@@ -1,0 +1,110 @@
+﻿<Page x:Class="VvvfSimulator.GUI.TrainAudio.Pages.Motor.MotorSetting"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:VvvfSimulator.GUI.TrainAudio.Pages"
+      mc:Ignorable="d" 
+      d:DesignWidth="800"
+      Title="TrainAudio_MotorSound_Setting_Page">
+
+    <Page.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/GUI/Resource/Dictionary/Common.xaml"/>
+                <ResourceDictionary Source="/GUI/Resource/Dictionary/ScrollBar.xaml"/>
+                <ResourceDictionary Source="/GUI/Resource/Dictionary/ListView.xaml"/>
+                <ResourceDictionary Source="/GUI/Resource/Dictionary/ContextMenu.xaml"/>
+                <ResourceDictionary Source="/GUI/Resource/Dictionary/MenuItem.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Page.Resources>
+
+    <StackPanel>
+        <Border Style="{DynamicResource ControlBorder}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="5*"/>
+                </Grid.ColumnDefinitions>
+                <Border Background="{DynamicResource TitleBarBrush}" Grid.Row="0" Grid.ColumnSpan="2" CornerRadius="25,25,0,0"/>
+                <Border Background="{DynamicResource SubTitleBarBrush}" Grid.Column="0" Grid.Row="1" Grid.RowSpan="9" CornerRadius="0,0,0,25"/>
+                <Border Background="{DynamicResource BackgroundBrush}" Grid.Column="1" Grid.Row="1" Grid.RowSpan="9" CornerRadius="0,0,25,0"/>
+                <Label Content="{DynamicResource TrainAudio.Pages.MotorSetting.MotorSpecification}" Style="{DynamicResource TitleBarText}" Grid.ColumnSpan="2"/>
+
+                <TextBox Grid.Column="1" Grid.Row="1" TextChanged="TextBox_TextChanged" Tag="SR" Name="SR" Style="{DynamicResource SlimTextBox}"/>
+                <TextBox Grid.Column="1" Grid.Row="2" TextChanged="TextBox_TextChanged" Tag="RR" Name="RR" Style="{DynamicResource SlimTextBox}"/>
+                <TextBox Grid.Column="1" Grid.Row="3" TextChanged="TextBox_TextChanged" Tag="SI" Name="SI" Style="{DynamicResource SlimTextBox}"/>
+                <TextBox Grid.Column="1" Grid.Row="4" TextChanged="TextBox_TextChanged" Tag="RI" Name="RI" Style="{DynamicResource SlimTextBox}"/>
+                <TextBox Grid.Column="1" Grid.Row="5" TextChanged="TextBox_TextChanged" Tag="MI" Name="MI" Style="{DynamicResource SlimTextBox}"/>
+                <TextBox Grid.Column="1" Grid.Row="6" TextChanged="TextBox_TextChanged" Tag="PL" Name="PL" Style="{DynamicResource SlimTextBox}"/>
+                <TextBox Grid.Column="1" Grid.Row="7" TextChanged="TextBox_TextChanged" Tag="D" Name="D" Style="{DynamicResource SlimTextBox}"/>
+                <TextBox Grid.Column="1" Grid.Row="8" TextChanged="TextBox_TextChanged" Tag="RIM" Name="RIM" Style="{DynamicResource SlimTextBox}"/>
+                <TextBox Grid.Column="1" Grid.Row="9" TextChanged="TextBox_TextChanged" Tag="SF" Name="SF" Style="{DynamicResource SlimTextBox}"/>
+                <Label Content="{DynamicResource TrainAudio.Pages.MotorSetting.MotorSpecification.StatorResistance}" Grid.Row="1" Style="{DynamicResource SubTitleBarText}"/>
+                <Label Content="{DynamicResource TrainAudio.Pages.MotorSetting.MotorSpecification.RotorResistance}" Grid.Row="2" Style="{DynamicResource SubTitleBarText}"/>
+                <Label Content="{DynamicResource TrainAudio.Pages.MotorSetting.MotorSpecification.StatorInductance}" Grid.Row="3" Style="{DynamicResource SubTitleBarText}"/>
+                <Label Content="{DynamicResource TrainAudio.Pages.MotorSetting.MotorSpecification.RotorInductancce}" Grid.Row="4" Style="{DynamicResource SubTitleBarText}"/>
+                <Label Content="{DynamicResource TrainAudio.Pages.MotorSetting.MotorSpecification.MutualInductance}" Grid.Row="5" Style="{DynamicResource SubTitleBarText}"/>
+                <Label Content="{DynamicResource TrainAudio.Pages.MotorSetting.MotorSpecification.PolarLogarithm}" Grid.Row="6" Style="{DynamicResource SubTitleBarText}"/>
+                <Label Content="{DynamicResource TrainAudio.Pages.MotorSetting.MotorSpecification.Damping}" Grid.Row="7" Style="{DynamicResource SubTitleBarText}"/>
+                <Label Content="{DynamicResource TrainAudio.Pages.MotorSetting.MotorSpecification.RotationalInertiaMass}" Grid.Row="8" Style="{DynamicResource SubTitleBarText}"/>
+                <Label Content="{DynamicResource TrainAudio.Pages.MotorSetting.MotorSpecification.StaticFriction}" Grid.Row="9" Style="{DynamicResource SubTitleBarText}"/>
+            </Grid>
+        </Border>
+        <Grid Height="2"/>
+        <Border Style="{DynamicResource ControlBorder}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="660"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="5*"/>
+                </Grid.ColumnDefinitions>
+                <Border Background="{DynamicResource TitleBarBrush}" Grid.Row="0" Grid.ColumnSpan="2" CornerRadius="25,25,0,0"/>
+                <Border Background="{DynamicResource SubTitleBarBrush}" Grid.Column="0" Grid.Row="1" Grid.RowSpan="2" CornerRadius="0,0,0,25"/>
+                <Border Background="{DynamicResource VoidBackgroundBrush}" Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" CornerRadius="0,0,25,0"/>
+                <Label Content="{DynamicResource TrainAudio.Pages.MotorSetting.MotorSounds}" Style="{DynamicResource TitleBarText}" Grid.ColumnSpan="2"/>
+
+                <ListView 
+                    x:Name="Motor_Harmonics_List" 
+                    Grid.Row="1" 
+                    d:ItemsSource="{d:SampleData ItemCount=5}" 
+                    SelectionChanged="ListView_SelectionChanged" 
+                    Style="{DynamicResource SlimListView}"
+                    ItemContainerStyle="{DynamicResource SlimListItem}"
+                    >
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+                                <TextBlock Text="{Binding Harmonic, StringFormat=\{0:N3\}}" Style="{DynamicResource ListItemTitleTextBlockStyle}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                    <ListView.ContextMenu>
+                        <ContextMenu Style="{DynamicResource SlimContextMenu}">
+                            <MenuItem Header="{DynamicResource Generic.MenuItem.Add}" Tag="Add" Click="MenuItem_Click"/>
+                            <MenuItem Header="{DynamicResource Generic.MenuItem.Delete}" Tag="Remove" Click="MenuItem_Click"/>
+                            <MenuItem Header="{DynamicResource Generic.MenuItem.Copy}" Tag="Clone" Click="MenuItem_Click"/>
+                        </ContextMenu>
+                    </ListView.ContextMenu>
+                </ListView>
+                <Frame x:Name="Motor_Harmonic_Edit_Frame" NavigationUIVisibility="Hidden" Grid.Column="1" Grid.Row="1" VerticalAlignment="Top"/>
+            </Grid>
+        </Border>
+    </StackPanel>
+</Page>

@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>nextmidi.midiport.output</name>
+    </assembly>
+    <members>
+        <member name="T:NextMidi.MidiPort.Output.MidiOutPort">
+            <summary>
+            物理 MIDI 出力ポートです。
+            </summary>
+        </member>
+        <member name="T:NextMidi.MidiPort.Output.IMidiOutPort">
+            <summary>
+            仮想 MIDI 出力ポートです。
+            </summary>
+        </member>
+        <member name="M:NextMidi.MidiPort.Output.IMidiOutPort.Send(NextMidi.DataElement.IMidiEvent)">
+            <summary>
+            データを送信します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.MidiPort.Output.MidiOutPort.#ctor(System.String)">
+            <summary>
+            MidiOutPort のインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.MidiPort.Output.MidiOutPort.#ctor(System.Int32)">
+            <summary>
+            MidiOutPort のインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.MidiPort.Output.MidiOutPort.Open">
+            <summary>
+            MIDI ポートを開きます。
+            </summary>
+        </member>
+        <member name="M:NextMidi.MidiPort.Output.MidiOutPort.Close">
+            <summary>
+            MIDI ポートを閉じます。
+            </summary>
+        </member>
+        <member name="M:NextMidi.MidiPort.Output.MidiOutPort.Send(NextMidi.DataElement.IMidiEvent)">
+            <summary>
+            MIDI イベントを送信します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.MidiPort.Output.MidiOutPort.ToString">
+            <summary>
+            ポートの名前を返します。
+            </summary>
+        </member>
+        <member name="P:NextMidi.MidiPort.Output.MidiOutPort.Name">
+            <summary>
+            ポートの名前です。
+            </summary>
+        </member>
+        <member name="P:NextMidi.MidiPort.Output.MidiOutPort.IsOpen">
+            <summary>
+            ポートの状態を表すフラグです。
+            </summary>
+        </member>
+        <member name="P:NextMidi.MidiPort.Output.MidiOutPort.PortCount">
+            <summary>
+            MIDI 出力ポートの数を取得します。
+            </summary>
+        </member>
+        <member name="T:NextMidi.MidiPort.Output.MidiOutPortExtensions">
+            <summary>
+            MidiOutPort の拡張クラスです。
+            </summary>
+        </member>
+        <member name="M:NextMidi.MidiPort.Output.MidiOutPortExtensions.AllNoteOff(NextMidi.MidiPort.Output.IMidiOutPort)">
+            <summary>
+            オールノートオフを送信します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.MidiPort.Output.MidiOutPortExtensions.AllSoundOff(NextMidi.MidiPort.Output.IMidiOutPort)">
+            <summary>
+            オールサウンドオフを送信します。
+            </summary>
+        </member>
+    </members>
+</doc>

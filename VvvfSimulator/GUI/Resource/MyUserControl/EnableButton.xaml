@@ -1,0 +1,33 @@
+﻿<UserControl x:Class="VvvfSimulator.GUI.Resource.MyUserControl.EnableButton"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:converter="clr-namespace:VvvfSimulator.GUI.Resource.Converter"
+             xmlns:local="clr-namespace:VvvfSimulator.GUI.Resource.MyUserControl"
+             mc:Ignorable="d" 
+             d:DesignHeight="250" d:DesignWidth="1000">
+
+    <UserControl.Resources>
+        <converter:HalfConverter x:Key="HalfConverter"/>
+        <local:FontSizeConverter x:Key="FontSizeConverter"/>
+
+        <Style TargetType="Label">
+            <Setter Property="FontSize" Value="{Binding ActualHeight, RelativeSource={RelativeSource AncestorType=Border}, Converter={StaticResource FontSizeConverter}}"/>
+            <Setter Property="FontFamily" Value="{DynamicResource Generic.Font}"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="0"/>
+            <d:Setter Property="Foreground" Value="{DynamicResource EnableSwitchTextColorDisabledBrush}"/>
+            <Setter Property="FontStretch" Value="Normal"/>
+            <Setter Property="FontStyle" Value="Normal"/>
+        </Style>
+    </UserControl.Resources>
+
+    <Grid Height="Auto" MouseUp="Grid_MouseUp" MouseDown="Grid_MouseDown" MouseLeave="Grid_MouseLeave" >
+        <Border x:Name="Button" d:Background="{DynamicResource EnableSwitchBackgroundEnabledBrush}" CornerRadius="{Binding ActualHeight, RelativeSource={RelativeSource Self}, Converter={StaticResource HalfConverter}}">
+            <Label x:Name="Status" Content="{DynamicResource Generic.Status.Enabled}"/>
+        </Border>
+    </Grid>
+</UserControl>

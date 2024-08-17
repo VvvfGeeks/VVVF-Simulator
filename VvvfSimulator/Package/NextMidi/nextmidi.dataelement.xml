@@ -1,0 +1,1413 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>nextmidi.dataelement</name>
+    </assembly>
+    <members>
+        <member name="T:NextMidi.DataElement.Primitive.ThreeBytesEvent">
+            <summary>
+            3バイトで構成される MIDI データです。
+            </summary>
+        </member>
+        <member name="T:NextMidi.DataElement.MidiEvent">
+            <summary>
+            MIDI イベントを表す基本クラスです。
+            </summary>
+        </member>
+        <member name="T:NextMidi.DataElement.IMidiEvent">
+            <summary>
+            MIDI イベントを表す基本インターフェースです。
+            </summary>
+        </member>
+        <member name="T:NextMidi.DataElement.ITrackEvent">
+            <summary>
+            MIDI イベントを表す基本インターフェースです。
+            </summary>
+        </member>
+        <member name="E:NextMidi.DataElement.ITrackEvent.Changed">
+            <summary>
+            イベントが編集された時に発生します。
+            </summary>
+        </member>
+        <member name="P:NextMidi.DataElement.ITrackEvent.Tick">
+            <summary>
+            イベントの演奏時刻です。
+            </summary>
+        </member>
+        <member name="M:NextMidi.DataElement.IMidiEvent.ToNativeEvent">
+            <summary>
+            送信用のイベントデータに変換します。
+            </summary>
+        </member>
+        <member name="P:NextMidi.DataElement.IMidiEvent.Channel">
+            <summary>
+            イベントの送信CHです。
+            </summary>
+        </member>
+        <member name="P:NextMidi.DataElement.IMidiEvent.RequireToSend">
+            <summary>
+            演奏時に送信されるイベントかどうかを示します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.DataElement.MidiEvent.OnChanged(System.EventArgs)">
+            <summary>
+            Changed イベントを発生させます。
+            </summary>
+        </member>
+        <member name="M:NextMidi.DataElement.MidiEvent.#ctor">
+            <summary>
+            MidiEvent のインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.DataElement.MidiEvent.#ctor(System.Boolean)">
+            <summary>
+            MidiEvent のインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.DataElement.MidiEvent.ToNativeEvent">
+            <summary>
+            イベントを等価な MIDI 信号に変換します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.DataElement.MidiEvent.Clone">
+            <summary>
+            データのコピーを作成します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.DataElement.MidiEvent.CompareTo(NextMidi.DataElement.MidiEvent)">
+            <summary>
+            オブジェクトを比較します。
+            </summary>
+        </member>
+        <member name="P:NextMidi.DataElement.MidiEvent.Channel">
+            <summary>
+            データの送信チャンネルです。
+            </summary>
+        </member>
+        <member name="P:NextMidi.DataElement.MidiEvent.Tick">
+            <summary>
+            データの演奏時刻です。
+            </summary>
+        </member>
+        <member name="P:NextMidi.DataElement.MidiEvent.RequireToSend">
+            <summary>
+            演奏時に送信されるかどうかを示すフラグです。
+            </summary>
+        </member>
+        <member name="P:NextMidi.DataElement.MidiEvent.StatusBase">
+            <summary>
+            ステータスバイトの非チャンネル部分の値です。
+            </summary>
+        </member>
+        <member name="E:NextMidi.DataElement.MidiEvent.Changed">
+            <summary>
+            イベントが編集された時に発生します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.DataElement.Primitive.ThreeBytesEvent.#ctor">
+            <summary>
+            ThreeBytesEvent の新しいインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.DataElement.Primitive.ThreeBytesEvent.#ctor(System.Byte)">
+            <summary>
+            ThreeBytesEvent の新しいインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.DataElement.Primitive.ThreeBytesEvent.#ctor(System.Byte,System.Byte)">
+            <summary>
+            ThreeBytesEvent の新しいインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.DataElement.Primitive.ThreeBytesEvent.ToNativeEvent">
+            <summary>
+            内部データを MIDI に変換します。
+            </summary>
+        </member>
+        <member name="P:NextMidi.DataElement.Primitive.ThreeBytesEvent.Param1">
+            <summary>
+            MIDIデータの2バイト目です。
+            </summary>
+        </member>
+        <member name="P:NextMidi.DataElement.Primitive.ThreeBytesEvent.Param2">
+            <summary>
+            MIDIデータの3バイト目です。
+            </summary>
+        </member>
+        <member name="P:NextMidi.DataElement.Primitive.ThreeBytesEvent.RequireToSend">
+            <summary>
+            送信が必要なデータかどうかを表すフラグです。
+            </summary>
+        </member>
+        <member name="T:NextMidi.DataElement.Primitive.IValueEvent">
+            <summary>
+            可変量を扱うインターフェースです。
+            </summary>
+        </member>
+        <member name="P:NextMidi.DataElement.Primitive.IValueEvent.Value">
+            <summary>
+            データの値です。
+            </summary>
+        </member>
+        <member name="T:NextMidi.DataElement.MetaData.TextMetaEvent">
+            <summary>
+            テキスト形式のメタデータです。
+            </summary>
+        </member>
+        <member name="T:NextMidi.DataElement.MetaData.MetaEvent">
+            <summary>
+            MIDIのメタデータです。
+            </summary>
+        </member>
+        <member name="T:NextMidi.DataElement.Primitive.SystemEvent">
+            <summary>
+            MIDI システムメッセージを表すクラスです。
+            </summary>
+        </member>
+        <member name="P:NextMidi.DataElement.Primitive.SystemEvent.Channel">
+            <summary>
+            データの送信CHです。
+            </summary>
+        </member>
+        <member name="M:NextMidi.DataElement.MetaData.MetaEvent.ToMetaContent">
+            <summary>
+            メタデータの内容を取得します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.DataElement.MetaData.MetaEvent.ToNativeEvent">
+            <summary>
+            内部データをMIDIに変換します。
+            </summary>
+        </member>
+        <member name="P:NextMidi.DataElement.MetaData.MetaEvent.StatusBase">
+            <summary>
+            ステータスバイトの非チャンネル部分の値です。
+            </summary>
+        </member>
+        <member name="P:NextMidi.DataElement.MetaData.MetaEvent.EventNumber">
+            <summary>
+            メタデータの種類です。
+            </summary>
+        </member>
+        <member name="M:NextMidi.DataElement.MetaData.TextMetaEvent.#ctor(System.Text.Encoding)">
+            <summary>
+            TextMetaEvent のインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.DataElement.MetaData.TextMetaEvent.#ctor(System.String,System.Text.Encoding)">
+            <summary>
+            TextMetaEvent のインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.DataElement.MetaData.TextMetaEvent.ToMetaContent">
+            <summary>
+            メタデータの内容を取得します。
+            </summary>
+        </member>
+        <member name="P:NextMidi.DataElement.MetaData.TextMetaEvent.Text">
+            <summary>
+            メタデータの内容です。
+            </summary>
+        </member>
+        <member name="P:NextMidi.DataElement.MetaData.TextMetaEvent.Encoding">
+            <summary>
+            テキストのエンコードに使用するコードページです。
+            </summary>
+        </member>
+        <member name="T:NextMidi.DataElement.Factory.MetaEventFactory">
+            <summary>
+            byte列をメタデータに変換するクラスです。
+            </summary>
+        </member>
+        <member name="T:NextMidi.DataElement.Factory.IMidiEventFactory">
+            <summary>
+            byte 列を MidiEvent 型に変換するインターフェースです。
+            </summary>
+        </member>
+        <member name="M:NextMidi.DataElement.Factory.IMidiEventFactory.Input(System.Byte[],System.Int32)">
+            <summary>
+            データを入力します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.DataElement.Factory.IMidiEventFactory.Finish">
+            <summary>
+            入力を終了します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.DataElement.Factory.MetaEventFactory.#ctor">
+            <summary>
+            MetaEventFactory のインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.DataElement.Factory.MetaEventFactory.#ctor(System.Text.Encoding)">
+            <summary>
+            MetaEventFactory のインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.DataElement.Factory.MetaEventFactory.Input(System.Byte[],System.Int32)">
+            <summary>
+            データを入力します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.DataElement.Factory.MetaEventFactory.Finish">
+            <summary>
+            入力を終了します。
+            </summary>
+        </member>
+        <member name="P:NextMidi.DataElement.Factory.MetaEventFactory.Encoding">
+            <summary>
+            テキストのエンコードです。
+            </summary>
+        </member>
+        <member name="T:NextMidi.DataElement.ProgramEvent">
+            <summary>
+            プログラムチェンジを表すデータです。
+            </summary>
+        </member>
+        <member name="T:NextMidi.DataElement.Primitive.TwoBytesEvent">
+            <summary>
+            2バイトで構成されるMIDIデータです。
+            </summary>
+        </member>
+        <member name="M:NextMidi.DataElement.Primitive.TwoBytesEvent.#ctor">
+            <summary>
+            TwoBytesDataのインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.DataElement.Primitive.TwoBytesEvent.#ctor(System.Byte)">
+            <summary>
+            TwoBytesDataのインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.DataElement.Primitive.TwoBytesEvent.ToNativeEvent">
+            <summary>
+            内部データを MIDI に変換します。
+            </summary>
+        </member>
+        <member name="P:NextMidi.DataElement.Primitive.TwoBytesEvent.Param">
+            <summary>
+            MIDIデータの2バイト目です。
+            </summary>
+        </member>
+        <member name="P:NextMidi.DataElement.Primitive.TwoBytesEvent.RequireToSend">
+            <summary>
+            送信が必要なデータかどうかを表すフラグです。
+            </summary>
+        </member>
+        <member name="M:NextMidi.DataElement.ProgramEvent.#ctor">
+            <summary>
+            ProgramEventのインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.DataElement.ProgramEvent.#ctor(System.Byte)">
+            <summary>
+            ProgramEventのインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="P:NextMidi.DataElement.ProgramEvent.StatusBase">
+            <summary>
+            ステータスバイトの非チャンネル部分の値です。
+            </summary>
+        </member>
+        <member name="P:NextMidi.DataElement.ProgramEvent.Value">
+            <summary>
+            プログラムナンバーです。
+            </summary>
+        </member>
+        <member name="T:NextMidi.DataElement.NoteOnEvent">
+            <summary>
+            MIDIノートオンを表すデータです。
+            </summary>
+        </member>
+        <member name="T:NextMidi.DataElement.Primitive.NoteEventBase">
+            <summary>
+            音高をパラメーターに持つデータです。
+            </summary>
+        </member>
+        <member name="M:NextMidi.DataElement.Primitive.NoteEventBase.#ctor">
+            <summary>
+            NoteEventBase の新しいインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.DataElement.Primitive.NoteEventBase.#ctor(System.Byte,System.Byte)">
+            <summary>
+            NoteEventBase の新しいインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="P:NextMidi.DataElement.Primitive.NoteEventBase.Note">
+            <summary>
+            音高です。
+            </summary>
+        </member>
+        <member name="M:NextMidi.DataElement.NoteOnEvent.#ctor">
+            <summary>
+            NoteOnEvent のインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.DataElement.NoteOnEvent.#ctor(System.Byte)">
+            <summary>
+            NoteOnEvent のインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.DataElement.NoteOnEvent.#ctor(System.Byte,System.Byte)">
+            <summary>
+            NoteOnEvent のインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="P:NextMidi.DataElement.NoteOnEvent.StatusBase">
+            <summary>
+            ステータスバイトの非チャンネル部分の値です。
+            </summary>
+        </member>
+        <member name="P:NextMidi.DataElement.NoteOnEvent.Velocity">
+            <summary>
+            MIDI ノートのベロシティです。
+            </summary>
+        </member>
+        <member name="T:NextMidi.DataElement.MetaData.RhythmEvent">
+            <summary>
+            拍子データです。
+            </summary>
+        </member>
+        <member name="T:NextMidi.DataElement.MetaData.IRhythmEvent">
+            <summary>
+            拍子データを表すインターフェースです。
+            </summary>
+        </member>
+        <member name="P:NextMidi.DataElement.MetaData.IRhythmEvent.Rhythm">
+            <summary>
+            拍子の分子です。
+            </summary>
+        </member>
+        <member name="P:NextMidi.DataElement.MetaData.IRhythmEvent.Note">
+            <summary>
+            拍子の分母です。
+            </summary>
+        </member>
+        <member name="M:NextMidi.DataElement.MetaData.RhythmEvent.#ctor">
+            <summary>
+            RhythmEvent のインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.DataElement.MetaData.RhythmEvent.#ctor(System.Byte,System.Byte)">
+            <summary>
+            RhythmEvent のインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.DataElement.MetaData.RhythmEvent.ToMetaContent">
+            <summary>
+            メタデータの内容を取得します。
+            </summary>
+        </member>
+        <member name="P:NextMidi.DataElement.MetaData.RhythmEvent.EventNumber">
+            <summary>
+            メタデータの種類です。
+            </summary>
+        </member>
+        <member name="P:NextMidi.DataElement.MetaData.RhythmEvent.Rhythm">
+            <summary>
+            拍子の分子です。
+            </summary>
+        </member>
+        <member name="P:NextMidi.DataElement.MetaData.RhythmEvent.Note">
+            <summary>
+            拍子の分母です。
+            </summary>
+        </member>
+        <member name="T:NextMidi.DataElement.ControlEvent">
+            <summary>
+            コントロールチェンジを表すデータです。
+            </summary>
+        </member>
+        <member name="T:NextMidi.DataElement.Primitive.INumberEvent">
+            <summary>
+            フィルタ番号を表すインターフェースです。
+            </summary>
+        </member>
+        <member name="M:NextMidi.DataElement.ControlEvent.#ctor">
+            <summary>
+            ControlEvent のインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.DataElement.ControlEvent.#ctor(System.Byte)">
+            <summary>
+            ControlEvent のインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.DataElement.ControlEvent.#ctor(System.Byte,System.Byte)">
+            <summary>
+            ControlEvent のインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="P:NextMidi.DataElement.ControlEvent.StatusBase">
+            <summary>
+            ステータスバイトの非チャンネル部分の値です。
+            </summary>
+        </member>
+        <member name="P:NextMidi.DataElement.ControlEvent.Number">
+            <summary>
+            コントローラーの番号です。
+            </summary>
+        </member>
+        <member name="P:NextMidi.DataElement.ControlEvent.Value">
+            <summary>
+            コントローラーの値です。
+            </summary>
+        </member>
+        <member name="T:NextMidi.DataElement.MetaData.MidiCopyright">
+            <summary>
+            MIDI の著作権情報を表すデータです。
+            </summary>
+        </member>
+        <member name="M:NextMidi.DataElement.MetaData.MidiCopyright.#ctor(System.Text.Encoding)">
+            <summary>
+            MidiCopyright のインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.DataElement.MetaData.MidiCopyright.#ctor(System.String,System.Text.Encoding)">
+            <summary>
+            MidiCopyright のインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="P:NextMidi.DataElement.MetaData.MidiCopyright.EventNumber">
+            <summary>
+            メタデータの種類です。
+            </summary>
+        </member>
+        <member name="T:NextMidi.DataElement.PitchEvent">
+            <summary>
+            ピッチベンドを表すデータです。
+            </summary>
+        </member>
+        <member name="M:NextMidi.DataElement.PitchEvent.#ctor">
+            <summary>
+            PitchEvent のインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.DataElement.PitchEvent.#ctor(System.Int32)">
+            <summary>
+            PitchEvent のインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="P:NextMidi.DataElement.PitchEvent.StatusBase">
+            <summary>
+            ステータスバイトの非チャンネル部分の値です。
+            </summary>
+        </member>
+        <member name="P:NextMidi.DataElement.PitchEvent.Value">
+            <summary>
+            ピッチベンドの値です。
+            </summary>
+        </member>
+        <member name="T:NextMidi.DataElement.MetaData.CommentEvent">
+            <summary>
+            MIDI のコメントを表すデータです。
+            </summary>
+        </member>
+        <member name="M:NextMidi.DataElement.MetaData.CommentEvent.#ctor(System.Text.Encoding)">
+            <summary>
+            CommentEvent のインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.DataElement.MetaData.CommentEvent.#ctor(System.String,System.Text.Encoding)">
+            <summary>
+            CommentEvent のインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="P:NextMidi.DataElement.MetaData.CommentEvent.EventNumber">
+            <summary>
+            メタデータの種類です。
+            </summary>
+        </member>
+        <member name="T:NextMidi.DataElement.MetaData.MetaEventTypeConst">
+            <summary>
+            メタデータの種類を表す定数です。
+            </summary>
+        </member>
+        <member name="F:NextMidi.DataElement.MetaData.MetaEventTypeConst.SequenceNumber">
+            <summary>
+            シーケンスナンバーです。SMF Format 2で使用されます。
+            </summary>
+        </member>
+        <member name="F:NextMidi.DataElement.MetaData.MetaEventTypeConst.Comment">
+            <summary>
+            コメントデータです。
+            </summary>
+        </member>
+        <member name="F:NextMidi.DataElement.MetaData.MetaEventTypeConst.Copyright">
+            <summary>
+            著作権情報です。
+            </summary>
+        </member>
+        <member name="F:NextMidi.DataElement.MetaData.MetaEventTypeConst.TrackTitle">
+            <summary>
+            トラックのタイトルです。
+            </summary>
+        </member>
+        <member name="F:NextMidi.DataElement.MetaData.MetaEventTypeConst.Instrument">
+            <summary>
+            トラックの楽器名です。
+            </summary>
+        </member>
+        <member name="F:NextMidi.DataElement.MetaData.MetaEventTypeConst.Lyric">
+            <summary>
+            歌詞です。
+            </summary>
+        </member>
+        <member name="F:NextMidi.DataElement.MetaData.MetaEventTypeConst.Marker">
+            <summary>
+            MIDIマーカーです。
+            </summary>
+        </member>
+        <member name="F:NextMidi.DataElement.MetaData.MetaEventTypeConst.CuePoint">
+            <summary>
+            キューポイントです。
+            </summary>
+        </member>
+        <member name="F:NextMidi.DataElement.MetaData.MetaEventTypeConst.ChannelPrefix">
+            <summary>
+            チャンネル情報を持たない後続データ (エクスクルーシブやメタデータ) に、チャンネル情報を付加します。
+            </summary>
+        </member>
+        <member name="F:NextMidi.DataElement.MetaData.MetaEventTypeConst.EndOfTrack">
+            <summary>
+            トラックの終端を表します。
+            </summary>
+        </member>
+        <member name="F:NextMidi.DataElement.MetaData.MetaEventTypeConst.Tempo">
+            <summary>
+            テンポデータです。
+            </summary>
+        </member>
+        <member name="F:NextMidi.DataElement.MetaData.MetaEventTypeConst.SmpteOffset">
+            <summary>
+            SMPTE オフセットです。
+            </summary>
+        </member>
+        <member name="F:NextMidi.DataElement.MetaData.MetaEventTypeConst.TimeSignature">
+            <summary>
+            拍子データです。
+            </summary>
+        </member>
+        <member name="F:NextMidi.DataElement.MetaData.MetaEventTypeConst.KeySignature">
+            <summary>
+            調号データです。
+            </summary>
+        </member>
+        <member name="F:NextMidi.DataElement.MetaData.MetaEventTypeConst.SequencerData">
+            <summary>
+            シーケンサーの固有データです。
+            </summary>
+        </member>
+        <member name="T:NextMidi.DataElement.MetaData.ITempoEvent">
+            <summary>
+            テンポを表すインターフェースです。
+            </summary>
+        </member>
+        <member name="P:NextMidi.DataElement.MetaData.ITempoEvent.Tempo">
+            <summary>
+            テンポの値です。
+            </summary>
+        </member>
+        <member name="T:NextMidi.DataElement.Factory.ConvertResult">
+            <summary>
+            データの変換結果を表すクラスです。
+            </summary>
+        </member>
+        <member name="M:NextMidi.DataElement.Factory.ConvertResult.#ctor(System.Boolean)">
+            <summary>
+            ConvertResult のインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.DataElement.Factory.ConvertResult.#ctor(System.Collections.Generic.List{NextMidi.DataElement.MidiEvent})">
+            <summary>
+            ConvertResult のインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.DataElement.Factory.ConvertResult.#ctor(NextMidi.DataElement.MidiEvent)">
+            <summary>
+            ConvertResult のインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.DataElement.Factory.ConvertResult.GetItems">
+            <summary>
+            データの変換結果です。
+            </summary>
+        </member>
+        <member name="P:NextMidi.DataElement.Factory.ConvertResult.Handled">
+            <summary>
+            IMidiEventFactory がデータを処理したかどうかを示します。
+            </summary>
+        </member>
+        <member name="T:NextMidi.DataElement.MetaData.MidiLyric">
+            <summary>
+            歌詞を表すデータです。
+            </summary>
+        </member>
+        <member name="M:NextMidi.DataElement.MetaData.MidiLyric.#ctor(System.Text.Encoding)">
+            <summary>
+            MidiLyric のインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.DataElement.MetaData.MidiLyric.#ctor(System.String,System.Text.Encoding)">
+            <summary>
+            MidiLyric のインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="P:NextMidi.DataElement.MetaData.MidiLyric.EventNumber">
+            <summary>
+            メタデータの種類です。
+            </summary>
+        </member>
+        <member name="T:NextMidi.DataElement.NoteEvent">
+            <summary>
+            ノートデータです。
+            </summary>
+        </member>
+        <member name="T:NextMidi.DataElement.Primitive.ICombinedEvent">
+            <summary>
+            複合イベントを表すインターフェースです。
+            </summary>
+        </member>
+        <member name="M:NextMidi.DataElement.Primitive.ICombinedEvent.ToElements">
+            <summary>
+            イベントを解体します。
+            </summary>
+        </member>
+        <member name="T:NextMidi.DataElement.Primitive.INoteEvent">
+            <summary>
+            ノートを表すインターフェースです。
+            </summary>
+        </member>
+        <member name="P:NextMidi.DataElement.Primitive.INoteEvent.Note">
+            <summary>
+            音高です。
+            </summary>
+        </member>
+        <member name="P:NextMidi.DataElement.Primitive.INoteEvent.Tick">
+            <summary>
+            発音時刻です。
+            </summary>
+        </member>
+        <member name="P:NextMidi.DataElement.Primitive.INoteEvent.Gate">
+            <summary>
+            ゲートタイムです。
+            </summary>
+        </member>
+        <member name="M:NextMidi.DataElement.NoteEvent.#ctor">
+            <summary>
+            NoteEvent のインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.DataElement.NoteEvent.#ctor(System.Byte)">
+            <summary>
+            NoteEvent のインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.DataElement.NoteEvent.#ctor(System.Byte,System.Byte)">
+            <summary>
+            NoteEvent のインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.DataElement.NoteEvent.#ctor(System.Byte,System.Byte,System.Int32)">
+            <summary>
+            NoteEvent のインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.DataElement.NoteEvent.#ctor(System.Byte,System.Byte,System.Int32,System.Byte)">
+            <summary>
+            NoteEvent のインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.DataElement.NoteEvent.ToElements">
+            <summary>
+            データを解体します。
+            </summary>
+        </member>
+        <member name="P:NextMidi.DataElement.NoteEvent.Gate">
+            <summary>
+            ゲートタイムです。
+            </summary>
+        </member>
+        <member name="P:NextMidi.DataElement.NoteEvent.Speed">
+            <summary>
+            ノートオフベロシティです。
+            </summary>
+        </member>
+        <member name="T:NextMidi.DataElement.Factory.StandardEventFactory">
+            <summary>
+            標準的な IMidiEventFactory の実装です。
+            </summary>
+        </member>
+        <member name="M:NextMidi.DataElement.Factory.StandardEventFactory.#ctor">
+            <summary>
+            StandardEventFactory のインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.DataElement.Factory.StandardEventFactory.#ctor(System.Text.Encoding)">
+            <summary>
+            StandardEventFactory のインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.DataElement.Factory.StandardEventFactory.Input(System.Byte[],System.Int32)">
+            <summary>
+            データを入力します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.DataElement.Factory.StandardEventFactory.Finish">
+            <summary>
+            入力を終了します。
+            </summary>
+        </member>
+        <member name="P:NextMidi.DataElement.Factory.StandardEventFactory.Encoding">
+            <summary>
+            テキストのエンコードです。
+            </summary>
+        </member>
+        <member name="T:NextMidi.DataElement.Factory.SingleEventFactory">
+            <summary>
+            byte 列を基本的なデータ型に変換するクラスです。
+            </summary>
+        </member>
+        <member name="M:NextMidi.DataElement.Factory.SingleEventFactory.#ctor">
+            <summary>
+            SingleEventFactory のインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.DataElement.Factory.SingleEventFactory.#ctor(System.Text.Encoding)">
+            <summary>
+            SingleEventFactory のインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.DataElement.Factory.SingleEventFactory.Input(System.Byte[],System.Int32)">
+            <summary>
+            データを入力します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.DataElement.Factory.SingleEventFactory.Finish">
+            <summary>
+            入力を終了します。
+            </summary>
+        </member>
+        <member name="P:NextMidi.DataElement.Factory.SingleEventFactory.Encoding">
+            <summary>
+            テキストのエンコードです。
+            </summary>
+        </member>
+        <member name="T:NextMidi.DataElement.ChannelPressureEvent">
+            <summary>
+            チャンネルプレッシャーを表すデータです。
+            </summary>
+        </member>
+        <member name="M:NextMidi.DataElement.ChannelPressureEvent.#ctor">
+            <summary>
+            ChannelPressureEvent のインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.DataElement.ChannelPressureEvent.#ctor(System.Byte)">
+            <summary>
+            ChannelPressureEvent のインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="P:NextMidi.DataElement.ChannelPressureEvent.StatusBase">
+            <summary>
+            ステータスバイトの非チャンネル部分の値です。
+            </summary>
+        </member>
+        <member name="P:NextMidi.DataElement.ChannelPressureEvent.Value">
+            <summary>
+            チャンネルプレッシャーの強さです。
+            </summary>
+        </member>
+        <member name="T:NextMidi.DataElement.ExclusiveEvent">
+            <summary>
+            エクスクルーシブデータです。
+            </summary>
+        </member>
+        <member name="M:NextMidi.DataElement.ExclusiveEvent.#ctor(System.Byte[])">
+            <summary>
+            ExclusiveEvent のインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.DataElement.ExclusiveEvent.ToNativeEvent">
+            <summary>
+            送信用のイベントデータに変換します。
+            </summary>
+        </member>
+        <member name="P:NextMidi.DataElement.ExclusiveEvent.RequireToSend">
+            <summary>
+            演奏時に送信されるイベントかどうかを示します。
+            </summary>
+        </member>
+        <member name="P:NextMidi.DataElement.ExclusiveEvent.StatusBase">
+            <summary>
+            ステータスバイトの非チャンネル部分の値です。
+            </summary>
+        </member>
+        <member name="T:NextMidi.DataElement.MetaData.VariableMetaEvent">
+            <summary>
+            任意のメタデータを格納できるクラスです。
+            </summary>
+        </member>
+        <member name="M:NextMidi.DataElement.MetaData.VariableMetaEvent.#ctor(System.Byte,System.Collections.Generic.IEnumerable{System.Byte})">
+            <summary>
+            VariableMetaEvent のインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.DataElement.MetaData.VariableMetaEvent.ToMetaContent">
+            <summary>
+            メタデータの内容を取得します。
+            </summary>
+        </member>
+        <member name="P:NextMidi.DataElement.MetaData.VariableMetaEvent.EventNumber">
+            <summary>
+            メタデータの種類です。
+            </summary>
+        </member>
+        <member name="T:NextMidi.DataElement.MetaData.MidiMarker">
+            <summary>
+            MIDI マーカーを表すデータです。
+            </summary>
+        </member>
+        <member name="M:NextMidi.DataElement.MetaData.MidiMarker.#ctor(System.Text.Encoding)">
+            <summary>
+            MidiMarker のインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.DataElement.MetaData.MidiMarker.#ctor(System.String,System.Text.Encoding)">
+            <summary>
+            MidiMarker のインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="P:NextMidi.DataElement.MetaData.MidiMarker.EventNumber">
+            <summary>
+            メタデータの種類です。
+            </summary>
+        </member>
+        <member name="T:NextMidi.DataElement.ControlNumber">
+            <summary>
+            コントロールチェンジの種類を表します。
+            </summary>
+        </member>
+        <member name="F:NextMidi.DataElement.ControlNumber.Msb">
+            <summary>
+            バンクセレクト MSB
+            </summary>
+        </member>
+        <member name="F:NextMidi.DataElement.ControlNumber.Modulation">
+            <summary>
+            モジュレーション
+            </summary>
+        </member>
+        <member name="F:NextMidi.DataElement.ControlNumber.BreathControl">
+            <summary>
+            ブレスコントローラ
+            </summary>
+        </member>
+        <member name="F:NextMidi.DataElement.ControlNumber.FootControl">
+            <summary>
+            フットコントローラ
+            </summary>
+        </member>
+        <member name="F:NextMidi.DataElement.ControlNumber.PortamentoTime">
+            <summary>
+            ポルタメントタイム
+            </summary>
+        </member>
+        <member name="F:NextMidi.DataElement.ControlNumber.DataEntryMsb">
+            <summary>
+            データエントリー MSB
+            </summary>
+        </member>
+        <member name="F:NextMidi.DataElement.ControlNumber.Volume">
+            <summary>
+            ボリューム
+            </summary>
+        </member>
+        <member name="F:NextMidi.DataElement.ControlNumber.Balance">
+            <summary>
+            バランスコントロール
+            </summary>
+        </member>
+        <member name="F:NextMidi.DataElement.ControlNumber.Panpot">
+            <summary>
+            パン
+            </summary>
+        </member>
+        <member name="F:NextMidi.DataElement.ControlNumber.Expression">
+            <summary>
+            エクスプレッション
+            </summary>
+        </member>
+        <member name="F:NextMidi.DataElement.ControlNumber.GeneralPurpose1">
+            <summary>
+            汎用操作子 1
+            </summary>
+        </member>
+        <member name="F:NextMidi.DataElement.ControlNumber.GeneralPurpose2">
+            <summary>
+            汎用操作子 2
+            </summary>
+        </member>
+        <member name="F:NextMidi.DataElement.ControlNumber.GeneralPurpose3">
+            <summary>
+            汎用操作子 3
+            </summary>
+        </member>
+        <member name="F:NextMidi.DataElement.ControlNumber.GeneralPurpose4">
+            <summary>
+            汎用操作子 4
+            </summary>
+        </member>
+        <member name="F:NextMidi.DataElement.ControlNumber.Lsb">
+            <summary>
+            バンクセレクト LSB
+            </summary>
+        </member>
+        <member name="F:NextMidi.DataElement.ControlNumber.ModulationLsb">
+            <summary>
+            モジュレーション LSB
+            </summary>
+        </member>
+        <member name="F:NextMidi.DataElement.ControlNumber.BreathControlLsb">
+            <summary>
+            ブレスコントロール LSB
+            </summary>
+        </member>
+        <member name="F:NextMidi.DataElement.ControlNumber.FootControlLsb">
+            <summary>
+            フットコントロール LSB
+            </summary>
+        </member>
+        <member name="F:NextMidi.DataElement.ControlNumber.PortamentoTimeLsb">
+            <summary>
+            ポルタメントタイム LSB
+            </summary>
+        </member>
+        <member name="F:NextMidi.DataElement.ControlNumber.DataEntryLsb">
+            <summary>
+            データエントリー LSB
+            </summary>
+        </member>
+        <member name="F:NextMidi.DataElement.ControlNumber.VolumeLsb">
+            <summary>
+            ボリューム LSB
+            </summary>
+        </member>
+        <member name="F:NextMidi.DataElement.ControlNumber.BalanceLsb">
+            <summary>
+            バランス LSB
+            </summary>
+        </member>
+        <member name="F:NextMidi.DataElement.ControlNumber.PanpotLsb">
+            <summary>
+            パン LSB
+            </summary>
+        </member>
+        <member name="F:NextMidi.DataElement.ControlNumber.ExpressionLsb">
+            <summary>
+            エクスプレッション LSB
+            </summary>
+        </member>
+        <member name="F:NextMidi.DataElement.ControlNumber.GeneralPurpose1Lsb">
+            <summary>
+            汎用操作子 1 LSB
+            </summary>
+        </member>
+        <member name="F:NextMidi.DataElement.ControlNumber.GeneralPurpose2Lsb">
+            <summary>
+            汎用操作子 2 LSB
+            </summary>
+        </member>
+        <member name="F:NextMidi.DataElement.ControlNumber.GeneralPurpose3Lsb">
+            <summary>
+            汎用操作子 3 LSB
+            </summary>
+        </member>
+        <member name="F:NextMidi.DataElement.ControlNumber.GeneralPurpose4Lsb">
+            <summary>
+            汎用操作子 4 LSB
+            </summary>
+        </member>
+        <member name="F:NextMidi.DataElement.ControlNumber.Hold">
+            <summary>
+            ホールド
+            </summary>
+        </member>
+        <member name="F:NextMidi.DataElement.ControlNumber.Portamento">
+            <summary>
+            ポルタメント
+            </summary>
+        </member>
+        <member name="F:NextMidi.DataElement.ControlNumber.Sostenuto">
+            <summary>
+            ソステヌート
+            </summary>
+        </member>
+        <member name="F:NextMidi.DataElement.ControlNumber.Soft">
+            <summary>
+            ソフトペダル
+            </summary>
+        </member>
+        <member name="F:NextMidi.DataElement.ControlNumber.Freeze">
+            <summary>
+            フリーズ (ホールド 2)
+            </summary>
+        </member>
+        <member name="F:NextMidi.DataElement.ControlNumber.MemoryPatch">
+            <summary>
+            メモリーパッチ
+            </summary>
+        </member>
+        <member name="F:NextMidi.DataElement.ControlNumber.GeneralPurpose5">
+            <summary>
+            汎用操作子 5
+            </summary>
+        </member>
+        <member name="F:NextMidi.DataElement.ControlNumber.GeneralPurpose6">
+            <summary>
+            汎用操作子 6
+            </summary>
+        </member>
+        <member name="F:NextMidi.DataElement.ControlNumber.GeneralPurpose7">
+            <summary>
+            汎用操作子 7
+            </summary>
+        </member>
+        <member name="F:NextMidi.DataElement.ControlNumber.GeneralPurpose8">
+            <summary>
+            汎用操作子 8
+            </summary>
+        </member>
+        <member name="F:NextMidi.DataElement.ControlNumber.Reverb">
+            <summary>
+            リバーブ
+            </summary>
+        </member>
+        <member name="F:NextMidi.DataElement.ControlNumber.Tremolo">
+            <summary>
+            トレモロ
+            </summary>
+        </member>
+        <member name="F:NextMidi.DataElement.ControlNumber.Chorus">
+            <summary>
+            コーラス
+            </summary>
+        </member>
+        <member name="F:NextMidi.DataElement.ControlNumber.Delay">
+            <summary>
+            ディレイ (セレステ)
+            </summary>
+        </member>
+        <member name="F:NextMidi.DataElement.ControlNumber.Phaser">
+            <summary>
+            フェイザー
+            </summary>
+        </member>
+        <member name="F:NextMidi.DataElement.ControlNumber.DataIncrement">
+            <summary>
+            データインクリメント
+            </summary>
+        </member>
+        <member name="F:NextMidi.DataElement.ControlNumber.DataDecrement">
+            <summary>
+            データデクリメント
+            </summary>
+        </member>
+        <member name="F:NextMidi.DataElement.ControlNumber.NrpnLsb">
+            <summary>
+            NRPN LSB
+            </summary>
+        </member>
+        <member name="F:NextMidi.DataElement.ControlNumber.NrpnMsb">
+            <summary>
+            NRPN MSB
+            </summary>
+        </member>
+        <member name="F:NextMidi.DataElement.ControlNumber.RpnLsb">
+            <summary>
+            RPN LSB
+            </summary>
+        </member>
+        <member name="F:NextMidi.DataElement.ControlNumber.RpnMsb">
+            <summary>
+            RPN MSB
+            </summary>
+        </member>
+        <member name="F:NextMidi.DataElement.ControlNumber.AllSoundOff">
+            <summary>
+            オールサウンドオフ
+            </summary>
+        </member>
+        <member name="F:NextMidi.DataElement.ControlNumber.ResetAllController">
+            <summary>
+            リセットオールコントローラー
+            </summary>
+        </member>
+        <member name="F:NextMidi.DataElement.ControlNumber.LocalControl">
+            <summary>
+            ローカルコントロール
+            </summary>
+        </member>
+        <member name="F:NextMidi.DataElement.ControlNumber.AllNoteOff">
+            <summary>
+            オールノートオフ
+            </summary>
+        </member>
+        <member name="F:NextMidi.DataElement.ControlNumber.OmniOff">
+            <summary>
+            オムニオフ
+            </summary>
+        </member>
+        <member name="F:NextMidi.DataElement.ControlNumber.OmniOn">
+            <summary>
+            オムニオン
+            </summary>
+        </member>
+        <member name="F:NextMidi.DataElement.ControlNumber.MonoOn">
+            <summary>
+            モノオン
+            </summary>
+        </member>
+        <member name="F:NextMidi.DataElement.ControlNumber.PolyOn">
+            <summary>
+            ポリオン
+            </summary>
+        </member>
+        <member name="T:NextMidi.DataElement.MetaData.MidiKey">
+            <summary>
+            調号を表すデータです。
+            </summary>
+        </member>
+        <member name="M:NextMidi.DataElement.MetaData.MidiKey.#ctor">
+            <summary>
+            MidiKey のインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.DataElement.MetaData.MidiKey.#ctor(System.SByte,System.Boolean)">
+            <summary>
+            MidiKey のインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.DataElement.MetaData.MidiKey.ToMetaContent">
+            <summary>
+            メタデータの内容を取得します。
+            </summary>
+        </member>
+        <member name="P:NextMidi.DataElement.MetaData.MidiKey.EventNumber">
+            <summary>
+            メタデータの種類です。
+            </summary>
+        </member>
+        <member name="P:NextMidi.DataElement.MetaData.MidiKey.SharpCount">
+            <summary>
+            調号のシャープの数を表します。マイナスの場合はフラットの数を表します。
+            </summary>
+        </member>
+        <member name="P:NextMidi.DataElement.MetaData.MidiKey.IsMinor">
+            <summary>
+            調がメジャーかマイナーかを示します。
+            </summary>
+        </member>
+        <member name="T:NextMidi.DataElement.KeyPressureEvent">
+            <summary>
+            ポリフォニックキープレッシャーを表すデータです。
+            </summary>
+        </member>
+        <member name="M:NextMidi.DataElement.KeyPressureEvent.#ctor">
+            <summary>
+            KeyPressureEvent のインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.DataElement.KeyPressureEvent.#ctor(System.Byte)">
+            <summary>
+            KeyPressureEvent のインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.DataElement.KeyPressureEvent.#ctor(System.Byte,System.Byte)">
+            <summary>
+            KeyPressureEvent のインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="P:NextMidi.DataElement.KeyPressureEvent.StatusBase">
+            <summary>
+            ステータスバイトの非チャンネル部分の値です。
+            </summary>
+        </member>
+        <member name="P:NextMidi.DataElement.KeyPressureEvent.Value">
+            <summary>
+            ポリフォニックキープレッシャーの強さです。
+            </summary>
+        </member>
+        <member name="T:NextMidi.DataElement.IKeyEvent">
+            <summary>
+            音高イベントを表すインターフェースです。
+            </summary>
+        </member>
+        <member name="P:NextMidi.DataElement.IKeyEvent.Note">
+            <summary>
+            音高です。
+            </summary>
+        </member>
+        <member name="T:NextMidi.DataElement.INoteOffEvent">
+            <summary>
+            ノートオフイベントを表すインターフェースです。
+            </summary>
+        </member>
+        <member name="P:NextMidi.DataElement.INoteOffEvent.Speed">
+            <summary>
+            離鍵の速さです。
+            </summary>
+        </member>
+        <member name="T:NextMidi.DataElement.INoteOnEvent">
+            <summary>
+            ノートオンイベントを表すインターフェースです。
+            </summary>
+        </member>
+        <member name="P:NextMidi.DataElement.INoteOnEvent.Velocity">
+            <summary>
+            打鍵の強さです。
+            </summary>
+        </member>
+        <member name="T:NextMidi.DataElement.IControlEvent">
+            <summary>
+            コントロールイベントを表すインターフェースです。
+            </summary>
+        </member>
+        <member name="P:NextMidi.DataElement.IControlEvent.Number">
+            <summary>
+            コントローラーの番号です。
+            </summary>
+        </member>
+        <member name="P:NextMidi.DataElement.IControlEvent.Value">
+            <summary>
+            コントローラーの値です。
+            </summary>
+        </member>
+        <member name="T:NextMidi.DataElement.MetaData.TempoEvent">
+            <summary>
+            テンポを表すデータです。
+            </summary>
+        </member>
+        <member name="M:NextMidi.DataElement.MetaData.TempoEvent.#ctor">
+            <summary>
+            TempoEvent のインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.DataElement.MetaData.TempoEvent.#ctor(System.Int32)">
+            <summary>
+            TempoEvent のインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.DataElement.MetaData.TempoEvent.ToMetaContent">
+            <summary>
+            メタデータの内容を取得します。
+            </summary>
+        </member>
+        <member name="P:NextMidi.DataElement.MetaData.TempoEvent.EventNumber">
+            <summary>
+            メタデータの種類です。
+            </summary>
+        </member>
+        <member name="P:NextMidi.DataElement.MetaData.TempoEvent.Tempo">
+            <summary>
+            テンポの値です。
+            </summary>
+        </member>
+        <member name="P:NextMidi.DataElement.MetaData.TempoEvent.MicroSecond">
+            <summary>
+            テンポをマイクロ秒で表わした値です。
+            </summary>
+        </member>
+        <member name="T:NextMidi.DataElement.MetaData.MidiTrackTitle">
+            <summary>
+            トラックのタイトルを表すデータです。
+            </summary>
+        </member>
+        <member name="M:NextMidi.DataElement.MetaData.MidiTrackTitle.#ctor(System.Text.Encoding)">
+            <summary>
+            MidiTrackTitle のインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.DataElement.MetaData.MidiTrackTitle.#ctor(System.String,System.Text.Encoding)">
+            <summary>
+            MidiTrackTitle のインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="P:NextMidi.DataElement.MetaData.MidiTrackTitle.EventNumber">
+            <summary>
+            メタデータの種類です。
+            </summary>
+        </member>
+        <member name="T:NextMidi.DataElement.MetaData.MidiInstrumentName">
+            <summary>
+            楽器名を表すデータです。
+            </summary>
+        </member>
+        <member name="M:NextMidi.DataElement.MetaData.MidiInstrumentName.#ctor(System.Text.Encoding)">
+            <summary>
+            MidiInstrumentName のインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.DataElement.MetaData.MidiInstrumentName.#ctor(System.String,System.Text.Encoding)">
+            <summary>
+            MidiInstrumentName のインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="P:NextMidi.DataElement.MetaData.MidiInstrumentName.EventNumber">
+            <summary>
+            メタデータの種類です。
+            </summary>
+        </member>
+        <member name="T:NextMidi.DataElement.MetaData.MidiEndOfTrack">
+            <summary>
+            トラックの終端を表すデータです。
+            </summary>
+        </member>
+        <member name="M:NextMidi.DataElement.MetaData.MidiEndOfTrack.#ctor">
+            <summary>
+            MidiEndOfTrack のインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.DataElement.MetaData.MidiEndOfTrack.ToMetaContent">
+            <summary>
+            メタデータの内容を取得します。
+            </summary>
+        </member>
+        <member name="P:NextMidi.DataElement.MetaData.MidiEndOfTrack.EventNumber">
+            <summary>
+            メタデータの種類です。
+            </summary>
+        </member>
+        <member name="T:NextMidi.DataElement.NoteOffEvent">
+            <summary>
+            ノートオフを表すデータです。
+            </summary>
+        </member>
+        <member name="M:NextMidi.DataElement.NoteOffEvent.#ctor">
+            <summary>
+            NoteOffEvent の新しいインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.DataElement.NoteOffEvent.#ctor(System.Byte)">
+            <summary>
+            NoteOffEvent の新しいインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.DataElement.NoteOffEvent.#ctor(System.Byte,System.Byte)">
+            <summary>
+            NoteOffEvent の新しいインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="P:NextMidi.DataElement.NoteOffEvent.StatusBase">
+            <summary>
+            ステータスバイトの非チャンネル部分の値です。
+            </summary>
+        </member>
+        <member name="P:NextMidi.DataElement.NoteOffEvent.Speed">
+            <summary>
+            離鍵スピードです。
+            </summary>
+        </member>
+    </members>
+</doc>

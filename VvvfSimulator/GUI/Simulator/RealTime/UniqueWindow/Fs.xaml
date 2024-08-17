@@ -1,0 +1,43 @@
+﻿<Window x:Class="VvvfSimulator.GUI.Simulator.RealTime.UniqueWindow.Fs"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Style="{DynamicResource MinimumWindowStyle}"
+        Title="{DynamicResource Simulator.RealTime.UniqueWindow.Fs.Title}" Height="500" Width="500">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/GUI/Resource/Dictionary/Window.xaml"/>
+                <ResourceDictionary Source="/GUI/Resource/Dictionary/Common.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Grid x:Name="FS_Image" Background="{DynamicResource VoidBackgroundBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+
+        <Image HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Source="{Binding Image}"/>
+        <Border Grid.Row="1" Background="{DynamicResource SubBackgroundBrush}" CornerRadius="25,25,0,0">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="7*"/>
+                    <ColumnDefinition Width="4*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBox x:Name="TextBox_N" Text="200" TextChanged="TextBox_N_TextChanged" Grid.Column="1" Style="{DynamicResource SlimTextBox}"/>
+                <Label Content="N=" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="{DynamicResource BackgroundTextBrush}"/>
+                <Button x:Name="Button_CopyCoefficients" Grid.Column="2" Content="{DynamicResource Simulator.RealTime.UniqueWindow.Fs.CopyCoefficients}" Click="Button_CopyCoefficients_Click" Style="{DynamicResource SlimButton}"/>
+            </Grid>
+        </Border>
+
+
+
+    </Grid>
+</Window>

@@ -1,0 +1,76 @@
+﻿<Page x:Class="VvvfSimulator.GUI.Create.Settings.MinimumFrequency"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:VvvfSimulator.GUI.Create.Settings"
+      mc:Ignorable="d" 
+      d:DesignHeight="434" d:DesignWidth="661"
+      Title="minimum_freq_setting">
+
+    <Page.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/GUI/Resource/Dictionary/Common.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Page.Resources>
+
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Border CornerRadius="25" Background="{DynamicResource TitleBarBrush}">
+            <Label Content="{DynamicResource Create.Settings.MinimumFrequency.MinimumFrequency}" Style="{DynamicResource TitleBarText}"/>
+        </Border>
+
+        <Grid Grid.Row="1">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="100"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="5*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="5*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Border CornerRadius="25,25,0,0"  Grid.Column="1" Grid.Row="1" Background="{DynamicResource TitleBarBrush}">
+                    <Label Content="{DynamicResource Create.Settings.MinimumFrequency.Accelerating}" Style="{DynamicResource TitleBarText}"/>
+                </Border>
+                <Border CornerRadius="25,25,0,0"  Grid.Column="3" Grid.Row="1" Background="{DynamicResource TitleBarBrush}">
+                    <Label Content="{DynamicResource Create.Settings.MinimumFrequency.Braking}" Style="{DynamicResource TitleBarText}"/>
+                </Border>
+                <Border Grid.Column="1" Grid.Row="2" Background="{DynamicResource BackgroundBrush}" CornerRadius="0,0,25,25">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="7*"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBox x:Name="accelerate_min_freq_box" Style="{DynamicResource SlimTextBox}" Text="2.00" TextAlignment="Center" TextChanged="ValueChanged" Tag="Accelerate"/>
+                        <Label Content="Hz" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{DynamicResource BackgroundTextBrush}"/>
+                    </Grid>
+                </Border>
+                <Border Grid.Column="3" Grid.Row="2" Background="{DynamicResource BackgroundBrush}" CornerRadius="0,0,25,25">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="7*"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBox x:Name="braking_min_freq_box" Style="{DynamicResource SlimTextBox}" Text="2.00"  MaxLength="10" TextChanged="ValueChanged" Tag="Brake"/>
+                        <Label Content="Hz" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{DynamicResource BackgroundTextBrush}"/>
+                    </Grid>
+                </Border>
+
+
+            </Grid>
+        </Grid>
+    </Grid>
+</Page>

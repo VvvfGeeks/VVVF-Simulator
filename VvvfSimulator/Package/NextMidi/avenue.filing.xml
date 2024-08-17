@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>avenue.filing</name>
+    </assembly>
+    <members>
+        <member name="T:Avenue.Filing.IListReader`1">
+            <summary>
+            指定した型のデータの配列を読み取るインターフェースです。
+            </summary>
+            <typeparam name="T">読み取るデータの型。</typeparam>
+        </member>
+        <member name="M:Avenue.Filing.IListReader`1.Peek">
+            <summary>
+            データが存在するかどうかを検証します。
+            </summary>
+        </member>
+        <member name="M:Avenue.Filing.IListReader`1.Read">
+            <summary>
+            データを読み込みます。
+            </summary>
+        </member>
+        <member name="T:Avenue.Filing.ListReaderExtensions">
+            <summary>
+            IListReaderの拡張クラスです。
+            </summary>
+        </member>
+        <member name="M:Avenue.Filing.ListReaderExtensions.ReadAll``1(Avenue.Filing.IListReader{``0})">
+            <summary>
+            データをすべて読み込みます。
+            </summary>
+        </member>
+        <member name="T:Avenue.Filing.BinaryReaderExtensions">
+            <summary>
+            BinaryReaderの拡張クラスです。
+            </summary>
+        </member>
+        <member name="M:Avenue.Filing.BinaryReaderExtensions.Peek(System.IO.BinaryReader)">
+            <summary>
+            データが存在するかどうかを検証します。
+            </summary>
+        </member>
+        <member name="M:Avenue.Filing.BinaryReaderExtensions.Enumerate(System.IO.BinaryReader)">
+            <summary>
+            現在の読み取り位置からバイト列を順次読み出します。
+            </summary>
+        </member>
+        <member name="T:Avenue.Filing.IListWriter`1">
+            <summary>
+            指定した型のデータの配列を書き込むインターフェースです。
+            </summary>
+            <typeparam name="T">書き込むデータの型。</typeparam>
+        </member>
+        <member name="M:Avenue.Filing.IListWriter`1.Write(`0)">
+            <summary>
+            データを書き込みます。
+            </summary>
+        </member>
+        <member name="T:Avenue.Filing.ListWriterExtensions">
+            <summary>
+            IListWriterの拡張クラスです。
+            </summary>
+        </member>
+        <member name="M:Avenue.Filing.ListWriterExtensions.WriteAll``1(Avenue.Filing.IListWriter{``0},System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            データをすべて書き込みます。
+            </summary>
+        </member>
+    </members>
+</doc>

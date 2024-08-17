@@ -1,0 +1,203 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>nextmidi.midiport.input.core</name>
+    </assembly>
+    <members>
+        <member name="T:NextMidi.MidiPort.Input.Core.MidiInMessage">
+            <summary>
+            MIDI 入力のコールバック関数に渡されるメッセージの種類です。
+            </summary>
+        </member>
+        <member name="F:NextMidi.MidiPort.Input.Core.MidiInMessage.Open">
+            <summary>
+            MM_MIM_OPEN
+            </summary>
+        </member>
+        <member name="F:NextMidi.MidiPort.Input.Core.MidiInMessage.Close">
+            <summary>
+            MM_MIM_CLOSE
+            </summary>
+        </member>
+        <member name="F:NextMidi.MidiPort.Input.Core.MidiInMessage.Data">
+            <summary>
+            MM_MIM_DATA
+            </summary>
+        </member>
+        <member name="F:NextMidi.MidiPort.Input.Core.MidiInMessage.LongData">
+            <summary>
+            MM_MIM_LONGDATA
+            </summary>
+        </member>
+        <member name="T:NextMidi.MidiPort.Input.Core.MidiInProc">
+            <summary>
+            MidiInProc のマネージド実装です。
+            </summary>
+        </member>
+        <member name="T:NextMidi.MidiPort.Input.Core.MidiInPortHandle">
+            <summary>
+            MIDI 入力ポートを抽象化するクラスです。
+            </summary>
+        </member>
+        <member name="M:NextMidi.MidiPort.Input.Core.MidiInPortHandle.#ctor(System.Int32)">
+            <summary>
+            MidiInPortHandle のインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.MidiPort.Input.Core.MidiInPortHandle.OnReceived(Avenue.DataEventArgs{System.Byte[]})">
+            <summary>
+            Received イベントを発生させます。
+            </summary>
+        </member>
+        <member name="M:NextMidi.MidiPort.Input.Core.MidiInPortHandle.ReleaseCore">
+            <summary>
+            MIDI ポートハンドルを開放します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.MidiPort.Input.Core.MidiInPortHandle.FindPort(System.String)">
+            <summary>
+            指定した名前のポートを検索します。見つからない場合は-1を返します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.MidiPort.Input.Core.MidiInPortHandle.GetPortInformation(System.Int32)">
+            <summary>
+            MIDI 入力ポートの情報を取得します。
+            </summary>
+        </member>
+        <member name="E:NextMidi.MidiPort.Input.Core.MidiInPortHandle.Received">
+            <summary>
+            MIDI 信号を受信した時に発生します。
+            </summary>
+        </member>
+        <member name="P:NextMidi.MidiPort.Input.Core.MidiInPortHandle.PortCount">
+            <summary>
+            MIDI 入力ポートの数を取得します。
+            </summary>
+        </member>
+        <member name="T:NextMidi.MidiPort.Input.Core.MidiInBuffer">
+            <summary>
+            MIDI 入力バッファを管理するクラスです。
+            </summary>
+        </member>
+        <member name="M:NextMidi.MidiPort.Input.Core.MidiInBuffer.#ctor(System.IntPtr,System.String)">
+            <summary>
+            MidiInBuffer のインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.MidiPort.Input.Core.MidiInBuffer.#ctor(System.IntPtr,System.String,System.Int32)">
+            <summary>
+            MidiInBuffer のインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.MidiPort.Input.Core.MidiInBuffer.Clear">
+            <summary>
+            メモリを解放します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.MidiPort.Input.Core.MidiInBuffer.GetData">
+            <summary>
+            データを取得します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.MidiPort.Input.Core.MidiInBuffer.Prepare">
+            <summary>
+            バッファを準備します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.MidiPort.Input.Core.MidiInBuffer.Unprepare">
+            <summary>
+            バッファの登録を解除します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.MidiPort.Input.Core.MidiInBuffer.ReleaseCore">
+            <summary>
+            インスタンスを破棄します。
+            </summary>
+        </member>
+        <member name="T:NextMidi.MidiPort.Input.Core.MidiInCapsA">
+            <summary>
+            MIDI 入力ポートの情報を表します。
+            </summary>
+        </member>
+        <member name="F:NextMidi.MidiPort.Input.Core.MidiInCapsA.wMid">
+            <summary>
+            MIDI ハードウェアのメーカー ID です。
+            </summary>
+        </member>
+        <member name="F:NextMidi.MidiPort.Input.Core.MidiInCapsA.wPid">
+            <summary>
+            Product ID です。
+            </summary>
+        </member>
+        <member name="F:NextMidi.MidiPort.Input.Core.MidiInCapsA.vDriverVersion">
+            <summary>
+            ドライバーのバージョンです。
+            </summary>
+        </member>
+        <member name="F:NextMidi.MidiPort.Input.Core.MidiInCapsA.szPname">
+            <summary>
+            ポートの名前です。
+            </summary>
+        </member>
+        <member name="P:NextMidi.MidiPort.Input.Core.MidiInCapsA.MarshalSize">
+            <summary>
+            マーシャリング時の構造体のサイズです。
+            </summary>
+        </member>
+        <member name="T:NextMidi.MidiPort.Input.Core.MidiInApi">
+            <summary>
+            MIDI 入力APIの宣言です。
+            </summary>
+        </member>
+        <member name="M:NextMidi.MidiPort.Input.Core.MidiInApi.midiInGetNumDevs">
+            <summary>
+            MIDI 入力ポートの数を取得します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.MidiPort.Input.Core.MidiInApi.midiInGetDevCapsA(System.UInt32,NextMidi.MidiPort.Input.Core.MidiInCapsA@,System.UInt32)">
+            <summary>
+            MIDI 入力ポートの情報を取得します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.MidiPort.Input.Core.MidiInApi.midiInOpen(System.IntPtr@,System.UInt32,System.Delegate,System.UInt32,NextMidi.MidiPort.Core.MidiPortOpenFlag)">
+            <summary>
+            MIDI 入力ポートを開きます。
+            </summary>
+        </member>
+        <member name="M:NextMidi.MidiPort.Input.Core.MidiInApi.midiInClose(System.IntPtr)">
+            <summary>
+            MIDI 入力ポートを閉じます。
+            </summary>
+        </member>
+        <member name="M:NextMidi.MidiPort.Input.Core.MidiInApi.midiInStart(System.IntPtr)">
+            <summary>
+            MIDI 入力信号を受け付けます。
+            </summary>
+        </member>
+        <member name="M:NextMidi.MidiPort.Input.Core.MidiInApi.midiInStop(System.IntPtr)">
+            <summary>
+            MIDI 入力信号の受付を終了します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.MidiPort.Input.Core.MidiInApi.midiInReset(System.IntPtr)">
+            <summary>
+            入力バッファをリセットします。
+            </summary>
+        </member>
+        <member name="M:NextMidi.MidiPort.Input.Core.MidiInApi.midiInPrepareHeader(System.IntPtr,NextMidi.MidiPort.Core.MidiHdr@,System.UInt32)">
+            <summary>
+            MIDI 入力バッファを登録します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.MidiPort.Input.Core.MidiInApi.midiInUnprepareHeader(System.IntPtr,NextMidi.MidiPort.Core.MidiHdr@,System.UInt32)">
+            <summary>
+            MIDI 入力バッファの登録を解除します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.MidiPort.Input.Core.MidiInApi.midiInAddBuffer(System.IntPtr,NextMidi.MidiPort.Core.MidiHdr@,System.UInt32)">
+            <summary>
+            MIDI 入力バッファを追加します。
+            </summary>
+        </member>
+    </members>
+</doc>

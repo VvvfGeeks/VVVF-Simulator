@@ -1,0 +1,155 @@
+﻿<Window x:Class="VvvfSimulator.GUI.Simulator.RealTime.Setting.Basic"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:VvvfSimulator.GUI.Simulator.RealTime"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterOwner"
+        Style="{DynamicResource DialogWindowStyle}"
+        Title="{Binding ElementName=WindowTitle, Path=Content}" Height="auto" Width="600" ResizeMode="NoResize" HorizontalAlignment="Left" VerticalAlignment="Top" SizeToContent="Height" Closing="Window_Closing">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/GUI/Resource/Dictionary/Common.xaml"/>
+                <ResourceDictionary Source="/GUI/Resource/Dictionary/Window.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Grid Background="{DynamicResource VoidBackgroundBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="100"/>
+            
+        </Grid.RowDefinitions>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="25"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="46"/>
+            </Grid.ColumnDefinitions>
+            <Image Style="{StaticResource WindowIconStyle}"/>
+            <Label Grid.Column="1" x:Name="WindowTitle" Content="Title" Style="{StaticResource WindowTitleStyle}"/>
+            <Button Grid.Column="2" Tag="Close" Click="OnWindowControlButtonClick" Style="{DynamicResource WindowCloseButton}"/>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="6*"/>
+            </Grid.ColumnDefinitions>
+            <Border Background="{DynamicResource SubTitleBarBrush}" CornerRadius="0,25,0,0">
+                <Label Content="{DynamicResource Simulator.RealTime.Setting.Basic.AudioBuffSize}" Style="{DynamicResource SubTitleBarText}"/>
+            </Border>
+            <TextBox x:Name="TextBuffSize" Grid.Column="1" Text="40000" TextChanged="TextBoxChanged" Tag="AudioBuffSize" Style="{DynamicResource SlimTextBox}"/>
+        </Grid>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="6*"/>
+            </Grid.ColumnDefinitions>
+            <Border Background="{DynamicResource SubTitleBarBrush}" CornerRadius="0,0,0,0">
+                <Label Content="{DynamicResource Simulator.RealTime.Setting.Basic.SamplingFrequency}" Style="{DynamicResource SubTitleBarText}"/>
+            </Border>
+            <TextBox x:Name="SamplingFrequencyInput" Grid.Column="1" Text="200000" TextChanged="TextBoxChanged" Tag="SamplingFrequency" Style="{DynamicResource SlimTextBox}"/>
+        </Grid>
+        <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="6*"/>
+            </Grid.ColumnDefinitions>
+            <Border Background="{DynamicResource SubTitleBarBrush}" CornerRadius="0,0,0,0">
+                <Label Content="{DynamicResource Simulator.RealTime.Setting.Basic.CalculateDivision}" Style="{DynamicResource SubTitleBarText}"/>
+            </Border>
+            <TextBox x:Name="CalculateDivisionInput" Grid.Column="1" Text="64" TextChanged="TextBoxChanged" Tag="CalculateDivision" Style="{DynamicResource SlimTextBox}"/>
+        </Grid>
+        <Grid Grid.Row="4" Height="100">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="6*"/>
+            </Grid.ColumnDefinitions>
+            <Grid Background="{DynamicResource SubTitleBarBrush}">
+                <Label Content="{DynamicResource Simulator.RealTime.Setting.Basic.ControlStatus}" Style="{DynamicResource SubTitleBarText}"/>
+            </Grid>
+            <Grid Grid.Column="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+                <CheckBox Style="{DynamicResource SlimCheckBox}" x:Name="BoxShowControl" Tag="Control" Content="{DynamicResource Simulator.RealTime.Setting.Basic.ControlStatus.Show}" HorizontalAlignment="Center" VerticalAlignment="Center" Checked="BoxChecked" Unchecked="BoxChecked"/>
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="{DynamicResource Simulator.RealTime.Setting.Basic.ControlStatus.Design}" HorizontalAlignment="Center"  VerticalAlignment="Center" Foreground="{DynamicResource BackgroundTextBrush}"/>
+                    <ComboBox x:Name="SelectorControlDesign" SelectionChanged="SelectorChanged" Tag="ControlDesign" Grid.Column="1" Style="{DynamicResource SlimComboBoxStyle}" SelectedValuePath="Key" DisplayMemberPath="Value"/>
+                    <CheckBox Style="{DynamicResource SlimCheckBox}" x:Name="BoxControlPrecise" Content="{DynamicResource Simulator.RealTime.Setting.Basic.ControlStatus.PreciseCalculation}" Tag="ControlPrecise" Checked="BoxChecked" Unchecked="BoxChecked" HorizontalAlignment="Center" Grid.Row="1" Grid.ColumnSpan="2" VerticalAlignment="Center" />
+                </Grid>
+            </Grid>
+        </Grid>
+        <Grid Grid.Row="5" Height="100">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="6*"/>
+            </Grid.ColumnDefinitions>
+            <Grid Background="{DynamicResource SubTitleBarBrush}">
+                <Label Content="{DynamicResource Simulator.RealTime.Setting.Basic.VoltageVector}" Style="{DynamicResource SubTitleBarText}"/>
+            </Grid>
+            <Grid Grid.Column="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+                <CheckBox Style="{DynamicResource SlimCheckBox}" x:Name="BoxShowHexagon" Tag="Hexagon" Content="{DynamicResource Simulator.RealTime.Setting.Basic.VoltageVector.Show}" HorizontalAlignment="Center" VerticalAlignment="Center" Checked="BoxChecked" Unchecked="BoxChecked"/>
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="{DynamicResource Simulator.RealTime.Setting.Basic.VoltageVector.Design}" HorizontalAlignment="Center"  VerticalAlignment="Center" Foreground="{DynamicResource BackgroundTextBrush}"/>
+                    <ComboBox x:Name="SelectorHexagonDesign" SelectionChanged="SelectorChanged" Tag="HexagonDesign" Grid.Column="1" Style="{DynamicResource SlimComboBoxStyle}" SelectedValuePath="Key" DisplayMemberPath="Value"/>
+                    <CheckBox Style="{DynamicResource SlimCheckBox}" x:Name="BoxShowZeroVectorCicle" Content="{DynamicResource Simulator.RealTime.Setting.Basic.VoltageVector.ShowZeroVector}" Tag="HexagonZero" Checked="BoxChecked" Unchecked="BoxChecked" HorizontalAlignment="Center" Grid.Row="1" Grid.ColumnSpan="2" VerticalAlignment="Center" />
+                </Grid>
+            </Grid>
+        </Grid>
+        <Grid Grid.Row="6" Height="100">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="6*"/>
+            </Grid.ColumnDefinitions>
+            <Grid Background="{DynamicResource SubTitleBarBrush}">
+                <Label Content="{DynamicResource Simulator.RealTime.Setting.Basic.Others}" Style="{DynamicResource SubTitleBarText}"/>
+            </Grid>
+            <Grid Grid.Column="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+                <CheckBox Style="{DynamicResource SlimCheckBox}" x:Name="BoxWaveForm" Tag="WaveForm" Content="{DynamicResource Simulator.RealTime.Setting.Basic.Others.WaveForm.Show}" HorizontalAlignment="Center" VerticalAlignment="Center" Checked="BoxChecked" Unchecked="BoxChecked" Grid.Column="0" Grid.RowSpan="1"/>
+                <CheckBox Style="{DynamicResource SlimCheckBox}" x:Name="BoxRealTimeEdit" Tag="Edit" Content="{DynamicResource Simulator.RealTime.Setting.Basic.Others.EditRealTime}" HorizontalAlignment="Center" VerticalAlignment="Center" Checked="BoxChecked" Unchecked="BoxChecked" Grid.Column="1" Grid.RowSpan="1"/>
+                <CheckBox Style="{DynamicResource SlimCheckBox}" x:Name="BoxFFT" Tag="FFT" Content="{DynamicResource Simulator.RealTime.Setting.Basic.Others.FFT.Show}" HorizontalAlignment="Center" VerticalAlignment="Center" Checked="BoxChecked" Unchecked="BoxChecked" Grid.Row="1"/>
+                <CheckBox Style="{DynamicResource SlimCheckBox}" x:Name="BoxFS" Tag="FS" Content="{DynamicResource Simulator.RealTime.Setting.Basic.Others.FS.Show}" HorizontalAlignment="Center" VerticalAlignment="Center" Checked="BoxChecked" Unchecked="BoxChecked" Grid.Column="1" Grid.Row="1"/>
+            </Grid>
+        </Grid>
+
+    </Grid>
+</Window>

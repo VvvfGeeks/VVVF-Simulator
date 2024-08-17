@@ -1,0 +1,108 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>nextmidi.filing.midi</name>
+    </assembly>
+    <members>
+        <member name="T:NextMidi.Filing.Midi.MidiReader">
+            <summary>
+            MIDI ファイルの読み込みを自動で行うクラスです。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Filing.Midi.MidiReader.#ctor(System.IO.Stream)">
+            <summary>
+            MidiReader のインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Filing.Midi.MidiReader.#ctor(System.IO.Stream,System.Text.Encoding)">
+            <summary>
+            MidiReader のインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Filing.Midi.MidiReader.#ctor(System.IO.Stream,NextMidi.DataElement.Factory.IMidiEventFactory,NextMidi.Filing.Midi.IMidiExtractor)">
+            <summary>
+            MidiReader のインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Filing.Midi.MidiReader.Dispose">
+            <summary>
+            MidiReader の元になるストリームを閉じます。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Filing.Midi.MidiReader.Close">
+            <summary>
+            MidiReader の元になるストリームを閉じます。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Filing.Midi.MidiReader.ReadFile">
+            <summary>
+            ファイルを読み込みます。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Filing.Midi.MidiReader.ReadFrom(System.String)">
+            <summary>
+            指定したファイルを読み込みます。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Filing.Midi.MidiReader.ReadFrom(System.String,System.Text.Encoding)">
+            <summary>
+            指定したファイルを読み込みます。
+            </summary>
+        </member>
+        <member name="T:NextMidi.Filing.Midi.MidiWriter">
+            <summary>
+            MIDI ファイルの書き込みを自動で行うクラスです。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Filing.Midi.MidiWriter.#ctor(System.IO.Stream)">
+            <summary>
+            MidiWriter のインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Filing.Midi.MidiWriter.Dispose">
+            <summary>
+            MidiWriter の元になるストリームを閉じます。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Filing.Midi.MidiWriter.Close">
+            <summary>
+            MidiWriter の元になるストリームを閉じます。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Filing.Midi.MidiWriter.WriteFile(NextMidi.Data.MidiData)">
+            <summary>
+            データを書き込みます。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Filing.Midi.MidiWriter.WriteTo(System.String,NextMidi.Data.MidiData)">
+            <summary>
+            MIDI データを指定したファイルに書き込みます。
+            </summary>
+        </member>
+        <member name="T:NextMidi.Filing.Midi.MidiExtractor">
+            <summary>
+            Format 0 の MIDI データを Format 1 に変換するクラスです。
+            </summary>
+        </member>
+        <member name="T:NextMidi.Filing.Midi.IMidiExtractor">
+            <summary>
+            Format 0 の MIDI データを Format 1 に変換するインターフェースです。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Filing.Midi.IMidiExtractor.Extract(NextMidi.Data.Track.MidiTrack)">
+            <summary>
+            データを展開します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Filing.Midi.MidiExtractor.#ctor">
+            <summary>
+            MidiExtractor のインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Filing.Midi.MidiExtractor.Extract(NextMidi.Data.Track.MidiTrack)">
+            <summary>
+            データを展開します。
+            </summary>
+        </member>
+    </members>
+</doc>

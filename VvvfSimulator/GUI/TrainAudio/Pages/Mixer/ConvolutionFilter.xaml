@@ -1,0 +1,33 @@
+﻿<Page
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:VvvfSimulator.GUI.TrainAudio.Pages.Mixer"
+      xmlns:MyUserControl="clr-namespace:VvvfSimulator.GUI.Resource.MyUserControl" x:Class="VvvfSimulator.GUI.TrainAudio.Pages.Mixer.ConvolutionFilter"
+      mc:Ignorable="d" d:DesignWidth="800" Height="114">
+
+    <Page.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/GUI/Resource/Dictionary/Common.xaml"/>
+                <ResourceDictionary Source="/GUI/Resource/Dictionary/DataGrid.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Page.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <Button x:Name="LoadButton" Content="{DynamicResource TrainAudio.Pages.Mixer.ConvolutionFilter.Load}" Click="OnLoadButtonClick" Style="{StaticResource SlimButton}" Grid.Column="1" Grid.Row="1" Grid.RowSpan="2"/>
+        <Label Content="{DynamicResource TrainAudio.Pages.Mixer.ConvolutionFilter.ImpulseResponse}" FontFamily="{DynamicResource Generic.Font}" FontWeight="Bold" Foreground="{StaticResource BackgroundTextBrush}" Grid.Column="1" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+    </Grid>
+</Page>

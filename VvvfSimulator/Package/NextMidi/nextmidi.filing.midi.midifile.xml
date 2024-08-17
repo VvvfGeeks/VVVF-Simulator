@@ -1,0 +1,228 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>nextmidi.filing.midi.midifile</name>
+    </assembly>
+    <members>
+        <member name="M:NextMidi.Filing.Midi.MidiFile.SmfEvent.#ctor(System.Int32,System.Byte[])">
+            <summary>
+            SmfEvent のインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="T:NextMidi.Filing.Midi.MidiFile.DeltaTime">
+            <summary>
+            デルタタイムを表すクラスです。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Filing.Midi.MidiFile.DeltaTime.#ctor(System.Collections.Generic.IEnumerable{System.Byte})">
+            <summary>
+            DeltaTimeのインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Filing.Midi.MidiFile.DeltaTime.#ctor(System.Int32)">
+            <summary>
+            DeltaTimeのインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Filing.Midi.MidiFile.DeltaTime.ToArray">
+            <summary>
+            デルタタイムを配列表現に変換します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Filing.Midi.MidiFile.DeltaTime.ToEnumerable">
+            <summary>
+            デルタタイムを列挙表現に変換します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Filing.Midi.MidiFile.DeltaTime.ReadFrom(System.IO.BinaryReader)">
+            <summary>
+            BinaryReader からデルタタイムを読み込みます。
+            </summary>
+        </member>
+        <member name="P:NextMidi.Filing.Midi.MidiFile.DeltaTime.Value">
+            <summary>
+            デルタタイムの値です。
+            </summary>
+        </member>
+        <member name="T:NextMidi.Filing.Midi.MidiFile.MidiFileData">
+            <summary>
+            MIDI ファイルの内容を表すクラスです。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Filing.Midi.MidiFile.MidiFileData.#ctor">
+            <summary>
+            MidiFileData のインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Filing.Midi.MidiFile.MidiFileData.#ctor(NextMidi.Filing.Midi.MidiFile.MidiFileHeader,System.Collections.Generic.List{System.Collections.Generic.List{NextMidi.Filing.Midi.MidiFile.SmfEvent}})">
+            <summary>
+            MIDI ファイルヘッダーとトラックの一覧から MidiFileData のインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="P:NextMidi.Filing.Midi.MidiFile.MidiFileData.Header">
+            <summary>
+            ヘッダーチャンクの内容です。
+            </summary>
+        </member>
+        <member name="P:NextMidi.Filing.Midi.MidiFile.MidiFileData.Tracks">
+            <summary>
+            トラックの一覧です。
+            </summary>
+        </member>
+        <member name="T:NextMidi.Filing.Midi.MidiFile.MidiFileReader">
+            <summary>
+            MIDI ファイルの読み込みを行うクラスです。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Filing.Midi.MidiFile.MidiFileReader.#ctor(System.IO.Stream)">
+            <summary>
+            MidiFileReader のインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Filing.Midi.MidiFile.MidiFileReader.Dispose">
+            <summary>
+            MidiFileReader の元になるストリームを閉じます。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Filing.Midi.MidiFile.MidiFileReader.Close">
+            <summary>
+            MidiFileReaderの元になるストリームを閉じます。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Filing.Midi.MidiFile.MidiFileReader.Read">
+            <summary>
+            ファイルを読み込みます。
+            </summary>
+        </member>
+        <member name="T:NextMidi.Filing.Midi.MidiFile.MidiTrackWriter">
+            <summary>
+            MIDI トラックの書き込みを行うクラスです。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Filing.Midi.MidiFile.MidiTrackWriter.#ctor(System.IO.Stream)">
+            <summary>
+            MidiTrackWriter のインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Filing.Midi.MidiFile.MidiTrackWriter.Dispose">
+            <summary>
+            MidiTrackWriter の元になるストリームを閉じます。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Filing.Midi.MidiFile.MidiTrackWriter.Close">
+            <summary>
+            MidiTrackWriter の元になるストリームを閉じます。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Filing.Midi.MidiFile.MidiTrackWriter.Write(NextMidi.Filing.Midi.MidiFile.SmfEvent)">
+            <summary>
+            MIDI イベントを書き込みます。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Filing.Midi.MidiFile.MidiTrackWriter.WriteAll(System.Collections.Generic.IEnumerable{NextMidi.Filing.Midi.MidiFile.SmfEvent})">
+            <summary>
+            MIDI イベントを全て書き込みます。
+            </summary>
+        </member>
+        <member name="T:NextMidi.Filing.Midi.MidiFile.MidiTrackReader">
+            <summary>
+            MIDI トラックの読み込みを行うクラスです。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Filing.Midi.MidiFile.MidiTrackReader.#ctor(System.IO.Stream,System.UInt32)">
+            <summary>
+            MidiTrackReader のインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Filing.Midi.MidiFile.MidiTrackReader.Dispose">
+            <summary>
+            MidiTrackReader の元になるストリームを閉じます。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Filing.Midi.MidiFile.MidiTrackReader.Close">
+            <summary>
+            MidiTrackReader の元になるストリームを閉じます。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Filing.Midi.MidiFile.MidiTrackReader.Peek">
+            <summary>
+            データが存在するかどうかを検証します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Filing.Midi.MidiFile.MidiTrackReader.Read">
+            <summary>
+            MIDIイベントを読み込みます。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Filing.Midi.MidiFile.MidiTrackReader.ReadMessage">
+            <summary>
+            MIDI メッセージを読み込みます。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Filing.Midi.MidiFile.MidiTrackReader.ReadHeader">
+            <summary>
+            MIDI メッセージの先頭 2 バイトを読み込みます。
+            </summary>
+        </member>
+        <member name="T:NextMidi.Filing.Midi.MidiFile.MidiFileWriter">
+            <summary>
+            MIDI ファイルの書き込みを行うクラスです。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Filing.Midi.MidiFile.MidiFileWriter.#ctor(System.IO.Stream)">
+            <summary>
+            MidiFileWriter のインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Filing.Midi.MidiFile.MidiFileWriter.Dispose">
+            <summary>
+            MidiFileWriter の元になるストリームを閉じます。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Filing.Midi.MidiFile.MidiFileWriter.Close">
+            <summary>
+            MidiFileWriterの元になるストリームを閉じます。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Filing.Midi.MidiFile.MidiFileWriter.Write(NextMidi.Filing.Midi.MidiFile.MidiFileData)">
+            <summary>
+            ファイルを書き込みます。
+            </summary>
+        </member>
+        <member name="T:NextMidi.Filing.Midi.MidiFile.MidiFileHeader">
+            <summary>
+            ヘッダーチャンクの内容を表すクラスです。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Filing.Midi.MidiFile.MidiFileHeader.#ctor(System.UInt16,System.UInt16,System.UInt16)">
+            <summary>
+            フォーマット、トラック数、分解能を指定して MidiFileHeader のインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Filing.Midi.MidiFile.MidiFileHeader.#ctor(System.Byte[])">
+            <summary>
+            MIDI ヘッダーチャンクの内容から MidiFileHeader のインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Filing.Midi.MidiFile.MidiFileHeader.ToMidiChunk">
+            <summary>
+            MidiFileHeader の内容を、等価な MIDI チャンクに変換します。
+            </summary>
+        </member>
+        <member name="P:NextMidi.Filing.Midi.MidiFile.MidiFileHeader.Format">
+            <summary>
+            MIDI ファイルのフォーマットです。
+            </summary>
+        </member>
+        <member name="P:NextMidi.Filing.Midi.MidiFile.MidiFileHeader.TrackCount">
+            <summary>
+            トラックチャンクの数です。
+            </summary>
+        </member>
+        <member name="P:NextMidi.Filing.Midi.MidiFile.MidiFileHeader.Resolution">
+            <summary>
+            MIDI 分解能です。
+            </summary>
+        </member>
+    </members>
+</doc>

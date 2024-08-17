@@ -1,0 +1,213 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>avenue.core</name>
+    </assembly>
+    <members>
+        <member name="M:Avenue.ProgramArguments.GetValue(System.String,System.String)">
+            <summary>
+            プログラムの引数を取得します。
+            </summary>
+        </member>
+        <member name="M:Avenue.ProgramArguments.HasOption(System.String)">
+            <summary>
+            指定したオプションが設定されているかどうかを判断します。
+            </summary>
+        </member>
+        <member name="P:Avenue.ProgramArguments.Target">
+            <summary>
+            プログラムの第一引数を取得します。
+            </summary>
+        </member>
+        <member name="T:Avenue.ChangeEventArgs`1">
+            <summary>
+            特定の型のイベントデータを格納するクラスです。
+            </summary>
+        </member>
+        <member name="M:Avenue.ChangeEventArgs`1.#ctor(`0,`0)">
+            <summary>
+            ChangeEventArgs のインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="P:Avenue.ChangeEventArgs`1.OldValue">
+            <summary>
+            イベントの古い値です。
+            </summary>
+        </member>
+        <member name="P:Avenue.ChangeEventArgs`1.NewValue">
+            <summary>
+            イベントの新しい値です。
+            </summary>
+        </member>
+        <member name="T:Avenue.IFactory`2">
+            <summary>
+            ファクトリを表すインターフェースです。
+            </summary>
+        </member>
+        <member name="M:Avenue.IFactory`2.CreateInstance(`1)">
+            <summary>
+            引数を使用してインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="T:Avenue.AspectRoot">
+            <summary>
+            タグ付け可能なオブジェクトです。
+            </summary>
+        </member>
+        <member name="M:Avenue.AspectRoot.OnAspectChanged(Avenue.DataEventArgs{System.Object})">
+            <summary>
+            AspectChanged イベントを発生させます。
+            </summary>
+        </member>
+        <member name="M:Avenue.AspectRoot.OnTypeAspectChanged(Avenue.DataEventArgs{System.Type})">
+            <summary>
+            TypeAspectChanged イベントを発生させます。
+            </summary>
+        </member>
+        <member name="M:Avenue.AspectRoot.GetValue``1">
+            <summary>
+            タグを取得します。
+            </summary>
+        </member>
+        <member name="M:Avenue.AspectRoot.GetValue``1(System.Object)">
+            <summary>
+            タグを取得します。
+            </summary>
+        </member>
+        <member name="M:Avenue.AspectRoot.SetValue``1(``0)">
+            <summary>
+            タグを設定します。
+            </summary>
+        </member>
+        <member name="M:Avenue.AspectRoot.SetValue``1(System.Object,``0)">
+            <summary>
+            タグを設定します。
+            </summary>
+        </member>
+        <member name="E:Avenue.AspectRoot.AspectChanged">
+            <summary>
+            タグが変更された時に発生します。
+            </summary>
+        </member>
+        <member name="E:Avenue.AspectRoot.TypeAspectChanged">
+            <summary>
+            型設定されたタグが変更された時に発生します。
+            </summary>
+        </member>
+        <member name="T:Avenue.Fraction">
+            <summary>
+            分数を表す構造体です。
+            </summary>
+        </member>
+        <member name="M:Avenue.Fraction.#ctor(System.Int32,System.Int32)">
+            <summary>
+            Fraction のインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="M:Avenue.Fraction.op_Multiply(Avenue.Fraction,System.Int32)">
+            <summary>
+            分数の掛け算を行います。
+            </summary>
+        </member>
+        <member name="M:Avenue.Fraction.op_Multiply(System.Int32,Avenue.Fraction)">
+            <summary>
+            分数の掛け算を行います。
+            </summary>
+        </member>
+        <member name="P:Avenue.Fraction.Numerator">
+            <summary>
+            分子です。
+            </summary>
+        </member>
+        <member name="P:Avenue.Fraction.Denominator">
+            <summary>
+            分母です。
+            </summary>
+        </member>
+        <member name="T:Avenue.NullChecker">
+            <summary>
+            オブジェクトを検証するクラスです。
+            </summary>
+        </member>
+        <member name="M:Avenue.NullChecker.CheckNotNull``1(System.Object,``0)">
+            <summary>
+            オブジェクトが null 参照の時にエラーを発生させます。
+            </summary>
+        </member>
+        <member name="T:Avenue.Bounder">
+            <summary>
+            値の範囲をチェックする拡張クラスです。
+            </summary>
+        </member>
+        <member name="M:Avenue.Bounder.CheckBounded(System.Byte,System.Byte,System.Byte)">
+            <summary>
+            値が指定した範囲内にあるかどうかをチェックします。
+            </summary>
+        </member>
+        <member name="M:Avenue.Bounder.CheckBounded(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            値が指定した範囲内にあるかどうかをチェックします。
+            </summary>
+        </member>
+        <member name="M:Avenue.Bounder.CheckNotMinus(System.Int32)">
+            <summary>
+            値が指定した範囲内にあるかどうかをチェックします。
+            </summary>
+        </member>
+        <member name="M:Avenue.Bounder.BoundNotMinus(System.Int32)">
+            <summary>
+            値を0以上の値に修正します。
+            </summary>
+        </member>
+        <member name="M:Avenue.Bounder.BoundTo(System.Byte,System.Byte,System.Byte)">
+            <summary>
+            値を指定した範囲内に修正します。
+            </summary>
+        </member>
+        <member name="M:Avenue.Bounder.BoundTo(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            値を指定した範囲内に修正します。
+            </summary>
+        </member>
+        <member name="T:Avenue.BigEndian">
+            <summary>
+            ビッグエンディアンを操作するクラスです。
+            </summary>
+        </member>
+        <member name="M:Avenue.BigEndian.ToUInt16(System.Byte[])">
+            <summary>
+            byte 列を ushort 型に変換します。
+            </summary>
+        </member>
+        <member name="M:Avenue.BigEndian.ToUInt32(System.Byte[])">
+            <summary>
+            byte 列を uint 型に変換します。
+            </summary>
+        </member>
+        <member name="M:Avenue.BigEndianExtensions.ToBigEndian(System.UInt16)">
+            <summary>
+            ushort 型を byte 列に変換します。
+            </summary>
+        </member>
+        <member name="M:Avenue.BigEndianExtensions.ToBigEndian(System.UInt32)">
+            <summary>
+            uint 型を byte 列に変換します。
+            </summary>
+        </member>
+        <member name="T:Avenue.DataEventArgs`1">
+            <summary>
+            特定の型のイベントデータを格納するクラスです。
+            </summary>
+        </member>
+        <member name="M:Avenue.DataEventArgs`1.#ctor(`0)">
+            <summary>
+            DataEventArgs のインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="P:Avenue.DataEventArgs`1.Value">
+            <summary>
+            イベントのデータです。
+            </summary>
+        </member>
+    </members>
+</doc>

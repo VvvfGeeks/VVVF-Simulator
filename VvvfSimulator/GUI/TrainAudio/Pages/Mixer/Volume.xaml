@@ -1,0 +1,60 @@
+﻿<Page
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:VvvfSimulator.GUI.TrainAudio.Pages.Mixer"
+      xmlns:MyUserControl="clr-namespace:VvvfSimulator.GUI.Resource.MyUserControl" x:Class="VvvfSimulator.GUI.TrainAudio.Pages.Mixer.Volume"
+      mc:Ignorable="d" 
+      d:DesignHeight="200" d:DesignWidth="800"
+      Title="Volume">
+
+    <Page.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/GUI/Resource/Dictionary/Common.xaml"/>
+                <ResourceDictionary Source="/GUI/Resource/Dictionary/Slider.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Page.Resources>
+    
+    <Grid Background="{StaticResource VoidBackgroundBrush}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <Grid.Resources>
+            <Style TargetType="Label">
+                <Setter Property="HorizontalAlignment" Value="Center"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="FontFamily" Value="{DynamicResource Generic.Font}"/>
+                <Setter Property="FontSize" Value="20"/>
+                <Setter Property="Foreground" Value="{StaticResource SubTitleBarTextBrush}"/>
+            </Style>
+        </Grid.Resources>
+        <Border Grid.RowSpan="4" Background="{StaticResource SubTitleBarBrush}" BorderThickness="0,0,3,0"/>
+        <Label Grid.Row="0" Content="{DynamicResource TrainAudio.Pages.Mixer.Volume.MasterVolume}"/>
+        <Label Grid.Row="1" Content="{DynamicResource TrainAudio.Pages.Mixer.Volume.MotorVolume}"/>
+        <Label Grid.Row="2" Content="{DynamicResource TrainAudio.Pages.Mixer.Volume.FrequencyFilter}"/>
+        <Label Grid.Row="3" Content="{DynamicResource TrainAudio.Pages.Mixer.Volume.ConvolutionFilter}"/>
+
+        <Slider x:Name="MasterVolume" Style="{DynamicResource SlimSlider}" Grid.Column="1" VerticalAlignment="Center" Maximum="5" Minimum="-20" Grid.ColumnSpan="2" ValueChanged="SliderValueChanged" Tag="MasterVolume"/>
+        <TextBox x:Name="MasterVolumeValue" Style="{DynamicResource SlimTextBox}" Grid.Column="3" Grid.Row="0" TextChanged="TextBoxChanged" Tag="MasterVolume" d:Text="20"/>
+        <Slider x:Name="MotorVolume" Style="{DynamicResource SlimSlider}" Grid.Column="1" VerticalAlignment="Center" Maximum="5" Minimum="-20" Grid.ColumnSpan="2" Grid.Row="1" ValueChanged="SliderValueChanged" Tag="MotorVolume"/>
+        <TextBox x:Name="MotorVolumeValue" Style="{DynamicResource SlimTextBox}" Grid.Column="3" Grid.Row="1" TextChanged="TextBoxChanged" Tag="MotorVolume" d:Text="20"/>
+    
+        
+        
+        <MyUserControl:EnableButton x:Name="EnableFrequencyFilter" Grid.Column="2" Grid.Row="2" Margin="5" OnClicked="EnableFrequencyFilter_OnClicked"/>
+        <MyUserControl:EnableButton x:Name="EnableConvolutionFilter" Grid.Column="2" Grid.Row="3" Margin="5" OnClicked="EnableConvolutionFilter_OnClicked"/>
+
+    </Grid>
+</Page>

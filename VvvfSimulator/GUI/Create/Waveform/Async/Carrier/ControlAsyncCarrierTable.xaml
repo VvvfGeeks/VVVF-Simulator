@@ -1,0 +1,34 @@
+﻿<UserControl x:Class="VvvfSimulator.GUI.Create.Waveform.Async.ControlAsyncCarrierTable"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:VvvfSimulator.GUI.Create.Waveform.Async"
+             mc:Ignorable="d" 
+             d:DesignHeight="350" d:DesignWidth="560">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/GUI/Resource/Dictionary/Common.xaml"/>
+                <ResourceDictionary Source="/GUI/Resource/Dictionary/DataGrid.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid>
+        <DataGrid ItemsSource="{Binding Async_Table_Data, NotifyOnTargetUpdated=True}" TargetUpdated="DataGrid_TargetUpdated" d:ItemsSource="{d:SampleData ItemCount=5}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="{DynamicResource Create.Settings.Waveform.Async.Carrier.ControlAsyncCarrierTable.Carrier}" Width="1*" Binding="{Binding CarrierFrequency}" EditingElementStyle="{StaticResource SlimTextBox}" ElementStyle="{StaticResource DataGridTextBlockStyle}"/>
+                <DataGridTextColumn Header="{DynamicResource Create.Settings.Waveform.Async.Carrier.ControlAsyncCarrierTable.From}" Width="1*" Binding="{Binding ControlFrequencyFrom}" EditingElementStyle="{StaticResource SlimTextBox}" ElementStyle="{StaticResource DataGridTextBlockStyle}"/>
+                <DataGridTemplateColumn Header="{DynamicResource Create.Settings.Waveform.Async.Carrier.ControlAsyncCarrierTable.StuckAtHere}" Width="1*" >
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <CheckBox IsChecked="{Binding FreeRunStuckAtHere, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource SlimCheckBox}" HorizontalAlignment="Center"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</UserControl>

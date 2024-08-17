@@ -1,0 +1,221 @@
+﻿<Window x:Class="VvvfSimulator.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:converter="clr-namespace:VvvfSimulator.GUI.Resource.Converter"
+        mc:Ignorable="d"
+        Style="{DynamicResource MinimumWindowStyle}"
+        Title="{DynamicResource MainWindow.Title}" Height="500" Width="960" Closing="Window_Closing" WindowStartupLocation="CenterScreen">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/GUI/Resource/Dictionary/Common.xaml"/>
+                <ResourceDictionary Source="/GUI/Resource/Dictionary/MenuBar.xaml"/>
+                <ResourceDictionary Source="/GUI/Resource/Dictionary/ContextMenu.xaml"/>
+                <ResourceDictionary Source="/GUI/Resource/Dictionary/TabControl.xaml"/>
+                <ResourceDictionary Source="/GUI/Resource/Dictionary/ListView.xaml"/>
+                <ResourceDictionary Source="/GUI/Resource/Dictionary/Window.xaml"/>
+                <ResourceDictionary Source="/GUI/Resource/Dictionary/MenuItem.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+            <converter:PulseModeNameConverter x:Key="PulseModeNameConverter"/>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Grid Background="{DynamicResource VoidBackgroundBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="7*"/>
+            </Grid.ColumnDefinitions>
+            <Grid Margin="5,10,4,5">
+                <TabControl x:Name="setting_tabs">
+                    <TabItem Header="{DynamicResource MainWindow.TabControl.Settings}">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="50"/>
+                                <RowDefinition Height="50"/>
+                                <RowDefinition Height="50"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Button Style="{StaticResource SlimButton}" x:Name="settings_level" Content="{DynamicResource MainWindow.TabControl.Settings.PwmLevel}" Click="SettingButtonClick"/>
+                            <Button Style="{StaticResource SlimButton}" x:Name="settings_minimum" Content="{DynamicResource MainWindow.TabControl.Settings.MinimumFrequency}" Click="SettingButtonClick" Grid.Row="1"/>
+                            <Button Style="{StaticResource SlimButton}" x:Name="settings_mascon" Content="{DynamicResource MainWindow.TabControl.Settings.JerkSetting}" Click="SettingButtonClick" Grid.Row="2"/>
+                        </Grid>
+                    </TabItem>
+                    <TabItem Header="{DynamicResource MainWindow.TabControl.Accelerate}">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="50"/>
+                            </Grid.RowDefinitions>
+                            <Border Grid.Row="1" Background="{DynamicResource SubBackgroundBrush}" Grid.ColumnSpan="3" CornerRadius="25">
+                                <Button Style="{DynamicResource SlimButton}" x:Name="accelerate_add" Tag="accelerate_add" Content="+" Click="SettingEditClick" Grid.Column="0"/>
+                            </Border>
+                            <ListView x:Name="accelerate_settings"  Loaded="SettingsLoad" Tag="accelerate" SelectionChanged="SettingsSelectionChanged" Style="{DynamicResource SlimListView}" ItemContainerStyle="{DynamicResource SlimListItem}">
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel>
+                                            <TextBlock Text="{Binding PulseMode.PulseName, Converter={StaticResource PulseModeNameConverter}}" Style="{DynamicResource ListItemTitleTextBlockStyle}" HorizontalAlignment="Stretch"/>
+                                            <TextBlock Text="{Binding ControlFrequencyFrom}" Foreground="{DynamicResource BackgroundTextBrush}" HorizontalAlignment="Stretch" TextAlignment="Center"/>
+                                            <StackPanel.ContextMenu>
+                                                <ContextMenu Style="{DynamicResource SlimContextMenu}">
+                                                    <MenuItem Header="{DynamicResource Generic.MenuItem.Copy}" Click="ContextMenuClick" Tag="accelerate.copy"/>
+                                                    <Separator/>
+                                                    <MenuItem Header="{DynamicResource Generic.MenuItem.Delete}" Click="ContextMenuClick" Tag="accelerate.delete"/>
+                                                </ContextMenu>
+                                            </StackPanel.ContextMenu>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                                <ListView.ContextMenu>
+                                    <ContextMenu Style="{DynamicResource SlimContextMenu}">
+                                        <MenuItem Header="{DynamicResource Generic.MenuItem.Sort}" Click="ContextMenuClick" Tag="accelerate.sort"/>
+                                    </ContextMenu>
+                                </ListView.ContextMenu>
+                            </ListView>
+                        </Grid>
+                    </TabItem>
+                    <TabItem Header="{DynamicResource MainWindow.TabControl.Brake}">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="50"/>
+                            </Grid.RowDefinitions>
+
+                            <Border Background="{DynamicResource SubBackgroundBrush}" Grid.ColumnSpan="3" CornerRadius="25" Grid.Row="1">
+                                <Button Style="{DynamicResource SlimButton}" x:Name="brake_add" Tag="brake_add" Content="+" Click="SettingEditClick" Grid.Column="0"/>
+                            </Border>
+
+                            <ListView x:Name="brake_settings" Loaded="SettingsLoad" Tag="brake" SelectionChanged="SettingsSelectionChanged" Style="{DynamicResource SlimListView}" ItemContainerStyle="{DynamicResource SlimListItem}">
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel>
+                                            <TextBlock Text="{Binding PulseMode.PulseName, Converter={StaticResource PulseModeNameConverter}}" Style="{DynamicResource ListItemTitleTextBlockStyle}" HorizontalAlignment="Stretch"/>
+                                            <TextBlock Text="{Binding ControlFrequencyFrom}" Foreground="{DynamicResource BackgroundTextBrush}" HorizontalAlignment="Stretch" TextAlignment="Center"/>
+                                            <StackPanel.ContextMenu>
+                                                <ContextMenu Style="{DynamicResource SlimContextMenu}">
+                                                    <MenuItem Header="{DynamicResource Generic.MenuItem.Copy}" Click="ContextMenuClick" Tag="brake.copy"/>
+                                                    <Separator/>
+                                                    <MenuItem Header="{DynamicResource Generic.MenuItem.Delete}" Click="ContextMenuClick" Tag="brake.delete"/>
+                                                </ContextMenu>
+                                            </StackPanel.ContextMenu>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                                <ListView.ContextMenu>
+                                    <ContextMenu Style="{DynamicResource SlimContextMenu}">
+                                        <MenuItem Header="{DynamicResource Generic.MenuItem.Sort}" Click="ContextMenuClick" Tag="brake.sort"/>
+                                    </ContextMenu>
+                                </ListView.ContextMenu>
+                                <ListView.Resources>
+                                    <Style TargetType="Border">
+                                        <Setter Property="CornerRadius" Value="0"/>
+                                    </Style>
+                                </ListView.Resources>
+                            </ListView>
+
+
+                        </Grid>
+                    </TabItem>
+                </TabControl>
+            </Grid>
+            <Grid Grid.Column="1">
+                <Frame x:Name="SettingContentViewer" NavigationUIVisibility="Hidden" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+            </Grid>
+        </Grid>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="25"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="46"/>
+                <ColumnDefinition Width="46"/>
+                <ColumnDefinition Width="46"/>
+            </Grid.ColumnDefinitions>
+            <Image Style="{StaticResource WindowIconStyle}"/>
+            <Menu Style="{DynamicResource MenuStyle}" Grid.Column="1">
+                <MenuItem Header="{DynamicResource MainWindow.Menu.File}">
+                    <MenuItem Header="{DynamicResource MainWindow.Menu.File.Save}" Tag="Save" Click="File_Menu_Click"/>
+                    <MenuItem Header="{DynamicResource MainWindow.Menu.File.SaveAs}" Tag="Save_As" Click="File_Menu_Click"/>
+                    <MenuItem Header="{DynamicResource MainWindow.Menu.File.Load}" Tag="Load" Click="File_Menu_Click"/>
+                </MenuItem>
+
+                <MenuItem Header="{DynamicResource MainWindow.Menu.Edit}">
+                    <MenuItem Header="{DynamicResource MainWindow.Menu.Edit.Reset}" Tag="Reset" Click="Edit_Menu_Click"/>
+                </MenuItem>
+
+                <MenuItem Header="{DynamicResource MainWindow.Menu.Window}">
+                    <MenuItem Header="{DynamicResource MainWindow.Menu.Window.LinearCalculator}" Tag="LCalc" Click="Window_Menu_Click"/>
+                    <MenuItem Header="{DynamicResource MainWindow.Menu.Window.TaskProgress}" Tag="TaskProgressView" Click="Window_Menu_Click"/>
+                    <MenuItem Header="{DynamicResource MainWindow.Menu.Window.BaseFreqPattern}" Tag="AccelPattern" Click="Window_Menu_Click"/>
+                    <MenuItem Header="{DynamicResource MainWindow.Menu.Window.TrainSound}" Tag="TrainSoundSetting" Click="Window_Menu_Click"/>
+                </MenuItem>
+
+                <MenuItem Header="{DynamicResource MainWindow.Menu.Generate}">
+                    <MenuItem Header="{DynamicResource MainWindow.Menu.Generate.SourceCode}">
+                        <MenuItem Header="{DynamicResource MainWindow.Menu.Generate.SourceCode.RPi3}" Tag="SourceCode_RPi3" Click="Generation_Menu_Click"/>
+                    </MenuItem>
+                    <MenuItem Header="{DynamicResource MainWindow.Menu.Generate.Audio}">
+                        <MenuItem Header="{DynamicResource MainWindow.Menu.Generate.Audio.VVVF}" Tag="VVVF_WAV" Click="Generation_Menu_Click"/>
+                        <Separator/>
+                        <MenuItem Header="{DynamicResource MainWindow.Menu.Generate.Audio.Train}" Tag="Train_WAV" Click="Generation_Menu_Click"/>
+                    </MenuItem>
+                    <MenuItem Header="{DynamicResource MainWindow.Menu.Generate.Movie}">
+                        <MenuItem Header="{DynamicResource MainWindow.Menu.Generate.Movie.Control}">
+                            <MenuItem Header="{DynamicResource MainWindow.Menu.Generate.Movie.Control.Original}" Tag="Control_Original" Click="Generation_Menu_Click"/>
+                            <MenuItem Header="{DynamicResource MainWindow.Menu.Generate.Movie.Control.Original2}" Tag="Control_Original2" Click="Generation_Menu_Click"/>
+                        </MenuItem>
+                        <MenuItem Header="{DynamicResource MainWindow.Menu.Generate.Movie.WaveForm}">
+                            <MenuItem Header="{DynamicResource MainWindow.Menu.Generate.Movie.WaveForm.Original}" Tag="WaveForm_Original" Click="Generation_Menu_Click"/>
+                            <MenuItem Header="{DynamicResource MainWindow.Menu.Generate.Movie.WaveForm.Spaced}" Tag="WaveForm_Spaced" Click="Generation_Menu_Click"/>
+                            <MenuItem Header="{DynamicResource MainWindow.Menu.Generate.Movie.WaveForm.UVW}" Tag="WaveForm_UVW" Click="Generation_Menu_Click"/>
+                        </MenuItem>
+                        <MenuItem Header="{DynamicResource MainWindow.Menu.Generate.Movie.Hexagon}">
+                            <MenuItem Header="{DynamicResource MainWindow.Menu.Generate.Movie.Hexagon.Original}" Tag="Hexagon_Original" Click="Generation_Menu_Click"/>
+                            <MenuItem Header="{DynamicResource MainWindow.Menu.Generate.Movie.Hexagon.Explain}" Tag="Hexagon_Explain" Click="Generation_Menu_Click"/>
+
+                        </MenuItem>
+                        <MenuItem Header="{DynamicResource MainWindow.Menu.Generate.Movie.FFT}">
+                            <MenuItem Header="{DynamicResource MainWindow.Menu.Generate.Movie.FFT.Original}" Tag="FFT_Video" Click="Generation_Menu_Click"/>
+                        </MenuItem>
+                    </MenuItem>
+
+                    <MenuItem Header="{DynamicResource MainWindow.Menu.Generate.Image}">
+                        <MenuItem Header="{DynamicResource MainWindow.Menu.Generate.Image.Hexagon}">
+                            <MenuItem Header="{DynamicResource MainWindow.Menu.Generate.Image.Hexagon.Original}" Tag="Hexagon_OriginalImage" Click="Generation_Menu_Click"/>
+                        </MenuItem>
+                        <MenuItem Header="{DynamicResource MainWindow.Menu.Generate.Image.FFT}">
+                            <MenuItem Header="{DynamicResource MainWindow.Menu.Generate.Image.FFT.Original}" Tag="FFT_Image" Click="Generation_Menu_Click"/>
+                        </MenuItem>
+                    </MenuItem>
+                </MenuItem>
+
+                <MenuItem Header="{DynamicResource MainWindow.Menu.RealTime}">
+                    <MenuItem Header="{DynamicResource MainWindow.Menu.RealTime.VVVF}" Tag="VVVF_RealTime" Click="Generation_Menu_Click"/>
+                    <MenuItem Header="{DynamicResource MainWindow.Menu.RealTime.VVVF.USB}" Tag="VVVF_RealTime_Usb" Click="Generation_Menu_Click"/>
+                    <MenuItem Header="{DynamicResource MainWindow.Menu.RealTime.VVVF.Setting}" Tag="VVVF_Setting" Click="Generation_Menu_Click"/>
+                    <Separator/>
+                    <MenuItem Header="{DynamicResource MainWindow.Menu.RealTime.Train}" Tag="Train_RealTime" Click="Generation_Menu_Click"/>
+                    <MenuItem Header="{DynamicResource MainWindow.Menu.RealTime.Train.Setting}" Tag="Train_Setting" Click="Generation_Menu_Click"/>
+                </MenuItem>
+
+                <MenuItem Header="{DynamicResource MainWindow.Menu.Tools}">
+                    <MenuItem Header="{DynamicResource MainWindow.Menu.Tools.AutoVoltage}" Tag="AutoVoltage" Click="Tools_Menu_Click"/>
+                    <MenuItem Header="{DynamicResource MainWindow.Menu.Tools.FreeRunAmpZero}" Tag="FreeRunAmpZero" Click="Tools_Menu_Click"/>
+                    <MenuItem Header="{DynamicResource MainWindow.Menu.Tools.FreeRunEndAmplitudeContinuous}" Tag="EndAmplitudeContinuous" Click="Tools_Menu_Click"/>
+                    <MenuItem Header="{DynamicResource MainWindow.Menu.Tools.MIDI}" Tag="MIDI" Click="Tools_Menu_Click"/>
+                </MenuItem>
+            </Menu>
+            <Button Grid.Column="2" Tag="Minimize" Style="{DynamicResource WindowMimizeButton}" Click="OnWindowControlButtonClick"/>
+            <Button Grid.Column="3" Tag="Maximize" Style="{DynamicResource WindowMaximizeButton}" Click="OnWindowControlButtonClick"/>
+            <Button Grid.Column="4" Tag="Close" Style="{DynamicResource WindowCloseButton}" Click="OnWindowControlButtonClick"/>
+        </Grid>
+        <Grid x:Name="Hider" Background="#7F000000" Visibility="{Binding Blocked, Converter={StaticResource BooleanToVisibilityConverter}}" Grid.RowSpan="2" d:IsHidden="True"/>
+    </Grid>
+</Window>

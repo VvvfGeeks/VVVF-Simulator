@@ -1,0 +1,118 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>nextmidi.filing.midi.chunk</name>
+    </assembly>
+    <members>
+        <member name="T:NextMidi.Filing.Midi.Chunk.MidiChunkType">
+            <summary>
+            MIDI チャンクの種類を表す列挙子です。
+            </summary>
+        </member>
+        <member name="F:NextMidi.Filing.Midi.Chunk.MidiChunkType.File">
+            <summary>
+            MIDI ファイルチャンクです。
+            </summary>
+        </member>
+        <member name="F:NextMidi.Filing.Midi.Chunk.MidiChunkType.Track">
+            <summary>
+            MIDI トラックチャンクです。
+            </summary>
+        </member>
+        <member name="T:NextMidi.Filing.Midi.Chunk.MidiChunk">
+            <summary>
+            MIDI チャンクを表すクラスです。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Filing.Midi.Chunk.MidiChunk.#ctor(NextMidi.Filing.Midi.Chunk.MidiChunkType,System.Byte[])">
+            <summary>
+            MidiChunkのインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Filing.Midi.Chunk.MidiChunk.GetContent">
+            <summary>
+            MIDIチャンクの内容を取得します。
+            </summary>
+        </member>
+        <member name="P:NextMidi.Filing.Midi.Chunk.MidiChunk.Expression">
+            <summary>
+            MIDI チャンクの種類を表す文字列です。
+            </summary>
+        </member>
+        <member name="P:NextMidi.Filing.Midi.Chunk.MidiChunk.Length">
+            <summary>
+            MIDI チャンクの長さです。
+            </summary>
+        </member>
+        <member name="T:NextMidi.Filing.Midi.Chunk.MidiChunkWriter">
+            <summary>
+            MIDI チャンクの書き込みを行うクラスです。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Filing.Midi.Chunk.MidiChunkWriter.#ctor(System.IO.Stream)">
+            <summary>
+            MidiChunkWriter の新しいインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Filing.Midi.Chunk.MidiChunkWriter.Dispose">
+            <summary>
+            MidiChunkWriter の元になるストリームを閉じます。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Filing.Midi.Chunk.MidiChunkWriter.Write(NextMidi.Filing.Midi.Chunk.MidiChunk)">
+            <summary>
+            MIDI チャンクを書き込みます。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Filing.Midi.Chunk.MidiChunkWriter.Close">
+            <summary>
+            MidiChunkWriter の元になるストリームを閉じます。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Filing.Midi.Chunk.MidiChunkWriter.WriteChunkLength(System.UInt32)">
+            <summary>
+            MIDI チャンクの長さを書き込みます。
+            </summary>
+        </member>
+        <member name="T:NextMidi.Filing.Midi.Chunk.MidiChunkReader">
+            <summary>
+            MIDI チャンクの読み込みを行うクラスです。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Filing.Midi.Chunk.MidiChunkReader.#ctor(System.IO.Stream)">
+            <summary>
+            MidiChunkReader の新しいインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Filing.Midi.Chunk.MidiChunkReader.Dispose">
+            <summary>
+            MidiChunkReader の元になるストリームを閉じます。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Filing.Midi.Chunk.MidiChunkReader.Peek">
+            <summary>
+            データが存在するかどうかを検証します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Filing.Midi.Chunk.MidiChunkReader.Read">
+            <summary>
+            MIDI チャンクを読み込みます。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Filing.Midi.Chunk.MidiChunkReader.Close">
+            <summary>
+            MidiChunkReader の元になるストリームを閉じます。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Filing.Midi.Chunk.MidiChunkReader.ReadChunkType">
+            <summary>
+            MIDI チャンクタイプを読み込みます。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Filing.Midi.Chunk.MidiChunkReader.ReadChunkLength">
+            <summary>
+            MIDI チャンクの長さを読み込みます。
+            </summary>
+        </member>
+    </members>
+</doc>

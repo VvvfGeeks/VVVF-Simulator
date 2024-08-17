@@ -1,0 +1,113 @@
+﻿<UserControl x:Class="VvvfSimulator.GUI.Create.Waveform.Async.Vibrato.ControlAsyncVibrato"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:VvvfSimulator.GUI.Create.Waveform.Async.Vibrato"
+             mc:Ignorable="d" 
+             d:DesignHeight="1100" d:DesignWidth="560">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/GUI/Resource/Dictionary/Common.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="11*"/>
+            </Grid.ColumnDefinitions>
+            <Border Background="{DynamicResource InnerSubTitleBarBrush}" CornerRadius="25,0,0,0">
+                <Label Content="{DynamicResource Create.Settings.Waveform.Async.Vibrato.ControlAsyncVibrato.Basic}" Style="{DynamicResource InnerSubTitleBarText}"/>
+            </Border>
+            <Border Grid.Column="1" Background="{DynamicResource BackgroundBrush}" CornerRadius="0,25,0,0">
+                <CheckBox Style="{DynamicResource SlimCheckBox}" x:Name="Continuous_CheckBox" Content="{DynamicResource Create.Settings.Waveform.Async.Vibrato.ControlAsyncVibrato.Basic.Continuous}" HorizontalAlignment="Center" VerticalAlignment="Center" Checked="Continuous_CheckBox_Checked" Unchecked="Continuous_CheckBox_Checked"/>
+            </Border>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="11*"/>
+            </Grid.ColumnDefinitions>
+            <Border Background="{DynamicResource InnerSubTitleBarBrush}">
+                <Label Content="{DynamicResource Create.Settings.Waveform.Async.Vibrato.ControlAsyncVibrato.Interval}" Style="{DynamicResource InnerSubTitleBarText}"/>
+            </Border>
+            <Grid Grid.Column="1" Background="{DynamicResource BackgroundBrush}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Border Grid.Column="1">
+                        <ComboBox Style="{DynamicResource SlimComboBoxStyle}" x:Name="interval_mode" SelectionChanged="SelectionChanged" Tag="Interval" SelectedValuePath="Key" DisplayMemberPath="Value"/>
+                    </Border>
+                    <Border Grid.Column="1" Grid.Row="1">
+                        <Frame x:Name="interval_mode_frame" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch"/>
+                    </Border>
+                </Grid>
+            </Grid>
+        </Grid>
+
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="11*"/>
+            </Grid.ColumnDefinitions>
+            <Border Background="{DynamicResource InnerSubTitleBarBrush}">
+                <TextBlock Style="{DynamicResource InnerSubTitleBarTextBlock}" Text="{DynamicResource Create.Settings.Waveform.Async.Vibrato.ControlAsyncVibrato.Highest}"/>
+            </Border>
+            <Grid Grid.Column="1" Background="{DynamicResource BackgroundBrush}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+                    <Border Grid.Column="1">
+                        <ComboBox Style="{DynamicResource SlimComboBoxStyle}" x:Name="highest_mode" SelectionChanged="SelectionChanged" Tag="Highest" SelectedValuePath="Key" DisplayMemberPath="Value"/>
+                    </Border>
+                    <Border Grid.Column="1" Grid.Row="1">
+                        <Frame x:Name="highest_param_frame" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch"/>
+                    </Border>
+                </Grid>
+            </Grid>
+        </Grid>
+        <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="11*"/>
+            </Grid.ColumnDefinitions>
+            <Border Background="{DynamicResource InnerSubTitleBarBrush}" CornerRadius="0,0,0,25">
+                <TextBlock Style="{DynamicResource InnerSubTitleBarTextBlock}" Text="{DynamicResource Create.Settings.Waveform.Async.Vibrato.ControlAsyncVibrato.Lowest}"/>
+            </Border>
+            <Grid Grid.Column="1">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+                    <Border Grid.Column="1"  Background="{DynamicResource BackgroundBrush}">
+                        <ComboBox Style="{DynamicResource SlimComboBoxStyle}" x:Name="lowest_mode" SelectionChanged="SelectionChanged" Tag="Lowest" SelectedValuePath="Key" DisplayMemberPath="Value"/>
+                    </Border>
+                    <Border Grid.Column="1" Grid.Row="1" Background="{DynamicResource BackgroundBrush}" CornerRadius="0,0,25,0">
+                        <Frame x:Name="lowest_param_frame" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch"/>
+                    </Border>
+                </Grid>
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>

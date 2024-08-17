@@ -1,0 +1,218 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>nextmidi.time</name>
+    </assembly>
+    <members>
+        <member name="T:NextMidi.Time.MidiSender">
+            <summary>
+            MIDI イベントを送信するクラスです。
+            </summary>
+        </member>
+        <member name="T:NextMidi.Time.IMidiSender">
+            <summary>
+            MIDI イベントを送信するインターフェースです。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Time.IMidiSender.Start">
+            <summary>
+            演奏を開始します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Time.IMidiSender.Send(System.Int32)">
+            <summary>
+            指定した時刻までのデータを送信します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Time.IMidiSender.Stop">
+            <summary>
+            演奏を停止します。
+            </summary>
+        </member>
+        <member name="P:NextMidi.Time.IMidiSender.CurrentTick">
+            <summary>
+            現在の演奏時刻です。
+            </summary>
+        </member>
+        <member name="P:NextMidi.Time.IMidiSender.TickLength">
+            <summary>
+            演奏時間を取得します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Time.MidiSender.#ctor(NextMidi.Data.MidiData,NextMidi.IO.MidiPort.Output.IMidiOutBridge)">
+            <summary>
+            MidiSender のインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Time.MidiSender.Start">
+            <summary>
+            演奏を開始します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Time.MidiSender.Send(System.Int32)">
+            <summary>
+            指定した範囲のデータを送信します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Time.MidiSender.Stop">
+            <summary>
+            演奏を停止します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Time.MidiSender.GetBufferTrack(NextMidi.Data.Track.MidiTrack)">
+            <summary>
+            指定したトラックに対応するバッファを取得します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Time.MidiSender.CacheEvents(NextMidi.Data.Track.MidiTrack,System.Int32,System.Int32)">
+            <summary>
+            指定した範囲の送信用データをキャッシュします。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Time.MidiSender.AddEvent(NextMidi.Data.Track.MidiTrack,NextMidi.DataElement.MidiEvent)">
+            <summary>
+            指定したデータを送信リストに追加します。
+            </summary>
+        </member>
+        <member name="P:NextMidi.Time.MidiSender.CurrentTick">
+            <summary>
+            現在の演奏時刻です。
+            </summary>
+        </member>
+        <member name="P:NextMidi.Time.MidiSender.TickLength">
+            <summary>
+            演奏時間を取得します。
+            </summary>
+        </member>
+        <member name="T:NextMidi.Time.IMidiPlayer">
+            <summary>
+            MIDI データを演奏するインターフェースです。
+            </summary>
+        </member>
+        <member name="E:NextMidi.Time.IMidiPlayer.TickChanged">
+            <summary>
+            演奏カーソルの位置が変更された時に発生します。
+            </summary>
+        </member>
+        <member name="E:NextMidi.Time.IMidiPlayer.Starting">
+            <summary>
+            演奏が開始される時に発生します。
+            </summary>
+        </member>
+        <member name="E:NextMidi.Time.IMidiPlayer.Stopped">
+            <summary>
+            演奏が停止された時に発生します。
+            </summary>
+        </member>
+        <member name="T:NextMidi.Time.MidiTimer">
+            <summary>
+            時刻を取得するクラスです。
+            </summary>
+        </member>
+        <member name="T:NextMidi.Time.IMidiTimer">
+            <summary>
+            時刻を取得するためのインターフェースです。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Time.IMidiTimer.GetTime">
+            <summary>
+            現在時刻をミリ秒単位で取得します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Time.MidiTimer.#ctor">
+            <summary>
+            MidiTimer のインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Time.MidiTimer.GetTime">
+            <summary>
+            現在時刻をミリ秒単位で取得します。
+            </summary>
+        </member>
+        <member name="T:NextMidi.Time.MidiPlayer">
+            <summary>
+            MIDI データを演奏するクラスです。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Time.MidiPlayer.#ctor(NextMidi.MidiPort.Output.IMidiOutPort)">
+            <summary>
+            MidiPlayer のインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Time.MidiPlayer.#ctor(NextMidi.IO.MidiPort.Output.IMidiOutBridge)">
+            <summary>
+            MidiPlayer のインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Time.MidiPlayer.#ctor(NextMidi.IO.MidiPort.Output.IMidiOutBridge,NextMidi.Time.IMidiTimer)">
+            <summary>
+            MidiPlayer のインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Time.MidiPlayer.OnTickChanged(System.EventArgs)">
+            <summary>
+            TickChanged イベントを発生させます。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Time.MidiPlayer.OnStarting(System.EventArgs)">
+            <summary>
+            Startingイベントを発生させます。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Time.MidiPlayer.OnStopped(System.EventArgs)">
+            <summary>
+            Stoppedイベントを発生させます。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Time.MidiPlayer.Play(NextMidi.Data.Domain.IMidiFileDomain)">
+            <summary>
+            演奏スレッドを作成し、演奏を開始します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Time.MidiPlayer.Stop">
+            <summary>
+            演奏を停止します。
+            </summary>
+        </member>
+        <member name="P:NextMidi.Time.MidiPlayer.Priority">
+            <summary>
+            演奏スレッドの優先順位を示します。
+            </summary>
+        </member>
+        <member name="P:NextMidi.Time.MidiPlayer.Tick">
+            <summary>
+            演奏カーソルの位置を取得します。
+            </summary>
+        </member>
+        <member name="P:NextMidi.Time.MidiPlayer.Time">
+            <summary>
+            演奏カーソルの位置を取得します。
+            </summary>
+        </member>
+        <member name="P:NextMidi.Time.MidiPlayer.MusicTime">
+            <summary>
+            演奏カーソルの位置を取得します。
+            </summary>
+        </member>
+        <member name="P:NextMidi.Time.MidiPlayer.Playing">
+            <summary>
+            演奏中かどうかを取得します。
+            </summary>
+        </member>
+        <member name="E:NextMidi.Time.MidiPlayer.TickChanged">
+            <summary>
+            演奏カーソルの位置が変更された時に発生します。
+            </summary>
+        </member>
+        <member name="E:NextMidi.Time.MidiPlayer.Starting">
+            <summary>
+            演奏が開始される時に発生します。
+            </summary>
+        </member>
+        <member name="E:NextMidi.Time.MidiPlayer.Stopped">
+            <summary>
+            演奏が停止された時に発生します。
+            </summary>
+        </member>
+    </members>
+</doc>

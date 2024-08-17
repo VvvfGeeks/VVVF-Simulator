@@ -1,0 +1,75 @@
+﻿<Window
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:MyUserControl="clr-namespace:VvvfSimulator.GUI.Resource.MyUserControl"
+    x:Class="VvvfSimulator.GUI.MIDIConvert.Main"
+    mc:Ignorable="d"
+    Style="{DynamicResource MinimumWindowStyle}" ResizeMode="NoResize"
+    Title="{DynamicResource MidiConvert.Main.Title}" Height="600" Width="200">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/GUI/Resource/Dictionary/Common.xaml"/>
+                <ResourceDictionary Source="/GUI/Resource/Dictionary/Window.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
+
+    <Grid Background="{DynamicResource VoidBackgroundBrush}">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="25"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="46"/>
+            </Grid.ColumnDefinitions>
+            <Image Style="{StaticResource WindowIconStyle}"/>
+            <Label Grid.Column="1" x:Name="WindowTitle" Content="{DynamicResource MidiConvert.Main.Title}" Style="{StaticResource WindowTitleStyle}"/>
+            <Button Grid.Column="4" Tag="Close" Style="{DynamicResource WindowCloseButton}" Click="OnWindowControlButtonClick"/>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="5*"/>
+                <RowDefinition Height="5*"/>
+                <RowDefinition Height="5*"/>
+                <RowDefinition Height="5*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+
+            <StackPanel Grid.Row="1" VerticalAlignment="Center">
+                <Image Source="/GUI/Resource/Images/MIDIConvert/B_MIDI_Document.png" Stretch="Fill" Width="50" Height="50" HorizontalAlignment="Center" />
+                <Button x:Name="BtnBrowse" Content="{DynamicResource MidiConvert.Main.Browse}" Click="Button_Click" Tag="Browse" Height="50" Margin="10,5,10,0" Style="{DynamicResource SlimButton}"/>
+            </StackPanel>
+
+            <StackPanel Grid.Row="2" VerticalAlignment="Center">
+                <Image Source="/GUI/Resource/Images/MIDIConvert/B_Folder_Opend.png" Stretch="Fill" Width="50" Height="50" HorizontalAlignment="Center" />
+                <Button x:Name="BtnSelect" Content="{DynamicResource MidiConvert.Main.Select}" Click="Button_Click" Tag="Select" Height="50" Margin="10,5,10,0" Style="{DynamicResource SlimButton}"/>
+            </StackPanel>
+
+            <StackPanel Grid.Row="3" VerticalAlignment="Center">
+                <Image Source="/GUI/Resource/Images/MIDIConvert/B_Spanner.png" Stretch="Fill" Width="50" Height="50" HorizontalAlignment="Center" />
+                <Button x:Name="BtnConfig" Content="{DynamicResource MidiConvert.Main.Config}" Click="Button_Click" Tag="Config" Height="50" Margin="10,5,10,0" Style="{DynamicResource SlimButton}"/>
+            </StackPanel>
+
+            <StackPanel Grid.Row="4" VerticalAlignment="Center">
+                <Image Source="/GUI/Resource/Images/MIDIConvert/B_Start.png" Stretch="Fill" Width="50" Height="50" HorizontalAlignment="Center" />
+                <Button x:Name="BtnConvert" Content="{DynamicResource MidiConvert.Main.Convert}" Click="Button_Click" Tag="Convert" Height="50" Margin="10,5,10,0" Style="{DynamicResource SlimButton}" IsEnabled="False"/>
+            </StackPanel>
+
+        </Grid>
+
+    </Grid>
+    
+
+</Window>

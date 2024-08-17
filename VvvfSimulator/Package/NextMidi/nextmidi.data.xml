@@ -1,0 +1,738 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>nextmidi.data</name>
+    </assembly>
+    <members>
+        <member name="T:NextMidi.Data.Score.TempoMapBase">
+            <summary>
+            TempoMap の基底クラスです。
+            </summary>
+        </member>
+        <member name="T:NextMidi.Data.Score.ITempoMap">
+            <summary>
+            テンポを管理するインターフェースです。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Data.Score.ITempoMap.GetTempo(System.Int32)">
+            <summary>
+            指定した時刻のテンポを取得します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Data.Score.ITempoMap.ToTick(System.Int32)">
+            <summary>
+            ミリ秒を Tick 値に換算します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Data.Score.ITempoMap.ToMilliSeconds(System.Int32)">
+            <summary>
+            Tick 値をミリ秒に換算します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Data.Score.ITempoMap.ToTime(System.Int32)">
+            <summary>
+            Tick 値を時刻に換算します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Data.Score.TempoMapBase.#ctor(System.Int32)">
+            <summary>
+            TempoMapBase のインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Data.Score.TempoMapBase.GetTempo(System.Int32)">
+            <summary>
+            指定した時刻のテンポを取得します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Data.Score.TempoMapBase.ToTick(System.Int32)">
+            <summary>
+            ミリ秒を Tick 値に換算します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Data.Score.TempoMapBase.ToMilliSeconds(System.Int32)">
+            <summary>
+            Tick 値をミリ秒に換算します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Data.Score.TempoMapBase.ToTime(System.Int32)">
+            <summary>
+            Tick 値を時刻に換算します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Data.Score.TempoMapBase.SetResolution(System.Int32)">
+            <summary>
+            分解能を設定します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Data.Score.TempoMapBase.SetTempoMap(System.Collections.Generic.List{NextMidi.Data.ScoreTempo})">
+            <summary>
+            テンポマップを設定します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Data.Score.TempoMapBase.GetTickLength(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            指定したミリ秒のTick幅を計算します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Data.Score.TempoMapBase.GetMilliSeconds(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            指定したTick値のミリ秒幅を計算します。
+            </summary>
+        </member>
+        <member name="T:NextMidi.Data.MidiDataExtensions">
+            <summary>
+            MidiData の拡張クラスです。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Data.MidiDataExtensions.GetTitle(NextMidi.Data.IMidiData)">
+            <summary>
+            MIDI ファイルのタイトルを取得します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Data.MidiDataExtensions.GetTickLength(NextMidi.Data.IMidiData)">
+            <summary>
+            MIDI ファイルの長さを取得します。
+            </summary>
+        </member>
+        <member name="T:NextMidi.Data.Domain.MidiFileDomain">
+            <summary>
+            MIDI ファイルのデータ境界を定めるクラスです。
+            </summary>
+        </member>
+        <member name="T:NextMidi.Data.Domain.IMidiFileDomain">
+            <summary>
+            MIDI ファイルのデータ境界を定めるインターフェースです。
+            </summary>
+        </member>
+        <member name="P:NextMidi.Data.Domain.IMidiFileDomain.MidiData">
+            <summary>
+            MIDI ファイルデータです。
+            </summary>
+        </member>
+        <member name="P:NextMidi.Data.Domain.IMidiFileDomain.TempoMap">
+            <summary>
+            テンポを管理するインターフェースです。
+            </summary>
+        </member>
+        <member name="P:NextMidi.Data.Domain.IMidiFileDomain.MusicMap">
+            <summary>
+            音楽時刻を計算するインターフェースです。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Data.Domain.MidiFileDomain.#ctor(NextMidi.Data.MidiData)">
+            <summary>
+            MidiFileDomain のインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="P:NextMidi.Data.Domain.MidiFileDomain.MidiData">
+            <summary>
+            MIDI ファイルデータです。
+            </summary>
+        </member>
+        <member name="P:NextMidi.Data.Domain.MidiFileDomain.TempoMap">
+            <summary>
+            テンポを管理するインターフェースです。
+            </summary>
+        </member>
+        <member name="P:NextMidi.Data.Domain.MidiFileDomain.MusicMap">
+            <summary>
+            音楽時刻を計算するインターフェースです。
+            </summary>
+        </member>
+        <member name="T:NextMidi.Data.MidiData">
+            <summary>
+            MIDI データを管理するクラスです。
+            </summary>
+        </member>
+        <member name="T:NextMidi.Data.IMidiData">
+            <summary>
+            MIDI データを管理するインターフェースです。
+            </summary>
+        </member>
+        <member name="P:NextMidi.Data.IMidiData.Resolution">
+            <summary>
+            分解能を取得します。
+            </summary>
+        </member>
+        <member name="P:NextMidi.Data.IMidiData.Tracks">
+            <summary>
+            トラックの一覧を取得します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Data.MidiData.#ctor">
+            <summary>
+            MidiDataのインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Data.MidiData.#ctor(NextMidi.Data.ResolutionSource)">
+            <summary>
+            MidiDataのインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Data.MidiData.#ctor(NextMidi.Data.Track.TrackCollection,NextMidi.Data.ResolutionSource)">
+            <summary>
+            MidiDataのインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="P:NextMidi.Data.MidiData.Resolution">
+            <summary>
+            分解能を取得します。
+            </summary>
+        </member>
+        <member name="P:NextMidi.Data.MidiData.Tracks">
+            <summary>
+            トラックの一覧を取得します。
+            </summary>
+        </member>
+        <member name="T:NextMidi.Data.Score.MusicMap">
+            <summary>
+            音楽時刻を計算するクラスです。
+            </summary>
+        </member>
+        <member name="T:NextMidi.Data.Score.IMusicMap">
+            <summary>
+            音楽時刻を計算するインターフェースです。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Data.Score.IMusicMap.ToMusicTime(System.Int32)">
+            <summary>
+            指定した Tick 値から小節番号を振り分けます。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Data.Score.IMusicMap.ToTick(NextMidi.Data.MusicTime)">
+            <summary>
+            指定した位置までの Tick 値の合計を返します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Data.Score.IMusicMap.GetRhythm(System.Int32)">
+            <summary>
+            指定した小節の拍子を取得します。
+            </summary>
+        </member>
+        <member name="P:NextMidi.Data.Score.IMusicMap.Resolution">
+            <summary>
+            分解能を取得します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Data.Score.MusicMap.#ctor(NextMidi.Data.MidiData)">
+            <summary>
+            MusicMap のインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Data.Score.MusicMap.ToMusicTime(System.Int32)">
+            <summary>
+            指定した Tick 値から小節番号を振り分けます。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Data.Score.MusicMap.ToTick(NextMidi.Data.MusicTime)">
+            <summary>
+            指定した位置までの Tick 値の合計を返します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Data.Score.MusicMap.GetRhythm(System.Int32)">
+            <summary>
+            指定した小節の拍子を取得します。
+            </summary>
+        </member>
+        <member name="P:NextMidi.Data.Score.MusicMap.Resolution">
+            <summary>
+            分解能を取得します。
+            </summary>
+        </member>
+        <member name="T:NextMidi.Data.Score.ScoreSignature">
+            <summary>
+            位置情報と拍子記号のセットです。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Data.Score.ScoreSignature.#ctor(System.Int32,System.Int32,Avenue.Fraction)">
+            <summary>
+            ScoreSignature のインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="P:NextMidi.Data.Score.ScoreSignature.Measure">
+            <summary>
+            データの小節番号です。
+            </summary>
+        </member>
+        <member name="P:NextMidi.Data.Score.ScoreSignature.Tick">
+            <summary>
+            データの時刻です。
+            </summary>
+        </member>
+        <member name="P:NextMidi.Data.Score.ScoreSignature.Signature">
+            <summary>
+            拍子記号です。
+            </summary>
+        </member>
+        <member name="T:NextMidi.Data.ScoreTempo">
+            <summary>
+            位置情報とテンポのセットです。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Data.ScoreTempo.#ctor(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            ScoreTempo のインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="P:NextMidi.Data.ScoreTempo.MilliSeconds">
+            <summary>
+            データの時刻です。
+            </summary>
+        </member>
+        <member name="P:NextMidi.Data.ScoreTempo.Tick">
+            <summary>
+            データの時刻です。
+            </summary>
+        </member>
+        <member name="P:NextMidi.Data.ScoreTempo.Tempo">
+            <summary>
+            テンポの値です。
+            </summary>
+        </member>
+        <member name="T:NextMidi.Data.IResolutionSource">
+            <summary>
+            分解能を表すインターフェースです。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Data.IResolutionSource.ToTick(Avenue.Fraction)">
+            <summary>
+            指定した音価の長さを取得します。
+            </summary>
+        </member>
+        <member name="E:NextMidi.Data.IResolutionSource.Changed">
+            <summary>
+            分解能が変更された時に発生します。
+            </summary>
+        </member>
+        <member name="P:NextMidi.Data.IResolutionSource.Resolution">
+            <summary>
+            4分音符の分解能です。
+            </summary>
+        </member>
+        <member name="T:NextMidi.Data.Score.TempoMap">
+            <summary>
+            テンポを管理するクラスです。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Data.Score.TempoMap.#ctor(NextMidi.Data.MidiData)">
+            <summary>
+            TempoMap のインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="T:NextMidi.Data.MusicTime">
+            <summary>
+            音楽時刻を表すクラスです。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Data.MusicTime.#ctor">
+            <summary>
+            MusicTime のインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Data.MusicTime.#ctor(System.Int32)">
+            <summary>
+            MusicTime のインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Data.MusicTime.#ctor(System.Int32,System.Int32)">
+            <summary>
+            MusicTime のインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="P:NextMidi.Data.MusicTime.Measure">
+            <summary>
+            時刻の小節部分です。
+            </summary>
+        </member>
+        <member name="P:NextMidi.Data.MusicTime.Tick">
+            <summary>
+            時刻のTick値部分です。
+            </summary>
+        </member>
+        <member name="T:NextMidi.Data.Track.TickIndexEvent">
+            <summary>
+            指定した時刻の位置を計算するための MIDI イベントです。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Data.Track.TickIndexEvent.#ctor(System.Int32)">
+            <summary>
+            TickIndexEvent のインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="P:NextMidi.Data.Track.TickIndexEvent.StatusBase">
+            <summary>
+            ステータスバイトの非チャンネル部分の値です。
+            </summary>
+        </member>
+        <member name="T:NextMidi.Data.Domain.MidiApplicationDomain">
+            <summary>
+            MIDI アプリケーションのデータ境界を定めるクラスです。
+            </summary>
+        </member>
+        <member name="T:NextMidi.Data.Domain.IMidiApplicationDomain">
+            <summary>
+            MIDI アプリケーションのデータ境界を定めるインターフェースです。
+            </summary>
+        </member>
+        <member name="P:NextMidi.Data.Domain.IMidiApplicationDomain.FileDomain">
+            <summary>
+            MIDI ファイルデータ境界を示します。
+            </summary>
+        </member>
+        <member name="P:NextMidi.Data.Domain.IMidiApplicationDomain.Factory">
+            <summary>
+            MIDI イベントファクトリを示します。
+            </summary>
+        </member>
+        <member name="E:NextMidi.Data.Domain.IMidiApplicationDomain.FileDomainChanged">
+            <summary>
+            ファイルドメインが変更された時に発生します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Data.Domain.MidiApplicationDomain.#ctor">
+            <summary>
+            MidiApplicationDomain のインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Data.Domain.MidiApplicationDomain.OnFileDomainChanged(System.EventArgs)">
+            <summary>
+            FileDomainChanged イベントを発生させます。
+            </summary>
+        </member>
+        <member name="P:NextMidi.Data.Domain.MidiApplicationDomain.FileDomain">
+            <summary>
+            MIDI ファイルデータ境界を示します。
+            </summary>
+        </member>
+        <member name="P:NextMidi.Data.Domain.MidiApplicationDomain.Factory">
+            <summary>
+            MIDI イベントファクトリを示します。
+            </summary>
+        </member>
+        <member name="E:NextMidi.Data.Domain.MidiApplicationDomain.FileDomainChanged">
+            <summary>
+            ファイルドメインが変更された時に発生します。
+            </summary>
+        </member>
+        <member name="T:NextMidi.Data.Track.TrackCollection">
+            <summary>
+            MidiTrack の一覧を管理するクラスです。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Data.Track.TrackCollection.#ctor">
+            <summary>
+            TrackCollection のインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Data.Track.TrackCollection.OnChanged(System.EventArgs)">
+            <summary>
+            Changedイベントを発生させます。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Data.Track.TrackCollection.OnTrackListChanged(System.EventArgs)">
+            <summary>
+            TrackListChangedイベントを発生させます。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Data.Track.TrackCollection.BeginInit">
+            <summary>
+            編集を開始します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Data.Track.TrackCollection.EndInit">
+            <summary>
+            編集を終了します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Data.Track.TrackCollection.ClearItems">
+            <summary>
+            全てのトラックを削除します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Data.Track.TrackCollection.InsertItem(System.Int32,NextMidi.Data.Track.MidiTrack)">
+            <summary>
+            トラックを追加します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Data.Track.TrackCollection.RemoveItem(System.Int32)">
+            <summary>
+            トラックを削除します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Data.Track.TrackCollection.SetItem(System.Int32,NextMidi.Data.Track.MidiTrack)">
+            <summary>
+            トラックを変更します。
+            </summary>
+        </member>
+        <member name="E:NextMidi.Data.Track.TrackCollection.Changed">
+            <summary>
+            トラックが変更された時に発生します。
+            </summary>
+        </member>
+        <member name="E:NextMidi.Data.Track.TrackCollection.TrackListChanged">
+            <summary>
+            トラックの一覧が変更された時に発生します。
+            </summary>
+        </member>
+        <member name="T:NextMidi.Data.Track.TickIndexComparer">
+            <summary>
+            指定した時刻位置を計算するための比較演算クラスです。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Data.Track.TickIndexComparer.Compare(NextMidi.DataElement.MidiEvent,NextMidi.DataElement.MidiEvent)">
+            <summary>
+            データを比較します。
+            </summary>
+        </member>
+        <member name="T:NextMidi.Data.Track.MidiTrack">
+            <summary>
+            MIDIトラックを表すクラスです。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Data.Track.MidiTrack.#ctor">
+            <summary>
+            MidiTrack のインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Data.Track.MidiTrack.#ctor(System.Collections.Generic.List{NextMidi.DataElement.MidiEvent})">
+            <summary>
+            MidiTrack のインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Data.Track.MidiTrack.OnChanged(System.EventArgs)">
+            <summary>
+            Changedイベントを発生させます。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Data.Track.MidiTrack.BeginInit">
+            <summary>
+            編集を開始します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Data.Track.MidiTrack.EndInit">
+            <summary>
+            編集を終了します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Data.Track.MidiTrack.Clear">
+            <summary>
+            データを全て削除します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Data.Track.MidiTrack.Insert(NextMidi.DataElement.MidiEvent)">
+            <summary>
+            データを追加します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Data.Track.MidiTrack.InsertRange(System.Collections.Generic.List{NextMidi.DataElement.MidiEvent})">
+            <summary>
+            データを追加します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Data.Track.MidiTrack.Remove(NextMidi.DataElement.MidiEvent)">
+            <summary>
+            データを削除します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Data.Track.MidiTrack.RemoveRange(System.Collections.Generic.List{NextMidi.DataElement.MidiEvent})">
+            <summary>
+            データを削除します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Data.Track.MidiTrack.RemoveRange``1(System.Collections.Generic.List{``0})">
+            <summary>
+            データを削除します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Data.Track.MidiTrack.GetData(System.Func{NextMidi.DataElement.MidiEvent,System.Boolean})">
+            <summary>
+            指定した条件を満たすデータの一覧を返します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Data.Track.MidiTrack.SetChannel(System.Nullable{System.Byte})">
+            <summary>
+            トラックの MIDI チャンネルを変更します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Data.Track.MidiTrack.GetData">
+            <summary>
+            全てのデータの一覧を返します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Data.Track.MidiTrack.GetData``1">
+            <summary>
+            指定した型のデータの一覧を返します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Data.Track.MidiTrack.GetData``1(System.Func{``0,System.Boolean})">
+            <summary>
+            指定した型のデータのうち、条件を満たすデータの一覧を返します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Data.Track.MidiTrack.GetTickData(System.Int32,System.Int32)">
+            <summary>
+            指定した時刻の間にあるデータの一覧を返します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Data.Track.MidiTrack.GetTickData``1(System.Int32,System.Int32)">
+            <summary>
+            指定した型のデータのうち、指定した時刻の間にあるデータの一覧を返します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Data.Track.MidiTrack.ForEach(System.Action{NextMidi.DataElement.MidiEvent})">
+            <summary>
+            トラック中の全てのデータに対し、指定した動作を実行します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Data.Track.MidiTrack.ForEach``1(System.Action{``0})">
+            <summary>
+            指定した型の全てのデータに対し、指定した動作を実行します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Data.Track.MidiTrack.Find(System.Predicate{NextMidi.DataElement.MidiEvent})">
+            <summary>
+            指定した条件に一致する要素を検索します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Data.Track.MidiTrack.ElementAt(System.Int32)">
+            <summary>
+            指定したインデックスの要素を返します。
+            </summary>
+        </member>
+        <member name="P:NextMidi.Data.Track.MidiTrack.Channel">
+            <summary>
+            トラックのチャンネルです。
+            </summary>
+        </member>
+        <member name="P:NextMidi.Data.Track.MidiTrack.TickLength">
+            <summary>
+            トラックの長さを取得します。
+            </summary>
+        </member>
+        <member name="P:NextMidi.Data.Track.MidiTrack.Count">
+            <summary>
+            トラックのイベント数を取得します。
+            </summary>
+        </member>
+        <member name="E:NextMidi.Data.Track.MidiTrack.Changed">
+            <summary>
+            トラックが編集された時に発生します。
+            </summary>
+        </member>
+        <member name="T:NextMidi.Data.Score.IConductor`1">
+            <summary>
+            拍子、調号、テンポの自動収集を行うインターフェースです。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Data.Score.IConductor`1.GetData">
+            <summary>
+            データの一覧を取得します。
+            </summary>
+        </member>
+        <member name="E:NextMidi.Data.Score.IConductor`1.Changed">
+            <summary>
+            データの一覧が変更された時に発生します。
+            </summary>
+        </member>
+        <member name="T:NextMidi.Data.ResolutionSource">
+            <summary>
+            分解能を表すクラスです。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Data.ResolutionSource.#ctor">
+            <summary>
+            MidiResolutionのインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Data.ResolutionSource.#ctor(System.Int32)">
+            <summary>
+            MidiResolutionのインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Data.ResolutionSource.OnChanged(System.EventArgs)">
+            <summary>
+            Changed イベントを発生させます。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Data.ResolutionSource.ToTick(Avenue.Fraction)">
+            <summary>
+            指定した音価の長さを取得します。
+            </summary>
+        </member>
+        <member name="F:NextMidi.Data.ResolutionSource.MinValue">
+            <summary>
+            分解能の最小値です。
+            </summary>
+        </member>
+        <member name="F:NextMidi.Data.ResolutionSource.MaxValue">
+            <summary>
+            分解能の最大値です。
+            </summary>
+        </member>
+        <member name="F:NextMidi.Data.ResolutionSource.DefaultValue">
+            <summary>
+            デフォルトの分解能です。
+            </summary>
+        </member>
+        <member name="P:NextMidi.Data.ResolutionSource.Resolution">
+            <summary>
+            4分音符の分解能です。
+            </summary>
+        </member>
+        <member name="E:NextMidi.Data.ResolutionSource.Changed">
+            <summary>
+            分解能が変更された時に発生します。
+            </summary>
+        </member>
+        <member name="T:NextMidi.Data.Track.MidiTrackExtensions">
+            <summary>
+            MidiTrack の拡張クラスです。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Data.Track.MidiTrackExtensions.GetTitle(NextMidi.Data.Track.MidiTrack,System.Boolean)">
+            <summary>
+            トラックのタイトルを取得します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Data.Track.MidiTrackExtensions.SetTitle(NextMidi.Data.Track.MidiTrack,System.String,System.Boolean)">
+            <summary>
+            トラックのタイトルを設定します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Data.Track.MidiTrackExtensions.ToElementalTrack(NextMidi.Data.Track.MidiTrack)">
+            <summary>
+            トラックを基本イベントに分解します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Data.Track.MidiTrackExtensions.DetectChannel(NextMidi.Data.Track.MidiTrack)">
+            <summary>
+            トラックのチャンネルを取得します。
+            </summary>
+        </member>
+        <member name="T:NextMidi.Data.Score.Conductor`1">
+            <summary>
+            拍子、調号、テンポの自動収集を行うクラスです。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Data.Score.Conductor`1.#ctor(NextMidi.Data.Track.TrackCollection)">
+            <summary>
+            Conductor のインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Data.Score.Conductor`1.OnChanged(System.EventArgs)">
+            <summary>
+            Changed イベントを発生させます。
+            </summary>
+        </member>
+        <member name="M:NextMidi.Data.Score.Conductor`1.GetData">
+            <summary>
+            データの一覧を取得します。
+            </summary>
+        </member>
+        <member name="E:NextMidi.Data.Score.Conductor`1.Changed">
+            <summary>
+            データの一覧が変更された時に発生します。
+            </summary>
+        </member>
+    </members>
+</doc>

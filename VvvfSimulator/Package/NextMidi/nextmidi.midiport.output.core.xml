@@ -1,0 +1,153 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>nextmidi.midiport.output.core</name>
+    </assembly>
+    <members>
+        <member name="T:NextMidi.MidiPort.Output.Core.MidiOutApi">
+            <summary>
+            MIDI 出力APIの宣言です。
+            </summary>
+        </member>
+        <member name="M:NextMidi.MidiPort.Output.Core.MidiOutApi.midiOutGetNumDevs">
+            <summary>
+            MIDI 出力ポートの数を取得します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.MidiPort.Output.Core.MidiOutApi.midiOutGetDevCapsA(System.UInt32,NextMidi.MidiPort.Output.Core.MidiOutCapsA@,System.UInt32)">
+            <summary>
+            MIDI 出力ポートの情報を取得します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.MidiPort.Output.Core.MidiOutApi.midiOutOpen(System.IntPtr@,System.UInt32,System.Delegate,System.UInt32,NextMidi.MidiPort.Core.MidiPortOpenFlag)">
+            <summary>
+            MIDI 出力ポートを開きます。
+            </summary>
+        </member>
+        <member name="M:NextMidi.MidiPort.Output.Core.MidiOutApi.midiOutClose(System.IntPtr)">
+            <summary>
+            MIDI 出力ポートを閉じます。
+            </summary>
+        </member>
+        <member name="M:NextMidi.MidiPort.Output.Core.MidiOutApi.midiOutShortMsg(System.IntPtr,System.UInt32)">
+            <summary>
+            MIDI ショートメッセージを送信します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.MidiPort.Output.Core.MidiOutApi.midiOutLongMsg(System.IntPtr,NextMidi.MidiPort.Core.MidiHdr@,System.UInt32)">
+            <summary>
+            MIDI ロングメッセージを送信します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.MidiPort.Output.Core.MidiOutApi.midiOutPrepareHeader(System.IntPtr,NextMidi.MidiPort.Core.MidiHdr@,System.UInt32)">
+            <summary>
+            MIDI 出力バッファを登録します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.MidiPort.Output.Core.MidiOutApi.midiOutUnprepareHeader(System.IntPtr,NextMidi.MidiPort.Core.MidiHdr@,System.UInt32)">
+            <summary>
+            MIDI 出力バッファの登録を解除します。
+            </summary>
+        </member>
+        <member name="T:NextMidi.MidiPort.Output.Core.MidiOutCapsA">
+            <summary>
+            MIDI 出力ポートの情報を表します。
+            </summary>
+        </member>
+        <member name="F:NextMidi.MidiPort.Output.Core.MidiOutCapsA.wMid">
+            <summary>
+            MIDI ハードウェアのメーカー ID です。
+            </summary>
+        </member>
+        <member name="F:NextMidi.MidiPort.Output.Core.MidiOutCapsA.wPid">
+            <summary>
+            Product ID です。
+            </summary>
+        </member>
+        <member name="F:NextMidi.MidiPort.Output.Core.MidiOutCapsA.vDriverVersion">
+            <summary>
+            ドライバーのバージョンです。
+            </summary>
+        </member>
+        <member name="F:NextMidi.MidiPort.Output.Core.MidiOutCapsA.szPname">
+            <summary>
+            ポートの名前です。
+            </summary>
+        </member>
+        <member name="F:NextMidi.MidiPort.Output.Core.MidiOutCapsA.wTechnology">
+            <summary>
+            wTechnology 値です。
+            </summary>
+        </member>
+        <member name="F:NextMidi.MidiPort.Output.Core.MidiOutCapsA.wVoices">
+            <summary>
+            最大ボイス数を取得します。
+            </summary>
+        </member>
+        <member name="F:NextMidi.MidiPort.Output.Core.MidiOutCapsA.wNotes">
+            <summary>
+            最大同時発音数を取得します。
+            </summary>
+        </member>
+        <member name="F:NextMidi.MidiPort.Output.Core.MidiOutCapsA.wChannelMask">
+            <summary>
+            チャンネルマスクを取得します。
+            </summary>
+        </member>
+        <member name="F:NextMidi.MidiPort.Output.Core.MidiOutCapsA.dwSupport">
+            <summary>
+            dwSupport 値です。
+            </summary>
+        </member>
+        <member name="P:NextMidi.MidiPort.Output.Core.MidiOutCapsA.MarshalSize">
+            <summary>
+            マーシャリング時の構造体のサイズです。
+            </summary>
+        </member>
+        <member name="T:NextMidi.MidiPort.Output.Core.MidiOutPortHandle">
+            <summary>
+            MIDI 出力ポートを抽象化するクラスです。
+            </summary>
+        </member>
+        <member name="M:NextMidi.MidiPort.Output.Core.MidiOutPortHandle.#ctor(System.Int32)">
+            <summary>
+            指定した番号のポートを作成します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.MidiPort.Output.Core.MidiOutPortHandle.Send(System.Byte[])">
+            <summary>
+            MIDIデータを送信します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.MidiPort.Output.Core.MidiOutPortHandle.SendShortMessage(System.Byte[])">
+            <summary>
+            4バイト以内の MIDI メッセージ (Short Message) を送信します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.MidiPort.Output.Core.MidiOutPortHandle.SendLongMessage(System.Byte[])">
+            <summary>
+            5バイト以上のMIDIメッセージ(Long Message)を送信します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.MidiPort.Output.Core.MidiOutPortHandle.ReleaseCore">
+            <summary>
+            MIDIポートハンドルを開放します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.MidiPort.Output.Core.MidiOutPortHandle.FindPort(System.String)">
+            <summary>
+            指定した名前のポートを検索します。見つからない場合は-1を返します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.MidiPort.Output.Core.MidiOutPortHandle.GetPortInformation(System.Int32)">
+            <summary>
+            MIDI 出力ポートの情報を取得します。
+            </summary>
+        </member>
+        <member name="P:NextMidi.MidiPort.Output.Core.MidiOutPortHandle.PortCount">
+            <summary>
+            MIDI 出力ポートの数を取得します。
+            </summary>
+        </member>
+    </members>
+</doc>

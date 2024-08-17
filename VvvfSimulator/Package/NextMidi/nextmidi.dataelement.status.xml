@@ -1,0 +1,119 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>nextmidi.dataelement.status</name>
+    </assembly>
+    <members>
+        <member name="T:NextMidi.DataElement.Status.StatusByte">
+            <summary>
+            MIDI のステータスバイトを表す構造体です。
+            </summary>
+        </member>
+        <member name="M:NextMidi.DataElement.Status.StatusByte.#ctor(System.Byte)">
+            <summary>
+            StatusByte のインスタンスを作成します。
+            </summary>
+            <param name="value">ステータスバイトの値。</param>
+        </member>
+        <member name="P:NextMidi.DataElement.Status.StatusByte.Channel">
+            <summary>
+            MIDI イベントのチャンネルです。
+            </summary>
+        </member>
+        <member name="P:NextMidi.DataElement.Status.StatusByte.EventType">
+            <summary>
+            MIDI イベントの種類を示します。
+            </summary>
+        </member>
+        <member name="P:NextMidi.DataElement.Status.StatusByte.EventLength">
+            <summary>
+            ステータスに対応する MIDI イベントのデータ長です。
+            </summary>
+        </member>
+        <member name="P:NextMidi.DataElement.Status.StatusByte.IsChannelMessage">
+            <summary>
+            ステータスがチャンネルメッセージを示すかどうかを判断します。
+            </summary>
+        </member>
+        <member name="P:NextMidi.DataElement.Status.StatusByte.IsExclusive">
+            <summary>
+            ステータスがエクスクルーシブを示すかどうかを判断します。
+            </summary>
+        </member>
+        <member name="P:NextMidi.DataElement.Status.StatusByte.IsMetaEvent">
+            <summary>
+            ステータスがメタデータを示すかどうかを判断します。
+            </summary>
+        </member>
+        <member name="T:NextMidi.DataElement.Status.MidiEventLength">
+            <summary>
+            MIDIデータ長を表すフラグです。
+            </summary>
+        </member>
+        <member name="F:NextMidi.DataElement.Status.MidiEventLength.Two">
+            <summary>
+            データ長は2バイトです。
+            </summary>
+        </member>
+        <member name="F:NextMidi.DataElement.Status.MidiEventLength.Three">
+            <summary>
+            データ長は3バイトです。
+            </summary>
+        </member>
+        <member name="F:NextMidi.DataElement.Status.MidiEventLength.Variable">
+            <summary>
+            データ長は可変です。
+            </summary>
+        </member>
+        <member name="T:NextMidi.DataElement.Status.MidiEventBase">
+            <summary>
+            ステータスバイトの種類を表します。
+            </summary>
+        </member>
+        <member name="F:NextMidi.DataElement.Status.MidiEventBase.NoteOff">
+            <summary>
+            0x80 (ノートオフ)
+            </summary>
+        </member>
+        <member name="F:NextMidi.DataElement.Status.MidiEventBase.NoteOn">
+            <summary>
+            0x90 (ノートオン)
+            </summary>
+        </member>
+        <member name="F:NextMidi.DataElement.Status.MidiEventBase.KeyPressure">
+            <summary>
+            0xA0 (ポリフォニックキープレッシャー)
+            </summary>
+        </member>
+        <member name="F:NextMidi.DataElement.Status.MidiEventBase.Control">
+            <summary>
+            0xB0 (コントロールチェンジ)
+            </summary>
+        </member>
+        <member name="F:NextMidi.DataElement.Status.MidiEventBase.Program">
+            <summary>
+            0xC0 (プログラムチェンジ)
+            </summary>
+        </member>
+        <member name="F:NextMidi.DataElement.Status.MidiEventBase.ChannelPressure">
+            <summary>
+            0xD0 (チャンネルプレッシャー)
+            </summary>
+        </member>
+        <member name="F:NextMidi.DataElement.Status.MidiEventBase.Pitch">
+            <summary>
+            0xE0 (ピッチベンド)
+            </summary>
+        </member>
+        <member name="F:NextMidi.DataElement.Status.MidiEventBase.Exclusive">
+            <summary>
+            0xF0 (エクスクルーシブ)
+            </summary>
+        </member>
+        <member name="F:NextMidi.DataElement.Status.MidiEventBase.MetaData">
+            <summary>
+            0xFF (メタデータ)
+            </summary>
+        </member>
+    </members>
+</doc>

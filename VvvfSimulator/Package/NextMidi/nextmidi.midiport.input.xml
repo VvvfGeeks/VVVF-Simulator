@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>nextmidi.midiport.input</name>
+    </assembly>
+    <members>
+        <member name="T:NextMidi.MidiPort.Input.IMidiInPort">
+            <summary>
+            仮想 MIDI 入力ポートです。
+            </summary>
+        </member>
+        <member name="E:NextMidi.MidiPort.Input.IMidiInPort.Received">
+            <summary>
+            データを受信した時に発生します。
+            </summary>
+        </member>
+        <member name="T:NextMidi.MidiPort.Input.MidiInPort">
+            <summary>
+            物理MIDI入力ポートです。
+            </summary>
+        </member>
+        <member name="M:NextMidi.MidiPort.Input.MidiInPort.#ctor(System.String)">
+            <summary>
+            MidiInPort のインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.MidiPort.Input.MidiInPort.#ctor(System.Int32)">
+            <summary>
+            MidiInPort のインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.MidiPort.Input.MidiInPort.#ctor(System.String,NextMidi.DataElement.Factory.IMidiEventFactory)">
+            <summary>
+            MidiInPort のインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.MidiPort.Input.MidiInPort.#ctor(System.Int32,NextMidi.DataElement.Factory.IMidiEventFactory)">
+            <summary>
+            MidiInPort のインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.MidiPort.Input.MidiInPort.OnReceived(Avenue.DataEventArgs{NextMidi.DataElement.MidiEvent})">
+            <summary>
+            Received イベントを発生させます。
+            </summary>
+        </member>
+        <member name="M:NextMidi.MidiPort.Input.MidiInPort.Open">
+            <summary>
+            MIDI ポートを開きます。
+            </summary>
+        </member>
+        <member name="M:NextMidi.MidiPort.Input.MidiInPort.Close">
+            <summary>
+            MIDIポートを閉じます。
+            </summary>
+        </member>
+        <member name="M:NextMidi.MidiPort.Input.MidiInPort.ToString">
+            <summary>
+            ポートの名前を返します。
+            </summary>
+        </member>
+        <member name="P:NextMidi.MidiPort.Input.MidiInPort.Name">
+            <summary>
+            ポートの名前です。
+            </summary>
+        </member>
+        <member name="P:NextMidi.MidiPort.Input.MidiInPort.IsOpen">
+            <summary>
+            ポートが開いているかどうかを示します。
+            </summary>
+        </member>
+        <member name="P:NextMidi.MidiPort.Input.MidiInPort.PortCount">
+            <summary>
+            MIDI 入力ポートの数を取得します。
+            </summary>
+        </member>
+        <member name="E:NextMidi.MidiPort.Input.MidiInPort.Received">
+            <summary>
+            データを受信した時に発生します。
+            </summary>
+        </member>
+    </members>
+</doc>

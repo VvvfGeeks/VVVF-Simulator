@@ -1,0 +1,295 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Color x:Key="KeyUltraLightColor">#0C59AC</Color>
+    <Color x:Key="KeyVeryLightColor">#0B4F98</Color>
+    <Color x:Key="KeyLightColor">#0A4585</Color>
+    <Color x:Key="KeyColor">#083D77</Color>
+    <Color x:Key="KeyDarkColor">#07325F</Color>
+    <Color x:Key="KeyTextColor">#F1F2EE</Color>
+    <Color x:Key="BackgroundColor">#3c3c3c</Color>
+    <Color x:Key="VoidBackgroundColor">#1F1E20</Color>
+    <Color x:Key="SubBackgroundColor">#47454A</Color>
+    <Color x:Key="BackgroundTextColor">#E5EBEA</Color>
+
+    <LinearGradientBrush x:Key="TitleBarBrush" StartPoint="0,0" EndPoint="0,1">
+        <LinearGradientBrush.GradientStops>
+            <GradientStopCollection>
+                <GradientStop Color="{DynamicResource KeyColor}" Offset="0"/>
+                <GradientStop Color="{DynamicResource KeyDarkColor}" Offset="1"/>
+            </GradientStopCollection>
+        </LinearGradientBrush.GradientStops>
+    </LinearGradientBrush>
+    <SolidColorBrush x:Key="TitleBarTextBrush" Color="{DynamicResource KeyTextColor}"/>
+    <SolidColorBrush x:Key="SubTitleBarBrush" Color="#2b2b2b"/>
+    <SolidColorBrush x:Key="SubTitleBarTextBrush" Color="#FFFFFF"/>
+    <SolidColorBrush x:Key="InnerSubTitleBarBrush" Color="#2b2b2b"/>
+    <SolidColorBrush x:Key="InnerSubTitleBarTextBrush" Color="#FFFFFF"/>
+
+    <SolidColorBrush x:Key="BackgroundBrush" Color="{DynamicResource BackgroundColor}"/>
+    <SolidColorBrush x:Key="BackgroundTextBrush" Color="{DynamicResource BackgroundTextColor}"/>
+    <SolidColorBrush x:Key="VoidBackgroundBrush" Color="{DynamicResource VoidBackgroundColor}"/>
+    <SolidColorBrush x:Key="SubBackgroundBrush" Color="{DynamicResource SubBackgroundColor}"/>
+    <SolidColorBrush x:Key="BorderBrush" Color="#A5A5A5"/>
+
+    <SolidColorBrush x:Key="TextboxBackgroundBrush" Color="#40434E"/>
+    <SolidColorBrush x:Key="TextboxForegroundBrush" Color="#FFFFFF"/>
+    <SolidColorBrush x:Key="TextboxBorderBrush" Color="#171717"/>
+    <SolidColorBrush x:Key="TextboxHoverBorderBrush" Color="{DynamicResource KeyColor}"/>
+    <SolidColorBrush x:Key="TextboxErrorBrush" Color="#6D213C"/>
+
+    <Color x:Key="ButtonForegroundColor">#FFFFFF</Color>
+    <LinearGradientBrush x:Key="ButtonBackgroundBrush" StartPoint="0,0" EndPoint="0,1">
+        <LinearGradientBrush.GradientStops>
+            <GradientStopCollection>
+                <GradientStop Color="#333333" Offset="0.0" />
+                <GradientStop Color="#171717" Offset="1.0" />
+            </GradientStopCollection>
+        </LinearGradientBrush.GradientStops>
+    </LinearGradientBrush>
+    <LinearGradientBrush x:Key="ButtonHoverBackgroundBrush" StartPoint="0,0" EndPoint="0,1">
+        <LinearGradientBrush.GradientStops>
+            <GradientStopCollection>
+                <GradientStop Color="{DynamicResource KeyVeryLightColor}" Offset="0.0" />
+                <GradientStop Color="{DynamicResource KeyLightColor}" Offset="1.0" />
+            </GradientStopCollection>
+        </LinearGradientBrush.GradientStops>
+    </LinearGradientBrush>
+    <LinearGradientBrush x:Key="ButtonActiveBackgroundBrush" StartPoint="0,0" EndPoint="0,1">
+        <LinearGradientBrush.GradientStops>
+            <GradientStopCollection>
+                <GradientStop Color="{DynamicResource KeyVeryLightColor}" Offset="0.0" />
+                <GradientStop Color="{DynamicResource KeyLightColor}" Offset="1.0" />
+            </GradientStopCollection>
+        </LinearGradientBrush.GradientStops>
+    </LinearGradientBrush>
+    <LinearGradientBrush x:Key="ButtonDisabledBackgroundBrush" StartPoint="0,0" EndPoint="0,1">
+        <LinearGradientBrush.GradientStops>
+            <GradientStopCollection>
+                <GradientStop Color="#474747" Offset="0.0" />
+                <GradientStop Color="#333333" Offset="1.0" />
+            </GradientStopCollection>
+        </LinearGradientBrush.GradientStops>
+    </LinearGradientBrush>
+
+    <SolidColorBrush x:Key="ComboBoxActiveBrush" Color="{DynamicResource KeyColor}"/>
+    <SolidColorBrush x:Key="ComboBoxActiveLightBrush" Color="{DynamicResource KeyLightColor}"/>
+    <SolidColorBrush x:Key="ComboBoxHoverBrush" Color="#333333"/>
+    <SolidColorBrush x:Key="ComboBoxHoverLightBrush" Color="{DynamicResource KeyUltraLightColor}"/>
+    <SolidColorBrush x:Key="ComboBoxTextColor" Color="#FFFFFF"/>
+    <SolidColorBrush x:Key="ComboBoxBorderBrush" Color="#171717"/>
+    <LinearGradientBrush x:Key="ComboBoxBackgroundBrush" StartPoint="0,0" EndPoint="0,1">
+        <LinearGradientBrush.GradientStops>
+            <GradientStopCollection>
+                <GradientStop Color="#333333" Offset="0.0" />
+                <GradientStop Color="#171717" Offset="1.0" />
+            </GradientStopCollection>
+        </LinearGradientBrush.GradientStops>
+    </LinearGradientBrush>
+    <LinearGradientBrush x:Key="ComboBoxHoverBackgroundBrush" StartPoint="0,0" EndPoint="0,1">
+        <LinearGradientBrush.GradientStops>
+            <GradientStopCollection>
+                <GradientStop Color="{DynamicResource KeyVeryLightColor}" Offset="0.0" />
+                <GradientStop Color="{DynamicResource KeyLightColor}" Offset="1.0" />
+            </GradientStopCollection>
+        </LinearGradientBrush.GradientStops>
+    </LinearGradientBrush>
+    <LinearGradientBrush x:Key="ComboBoxActiveBackgroundBrush" StartPoint="0,0" EndPoint="0,1">
+        <LinearGradientBrush.GradientStops>
+            <GradientStopCollection>
+                <GradientStop Color="{DynamicResource KeyVeryLightColor}" Offset="0.0" />
+                <GradientStop Color="{DynamicResource KeyLightColor}" Offset="1.0" />
+            </GradientStopCollection>
+        </LinearGradientBrush.GradientStops>
+    </LinearGradientBrush>
+
+    <SolidColorBrush x:Key="CheckBoxActiveForeBrush" Color="#FFFFFF"/>
+    <SolidColorBrush x:Key="CheckBoxActiveBrush" Color="{DynamicResource KeyColor}"/>
+    <SolidColorBrush x:Key="CheckBoxActiveLightBrush" Color="{DynamicResource KeyLightColor}"/>
+
+    <SolidColorBrush x:Key="MenuBarBackgroundBrush" Color="#444146"/>
+    <SolidColorBrush x:Key="MenuBarBorderBrush" Color="#524E55"/>
+
+    <SolidColorBrush x:Key="ContextMenuBackgroundBrush" Color="#444146"/>
+    <SolidColorBrush x:Key="ContextMenuBorderBrush" Color="#524E55"/>
+
+    <SolidColorBrush x:Key="MenuItemBackgroundBrush" Color="#444146"/>
+    <SolidColorBrush x:Key="MenuItemBorderBrush" Color="#524E55"/>
+    <SolidColorBrush x:Key="MenuItemHighlightBackgroundBrush" Color="#67626A"/>
+    <SolidColorBrush x:Key="MenuItemHighlightBorderBrush" Color="#716C75"/>
+    <SolidColorBrush x:Key="MenuItemSelectedBackgroundBrush" Color="#67626A"/>
+    <SolidColorBrush x:Key="MenuItemSelectedBorderBrush" Color="#716C75"/>
+    <SolidColorBrush x:Key="MenuItemSeparatorBrush" Color="{DynamicResource KeyColor}"/>
+    <SolidColorBrush x:Key="MenuItemForegroundBrush" Color="#FFFFFF"/>
+    <SolidColorBrush x:Key="MenuItemHighlightedForegroundBrush" Color="{DynamicResource KeyVeryLightColor}"/>
+
+    <SolidColorBrush x:Key="TabControlForeground" Color="#FFFFFF"/>
+    <LinearGradientBrush x:Key="TabControlSelected" StartPoint="0,0" EndPoint="0,1">
+        <LinearGradientBrush.GradientStops>
+            <GradientStopCollection>
+                <GradientStop Color="{DynamicResource KeyLightColor}" Offset="0.0" />
+                <GradientStop Color="{DynamicResource KeyColor}" Offset="1.0" />
+            </GradientStopCollection>
+        </LinearGradientBrush.GradientStops>
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="TabControlHover" StartPoint="0,0" EndPoint="0,1">
+        <LinearGradientBrush.GradientStops>
+            <GradientStopCollection>
+                <GradientStop Color="{DynamicResource KeyVeryLightColor}" Offset="0.0" />
+                <GradientStop Color="{DynamicResource KeyLightColor}" Offset="1.0" />
+            </GradientStopCollection>
+        </LinearGradientBrush.GradientStops>
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="TabControlDeselected" StartPoint="0,0" EndPoint="0,1">
+        <LinearGradientBrush.GradientStops>
+            <GradientStopCollection>
+                <GradientStop Color="#333333" Offset="0.0" />
+                <GradientStop Color="#171717" Offset="1.0" />
+            </GradientStopCollection>
+        </LinearGradientBrush.GradientStops>
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="DataGridColumnHeaderBackgroundBrush" StartPoint="0,0" EndPoint="0,1">
+        <LinearGradientBrush.GradientStops>
+            <GradientStopCollection>
+                <GradientStop Color="{DynamicResource KeyColor}" Offset="0"/>
+                <GradientStop Color="{DynamicResource KeyDarkColor}" Offset="1"/>
+            </GradientStopCollection>
+        </LinearGradientBrush.GradientStops>
+    </LinearGradientBrush>
+
+    <SolidColorBrush x:Key="DataGridColumnHeaderTextBrush" Color="{DynamicResource KeyTextColor}"/>
+    <SolidColorBrush x:Key="DataGridRowBrush" Color="{DynamicResource BackgroundColor}"/>
+    <SolidColorBrush x:Key="DataGridAlternateRowBrush" Color="{DynamicResource VoidBackgroundColor}"/>
+
+    <SolidColorBrush x:Key="DataGridMouseOverBrush" Color="{DynamicResource KeyLightColor}"/>
+    <SolidColorBrush x:Key="DataGridUnfocusedSelectedBrush" Color="{DynamicResource KeyLightColor}"/>
+    <SolidColorBrush x:Key="DataGridMouseOverUnfocusedEditingBrush" Color="{DynamicResource KeyLightColor}"/>
+    <SolidColorBrush x:Key="DataGridMouseUnfocusedEditingBrush" Color="{DynamicResource KeyLightColor}"/>
+    <SolidColorBrush x:Key="DataGridMouseOverUnfocusedSelectedBrush" Color="{DynamicResource KeyLightColor}"/>
+
+    <SolidColorBrush x:Key="DataGridSelectedCellBrush" Color="{DynamicResource KeyColor}"/>
+    <SolidColorBrush x:Key="DataGridNormalSelectedBrush" Color="{DynamicResource KeyColor}"/>
+    <SolidColorBrush x:Key="DataGridNormalEditingBrush" Color="{DynamicResource KeyColor}"/>
+    <SolidColorBrush x:Key="DataGridMouseOverEditingBrush" Color="{DynamicResource KeyColor}"/>
+    <SolidColorBrush x:Key="DataGridMouseOverSelectedBrush" Color="{DynamicResource KeyColor}"/>
+    <SolidColorBrush x:Key="DataGridSelectedTextColorBrush" Color="{DynamicResource KeyTextColor}"/>
+
+    <SolidColorBrush x:Key="WindowMinimizeButtonForegroundBrush" Color="{DynamicResource BackgroundTextColor}"/>
+    <SolidColorBrush x:Key="WindowMinimizeButtonHoverForegroundBrush" Color="{DynamicResource BackgroundTextColor}"/>
+    <SolidColorBrush x:Key="WindowMinimizeButtonClickForegroundBrush" Color="{DynamicResource BackgroundTextColor}"/>
+    <SolidColorBrush x:Key="WindowMinimizeButtonBackgroundBrush" Color="Transparent"/>
+    <SolidColorBrush x:Key="WindowMinimizeButtonHoverBackgroundBrush" Color="#B3B616"/>
+    <SolidColorBrush x:Key="WindowMinimizeButtonClickBackgroundBrush" Color="#8F9112"/>
+
+    <SolidColorBrush x:Key="WindowMaximizeButtonForegroundBrush" Color="{DynamicResource BackgroundTextColor}"/>
+    <SolidColorBrush x:Key="WindowMaximizeButtonHoverForegroundBrush" Color="{DynamicResource BackgroundTextColor}"/>
+    <SolidColorBrush x:Key="WindowMaximizeButtonClickForegroundBrush" Color="{DynamicResource BackgroundTextColor}"/>
+    <SolidColorBrush x:Key="WindowMaximizeButtonBackgroundBrush" Color="Transparent"/>
+    <SolidColorBrush x:Key="WindowMaximizeButtonHoverBackgroundBrush" Color="#649075"/> 
+    <SolidColorBrush x:Key="WindowMaximizeButtonClickBackgroundBrush" Color="#547861"/> 
+
+    <SolidColorBrush x:Key="WindowCloseButtonForegroundBrush" Color="{DynamicResource BackgroundTextColor}"/>
+    <SolidColorBrush x:Key="WindowCloseButtonHoverForegroundBrush" Color="{DynamicResource BackgroundTextColor}"/>
+    <SolidColorBrush x:Key="WindowCloseButtonClickForegroundBrush" Color="{DynamicResource BackgroundTextColor}"/>
+    <SolidColorBrush x:Key="WindowCloseButtonBackgroundBrush" Color="Transparent"/>
+    <SolidColorBrush x:Key="WindowCloseButtonHoverBackgroundBrush" Color="#C1351F"/>
+    <SolidColorBrush x:Key="WindowCloseButtonClickBackgroundBrush" Color="#9E2B1A"/>
+
+    <SolidColorBrush x:Key="WindowTitleTextBrush" Color="{DynamicResource BackgroundTextColor}"/>
+
+    <SolidColorBrush x:Key="ScrollBarRepeatButtonBackgroundBrush" Color="{DynamicResource KeyColor}"/>
+    <SolidColorBrush x:Key="ScrollBarRepeatButtonPressedBackgroundBrush" Color="{DynamicResource KeyDarkColor}"/>
+    <SolidColorBrush x:Key="ScrollBarRepeatButtonDisabledBrush" Color="{DynamicResource KeyColor}"/>
+    <SolidColorBrush x:Key="ScrollBarRepeatButtonBorderBrush" Color="Transparent"/>
+    <SolidColorBrush x:Key="ScrollBarRepeatButtonGraphicBrush" Color="{DynamicResource BackgroundTextColor}"/>
+    <SolidColorBrush x:Key="ScrollBarThumbBackgroundBrush" Color="{DynamicResource KeyColor}"/>
+    <SolidColorBrush x:Key="ScrollBarThumbBorderBrush" Color="{DynamicResource VoidBackgroundColor}"/>
+    <SolidColorBrush x:Key="ScrollBarVerticalBackgroundBrush" Color="{DynamicResource VoidBackgroundColor}"/>
+    <SolidColorBrush x:Key="ScrollBarHorizontalBackgroundBrush" Color="{DynamicResource KeyUltraLightColor}"/>
+
+    <SolidColorBrush x:Key="ListViewBackgroundBrush" Color="Transparent"/>
+    <SolidColorBrush x:Key="ListViewBorderBrush" Color="Transparent"/>
+    <SolidColorBrush x:Key="ListViewDisabledBorderBrush" Color="#B3B3B3"/>
+    <SolidColorBrush x:Key="ListViewSelectedBrush" Color="{DynamicResource KeyColor}"/>
+    <SolidColorBrush x:Key="ListViewSelectedUnfocusedBrush" Color="{DynamicResource KeyUltraLightColor}"/>
+
+    <SolidColorBrush x:Key="LevelSelectorWaveformColorBrush" Color="#FAF9F9"/>
+
+    <SolidColorBrush x:Key="ProgressBarBackgroundBrush" Color="{DynamicResource BackgroundColor}"/>
+    <LinearGradientBrush x:Key="ProgressBarProgressBrush" StartPoint="0,0" EndPoint="0,1">
+        <LinearGradientBrush.GradientStops>
+            <GradientStopCollection>
+                <GradientStop Color="#8FBE23" Offset="0"/>
+                <GradientStop Color="#82AC20" Offset="1"/>
+            </GradientStopCollection>
+        </LinearGradientBrush.GradientStops>
+    </LinearGradientBrush>
+
+    <SolidColorBrush x:Key="MasconDefaultBackgroundBrush" Color="{DynamicResource BackgroundColor}"/>
+    <SolidColorBrush x:Key="MasconB4Brush" Color="#DD290E"/>
+    <SolidColorBrush x:Key="MasconB3Brush" Color="#E04010"/>
+    <SolidColorBrush x:Key="MasconB2Brush" Color="#E35611"/>
+    <SolidColorBrush x:Key="MasconB1Brush" Color="#E66C12"/>
+    <SolidColorBrush x:Key="MasconB0Brush" Color="#E98213"/>
+    <SolidColorBrush x:Key="MasconNeutralBrush" Color="#68B684"/>
+    <SolidColorBrush x:Key="MasconP0Brush" Color="#90C6F0"/>
+    <SolidColorBrush x:Key="MasconP1Brush" Color="#74B6F1"/>
+    <SolidColorBrush x:Key="MasconP2Brush" Color="#58A6F1"/>
+    <SolidColorBrush x:Key="MasconP3Brush" Color="#3C96F2"/>
+    <SolidColorBrush x:Key="MasconP4Brush" Color="#1F85F2"/>
+
+    <SolidColorBrush x:Key="SliderThumbStrokeBrush" Color="{DynamicResource KeyColor}"/>
+    <SolidColorBrush x:Key="SliderThumbBrush" Color="{DynamicResource KeyColor}"/>
+    <SolidColorBrush x:Key="SliderThumbMouseOverBrush" Color="{DynamicResource KeyUltraLightColor}"/>
+    <SolidColorBrush x:Key="SliderThumbMouseClickBrush" Color="{DynamicResource KeyDarkColor}"/>
+    <SolidColorBrush x:Key="SliderThumbDisabledBrush" Color="#B3B3B3"/>
+    <SolidColorBrush x:Key="SliderTrackBackgroundBrush" Color="{DynamicResource BackgroundColor}"/>
+    <SolidColorBrush x:Key="SliderTrackBorderBrush" Color="{DynamicResource KeyDarkColor}"/>
+    <SolidColorBrush x:Key="SliderTickFillBrush" Color="{DynamicResource SubBackgroundColor}"/>
+
+    <LinearGradientBrush x:Key="EnableSwitchBackgroundEnabledBrush" StartPoint="0,0" EndPoint="0,1">
+        <LinearGradientBrush.GradientStops>
+            <GradientStopCollection>
+                <GradientStop Offset="0" Color="#61D039"/>
+                <GradientStop Offset="1" Color="#57C62F"/>
+            </GradientStopCollection>
+        </LinearGradientBrush.GradientStops>
+    </LinearGradientBrush>
+    <LinearGradientBrush x:Key="EnableSwitchBackgroundEnabledPressedBrush" StartPoint="0,0" EndPoint="0,1">
+        <LinearGradientBrush.GradientStops>
+            <GradientStopCollection>
+                <GradientStop Offset="0" Color="#57C62F"/>
+                <GradientStop Offset="1" Color="#50B62B"/>
+            </GradientStopCollection>
+        </LinearGradientBrush.GradientStops>
+    </LinearGradientBrush>
+    <SolidColorBrush x:Key="EnableSwitchTextColorEnabledBrush" Color="#FCFCFC"/>
+    <LinearGradientBrush x:Key="EnableSwitchBackgroundDisabledBrush" StartPoint="0,0" EndPoint="0,1">
+        <LinearGradientBrush.GradientStops>
+            <GradientStopCollection>
+                <GradientStop Offset="0" Color="#3D3C3E"/>
+                <GradientStop Offset="1" Color="#333234"/>
+            </GradientStopCollection>
+        </LinearGradientBrush.GradientStops>
+    </LinearGradientBrush>
+    <LinearGradientBrush x:Key="EnableSwitchBackgroundDisabledPressedBrush" StartPoint="0,0" EndPoint="0,1">
+        <LinearGradientBrush.GradientStops>
+            <GradientStopCollection>
+                <GradientStop Offset="0" Color="#333234"/>
+                <GradientStop Offset="1" Color="#29282A"/>
+            </GradientStopCollection>
+        </LinearGradientBrush.GradientStops>
+    </LinearGradientBrush>
+    <SolidColorBrush x:Key="EnableSwitchTextColorDisabledBrush" Color="#FCFCFC"/>
+
+    <SolidColorBrush x:Key="TaskViewer.DescriptionBrush" Color="{DynamicResource KeyTextColor}"/>
+    <SolidColorBrush x:Key="TaskViewer.StatusColor.Canceled" Color="#66717E"/>
+    <SolidColorBrush x:Key="TaskViewer.StatusColor.Complete" Color="#496F5D"/>
+    <SolidColorBrush x:Key="TaskViewer.StatusColor.Running" Color="{DynamicResource KeyDarkColor}"/>
+
+    <SolidColorBrush x:Key="IconBrush" Color="#FFFFFF"/>
+    
+</ResourceDictionary>

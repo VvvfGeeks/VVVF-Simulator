@@ -1,0 +1,66 @@
+﻿<Page x:Class="VvvfSimulator.GUI.Create.Settings.Level"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:VvvfSimulator.GUI.Create.Settings"
+      mc:Ignorable="d" 
+      d:DesignHeight="434" d:DesignWidth="661"
+      Title="level_setting">
+
+    <Page.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/GUI/Resource/Dictionary/Common.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Page.Resources>
+
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+
+        <Border Background="{DynamicResource TitleBarBrush}" CornerRadius="25">
+            <Label Content="{DynamicResource Create.Settings.Level.Level}" Style="{DynamicResource TitleBarText}"/>
+        </Border>
+
+        <Grid Grid.Row="1">
+            <Viewbox Margin="5">
+                <Path Stretch="Fill">
+                    <Path.Resources>
+                        <Style TargetType="Path">
+                            <Setter Property="Stroke" Value="{DynamicResource LevelSelectorWaveformColorBrush}"/>
+                            <Setter Property="StrokeThickness" Value="5"/>
+                            <Setter Property="Data" Value="M 0,0 l 37,0 l 0,-50 l 46,0 l 0,-50 l 191,0 l 0,50 l 46,0 l 0,50 l 72,0 l 0,50 l 37,0 l 0,50 l 191,0 l 0,-50 l 46,0 l 0,-50 l 37,0"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Level}" Value="2">
+                                    <Setter Property="Data" Value="M 0,0 l 50,0 l 0,-100 l 200,0 l 0,+100 l 100,0 l 0,+100 l 200,0 l 0,-100 l 50,0"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding Level}" Value="3">
+                                    <Setter Property="Data" Value="M 0,0 l 31.57,0 l 0,-50 l 39.2,0 l 0,-50 l 163.01,0 l 0,50 l 39.2,0 l 0,50 l 61.45,0 l 0,50 l 31.57,0 l 0,50 l 163.01,0 l 0,-50 l 39.2,0 l 0,-50 l 31.57,0"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Path.Resources>
+                </Path>
+            </Viewbox>
+        </Grid>
+
+        <Border Grid.Row="2"  CornerRadius="0,0,25,25">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Button Content="{DynamicResource Create.Settings.Level.2Level}" Tag="2" Click="ButtonClick" Grid.Column="1" Style="{DynamicResource SlimButton}" />
+                <Button Content="{DynamicResource Create.Settings.Level.3Level}" Tag="3" Click="ButtonClick" Grid.Column="3" Style="{DynamicResource SlimButton}" />
+            </Grid>
+        </Border>
+    </Grid>
+</Page>

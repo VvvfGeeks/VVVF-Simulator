@@ -1,0 +1,135 @@
+﻿<UserControl x:Class="VvvfSimulator.GUI.Create.Waveform.Basic.ControlBasic"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:VvvfSimulator.GUI.Create.Waveform.Basic"
+             mc:Ignorable="d" 
+             d:DesignHeight="400" d:DesignWidth="661">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/GUI/Resource/Dictionary/Common.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+
+            <Style TargetType="Label" x:Key="UnitLabel">
+                <Setter Property="HorizontalAlignment" Value="Left"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="FontFamily" Value="{DynamicResource Generic.Font}"/>
+                <Setter Property="Foreground" Value="{DynamicResource BackgroundTextBrush}"/>
+                <Setter Property="Padding" Value="0"/>
+            </Style>
+
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Border Style="{DynamicResource ControlBorder}">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="150"/>
+                <RowDefinition Height="50"/>
+            </Grid.RowDefinitions>
+            <Border Background="{DynamicResource TitleBarBrush}" CornerRadius="25,25,0,0">
+                <Label Content="{DynamicResource Create.Settings.Waveform.Basic.ControlBasic.Title}" Style="{DynamicResource TitleBarText}"/>
+            </Border>
+            <Grid Background="{DynamicResource BackgroundBrush}" Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="10*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Grid Background="{DynamicResource SubTitleBarBrush}">
+                    <Label Content="{DynamicResource Create.Settings.Waveform.Basic.ControlBasic.From}" Style="{DynamicResource SubTitleBarText}"/>
+                </Grid>
+                <TextBox Style="{DynamicResource SlimTextBox}" Grid.Column="1" x:Name="from_text_box" Text="56" FontSize="20" MaxLength="20" MaxLines="1" TextChanged="TextBox_TextChanged" Tag="From"/>
+                <Label Grid.Column="2" Content="Hz" Style="{DynamicResource UnitLabel}" />
+            </Grid>
+            <Grid Background="{DynamicResource BackgroundBrush}" Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="10*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Grid Background="{DynamicResource SubTitleBarBrush}">
+                    <Label Content="{DynamicResource Create.Settings.Waveform.Basic.ControlBasic.SineFrom}" Style="{DynamicResource SubTitleBarText}"/>
+                </Grid>
+                <TextBox Style="{DynamicResource SlimTextBox}" Grid.Column="1" x:Name="sine_from_text_box" Text="56" FontSize="20" MaxLength="20" MaxLines="1" TextChanged="TextBox_TextChanged" Tag="SineFrom"/>
+                <Label Grid.Column="2" Content="Hz" Style="{DynamicResource UnitLabel}"/>
+            </Grid>
+            <Grid Background="{DynamicResource BackgroundBrush}" Grid.Row="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="10*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Grid Background="{DynamicResource SubTitleBarBrush}">
+                    <Label Content="{DynamicResource Create.Settings.Waveform.Basic.ControlBasic.SineBelow}" Style="{DynamicResource SubTitleBarText}"/>
+                </Grid>
+                <TextBox Style="{DynamicResource SlimTextBox}" Grid.Column="1" x:Name="sine_below_text_box" Text="56" FontSize="20" MaxLength="20" MaxLines="1" TextChanged="TextBox_TextChanged" Tag="SineBelow"/>
+                <Label Grid.Column="2" Content="Hz" Style="{DynamicResource UnitLabel}"/>
+            </Grid>
+            <Grid Background="{DynamicResource BackgroundBrush}" Grid.Row="4">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="11*"/>
+                </Grid.ColumnDefinitions>
+                <Grid Background="{DynamicResource SubTitleBarBrush}">
+                    <Label Content="{DynamicResource Create.Settings.Waveform.Basic.ControlBasic.PulseMode}" Style="{DynamicResource SubTitleBarText}"/>
+                </Grid>
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="2*"/>
+                    </Grid.RowDefinitions>
+                    <ComboBox SelectedValuePath="Key" DisplayMemberPath="Value" Style="{DynamicResource SlimComboBoxStyle}" x:Name="PulseNameSelector" SelectionChanged="Selector_SelectionChanged" Grid.ColumnSpan="1" Tag="PulseName" />
+                    <Grid Grid.Row="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="1*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <CheckBox Style="{DynamicResource SlimCheckBox}" x:Name="Shifted_Box" Content="{DynamicResource Create.Settings.Waveform.Basic.ControlBasic.PulseMode.Shifted}" HorizontalAlignment="Center" VerticalAlignment="Center" Checked="CheckedChanged" Unchecked="CheckedChanged" Tag="Shifted" Visibility="{Binding Shifted_Visible, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                        <CheckBox Style="{DynamicResource SlimCheckBox}" x:Name="Square_Box" Content="{DynamicResource Create.Settings.Waveform.Basic.ControlBasic.PulseMode.Square}" HorizontalAlignment="Center" VerticalAlignment="Center" Checked="CheckedChanged" Unchecked="CheckedChanged" Tag="Square" Visibility="{Binding Square_Visible, Converter={StaticResource BooleanToVisibilityConverter}}" Grid.Column="1"/>
+
+                        <Button Style="{DynamicResource SlimButton}" Visibility="{Binding Harmonic_Visible, Converter={StaticResource BooleanToVisibilityConverter}}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" x:Name="Open_Harmonic_Setting_Button" Content="{DynamicResource Create.Settings.Waveform.Basic.ControlBasic.PulseMode.HarmonicSetting}" Click="Open_Harmonic_Setting_Button_Click" Grid.Column="2"/>
+                        <Button Style="{DynamicResource SlimButton}" Visibility="{Binding Discrete_Visible, Converter={StaticResource BooleanToVisibilityConverter}}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" x:Name="Open_Discrete_Setting_Button" Content="{DynamicResource Create.Settings.Waveform.Basic.ControlBasic.PulseMode.DiscreteSetting}" Click="Open_Discrete_Setting_Button_Click" Grid.Column="2" Grid.Row="1"/>
+
+                        <ComboBox SelectedValuePath="Key" DisplayMemberPath="Value" Style="{DynamicResource SlimComboBoxStyle}" x:Name="AltModeSelector" Visibility="{Binding AltModeSelector_Visible, Converter={StaticResource BooleanToVisibilityConverter}}" SelectionChanged="Selector_SelectionChanged" Tag="AltMode" Grid.Row="1" Grid.Column="0" />
+                        <ComboBox SelectedValuePath="Key" DisplayMemberPath="Value" Style="{DynamicResource SlimComboBoxStyle}" x:Name="BaseWaveSelector" Visibility="{Binding BaseWaveSelector_Visible, Converter={StaticResource BooleanToVisibilityConverter}}" SelectionChanged="Selector_SelectionChanged" Tag="BaseWave" Grid.Row="1" Grid.Column="1" />
+                    </Grid>
+                </Grid>
+            </Grid>
+            <Grid Grid.Row="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="11*"/>
+                </Grid.ColumnDefinitions>
+                <Border Background="{DynamicResource SubTitleBarBrush}" CornerRadius="0,0,0,25">
+                    <Label Content="{DynamicResource Create.Settings.Waveform.Basic.ControlBasic.Enable}" Style="{DynamicResource SubTitleBarText}"/>
+                </Border>
+                <Grid Grid.Column="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <Border Grid.ColumnSpan="3" Background="{DynamicResource BackgroundBrush}" CornerRadius="0,0,25,0"/>
+                    <CheckBox Style="{DynamicResource SlimCheckBox}" x:Name="Enable_Normal_Check" Content="{DynamicResource Create.Settings.Waveform.Basic.ControlBasic.Enable.NormalState}" HorizontalAlignment="Center" VerticalAlignment="Center" Checked="CheckedChanged" Tag="Normal" Unchecked="CheckedChanged"/>
+                    <CheckBox Style="{DynamicResource SlimCheckBox}" x:Name="Enable_FreeRun_On_Check" Content="{DynamicResource Create.Settings.Waveform.Basic.ControlBasic.Enable.JerkOn}" HorizontalAlignment="Center" VerticalAlignment="Center" Checked="CheckedChanged" Tag="FreeRunOn" Unchecked="CheckedChanged" Grid.Column="1"/>
+                    <CheckBox Style="{DynamicResource SlimCheckBox}" x:Name="Enable_FreeRun_Off_Check" Content="{DynamicResource Create.Settings.Waveform.Basic.ControlBasic.Enable.JerkOff}" HorizontalAlignment="Center" VerticalAlignment="Center" Checked="CheckedChanged" Tag="FreeRunOff" Unchecked="CheckedChanged" Grid.Column="2"/>
+                </Grid>
+            </Grid>
+        </Grid>
+    </Border>
+</UserControl>

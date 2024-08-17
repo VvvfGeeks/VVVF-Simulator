@@ -1,0 +1,194 @@
+﻿<Page x:Class="VvvfSimulator.GUI.Create.Settings.Jerk"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:VvvfSimulator.GUI.Create.Settings"
+      mc:Ignorable="d" 
+      d:DesignHeight="434" d:DesignWidth="661"
+      Title="mascon_off_setting">
+
+    <Page.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/GUI/Resource/Dictionary/Common.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <LinearGradientBrush x:Key="AccelerateActive" EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="#FF6EA4ED"/>
+                <GradientStop Color="#FF165CB9" Offset="1"/>
+            </LinearGradientBrush>
+            <SolidColorBrush x:Key="AccelerateActiveText" Color="#FF9BD8FF"/>
+            <LinearGradientBrush x:Key="BrakeActive" EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="#FFFFA243"/>
+                <GradientStop Color="Red" Offset="1"/>
+            </LinearGradientBrush>
+            <SolidColorBrush x:Key="BrakeActiveText" Color="#FFFFEDAD"/>
+            <SolidColorBrush x:Key="Inactive" Color="#FFDDDDDD"/>
+            <SolidColorBrush x:Key="InactiveText" Color="#FFC8C8C8"/>
+            <LinearGradientBrush x:Key="Active" EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="#FF6BEF67" Offset="0.003"/>
+                <GradientStop Color="#FF24CE1F" Offset="1"/>
+            </LinearGradientBrush>
+            <SolidColorBrush x:Key="ActiveText" Color="#FFE3FFC8"/>
+        </ResourceDictionary>
+    </Page.Resources>
+
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Border Background="{DynamicResource TitleBarBrush}" CornerRadius="25">
+            <Label Content="{DynamicResource Create.Settings.Jerk.Jerk}" Style="{DynamicResource TitleBarText}"/>
+        </Border>
+
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="15*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="10*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Grid x:Name="ModeSelect" Grid.Column="1" Grid.Row="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+                <Button x:Name="ButtonModeAccelerate" Content="{DynamicResource Create.Settings.Jerk.Accelerate}" FontFamily="{DynamicResource Generic.Font}" BorderBrush="{x:Null}" FontWeight="Bold" Click="onClick" FontSize="15">
+                    <Button.LayoutTransform>
+                        <RotateTransform Angle="-90"/>
+                    </Button.LayoutTransform>
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="7,7,0,0"/>
+                        </Style>
+
+                        <Style TargetType="Button">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsAccelerateActive}" Value="True">
+                                    <Setter Property="Background" Value="{DynamicResource AccelerateActive}" />
+                                    <Setter Property="Foreground" Value="{DynamicResource AccelerateActiveText}" />
+                                </DataTrigger>
+
+                                <DataTrigger Binding="{Binding IsAccelerateActive}" Value="False">
+                                    <Setter Property="Background" Value="{DynamicResource Inactive}" />
+                                    <Setter Property="Foreground" Value="{DynamicResource InactiveText}" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+                <Button x:Name="ButtonModeBrake" Content="{DynamicResource Create.Settings.Jerk.Accelerate}" FontFamily="{DynamicResource Generic.Font}" Margin="0,1,0,0" Grid.Row="1" BorderBrush="{x:Null}" FontWeight="Bold" Click="onClick" FontSize="15">
+                    <Button.LayoutTransform>
+                        <RotateTransform Angle="-90"/>
+                    </Button.LayoutTransform>
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="7,7,0,0"/>
+                        </Style>
+
+                        <Style TargetType="Button">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsAccelerateActive}" Value="False">
+                                    <Setter Property="Background" Value="{DynamicResource BrakeActive}" />
+                                    <Setter Property="Foreground" Value="{DynamicResource BrakeActiveText}" />
+                                </DataTrigger>
+
+                                <DataTrigger Binding="{Binding IsAccelerateActive}" Value="True">
+                                    <Setter Property="Background" Value="{DynamicResource Inactive}" />
+                                    <Setter Property="Foreground" Value="{DynamicResource InactiveText}" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+            </Grid>
+            <Grid x:Name="TurnSelect" Grid.Column="2" Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Button x:Name="ButtonTurnOn" Content="{DynamicResource Create.Settings.Jerk.JerkOn}" BorderBrush="{x:Null}" FontFamily="{DynamicResource Generic.Font}" FontWeight="Bold" Click="onClick" FontSize="15">
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="7,7,0,0"/>
+                        </Style>
+
+                        <Style TargetType="Button">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsTurnOnActive}" Value="True">
+                                    <Setter Property="Background" Value="{DynamicResource Active}" />
+                                    <Setter Property="Foreground" Value="{DynamicResource ActiveText}" />
+                                </DataTrigger>
+
+                                <DataTrigger Binding="{Binding IsTurnOnActive}" Value="False">
+                                    <Setter Property="Background" Value="{DynamicResource Inactive}" />
+                                    <Setter Property="Foreground" Value="{DynamicResource InactiveText}" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+                <Button x:Name="ButtonTurnOff" Content="{DynamicResource Create.Settings.Jerk.JerkOff}" BorderBrush="{x:Null}" FontFamily="{DynamicResource Generic.Font}" FontWeight="Bold" Grid.Column="1" Click="onClick" FontSize="15">
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="7,7,0,0"/>
+                        </Style>
+
+                        <Style TargetType="Button">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsTurnOnActive}" Value="False">
+                                    <Setter Property="Background" Value="{DynamicResource Active}" />
+                                    <Setter Property="Foreground" Value="{DynamicResource ActiveText}" />
+                                </DataTrigger>
+
+                                <DataTrigger Binding="{Binding IsTurnOnActive}" Value="True">
+                                    <Setter Property="Background" Value="{DynamicResource Inactive}" />
+                                    <Setter Property="Foreground" Value="{DynamicResource InactiveText}" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+            </Grid>
+            <Grid x:Name="Main" Grid.Column="2" Grid.Row="2" Background="{DynamicResource BackgroundBrush}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="5*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+                <Border BorderBrush="#FFDDDDDD" BorderThickness="0,2,0,0" Grid.Row="1">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="40"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBox x:Name="MaxVoltageFreqInput" Style="{DynamicResource SlimTextBox}" Text="60" Grid.Column="1" TextChanged="ValueUpdated"/>
+                        <Label Content="{DynamicResource Create.Settings.Jerk.MaxVoltageFrequency}" HorizontalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="{DynamicResource Generic.Font}" FontWeight="Bold" FontSize="15" Foreground="{DynamicResource BackgroundTextBrush}" VerticalAlignment="Center"/>
+                        <Label Content="Hz" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="{DynamicResource Generic.Font}" FontWeight="Bold" FontSize="10" Foreground="{DynamicResource BackgroundTextBrush}" VerticalAlignment="Bottom" Grid.Column="2" HorizontalAlignment="Left"/>
+                    </Grid>
+                </Border>
+                <Border BorderBrush="#FFDDDDDD" BorderThickness="0,2,0,0" Grid.Row="2">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="40"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBox x:Name="FreqChangeRateInput" Style="{DynamicResource SlimTextBox}" Text="60" Grid.Column="1" TextChanged="ValueUpdated"/>
+                        <Label Content="{DynamicResource Create.Settings.Jerk.FrequencyChangeRate}" HorizontalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="{DynamicResource Generic.Font}" FontWeight="Bold" FontSize="15" Foreground="{DynamicResource BackgroundTextBrush}" VerticalAlignment="Center"/>
+                        <Label Content="Hz/s" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="{DynamicResource Generic.Font}" FontWeight="Bold" FontSize="10" Foreground="{DynamicResource BackgroundTextBrush}" VerticalAlignment="Bottom" Grid.Column="2" HorizontalAlignment="Left"/>
+                    </Grid>
+                </Border>
+            </Grid>
+        </Grid>
+    </Grid>
+</Page>

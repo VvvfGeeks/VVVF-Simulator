@@ -1,0 +1,213 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>nextmidi.midiport.core</name>
+    </assembly>
+    <members>
+        <member name="T:NextMidi.MidiPort.Core.MidiPortHandleBase">
+            <summary>
+            MidiOutPortHandle, MidiInPortHandle の抽象基底クラスです。
+            </summary>
+        </member>
+        <member name="M:NextMidi.MidiPort.Core.MidiPortHandleBase.#ctor(System.String)">
+            <summary>
+            MidiPortHandleBase のインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.MidiPort.Core.MidiPortHandleBase.Finalize">
+            <summary>
+            MIDI ポートハンドルを解放します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.MidiPort.Core.MidiPortHandleBase.Close">
+            <summary>
+            MIDIポートハンドルを開放します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.MidiPort.Core.MidiPortHandleBase.Dispose">
+            <summary>
+            MIDIポートハンドルを開放します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.MidiPort.Core.MidiPortHandleBase.CheckDisposed">
+            <summary>
+            インスタンスが既に破棄されているかどうかを検証します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.MidiPort.Core.MidiPortHandleBase.Release(System.Boolean)">
+            <summary>
+            インスタンスを破棄します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.MidiPort.Core.MidiPortHandleBase.ReleaseCore">
+            <summary>
+            インスタンスを破棄します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.MidiPort.Core.MidiPortHandleBase.CheckResult(NextMidi.MidiPort.Core.MMResult)">
+            <summary>
+            マルチメディア API の実行結果を検証します。
+            </summary>
+        </member>
+        <member name="P:NextMidi.MidiPort.Core.MidiPortHandleBase.Name">
+            <summary>
+            ポートの名前です。
+            </summary>
+        </member>
+        <member name="P:NextMidi.MidiPort.Core.MidiPortHandleBase.Handle">
+            <summary>
+            MIDI ポートのハンドルです。
+            </summary>
+        </member>
+        <member name="T:NextMidi.MidiPort.Core.MidiHdr">
+            <summary>
+            MIDIHDR 構造体の実装です。
+            </summary>
+        </member>
+        <member name="F:NextMidi.MidiPort.Core.MidiHdr.lpData">
+            <summary>
+            MIDI データのポインタです。
+            </summary>
+        </member>
+        <member name="F:NextMidi.MidiPort.Core.MidiHdr.dwBufferLength">
+            <summary>
+            バッファのサイズです。
+            </summary>
+        </member>
+        <member name="F:NextMidi.MidiPort.Core.MidiHdr.dwBytesRecorded">
+            <summary>
+            実際に入力されたデータのサイズです。
+            </summary>
+        </member>
+        <member name="F:NextMidi.MidiPort.Core.MidiHdr.dwUser">
+            <summary>
+            dwUser 値です。
+            </summary>
+        </member>
+        <member name="F:NextMidi.MidiPort.Core.MidiHdr.dwFlags">
+            <summary>
+            MIDI ヘッダーの状態を表します。
+            </summary>
+        </member>
+        <member name="F:NextMidi.MidiPort.Core.MidiHdr.lpNext">
+            <summary>
+            lpNext 値です。
+            </summary>
+        </member>
+        <member name="F:NextMidi.MidiPort.Core.MidiHdr.reserved">
+            <summary>
+            reserved 値です。
+            </summary>
+        </member>
+        <member name="F:NextMidi.MidiPort.Core.MidiHdr.dwOffset">
+            <summary>
+            dwOffset 値です。
+            </summary>
+        </member>
+        <member name="F:NextMidi.MidiPort.Core.MidiHdr.dwReserved">
+            <summary>
+            dwReserved 値です。
+            </summary>
+        </member>
+        <member name="P:NextMidi.MidiPort.Core.MidiHdr.MarshalSize">
+            <summary>
+            マーシャリング時の構造体のサイズです。
+            </summary>
+        </member>
+        <member name="T:NextMidi.MidiPort.Core.IMidiPort">
+            <summary>
+            MIDI ポートを表すインターフェースです。
+            </summary>
+        </member>
+        <member name="M:NextMidi.MidiPort.Core.IMidiPort.Open">
+            <summary>
+            MIDI ポートを開きます。
+            </summary>
+        </member>
+        <member name="M:NextMidi.MidiPort.Core.IMidiPort.Close">
+            <summary>
+            MIDI ポートを閉じます。
+            </summary>
+        </member>
+        <member name="P:NextMidi.MidiPort.Core.IMidiPort.Name">
+            <summary>
+            ポートの名前です。
+            </summary>
+        </member>
+        <member name="P:NextMidi.MidiPort.Core.IMidiPort.IsOpen">
+            <summary>
+            ポートが開いているかどうかを示します。
+            </summary>
+        </member>
+        <member name="T:NextMidi.MidiPort.Core.MMResult">
+            <summary>
+            MMRESULT の実装です。
+            </summary>
+        </member>
+        <member name="F:NextMidi.MidiPort.Core.MMResult.NoError">
+            <summary>
+            処理に成功しました。
+            </summary>
+        </member>
+        <member name="F:NextMidi.MidiPort.Core.MMResult.InvalidDeviceID">
+            <summary>
+            指定された ID は無効です。
+            </summary>
+        </member>
+        <member name="F:NextMidi.MidiPort.Core.MMResult.Allocated">
+            <summary>
+            指定されたリソースは既に割り当てられています。
+            </summary>
+        </member>
+        <member name="T:NextMidi.MidiPort.Core.MidiHdrFlag">
+            <summary>
+            MidiHdr 構造体の dwFlags 値を表す列挙子です。
+            </summary>
+        </member>
+        <member name="F:NextMidi.MidiPort.Core.MidiHdrFlag.None">
+            <summary>
+            フラグがセットされていません。
+            </summary>
+        </member>
+        <member name="F:NextMidi.MidiPort.Core.MidiHdrFlag.Done">
+            <summary>
+            バッファの使用が完了しました。
+            </summary>
+        </member>
+        <member name="F:NextMidi.MidiPort.Core.MidiHdrFlag.Prepared">
+            <summary>
+            バッファの準備が完了しました。
+            </summary>
+        </member>
+        <member name="F:NextMidi.MidiPort.Core.MidiHdrFlag.InQueue">
+            <summary>
+            バッファは再生待ちです。
+            </summary>
+        </member>
+        <member name="T:NextMidi.MidiPort.Core.MidiPortOpenFlag">
+            <summary>
+            MIDI ポートを開く時のオプションです。
+            </summary>
+        </member>
+        <member name="F:NextMidi.MidiPort.Core.MidiPortOpenFlag.NoCallback">
+            <summary>
+            コールバック機構を使用しません。
+            </summary>
+        </member>
+        <member name="F:NextMidi.MidiPort.Core.MidiPortOpenFlag.CallbackWindow">
+            <summary>
+            コールバックはウィンドウメッセージとして送信されます。
+            </summary>
+        </member>
+        <member name="F:NextMidi.MidiPort.Core.MidiPortOpenFlag.CallbackThread">
+            <summary>
+            コールバックはスレッドに送信されます。
+            </summary>
+        </member>
+        <member name="F:NextMidi.MidiPort.Core.MidiPortOpenFlag.CallbackFunction">
+            <summary>
+            コールバックは関数ポインタです。
+            </summary>
+        </member>
+    </members>
+</doc>

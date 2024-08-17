@@ -1,0 +1,53 @@
+﻿<Window
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="clr-namespace:VvvfSimulator.GUI.MIDIConvert"
+    xmlns:MyUserControl="clr-namespace:VvvfSimulator.GUI.Resource.MyUserControl" x:Class="VvvfSimulator.GUI.MIDIConvert.Config"
+    mc:Ignorable="d"
+    Style="{DynamicResource DialogWindowStyle}"
+    WindowStartupLocation="CenterOwner"
+    Title="{DynamicResource MidiConvert.Config.Title}" Height="450" Width="200" ResizeMode="NoResize">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/GUI/Resource/Dictionary/Window.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Grid Background="{DynamicResource VoidBackgroundBrush}">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="25"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="46"/>
+            </Grid.ColumnDefinitions>
+            <Image Style="{StaticResource WindowIconStyle}"/>
+            <Label Grid.Column="1" x:Name="WindowTitle" Content="{DynamicResource MidiConvert.Config.Title}" Style="{StaticResource WindowTitleStyle}"/>
+            <Button Grid.Column="4" Tag="Close" Style="{DynamicResource WindowCloseButton}" Click="OnWindowControlButtonClick"/>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="5*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+
+            <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Image Source="/GUI/Resource/Images/MIDIConvert/B_MultiTask.png" Stretch="Fill" Width="100" Height="100" HorizontalAlignment="Center" Grid.Row="1"/>
+                <Label Content="{DynamicResource MidiConvert.Config.MultiThreading}" HorizontalAlignment="Center" Grid.Row="1" VerticalAlignment="Top" FontFamily="{DynamicResource Generic.Font}" FontWeight="Bold" Foreground="{DynamicResource BackgroundTextBrush}" FontSize="16"/>
+                <MyUserControl:EnableButton OnClicked="EnableButton_OnClicked" Tag="MultiThread" x:Name="BtnMultiThread" HorizontalAlignment="Center" Grid.Row="1" Width="160" Height="40" />
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>

@@ -1,0 +1,140 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
+		<TargetFramework>net8.0-windows10.0.22621.0</TargetFramework>
+		<RootNamespace>VvvfSimulator</RootNamespace>
+		<Nullable>enable</Nullable>
+		<UseWPF>true</UseWPF>
+		<ApplicationIcon>GUI/Resource/Images/vvvf-simulator.ico</ApplicationIcon>
+		<Authors>VvvfGeeks</Authors>
+		<Description>A simple application to simulate VVVF sound</Description>
+		<PackageIcon>vvvf-simulator.png</PackageIcon>
+		<AllowUnsafeBlocks>False</AllowUnsafeBlocks>
+		<AssemblyVersion>1.8.0.0</AssemblyVersion>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<Resource Include="GUI\Resource\Fonts\BIZ_UDPGothic\BIZUDPGothic-Bold.ttf" />
+		<Resource Include="GUI\Resource\Fonts\BIZ_UDPGothic\BIZUDPGothic-Regular.ttf" />
+		<Resource Include="GUI\Resource\Fonts\fonts-DSEG_v046\DSEG14-Classic\DSEG14Classic-Bold.ttf" />
+		<Resource Include="GUI\Resource\Fonts\fonts-DSEG_v046\DSEG14-Classic\DSEG14Classic-BoldItalic.ttf" />
+		<Resource Include="GUI\Resource\Fonts\fonts-DSEG_v046\DSEG14-Classic\DSEG14Classic-Italic.ttf" />
+		<Resource Include="GUI\Resource\Fonts\fonts-DSEG_v046\DSEG14-Classic\DSEG14Classic-Light.ttf" />
+		<Resource Include="GUI\Resource\Fonts\fonts-DSEG_v046\DSEG14-Classic\DSEG14Classic-LightItalic.ttf" />
+		<Resource Include="GUI\Resource\Fonts\fonts-DSEG_v046\DSEG14-Classic\DSEG14Classic-Regular.ttf" />
+		<Resource Include="GUI\Resource\Fonts\fonts-DSEG_v046\DSEG14-Modern\DSEG14Modern-Bold.ttf" />
+		<Resource Include="GUI\Resource\Fonts\fonts-DSEG_v046\DSEG14-Modern\DSEG14Modern-BoldItalic.ttf" />
+		<Resource Include="GUI\Resource\Fonts\fonts-DSEG_v046\DSEG14-Modern\DSEG14Modern-Italic.ttf" />
+		<Resource Include="GUI\Resource\Fonts\fonts-DSEG_v046\DSEG14-Modern\DSEG14Modern-Light.ttf" />
+		<Resource Include="GUI\Resource\Fonts\fonts-DSEG_v046\DSEG14-Modern\DSEG14Modern-LightItalic.ttf" />
+		<Resource Include="GUI\Resource\Fonts\fonts-DSEG_v046\DSEG14-Modern\DSEG14Modern-Regular.ttf" />
+		<Resource Include="GUI\Resource\Fonts\fonts-DSEG_v046\DSEG7-Classic\DSEG7Classic-Bold.ttf" />
+		<Resource Include="GUI\Resource\Fonts\fonts-DSEG_v046\DSEG7-Classic\DSEG7Classic-BoldItalic.ttf" />
+		<Resource Include="GUI\Resource\Fonts\fonts-DSEG_v046\DSEG7-Classic\DSEG7Classic-Italic.ttf" />
+		<Resource Include="GUI\Resource\Fonts\fonts-DSEG_v046\DSEG7-Classic\DSEG7Classic-Light.ttf" />
+		<Resource Include="GUI\Resource\Fonts\fonts-DSEG_v046\DSEG7-Classic\DSEG7Classic-LightItalic.ttf" />
+		<Resource Include="GUI\Resource\Fonts\fonts-DSEG_v046\DSEG7-Classic\DSEG7Classic-Regular.ttf" />
+		<Resource Include="GUI\Resource\Fonts\fonts-DSEG_v046\DSEG7-Modern\DSEG7Modern-Bold.ttf" />
+		<Resource Include="GUI\Resource\Fonts\fonts-DSEG_v046\DSEG7-Modern\DSEG7Modern-BoldItalic.ttf" />
+		<Resource Include="GUI\Resource\Fonts\fonts-DSEG_v046\DSEG7-Modern\DSEG7Modern-Italic.ttf" />
+		<Resource Include="GUI\Resource\Fonts\fonts-DSEG_v046\DSEG7-Modern\DSEG7Modern-Light.ttf" />
+		<Resource Include="GUI\Resource\Fonts\fonts-DSEG_v046\DSEG7-Modern\DSEG7Modern-LightItalic.ttf" />
+		<Resource Include="GUI\Resource\Fonts\fonts-DSEG_v046\DSEG7-Modern\DSEG7Modern-Regular.ttf" />
+		<Resource Include="GUI\Resource\Fonts\MPlus1Code\MPLUS1Code-Bold.ttf" />
+		<Resource Include="GUI\Resource\Fonts\MPlus1Code\MPLUS1Code-ExtraLight.ttf" />
+		<Resource Include="GUI\Resource\Fonts\MPlus1Code\MPLUS1Code-Light.ttf" />
+		<Resource Include="GUI\Resource\Fonts\MPlus1Code\MPLUS1Code-Medium.ttf" />
+		<Resource Include="GUI\Resource\Fonts\MPlus1Code\MPLUS1Code-Regular.ttf" />
+		<Resource Include="GUI\Resource\Fonts\MPlus1Code\MPLUS1Code-SemiBold.ttf" />
+		<Resource Include="GUI\Resource\Fonts\MPlus1Code\MPLUS1Code-Thin.ttf" />
+		<Resource Include="GUI\Resource\Fonts\New_Amsterdam\NewAmsterdam-Regular.ttf" />
+		<Resource Include="GUI\Resource\Fonts\Roboto_Condensed\RobotoCondensed-Medium.ttf" />
+		<Resource Include="GUI\Resource\Images\MIDIConvert\B_MultiTask.png" />
+		<Resource Include="GUI\Resource\Images\MIDIConvert\B_Spanner.png" />
+		<Resource Include="GUI\Resource\Images\MIDIConvert\B_Start.png" />
+		<Resource Include="GUI\Resource\Images\vvvf-simulator.ico" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<EmbeddedResource Include="Generation\Audio\TrainSound\IrSample\sample6.wav" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Resource Include="GUI\Resource\Images\MIDIConvert\B_Folder_Opend.png" />
+		<Resource Include="GUI\Resource\Images\MIDIConvert\B_MIDI_Document.png" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="NAudio" Version="2.2.1" />
+		<PackageReference Include="OpenCvSharp4" Version="4.9.0.20240103" />
+		<PackageReference Include="OpenCvSharp4.runtime.win" Version="4.9.0.20240103" />
+		<PackageReference Include="System.Drawing.Common" Version="8.0.1" />
+		<PackageReference Include="System.IO.Ports" Version="8.0.0" />
+		<PackageReference Include="YamlDotNet" Version="15.1.1" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Reference Include="avenue.core">
+			<HintPath>Package\NextMidi\avenue.core.dll</HintPath>
+		</Reference>
+		<Reference Include="avenue.filing">
+			<HintPath>Package\NextMidi\avenue.filing.dll</HintPath>
+		</Reference>
+		<Reference Include="nextmidi.data">
+			<HintPath>Package\NextMidi\nextmidi.data.dll</HintPath>
+		</Reference>
+		<Reference Include="nextmidi.dataelement">
+			<HintPath>Package\NextMidi\nextmidi.dataelement.dll</HintPath>
+		</Reference>
+		<Reference Include="nextmidi.dataelement.status">
+			<HintPath>Package\NextMidi\nextmidi.dataelement.status.dll</HintPath>
+		</Reference>
+		<Reference Include="nextmidi.filing.midi">
+			<HintPath>Package\NextMidi\nextmidi.filing.midi.dll</HintPath>
+		</Reference>
+		<Reference Include="nextmidi.filing.midi.chunk">
+			<HintPath>Package\NextMidi\nextmidi.filing.midi.chunk.dll</HintPath>
+		</Reference>
+		<Reference Include="nextmidi.filing.midi.midifile">
+			<HintPath>Package\NextMidi\nextmidi.filing.midi.midifile.dll</HintPath>
+		</Reference>
+		<Reference Include="nextmidi.midiport.bridge">
+			<HintPath>Package\NextMidi\nextmidi.midiport.bridge.dll</HintPath>
+		</Reference>
+		<Reference Include="nextmidi.midiport.core">
+			<HintPath>Package\NextMidi\nextmidi.midiport.core.dll</HintPath>
+		</Reference>
+		<Reference Include="nextmidi.midiport.input">
+			<HintPath>Package\NextMidi\nextmidi.midiport.input.dll</HintPath>
+		</Reference>
+		<Reference Include="nextmidi.midiport.input.core">
+			<HintPath>Package\NextMidi\nextmidi.midiport.input.core.dll</HintPath>
+		</Reference>
+		<Reference Include="nextmidi.midiport.output">
+			<HintPath>Package\NextMidi\nextmidi.midiport.output.dll</HintPath>
+		</Reference>
+		<Reference Include="nextmidi.midiport.output.core">
+			<HintPath>Package\NextMidi\nextmidi.midiport.output.core.dll</HintPath>
+		</Reference>
+		<Reference Include="nextmidi.time">
+			<HintPath>Package\NextMidi\nextmidi.time.dll</HintPath>
+		</Reference>
+	</ItemGroup>
+
+	<ItemGroup>
+		<Compile Update="Properties\Settings.Designer.cs">
+			<DesignTimeSharedInput>True</DesignTimeSharedInput>
+			<AutoGen>True</AutoGen>
+			<DependentUpon>Settings.settings</DependentUpon>
+		</Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Update="Properties\Settings.settings">
+			<Generator>SettingsSingleFileGenerator</Generator>
+			<LastGenOutput>Settings.Designer.cs</LastGenOutput>
+		</None>
+	</ItemGroup>
+
+</Project>

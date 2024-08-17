@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>nextmidi.midiport.bridge</name>
+    </assembly>
+    <members>
+        <member name="T:NextMidi.IO.MidiPort.MidiBus`1">
+            <summary>
+            MIDI で使用するバスを表すクラスです。
+            </summary>
+        </member>
+        <member name="M:NextMidi.IO.MidiPort.MidiBus`1.#ctor(System.String,`0)">
+            <summary>
+            MidiBus のインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="P:NextMidi.IO.MidiPort.MidiBus`1.Name">
+            <summary>
+            バスの名前です。
+            </summary>
+        </member>
+        <member name="P:NextMidi.IO.MidiPort.MidiBus`1.Port">
+            <summary>
+            MIDI ポートです。
+            </summary>
+        </member>
+        <member name="T:NextMidi.IO.MidiPort.Output.MidiOutBridge">
+            <summary>
+            仮想出力バスにデータを送信するクラスです。
+            </summary>
+        </member>
+        <member name="T:NextMidi.IO.MidiPort.Output.IMidiOutBridge">
+            <summary>
+            仮想出力バスにデータを送信するインターフェースです。
+            </summary>
+        </member>
+        <member name="M:NextMidi.IO.MidiPort.Output.IMidiOutBridge.Send(NextMidi.DataElement.MidiEvent)">
+            <summary>
+            データを送信します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.IO.MidiPort.Output.IMidiOutBridge.Send(NextMidi.DataElement.MidiEvent,System.String)">
+            <summary>
+            データを送信します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.IO.MidiPort.Output.IMidiOutBridge.Stop">
+            <summary>
+            演奏を停止します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.IO.MidiPort.Output.MidiOutBridge.#ctor">
+            <summary>
+            MidiOutBridge のインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.IO.MidiPort.Output.MidiOutBridge.#ctor(NextMidi.MidiPort.Output.IMidiOutPort)">
+            <summary>
+            MidiOutBridge のインスタンスを作成します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.IO.MidiPort.Output.MidiOutBridge.Send(NextMidi.DataElement.MidiEvent)">
+            <summary>
+            データを送信します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.IO.MidiPort.Output.MidiOutBridge.Send(NextMidi.DataElement.MidiEvent,System.String)">
+            <summary>
+            データを送信します。
+            </summary>
+        </member>
+        <member name="M:NextMidi.IO.MidiPort.Output.MidiOutBridge.Stop">
+            <summary>
+            演奏を停止します。
+            </summary>
+        </member>
+        <member name="P:NextMidi.IO.MidiPort.Output.MidiOutBridge.Items">
+            <summary>
+            仮想出力バスの一覧です。
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,64 @@
+﻿<Window
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="clr-namespace:VvvfSimulator.GUI.Create.Waveform.Basic"
+    x:Class="VvvfSimulator.GUI.Create.Waveform.Basic.DiscreteSettingWindow"
+    mc:Ignorable="d"
+    Style="{DynamicResource DialogWindowStyle}"
+    WindowStartupLocation="CenterOwner"
+    Title="{DynamicResource Create.Settings.Waveform.Basic.DiscreteSetting.Title}" Width="572" VerticalAlignment="Top" HorizontalAlignment="Center" SizeToContent="Height">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/GUI/Resource/Dictionary/Common.xaml"/>
+                <ResourceDictionary Source="/GUI/Resource/Dictionary/Window.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Grid Background="{DynamicResource VoidBackgroundBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="25"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="46"/>
+                <ColumnDefinition Width="46"/>
+                <ColumnDefinition Width="46"/>
+            </Grid.ColumnDefinitions>
+            <Image Style="{StaticResource WindowIconStyle}"/>
+
+            <Label Grid.Column="1" x:Name="WindowTitle" Content="{DynamicResource Create.Settings.Waveform.Basic.DiscreteSetting.Title}" Style="{StaticResource WindowTitleStyle}"/>
+            <Button Grid.Column="4" Tag="Close" Style="{DynamicResource WindowCloseButton}" Click="OnWindowControlButtonClick"/>
+        </Grid>
+        <Grid Grid.Row="1" Height="200" VerticalAlignment="Top" Background="{DynamicResource BackgroundBrush}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="11*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+            </Grid.RowDefinitions>
+            <Border Height="50" Background="{DynamicResource TitleBarBrush}" Grid.ColumnSpan="2">
+                <Label Content="{DynamicResource Create.Settings.Waveform.Basic.DiscreteSetting.DiscreteSetting}" Style="{DynamicResource TitleBarText}"/>
+            </Border>
+            <Border Grid.Row="1" Grid.RowSpan="3" Background="{DynamicResource SubTitleBarBrush}"/>
+            <Label Content="{DynamicResource Create.Settings.Waveform.Basic.DiscreteSetting.Enable}" Style="{DynamicResource SubTitleBarText}" Grid.Row="1"/>
+            <Label Content="{DynamicResource Create.Settings.Waveform.Basic.DiscreteSetting.Steps}" Style="{DynamicResource SubTitleBarText}" Grid.Row="2"/>
+            <Label Content="{DynamicResource Create.Settings.Waveform.Basic.DiscreteSetting.Mode}" Style="{DynamicResource SubTitleBarText}" Grid.Row="3"/>
+            <CheckBox Style="{DynamicResource SlimCheckBox}" x:Name="EnabledCheckBox" Grid.Column="1" Content="{DynamicResource Create.Settings.Waveform.Basic.DiscreteSetting.Enabled}" HorizontalAlignment="Center" Grid.Row="1" VerticalAlignment="Center" Checked="EnabledCheckBox_Checked"/>
+            <TextBox Style="{DynamicResource SlimTextBox}" x:Name="StepsInput" Grid.Column="1" Grid.Row="2" Text="TextBox" TextChanged="StepsInput_TextChanged"/>
+            <ComboBox Style="{DynamicResource SlimComboBoxStyle}" x:Name="ModeComboBox" Grid.Column="1" Grid.Row="3" SelectionChanged="ModeComboBox_SelectionChanged" SelectedValuePath="Key" DisplayMemberPath="Value"/>
+        </Grid>
+    </Grid>
+</Window>

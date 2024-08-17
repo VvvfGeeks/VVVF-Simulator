@@ -1,0 +1,107 @@
+﻿<Page x:Class="VvvfSimulator.GUI.TrainAudio.Pages.HarmonicSetting"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:VvvfSimulator.GUI.TrainAudio.Pages"
+      mc:Ignorable="d" 
+      d:DesignWidth="800"
+      Title="TrainAudio_Harmonic_Setting_Page">
+
+    <Page.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/GUI/Resource/Dictionary/Common.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Page.Resources>
+
+    <StackPanel>
+
+        <Border Style="{DynamicResource ControlBorder}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="5*"/>
+                </Grid.ColumnDefinitions>
+                <Border Background="{DynamicResource TitleBarBrush}" Grid.Row="0" Grid.ColumnSpan="2" CornerRadius="25,25,0,0"/>
+                <Border Background="{DynamicResource SubTitleBarBrush}" Grid.Column="0" Grid.Row="1" Grid.RowSpan="2" CornerRadius="0,0,0,25"/>
+                <Border Background="{DynamicResource BackgroundBrush}" Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" CornerRadius="0,0,25,0"/>
+                <Label Content="{DynamicResource TrainAudio.Pages.HarmonicSetting.BasicSetting}" Style="{DynamicResource TitleBarText}" Grid.ColumnSpan="2"/>
+
+                <Label Content="{DynamicResource TrainAudio.Pages.HarmonicSetting.BasicSetting.Harmonic}" Grid.Row="1" Style="{DynamicResource SubTitleBarText}"/>
+                <Label Content="{DynamicResource TrainAudio.Pages.HarmonicSetting.BasicSetting.DisappearFrequency}" Grid.Row="2" Style="{DynamicResource SubTitleBarText}"/>
+                <TextBox Grid.Column="1" Grid.Row="1" Style="{DynamicResource SlimTextBox}" TextChanged="TextBox_TextChanged" x:Name="Harmonic"/>
+                <TextBox Grid.Column="1" Grid.Row="2" Style="{DynamicResource SlimTextBox}" TextChanged="TextBox_TextChanged" x:Name="Disappear_Frequency"/>
+            </Grid>
+        </Border>
+        <Grid Height="2"/>
+        <Border Style="{DynamicResource ControlBorder}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="5*"/>
+                </Grid.ColumnDefinitions>
+                <Border Background="{DynamicResource TitleBarBrush}" Grid.Row="0" Grid.ColumnSpan="2" CornerRadius="25,25,0,0"/>
+                <Border Background="{DynamicResource SubTitleBarBrush}" Grid.Column="0" Grid.Row="1" Grid.RowSpan="2" CornerRadius="0,0,0,25"/>
+                <Border Background="{DynamicResource BackgroundBrush}" Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" CornerRadius="0,0,25,0"/>
+                <Label Content="{DynamicResource TrainAudio.Pages.HarmonicSetting.RangeSetting}" Style="{DynamicResource TitleBarText}" Grid.ColumnSpan="2"/>
+
+                <Label Content="{DynamicResource TrainAudio.Pages.HarmonicSetting.RangeSetting.StartFrequency}" Grid.Row="1" Style="{DynamicResource SubTitleBarText}"/>
+                <Label Content="{DynamicResource TrainAudio.Pages.HarmonicSetting.RangeSetting.EndFrequency}" Grid.Row="2" Style="{DynamicResource SubTitleBarText}"/>
+                <TextBox Grid.Column="1" Grid.Row="1" Style="{DynamicResource SlimTextBox}" TextChanged="TextBox_TextChanged" x:Name="Range_Start_Frequency"/>
+                <TextBox Grid.Column="1" Grid.Row="2" Style="{DynamicResource SlimTextBox}" TextChanged="TextBox_TextChanged" x:Name="Range_End_Frequency"/>
+            </Grid>
+        </Border>
+        <Grid Height="2"/>
+        <Border Style="{DynamicResource ControlBorder}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="5*"/>
+                </Grid.ColumnDefinitions>
+                <Border Background="{DynamicResource TitleBarBrush}" Grid.Row="0" Grid.ColumnSpan="2" CornerRadius="25,25,0,0"/>
+                <Border Background="{DynamicResource SubTitleBarBrush}" Grid.Column="0" Grid.Row="1" Grid.RowSpan="6" CornerRadius="0,0,0,25"/>
+                <Border Background="{DynamicResource BackgroundBrush}" Grid.Column="1" Grid.Row="1" Grid.RowSpan="6" CornerRadius="0,0,25,0"/>
+                <Label Content="{DynamicResource TrainAudio.Pages.HarmonicSetting.AmplitudeSetting}" Style="{DynamicResource TitleBarText}" Grid.ColumnSpan="2"/>
+
+                <Label Content="{DynamicResource TrainAudio.Pages.HarmonicSetting.AmplitudeSetting.StartFrequency}" Grid.Row="1" Style="{DynamicResource SubTitleBarText}"/>
+                <Label Content="{DynamicResource TrainAudio.Pages.HarmonicSetting.AmplitudeSetting.EndFrequency}" Grid.Row="2" Style="{DynamicResource SubTitleBarText}"/>
+                <Label Content="{DynamicResource TrainAudio.Pages.HarmonicSetting.AmplitudeSetting.StartAmplitude}" Grid.Row="3" Style="{DynamicResource SubTitleBarText}"/>
+                <Label Content="{DynamicResource TrainAudio.Pages.HarmonicSetting.AmplitudeSetting.EndAmplitude}" Grid.Row="4" Style="{DynamicResource SubTitleBarText}"/>
+                <Label Content="{DynamicResource TrainAudio.Pages.HarmonicSetting.AmplitudeSetting.MaxAmplitude}" Grid.Row="5" Style="{DynamicResource SubTitleBarText}"/>
+                <Label Content="{DynamicResource TrainAudio.Pages.HarmonicSetting.AmplitudeSetting.MinAmplitude}" Grid.Row="6" Style="{DynamicResource SubTitleBarText}"/>
+
+                <TextBox Grid.Column="1" Grid.Row="1" Style="{DynamicResource SlimTextBox}" TextChanged="TextBox_TextChanged" x:Name="Start_Frequency"/>
+                <TextBox Grid.Column="1" Grid.Row="2" Style="{DynamicResource SlimTextBox}" TextChanged="TextBox_TextChanged" x:Name="End_Frequency"/>
+                <TextBox Grid.Column="1" Grid.Row="3" Style="{DynamicResource SlimTextBox}" TextChanged="TextBox_TextChanged" x:Name="Start_Amplitude"/>
+                <TextBox Grid.Column="1" Grid.Row="4" Style="{DynamicResource SlimTextBox}" TextChanged="TextBox_TextChanged" x:Name="End_Amplitude"/>
+                <TextBox Grid.Column="1" Grid.Row="5" Style="{DynamicResource SlimTextBox}" TextChanged="TextBox_TextChanged" x:Name="Max_Amplitude"/>
+                <TextBox Grid.Column="1" Grid.Row="6" Style="{DynamicResource SlimTextBox}" TextChanged="TextBox_TextChanged" x:Name="Min_Amplitude"/>
+
+            </Grid>
+        </Border>
+
+        
+        
+    </StackPanel>
+</Page>

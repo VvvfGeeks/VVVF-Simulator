@@ -1,0 +1,61 @@
+﻿<UserControl x:Class="VvvfSimulator.GUI.Create.Waveform.Dipolar.ControlDipolar"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:VvvfSimulator.GUI.Create.Waveform.Dipolar"
+             mc:Ignorable="d" 
+             d:DesignHeight="500" d:DesignWidth="661">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/GUI/Resource/Dictionary/Common.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Border Style="{DynamicResource ControlBorder}">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Border Background="{DynamicResource TitleBarBrush}" CornerRadius="25,25,0,0">
+                <Label x:Name="carrier_title" Content="{DynamicResource Create.Settings.Waveform.Dipolar.ControlDipolar.Title}" Style="{DynamicResource TitleBarText}"/>
+            </Border>
+            <Grid Grid.Row="1">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="11*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid Background="{DynamicResource SubTitleBarBrush}">
+                        <Label Content="{DynamicResource Create.Settings.Waveform.Dipolar.ControlDipolar.ParamType}" Style="{DynamicResource SubTitleBarText}"/>
+                    </Grid>
+                    <Grid Grid.Column="1" Background="{DynamicResource BackgroundBrush}" HorizontalAlignment="Stretch">
+                        <ComboBox Style="{DynamicResource SlimComboBoxStyle}"  x:Name="dipolar_mode" SelectionChanged="ValueModeSelectionChanged" SelectedValuePath="Key" DisplayMemberPath="Value"/>
+
+                    </Grid>
+                </Grid>
+
+            </Grid>
+            <Grid Grid.Row="2">
+                <Grid VerticalAlignment="Stretch">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="11*"/>
+                    </Grid.ColumnDefinitions>
+                    <Border Background="{DynamicResource SubTitleBarBrush}" VerticalAlignment="Stretch" CornerRadius="0,0,0,25">
+                        <Label Content="{DynamicResource Create.Settings.Waveform.Dipolar.ControlDipolar.Param}" Style="{DynamicResource SubTitleBarText}"/>
+                    </Border>
+                    <Border Grid.Column="1" Background="{DynamicResource BackgroundBrush}" HorizontalAlignment="Stretch" CornerRadius="0,0,25,0">
+                        <Frame x:Name="dipolar_param" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"  />
+                    </Border>
+                </Grid>
+
+            </Grid>
+
+        </Grid>
+    </Border>
+</UserControl>

@@ -1,0 +1,108 @@
+﻿<Window x:Class="VvvfSimulator.GUI.Simulator.RealTime.Setting.MasconDevice"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:VvvfSimulator.GUI.Simulator.RealTime.Setting"
+        mc:Ignorable="d"
+        Closing="Window_Closing"
+        WindowStartupLocation="CenterOwner"
+        Style="{DynamicResource DialogWindowStyle}"
+        Title="{DynamicResource Simulator.RealTime.Setting.MasconDevice.Title}" Height="auto" Width="400" SizeToContent="Height">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/GUI/Resource/Dictionary/Common.xaml"/>
+                <ResourceDictionary Source="/GUI/Resource/Dictionary/Window.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    
+    <Grid Background="{DynamicResource VoidBackgroundBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="25"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="46"/>
+            </Grid.ColumnDefinitions>
+            <Image Style="{StaticResource WindowIconStyle}"/>
+            <Label Grid.Column="1" x:Name="WindowTitle" Content="{DynamicResource Simulator.RealTime.Setting.MasconDevice.Title}" Style="{StaticResource WindowTitleStyle}"/>
+            <Button Grid.Column="2" Tag="Close" Click="OnWindowControlButtonClick" Style="{DynamicResource WindowCloseButton}"/>
+        </Grid>
+
+        <Grid Grid.Row="1" Height="50" Visibility="{Binding FrequencyRateVisibility}" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="5*"/>
+            </Grid.ColumnDefinitions>
+            <Border Background="{DynamicResource SubTitleBarBrush}" CornerRadius="0,25,0,0">
+                <Label Content="{DynamicResource Simulator.RealTime.Setting.MasconDevice.FrequencyRate}" Style="{DynamicResource SubTitleBarText}"/>
+            </Border>
+            <TextBox x:Name="FrequencyRateInput" Grid.Column="1" Tag="FrequencyRate" Style="{DynamicResource SlimTextBox}" TextChanged="DoubleInputTextBoxChanged"/>
+        </Grid>
+        
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="5*"/>
+            </Grid.ColumnDefinitions>
+            <Border Background="{DynamicResource SubTitleBarBrush}">
+                <Label Content="{DynamicResource Simulator.RealTime.Setting.MasconDevice.DeviceMode}" Style="{DynamicResource SubTitleBarText}"/>
+            </Border>
+            <ComboBox x:Name="ModeSelector" Grid.Column="1" SelectionChanged="Selector_SelectionChanged" Tag="Mode" Style="{DynamicResource SlimComboBoxStyle}" SelectedValuePath="Key" DisplayMemberPath="Value"/>
+
+        </Grid>
+
+        <StackPanel Grid.Row="3">
+            
+            <Grid Height="50" Visibility="{Binding PortVisibility}" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="5*"/>
+                </Grid.ColumnDefinitions>
+                <Border Background="{DynamicResource SubTitleBarBrush}">
+                    <Label Content="{DynamicResource Simulator.RealTime.Setting.MasconDevice.Port}" Style="{DynamicResource SubTitleBarText}"/>
+                </Border>
+                <ComboBox x:Name="PortSelector" Grid.Column="1" SelectionChanged="Selector_SelectionChanged" Tag="Port" Style="{DynamicResource SlimComboBoxStyle}"/>
+            </Grid>
+            <Grid Height="50" Visibility="{Binding AccelerateKeySettingVisibility}" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="5*"/>
+                </Grid.ColumnDefinitions>
+                <Border Background="{DynamicResource SubTitleBarBrush}">
+                    <Label Content="{DynamicResource Simulator.RealTime.Setting.MasconDevice.AccelerateKey}" Style="{DynamicResource SubTitleBarText}"/>
+                </Border>
+                <TextBox x:Name="AccelerateKey" Grid.Column="1" Tag="Accelerate"  Style="{DynamicResource SlimTextBox}" PreviewKeyDown="TextBoxKeyDown"/>
+            </Grid>
+            <Grid Height="50" Visibility="{Binding NeutralKeySettingVisibility}" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="5*"/>
+                </Grid.ColumnDefinitions>
+                <Border Background="{DynamicResource SubTitleBarBrush}">
+                    <Label Content="{DynamicResource Simulator.RealTime.Setting.MasconDevice.NeutralKey}" Style="{DynamicResource SubTitleBarText}"/>
+                </Border>
+                <TextBox x:Name="NeutralKey" Grid.Column="1" Tag="Neutral" Style="{DynamicResource SlimTextBox}" PreviewKeyDown="TextBoxKeyDown"/>
+            </Grid>
+            <Grid Height="50" Visibility="{Binding BrakeKeySettingVisibility}" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="5*"/>
+                </Grid.ColumnDefinitions>
+                <Border Background="{DynamicResource SubTitleBarBrush}">
+                    <Label Content="{DynamicResource Simulator.RealTime.Setting.MasconDevice.BrakeKey}" Style="{DynamicResource SubTitleBarText}"/>
+                </Border>
+                <TextBox x:Name="BrakeKey" Grid.Column="1" Tag="Brake" Style="{DynamicResource SlimTextBox}" PreviewKeyDown="TextBoxKeyDown"/>
+            </Grid>
+        </StackPanel>
+
+    </Grid>
+</Window>

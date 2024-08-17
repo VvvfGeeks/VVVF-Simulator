@@ -1,0 +1,100 @@
+﻿<Window x:Class="VvvfSimulator.GUI.Util.LinearCalculator"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:VvvfSimulator.GUI.Util"
+        mc:Ignorable="d"
+        Style="{DynamicResource MinimumWindowStyle}"
+        Title="{DynamicResource LinearCalculator.Title}" Height="200" Width="500" ResizeMode="NoResize">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/GUI/Resource/Dictionary/Common.xaml"/>
+                <ResourceDictionary Source="/GUI/Resource/Dictionary/Window.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <Style TargetType="Label">
+                <Setter Property="Foreground">
+                    <Setter.Value>
+                        <SolidColorBrush Color="{DynamicResource BackgroundTextColor}"/>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="FontSize" Value="20"/>
+                <Setter Property="FontFamily" Value="{DynamicResource Generic.Font}"/>
+            </Style>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Grid Background="{DynamicResource VoidBackgroundBrush}">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="25"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="46"/>
+                <ColumnDefinition Width="46"/>
+                <ColumnDefinition Width="46"/>
+            </Grid.ColumnDefinitions>
+            <Image Style="{StaticResource WindowIconStyle}"/>
+            <Label Grid.Column="1" x:Name="WindowTitle" Content="{DynamicResource LinearCalculator.Title}" Style="{StaticResource WindowTitleStyle}"/>
+            <Button Grid.Column="2" Tag="Minimize" Style="{DynamicResource WindowMimizeButton}" Click="OnWindowControlButtonClick"/>
+            <Button Grid.Column="4" Tag="Close" Style="{DynamicResource WindowCloseButton}" Click="OnWindowControlButtonClick"/>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="10"/>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="10"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <TextBox Style="{DynamicResource SlimTextBox}" x:Name="a_textbox" Text="1" Tag="A" TextChanged="TextBox_TextChanged" Grid.Column="1"/>
+                <TextBox Style="{DynamicResource SlimTextBox}" x:Name="x_textbox" Text="2" Tag="X" TextChanged="TextBox_TextChanged" Grid.Column="3"/>
+                <TextBox Style="{DynamicResource SlimTextBox}" x:Name="b_textbox" Text="3" Tag="B" TextChanged="TextBox_TextChanged" Grid.Column="5"/>
+                <Label Content="x" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="2"/>
+                <Label Content="+" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="4"/>
+            </Grid>
+            <Grid Grid.Row="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Label Content="=" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1"/>
+                <TextBox Style="{DynamicResource SlimTextBox}" x:Name="ans_textbox" Text="ans" IsReadOnly="True" Grid.Column="2"/>
+            </Grid>
+            <Grid Grid.Row="4">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Button Style="{DynamicResource SlimButton}" x:Name="copy_button" Content="{DynamicResource LinearCalculator.Copy}" Click="CopyButtonClicked" Grid.Column="3"/>
+            </Grid>
+        </Grid>
+
+    </Grid>
+</Window>
