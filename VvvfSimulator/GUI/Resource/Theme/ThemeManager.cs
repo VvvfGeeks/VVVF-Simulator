@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Runtime.InteropServices;
+using System.Windows;
 using System.Windows.Media;
 
 namespace VvvfSimulator.GUI.Resource.Theme
@@ -35,7 +36,26 @@ namespace VvvfSimulator.GUI.Resource.Theme
         public static void SetColorTheme(this ColorTheme theme)
         {
             if (ColorThemeDictionary == null) return;
+            Properties.Settings.Default.ColorTheme = (int)theme;
+            Properties.Settings.Default.Save();
             ColorThemeDictionary.Source = new System.Uri(theme.GetColorThemeFilePath(), System.UriKind.Relative);
+        }
+
+        [DllImport("UXTheme.dll", SetLastError = true, EntryPoint = "#138")]
+        public static extern bool ShouldSystemUseDarkMode();
+        public static ColorTheme GetSystemTheme()
+        {
+            return ShouldSystemUseDarkMode() switch
+            {
+                true => ColorTheme.Dark,
+                _ => ColorTheme.Light,
+            };
+        }
+        public static ColorTheme GetApplicationTheme()
+        {
+            int ApplicationTheme = Properties.Settings.Default.ColorTheme;
+            if (ApplicationTheme == -1) return GetSystemTheme();
+            return (ColorTheme)ApplicationTheme;
         }
 
         public static void InitializeColorTheme()
@@ -45,8 +65,9 @@ namespace VvvfSimulator.GUI.Resource.Theme
                 ResourceDictionary dictionary = Application.Current.Resources.MergedDictionaries[i];
                 if (!dictionary.Source.OriginalString.Equals(ColorTheme.Dark.GetColorThemeFilePath())) continue;
                 ColorThemeDictionary = dictionary;
-                return;
+                break;
             }
+            GetApplicationTheme().SetColorTheme();
         }
 
     }

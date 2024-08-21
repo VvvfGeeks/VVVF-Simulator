@@ -85,7 +85,7 @@
                         </Style>
                     </Button.Resources>
                 </Button>
-                <Button x:Name="ButtonModeBrake" Content="{DynamicResource Create.Settings.Jerk.Accelerate}" FontFamily="{DynamicResource Generic.Font}" Margin="0,1,0,0" Grid.Row="1" BorderBrush="{x:Null}" FontWeight="Bold" Click="onClick" FontSize="15">
+                <Button x:Name="ButtonModeBrake" Content="{DynamicResource Create.Settings.Jerk.Brake}" FontFamily="{DynamicResource Generic.Font}" Margin="0,1,0,0" Grid.Row="1" BorderBrush="{x:Null}" FontWeight="Bold" Click="onClick" FontSize="15">
                     <Button.LayoutTransform>
                         <RotateTransform Angle="-90"/>
                     </Button.LayoutTransform>

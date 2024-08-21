@@ -11,7 +11,7 @@
 		<Description>A simple application to simulate VVVF sound</Description>
 		<PackageIcon>vvvf-simulator.png</PackageIcon>
 		<AllowUnsafeBlocks>False</AllowUnsafeBlocks>
-		<AssemblyVersion>1.8.0.0</AssemblyVersion>
+		<AssemblyVersion>1.8.0.1</AssemblyVersion>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -48,6 +48,11 @@
 		<Resource Include="GUI\Resource\Fonts\MPlus1Code\MPLUS1Code-Regular.ttf" />
 		<Resource Include="GUI\Resource\Fonts\MPlus1Code\MPLUS1Code-SemiBold.ttf" />
 		<Resource Include="GUI\Resource\Fonts\MPlus1Code\MPLUS1Code-Thin.ttf" />
+		<Resource Include="GUI\Resource\Fonts\NanumSquareNeo\NanumSquareNeo-aLt.ttf" />
+		<Resource Include="GUI\Resource\Fonts\NanumSquareNeo\NanumSquareNeo-bRg.ttf" />
+		<Resource Include="GUI\Resource\Fonts\NanumSquareNeo\NanumSquareNeo-cBd.ttf" />
+		<Resource Include="GUI\Resource\Fonts\NanumSquareNeo\NanumSquareNeo-dEb.ttf" />
+		<Resource Include="GUI\Resource\Fonts\NanumSquareNeo\NanumSquareNeo-eHv.ttf" />
 		<Resource Include="GUI\Resource\Fonts\New_Amsterdam\NewAmsterdam-Regular.ttf" />
 		<Resource Include="GUI\Resource\Fonts\Roboto_Condensed\RobotoCondensed-Medium.ttf" />
 		<Resource Include="GUI\Resource\Images\MIDIConvert\B_MultiTask.png" />

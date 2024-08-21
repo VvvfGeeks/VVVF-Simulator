@@ -16,6 +16,17 @@
     <system:String x:Key="Generic.Status.Enabled">有効</system:String>
     <system:String x:Key="Generic.Status.Disabled">無効</system:String>
 
+    <system:String x:Key="Preference.Title">設定</system:String>
+    <system:String x:Key="Preference.Language">言語</system:String>
+    <system:String x:Key="Preference.ColorTheme">配色</system:String>
+
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.Language.Name.JaJp">日本語</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.Language.Name.EnUs">英語（米）</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.Language.Name.KoKr">韓国語</system:String>
+
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.ColorTheme.Name.Light">白</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.ColorTheme.Name.Dark">黒</system:String>
+
     <system:String x:Key="MainWindow.Title">可変電圧可変周波数制御再現機</system:String>
     
     <system:String x:Key="MainWindow.Menu.File">ファイル</system:String>
@@ -71,6 +82,7 @@
     <system:String x:Key="MainWindow.Menu.Window.TaskProgress">タスク一覧</system:String>
     <system:String x:Key="MainWindow.Menu.Window.BaseFreqPattern">生成時基本周波数</system:String>
     <system:String x:Key="MainWindow.Menu.Window.TrainSound">列車音設定</system:String>
+    <system:String x:Key="MainWindow.Menu.Window.Preference">設定</system:String>
 
     <system:String x:Key="MainWindow.TabControl.Settings">基本</system:String>
     <system:String x:Key="MainWindow.TabControl.Settings.PwmLevel">電位レベル</system:String>

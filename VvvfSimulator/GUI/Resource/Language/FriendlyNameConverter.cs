@@ -1,6 +1,7 @@
 ﻿using OpenCvSharp.Aruco;
 using System;
 using System.Collections.Generic;
+using VvvfSimulator.GUI.Resource.Theme;
 using VvvfSimulator.GUI.Simulator.RealTime;
 using VvvfSimulator.GUI.Simulator.RealTime.Setting;
 using static VvvfSimulator.GUI.Simulator.RealTime.RealtimeDisplay.ControlStatus;
@@ -322,6 +323,37 @@ namespace VvvfSimulator.GUI.Resource.Language
             {
                 YamlAsyncParameterVibratoMode.Const => LanguageManager.GetString("Resource.Language.FriendlyNameConverter.YamlAsyncParameterVibratoMode.Name.Const"),
                 _ => LanguageManager.GetString("Resource.Language.FriendlyNameConverter.YamlAsyncParameterVibratoMode.Name.Moving"),
+            };
+        }
+
+        public static Dictionary<Language, string> GetLanguageNames()
+        {
+            Dictionary<Language, string> Names = [];
+            foreach (Language type in (Language[])Enum.GetValues(typeof(Language)))
+            {
+                Names.Add(type, GetLanguageName(type));
+            }
+            return Names;
+        }
+        public static string GetLanguageName(Language language)
+        {
+            return LanguageManager.GetString("Resource.Language.FriendlyNameConverter.Language.Name." + language.ToString());
+        }
+
+        public static Dictionary<ColorTheme, string> GetColorThemeNames()
+        {
+            Dictionary<ColorTheme, string> Names = [];
+            foreach (ColorTheme type in (ColorTheme[])Enum.GetValues(typeof(ColorTheme)))
+            {
+                Names.Add(type, GetColorThemeName(type));
+            }
+            return Names;
+        }
+        public static string GetColorThemeName(ColorTheme colorTheme) {
+            return colorTheme switch
+            {
+                ColorTheme.Light => LanguageManager.GetString("Resource.Language.FriendlyNameConverter.ColorTheme.Name.Light"),
+                _ => LanguageManager.GetString("Resource.Language.FriendlyNameConverter.ColorTheme.Name.Dark"),
             };
         }
     }

@@ -155,6 +155,8 @@
                     <MenuItem Header="{DynamicResource MainWindow.Menu.Window.TaskProgress}" Tag="TaskProgressView" Click="Window_Menu_Click"/>
                     <MenuItem Header="{DynamicResource MainWindow.Menu.Window.BaseFreqPattern}" Tag="AccelPattern" Click="Window_Menu_Click"/>
                     <MenuItem Header="{DynamicResource MainWindow.Menu.Window.TrainSound}" Tag="TrainSoundSetting" Click="Window_Menu_Click"/>
+                    <Separator/>
+                    <MenuItem Header="{DynamicResource MainWindow.Menu.Window.Preference}" Tag="Preference" Click="Window_Menu_Click"/>
                 </MenuItem>
 
                 <MenuItem Header="{DynamicResource MainWindow.Menu.Generate}">

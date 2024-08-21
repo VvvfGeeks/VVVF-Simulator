@@ -104,5 +104,11 @@
     <Setting Name="RealtimeTrainCalculateDivision" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">512</Value>
     </Setting>
+    <Setting Name="Language" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">-1</Value>
+    </Setting>
+    <Setting Name="ColorTheme" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">-1</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

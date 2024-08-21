@@ -6,7 +6,7 @@ namespace VvvfSimulator.GUI.Resource.Language
 {
     public enum Language
     {
-        JaJp, EnUs
+        JaJp, EnUs, KoKr
     }
     public static class LanguageManager
     {
@@ -18,6 +18,7 @@ namespace VvvfSimulator.GUI.Resource.Language
             {
                 Language.JaJp => "/GUI/Resource/Language/ja-jp.xaml",
                 Language.EnUs => "/GUI/Resource/Language/en-us.xaml",
+                Language.KoKr => "/GUI/Resource/Language/ko-kr.xaml",
                 _ => "/GUI/Resource/Language/en-us.xaml",
             };
         }
@@ -44,15 +45,12 @@ namespace VvvfSimulator.GUI.Resource.Language
             return GetString(name).Replace("\\n", Environment.NewLine);
         }
 
-        public static void SetLanguage(this Language theme)
+        public static void SetLanguage(this Language lang)
         {
             if (LanguageDictionary == null) return;
-            LanguageDictionary.Source = new System.Uri(theme.GetLanguageFilePath(), System.UriKind.Relative);
-        }
-
-        public static void SetLanguage()
-        {
-            SetLanguage(GetSystemLanguage());
+            Properties.Settings.Default.Language = (int)lang;
+            Properties.Settings.Default.Save();
+            LanguageDictionary.Source = new System.Uri(lang.GetLanguageFilePath(), System.UriKind.Relative);
         }
 
         public static Language GetSystemLanguage()
@@ -60,8 +58,16 @@ namespace VvvfSimulator.GUI.Resource.Language
             return CultureInfo.CurrentCulture.Name switch
             {
                 "ja-JP" => Language.JaJp,
+                "ko-KR" => Language.KoKr,
                 _ => Language.EnUs,
             };
+        }
+
+        public static Language GetApplicationLanguage()
+        {
+            int ApplicationLanguage = Properties.Settings.Default.Language;
+            if (ApplicationLanguage == -1) return GetSystemLanguage();
+            return (Language)ApplicationLanguage;
         }
 
         public static void Initialize()
@@ -71,8 +77,9 @@ namespace VvvfSimulator.GUI.Resource.Language
                 ResourceDictionary dictionary = Application.Current.Resources.MergedDictionaries[i];
                 if (!dictionary.Source.OriginalString.Equals(Language.JaJp.GetLanguageFilePath())) continue;
                 LanguageDictionary = dictionary;
-                return;
+                break;
             }
+            GetApplicationLanguage().SetLanguage();
         }
     }
 }

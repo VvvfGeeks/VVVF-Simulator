@@ -16,6 +16,17 @@
     <system:String x:Key="Generic.Status.Enabled">Enabled</system:String>
     <system:String x:Key="Generic.Status.Disabled">Disabled</system:String>
 
+    <system:String x:Key="Preference.Title">Preference</system:String>
+    <system:String x:Key="Preference.Language">Language</system:String>
+    <system:String x:Key="Preference.ColorTheme">Theme</system:String>
+
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.Language.Name.JaJp">Japanese</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.Language.Name.EnUs">English(US)</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.Language.Name.KoKr">Korean</system:String>
+
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.ColorTheme.Name.Light">Light</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.ColorTheme.Name.Dark">Dark</system:String>
+    
     <system:String x:Key="MainWindow.Title">VVVF Simulator</system:String>
 
     <system:String x:Key="MainWindow.Menu.File">File</system:String>
@@ -71,6 +82,7 @@
     <system:String x:Key="MainWindow.Menu.Window.TaskProgress">Task Manager</system:String>
     <system:String x:Key="MainWindow.Menu.Window.BaseFreqPattern">Generation Base Frequency Editor</system:String>
     <system:String x:Key="MainWindow.Menu.Window.TrainSound">Train Sound Setting</system:String>
+    <system:String x:Key="MainWindow.Menu.Window.Preference">Preference</system:String>
 
     <system:String x:Key="MainWindow.TabControl.Settings">Basic</system:String>
     <system:String x:Key="MainWindow.TabControl.Settings.PwmLevel">Level</system:String>

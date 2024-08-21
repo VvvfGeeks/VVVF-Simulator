@@ -872,6 +872,13 @@ namespace VvvfSimulator
                 tahw.ShowDialog();
                 MainWindow.SetInteractive(true);
             }
+            else if (tag_str.Equals("Preference"))
+            {
+                SetInteractive(false);
+                Preference preference = new(this);
+                preference.ShowDialog();
+                SetInteractive(true);
+            }
         }
         private void Tools_Menu_Click(object sender, RoutedEventArgs e)
         {
