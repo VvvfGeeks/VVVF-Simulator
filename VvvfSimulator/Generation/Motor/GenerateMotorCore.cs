@@ -1,5 +1,5 @@
 ﻿using System;
-using static VvvfSimulator.VvvfStructs;
+using static VvvfSimulator.Vvvf.Struct;
 
 
 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows;
+using static VvvfSimulator.Vvvf.Struct;
 
 namespace VvvfSimulator.Yaml.VvvfSound
 {

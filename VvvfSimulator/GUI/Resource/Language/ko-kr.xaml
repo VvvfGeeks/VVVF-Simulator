@@ -20,10 +20,11 @@
     <system:String x:Key="Preference.Language">언어</system:String>
     <system:String x:Key="Preference.ColorTheme">테마</system:String>
 
-    <system:String x:Key="Resource.Language.FriendlyNameConverter.Language.Name.JaJp">일본어</system:String>
-    <system:String x:Key="Resource.Language.FriendlyNameConverter.Language.Name.EnUs">영어(미국)</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.Language.Name.JaJp">日本語</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.Language.Name.EnUs">English(US)</system:String>
     <system:String x:Key="Resource.Language.FriendlyNameConverter.Language.Name.KoKr">한국어</system:String>
-
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.Language.Name.ZhCn">简体中文</system:String>
+    
     <system:String x:Key="Resource.Language.FriendlyNameConverter.ColorTheme.Name.Light">라이트</system:String>
     <system:String x:Key="Resource.Language.FriendlyNameConverter.ColorTheme.Name.Dark">다크</system:String>
     
@@ -42,6 +43,8 @@
     <system:String x:Key="MainWindow.Menu.Generate.SourceCode.RPi3">RPi3</system:String>
     <system:String x:Key="MainWindow.Menu.Generate.Audio">오디오</system:String>
     <system:String x:Key="MainWindow.Menu.Generate.Audio.VVVF">VVVF음</system:String>
+    <system:String x:Key="MainWindow.Menu.Generate.Audio.VVVF.Line">선간전압</system:String>
+    <system:String x:Key="MainWindow.Menu.Generate.Audio.VVVF.Phases">상전압</system:String>
     <system:String x:Key="MainWindow.Menu.Generate.Audio.Train">주행음</system:String>
     <system:String x:Key="MainWindow.Menu.Generate.Movie">영상</system:String>
     <system:String x:Key="MainWindow.Menu.Generate.Movie.Control">제어</system:String>
@@ -73,8 +76,8 @@
 
     <system:String x:Key="MainWindow.Menu.Tools">도구</system:String>
     <system:String x:Key="MainWindow.Menu.Tools.AutoVoltage">진폭 자동 설정</system:String>
-    <system:String x:Key="MainWindow.Menu.Tools.FreeRunAmpZero">타행 진입 시 진폭을 0으로 설정</system:String>
-    <system:String x:Key="MainWindow.Menu.Tools.FreeRunEndAmplitudeContinuous">타행 전환 시 진폭을 연속으로 설정</system:String>
+    <system:String x:Key="MainWindow.Menu.Tools.FreeRunAmpZero">타행 시 진폭을 0으로 설정</system:String>
+    <system:String x:Key="MainWindow.Menu.Tools.FreeRunEndAmplitudeContinuous">타행 시 진폭을 연속으로 설정</system:String>
     <system:String x:Key="MainWindow.Menu.Tools.MIDI">MIDI 변환</system:String>
 
     <system:String x:Key="MainWindow.Menu.Window">기타</system:String>
@@ -91,7 +94,8 @@
     <system:String x:Key="MainWindow.TabControl.Accelerate">역행</system:String>
     <system:String x:Key="MainWindow.TabControl.Brake">제동</system:String>
 
-    <system:String x:Key="MainWindow.TaskDescription.Generate.Audio.Vvvf">VVVF음 생성 ：</system:String>
+    <system:String x:Key="MainWindow.TaskDescription.Generate.Audio.Vvvf.Line">선간전압 오디오 생성：</system:String>
+    <system:String x:Key="MainWindow.TaskDescription.Generate.Audio.Vvvf.Phases">상전압 오디오 생성：</system:String>
     <system:String x:Key="MainWindow.TaskDescription.Generate.Audio.Train">주행음 생성：</system:String>
     <system:String x:Key="MainWindow.TaskDescription.Generate.Movie.Control.Original">제어(디자인1) 영상 생성：</system:String>
     <system:String x:Key="MainWindow.TaskDescription.Generate.Movie.Control.Original2">제어(디자인2) 영상 생성：</system:String>
@@ -118,9 +122,9 @@
     <system:String x:Key="MainWindow.Message.Generate.Image.Hexagon.Original.EnterFrequency">생성 주파수 입력</system:String>
     <system:String x:Key="MainWindow.Message.Generate.Image.FFT.Original.EnterFrequency">생성 주파수 입력</system:String>
     <system:String x:Key="MainWindow.Message.Generate.SourceCode.RPi3.Ok.Title">성공</system:String>
-    <system:String x:Key="MainWindow.Message.Generate.SourceCode.RPi3.Ok.Message">C언어 파일을 성공적으로 내보냈습니다</system:String>
+    <system:String x:Key="MainWindow.Message.Generate.SourceCode.RPi3.Ok.Message">.c 파일을 내보냈습니다</system:String>
     <system:String x:Key="MainWindow.Message.Tools.AutoVoltage.Error">
-        진폭 자동 설정을 사용 시 다음 사항을 확인하시기 바랍니다.\n
+        진폭 자동 설정 사용 시 아래 사항을 확인해 주세요.\n
         ・역행 및 제동 패턴은 각각 2개 이상의 패턴을 포함해야 합니다.\n
         ・모든 패턴의 시작 주파수 값은 0 이상이어야 합니다.
     </system:String>
@@ -150,6 +154,8 @@
     <system:String x:Key="TaskViewer.Status.Complete">완료</system:String>
     <system:String x:Key="TaskViewer.Status.Running">진행중</system:String>
 
+    <system:String x:Key="BitmapViewer.Title.Default">이미지 뷰어</system:String>
+    
     <system:String x:Key="TrainAudio.SettingWindow.Title">주행음 설정</system:String>
 
     <system:String x:Key="TrainAudio.SettingWindow.Menu.File">파일</system:String>
@@ -253,6 +259,9 @@
     <system:String x:Key="Simulator.RealTime.Setting.Basic.AudioBuffSize">오디오 버퍼 크기</system:String>
     <system:String x:Key="Simulator.RealTime.Setting.Basic.SamplingFrequency">샘플링 주파수</system:String>
     <system:String x:Key="Simulator.RealTime.Setting.Basic.CalculateDivision">계산 단위</system:String>
+    <system:String x:Key="Simulator.RealTime.Setting.Basic.WaveForm">파형</system:String>
+    <system:String x:Key="Simulator.RealTime.Setting.Basic.WaveForm.Show.Line">선간전압 표시</system:String>
+    <system:String x:Key="Simulator.RealTime.Setting.Basic.WaveForm.Show.Phase">상전압 표시</system:String>
     <system:String x:Key="Simulator.RealTime.Setting.Basic.ControlStatus">제어 상태</system:String>
     <system:String x:Key="Simulator.RealTime.Setting.Basic.ControlStatus.Show">표시</system:String>
     <system:String x:Key="Simulator.RealTime.Setting.Basic.ControlStatus.Design">디자인</system:String>
@@ -262,7 +271,6 @@
     <system:String x:Key="Simulator.RealTime.Setting.Basic.VoltageVector.Design">디자인</system:String>
     <system:String x:Key="Simulator.RealTime.Setting.Basic.VoltageVector.ShowZeroVector">영전압 벡터 표시</system:String>
     <system:String x:Key="Simulator.RealTime.Setting.Basic.Others">기타</system:String>
-    <system:String x:Key="Simulator.RealTime.Setting.Basic.Others.WaveForm.Show">파형 표시</system:String>
     <system:String x:Key="Simulator.RealTime.Setting.Basic.Others.FFT.Show">FFT 표시</system:String>
     <system:String x:Key="Simulator.RealTime.Setting.Basic.Others.FS.Show">푸리에 급수 표시</system:String>
     <system:String x:Key="Simulator.RealTime.Setting.Basic.Others.EditRealTime">실시간 편집 허용</system:String>
@@ -307,8 +315,8 @@
     <system:String x:Key="Mascon.ControlEditor.Message.File.Save.Error.Message">파일을 저장하지 못했습니다</system:String>
 
     <system:String x:Key="Create.Settings.Jerk.Jerk">타행 설정</system:String>
-    <system:String x:Key="Create.Settings.Jerk.JerkOn">타행 진입 시</system:String>
-    <system:String x:Key="Create.Settings.Jerk.JerkOff">타행 종료 시</system:String>
+    <system:String x:Key="Create.Settings.Jerk.JerkOn">타행 종료 시</system:String>
+    <system:String x:Key="Create.Settings.Jerk.JerkOff">타행 진입 시</system:String>
     <system:String x:Key="Create.Settings.Jerk.Accelerate">역행</system:String>
     <system:String x:Key="Create.Settings.Jerk.Brake">제동</system:String>
     <system:String x:Key="Create.Settings.Jerk.MaxVoltageFrequency">최대 전압 주파수</system:String>
@@ -323,14 +331,14 @@
     <system:String x:Key="Create.Settings.MinimumFrequency.Braking">제동</system:String>
 
     <system:String x:Key="Create.Settings.Waveform.Single.ControlFreeRun.Title">타행 설정</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Single.ControlFreeRun.On">타행 진입 시</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Single.ControlFreeRun.Off">타행 종료 시</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Single.ControlFreeRun.On">타행 종료 시</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Single.ControlFreeRun.Off">타행 진입 시</system:String>
     <system:String x:Key="Create.Settings.Waveform.Single.ControlFreeRun.Skip">이 펄스 건너뛰기</system:String>
     <system:String x:Key="Create.Settings.Waveform.Single.ControlFreeRun.StuckAtHere">이 펄스 유지</system:String>
 
     <system:String x:Key="Create.Settings.Waveform.Single.ControlAmplitude.Title.Default">진폭 설정</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Single.ControlAmplitude.Title.JerkOn">타행 진입 시 진폭 설정</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Single.ControlAmplitude.Title.JerkOff">타행 종료 시 진폭 설정</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Single.ControlAmplitude.Title.JerkOn">타행 종료 시 진폭 설정</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Single.ControlAmplitude.Title.JerkOff">타행 진입 시 진폭 설정</system:String>
     <system:String x:Key="Create.Settings.Waveform.Single.ControlAmplitude.Mode">모드</system:String>
     <system:String x:Key="Create.Settings.Waveform.Single.ControlAmplitude.Value">값</system:String>
     <system:String x:Key="Create.Settings.Waveform.Single.ControlAmplitude.StartFrequency">시작 주파수</system:String>
@@ -354,35 +362,38 @@
     <system:String x:Key="Create.Settings.Waveform.Common.ControlMovingSetting.StartValue">시작값</system:String>
     <system:String x:Key="Create.Settings.Waveform.Common.ControlMovingSetting.End">끝 주파수</system:String>
     <system:String x:Key="Create.Settings.Waveform.Common.ControlMovingSetting.EndValue">끝값</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Common.ControlMovingSetting.Exponential">지수함수</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Common.ControlMovingSetting.Exponential">지수함수의 밑</system:String>
     <system:String x:Key="Create.Settings.Waveform.Common.ControlMovingSetting.CurveRate">곡률</system:String>
 
-    <system:String x:Key="Create.Settings.Waveform.Basic.ControlBasic.Title">기본 설정</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Basic.ControlBasic.From">시작 주파수</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Basic.ControlBasic.SineFrom">최소 주파수</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Basic.ControlBasic.SineBelow">최대 주파수</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Basic.ControlBasic.PulseMode">펄스 모드</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Basic.ControlBasic.PulseMode.Shifted">위상 반전</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Basic.ControlBasic.PulseMode.Square">사각파</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Basic.ControlBasic.PulseMode.HarmonicSetting">고조파 설정</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Basic.ControlBasic.PulseMode.DiscreteSetting">이산 설정</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Basic.ControlBasic.Enable">활성화</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Basic.ControlBasic.Enable.NormalState">평상시</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Basic.ControlBasic.Enable.JerkOn">타행 진입 시</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Basic.ControlBasic.Enable.JerkOff">타행 종료 시</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.PulseSetting.Title">펄스 모드</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.PulseSetting.Type">종류</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.PulseSetting.PulseCount">펄스 수</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.PulseSetting.Detail">상세</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.PulseSetting.Shifted">위상 반전</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.PulseSetting.Square">구형파</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.PulseSetting.HarmonicSetting">고조파 설정</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.PulseSetting.DiscreteSetting">이산 설정</system:String>
+
+    <system:String x:Key="Create.Settings.Waveform.Basic.ConditionSetting.Title">조건 설정</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.ConditionSetting.From">시작 주파수</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.ConditionSetting.SineFrom">최소 주파수</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.ConditionSetting.SineBelow">최대 주파수</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.ConditionSetting.Keep">유지 조건</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.ConditionSetting.Keep.JerkOn">타행 종료</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.ConditionSetting.Keep.JerkOff">타행 진입</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.ConditionSetting.Enable">활성화 조건</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.ConditionSetting.Enable.NormalState">역행 및 제동</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.ConditionSetting.Enable.JerkOn">타행 종료</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.ConditionSetting.Enable.JerkOff">타행 진입</system:String>
 
     <system:String x:Key="Create.Settings.Waveform.Basic.ControlBasicHarmonic.Title">고조파 설정</system:String>
     <system:String x:Key="Create.Settings.Waveform.Basic.ControlBasicHarmonic.Add">추가</system:String>
     <system:String x:Key="Create.Settings.Waveform.Basic.ControlBasicHarmonic.Set">설정</system:String>
     <system:String x:Key="Create.Settings.Waveform.Basic.ControlBasicHarmonic.Type">타입</system:String>
     <system:String x:Key="Create.Settings.Waveform.Basic.ControlBasicHarmonic.Harmonic">고조파</system:String>
-    <Span x:Key="Create.Settings.Waveform.Basic.ControlBasicHarmonic.HarmonicProportional">고조파
-        <LineBreak /> 비례
-    </Span>
+    <Span x:Key="Create.Settings.Waveform.Basic.ControlBasicHarmonic.HarmonicProportional">고조파<LineBreak />비례</Span>
     <system:String x:Key="Create.Settings.Waveform.Basic.ControlBasicHarmonic.Amplitude">진폭</system:String>
-    <Span x:Key="Create.Settings.Waveform.Basic.ControlBasicHarmonic.AmplitudeProportional">진폭
-        <LineBreak/> 비례
-    </Span>
+    <Span x:Key="Create.Settings.Waveform.Basic.ControlBasicHarmonic.AmplitudeProportional">진폭<LineBreak/>비례</Span>
     <system:String x:Key="Create.Settings.Waveform.Basic.ControlBasicHarmonic.InitialPhase">초기 위상</system:String>
 
     <system:String x:Key="Create.Settings.Waveform.Basic.DiscreteSetting.Title">이산 설정</system:String>
@@ -430,11 +441,11 @@
 
     <system:String x:Key="Resource.Language.FriendlyNameConverter.VoltageVector.Design.Original">디자인1</system:String>
 
-    <system:String x:Key="Resource.Language.FriendlyNameConverter.AmplitudeMode.Name.Linear">비례</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.AmplitudeMode.Name.Linear">정비례</system:String>
     <system:String x:Key="Resource.Language.FriendlyNameConverter.AmplitudeMode.Name.Wide3Pulse">광역 3펄스용</system:String>
     <system:String x:Key="Resource.Language.FriendlyNameConverter.AmplitudeMode.Name.InvProportional">반비례</system:String>
-    <system:String x:Key="Resource.Language.FriendlyNameConverter.AmplitudeMode.Name.Exponential">지수</system:String>
-    <system:String x:Key="Resource.Language.FriendlyNameConverter.AmplitudeMode.Name.LinearPolynomial">차수</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.AmplitudeMode.Name.Exponential">지수함수</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.AmplitudeMode.Name.LinearPolynomial">N차함수</system:String>
     <system:String x:Key="Resource.Language.FriendlyNameConverter.AmplitudeMode.Name.Sine">사인함수</system:String>
 
     <system:String x:Key="Resource.Language.FriendlyNameConverter.BaseWaveType.Name.Sine">사인파</system:String>
@@ -443,11 +454,14 @@
     <system:String x:Key="Resource.Language.FriendlyNameConverter.BaseWaveType.Name.ModifiedSine2">변형 사인파2</system:String>
     <system:String x:Key="Resource.Language.FriendlyNameConverter.BaseWaveType.Name.ModifiedSaw1">변형 삼각파</system:String>
 
-    <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseAlternativeMode.Name.Default">기본</system:String>
-    <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseAlternativeMode.Name.Alt">변형</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseAlternative.Name.Default">기본</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseAlternative.Name.Alt">변형</system:String>
 
     <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseModeName.Name.Async">비동기</system:String>
-    <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseModeName.Name.Wide">광역</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseModeName.Name.Sync">동기</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseModeName.Name.Chm">CHM</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseModeName.Name.She">SHE</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseModeName.Name.Ho">HO</system:String>
     <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseModeName.Name.Pulse">펄스</system:String>
 
     <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseHarmonicType.Name.Sine">사인파</system:String>

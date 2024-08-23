@@ -9,6 +9,7 @@ using VvvfSimulator.GUI.Resource.Class;
 using VvvfSimulator.Yaml.VvvfSound;
 using static VvvfSimulator.Generation.Audio.GenerateRealTimeCommon;
 using static VvvfSimulator.Generation.Video.FS.GenerateFourierSeries;
+using static VvvfSimulator.Vvvf.Struct;
 
 namespace VvvfSimulator.GUI.Simulator.RealTime.UniqueWindow
 {

@@ -1,14 +1,15 @@
 ﻿using NAudio.CoreAudioApi;
 using NAudio.Wave;
 using System;
+using System.Windows;
 using VvvfSimulator.Properties;
 using VvvfSimulator.Yaml.VvvfSound;
 using static VvvfSimulator.Generation.Audio.GenerateRealTimeCommon;
 using static VvvfSimulator.Generation.Audio.TrainSound.Audio;
-using static VvvfSimulator.Generation.Motor.GenerateMotorCore;
-using static VvvfSimulator.Yaml.TrainAudioSetting.YamlTrainSoundAnalyze;
 using static VvvfSimulator.Generation.Audio.TrainSound.AudioFilter;
-using System.Windows;
+using static VvvfSimulator.Generation.Motor.GenerateMotorCore;
+using static VvvfSimulator.Vvvf.Struct;
+using static VvvfSimulator.Yaml.TrainAudioSetting.YamlTrainSoundAnalyze;
 
 namespace VvvfSimulator.Generation.Audio.TrainSound
 {
@@ -70,7 +71,7 @@ namespace VvvfSimulator.Generation.Audio.TrainSound
                 if (SoundConfiguration.UseConvolutionFilter) sampleProvider = new CppConvolutionFilter(sampleProvider, 4096, SoundConfiguration.ImpulseResponse);
 
                 var mmDevice = new MMDeviceEnumerator().GetDevice(Param.AudioDeviceId);
-                IWavePlayer wavPlayer = new WasapiOut(mmDevice, AudioClientShareMode.Shared, false, 0);
+                WasapiOut wavPlayer = new (mmDevice, AudioClientShareMode.Shared, false, 0);
 
                 wavPlayer.Init(sampleProvider);
                 wavPlayer.Play();

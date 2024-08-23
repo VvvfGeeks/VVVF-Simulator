@@ -1,22 +1,20 @@
-﻿using OpenCvSharp.Aruco;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using VvvfSimulator.GUI.Resource.Theme;
-using VvvfSimulator.GUI.Simulator.RealTime;
 using VvvfSimulator.GUI.Simulator.RealTime.Setting;
 using static VvvfSimulator.GUI.Simulator.RealTime.RealtimeDisplay.ControlStatus;
 using static VvvfSimulator.GUI.Simulator.RealTime.RealtimeDisplay.Hexagon;
-using static VvvfSimulator.VvvfCalculate;
-using static VvvfSimulator.VvvfStructs.PulseMode;
-using static VvvfSimulator.VvvfStructs.PulseMode.DiscreteTimeConfiguration;
-using static VvvfSimulator.VvvfStructs.PulseMode.PulseHarmonic;
+using static VvvfSimulator.Vvvf.Calculate;
 using static VvvfSimulator.Yaml.TrainAudioSetting.YamlTrainSoundAnalyze.YamlTrainSoundData.SoundFilter;
 using static VvvfSimulator.Yaml.VvvfSound.YamlVvvfSoundData.YamlControlData;
-using static VvvfSimulator.Yaml.VvvfSound.YamlVvvfSoundData.YamlControlData.YamlAsyncParameter.YamlAsyncParameterCarrierFreq;
-using static VvvfSimulator.Yaml.VvvfSound.YamlVvvfSoundData.YamlControlData.YamlAsyncParameter.YamlAsyncParameterCarrierFreq.YamlAsyncParameterCarrierFreqVibrato.YamlAsyncParameterVibratoValue;
-using static VvvfSimulator.Yaml.VvvfSound.YamlVvvfSoundData.YamlControlData.YamlAsyncParameter.YamlAsyncParameterDipolar;
-using static VvvfSimulator.Yaml.VvvfSound.YamlVvvfSoundData.YamlControlData.YamlAsyncParameter.YamlAsyncParameterRandom.YamlAsyncParameterRandomValue;
+using static VvvfSimulator.Yaml.VvvfSound.YamlVvvfSoundData.YamlControlData.YamlAsync.CarrierFrequency;
+using static VvvfSimulator.Yaml.VvvfSound.YamlVvvfSoundData.YamlControlData.YamlAsync.CarrierFrequency.YamlAsyncParameterCarrierFreqVibrato.YamlAsyncParameterVibratoValue;
+using static VvvfSimulator.Yaml.VvvfSound.YamlVvvfSoundData.YamlControlData.YamlAsync.Dipolar;
+using static VvvfSimulator.Yaml.VvvfSound.YamlVvvfSoundData.YamlControlData.YamlAsync.RandomModulation.YamlAsyncParameterRandomValue;
 using static VvvfSimulator.Yaml.VvvfSound.YamlVvvfSoundData.YamlControlData.YamlMovingValue;
+using static VvvfSimulator.Yaml.VvvfSound.YamlVvvfSoundData.YamlControlData.YamlPulseMode;
+using static VvvfSimulator.Yaml.VvvfSound.YamlVvvfSoundData.YamlControlData.YamlPulseMode.DiscreteTimeConfiguration;
+using static VvvfSimulator.Yaml.VvvfSound.YamlVvvfSoundData.YamlControlData.YamlPulseMode.PulseHarmonic;
 
 namespace VvvfSimulator.GUI.Resource.Language
 {
@@ -170,66 +168,85 @@ namespace VvvfSimulator.GUI.Resource.Language
             {
                 BaseWaveType.Sine => LanguageManager.GetString("Resource.Language.FriendlyNameConverter.BaseWaveType.Name.Sine"),
                 BaseWaveType.Saw => LanguageManager.GetString("Resource.Language.FriendlyNameConverter.BaseWaveType.Name.Saw"),
-                BaseWaveType.Modified_Sine_1 => LanguageManager.GetString("Resource.Language.FriendlyNameConverter.BaseWaveType.Name.ModifiedSine1"),
-                BaseWaveType.Modified_Sine_2 => LanguageManager.GetString("Resource.Language.FriendlyNameConverter.BaseWaveType.Name.ModifiedSine2"),
+                BaseWaveType.ModifiedSine1 => LanguageManager.GetString("Resource.Language.FriendlyNameConverter.BaseWaveType.Name.ModifiedSine1"),
+                BaseWaveType.ModifiedSine2 => LanguageManager.GetString("Resource.Language.FriendlyNameConverter.BaseWaveType.Name.ModifiedSine2"),
                 _ => LanguageManager.GetString("Resource.Language.FriendlyNameConverter.BaseWaveType.Name.ModifiedSaw1"),
             };
         }
 
-        public static Dictionary<PulseAlternativeMode, string> GetPulseAltModeNames(PulseAlternativeMode[]? Modes)
+        public static Dictionary<PulseAlternative, string> GetPulseAltModeNames(PulseAlternative[]? Modes)
         {
-            Dictionary<PulseAlternativeMode, string> Names = [];
-            Modes ??= (PulseAlternativeMode[])Enum.GetValues(typeof(PulseAlternativeMode));
-            foreach (PulseAlternativeMode type in Modes)
+            Dictionary<PulseAlternative, string> Names = [];
+            Modes ??= (PulseAlternative[])Enum.GetValues(typeof(PulseAlternative));
+            foreach (PulseAlternative type in Modes)
             {
                 Names.Add(type, GetPulseAltModeName(type));
             }
             return Names;
         }
-        public static string GetPulseAltModeName(PulseAlternativeMode Mode)
+        public static string GetPulseAltModeName(PulseAlternative Mode)
         {
             return Mode switch
             {
-                PulseAlternativeMode.Default => LanguageManager.GetString("Resource.Language.FriendlyNameConverter.PulseAlternativeMode.Name.Default"),
-                _ => LanguageManager.GetString("Resource.Language.FriendlyNameConverter.PulseAlternativeMode.Name.Alt") + ((int)Mode),
+                PulseAlternative.Default => LanguageManager.GetString("Resource.Language.FriendlyNameConverter.PulseAlternative.Name.Default"),
+                _ => LanguageManager.GetString("Resource.Language.FriendlyNameConverter.PulseAlternative.Name.Alt") + ((int)Mode),
             };
         }
 
-        public static Dictionary<PulseModeName, string> GetPulseModeNames(PulseModeName[]? Modes)
+        public static Dictionary<PulseTypeName, string> GetPulseTypeNames(PulseTypeName[]? Modes)
         {
-            Dictionary<PulseModeName, string> Names = [];
-            Modes ??= (PulseModeName[])Enum.GetValues(typeof(PulseModeName));
-            foreach (PulseModeName type in Modes)
+            Dictionary<PulseTypeName, string> Names = [];
+            Modes ??= (PulseTypeName[])Enum.GetValues(typeof(PulseTypeName));
+            foreach (PulseTypeName type in Modes)
+            {
+                Names.Add(type, GetPulseTypeName(type));
+            }
+            return Names;
+        }
+        public static string GetPulseTypeName(PulseTypeName Name)
+        {
+            return Name switch
+            {
+                PulseTypeName.ASYNC => LanguageManager.GetString("Resource.Language.FriendlyNameConverter.PulseModeName.Name.Async"),
+                PulseTypeName.CHM => LanguageManager.GetString("Resource.Language.FriendlyNameConverter.PulseModeName.Name.Chm"),
+                PulseTypeName.SHE => LanguageManager.GetString("Resource.Language.FriendlyNameConverter.PulseModeName.Name.She"),
+                PulseTypeName.HO => LanguageManager.GetString("Resource.Language.FriendlyNameConverter.PulseModeName.Name.Ho"),
+                _ => LanguageManager.GetString("Resource.Language.FriendlyNameConverter.PulseModeName.Name.Sync"),
+            };
+        }
+
+        public static Dictionary<YamlPulseMode, string> GetPulseModeNames(YamlPulseMode[] Modes)
+        {
+            Dictionary<YamlPulseMode, string> Names = [];
+            foreach (YamlPulseMode type in Modes)
             {
                 Names.Add(type, GetPulseModeName(type));
             }
             return Names;
         }
-        public static string GetPulseModeName(PulseModeName Name)
+
+        public static string GetPulseModeName(YamlPulseMode Mode)
         {
-            if (Name.Equals(PulseModeName.Async)) return LanguageManager.GetString("Resource.Language.FriendlyNameConverter.PulseModeName.Name.Async");
-
-            // Common Conversion
-            string ConvertedName = "";
-
-            string NameStr = Name.ToString();
-            string[] NameParts = NameStr.Split("_");
-            string SpecialPulseName = NameParts[0][..NameParts[0].LastIndexOf('P')];
-            string PulseCount = NameParts[^1];
-
-            ConvertedName += SpecialPulseName;
-            ConvertedName += " ";
-
-            for (int i = 1; i < NameParts.Length - 1; i++)
+            return Mode.PulseType switch
             {
-                string LocalizedSpecificName = LanguageManager.GetString("Resource.Language.FriendlyNameConverter.PulseModeName.Name." +  NameParts[i]);
-                ConvertedName += LocalizedSpecificName;
-            }
-            
-            ConvertedName += PulseCount;
-            ConvertedName += LanguageManager.GetString("Resource.Language.FriendlyNameConverter.PulseModeName.Name.Pulse");
+                PulseTypeName.ASYNC => GetPulseTypeName(Mode.PulseType),
+                _ => GetPulseTypeName(Mode.PulseType) + " " + Mode.PulseCount + " " + LanguageManager.GetString("Resource.Language.FriendlyNameConverter.PulseModeName.Name.Pulse"),
+            };
+        }
 
-            return ConvertedName;
+        public static Dictionary<int, string> GetPulseCountNames(int[] Modes)
+        {
+            Dictionary<int, string> Names = [];
+            foreach (int type in Modes)
+            {
+                Names.Add(type, GetPulseCountName(type));
+            }
+            return Names;
+        }
+
+        public static string GetPulseCountName(int PulseCount)
+        {
+            return PulseCount + " " + LanguageManager.GetString("Resource.Language.FriendlyNameConverter.PulseModeName.Name.Pulse");
         }
 
         public static Dictionary<PulseHarmonicType, string> GetPulseHarmonicTypeNames()

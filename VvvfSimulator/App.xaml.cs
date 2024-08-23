@@ -1,5 +1,4 @@
-﻿using System.Runtime.InteropServices;
-using System.Windows;
+﻿using System.Windows;
 using VvvfSimulator.GUI.Resource.Language;
 using VvvfSimulator.GUI.Resource.Theme;
 

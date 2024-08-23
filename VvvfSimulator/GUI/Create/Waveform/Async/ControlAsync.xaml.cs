@@ -5,9 +5,9 @@ using VvvfSimulator.GUI.Create.Waveform.Async.Vibrato;
 using VvvfSimulator.GUI.Create.Waveform.Common;
 using VvvfSimulator.GUI.Resource.Language;
 using static VvvfSimulator.Yaml.VvvfSound.YamlVvvfSoundData;
-using static VvvfSimulator.Yaml.VvvfSound.YamlVvvfSoundData.YamlControlData.YamlAsyncParameter.YamlAsyncParameterCarrierFreq;
-using static VvvfSimulator.Yaml.VvvfSound.YamlVvvfSoundData.YamlControlData.YamlAsyncParameter.YamlAsyncParameterRandom;
-using static VvvfSimulator.Yaml.VvvfSound.YamlVvvfSoundData.YamlControlData.YamlAsyncParameter.YamlAsyncParameterRandom.YamlAsyncParameterRandomValue;
+using static VvvfSimulator.Yaml.VvvfSound.YamlVvvfSoundData.YamlControlData.YamlAsync.CarrierFrequency;
+using static VvvfSimulator.Yaml.VvvfSound.YamlVvvfSoundData.YamlControlData.YamlAsync.RandomModulation;
+using static VvvfSimulator.Yaml.VvvfSound.YamlVvvfSoundData.YamlControlData.YamlAsync.RandomModulation.YamlAsyncParameterRandomValue;
 
 namespace VvvfSimulator.GUI.Create.Waveform
 {
@@ -18,8 +18,10 @@ namespace VvvfSimulator.GUI.Create.Waveform
     {
         private readonly YamlControlData Data;
         private readonly bool IgnoreUpdate = true;
-        public ControlAsync(YamlControlData ycd)
+        private readonly WaveformEditor Editor;
+        public ControlAsync(WaveformEditor Editor, YamlControlData ycd)
         {
+            this.Editor = Editor;
             Data = ycd;
             InitializeComponent();
             apply_data();

@@ -164,7 +164,7 @@
                     </Grid.ColumnDefinitions>
                     <Label Content="{DynamicResource Simulator.RealTime.MasconWindow.SineFrequency}" Style="{DynamicResource ValueTitle}"/>
                     <Label Grid.Column="2" Content="Hz" Style="{DynamicResource ValueUnit}"/>
-                    <TextBlock Style="{DynamicResource Value}" Grid.Column="1" Text="{Binding sine_freq, StringFormat=\{0:N1\}}" d:Text="100.0"/>
+                    <TextBlock Style="{DynamicResource Value}" Grid.Column="1" Text="{Binding SineFrequency, StringFormat=\{0:N1\}}" d:Text="100.0"/>
                 </Grid>
                 <Grid Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                     <Grid.ColumnDefinitions>
@@ -174,7 +174,7 @@
                     </Grid.ColumnDefinitions>
                     <Label Content="{DynamicResource Simulator.RealTime.MasconWindow.Voltage}" Style="{DynamicResource ValueTitle}"/>
                     <Label Grid.Column="2" Content="%" Style="{DynamicResource ValueUnit}"/>
-                    <TextBlock Style="{DynamicResource Value}" Grid.Column="1" Text="{Binding voltage, StringFormat=\{0:N1\}}" d:Text="100"/>
+                    <TextBlock Style="{DynamicResource Value}" Grid.Column="1" Text="{Binding Voltage, StringFormat=\{0:N1\}}" d:Text="100"/>
                 </Grid>
                 <Grid Grid.Row="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                     <Grid.ColumnDefinitions>
@@ -183,7 +183,7 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
                     <Label Content="{DynamicResource Simulator.RealTime.MasconWindow.PulseState}" Style="{DynamicResource ValueTitle}" />
-                    <TextBlock Style="{DynamicResource Value}" Grid.Column="1" Text="{Binding pulse_state}" d:Text="P1"/>
+                    <TextBlock Style="{DynamicResource Value}" Grid.Column="1" Text="{Binding PulseState}" d:Text="P1"/>
                 </Grid>
             </Grid>
         </Border>

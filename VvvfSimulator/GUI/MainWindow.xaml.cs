@@ -150,7 +150,7 @@ namespace VvvfSimulator
             {
                 YamlVvvfSoundData ysd = YamlVvvfManage.CurrentData;
                 var selected_data = ysd.AcceleratePattern[selected];
-                SettingContentViewer.Navigate(new Top(selected_data, ysd.Level));
+                SettingContentViewer.Navigate(new WaveformEditor(selected_data, ysd.Level));
             }
         }
         private void BrakeSelectedShow()
@@ -164,7 +164,7 @@ namespace VvvfSimulator
             {
                 YamlVvvfSoundData ysd = YamlVvvfManage.CurrentData;
                 var selected_data = ysd.BrakingPattern[selected];
-                SettingContentViewer.Navigate(new Top(selected_data, ysd.Level));
+                SettingContentViewer.Navigate(new WaveformEditor(selected_data, ysd.Level));
             }
         }
 
@@ -343,6 +343,7 @@ namespace VvvfSimulator
                         FilterIndex = 1
                     };
                     if (dialog.ShowDialog() == false) return true;
+                    bool IsLine = command[2].Equals("LINE");
 
                     int sample_freq = new int[] { 192000, 5000000, 192000, 5000000 }[dialog.FilterIndex - 1];
                     bool raw = new bool[] { false, false, true, true }[dialog.FilterIndex - 1];
@@ -353,7 +354,10 @@ namespace VvvfSimulator
                     {
                         try
                         {
-                            Generation.Audio.VvvfSound.Audio.ExportWavFile(generationBasicParameter, sample_freq, raw, dialog.FileName);
+                            if (IsLine)
+                                Generation.Audio.VvvfSound.Audio.ExportWavLine(generationBasicParameter, sample_freq, raw, dialog.FileName);
+                            else
+                                Generation.Audio.VvvfSound.Audio.ExportWavPhases(generationBasicParameter, sample_freq, raw, dialog.FileName);
                         }
                         catch (Exception e)
                         {
@@ -362,7 +366,9 @@ namespace VvvfSimulator
                         SystemSounds.Beep.Play();
                     });
 
-                    TaskProgressData taskProgressData = new(task, generationBasicParameter.progressData, LanguageManager.GetString("MainWindow.TaskDescription.Generate.Audio.Vvvf") + GetLoadedYamlName());
+                    TaskProgressData taskProgressData = new(task, generationBasicParameter.Progress, 
+                        LanguageManager.GetString("MainWindow.TaskDescription.Generate.Audio.Vvvf." + (IsLine ? "Line" : "Phases")) + GetLoadedYamlName()
+                    );
                     TaskViewer.TaskList.Add(taskProgressData);
                 }
 
@@ -398,9 +404,16 @@ namespace VvvfSimulator
                     mascon.Show();
                     mascon.StartTask();
 
-                    if (Properties.Settings.Default.RealTime_VVVF_WaveForm_Show)
+                    if (Properties.Settings.Default.RealTime_VVVF_WaveForm_Line_Show)
                     {
-                        RealtimeDisplay.WaveForm window = new(parameter);
+                        RealtimeDisplay.WaveFormLine window = new(parameter);
+                        window.Show();
+                        window.RunTask();
+                    }
+
+                    if (Properties.Settings.Default.RealTime_VVVF_WaveForm_Phase_Show)
+                    {
+                        RealtimeDisplay.WaveFormPhase window = new(parameter);
                         window.Show();
                         window.RunTask();
                     }
@@ -492,7 +505,7 @@ namespace VvvfSimulator
                         SystemSounds.Beep.Play();
                     });
 
-                    TaskProgressData taskProgressData = new(task, generationBasicParameter.progressData, LanguageManager.GetString("MainWindow.TaskDescription.Generate.Audio.Train") + GetLoadedYamlName());
+                    TaskProgressData taskProgressData = new(task, generationBasicParameter.Progress, LanguageManager.GetString("MainWindow.TaskDescription.Generate.Audio.Train") + GetLoadedYamlName());
                     TaskViewer.TaskList.Add(taskProgressData);
                 }
                 else if (command[1].Equals("RealTime"))
@@ -506,9 +519,16 @@ namespace VvvfSimulator
                     mascon.Show();
                     mascon.StartTask();
 
-                    if (Properties.Settings.Default.RealTime_Train_WaveForm_Show)
+                    if (Properties.Settings.Default.RealTime_Train_WaveForm_Line_Show)
                     {
-                        RealtimeDisplay.WaveForm window = new(parameter);
+                        RealtimeDisplay.WaveFormLine window = new(parameter);
+                        window.Show();
+                        window.RunTask();
+                    }
+
+                    if (Properties.Settings.Default.RealTime_Train_WaveForm_Phase_Show)
+                    {
+                        RealtimeDisplay.WaveFormPhase window = new(parameter);
                         window.Show();
                         window.RunTask();
                     }
@@ -607,7 +627,7 @@ namespace VvvfSimulator
                         SystemSounds.Beep.Play();
                     });
 
-                    TaskProgressData taskProgressData = new(task, generationBasicParameter.progressData, LanguageManager.GetString("MainWindow.TaskDescription.Generate.Movie.Control.Original") + GetLoadedYamlName());
+                    TaskProgressData taskProgressData = new(task, generationBasicParameter.Progress, LanguageManager.GetString("MainWindow.TaskDescription.Generate.Movie.Control.Original") + GetLoadedYamlName());
                     TaskViewer.TaskList.Add(taskProgressData);
                 }
 
@@ -629,7 +649,7 @@ namespace VvvfSimulator
                         SystemSounds.Beep.Play();
                     });
 
-                    TaskProgressData taskProgressData = new(task, generationBasicParameter.progressData, LanguageManager.GetString("MainWindow.TaskDescription.Generate.Movie.Control.Original2") + GetLoadedYamlName());
+                    TaskProgressData taskProgressData = new(task, generationBasicParameter.Progress, LanguageManager.GetString("MainWindow.TaskDescription.Generate.Movie.Control.Original2") + GetLoadedYamlName());
                     TaskViewer.TaskList.Add(taskProgressData);
                 }
 
@@ -665,7 +685,7 @@ namespace VvvfSimulator
                     "Spaced" => LanguageManager.GetString("MainWindow.TaskDescription.Generate.Movie.WaveForm.Spaced"),
                     _ => LanguageManager.GetString("MainWindow.TaskDescription.Generate.Movie.WaveForm.UVW")
                 };
-                TaskProgressData taskProgressData = new(task, generationBasicParameter.progressData, description + GetLoadedYamlName());
+                TaskProgressData taskProgressData = new(task, generationBasicParameter.Progress, description + GetLoadedYamlName());
                 TaskViewer.TaskList.Add(taskProgressData);
             }
             else if (command[0].Equals("Hexagon"))
@@ -690,7 +710,7 @@ namespace VvvfSimulator
                         SystemSounds.Beep.Play();
                     });
 
-                    TaskProgressData taskProgressData = new(task, generationBasicParameter.progressData, LanguageManager.GetString("MainWindow.TaskDescription.Generate.Movie.Hexagon.Original") + GetLoadedYamlName());
+                    TaskProgressData taskProgressData = new(task, generationBasicParameter.Progress, LanguageManager.GetString("MainWindow.TaskDescription.Generate.Movie.Hexagon.Original") + GetLoadedYamlName());
                     TaskViewer.TaskList.Add(taskProgressData);
                 }
                 else if (command[1].Equals("Explain"))
@@ -707,7 +727,7 @@ namespace VvvfSimulator
                     {
                         try
                         {
-                            new Generation.Video.Hexagon.GenerateHexagonExplain().generate_wave_hexagon_explain(generationBasicParameter, dialog.FileName, circle, frequency);
+                            new Generation.Video.Hexagon.GenerateHexagonExplain().ExportVideo(generationBasicParameter, dialog.FileName, circle, frequency);
                         }
                         catch (Exception e)
                         {
@@ -716,7 +736,7 @@ namespace VvvfSimulator
                         SystemSounds.Beep.Play();
                     });
 
-                    TaskProgressData taskProgressData = new(task, generationBasicParameter.progressData, LanguageManager.GetString("MainWindow.TaskDescription.Generate.Movie.Hexagon.Explain") + GetLoadedYamlName());
+                    TaskProgressData taskProgressData = new(task, generationBasicParameter.Progress, LanguageManager.GetString("MainWindow.TaskDescription.Generate.Movie.Hexagon.Explain") + GetLoadedYamlName());
                     TaskViewer.TaskList.Add(taskProgressData);
                 }
                 else if (command[1].Equals("OriginalImage"))
@@ -765,7 +785,7 @@ namespace VvvfSimulator
                         SystemSounds.Beep.Play();
                     });
 
-                    TaskProgressData taskProgressData = new(task, generationBasicParameter.progressData, LanguageManager.GetString("MainWindow.TaskDescription.Generate.Movie.FFT.Original") + GetLoadedYamlName());
+                    TaskProgressData taskProgressData = new(task, generationBasicParameter.Progress, LanguageManager.GetString("MainWindow.TaskDescription.Generate.Movie.FFT.Original") + GetLoadedYamlName());
                     TaskViewer.TaskList.Add(taskProgressData);
                 }
                 else if (command[1].Equals("Image"))

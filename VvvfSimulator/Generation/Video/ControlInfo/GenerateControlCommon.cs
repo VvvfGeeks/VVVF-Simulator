@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Drawing;
+using VvvfSimulator.Vvvf;
 using VvvfSimulator.Yaml.VvvfSound;
-using static VvvfSimulator.VvvfCalculate;
-using static VvvfSimulator.VvvfStructs;
+using static VvvfSimulator.Vvvf.Struct;
 
 namespace VvvfSimulator.Generation.Video.ControlInfo
 {

@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Text;
-using YamlDotNet.Core;
 using YamlDotNet.Serialization;
-using static VvvfSimulator.VvvfCalculate;
-using static VvvfSimulator.VvvfStructs;
+using static VvvfSimulator.Vvvf.Calculate;
 
 namespace VvvfSimulator.Yaml.VvvfSound
 {
@@ -35,12 +32,12 @@ namespace VvvfSimulator.Yaml.VvvfSound
         public int Level { get; set; } = 2;
         public YamlMasconData MasconData { get; set; } = new();
         public YamlMinSineFrequency MinimumFrequency { get; set; } = new();
-        public List<YamlControlData> AcceleratePattern { get; set; } = new();
+        public List<YamlControlData> AcceleratePattern { get; set; } = [];
         public void SortAcceleratePattern(bool Inverse)
         {
             AcceleratePattern.Sort((a, b) => Math.Sign(Inverse ? (a.ControlFrequencyFrom - b.ControlFrequencyFrom) : (b.ControlFrequencyFrom - a.ControlFrequencyFrom)));
         }
-        public List<YamlControlData> BrakingPattern { get; set; } = new();
+        public List<YamlControlData> BrakingPattern { get; set; } = [];
         public void SortBrakingPattern(bool Inverse)
         {
             BrakingPattern.Sort((a, b) => Math.Sign(Inverse ? (a.ControlFrequencyFrom - b.ControlFrequencyFrom) : (b.ControlFrequencyFrom - a.ControlFrequencyFrom)));
@@ -131,21 +128,21 @@ namespace VvvfSimulator.Yaml.VvvfSound
             public double RotateFrequencyFrom { get; set; } = -1;
             public double RotateFrequencyBelow { get; set; } = -1;
             public bool EnableFreeRunOn { get; set; } = true;
+            public bool StuckFreeRunOn { get; set; } = false;
             public bool EnableFreeRunOff { get; set; } = true;
+            public bool StuckFreeRunOff { get; set; } = false;
             public bool EnableNormal { get; set; } = true;
 
             // Null check !
-            public PulseMode PulseMode { get; set; } = new();
-            public YamlFreeRunCondition FreeRunCondition { get; set; } = new YamlFreeRunCondition();
-            public YamlControlDataAmplitudeControl Amplitude { get; set; } = new YamlControlDataAmplitudeControl();
-            public YamlAsyncParameter AsyncModulationData { get; set; } = new YamlAsyncParameter();
+            public YamlPulseMode PulseMode { get; set; } = new();
+            public YamlAmplitude Amplitude { get; set; } = new YamlAmplitude();
+            public YamlAsync AsyncModulationData { get; set; } = new YamlAsync();
 
             public YamlControlData Clone()
             {
                 YamlControlData clone = (YamlControlData)MemberwiseClone();
 
                 //Deep copy
-                clone.FreeRunCondition = FreeRunCondition.Clone();
                 clone.Amplitude = Amplitude.Clone();
                 clone.AsyncModulationData = AsyncModulationData.Clone();
                 clone.PulseMode = PulseMode.Clone();
@@ -197,64 +194,114 @@ namespace VvvfSimulator.Yaml.VvvfSound
                     return clone;
                 }
             }
-            public class YamlFreeRunCondition
+
+            public class YamlPulseMode
             {
-                public YamlFreeRunConditionSingle On { get; set; } = new YamlFreeRunConditionSingle();
-                public YamlFreeRunConditionSingle Off { get; set; } = new YamlFreeRunConditionSingle();
-
-                public override string ToString()
+                public YamlPulseMode Clone()
                 {
-                    Type t = typeof(YamlFreeRunCondition);
-                    string final = "[\r\n";
-                    foreach (var f in t.GetFields())
+                    var x = (YamlPulseMode)MemberwiseClone();
+                    List<PulseHarmonic> clone_pulse_harmonics = [];
+                    for (int i = 0; i < PulseHarmonics.Count; i++)
                     {
-                        final += string.Format("{0} : {1}", f.Name, GetValueString(f.GetValue(t))) + "\r\n";
+                        clone_pulse_harmonics.Add(PulseHarmonics[i].Clone());
                     }
-                    final += "]";
-                    return final;
+                    x.PulseHarmonics = clone_pulse_harmonics;
+                    x.DiscreteTime = DiscreteTime.Clone();
+                    return x;
+
                 }
 
-                public YamlFreeRunCondition Clone()
+                //
+                // Fundamental Configuration
+                //
+                public PulseTypeName PulseType { get; set; }
+                public int PulseCount { get; set; } = 1;
+                public enum PulseTypeName
                 {
-                    YamlFreeRunCondition clone = (YamlFreeRunCondition)MemberwiseClone();
-                    clone.On = On.Clone();
-                    clone.Off = Off.Clone();
-                    return clone;
+                    ASYNC, SYNC, CHM, SHE, HO,
+                };
+
+                //
+                // Alternative Modes
+                //
+                public PulseAlternative Alternative { get; set; } = PulseAlternative.Default;
+                public enum PulseAlternative
+                {
+                    Default,
+                    Alt1, Alt2, Alt3, Alt4, Alt5, Alt6, Alt7, Alt8, Alt9, Alt10,
+                    Alt11, Alt12, Alt13, Alt14, Alt15, Alt16, Alt17, Alt18, Alt19, Alt20,
+                    Alt21, Alt22, Alt23, Alt24, Alt25, Alt26, Alt27, Alt28, Alt29, Alt30,
                 }
 
-                public class YamlFreeRunConditionSingle
+                //
+                // Flat Configurations
+                //
+                public bool Shift { get; set; } = false;
+                public bool Square { get; set; } = false;
+
+                //
+                // Discrete Time Configuration
+                //
+                public DiscreteTimeConfiguration DiscreteTime { get; set; } = new();
+                public class DiscreteTimeConfiguration
                 {
-                    public bool Skip { get; set; } = false;
-                    public bool StuckAtHere { get; set; } = false;
-                    public override string ToString()
+                    public bool Enabled { get; set; } = false;
+                    public int Steps { get; set; } = 2;
+                    public DiscreteTimeMode Mode { get; set; } = DiscreteTimeMode.Middle;
+
+                    public enum DiscreteTimeMode
                     {
-                        Type t = typeof(YamlFreeRunConditionSingle);
-                        string final = "[\r\n";
-                        foreach (var f in t.GetFields())
-                        {
-                            final += string.Format("{0} : {1}", f.Name, GetValueString(f.GetValue(t))) + "\r\n";
-                        }
-                        final += "]";
-                        return final;
+                        Left, Middle, Right
                     }
 
-                    public YamlFreeRunConditionSingle Clone()
+                    public DiscreteTimeConfiguration Clone()
                     {
-                        YamlFreeRunConditionSingle clone = (YamlFreeRunConditionSingle)MemberwiseClone();
-                        return clone;
+                        return (DiscreteTimeConfiguration)MemberwiseClone();
                     }
                 }
 
+                //
+                // Compare Base Wave
+                //
+                public BaseWaveType BaseWave { get; set; } = BaseWaveType.Sine;
+                public enum BaseWaveType
+                {
+                    Sine, Saw, ModifiedSine1, ModifiedSine2, ModifiedSaw1
+                }
+
+                //
+                // Compare Wave Harmonics
+                //
+                public List<PulseHarmonic> PulseHarmonics { get; set; } = [];
+                public class PulseHarmonic
+                {
+                    public double Harmonic { get; set; } = 3;
+                    public bool IsHarmonicProportional { get; set; } = true;
+                    public double Amplitude { get; set; } = 0.2;
+                    public bool IsAmplitudeProportional { get; set; } = true;
+                    public double InitialPhase { get; set; } = 0;
+                    public PulseHarmonicType Type { get; set; } = PulseHarmonicType.Sine;
+
+                    public enum PulseHarmonicType
+                    {
+                        Sine, Saw, Square
+                    }
+
+                    public PulseHarmonic Clone()
+                    {
+                        return (PulseHarmonic)MemberwiseClone();
+                    }
+                }
             }
 
-            public class YamlAsyncParameter
+            public class YamlAsync
             {
-                public YamlAsyncParameterRandom RandomData { get; set; } = new();
-                public YamlAsyncParameterCarrierFreq CarrierWaveData { get; set; } = new();
-                public YamlAsyncParameterDipolar DipolarData { get; set; } = new();
+                public RandomModulation RandomData { get; set; } = new();
+                public CarrierFrequency CarrierWaveData { get; set; } = new();
+                public Dipolar DipolarData { get; set; } = new();
                 public override string ToString()
                 {
-                    Type t = typeof(YamlAsyncParameter);
+                    Type t = typeof(YamlAsync);
                     string final = "[\r\n";
                     foreach (var f in t.GetFields())
                     {
@@ -264,22 +311,22 @@ namespace VvvfSimulator.Yaml.VvvfSound
                     return final;
                 }
 
-                public YamlAsyncParameter Clone()
+                public YamlAsync Clone()
                 {
-                    YamlAsyncParameter clone = (YamlAsyncParameter)MemberwiseClone();
+                    YamlAsync clone = (YamlAsync)MemberwiseClone();
                     clone.RandomData = RandomData.Clone();
                     clone.CarrierWaveData = CarrierWaveData.Clone();
                     clone.DipolarData = DipolarData.Clone();
                     return clone;
                 }
 
-                public class YamlAsyncParameterRandom
+                public class RandomModulation
                 {
                     public YamlAsyncParameterRandomValue Range { get; set; } = new();
                     public YamlAsyncParameterRandomValue Interval { get; set; } = new();
                     public override string ToString()
                     {
-                        Type t = typeof(YamlAsyncParameterRandom);
+                        Type t = typeof(RandomModulation);
                         string final = "[\r\n";
                         foreach (var f in t.GetFields())
                         {
@@ -288,9 +335,9 @@ namespace VvvfSimulator.Yaml.VvvfSound
                         final += "]";
                         return final;
                     }
-                    public YamlAsyncParameterRandom Clone()
+                    public RandomModulation Clone()
                     {
-                        YamlAsyncParameterRandom clone = (YamlAsyncParameterRandom)MemberwiseClone();
+                        RandomModulation clone = (RandomModulation)MemberwiseClone();
                         clone.Range = Range.Clone();
                         clone.Interval = Interval.Clone();
                         return clone;
@@ -327,7 +374,7 @@ namespace VvvfSimulator.Yaml.VvvfSound
 
 
                 }
-                public class YamlAsyncParameterCarrierFreq
+                public class CarrierFrequency
                 {
                     public YamlAsyncCarrierMode Mode { get; set; }
                     public double Constant { get; set; } = -1.0;
@@ -337,7 +384,7 @@ namespace VvvfSimulator.Yaml.VvvfSound
 
                     public override string ToString()
                     {
-                        Type t = typeof(YamlAsyncParameterCarrierFreq);
+                        Type t = typeof(CarrierFrequency);
                         string final = "[\r\n";
                         foreach (var f in t.GetFields())
                         {
@@ -348,9 +395,9 @@ namespace VvvfSimulator.Yaml.VvvfSound
                     }
 
 
-                    public YamlAsyncParameterCarrierFreq Clone()
+                    public CarrierFrequency Clone()
                     {
-                        YamlAsyncParameterCarrierFreq clone = (YamlAsyncParameterCarrierFreq)MemberwiseClone();
+                        CarrierFrequency clone = (CarrierFrequency)MemberwiseClone();
                         clone.MovingValue = MovingValue.Clone();
                         clone.VibratoData = VibratoData.Clone();
                         clone.CarrierFrequencyTable = CarrierFrequencyTable.Clone();
@@ -420,7 +467,7 @@ namespace VvvfSimulator.Yaml.VvvfSound
 
                     public class YamlAsyncParameterCarrierFreqTable
                     {
-                        public List<YamlAsyncParameterCarrierFreqTableValue> CarrierFrequencyTableValues { get; set; } = new List<YamlAsyncParameterCarrierFreqTableValue>();
+                        public List<YamlAsyncParameterCarrierFreqTableValue> CarrierFrequencyTableValues { get; set; } = [];
                         public class YamlAsyncParameterCarrierFreqTableValue
                         {
                             public double ControlFrequencyFrom { get; set; } = -1;
@@ -466,14 +513,14 @@ namespace VvvfSimulator.Yaml.VvvfSound
                         }
                     }
                 }
-                public class YamlAsyncParameterDipolar
+                public class Dipolar
                 {
                     public YamlAsyncParameterDipolarMode Mode { get; set; } = YamlAsyncParameterDipolarMode.Const;
                     public double Constant { get; set; } = -1;
                     public YamlMovingValue MovingValue { get; set; } = new YamlMovingValue();
                     public override string ToString()
                     {
-                        Type t = typeof(YamlAsyncParameterDipolar);
+                        Type t = typeof(Dipolar);
                         string final = "[\r\n";
                         foreach (var f in t.GetFields())
                         {
@@ -482,9 +529,9 @@ namespace VvvfSimulator.Yaml.VvvfSound
                         final += "]";
                         return final;
                     }
-                    public YamlAsyncParameterDipolar Clone()
+                    public Dipolar Clone()
                     {
-                        YamlAsyncParameterDipolar clone = (YamlAsyncParameterDipolar)MemberwiseClone();
+                        Dipolar clone = (Dipolar)MemberwiseClone();
                         clone.MovingValue = this.MovingValue.Clone();
                         return clone;
                     }
@@ -499,13 +546,13 @@ namespace VvvfSimulator.Yaml.VvvfSound
 
             }
 
-            public class YamlControlDataAmplitudeControl
+            public class YamlAmplitude
             {
                 public YamlControlDataAmplitude DefaultAmplitude { get; set; } = new YamlControlDataAmplitude();
                 public YamlControlDataAmplitudeFreeRun FreeRunAmplitude { get; set; } = new YamlControlDataAmplitudeFreeRun();
                 public override string ToString()
                 {
-                    Type t = typeof(YamlControlDataAmplitudeControl);
+                    Type t = typeof(YamlAmplitude);
                     string final = "[\r\n";
                     foreach (var f in t.GetFields())
                     {
@@ -515,9 +562,9 @@ namespace VvvfSimulator.Yaml.VvvfSound
                     return final;
                 }
 
-                public YamlControlDataAmplitudeControl Clone()
+                public YamlAmplitude Clone()
                 {
-                    YamlControlDataAmplitudeControl clone = (YamlControlDataAmplitudeControl)MemberwiseClone();
+                    YamlAmplitude clone = (YamlAmplitude)MemberwiseClone();
 
                     //Deep copy
                     clone.DefaultAmplitude = DefaultAmplitude.Clone();

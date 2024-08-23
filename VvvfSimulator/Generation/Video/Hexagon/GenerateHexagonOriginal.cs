@@ -1,16 +1,17 @@
 ﻿using OpenCvSharp;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
-using static VvvfSimulator.Generation.GenerateCommon;
-using VvvfSimulator.Yaml.VvvfSound;
-using System.Collections.Generic;
-using Point = System.Drawing.Point;
-using static VvvfSimulator.VvvfStructs;
-using static VvvfSimulator.Yaml.MasconControl.YamlMasconAnalyze;
-using static VvvfSimulator.Generation.GenerateCommon.GenerationBasicParameter;
 using VvvfSimulator.GUI.Util;
+using VvvfSimulator.Vvvf;
+using VvvfSimulator.Yaml.VvvfSound;
+using static VvvfSimulator.Generation.GenerateCommon;
+using static VvvfSimulator.Generation.GenerateCommon.GenerationBasicParameter;
+using static VvvfSimulator.Vvvf.Struct;
+using static VvvfSimulator.Yaml.MasconControl.YamlMasconAnalyze;
+using Point = System.Drawing.Point;
 
 namespace VvvfSimulator.Generation.Video.Hexagon
 {
@@ -49,16 +50,10 @@ namespace VvvfSimulator.Generation.Video.Hexagon
             Bitmap image = GetImage(ref PWM_Array, Control.GetControlFrequency(), Width, Height, Thickness, ZeroVectorCircle);
             return image;
         }
-        private class PointD
+        private class PointD(double X, double Y)
         {
-            public double X { get; set; } = 0;
-            public double Y { get; set; } = 0;
-
-            public PointD(double X, double Y)
-            {
-                this.X = X;
-                this.Y = Y;
-            }
+            public double X { get; set; } = X;
+            public double Y { get; set; } = Y;
 
             public bool IsZero()
             {
@@ -115,8 +110,8 @@ namespace VvvfSimulator.Generation.Video.Hexagon
             PointD CurrentPoint = new(0, 0);
             PointD MaxValue = new(double.MinValue, double.MinValue);
             PointD MinValue = new(double.MaxValue, double.MaxValue);
-            List<PointD> ZeroPoints = new();
-            List<PointD> LinePoints = new() { CurrentPoint };
+            List<PointD> ZeroPoints = [];
+            List<PointD> LinePoints = [CurrentPoint];
 
             WaveValues pre_wave_Values = new(0, 0, 0);
 
@@ -194,9 +189,9 @@ namespace VvvfSimulator.Generation.Video.Hexagon
             MainWindow.Invoke(() => Viewer = new BitmapViewerManager());
             Viewer?.Show();
 
-            YamlVvvfSoundData vvvfData = generationBasicParameter.vvvfData;
-            YamlMasconDataCompiled masconData = generationBasicParameter.masconData;
-            ProgressData progressData = generationBasicParameter.progressData;
+            YamlVvvfSoundData vvvfData = generationBasicParameter.VvvfData;
+            YamlMasconDataCompiled masconData = generationBasicParameter.MasconData;
+            ProgressData progressData = generationBasicParameter.Progress;
 
             VvvfValues control = new();
             control.ResetControlValues();

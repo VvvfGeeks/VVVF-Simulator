@@ -3,22 +3,22 @@ using System;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
-using static VvvfSimulator.VvvfCalculate;
-using static VvvfSimulator.Generation.GenerateCommon;
-using VvvfSimulator.Yaml.VvvfSound;
-using static VvvfSimulator.VvvfStructs;
-using static VvvfSimulator.Yaml.MasconControl.YamlMasconAnalyze;
-using static VvvfSimulator.Generation.GenerateCommon.GenerationBasicParameter;
 using VvvfSimulator.GUI.Util;
+using VvvfSimulator.Yaml.VvvfSound;
+using static VvvfSimulator.Generation.GenerateCommon;
+using static VvvfSimulator.Generation.GenerateCommon.GenerationBasicParameter;
+using static VvvfSimulator.Vvvf.Calculate;
+using static VvvfSimulator.Vvvf.Struct;
+using static VvvfSimulator.Yaml.MasconControl.YamlMasconAnalyze;
 
 namespace VvvfSimulator.Generation.Video.WaveForm
 {
     public class GenerateWaveFormUVW
     {
-        private static int image_width = 1500;
-        private static int image_height = 1000;
-        private static int calculate_div = 10;
-        public static Bitmap GetImage(VvvfValues control, ControlStatus cv, YamlVvvfSoundData vvvfData)
+        private static readonly int image_width = 1500;
+        private static readonly int image_height = 1000;
+        private static readonly int calculate_div = 10;
+        public static Bitmap GetImage(VvvfValues control, YamlVvvfSoundData vvvfData)
         {
             Bitmap image = new(image_width, image_height);
             Graphics g = Graphics.FromImage(image);
@@ -33,7 +33,7 @@ namespace VvvfSimulator.Generation.Video.WaveForm
                 control.SetSawTime(dt * i);
                 control.SetSineTime(dt * i);
 
-                PwmCalculateValues calculated_Values = YamlVvvfWave.CalculateYaml(control, cv, vvvfData);
+                PwmCalculateValues calculated_Values = YamlVvvfWave.CalculateYaml(control, vvvfData);
                 WaveValues Value = CalculatePhases(control, calculated_Values, 0);
 
                 if(LastValue == null)
@@ -79,13 +79,13 @@ namespace VvvfSimulator.Generation.Video.WaveForm
             MainWindow.Invoke(() => Viewer = new BitmapViewerManager());
             Viewer?.Show();
 
-            YamlVvvfSoundData vvvfData = generationBasicParameter.vvvfData;
-            YamlMasconDataCompiled masconData = generationBasicParameter.masconData;
-            ProgressData progressData = generationBasicParameter.progressData;
+            YamlVvvfSoundData vvvfData = generationBasicParameter.VvvfData;
+            YamlMasconDataCompiled masconData = generationBasicParameter.MasconData;
+            ProgressData progressData = generationBasicParameter.Progress;
 
-            VvvfValues control = new();
-            control.ResetControlValues();
-            control.ResetMathematicValues();
+            VvvfValues Control = new();
+            Control.ResetControlValues();
+            Control.ResetMathematicValues();
 
             int fps = 60;
             VideoWriter vr = new(fileName, OpenCvSharp.FourCC.H264, fps, new OpenCvSharp.Size(image_width, image_height));
@@ -97,15 +97,12 @@ namespace VvvfSimulator.Generation.Video.WaveForm
             bool START_FRAMES = true;
             if (START_FRAMES)
             {
-
-                ControlStatus cv = new()
-                {
-                    brake = true,
-                    mascon_on = true,
-                    free_run = false,
-                    wave_stat = 0
-                };
-                Bitmap final_image = GetImage(control, cv, vvvfData);
+                Control.SetFreeRun(false);
+                Control.SetBraking(false);
+                Control.SetMasconOff(false);
+                Control.SetControlFrequency(0);
+                Control.SetSineAngleFrequency(0);
+                Bitmap final_image = GetImage(Control, vvvfData);
 
                 AddImageFrames(final_image, fps, vr);
                 Viewer?.SetImage(final_image);
@@ -117,14 +114,7 @@ namespace VvvfSimulator.Generation.Video.WaveForm
 
             while (true)
             {
-                ControlStatus cv = new()
-                {
-                    brake = control.IsBraking(),
-                    mascon_on = !control.IsMasconOff(),
-                    free_run = control.IsFreeRun(),
-                    wave_stat = control.GetControlFrequency()
-                };
-                Bitmap final_image = GetImage(control.Clone(), cv, vvvfData);
+                Bitmap final_image = GetImage(Control.Clone(), vvvfData);
 
                 MemoryStream ms = new();
                 final_image.Save(ms, ImageFormat.Png);
@@ -136,7 +126,7 @@ namespace VvvfSimulator.Generation.Video.WaveForm
                 Viewer?.SetImage(final_image);
                 final_image.Dispose();
 
-                if (!CheckForFreqChange(control, masconData, vvvfData, 1.0 / fps)) break;
+                if (!CheckForFreqChange(Control, masconData, vvvfData, 1.0 / fps)) break;
                 if (progressData.Cancel) break;
                 progressData.Progress++;
             }
@@ -144,14 +134,12 @@ namespace VvvfSimulator.Generation.Video.WaveForm
             bool END_FRAMES = true;
             if (END_FRAMES)
             {
-                ControlStatus cv = new()
-                {
-                    brake = true,
-                    mascon_on = true,
-                    free_run = false,
-                    wave_stat = 0
-                };
-                Bitmap final_image = GetImage(control, cv, vvvfData);
+                Control.SetFreeRun(false);
+                Control.SetBraking(true);
+                Control.SetMasconOff(false);
+                Control.SetControlFrequency(0);
+                Control.SetSineAngleFrequency(0);
+                Bitmap final_image = GetImage(Control, vvvfData);
                 AddImageFrames(final_image, fps, vr);
                 Viewer?.SetImage(final_image);
                 final_image.Dispose();

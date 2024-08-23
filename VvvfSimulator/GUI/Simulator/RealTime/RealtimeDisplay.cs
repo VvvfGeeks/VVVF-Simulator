@@ -1,32 +1,21 @@
-﻿using System;
-using System.Drawing;
+﻿using System.Drawing;
 using System.Threading.Tasks;
-using static VvvfSimulator.Generation.Audio.GenerateRealTimeCommon;
+using VvvfSimulator.GUI.Resource.Language;
 using VvvfSimulator.GUI.Util;
 using VvvfSimulator.Yaml.VvvfSound;
-using static VvvfSimulator.VvvfStructs;
-using VvvfSimulator.GUI.Resource.Language;
+using static VvvfSimulator.Generation.Audio.GenerateRealTimeCommon;
+using static VvvfSimulator.Vvvf.Struct;
 
 namespace VvvfSimulator.GUI.Simulator.RealTime
 {
     public class RealtimeDisplay
     {
-        public class ControlStatus : BitmapViewerManager
+        public class ControlStatus(RealTimeParameter Parameter, ControlStatus.RealTimeControlStatStyle Style, bool ControlPrecise) : BitmapViewerManager
         {
-            private readonly RealTimeControlStatStyle _Style;
-            private readonly RealTimeParameter _Paremter;
-            private readonly bool _ControlPrecise;
-            
-            public ControlStatus(RealTimeParameter Parameter, RealTimeControlStatStyle Style, bool ControlPrecise)
-            {
-                _Style = Style;
-                _Paremter = Parameter;
-                _ControlPrecise = ControlPrecise;
-            }
             public void RunTask()
             {
                 Task.Run(() => {
-                    while (!_Paremter.Quit)
+                    while (!Parameter.Quit)
                     {
                         UpdateControl();
 
@@ -38,25 +27,25 @@ namespace VvvfSimulator.GUI.Simulator.RealTime
             {
                 Bitmap image;
 
-                if (_Style == RealTimeControlStatStyle.Original1)
+                if (Style == RealTimeControlStatStyle.Original1)
                 {
-                    VvvfValues control = _Paremter.Control.Clone();
+                    VvvfValues control = Parameter.Control.Clone();
                     image = Generation.Video.ControlInfo.GenerateControlOriginal.GetImage(
                         control,
-                        _Paremter.Control.GetSineFrequency() == 0
+                        Parameter.Control.GetSineFrequency() == 0
                     );
                 }
                 else
                 {
-                    VvvfValues control = _Paremter.Control.Clone();
+                    VvvfValues control = Parameter.Control.Clone();
                     image = Generation.Video.ControlInfo.GenerateControlOriginal2.GetImage(
                         control,
-                        _Paremter.VvvfSoundData,
-                        _ControlPrecise
+                        Parameter.VvvfSoundData,
+                        ControlPrecise
                     );
                 }
 
-                SetImage(image, LanguageManager.GetString("Simulator.RealTime.RealtimeWindows.ControlStatus.Title") + " (" + FriendlyNameConverter.GetRealTimeControlStatStyleName(_Style) + ")");
+                SetImage(image, LanguageManager.GetString("Simulator.RealTime.RealtimeWindows.ControlStatus.Title") + " (" + FriendlyNameConverter.GetRealTimeControlStatStyleName(Style) + ")");
                 image.Dispose();
             }
 
@@ -66,18 +55,12 @@ namespace VvvfSimulator.GUI.Simulator.RealTime
             }
         }
 
-        public class Fft : BitmapViewerManager
+        public class Fft (RealTimeParameter Parameter) : BitmapViewerManager 
         {
-            readonly RealTimeParameter _Parameter;
-            public Fft(RealTimeParameter Parameter)
-            {
-                _Parameter = Parameter;
-            }
-
             public void RunTask()
             {
                 Task.Run(() => {
-                    while (!_Parameter.Quit)
+                    while (!Parameter.Quit)
                     {
                         UpdateControl();
                     }
@@ -86,8 +69,8 @@ namespace VvvfSimulator.GUI.Simulator.RealTime
             }
             private void UpdateControl()
             {
-                VvvfValues control = _Parameter.Control.Clone();
-                YamlVvvfSoundData ysd = _Parameter.VvvfSoundData;
+                VvvfValues control = Parameter.Control.Clone();
+                YamlVvvfSoundData ysd = Parameter.VvvfSoundData;
 
                 control.SetSineTime(0);
                 control.SetSawTime(0);
@@ -99,22 +82,12 @@ namespace VvvfSimulator.GUI.Simulator.RealTime
             }
         }
 
-        public class Hexagon : BitmapViewerManager
+        public class Hexagon(RealTimeParameter Parameter, Hexagon.RealTimeHexagonStyle Style, bool ZeroVectorCircle) : BitmapViewerManager
         {
-            private RealTimeHexagonStyle _Style;
-            private RealTimeParameter _Parameter;
-            private bool _ZeroVectorCircle;
-            public Hexagon(RealTimeParameter Parameter, RealTimeHexagonStyle Style, bool ZeroVectorCircle)
-            {
-                _Parameter = Parameter;
-                _Style = Style;
-                _ZeroVectorCircle = ZeroVectorCircle;
-            }
-
             public void RunTask()
             {
                 Task.Run(() => {
-                    while (!_Parameter.Quit)
+                    while (!Parameter.Quit)
                     {
                         UpdateControl();
                     }
@@ -126,13 +99,13 @@ namespace VvvfSimulator.GUI.Simulator.RealTime
             {
                 Bitmap image = new(100, 100);
 
-                VvvfValues control = _Parameter.Control.Clone();
-                YamlVvvfSoundData ysd = _Parameter.VvvfSoundData;
+                VvvfValues control = Parameter.Control.Clone();
+                YamlVvvfSoundData ysd = Parameter.VvvfSoundData;
 
                 control.SetSineTime(0);
                 control.SetSawTime(0);
 
-                if (_Style == RealTimeHexagonStyle.Original)
+                if (Style == RealTimeHexagonStyle.Original)
                 {
                     int image_width = 1000;
                     int image_height = 1000;
@@ -145,12 +118,12 @@ namespace VvvfSimulator.GUI.Simulator.RealTime
                         image_height,
                         hex_div,
                         2,
-                        _ZeroVectorCircle,
+                        ZeroVectorCircle,
                         false
                     );
                 }
 
-                SetImage(image, LanguageManager.GetString("Simulator.RealTime.RealtimeWindows.Hexagon.Title") + " (" + FriendlyNameConverter.GetRealTimeHexagonStyleName(_Style) + ")");
+                SetImage(image, LanguageManager.GetString("Simulator.RealTime.RealtimeWindows.Hexagon.Title") + " (" + FriendlyNameConverter.GetRealTimeHexagonStyleName(Style) + ")");
                 image.Dispose();
             }
 
@@ -160,18 +133,12 @@ namespace VvvfSimulator.GUI.Simulator.RealTime
             }
         }
     
-        public class WaveForm : BitmapViewerManager
+        public class WaveFormLine(RealTimeParameter Parameter) : BitmapViewerManager
         {
-            private RealTimeParameter _Parameter;
-            public WaveForm(RealTimeParameter Parameter)
-            {
-                _Parameter = Parameter;
-            }
-
             public void RunTask()
             {
                 Task.Run(() => {
-                    while (!_Parameter.Quit)
+                    while (!Parameter.Quit)
                     {
                         UpdateControl();
                         System.Threading.Thread.Sleep(16);
@@ -182,8 +149,8 @@ namespace VvvfSimulator.GUI.Simulator.RealTime
 
             private void UpdateControl()
             {
-                YamlVvvfSoundData Sound = _Parameter.VvvfSoundData;
-                VvvfValues Control = _Parameter.Control.Clone();
+                YamlVvvfSoundData Sound = Parameter.VvvfSoundData;
+                VvvfValues Control = Parameter.Control.Clone();
 
                 Control.SetSawTime(0);
                 Control.SetSineTime(0);
@@ -195,15 +162,39 @@ namespace VvvfSimulator.GUI.Simulator.RealTime
                 int calculate_div = 3;
                 int wave_height = 100;
 
-                VvvfStructs.ControlStatus cv = new()
-                {
-                    brake = Control.IsBraking(),
-                    mascon_on = !Control.IsMasconOff(),
-                    free_run = Control.IsFreeRun(),
-                    wave_stat = Control.GetControlFrequency()
-                };
-                PwmCalculateValues calculated_Values = YamlVvvfWave.CalculateYaml(Control, cv, Sound);
+                PwmCalculateValues calculated_Values = YamlVvvfWave.CalculateYaml(Control, Sound);
                 Bitmap image = Generation.Video.WaveForm.GenerateWaveFormUV.GetImage(Control, calculated_Values, image_width, image_height, wave_height, 2, calculate_div, 0);
+
+                SetImage(image, LanguageManager.GetString("Simulator.RealTime.RealtimeWindows.WaveForm.Title"));
+                image.Dispose();
+            }
+        }
+
+        public class WaveFormPhase(RealTimeParameter Parameter) : BitmapViewerManager
+        {
+            public void RunTask()
+            {
+                Task.Run(() => {
+                    while (!Parameter.Quit)
+                    {
+                        UpdateControl();
+                        System.Threading.Thread.Sleep(16);
+                    }
+                    Close();
+                });
+            }
+
+            private void UpdateControl()
+            {
+                YamlVvvfSoundData Sound = Parameter.VvvfSoundData;
+                VvvfValues Control = Parameter.Control.Clone();
+
+                Control.SetSawTime(0);
+                Control.SetSineTime(0);
+
+                Control.SetRandomFrequencyMoveAllowed(false);
+
+                Bitmap image = Generation.Video.WaveForm.GenerateWaveFormUVW.GetImage(Control, Sound);
 
                 SetImage(image, LanguageManager.GetString("Simulator.RealTime.RealtimeWindows.WaveForm.Title"));
                 image.Dispose();

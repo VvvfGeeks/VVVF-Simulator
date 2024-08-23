@@ -1,17 +1,17 @@
 ﻿using OpenCvSharp;
 using System;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.IO;
-using static VvvfSimulator.VvvfCalculate;
-using static VvvfSimulator.Generation.GenerateCommon;
-using System.Drawing.Drawing2D;
-using VvvfSimulator.Yaml.VvvfSound;
-using static VvvfSimulator.VvvfStructs;
-using static VvvfSimulator.Yaml.MasconControl.YamlMasconAnalyze;
-using static VvvfSimulator.VvvfStructs.PulseMode;
-using static VvvfSimulator.Generation.GenerateCommon.GenerationBasicParameter;
 using VvvfSimulator.GUI.Util;
+using VvvfSimulator.Yaml.VvvfSound;
+using static VvvfSimulator.Generation.GenerateCommon;
+using static VvvfSimulator.Generation.GenerateCommon.GenerationBasicParameter;
+using static VvvfSimulator.Vvvf.Calculate;
+using static VvvfSimulator.Vvvf.Struct;
+using static VvvfSimulator.Yaml.MasconControl.YamlMasconAnalyze;
+using static VvvfSimulator.Yaml.VvvfSound.YamlVvvfSoundData.YamlControlData.YamlPulseMode;
 
 namespace VvvfSimulator.Generation.Video.ControlInfo
 {
@@ -19,83 +19,56 @@ namespace VvvfSimulator.Generation.Video.ControlInfo
     {
         private static string[] GetPulseName(VvvfValues control)
         {
-            PulseModeName mode = control.GetVideoPulseMode().PulseName;
-            //Not in sync
-            if (mode == PulseModeName.Async)
+            PulseTypeName Type = control.GetVideoPulseMode().PulseType;
+            int PulseCount = control.GetVideoPulseMode().PulseCount;
+
+            switch (Type)
             {
-                string[] names = new string[3];
-                int count = 0;
+                case PulseTypeName.ASYNC:
+                    {
+                        string[] names = new string[3];
+                        int count = 0;
 
-                CarrierFreq carrier_freq_data = control.GetVideoCarrierFrequency();
+                        CarrierFreq Carrier = control.GetVideoCarrierFrequency();
 
-                names[count] = String.Format("Async - " + carrier_freq_data.base_freq.ToString("F2")).PadLeft(6);
-                count++;
+                        names[count] = String.Format("Async - " + Carrier.BaseFrequency.ToString("F2")).PadLeft(6);
+                        count++;
 
-                if (carrier_freq_data.range != 0)
-                {
-                    names[count] = String.Format("Random ± " + carrier_freq_data.range.ToString("F2")).PadLeft(6);
-                    count++;
-                }
+                        if (Carrier.Range != 0)
+                        {
+                            names[count] = String.Format("Random ± " + Carrier.Range.ToString("F2")).PadLeft(6);
+                            count++;
+                        }
 
-                if (control.GetVideoDipolar() != -1)
-                {
-                    names[count] = String.Format("Dipolar : " + control.GetVideoDipolar().ToString("F0")).PadLeft(6);
-                    //count++;
-                }
-                return names;
-
-            }
-
-            //Abs
-            if (mode == PulseModeName.P_Wide_3)
-                return new string[] { "Wide 3 Pulse" };
-
-            if (mode.ToString().StartsWith("CHM"))
-            {
-                String mode_name = mode.ToString();
-                bool contain_wide = mode_name.Contains("Wide");
-                mode_name = mode_name.Replace("_Wide", "");
-
-                String[] mode_name_type = mode_name.Split("_");
-
-                String final_mode_name = ((contain_wide) ? "Wide " : "") + mode_name_type[1] + " Pulse";
-
-                return new string[] { final_mode_name, "Current Harmonic Minimum" };
-            }
-            else if (mode.ToString().StartsWith("SHE"))
-            {
-                String mode_name = mode.ToString();
-                bool contain_wide = mode_name.Contains("Wide");
-                mode_name = mode_name.Replace("_Wide", "");
-
-                String[] mode_name_type = mode_name.Split("_");
-
-                String final_mode_name = (contain_wide) ? "Wide " : "" + mode_name_type[1] + " Pulse";
-
-                return new string[] { final_mode_name, "Selective Harmonic Elimination" };
-            }
-            else if (mode.ToString().StartsWith("HOP"))
-            {
-                String mode_name = mode.ToString();
-                bool contain_wide = mode_name.Contains("Wide");
-                mode_name = mode_name.Replace("_Wide", "");
-
-                String[] mode_name_type = mode_name.Split("_");
-
-                String final_mode_name = (contain_wide) ? "Wide " : "" + mode_name_type[1] + " Pulse";
-
-                return new string[] { final_mode_name, "High efficiency Over-modulation" };
-            }
-            else
-            {
-                String[] mode_name_type = mode.ToString().Split("_");
-                String mode_name = "";
-                if (mode_name_type[0] == "SQ") mode_name = "Square ";
-
-                mode_name += mode_name_type[1] + " Pulse";
-
-                if (control.GetVideoDipolar() == -1) return new string[] { mode_name };
-                else return new string[] { mode_name, "Dipolar : " + control.GetVideoDipolar().ToString("F1") };
+                        if (control.GetVideoDipolar() != -1)
+                        {
+                            names[count] = String.Format("Dipolar : " + control.GetVideoDipolar().ToString("F0")).PadLeft(6);
+                            //count++;
+                        }
+                        return names;
+                    }
+                case PulseTypeName.SYNC:
+                    {
+                        string ModeName = PulseCount + " Pulse";
+                        if (control.GetVideoDipolar() == -1) return [ModeName];
+                        else return [ModeName, "Dipolar : " + control.GetVideoDipolar().ToString("F1")];
+                    }
+                case PulseTypeName.CHM:
+                    {
+                        return [PulseCount + " Pulse", "Current Harmonic Minimum"];
+                    }
+                case PulseTypeName.SHE:
+                    {
+                        return [PulseCount + " Pulse", "Selective Harmonic Elimination"];
+                    }
+                case PulseTypeName.HO:
+                    {
+                        return [PulseCount + " Pulse", "High efficiency Over-modulation"];
+                    }
+                default:
+                    {
+                        return ["UNKOWN", "UNKOWN"];
+                    }
             }
         }
         public static Bitmap GetImage(VvvfValues control, bool final_show)
@@ -283,9 +256,9 @@ namespace VvvfSimulator.Generation.Video.ControlInfo
             MainWindow.Invoke(() => Viewer = new BitmapViewerManager());
             Viewer?.Show();
 
-            YamlVvvfSoundData vvvfData = generationBasicParameter.vvvfData;
-            YamlMasconDataCompiled masconData = generationBasicParameter.masconData;
-            ProgressData progressData = generationBasicParameter.progressData;
+            YamlVvvfSoundData vvvfData = generationBasicParameter.VvvfData;
+            YamlMasconDataCompiled masconData = generationBasicParameter.MasconData;
+            ProgressData progressData = generationBasicParameter.Progress;
 
             VvvfValues control = new();
             control.ResetControlValues();
@@ -309,14 +282,7 @@ namespace VvvfSimulator.Generation.Video.ControlInfo
 
             while (loop)
             {
-                ControlStatus cv = new()
-                {
-                    brake = control.IsBraking(),
-                    mascon_on = !control.IsMasconOff(),
-                    free_run = control.IsFreeRun(),
-                    wave_stat = control.GetControlFrequency()
-                };
-                PwmCalculateValues calculated_Values = YamlVvvfWave.CalculateYaml(control, cv, vvvfData);
+                PwmCalculateValues calculated_Values = YamlVvvfWave.CalculateYaml(control, vvvfData);
                 _ = CalculatePhases(control, calculated_Values, 0);
 
                 control.SetSineTime(0);

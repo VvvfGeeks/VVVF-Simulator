@@ -1,13 +1,11 @@
 ﻿using OpenCvSharp;
-using System;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using VvvfSimulator.Yaml.MasconControl;
 using VvvfSimulator.Yaml.VvvfSound;
-using static VvvfSimulator.VvvfStructs;
+using static VvvfSimulator.Vvvf.Struct;
 using static VvvfSimulator.Yaml.MasconControl.YamlMasconAnalyze;
-using YamlMasconData = VvvfSimulator.Yaml.VvvfSound.YamlVvvfSoundData.YamlMasconData;
 
 namespace VvvfSimulator.Generation
 {
@@ -54,15 +52,15 @@ namespace VvvfSimulator.Generation
 
         public class GenerationBasicParameter
         {
-            public YamlMasconDataCompiled masconData { get; set; }
-            public YamlVvvfSoundData vvvfData { get; set; }
-            public ProgressData progressData { get; set; }
+            public YamlMasconDataCompiled MasconData { get; set; }
+            public YamlVvvfSoundData VvvfData { get; set; }
+            public ProgressData Progress { get; set; }
 
-            public GenerationBasicParameter(YamlMasconDataCompiled yaml_Mascon_Data_Compiled, YamlVvvfSoundData yaml_VVVF_Sound_Data, ProgressData progressData)
+            public GenerationBasicParameter(YamlMasconDataCompiled MasconData, YamlVvvfSoundData VvvfData, ProgressData Progress)
             {
-                this.masconData = yaml_Mascon_Data_Compiled;
-                this.vvvfData = yaml_VVVF_Sound_Data;
-                this.progressData = progressData;
+                this.MasconData = MasconData;
+                this.VvvfData = VvvfData;
+                this.Progress = Progress;
             }
             public class ProgressData
             {

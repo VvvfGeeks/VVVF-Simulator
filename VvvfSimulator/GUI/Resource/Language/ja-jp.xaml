@@ -21,8 +21,9 @@
     <system:String x:Key="Preference.ColorTheme">配色</system:String>
 
     <system:String x:Key="Resource.Language.FriendlyNameConverter.Language.Name.JaJp">日本語</system:String>
-    <system:String x:Key="Resource.Language.FriendlyNameConverter.Language.Name.EnUs">英語（米）</system:String>
-    <system:String x:Key="Resource.Language.FriendlyNameConverter.Language.Name.KoKr">韓国語</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.Language.Name.EnUs">English(US)</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.Language.Name.KoKr">한국어</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.Language.Name.ZhCn">简体中文</system:String>
 
     <system:String x:Key="Resource.Language.FriendlyNameConverter.ColorTheme.Name.Light">白</system:String>
     <system:String x:Key="Resource.Language.FriendlyNameConverter.ColorTheme.Name.Dark">黒</system:String>
@@ -42,6 +43,8 @@
     <system:String x:Key="MainWindow.Menu.Generate.SourceCode.RPi3">RPi3</system:String>
     <system:String x:Key="MainWindow.Menu.Generate.Audio">音声</system:String>
     <system:String x:Key="MainWindow.Menu.Generate.Audio.VVVF">VVVF</system:String>
+    <system:String x:Key="MainWindow.Menu.Generate.Audio.VVVF.Line">線間電圧</system:String>
+    <system:String x:Key="MainWindow.Menu.Generate.Audio.VVVF.Phases">相電圧</system:String>
     <system:String x:Key="MainWindow.Menu.Generate.Audio.Train">車両</system:String>
     <system:String x:Key="MainWindow.Menu.Generate.Movie">動画</system:String>
     <system:String x:Key="MainWindow.Menu.Generate.Movie.Control">制御状態</system:String>
@@ -91,7 +94,8 @@
     <system:String x:Key="MainWindow.TabControl.Accelerate">力行</system:String>
     <system:String x:Key="MainWindow.TabControl.Brake">回生</system:String>
 
-    <system:String x:Key="MainWindow.TaskDescription.Generate.Audio.Vvvf">VVVF音声の生成：</system:String>
+    <system:String x:Key="MainWindow.TaskDescription.Generate.Audio.Vvvf.Line">線間出力音声の生成：</system:String>
+    <system:String x:Key="MainWindow.TaskDescription.Generate.Audio.Vvvf.Phases">相出力音声の生成：</system:String>
     <system:String x:Key="MainWindow.TaskDescription.Generate.Audio.Train">列車音声の生成：</system:String>
     <system:String x:Key="MainWindow.TaskDescription.Generate.Movie.Control.Original">制御状態（デザイン1）の動画生成：</system:String>
     <system:String x:Key="MainWindow.TaskDescription.Generate.Movie.Control.Original2">制御状態（デザイン2）の動画生成：</system:String>
@@ -149,6 +153,8 @@
     <system:String x:Key="TaskViewer.Status.Canceled">中断済</system:String>
     <system:String x:Key="TaskViewer.Status.Complete">完了</system:String>
     <system:String x:Key="TaskViewer.Status.Running">実行中</system:String>
+
+    <system:String x:Key="BitmapViewer.Title.Default">画像表示</system:String>
 
     <system:String x:Key="TrainAudio.SettingWindow.Title">列車音環境設定</system:String>
     
@@ -253,6 +259,9 @@
     <system:String x:Key="Simulator.RealTime.Setting.Basic.AudioBuffSize">バッファーサイズ</system:String>
     <system:String x:Key="Simulator.RealTime.Setting.Basic.SamplingFrequency">サンプリング周波数</system:String>
     <system:String x:Key="Simulator.RealTime.Setting.Basic.CalculateDivision">単位計算数</system:String>
+    <system:String x:Key="Simulator.RealTime.Setting.Basic.WaveForm">波形</system:String>
+    <system:String x:Key="Simulator.RealTime.Setting.Basic.WaveForm.Show.Line">線間電圧を表示</system:String>
+    <system:String x:Key="Simulator.RealTime.Setting.Basic.WaveForm.Show.Phase">相電圧を表示</system:String>
     <system:String x:Key="Simulator.RealTime.Setting.Basic.ControlStatus">制御状態</system:String>
     <system:String x:Key="Simulator.RealTime.Setting.Basic.ControlStatus.Show">表示する</system:String>
     <system:String x:Key="Simulator.RealTime.Setting.Basic.ControlStatus.Design">デザイン</system:String>
@@ -262,7 +271,6 @@
     <system:String x:Key="Simulator.RealTime.Setting.Basic.VoltageVector.Design">デザイン</system:String>
     <system:String x:Key="Simulator.RealTime.Setting.Basic.VoltageVector.ShowZeroVector">停留点を表示</system:String>
     <system:String x:Key="Simulator.RealTime.Setting.Basic.Others">そのほか</system:String>
-    <system:String x:Key="Simulator.RealTime.Setting.Basic.Others.WaveForm.Show">波形を表示</system:String>
     <system:String x:Key="Simulator.RealTime.Setting.Basic.Others.FFT.Show">FFTを表示</system:String>
     <system:String x:Key="Simulator.RealTime.Setting.Basic.Others.FS.Show">フーリエ級数を表示</system:String>
     <system:String x:Key="Simulator.RealTime.Setting.Basic.Others.EditRealTime">即時編集適応</system:String>
@@ -357,19 +365,26 @@
     <system:String x:Key="Create.Settings.Waveform.Common.ControlMovingSetting.Exponential">指数</system:String>
     <system:String x:Key="Create.Settings.Waveform.Common.ControlMovingSetting.CurveRate">曲率</system:String>
 
-    <system:String x:Key="Create.Settings.Waveform.Basic.ControlBasic.Title">基本設定</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Basic.ControlBasic.From">開始周波数</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Basic.ControlBasic.SineFrom">回転以上条件</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Basic.ControlBasic.SineBelow">回転以下条件</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Basic.ControlBasic.PulseMode">パルスモード</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Basic.ControlBasic.PulseMode.Shifted">位相をずらす</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Basic.ControlBasic.PulseMode.Square">矩形波</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Basic.ControlBasic.PulseMode.HarmonicSetting">高調波設定</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Basic.ControlBasic.PulseMode.DiscreteSetting">離散設定</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Basic.ControlBasic.Enable">有効化</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Basic.ControlBasic.Enable.NormalState">通常時</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Basic.ControlBasic.Enable.JerkOn">ジャークON時</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Basic.ControlBasic.Enable.JerkOff">ジャークOFF時</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.PulseSetting.Title">パルスモード</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.PulseSetting.Type">種類</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.PulseSetting.PulseCount">パルス数</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.PulseSetting.Detail">詳細</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.PulseSetting.Shifted">位相をずらす</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.PulseSetting.Square">矩形波</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.PulseSetting.HarmonicSetting">高調波設定</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.PulseSetting.DiscreteSetting">離散設定</system:String>
+
+    <system:String x:Key="Create.Settings.Waveform.Basic.ConditionSetting.Title">条件設定</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.ConditionSetting.From">開始周波数</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.ConditionSetting.SineFrom">回転以上</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.ConditionSetting.SineBelow">回転以下</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.ConditionSetting.Keep">維持</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.ConditionSetting.Keep.JerkOn">ジャークON時</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.ConditionSetting.Keep.JerkOff">ジャークOFF時</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.ConditionSetting.Enable">有効化</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.ConditionSetting.Enable.NormalState">通常時</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.ConditionSetting.Enable.JerkOn">ジャークON時</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.ConditionSetting.Enable.JerkOff">ジャークOFF時</system:String>
 
     <system:String x:Key="Create.Settings.Waveform.Basic.ControlBasicHarmonic.Title">高調波設定</system:String>
     <system:String x:Key="Create.Settings.Waveform.Basic.ControlBasicHarmonic.Add">追加</system:String>
@@ -439,11 +454,14 @@
     <system:String x:Key="Resource.Language.FriendlyNameConverter.BaseWaveType.Name.ModifiedSine2">修正正弦波2</system:String>
     <system:String x:Key="Resource.Language.FriendlyNameConverter.BaseWaveType.Name.ModifiedSaw1">修正三角波</system:String>
 
-    <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseAlternativeMode.Name.Default">標準</system:String>
-    <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseAlternativeMode.Name.Alt">種類</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseAlternative.Name.Default">標準</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseAlternative.Name.Alt">種類</system:String>
 
     <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseModeName.Name.Async">非同期</system:String>
-    <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseModeName.Name.Wide">広域</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseModeName.Name.Sync">同期</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseModeName.Name.Chm">CHM</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseModeName.Name.She">SHE</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseModeName.Name.Ho">HO</system:String>
     <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseModeName.Name.Pulse">パルス</system:String>
 
     <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseHarmonicType.Name.Sine">正弦波</system:String>

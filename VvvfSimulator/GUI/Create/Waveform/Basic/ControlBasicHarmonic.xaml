@@ -42,7 +42,7 @@
                 <RowDefinition Height="3*"/>
                 <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
-            <DataGrid x:Name="Harmonic_Editor" ItemsSource="{Binding harmonic_data, NotifyOnTargetUpdated=True}" d:ItemsSource="{d:SampleData}"  TargetUpdated="DataGrid_TargetUpdated" Unloaded="Harmonic_Editor_Unloaded" Grid.RowSpan="1" Grid.ColumnSpan="1">
+            <DataGrid x:Name="Harmonic_Editor" ItemsSource="{Binding HarmonicList, NotifyOnTargetUpdated=True}" d:ItemsSource="{d:SampleData}"  TargetUpdated="DataGrid_TargetUpdated" Unloaded="Harmonic_Editor_Unloaded" Grid.RowSpan="1" Grid.ColumnSpan="1">
                 <DataGrid.Columns>
                     <DataGridComboBoxColumn x:Name="WaveformTypeSelector" Header="{DynamicResource Create.Settings.Waveform.Basic.ControlBasicHarmonic.Type}" Width="*" SelectedValueBinding="{Binding Type, Mode=TwoWay}" EditingElementStyle="{StaticResource SlimComboBoxStyle}" ElementStyle="{StaticResource DataGridComboBoxStyle}" SelectedValuePath="Key" DisplayMemberPath="Value"/>
                     <DataGridTextColumn Header="{DynamicResource Create.Settings.Waveform.Basic.ControlBasicHarmonic.Harmonic}" Width="1*" Binding="{Binding Harmonic}" EditingElementStyle="{StaticResource SlimTextBox}" ElementStyle="{StaticResource DataGridTextBlockStyle}"/>

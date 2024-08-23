@@ -1,120 +1,144 @@
-﻿using NAudio.Dsp;
-using NAudio.Wave;
+﻿using NAudio.Wave;
 using NAudio.Wave.SampleProviders;
 using System;
-using System.Diagnostics;
 using System.IO;
+using VvvfSimulator.Vvvf;
 using VvvfSimulator.Yaml.VvvfSound;
 using static VvvfSimulator.Generation.GenerateCommon;
-using static VvvfSimulator.Generation.GenerateCommon.GenerationBasicParameter;
-using static VvvfSimulator.VvvfStructs;
-using static VvvfSimulator.Yaml.MasconControl.YamlMasconAnalyze;
+using static VvvfSimulator.Vvvf.Struct;
 
 namespace VvvfSimulator.Generation.Audio.VvvfSound
 {
     public class Audio
     {
-        // -------- VVVF SOUND -------------
-        public static double CalculateVvvfSound(VvvfValues control, YamlVvvfSoundData sound_data)
+        private class BufferedWaveFileWriter
         {
-            ControlStatus cv = new()
-            {
-                brake = control.IsBraking(),
-                mascon_on = !control.IsMasconOff(),
-                free_run = control.IsFreeRun(),
-                wave_stat = control.GetControlFrequency()
-            };
-            PwmCalculateValues calculated_Values = YamlVvvfWave.CalculateYaml(control, cv, sound_data);
-            WaveValues value = VvvfCalculate.CalculatePhases(control, calculated_Values, 0);
-            double pwm_value = value.U - value.V;
-            return pwm_value;
-        }
+            private readonly BufferedWaveProvider Buffer;
+            private readonly ISampleProvider SampleProvider;
+            private readonly WaveFileWriter Writer;
 
-        // Export Audio
-        public static void ExportWavFile(GenerationBasicParameter generationBasicParameter, int sampleFrequency, bool raw, string path)
-        {
-            static void AddSample(float value, BufferedWaveProvider provider)
+            public BufferedWaveFileWriter(string Path,int SamplingFrequency)
+            {
+                Buffer = new(WaveFormat.CreateIeeeFloatWaveFormat(SamplingFrequency, 1))
+                {
+                    BufferLength = 80000
+                };
+                SampleProvider = Buffer.ToSampleProvider();
+                Writer = new(Path, SampleProvider.WaveFormat);
+            }
+            public void AddSample(double value)
             {
                 byte[] soundSample = BitConverter.GetBytes((float)value);
                 if (!BitConverter.IsLittleEndian) Array.Reverse(soundSample);
-                provider.AddSamples(soundSample, 0, 4);
+                Buffer.AddSamples(soundSample, 0, 4);
+                if (Buffer.BufferedBytes == Buffer.BufferLength) Write();
             }
 
-            static void Write(BufferedWaveProvider bufferedWaveProvider, ISampleProvider sampleProvider, WaveFileWriter writer)
+            private void Write()
             {
-                byte[] buffer = new byte[bufferedWaveProvider.BufferedBytes];
-                int bytesRead = sampleProvider.ToWaveProvider().Read(buffer, 0, buffer.Length);
-                writer.Write(buffer, 0, bytesRead);
+                byte[] buffer = new byte[Buffer.BufferedBytes];
+                int bytesRead = Buffer.Read(buffer, 0, buffer.Length);
+                Writer.Write(buffer, 0, bytesRead);
             }
 
-            static void DownSample(int NewSamplingRate, string InputPath, string OutputPath, bool DeleteOld)
+            public void Close()
             {
-                using (var reader = new AudioFileReader(InputPath))
-                {
-                    var resampler = new WdlResamplingSampleProvider(reader, NewSamplingRate);
-                    WaveFileWriter.CreateWaveFile16(OutputPath, resampler);
-                }
-
-                if (DeleteOld) File.Delete(InputPath);
+                if (Buffer.BufferedBytes > 0)
+                    Write();
+                Writer.Close();
+            }
+        }
+        private static void DownSample(int NewSamplingRate, string InputPath, string OutputPath, bool DeleteOld)
+        {
+            using (var reader = new AudioFileReader(InputPath))
+            {
+                var resampler = new WdlResamplingSampleProvider(reader, NewSamplingRate);
+                WaveFileWriter.CreateWaveFile16(OutputPath, resampler);
             }
 
-            YamlVvvfSoundData vvvfData = generationBasicParameter.vvvfData;
-            YamlMasconDataCompiled masconData = generationBasicParameter.masconData;
-            ProgressData progressData = generationBasicParameter.progressData;
+            if (DeleteOld) File.Delete(InputPath);
+        }
 
-            VvvfValues control = new();
-            control.ResetControlValues();
-            control.ResetMathematicValues();
 
-            int DownSampledFrequency = 44100;
-            string pathTemp = Path.GetDirectoryName(path) + "\\" + "temp-" + DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss") + ".wav";
+        private delegate double[] GetSampleDelegate(VvvfValues Control, YamlVvvfSoundData SoundData);
 
-            WaveFormat waveFormat = WaveFormat.CreateIeeeFloatWaveFormat(sampleFrequency, 1);
-            BufferedWaveProvider bufferedWaveProvider = new(waveFormat)
+        public static void ExportWavLine(GenerationBasicParameter GenParam, int SamplingFreq, bool UseRaw, string Path)
+        {
+            GetSampleDelegate SampleGen = (VvvfValues control, YamlVvvfSoundData sound_data) =>
             {
-                BufferLength = 80000
+                PwmCalculateValues calculated_Values = YamlVvvfWave.CalculateYaml(control, sound_data);
+                WaveValues value = Calculate.CalculatePhases(control, calculated_Values, MyMath.M_PI_6);
+                double pwm_value = value.U - value.V;
+                return [pwm_value];
             };
-            ISampleProvider sampleProvider = bufferedWaveProvider.ToSampleProvider();
-            WaveFileWriter writer = new(raw ? path : pathTemp, sampleProvider.WaveFormat);
+            ExportWavFile(GenParam, SampleGen, SamplingFreq, UseRaw, [Path]);
+        }
 
-            //TASK DATA PREPARE
-            double dt = 1.0 / sampleFrequency;
-            progressData.Total = masconData.GetEstimatedSteps(dt) * (raw ? 1 : 1.05);
+        public static void ExportWavPhases(GenerationBasicParameter GenParam, int SamplingFreq, bool UseRaw, string Path)
+        {
+            GetSampleDelegate SampleGen = (VvvfValues control, YamlVvvfSoundData sound_data) =>
+            {
+                PwmCalculateValues calculated_Values = YamlVvvfWave.CalculateYaml(control, sound_data);
+                WaveValues value = Calculate.CalculatePhases(control, calculated_Values, 0);
+                return [value.U, value.V, value.W];
+            };
 
+            string[] ExportPath = [
+                System.IO.Path.GetDirectoryName(Path) + "\\" + System.IO.Path.GetFileNameWithoutExtension(Path) + "_U.wav",
+                System.IO.Path.GetDirectoryName(Path) + "\\" + System.IO.Path.GetFileNameWithoutExtension(Path) + "_V.wav",
+                System.IO.Path.GetDirectoryName(Path) + "\\" + System.IO.Path.GetFileNameWithoutExtension(Path) + "_W.wav",
+            ];
+            ExportWavFile(GenParam, SampleGen, SamplingFreq, UseRaw, ExportPath);
+        }
+
+        private static void ExportWavFile(GenerationBasicParameter GenParam, GetSampleDelegate GetSample, int SamplingFreq, bool UseRaw, string[] Path)
+        {
+            const double VolumeFactor = 0.35;
+            double dt = 1.0 / SamplingFreq;
+            GenParam.Progress.Total = GenParam.MasconData.GetEstimatedSteps(dt) * (UseRaw ? 1 : Math.Pow(1.05, Path.Length));
+
+            VvvfValues Control = new();
+            Control.ResetControlValues();
+            Control.ResetMathematicValues();
+            int DownSampledFrequency = 44100;
+
+            string[] ExportPath = new string[Path.Length];
+            BufferedWaveFileWriter[] Writer = new BufferedWaveFileWriter[Path.Length];
+            for (int i = 0; i < Path.Length; i++)
+            {
+                if (UseRaw) ExportPath[i] = Path[i];
+                else ExportPath[i] = System.IO.Path.GetDirectoryName(Path[i]) + "\\" + DateTime.Now.ToString("yyyyMMddHHmmss") + System.IO.Path.GetFileNameWithoutExtension(Path[i]) + ".temp";
+                Writer[i] = new(ExportPath[i], SamplingFreq);
+            }
+            
             while (true)
             {
-                control.AddSineTime(dt);
-                control.AddSawTime(dt);
-
-                double sound = CalculateVvvfSound(control, vvvfData);
-                sound /= 2.0;
-                sound *= 0.7;
-
-                AddSample((float)sound, bufferedWaveProvider);
-                if (bufferedWaveProvider.BufferedBytes == bufferedWaveProvider.BufferLength)
+                Control.AddSineTime(dt);
+                Control.AddSawTime(dt);
+                double[] Samples = GetSample(Control, GenParam.VvvfData);
+                
+                for(int i = 0; i < ((Samples.Length < Path.Length) ? Samples.Length : Path.Length); i++)
                 {
-                    Write(bufferedWaveProvider, sampleProvider, writer);
+                    Writer[i].AddSample(Samples[i] * VolumeFactor);
                 }
 
-                progressData.Progress++;
-
-                bool flag_continue = CheckForFreqChange(control, masconData, vvvfData, 1.0 / sampleFrequency);
-                bool flag_cancel = progressData.Cancel;
-
+                GenParam.Progress.Progress++;
+                bool flag_continue = CheckForFreqChange(Control, GenParam.MasconData, GenParam.VvvfData, 1.0 / SamplingFreq);
+                bool flag_cancel = GenParam.Progress.Cancel;
                 if (flag_cancel || !flag_continue) break;
-
             }
 
-            if (bufferedWaveProvider.BufferedBytes > 0)
-                Write(bufferedWaveProvider, sampleProvider, writer);
-
-            writer.Close();
-
-            if (!raw)
+            for (int i = 0; i < Path.Length; i++)
             {
-                DownSample(DownSampledFrequency, pathTemp, path, true);
-                progressData.Progress = progressData.Total;
+                Writer[i].Close();
+                if (!UseRaw)
+                {
+                    DownSample(DownSampledFrequency, ExportPath[i], Path[i], true);
+                    GenParam.Progress.Progress *= 1.05;
+                }
             }
+
+            GenParam.Progress.Progress = GenParam.Progress.Total;
         }
     }
 }

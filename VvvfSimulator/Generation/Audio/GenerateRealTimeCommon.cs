@@ -1,6 +1,7 @@
 ﻿using System;
 using VvvfSimulator.Yaml.VvvfSound;
 using static VvvfSimulator.Generation.Motor.GenerateMotorCore;
+using static VvvfSimulator.Vvvf.Struct;
 using static VvvfSimulator.Yaml.TrainAudioSetting.YamlTrainSoundAnalyze;
 using static VvvfSimulator.Yaml.VvvfSound.YamlVvvfSoundData.YamlMasconData;
 

@@ -71,7 +71,7 @@ namespace VvvfSimulator.GUI.MIDIConvert
                     {
                         try
                         {
-                            Generation.Audio.VvvfSound.Audio.ExportWavFile(generationBasicParameter, midi_Convert_Config.SampleFrequency, midi_Convert_Config.ExportRaw, export_path);
+                            Generation.Audio.VvvfSound.Audio.ExportWavLine(generationBasicParameter, midi_Convert_Config.SampleFrequency, midi_Convert_Config.ExportRaw, export_path);
                             System.Media.SystemSounds.Beep.Play();
                         }
                         catch(Exception ex)
@@ -80,7 +80,7 @@ namespace VvvfSimulator.GUI.MIDIConvert
                         }
                     });
 
-                    TaskProgressData taskProgressData = new(task, generationBasicParameter.progressData, task_description);
+                    TaskProgressData taskProgressData = new(task, generationBasicParameter.Progress, task_description);
                     TaskViewer.TaskViewer.TaskList.Add(taskProgressData);
 
                     if(!midi_Convert_Config.MultiThread) task.Wait();

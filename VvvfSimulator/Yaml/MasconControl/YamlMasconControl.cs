@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using VvvfSimulator.Yaml.VvvfSound;
+using static VvvfSimulator.Vvvf.Struct;
 using static VvvfSimulator.Yaml.MasconControl.YamlMasconAnalyze;
 using static VvvfSimulator.Yaml.MasconControl.YamlMasconAnalyze.YamlMasconDataCompiled;
 using static VvvfSimulator.Yaml.VvvfSound.YamlVvvfSoundData.YamlMasconData;
-using YamlMasconData = VvvfSimulator.Yaml.VvvfSound.YamlVvvfSoundData.YamlMasconData;
 
 namespace VvvfSimulator.Yaml.MasconControl
 {

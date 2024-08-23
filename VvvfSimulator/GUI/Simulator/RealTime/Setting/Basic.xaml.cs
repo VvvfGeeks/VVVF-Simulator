@@ -51,7 +51,8 @@ namespace VvvfSimulator.GUI.Simulator.RealTime.Setting
             if (_SettingType.Equals(RealTimeBasicSettingMode.VVVF))
             {
                 TextBuffSize.Text = Prop.RealTime_VVVF_BuffSize.ToString();
-                BoxWaveForm.IsChecked = Prop.RealTime_VVVF_WaveForm_Show;
+                BoxWaveFormLine.IsChecked = Prop.RealTime_VVVF_WaveForm_Line_Show;
+                BoxWaveFormPhase.IsChecked = Prop.RealTime_VVVF_WaveForm_Phase_Show;
                 BoxFFT.IsChecked = Prop.RealTime_VVVF_FFT_Show;
                 BoxFS.IsChecked = Prop.RealTime_VVVF_FS_Show;
                 BoxRealTimeEdit.IsChecked = Prop.RealTime_VVVF_EditAllow;
@@ -72,7 +73,8 @@ namespace VvvfSimulator.GUI.Simulator.RealTime.Setting
             else
             {
                 TextBuffSize.Text = Prop.RealTime_Train_BuffSize.ToString();
-                BoxWaveForm.IsChecked = Prop.RealTime_Train_WaveForm_Show;
+                BoxWaveFormLine.IsChecked = Prop.RealTime_Train_WaveForm_Line_Show;
+                BoxWaveFormPhase.IsChecked = Prop.RealTime_Train_WaveForm_Phase_Show;
                 BoxFFT.IsChecked = Prop.RealTime_Train_FFT_Show;
                 BoxFS.IsChecked = Prop.RealTime_Train_FS_Show;
                 BoxRealTimeEdit.IsChecked = Prop.RealTime_Train_EditAllow;
@@ -96,68 +98,101 @@ namespace VvvfSimulator.GUI.Simulator.RealTime.Setting
         {
             if (IgnoreUpdate) return;
             CheckBox cb = (CheckBox)sender;
-            Object tag = cb.Tag;
+            string[] tags = (cb.Tag.ToString() ?? "").Split(".");
 
             Boolean is_checked = cb.IsChecked == true;
 
-            if (tag.Equals("WaveForm"))
+            if (tags[0].Equals("WaveForm"))
             {
-                if (_SettingType.Equals(RealTimeBasicSettingMode.VVVF))
-                    Properties.Settings.Default.RealTime_VVVF_WaveForm_Show = is_checked;
-                else if (_SettingType.Equals(RealTimeBasicSettingMode.Train))
-                    Properties.Settings.Default.RealTime_Train_WaveForm_Show = is_checked;
+                if (tags[1].Equals("Line"))
+                {
+                    if (_SettingType.Equals(RealTimeBasicSettingMode.VVVF))
+                        Properties.Settings.Default.RealTime_VVVF_WaveForm_Line_Show = is_checked;
+                    else if (_SettingType.Equals(RealTimeBasicSettingMode.Train))
+                        Properties.Settings.Default.RealTime_Train_WaveForm_Line_Show = is_checked;
+                    return;
+                }
+
+                if (tags[1].Equals("Phase"))
+                {
+                    if (_SettingType.Equals(RealTimeBasicSettingMode.VVVF))
+                        Properties.Settings.Default.RealTime_VVVF_WaveForm_Phase_Show = is_checked;
+                    else if (_SettingType.Equals(RealTimeBasicSettingMode.Train))
+                        Properties.Settings.Default.RealTime_Train_WaveForm_Phase_Show = is_checked;
+                }
+
+                return;
             }
                 
-            else if (tag.Equals("Edit"))
+            if (tags[0].Equals("Edit"))
             {
                 if (_SettingType.Equals(RealTimeBasicSettingMode.VVVF))
                     Properties.Settings.Default.RealTime_VVVF_EditAllow = is_checked;
                 else if (_SettingType.Equals(RealTimeBasicSettingMode.Train))
                     Properties.Settings.Default.RealTime_Train_EditAllow = is_checked;
+
+                return;
             }
 
-            else if (tag.Equals("Control"))
+            if (tags[0].Equals("Control"))
             {
-                if (_SettingType.Equals(RealTimeBasicSettingMode.VVVF))
-                    Properties.Settings.Default.RealTime_VVVF_Control_Show = is_checked;
-                else if (_SettingType.Equals(RealTimeBasicSettingMode.Train))
-                    Properties.Settings.Default.RealTime_Train_Control_Show = is_checked;
+                if(tags.Length == 1)
+                {
+                    if (_SettingType.Equals(RealTimeBasicSettingMode.VVVF))
+                        Properties.Settings.Default.RealTime_VVVF_Control_Show = is_checked;
+                    else if (_SettingType.Equals(RealTimeBasicSettingMode.Train))
+                        Properties.Settings.Default.RealTime_Train_Control_Show = is_checked;
+                    return;
+                }
+
+                if (tags[1].Equals("Precise"))
+                {
+                    if (_SettingType.Equals(RealTimeBasicSettingMode.VVVF))
+                        Properties.Settings.Default.RealTime_VVVF_Control_Precise = is_checked;
+                    else if (_SettingType.Equals(RealTimeBasicSettingMode.Train))
+                        Properties.Settings.Default.RealTime_Train_Control_Precise = is_checked;
+                    return;
+                }
+
+                return;
             }
 
-            else if (tag.Equals("Hexagon"))
+            if (tags[0].Equals("Hexagon"))
             {
-                if (_SettingType.Equals(RealTimeBasicSettingMode.VVVF))
-                    Properties.Settings.Default.RealTime_VVVF_Hexagon_Show = is_checked;
-                else if (_SettingType.Equals(RealTimeBasicSettingMode.Train))
-                    Properties.Settings.Default.RealTime_Train_Hexagon_Show = is_checked;
+                if(tags.Length == 1)
+                {
+                    if (_SettingType.Equals(RealTimeBasicSettingMode.VVVF))
+                        Properties.Settings.Default.RealTime_VVVF_Hexagon_Show = is_checked;
+                    else if (_SettingType.Equals(RealTimeBasicSettingMode.Train))
+                        Properties.Settings.Default.RealTime_Train_Hexagon_Show = is_checked;
+                    return;
+                }
+
+                if (tags[1].Equals("Zero"))
+                {
+                    if (_SettingType.Equals(RealTimeBasicSettingMode.VVVF))
+                        Properties.Settings.Default.RealTime_VVVF_Hexagon_ZeroVector = is_checked;
+                    else if (_SettingType.Equals(RealTimeBasicSettingMode.Train))
+                        Properties.Settings.Default.RealTime_Train_Hexagon_ZeroVector = is_checked;
+                    return;
+                }
             }
-            else if (tag.Equals("HexagonZero"))
-            {
-                if (_SettingType.Equals(RealTimeBasicSettingMode.VVVF))
-                    Properties.Settings.Default.RealTime_VVVF_Hexagon_ZeroVector = is_checked;
-                else if (_SettingType.Equals(RealTimeBasicSettingMode.Train))
-                    Properties.Settings.Default.RealTime_Train_Hexagon_ZeroVector = is_checked;
-            }
-            else if (tag.Equals("FFT"))
+
+            if (tags[0].Equals("FFT"))
             {
                 if (_SettingType.Equals(RealTimeBasicSettingMode.VVVF))
                     Properties.Settings.Default.RealTime_VVVF_FFT_Show = is_checked;
                 else if (_SettingType.Equals(RealTimeBasicSettingMode.Train))
                     Properties.Settings.Default.RealTime_Train_FFT_Show = is_checked;
+                return;
             }
-            else if (tag.Equals("FS"))
+            if (tags[0].Equals("FS"))
             {
                 if (_SettingType.Equals(RealTimeBasicSettingMode.VVVF))
                     Properties.Settings.Default.RealTime_VVVF_FS_Show = is_checked;
                 else if (_SettingType.Equals(RealTimeBasicSettingMode.Train))
                     Properties.Settings.Default.RealTime_Train_FS_Show = is_checked;
-            }
-            else if (tag.Equals("ControlPrecise"))
-            {
-                if (_SettingType.Equals(RealTimeBasicSettingMode.VVVF))
-                    Properties.Settings.Default.RealTime_VVVF_Control_Precise = is_checked;
-                else if (_SettingType.Equals(RealTimeBasicSettingMode.Train))
-                    Properties.Settings.Default.RealTime_Train_Control_Precise = is_checked;
+                return;
             }
 
         }

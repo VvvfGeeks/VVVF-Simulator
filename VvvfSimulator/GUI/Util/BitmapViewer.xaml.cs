@@ -4,6 +4,7 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Windows;
 using System.Windows.Media.Imaging;
+using VvvfSimulator.GUI.Resource.Language;
 
 namespace VvvfSimulator.GUI.Util
 {
@@ -103,7 +104,7 @@ namespace VvvfSimulator.GUI.Util
             if (require_resize)
             {
                 Viewer.SetWindowSize(image.Width, image.Height);
-                Viewer.SetTitle("Viewer");
+                Viewer.SetTitle(LanguageManager.GetString("BitmapViewer.Title.Default"));
                 require_resize = false;
             }
 

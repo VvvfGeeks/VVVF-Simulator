@@ -12,7 +12,7 @@ namespace VvvfSimulator.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.10.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.11.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -38,12 +38,12 @@ namespace VvvfSimulator.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool RealTime_VVVF_WaveForm_Show {
+        public bool RealTime_VVVF_WaveForm_Line_Show {
             get {
-                return ((bool)(this["RealTime_VVVF_WaveForm_Show"]));
+                return ((bool)(this["RealTime_VVVF_WaveForm_Line_Show"]));
             }
             set {
-                this["RealTime_VVVF_WaveForm_Show"] = value;
+                this["RealTime_VVVF_WaveForm_Line_Show"] = value;
             }
         }
         
@@ -86,12 +86,12 @@ namespace VvvfSimulator.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool RealTime_Train_WaveForm_Show {
+        public bool RealTime_Train_WaveForm_Line_Show {
             get {
-                return ((bool)(this["RealTime_Train_WaveForm_Show"]));
+                return ((bool)(this["RealTime_Train_WaveForm_Line_Show"]));
             }
             set {
-                this["RealTime_Train_WaveForm_Show"] = value;
+                this["RealTime_Train_WaveForm_Line_Show"] = value;
             }
         }
         
@@ -452,6 +452,30 @@ namespace VvvfSimulator.Properties {
             }
             set {
                 this["ColorTheme"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool RealTime_VVVF_WaveForm_Phase_Show {
+            get {
+                return ((bool)(this["RealTime_VVVF_WaveForm_Phase_Show"]));
+            }
+            set {
+                this["RealTime_VVVF_WaveForm_Phase_Show"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool RealTime_Train_WaveForm_Phase_Show {
+            get {
+                return ((bool)(this["RealTime_Train_WaveForm_Phase_Show"]));
+            }
+            set {
+                this["RealTime_Train_WaveForm_Phase_Show"] = value;
             }
         }
     }

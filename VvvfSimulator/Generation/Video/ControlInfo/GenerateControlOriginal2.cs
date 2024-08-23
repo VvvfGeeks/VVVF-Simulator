@@ -5,14 +5,15 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Threading.Tasks;
 using VvvfSimulator.GUI.Util;
+using VvvfSimulator.Vvvf;
 using VvvfSimulator.Yaml.VvvfSound;
 using static VvvfSimulator.Generation.GenerateCommon;
 using static VvvfSimulator.Generation.GenerateCommon.GenerationBasicParameter;
 using static VvvfSimulator.Generation.Video.ControlInfo.GenerateControlCommon;
-using static VvvfSimulator.VvvfCalculate;
-using static VvvfSimulator.VvvfStructs;
-using static VvvfSimulator.VvvfStructs.PulseMode;
+using static VvvfSimulator.Vvvf.Calculate;
+using static VvvfSimulator.Vvvf.Struct;
 using static VvvfSimulator.Yaml.MasconControl.YamlMasconAnalyze;
+using static VvvfSimulator.Yaml.VvvfSound.YamlVvvfSoundData.YamlControlData.YamlPulseMode;
 using Point = System.Drawing.Point;
 using Size = System.Drawing.Size;
 
@@ -51,63 +52,21 @@ namespace VvvfSimulator.Generation.Video.ControlInfo
             float unit_y = value_y + val_size.Height - unit_size.Height + unit.compensation.Y;
             g.DrawString(unit.content, unit.font, new SolidBrush(Color.White), new PointF(unit_x, unit_y));
         }
-        private static String GetPulseName(VvvfValues control)
+        private static String GetPulseName(VvvfValues Control)
         {
-            PulseMode mode_p = control.GetVideoPulseMode();
-            PulseModeName mode = mode_p.PulseName;
-            //Not in sync
-            if (mode == PulseModeName.Async)
+            CarrierFreq Carrier = Control.GetVideoCarrierFrequency();
+            PulseTypeName Type = Control.GetVideoPulseMode().PulseType;
+            int PulseCount = Control.GetVideoPulseMode().PulseCount;
+
+            return Type switch
             {
-                CarrierFreq carrier_freq_data = control.GetVideoCarrierFrequency();
-                String default_s = String.Format(carrier_freq_data.base_freq.ToString("F2"));
-                return default_s;
-            }
-
-            //Abs
-            if (mode == PulseModeName.P_Wide_3)
-                return "W 3";
-
-            if (mode.ToString().StartsWith("CHM"))
-            {
-                String mode_name = mode.ToString();
-                bool contain_wide = mode_name.Contains("Wide");
-                mode_name = mode_name.Replace("_Wide", "");
-
-                String[] mode_name_type = mode_name.Split("_");
-
-                String final_mode_name = (contain_wide ? "W " : "") + mode_name_type[1];
-
-                return "CHM " + final_mode_name;
-            }
-            else if (mode.ToString().StartsWith("SHE"))
-            {
-                String mode_name = mode.ToString();
-                bool contain_wide = mode_name.Contains("Wide");
-                mode_name = mode_name.Replace("_Wide", "");
-
-                String[] mode_name_type = mode_name.Split("_");
-
-                String final_mode_name = (contain_wide) ? "W " : "" + mode_name_type[1];
-
-                return "SHE " + final_mode_name;
-            }
-            else if (mode.ToString().StartsWith("HOP"))
-            {
-                String mode_name = mode.ToString();
-                bool contain_wide = mode_name.Contains("Wide");
-                mode_name = mode_name.Replace("_Wide", "");
-
-                String[] mode_name_type = mode_name.Split("_");
-
-                String final_mode_name = (contain_wide) ? "W " : "" + mode_name_type[1];
-
-                return "HOP " + final_mode_name;
-            }
-            else
-            {
-                String[] mode_name_type = mode.ToString().Split("_");
-                return mode_name_type[1];
-            }
+                PulseTypeName.ASYNC => Carrier.BaseFrequency.ToString("F2"),
+                PulseTypeName.SYNC => PulseCount.ToString(),
+                PulseTypeName.CHM => "CHM " + PulseCount.ToString(),
+                PulseTypeName.SHE => "SHE " + PulseCount.ToString(),
+                PulseTypeName.HO => "HO " + PulseCount.ToString(),
+                _ => PulseCount.ToString(),
+            };
         }
         public static Bitmap GetImage(VvvfValues Control, YamlVvvfSoundData Sound, bool Precise)
         {
@@ -135,13 +94,7 @@ namespace VvvfSimulator.Generation.Video.ControlInfo
                 WaveFormControl.SetRandomFrequencyMoveAllowed(false);
                 WaveFormControl.SetSineTime(0);
                 WaveFormControl.SetSawTime(0);
-                PwmCalculateValues calculated_Values = YamlVvvfWave.CalculateYaml(WaveFormControl, new ControlStatus()
-                {
-                    brake = WaveFormControl.IsBraking(),
-                    mascon_on = !WaveFormControl.IsMasconOff(),
-                    free_run = WaveFormControl.IsFreeRun(),
-                    wave_stat = WaveFormControl.GetControlFrequency()
-                }, Sound);
+                PwmCalculateValues calculated_Values = YamlVvvfWave.CalculateYaml(WaveFormControl, Sound);
                 wave_form = WaveForm.GenerateWaveFormUV.GetImage(WaveFormControl, calculated_Values, 1520, 400, 80, 2, Precise ? 60 : 1 ,50);
             });
             CycleCalcTask.Wait();
@@ -209,7 +162,7 @@ namespace VvvfSimulator.Generation.Video.ControlInfo
             // pulse state
 
 
-            bool is_async = CycleControl.GetVideoPulseMode().PulseName.Equals(PulseModeName.Async);
+            bool is_async = CycleControl.GetVideoPulseMode().PulseType.Equals(PulseTypeName.ASYNC);
             DrawTopicAndValue(
                 g, new Point(420, 10), new Size(480, 80),
                 new StringContent(topic_Font, "Pulse", new Point(0, 5)),
@@ -245,14 +198,14 @@ namespace VvvfSimulator.Generation.Video.ControlInfo
             MainWindow.Invoke(() => Viewer = new BitmapViewerManager());
             Viewer?.Show();
 
-            YamlVvvfSoundData vvvfData = generationBasicParameter.vvvfData;
-            YamlMasconDataCompiled masconData = generationBasicParameter.masconData;
-            ProgressData progressData = generationBasicParameter.progressData;
+            YamlVvvfSoundData vvvfData = generationBasicParameter.VvvfData;
+            YamlMasconDataCompiled masconData = generationBasicParameter.MasconData;
+            ProgressData progressData = generationBasicParameter.Progress;
 
-            VvvfValues control = new();
-            control.ResetControlValues();
-            control.ResetMathematicValues();
-            control.SetRandomFrequencyMoveAllowed(false);
+            VvvfValues Control = new();
+            Control.ResetControlValues();
+            Control.ResetMathematicValues();
+            Control.SetRandomFrequencyMoveAllowed(false);
 
             int image_width = 1920;
             int image_height = 500;
@@ -269,17 +222,14 @@ namespace VvvfSimulator.Generation.Video.ControlInfo
             bool START_FRAMES = true;
             if (START_FRAMES)
             {
-
-                ControlStatus cv = new()
-                {
-                    brake = true,
-                    mascon_on = true,
-                    free_run = false,
-                    wave_stat = 0
-                };
-                PwmCalculateValues calculated_Values = YamlVvvfWave.CalculateYaml(control, cv, vvvfData);
-                _ = CalculatePhases(control, calculated_Values, 0);
-                Bitmap final_image = GetImage(control, vvvfData, true);
+                Control.SetBraking(false);
+                Control.SetMasconOff(false);
+                Control.SetFreeRun(false);
+                Control.SetControlFrequency(0);
+                Control.SetSineAngleFrequency(0);
+                PwmCalculateValues calculated_Values = YamlVvvfWave.CalculateYaml(Control, vvvfData);
+                _ = CalculatePhases(Control, calculated_Values, 0);
+                Bitmap final_image = GetImage(Control, vvvfData, true);
 
                 AddImageFrames(final_image, fps, vr);
                 Viewer?.SetImage(final_image);
@@ -291,7 +241,7 @@ namespace VvvfSimulator.Generation.Video.ControlInfo
 
             while (true)
             {
-                Bitmap final_image = GetImage(control,  vvvfData, true);
+                Bitmap final_image = GetImage(Control,  vvvfData, true);
 
                 MemoryStream ms = new();
                 final_image.Save(ms, ImageFormat.Png);
@@ -303,7 +253,7 @@ namespace VvvfSimulator.Generation.Video.ControlInfo
                 Viewer?.SetImage(final_image);
                 final_image.Dispose();
 
-                if (!CheckForFreqChange(control, masconData, vvvfData, 1.0 / fps)) break;
+                if (!CheckForFreqChange(Control, masconData, vvvfData, 1.0 / fps)) break;
                 if (progressData.Cancel) break;
                 progressData.Progress++;
             }
@@ -312,16 +262,14 @@ namespace VvvfSimulator.Generation.Video.ControlInfo
             if (END_FRAMES)
             {
 
-                ControlStatus cv = new()
-                {
-                    brake = true,
-                    mascon_on = true,
-                    free_run = false,
-                    wave_stat = 0
-                };
-                PwmCalculateValues calculated_Values = YamlVvvfWave.CalculateYaml(control, cv, vvvfData);
-                _ = CalculatePhases(control, calculated_Values, 0);
-                Bitmap final_image = GetImage(control, vvvfData, true);
+                Control.SetBraking(true);
+                Control.SetMasconOff(false);
+                Control.SetFreeRun(false);
+                Control.SetControlFrequency(0);
+                Control.SetSineAngleFrequency(0);
+                PwmCalculateValues calculated_Values = YamlVvvfWave.CalculateYaml(Control, vvvfData);
+                _ = CalculatePhases(Control, calculated_Values, 0);
+                Bitmap final_image = GetImage(Control, vvvfData, true);
                 AddImageFrames(final_image, fps, vr);
                 Viewer?.SetImage(final_image);
                 final_image.Dispose();

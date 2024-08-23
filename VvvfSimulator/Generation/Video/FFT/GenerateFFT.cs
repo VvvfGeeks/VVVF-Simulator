@@ -5,10 +5,11 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using VvvfSimulator.GUI.Util;
+using VvvfSimulator.Vvvf;
 using VvvfSimulator.Yaml.VvvfSound;
 using static VvvfSimulator.Generation.GenerateCommon;
 using static VvvfSimulator.Generation.GenerateCommon.GenerationBasicParameter;
-using static VvvfSimulator.VvvfStructs;
+using static VvvfSimulator.Vvvf.Struct;
 using static VvvfSimulator.Yaml.MasconControl.YamlMasconAnalyze;
 
 namespace VvvfSimulator.Generation.Video.FFT
@@ -54,8 +55,8 @@ namespace VvvfSimulator.Generation.Video.FFT
 
             for (int i = 0; i < 1000 - 1; i++)
             {
-                var (Ri, θi) = ConvertComplex(FFT[(int)(MyMath.M_PI * i)]);
-                var (Rii, θii) = ConvertComplex(FFT[(int)(MyMath.M_PI * (i + 1))]);
+                var (Ri, _) = ConvertComplex(FFT[(int)(MyMath.M_PI * i)]);
+                var (Rii, _) = ConvertComplex(FFT[(int)(MyMath.M_PI * (i + 1))]);
                 PointF start = new(i, 1000 - Ri * 2000);
                 PointF end = new(i + 1, 1000 - Rii * 2000);
                 g.DrawLine(new Pen(Color.Black, 2), start, end);
@@ -73,9 +74,9 @@ namespace VvvfSimulator.Generation.Video.FFT
             MainWindow.Invoke(() => Viewer = new BitmapViewerManager());
             Viewer?.Show();
 
-            YamlVvvfSoundData vvvfData = generationBasicParameter.vvvfData;
-            YamlMasconDataCompiled masconData = generationBasicParameter.masconData;
-            ProgressData progressData = generationBasicParameter.progressData;
+            YamlVvvfSoundData vvvfData = generationBasicParameter.VvvfData;
+            YamlMasconDataCompiled masconData = generationBasicParameter.MasconData;
+            ProgressData progressData = generationBasicParameter.Progress;
 
             VvvfValues control = new();
             control.ResetControlValues();

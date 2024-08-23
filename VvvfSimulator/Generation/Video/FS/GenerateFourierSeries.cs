@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Drawing;
+using VvvfSimulator.Vvvf;
 using VvvfSimulator.Yaml.VvvfSound;
-using static VvvfSimulator.VvvfStructs;
+using static VvvfSimulator.Vvvf.Struct;
 
 namespace VvvfSimulator.Generation.Video.FS
 {
@@ -100,24 +101,24 @@ namespace VvvfSimulator.Generation.Video.FS
 
             private static double[] LinearRGB(double x, double x1, double x2, double r1, double g1, double b1, double r2, double g2, double b2)
             {
-                double[] val = new double[3]
-                {
+                double[] val =
+                [
                     Linear(x, x1, x2, r1, r2),
                     Linear(x, x1, x2, g1, g2),
                     Linear(x, x1, x2, b1, b2)
-                };
+                ];
                 return val;
             }
 
             public static Color GetColor(double rate)
             {
-                double[] rgb = new double[3] { 0,0,0 };
-                if (rate >= 0.85) rgb = new double[3]{255, 85, 85};
+                double[] rgb = [0,0,0];
+                if (rate >= 0.85) rgb = [255, 85, 85];
                 if (rate < 0.85) rgb = LinearRGB(rate, 0.85, 0.68, 255, 85, 85, 255, 205, 85);
                 if (rate < 0.68) rgb = LinearRGB(rate, 0.68, 0.5, 255, 205, 85, 206, 224, 0);
                 if (rate < 0.5) rgb = LinearRGB(rate, 0.5, 0.38, 206, 224, 0, 115, 227, 117);
                 if (rate < 0.38) rgb = LinearRGB(rate, 0.15, 0.38, 77, 148, 232, 115, 227, 117);
-                if (rate < 0.15) rgb = new double[3] { 77, 148, 232 };
+                if (rate < 0.15) rgb = [77, 148, 232];
 
                 Color color = Color.FromArgb((int)rgb[0], (int)rgb[1], (int)rgb[2]);
                 return color;

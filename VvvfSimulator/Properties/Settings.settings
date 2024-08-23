@@ -5,7 +5,7 @@
     <Setting Name="RealTime_VVVF_BuffSize" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">40000</Value>
     </Setting>
-    <Setting Name="RealTime_VVVF_WaveForm_Show" Type="System.Boolean" Scope="User">
+    <Setting Name="RealTime_VVVF_WaveForm_Line_Show" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="RealTime_VVVF_EditAllow" Type="System.Boolean" Scope="User">
@@ -17,7 +17,7 @@
     <Setting Name="RealTime_Train_EditAllow" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="RealTime_Train_WaveForm_Show" Type="System.Boolean" Scope="User">
+    <Setting Name="RealTime_Train_WaveForm_Line_Show" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="RealTime_VVVF_Control_Show" Type="System.Boolean" Scope="User">
@@ -109,6 +109,12 @@
     </Setting>
     <Setting Name="ColorTheme" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">-1</Value>
+    </Setting>
+    <Setting Name="RealTime_VVVF_WaveForm_Phase_Show" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="RealTime_Train_WaveForm_Phase_Show" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
     </Setting>
   </Settings>
 </SettingsFile>

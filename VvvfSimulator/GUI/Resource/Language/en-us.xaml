@@ -20,10 +20,11 @@
     <system:String x:Key="Preference.Language">Language</system:String>
     <system:String x:Key="Preference.ColorTheme">Theme</system:String>
 
-    <system:String x:Key="Resource.Language.FriendlyNameConverter.Language.Name.JaJp">Japanese</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.Language.Name.JaJp">日本語</system:String>
     <system:String x:Key="Resource.Language.FriendlyNameConverter.Language.Name.EnUs">English(US)</system:String>
-    <system:String x:Key="Resource.Language.FriendlyNameConverter.Language.Name.KoKr">Korean</system:String>
-
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.Language.Name.KoKr">한국어</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.Language.Name.ZhCn">简体中文</system:String>
+    
     <system:String x:Key="Resource.Language.FriendlyNameConverter.ColorTheme.Name.Light">Light</system:String>
     <system:String x:Key="Resource.Language.FriendlyNameConverter.ColorTheme.Name.Dark">Dark</system:String>
     
@@ -42,6 +43,8 @@
     <system:String x:Key="MainWindow.Menu.Generate.SourceCode.RPi3">RPi3</system:String>
     <system:String x:Key="MainWindow.Menu.Generate.Audio">Audio</system:String>
     <system:String x:Key="MainWindow.Menu.Generate.Audio.VVVF">VVVF</system:String>
+    <system:String x:Key="MainWindow.Menu.Generate.Audio.VVVF.Line">Line Output</system:String>
+    <system:String x:Key="MainWindow.Menu.Generate.Audio.VVVF.Phases">Phase Output</system:String>
     <system:String x:Key="MainWindow.Menu.Generate.Audio.Train">Train</system:String>
     <system:String x:Key="MainWindow.Menu.Generate.Movie">Movie</system:String>
     <system:String x:Key="MainWindow.Menu.Generate.Movie.Control">Control</system:String>
@@ -91,7 +94,8 @@
     <system:String x:Key="MainWindow.TabControl.Accelerate">Accelerate</system:String>
     <system:String x:Key="MainWindow.TabControl.Brake">Brake</system:String>
 
-    <system:String x:Key="MainWindow.TaskDescription.Generate.Audio.Vvvf">VVVF Audio Generation ：</system:String>
+    <system:String x:Key="MainWindow.TaskDescription.Generate.Audio.Vvvf.Line">Line Output Audio Generation : </system:String>
+    <system:String x:Key="MainWindow.TaskDescription.Generate.Audio.Vvvf.Phases">Phase Output Audio Generation ：</system:String>
     <system:String x:Key="MainWindow.TaskDescription.Generate.Audio.Train">Train Audio Generation：</system:String>
     <system:String x:Key="MainWindow.TaskDescription.Generate.Movie.Control.Original">Control(Design1) Movie Generation：</system:String>
     <system:String x:Key="MainWindow.TaskDescription.Generate.Movie.Control.Original2">Control(Design2) Movie Generation：</system:String>
@@ -149,6 +153,8 @@
     <system:String x:Key="TaskViewer.Status.Canceled">Canceled</system:String>
     <system:String x:Key="TaskViewer.Status.Complete">Complete</system:String>
     <system:String x:Key="TaskViewer.Status.Running">Running</system:String>
+
+    <system:String x:Key="BitmapViewer.Title.Default">Image Viewer</system:String>
 
     <system:String x:Key="TrainAudio.SettingWindow.Title">Train Sound Setting</system:String>
 
@@ -253,6 +259,9 @@
     <system:String x:Key="Simulator.RealTime.Setting.Basic.AudioBuffSize">Audio Buffer Size</system:String>
     <system:String x:Key="Simulator.RealTime.Setting.Basic.SamplingFrequency">Sampling Frequency</system:String>
     <system:String x:Key="Simulator.RealTime.Setting.Basic.CalculateDivision">Calculation Division</system:String>
+    <system:String x:Key="Simulator.RealTime.Setting.Basic.WaveForm">Waveform</system:String>
+    <system:String x:Key="Simulator.RealTime.Setting.Basic.WaveForm.Show.Line">Show Line Voltage</system:String>
+    <system:String x:Key="Simulator.RealTime.Setting.Basic.WaveForm.Show.Phase">Show Phase Voltage</system:String>
     <system:String x:Key="Simulator.RealTime.Setting.Basic.ControlStatus">Control Status</system:String>
     <system:String x:Key="Simulator.RealTime.Setting.Basic.ControlStatus.Show">Show</system:String>
     <system:String x:Key="Simulator.RealTime.Setting.Basic.ControlStatus.Design">Design</system:String>
@@ -262,7 +271,6 @@
     <system:String x:Key="Simulator.RealTime.Setting.Basic.VoltageVector.Design">Design</system:String>
     <system:String x:Key="Simulator.RealTime.Setting.Basic.VoltageVector.ShowZeroVector">Show Zero Vector</system:String>
     <system:String x:Key="Simulator.RealTime.Setting.Basic.Others">Others</system:String>
-    <system:String x:Key="Simulator.RealTime.Setting.Basic.Others.WaveForm.Show">Show WaveForm</system:String>
     <system:String x:Key="Simulator.RealTime.Setting.Basic.Others.FFT.Show">Show FFT</system:String>
     <system:String x:Key="Simulator.RealTime.Setting.Basic.Others.FS.Show">Show FS</system:String>
     <system:String x:Key="Simulator.RealTime.Setting.Basic.Others.EditRealTime">Realtime Edit</system:String>
@@ -357,26 +365,33 @@
     <system:String x:Key="Create.Settings.Waveform.Common.ControlMovingSetting.Exponential">Exponential</system:String>
     <system:String x:Key="Create.Settings.Waveform.Common.ControlMovingSetting.CurveRate">Curve Rate</system:String>
 
-    <system:String x:Key="Create.Settings.Waveform.Basic.ControlBasic.Title">Basic Setting</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Basic.ControlBasic.From">Control From</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Basic.ControlBasic.SineFrom">Rotate From</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Basic.ControlBasic.SineBelow">Rotate Below</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Basic.ControlBasic.PulseMode">Pulse Mode</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Basic.ControlBasic.PulseMode.Shifted">Shift Phase</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Basic.ControlBasic.PulseMode.Square">Square Pulse</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Basic.ControlBasic.PulseMode.HarmonicSetting">Harmonic Setting</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Basic.ControlBasic.PulseMode.DiscreteSetting">Discrete Setting</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Basic.ControlBasic.Enable">Enable</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Basic.ControlBasic.Enable.NormalState">Normal State</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Basic.ControlBasic.Enable.JerkOn">Jerk On</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Basic.ControlBasic.Enable.JerkOff">Jerk Off</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.PulseSetting.Title">Pulse Mode</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.PulseSetting.Type">Type</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.PulseSetting.PulseCount">Count</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.PulseSetting.Detail">Detail</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.PulseSetting.Shifted">Shifted</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.PulseSetting.Square">Square</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.PulseSetting.HarmonicSetting">Harmonic Setting</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.PulseSetting.DiscreteSetting">Discrete Setting</system:String>
+
+    <system:String x:Key="Create.Settings.Waveform.Basic.ConditionSetting.Title">Condition Setting</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.ConditionSetting.From">From</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.ConditionSetting.SineFrom">Rotate From</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.ConditionSetting.SineBelow">Rotate Below</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.ConditionSetting.Keep">Keep</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.ConditionSetting.Keep.JerkOn">Jerk On</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.ConditionSetting.Keep.JerkOff">Jerk Off</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.ConditionSetting.Enable">Enable</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.ConditionSetting.Enable.NormalState">Normal State</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.ConditionSetting.Enable.JerkOn">Jerk On</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.ConditionSetting.Enable.JerkOff">Jerk Off</system:String>
 
     <system:String x:Key="Create.Settings.Waveform.Basic.ControlBasicHarmonic.Title">Harmonic Setting</system:String>
     <system:String x:Key="Create.Settings.Waveform.Basic.ControlBasicHarmonic.Add">Add</system:String>
     <system:String x:Key="Create.Settings.Waveform.Basic.ControlBasicHarmonic.Set">Set</system:String>
     <system:String x:Key="Create.Settings.Waveform.Basic.ControlBasicHarmonic.Type">Type</system:String>
     <system:String x:Key="Create.Settings.Waveform.Basic.ControlBasicHarmonic.Harmonic">Harmonic</system:String>
-    <Span x:Key="Create.Settings.Waveform.Basic.ControlBasicHarmonic.HarmonicProportional">Harmonic<LineBreak /> Proportional</Span>
+    <Span x:Key="Create.Settings.Waveform.Basic.ControlBasicHarmonic.HarmonicProportional">Harmonic<LineBreak />Proportional</Span>
     <system:String x:Key="Create.Settings.Waveform.Basic.ControlBasicHarmonic.Amplitude">Amplitude</system:String>
     <Span x:Key="Create.Settings.Waveform.Basic.ControlBasicHarmonic.AmplitudeProportional">Amplitude<LineBreak/>Proportioanl</Span>
     <system:String x:Key="Create.Settings.Waveform.Basic.ControlBasicHarmonic.InitialPhase">Initial Phase</system:String>
@@ -439,12 +454,15 @@
     <system:String x:Key="Resource.Language.FriendlyNameConverter.BaseWaveType.Name.ModifiedSine2">Modified Sinusoidal 2</system:String>
     <system:String x:Key="Resource.Language.FriendlyNameConverter.BaseWaveType.Name.ModifiedSaw1">Modified Triangle</system:String>
 
-    <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseAlternativeMode.Name.Default">Default</system:String>
-    <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseAlternativeMode.Name.Alt">Alternate</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseAlternative.Name.Default">Default</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseAlternative.Name.Alt">Alternate</system:String>
 
     <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseModeName.Name.Async">Async</system:String>
-    <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseModeName.Name.Wide">Wide</system:String>
-    <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseModeName.Name.Pulse">P</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseModeName.Name.Sync">Sync</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseModeName.Name.Chm">CHM</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseModeName.Name.She">SHE</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseModeName.Name.Ho">HO</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseModeName.Name.Pulse">Pulse</system:String>
 
     <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseHarmonicType.Name.Sine">Sinusoidal</system:String>
     <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseHarmonicType.Name.Saw">Triangle</system:String>

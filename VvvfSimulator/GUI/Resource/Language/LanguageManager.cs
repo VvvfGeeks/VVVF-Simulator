@@ -6,7 +6,7 @@ namespace VvvfSimulator.GUI.Resource.Language
 {
     public enum Language
     {
-        JaJp, EnUs, KoKr
+        JaJp, EnUs, KoKr, ZhCn
     }
     public static class LanguageManager
     {
@@ -19,6 +19,7 @@ namespace VvvfSimulator.GUI.Resource.Language
                 Language.JaJp => "/GUI/Resource/Language/ja-jp.xaml",
                 Language.EnUs => "/GUI/Resource/Language/en-us.xaml",
                 Language.KoKr => "/GUI/Resource/Language/ko-kr.xaml",
+                Language.ZhCn => "/GUI/Resource/Language/zh-cn.xaml",
                 _ => "/GUI/Resource/Language/en-us.xaml",
             };
         }
@@ -59,6 +60,7 @@ namespace VvvfSimulator.GUI.Resource.Language
             {
                 "ja-JP" => Language.JaJp,
                 "ko-KR" => Language.KoKr,
+                "zh-CN" => Language.ZhCn,
                 _ => Language.EnUs,
             };
         }

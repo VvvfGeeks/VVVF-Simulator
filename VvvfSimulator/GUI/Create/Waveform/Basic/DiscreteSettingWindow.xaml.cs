@@ -2,7 +2,7 @@
 using System.Windows.Controls;
 using VvvfSimulator.GUI.Resource.Class;
 using VvvfSimulator.GUI.Resource.Language;
-using static VvvfSimulator.VvvfStructs;
+using static VvvfSimulator.Yaml.VvvfSound.YamlVvvfSoundData.YamlControlData;
 
 namespace VvvfSimulator.GUI.Create.Waveform.Basic
 {
@@ -11,9 +11,9 @@ namespace VvvfSimulator.GUI.Create.Waveform.Basic
     /// </summary>
     public partial class DiscreteSettingWindow : Window
     {
-        private readonly PulseMode pulseMode;
+        private readonly YamlPulseMode pulseMode;
         private readonly bool ignoreUpdate = true;
-        public DiscreteSettingWindow(Window? owner, PulseMode pulseMode)
+        public DiscreteSettingWindow(Window? owner, YamlPulseMode pulseMode)
         {
             Owner = owner;
             InitializeComponent();
@@ -44,13 +44,12 @@ namespace VvvfSimulator.GUI.Create.Waveform.Basic
         private void ModeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (ignoreUpdate) return;
-            pulseMode.DiscreteTime.Mode = (PulseMode.DiscreteTimeConfiguration.DiscreteTimeMode)ModeComboBox.SelectedValue;
+            pulseMode.DiscreteTime.Mode = (YamlPulseMode.DiscreteTimeConfiguration.DiscreteTimeMode)ModeComboBox.SelectedValue;
         }
 
         private void OnWindowControlButtonClick(object sender, RoutedEventArgs e)
         {
-            Button? btn = sender as Button;
-            if (btn == null) return;
+            if (sender is not Button btn) return;
             string? tag = btn.Tag.ToString();
             if (tag == null) return;
 

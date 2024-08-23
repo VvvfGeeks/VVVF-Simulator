@@ -3,12 +3,13 @@ using NAudio.Wave.SampleProviders;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using VvvfSimulator.Vvvf;
 using VvvfSimulator.Yaml.VvvfSound;
 using static VvvfSimulator.Generation.Audio.TrainSound.AudioFilter;
 using static VvvfSimulator.Generation.GenerateCommon;
 using static VvvfSimulator.Generation.GenerateCommon.GenerationBasicParameter;
 using static VvvfSimulator.Generation.Motor.GenerateMotorCore;
-using static VvvfSimulator.VvvfStructs;
+using static VvvfSimulator.Vvvf.Struct;
 using static VvvfSimulator.Yaml.MasconControl.YamlMasconAnalyze;
 using static VvvfSimulator.Yaml.TrainAudioSetting.YamlTrainSoundAnalyze;
 using static VvvfSimulator.Yaml.TrainAudioSetting.YamlTrainSoundAnalyze.YamlTrainSoundData;
@@ -20,15 +21,8 @@ namespace VvvfSimulator.Generation.Audio.TrainSound
         // -------- TRAIN SOUND --------------
         public static double CalculateMotorSound(VvvfValues control, YamlVvvfSoundData sound_data, MotorData motor)
         {
-            ControlStatus cv = new()
-            {
-                brake = control.IsBraking(),
-                mascon_on = !control.IsMasconOff(),
-                free_run = control.IsFreeRun(),
-                wave_stat = control.GetControlFrequency()
-            };
-            PwmCalculateValues calculated_Values = YamlVvvfWave.CalculateYaml(control, cv, sound_data);
-            WaveValues value = VvvfCalculate.CalculatePhases(control, calculated_Values, 0);
+            PwmCalculateValues calculated_Values = YamlVvvfWave.CalculateYaml(control, sound_data);
+            WaveValues value = Calculate.CalculatePhases(control, calculated_Values, 0);
 
             motor.motor_Param.sitamr = control.GetVideoSineFrequency() * Math.PI * 2 * control.GetSineTime();
             motor.AynMotorControler(new(value.W, value.V, value.U));
@@ -107,9 +101,9 @@ namespace VvvfSimulator.Generation.Audio.TrainSound
                 if(DeleteOld) File.Delete(InputPath);
             }
 
-            YamlVvvfSoundData vvvfData = generationBasicParameter.vvvfData;
-            YamlMasconDataCompiled masconData = generationBasicParameter.masconData;
-            ProgressData progressData = generationBasicParameter.progressData;
+            YamlVvvfSoundData vvvfData = generationBasicParameter.VvvfData;
+            YamlMasconDataCompiled masconData = generationBasicParameter.MasconData;
+            ProgressData progressData = generationBasicParameter.Progress;
 
             VvvfValues control = new();
             control.ResetControlValues();

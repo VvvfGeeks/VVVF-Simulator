@@ -6,7 +6,7 @@ using System.Windows;
 using VvvfSimulator.Properties;
 using VvvfSimulator.Yaml.VvvfSound;
 using static VvvfSimulator.Generation.Audio.GenerateRealTimeCommon;
-using static VvvfSimulator.VvvfStructs;
+using static VvvfSimulator.Vvvf.Struct;
 
 namespace VvvfSimulator.Generation.Audio.VvvfSound
 {
@@ -55,15 +55,8 @@ namespace VvvfSimulator.Generation.Audio.VvvfSound
                     control.AddSawTime(Dt);
                     control.AddGenerationCurrentTime(Dt);
 
-                    ControlStatus cv = new()
-                    {
-                        brake = control.IsBraking(),
-                        mascon_on = !control.IsMasconOff(),
-                        free_run = control.IsFreeRun(),
-                        wave_stat = control.GetControlFrequency()
-                    };
-                    PwmCalculateValues calculated_Values = YamlVvvfWave.CalculateYaml(control, cv, sound_data);
-                    WaveValues value = VvvfCalculate.CalculatePhases(control, calculated_Values, 0);
+                    PwmCalculateValues calculated_Values = YamlVvvfWave.CalculateYaml(control, sound_data);
+                    WaveValues value = Vvvf.Calculate.CalculatePhases(control, calculated_Values, 0);
                     char cvalue = (char)(value.U << 4 | value.V << 2 | value.W);
                     data[i] = (byte)cvalue;
 
@@ -109,8 +102,10 @@ namespace VvvfSimulator.Generation.Audio.VvvfSound
             Control.ResetControlValues();
             Param.Control = Control;
 
-            BufferedWaveProvider bufferedWaveProvider = new(WaveFormat.CreateIeeeFloatWaveFormat(Settings.Default.RealtimeVvvfSamplingFrequency, 1));
-            bufferedWaveProvider.DiscardOnBufferOverflow = true;
+            BufferedWaveProvider bufferedWaveProvider = new(WaveFormat.CreateIeeeFloatWaveFormat(Settings.Default.RealtimeVvvfSamplingFrequency, 1))
+            {
+                DiscardOnBufferOverflow = true
+            };
             MMDevice mmDevice = new MMDeviceEnumerator().GetDevice(Param.AudioDeviceId);
             WasapiOut wavPlayer = new(mmDevice, AudioClientShareMode.Shared, false, 0);
 

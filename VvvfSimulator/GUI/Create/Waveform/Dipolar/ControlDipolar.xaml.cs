@@ -4,7 +4,7 @@ using System.Windows.Controls;
 using VvvfSimulator.GUI.Create.Waveform.Common;
 using VvvfSimulator.GUI.Resource.Language;
 using static VvvfSimulator.Yaml.VvvfSound.YamlVvvfSoundData;
-using static VvvfSimulator.Yaml.VvvfSound.YamlVvvfSoundData.YamlControlData.YamlAsyncParameter.YamlAsyncParameterDipolar;
+using static VvvfSimulator.Yaml.VvvfSound.YamlVvvfSoundData.YamlControlData.YamlAsync.Dipolar;
 
 namespace VvvfSimulator.GUI.Create.Waveform.Dipolar
 {
@@ -15,10 +15,12 @@ namespace VvvfSimulator.GUI.Create.Waveform.Dipolar
     {
         private readonly YamlControlData Target;
         private readonly bool IgnoreUpdate = true;
+        private readonly WaveformEditor Editor;
 
-        public ControlDipolar(YamlControlData ycd)
+        public ControlDipolar(WaveformEditor Editor, YamlControlData ycd)
         {
             Target = ycd;
+            this.Editor = Editor;
             InitializeComponent();
             InitializeView();
             IgnoreUpdate = false;
@@ -42,7 +44,7 @@ namespace VvvfSimulator.GUI.Create.Waveform.Dipolar
 
         private void SetSelectedMode(YamlAsyncParameterDipolarMode selected)
         {
-            YamlControlData.YamlAsyncParameter.YamlAsyncParameterDipolar value = Target.AsyncModulationData.DipolarData;
+            YamlControlData.YamlAsync.Dipolar value = Target.AsyncModulationData.DipolarData;
             if (selected == YamlAsyncParameterDipolarMode.Const)
                 dipolar_param.Navigate(new ControlConstSetting(value.GetType(), value));
             else

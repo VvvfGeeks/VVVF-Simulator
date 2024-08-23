@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using VvvfSimulator.Yaml.VvvfSound;
-using static VvvfSimulator.VvvfCalculate;
+using static VvvfSimulator.Vvvf.Calculate;
 using static VvvfSimulator.Yaml.VvvfSound.YamlVvvfSoundData;
-using static VvvfSimulator.Yaml.VvvfSound.YamlVvvfSoundData.YamlControlData.YamlAsyncParameter.YamlAsyncParameterCarrierFreq.YamlAsyncParameterCarrierFreqTable;
+using static VvvfSimulator.Yaml.VvvfSound.YamlVvvfSoundData.YamlControlData.YamlAsync.CarrierFrequency.YamlAsyncParameterCarrierFreqTable;
 
 namespace VvvfSimulator.Generation.Pi3Generator
 {
@@ -12,26 +12,26 @@ namespace VvvfSimulator.Generation.Pi3Generator
 
 		public class Pi3Compiler
 		{
-			public int indent { get; set; } = 0;
-			public string code { get; set; } = "";
+			public int Indent { get; set; } = 0;
+			public string Code { get; set; } = "";
 
-			public void AddIndent() { indent++; }
-			public void DecrementIndent() {  indent--; }
+			public void AddIndent() { Indent++; }
+			public void DecrementIndent() {  Indent--; }
 
-			public void WriteCode(string code) { this.code += code; }
+			public void WriteCode(string code) { this.Code += code; }
             public void WriteLineCode(string code) {
                 WriteIndent();
-                this.code += code + "\r\n"; 
+                this.Code += code + "\r\n"; 
             }
 			public void WriteIndent()
 			{
-				for(int i = 0; i < indent; i++) { this.code += "	"; }
+				for(int i = 0; i < Indent; i++) { this.Code += "	"; }
 			}
 
-            public string GetCode() { return this.code;}
+            public string GetCode() { return this.Code;}
 		}
        
-        private static void _WriteWaveStatChange(
+        private static void WriteWaveStatChange(
             Pi3Compiler compiler,
             YamlVvvfSoundData.YamlMasconData.YamlMasconDataPattern yaml,
             double min_freq
@@ -67,7 +67,7 @@ namespace VvvfSimulator.Generation.Pi3Generator
             compiler.WriteLineCode("}");
         }
 
-        private static void _WriteWavePatterns(
+        private static void WriteWavePatterns(
             Pi3Compiler compiler,
             List<YamlVvvfSoundData.YamlControlData> list,
             YamlMasconData.YamlMasconDataPattern freqInfo
@@ -79,7 +79,7 @@ namespace VvvfSimulator.Generation.Pi3Generator
             for (int i = 0; control_list.Count > i;i++)
             {
                 YamlControlData data = control_list[i];
-                List<string> _if = new();
+                List<string> _if = [];
 
                 if(!data.EnableNormal)
                     _if.Add("status->free_run");
@@ -91,23 +91,23 @@ namespace VvvfSimulator.Generation.Pi3Generator
                 {
                     string _condition = "(" + data.ControlFrequencyFrom + " <= _wave_stat)";
 
-                    if (data.FreeRunCondition.On.StuckAtHere && data.FreeRunCondition.Off.StuckAtHere)
+                    if (data.StuckFreeRunOn && data.StuckFreeRunOff)
                         _condition += " || " + "(status->free_run && status->sin_angle_freq > " + data.ControlFrequencyFrom + " * M_2PI)";
                     else
                     {
-                        if (data.FreeRunCondition.On.StuckAtHere) _condition += " || (!status->mascon_off && status->free_run && status->sin_angle_freq > " + data.ControlFrequencyFrom + " * M_2PI)";
-                        if (data.FreeRunCondition.Off.StuckAtHere) _condition += " || (status->mascon_off && status->free_run && status->sin_angle_freq > " + data.ControlFrequencyFrom + " * M_2PI)";
+                        if (data.StuckFreeRunOn) _condition += " || (!status->mascon_off && status->free_run && status->sin_angle_freq > " + data.ControlFrequencyFrom + " * M_2PI)";
+                        if (data.StuckFreeRunOff) _condition += " || (status->mascon_off && status->free_run && status->sin_angle_freq > " + data.ControlFrequencyFrom + " * M_2PI)";
                     }
 
                     _if.Add(_condition);
                 }
                 
 
-                if (data.FreeRunCondition.On.Skip && data.FreeRunCondition.Off.Skip)
+                if (!data.EnableFreeRunOn && !data.EnableFreeRunOff)
                     _if.Add("!status->free_run");
                 else {
-                    if (data.FreeRunCondition.On.Skip) _if.Add("!(status->free_run && !status->mascon_off)");
-                    if (data.FreeRunCondition.Off.Skip) _if.Add("!(status->free_run && status->mascon_off)");
+                    if (!data.EnableFreeRunOn) _if.Add("!(status->free_run && !status->mascon_off)");
+                    if (!data.EnableFreeRunOff) _if.Add("!(status->free_run && status->mascon_off)");
                 }
                 if (data.RotateFrequencyBelow != -1) _if.Add("status->sin_angle_freq <" + data.RotateFrequencyBelow + " * M_2PI");
                 if (data.RotateFrequencyFrom != -1) _if.Add("status->sin_angle_freq > " + data.RotateFrequencyFrom + " * M_2PI");
@@ -122,15 +122,15 @@ namespace VvvfSimulator.Generation.Pi3Generator
                 compiler.WriteLineCode("{");
                 compiler.AddIndent();
 
-                compiler.WriteLineCode("pwm->pulse_mode.pulse_name = " + data.PulseMode.PulseName.ToString() + ";");
-                compiler.WriteLineCode("pwm->pulse_mode.alt_mode = " + data.PulseMode.AltMode.ToString() + ";");
+                compiler.WriteLineCode("pwm->pulse_mode.pulse_name = " + data.PulseMode.PulseType.ToString() + ";");
+                compiler.WriteLineCode("pwm->pulse_mode.alt_mode = " + data.PulseMode.Alternative.ToString() + ";");
 
                 {
-                    YamlControlData.YamlControlDataAmplitudeControl amplitude = data.Amplitude;
+                    YamlControlData.YamlAmplitude amplitude = data.Amplitude;
                     static void _WriteAmplitudeControl(
                         Pi3Compiler compiler,
-                        YamlControlData.YamlControlDataAmplitudeControl.YamlControlDataAmplitude? _default,
-                        YamlControlData.YamlControlDataAmplitudeControl.YamlControlDataAmplitude _target,
+                        YamlControlData.YamlAmplitude.YamlControlDataAmplitude? _default,
+                        YamlControlData.YamlAmplitude.YamlControlDataAmplitude _target,
                         bool refer_freq_sin,
                         double max_freq
                     )
@@ -143,7 +143,7 @@ namespace VvvfSimulator.Generation.Pi3Generator
 
                             compiler.WriteLineCode("{"); compiler.AddIndent();
 
-                            YamlControlData.YamlControlDataAmplitudeControl.YamlControlDataAmplitude.YamlControlDataAmplitudeParameter _t = _target.Parameter;
+                            YamlControlData.YamlAmplitude.YamlControlDataAmplitude.YamlControlDataAmplitudeParameter _t = _target.Parameter;
 
                             if(_t.EndAmplitude == _t.StartAmplitude) compiler.WriteLineCode("_amp = " + _t.StartAmplitude + ";");
                             else if (_target.Mode == AmplitudeMode.Linear)
@@ -193,8 +193,8 @@ namespace VvvfSimulator.Generation.Pi3Generator
                         }
                         else
                         {
-                            YamlControlData.YamlControlDataAmplitudeControl.YamlControlDataAmplitude.YamlControlDataAmplitudeParameter _t = _target.Parameter;
-                            YamlControlData.YamlControlDataAmplitudeControl.YamlControlDataAmplitude.YamlControlDataAmplitudeParameter _d = _default.Parameter;
+                            YamlControlData.YamlAmplitude.YamlControlDataAmplitude.YamlControlDataAmplitudeParameter _t = _target.Parameter;
+                            YamlControlData.YamlAmplitude.YamlControlDataAmplitude.YamlControlDataAmplitudeParameter _d = _default.Parameter;
 
                             if (_t.EndAmplitude == -1 || _t.StartAmplitude == -1) _WriteAmplitudeControl(compiler, null, _default, true, 0);
                             else compiler.WriteLineCode("double _c, _amp;");
@@ -274,8 +274,8 @@ namespace VvvfSimulator.Generation.Pi3Generator
 
                         static void _WriteRangeLimitCheck(
                             Pi3Compiler compiler,
-                            YamlControlData.YamlControlDataAmplitudeControl.YamlControlDataAmplitude.YamlControlDataAmplitudeParameter? _d,
-                            YamlControlData.YamlControlDataAmplitudeControl.YamlControlDataAmplitude.YamlControlDataAmplitudeParameter _t,
+                            YamlControlData.YamlAmplitude.YamlControlDataAmplitude.YamlControlDataAmplitudeParameter? _d,
+                            YamlControlData.YamlAmplitude.YamlControlDataAmplitude.YamlControlDataAmplitudeParameter _t,
                             bool min, bool max
                         )
                         {
@@ -311,15 +311,15 @@ namespace VvvfSimulator.Generation.Pi3Generator
 
                 }
 
-                if (data.PulseMode.PulseName == VvvfStructs.PulseMode.PulseModeName.Async)
+                if (data.PulseMode.PulseType == YamlControlData.YamlPulseMode.PulseTypeName.ASYNC)
                 {
                     {
-                        YamlControlData.YamlAsyncParameter.YamlAsyncParameterCarrierFreq async = data.AsyncModulationData.CarrierWaveData;
-                        if (async.Mode == YamlControlData.YamlAsyncParameter.YamlAsyncParameterCarrierFreq.YamlAsyncCarrierMode.Const)
+                        YamlControlData.YamlAsync.CarrierFrequency async = data.AsyncModulationData.CarrierWaveData;
+                        if (async.Mode == YamlControlData.YamlAsync.CarrierFrequency.YamlAsyncCarrierMode.Const)
                         {
                             compiler.WriteLineCode("pwm->carrier_freq.base_freq = " + async.Constant + ";");
                         }
-                        else if (async.Mode == YamlControlData.YamlAsyncParameter.YamlAsyncParameterCarrierFreq.YamlAsyncCarrierMode.Moving)
+                        else if (async.Mode == YamlControlData.YamlAsync.CarrierFrequency.YamlAsyncCarrierMode.Moving)
                         {
                             YamlControlData.YamlMovingValue moving = async.MovingValue;
                             if (moving.Type == YamlControlData.YamlMovingValue.MovingValueType.Proportional)
@@ -344,7 +344,7 @@ namespace VvvfSimulator.Generation.Pi3Generator
                                 compiler.WriteLineCode(" // @ 20231018205819");
                             }
 
-                        }else if (async.Mode == YamlControlData.YamlAsyncParameter.YamlAsyncParameterCarrierFreq.YamlAsyncCarrierMode.Table)
+                        }else if (async.Mode == YamlControlData.YamlAsync.CarrierFrequency.YamlAsyncCarrierMode.Table)
                         {
                             List<YamlAsyncParameterCarrierFreqTableValue> _list = new(async.CarrierFrequencyTable.CarrierFrequencyTableValues);
                             _list.Sort((a, b) => b.ControlFrequencyFrom.CompareTo(a.ControlFrequencyFrom));
@@ -369,12 +369,12 @@ namespace VvvfSimulator.Generation.Pi3Generator
                     }
 
                     {
-                        YamlControlData.YamlAsyncParameter.YamlAsyncParameterRandom.YamlAsyncParameterRandomValue random_interval = data.AsyncModulationData.RandomData.Interval;
-                        if (random_interval.Mode == YamlControlData.YamlAsyncParameter.YamlAsyncParameterRandom.YamlAsyncParameterRandomValue.YamlAsyncParameterRandomValueMode.Const)
+                        YamlControlData.YamlAsync.RandomModulation.YamlAsyncParameterRandomValue random_interval = data.AsyncModulationData.RandomData.Interval;
+                        if (random_interval.Mode == YamlControlData.YamlAsync.RandomModulation.YamlAsyncParameterRandomValue.YamlAsyncParameterRandomValueMode.Const)
                         {
                             compiler.WriteLineCode("pwm->carrier_freq.interval = " + random_interval.Constant + ";");
                         }
-                        else if (random_interval.Mode == YamlControlData.YamlAsyncParameter.YamlAsyncParameterRandom.YamlAsyncParameterRandomValue.YamlAsyncParameterRandomValueMode.Moving)
+                        else if (random_interval.Mode == YamlControlData.YamlAsync.RandomModulation.YamlAsyncParameterRandomValue.YamlAsyncParameterRandomValueMode.Moving)
                         {
                             YamlControlData.YamlMovingValue moving = random_interval.MovingValue;
                             if (moving.Type == YamlControlData.YamlMovingValue.MovingValueType.Proportional)
@@ -398,12 +398,12 @@ namespace VvvfSimulator.Generation.Pi3Generator
                     }
 
                     {
-                        YamlControlData.YamlAsyncParameter.YamlAsyncParameterRandom.YamlAsyncParameterRandomValue random_range = data.AsyncModulationData.RandomData.Range;
-                        if (random_range.Mode == YamlControlData.YamlAsyncParameter.YamlAsyncParameterRandom.YamlAsyncParameterRandomValue.YamlAsyncParameterRandomValueMode.Const)
+                        YamlControlData.YamlAsync.RandomModulation.YamlAsyncParameterRandomValue random_range = data.AsyncModulationData.RandomData.Range;
+                        if (random_range.Mode == YamlControlData.YamlAsync.RandomModulation.YamlAsyncParameterRandomValue.YamlAsyncParameterRandomValueMode.Const)
                         {
                             compiler.WriteLineCode("pwm->carrier_freq.range = " + random_range.Constant + ";");
                         }
-                        else if (random_range.Mode == YamlControlData.YamlAsyncParameter.YamlAsyncParameterRandom.YamlAsyncParameterRandomValue.YamlAsyncParameterRandomValueMode.Moving)
+                        else if (random_range.Mode == YamlControlData.YamlAsync.RandomModulation.YamlAsyncParameterRandomValue.YamlAsyncParameterRandomValueMode.Moving)
                         {
                             YamlControlData.YamlMovingValue moving = random_range.MovingValue;
                             if (moving.Type == YamlControlData.YamlMovingValue.MovingValueType.Proportional)
@@ -427,12 +427,12 @@ namespace VvvfSimulator.Generation.Pi3Generator
                     }
 
                     {
-                        YamlControlData.YamlAsyncParameter.YamlAsyncParameterDipolar dipolar = data.AsyncModulationData.DipolarData;
-                        if (dipolar.Mode == YamlControlData.YamlAsyncParameter.YamlAsyncParameterDipolar.YamlAsyncParameterDipolarMode.Const)
+                        YamlControlData.YamlAsync.Dipolar dipolar = data.AsyncModulationData.DipolarData;
+                        if (dipolar.Mode == YamlControlData.YamlAsync.Dipolar.YamlAsyncParameterDipolarMode.Const)
                         {
                             compiler.WriteLineCode("pwm->dipolar = " + dipolar.Constant + ";");
                         }
-                        else if (dipolar.Mode == YamlControlData.YamlAsyncParameter.YamlAsyncParameterDipolar.YamlAsyncParameterDipolarMode.Moving)
+                        else if (dipolar.Mode == YamlControlData.YamlAsync.Dipolar.YamlAsyncParameterDipolarMode.Moving)
                         {
                             YamlControlData.YamlMovingValue moving = dipolar.MovingValue;
                             if (moving.Type == YamlControlData.YamlMovingValue.MovingValueType.Proportional)
@@ -473,12 +473,12 @@ namespace VvvfSimulator.Generation.Pi3Generator
 
         public static string GenerateC(YamlVvvfSoundData vfsoundData, string functionName)
         {
-            Pi3Compiler compiler = new Pi3Compiler();
+            Pi3Compiler compiler = new();
             compiler.WriteLineCode("void calculate" + functionName + "(VvvfValues *status, PwmCalculateValues *pwm)");
             compiler.WriteLineCode("{");
             compiler.AddIndent();
-            List<String> lines = new List<String>()
-            {
+            List<String> lines =
+            [
                 "CarrierFreq carrier_freq = {0, 0, 0};",
                 "PulseMode pulse_mode = {P_1, Default};",
                 "pwm->level = " + vfsoundData.Level.ToString() + ";",
@@ -488,7 +488,7 @@ namespace VvvfSimulator.Generation.Pi3Generator
                 "pwm->none = false;",
                 "pwm->pulse_mode = pulse_mode;",
                 "pwm->carrier_freq = carrier_freq;"
-            };
+            ];
             for(int i = 0; i < lines.Count; i++)
             {
                 compiler.WriteLineCode(lines[i]);
@@ -498,8 +498,8 @@ namespace VvvfSimulator.Generation.Pi3Generator
             compiler.WriteLineCode("{");
             compiler.AddIndent();
 
-            _WriteWaveStatChange(compiler, vfsoundData.MasconData.Braking, vfsoundData.MinimumFrequency.Braking);
-            _WriteWavePatterns(compiler, vfsoundData.BrakingPattern, vfsoundData.MasconData.Braking);
+            WriteWaveStatChange(compiler, vfsoundData.MasconData.Braking, vfsoundData.MinimumFrequency.Braking);
+            WriteWavePatterns(compiler, vfsoundData.BrakingPattern, vfsoundData.MasconData.Braking);
 
             compiler.DecrementIndent();
             compiler.WriteLineCode("}");
@@ -507,8 +507,8 @@ namespace VvvfSimulator.Generation.Pi3Generator
             compiler.WriteLineCode("{");
             compiler.AddIndent();
 
-            _WriteWaveStatChange(compiler, vfsoundData.MasconData.Accelerating, vfsoundData.MinimumFrequency.Accelerating);
-            _WriteWavePatterns(compiler, vfsoundData.AcceleratePattern, vfsoundData.MasconData.Accelerating);
+            WriteWaveStatChange(compiler, vfsoundData.MasconData.Accelerating, vfsoundData.MinimumFrequency.Accelerating);
+            WriteWavePatterns(compiler, vfsoundData.AcceleratePattern, vfsoundData.MasconData.Accelerating);
 
             compiler.DecrementIndent();
             compiler.WriteLineCode("}");

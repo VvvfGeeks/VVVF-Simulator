@@ -3,25 +3,26 @@ using System;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
-using static VvvfSimulator.VvvfCalculate;
-using static VvvfSimulator.Generation.GenerateCommon;
-using VvvfSimulator.Yaml.VvvfSound;
-using static VvvfSimulator.VvvfStructs;
-using static VvvfSimulator.Generation.GenerateCommon.GenerationBasicParameter;
 using VvvfSimulator.GUI.Util;
+using VvvfSimulator.Vvvf;
+using VvvfSimulator.Yaml.VvvfSound;
+using static VvvfSimulator.Generation.GenerateCommon;
+using static VvvfSimulator.Generation.GenerateCommon.GenerationBasicParameter;
+using static VvvfSimulator.Vvvf.Calculate;
+using static VvvfSimulator.Vvvf.Struct;
 
 namespace VvvfSimulator.Generation.Video.Hexagon
 {
     public class GenerateHexagonExplain
     {
         private BitmapViewerManager? Viewer { get; set; }
-        public bool generate_wave_hexagon_explain(GenerationBasicParameter generationBasicParameter, String output_path, bool circle, double d)
+        public bool ExportVideo(GenerationBasicParameter generationBasicParameter, String output_path, bool circle, double d)
         {
             MainWindow.Invoke(() => Viewer = new BitmapViewerManager());
             Viewer?.Show();
 
-            YamlVvvfSoundData vvvfData = generationBasicParameter.vvvfData;
-            ProgressData progressData = generationBasicParameter.progressData;
+            YamlVvvfSoundData vvvfData = generationBasicParameter.VvvfData;
+            ProgressData progressData = generationBasicParameter.Progress;
 
             VvvfValues control = new();
             control.ResetControlValues();
@@ -96,17 +97,10 @@ namespace VvvfSimulator.Generation.Video.Hexagon
             int[] points_V = new int[hex_div];
             int[] points_W = new int[hex_div];
 
-            double[] x_min_max = new double[] { 50000, 0 };
-            double[] hexagon_coordinate = new double[] { 100, 500 };
+            double[] x_min_max = [50000, 0];
+            double[] hexagon_coordinate = [100, 500];
 
-            ControlStatus cv = new()
-            {
-                brake = control.IsBraking(),
-                mascon_on = !control.IsMasconOff(),
-                free_run = control.IsFreeRun(),
-                wave_stat = control.GetControlFrequency()
-            };
-            PwmCalculateValues calculated_Values = YamlVvvfWave.CalculateYaml(control, cv, vvvfData);
+            PwmCalculateValues calculated_Values = YamlVvvfWave.CalculateYaml(control, vvvfData);
 
             for (int i = 0; i < hex_div; i++)
             {
@@ -132,7 +126,7 @@ namespace VvvfSimulator.Generation.Video.Hexagon
 
             }
 
-            hexagon_coordinate = new double[] { 100, 500 };
+            hexagon_coordinate = [100, 500];
             double moved_x = (image_width - x_min_max[1] - x_min_max[0]) / 2.0;
 
             int jump_add = hex_div / pwm_image_width;

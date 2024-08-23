@@ -1,0 +1,487 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib">
+
+    <FontFamily x:Key="Generic.Font">/GUI/Resource/Fonts/Noto_Sans_SC/#Noto Sans SC Medium</FontFamily>
+    <FontFamily x:Key="Generic.Font.Input">/GUI/Resource/Fonts/MPlus1Code/#M PLUS 1 Code</FontFamily>
+
+    <system:String x:Key="Generic.Title.Error">出现错误</system:String>
+    <system:String x:Key="Generic.Title.Info">信息</system:String>
+    <system:String x:Key="Generic.Title.Ask">Ask</system:String>
+    <system:String x:Key="Generic.Message.Error">遇到了一些错误</system:String>
+    <system:String x:Key="Generic.MenuItem.Add">添加</system:String>
+    <system:String x:Key="Generic.MenuItem.Copy">复制</system:String>
+    <system:String x:Key="Generic.MenuItem.Sort">排序</system:String>
+    <system:String x:Key="Generic.MenuItem.Delete">删除</system:String>
+    <system:String x:Key="Generic.Status.Enabled">启用</system:String>
+    <system:String x:Key="Generic.Status.Disabled">禁用</system:String>
+
+    <system:String x:Key="Preference.Title">Preference</system:String>
+    <system:String x:Key="Preference.Language">语言</system:String>
+    <system:String x:Key="Preference.ColorTheme">主题</system:String>
+
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.Language.Name.JaJp">日本語</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.Language.Name.EnUs">English(US)</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.Language.Name.KoKr">한국어</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.Language.Name.ZhCn">简体中文</system:String>
+
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.ColorTheme.Name.Light">浅色</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.ColorTheme.Name.Dark">深色</system:String>
+    
+    <system:String x:Key="MainWindow.Title">VVVF Simulator</system:String><!--不用翻译-->
+
+    <system:String x:Key="MainWindow.Menu.File">文件</system:String>
+    <system:String x:Key="MainWindow.Menu.File.Save">保存</system:String>
+    <system:String x:Key="MainWindow.Menu.File.SaveAs">另存为</system:String>
+    <system:String x:Key="MainWindow.Menu.File.Load">打开</system:String>
+
+    <system:String x:Key="MainWindow.Menu.Edit">编辑</system:String>
+    <system:String x:Key="MainWindow.Menu.Edit.Reset">重置</system:String>
+
+    <system:String x:Key="MainWindow.Menu.Generate">生成</system:String>
+    <system:String x:Key="MainWindow.Menu.Generate.SourceCode">源代码</system:String>
+    <system:String x:Key="MainWindow.Menu.Generate.SourceCode.RPi3">RPi3</system:String>
+    <system:String x:Key="MainWindow.Menu.Generate.Audio">音频</system:String>
+    <system:String x:Key="MainWindow.Menu.Generate.Audio.VVVF">VVVF</system:String><!--不用翻译-->
+    <system:String x:Key="MainWindow.Menu.Generate.Audio.VVVF.Line">线电压音频</system:String>
+    <system:String x:Key="MainWindow.Menu.Generate.Audio.VVVF.Phases">相电压音频</system:String>
+    <system:String x:Key="MainWindow.Menu.Generate.Audio.Train">走行音</system:String>
+    <system:String x:Key="MainWindow.Menu.Generate.Movie">视频</system:String>
+    <system:String x:Key="MainWindow.Menu.Generate.Movie.Control">控制信息</system:String>
+    <system:String x:Key="MainWindow.Menu.Generate.Movie.Control.Original">样式 1</system:String>
+    <system:String x:Key="MainWindow.Menu.Generate.Movie.Control.Original2">样式 2</system:String>
+    <system:String x:Key="MainWindow.Menu.Generate.Movie.WaveForm">波形</system:String>
+    <system:String x:Key="MainWindow.Menu.Generate.Movie.WaveForm.Original">线电压(1)</system:String>
+    <system:String x:Key="MainWindow.Menu.Generate.Movie.WaveForm.Spaced">线电压(2)</system:String>
+    <system:String x:Key="MainWindow.Menu.Generate.Movie.WaveForm.UVW">相电压</system:String>
+    <system:String x:Key="MainWindow.Menu.Generate.Movie.Hexagon">磁链</system:String>
+    <system:String x:Key="MainWindow.Menu.Generate.Movie.Hexagon.Original">样式 1</system:String>
+    <system:String x:Key="MainWindow.Menu.Generate.Movie.Hexagon.Explain">Render Progress</system:String>
+    <system:String x:Key="MainWindow.Menu.Generate.Movie.FFT">FFT</system:String>
+    <system:String x:Key="MainWindow.Menu.Generate.Movie.FFT.Original">样式 1</system:String>
+    <system:String x:Key="MainWindow.Menu.Generate.Image">图片</system:String>
+    <system:String x:Key="MainWindow.Menu.Generate.Image.Hexagon">磁链</system:String>
+    <system:String x:Key="MainWindow.Menu.Generate.Image.Hexagon.Original">样式 1</system:String>
+    <system:String x:Key="MainWindow.Menu.Generate.Image.FFT">频谱</system:String>
+    <system:String x:Key="MainWindow.Menu.Generate.Image.FFT.Original">样式 1</system:String>
+
+    <system:String x:Key="MainWindow.Menu.RealTime">实时模拟</system:String>
+    <system:String x:Key="MainWindow.Menu.RealTime.VVVF">VVVF</system:String><!--不用翻译-->
+    <system:String x:Key="MainWindow.Menu.RealTime.VVVF.USB">VVVF- USB 直通</system:String>
+    <system:String x:Key="MainWindow.Menu.RealTime.VVVF.USB.Error.Title">出现错误</system:String>
+    <system:String x:Key="MainWindow.Menu.RealTime.VVVF.USB.Error.Message">端口无效。</system:String>
+    <system:String x:Key="MainWindow.Menu.RealTime.VVVF.Setting">VVVF 模拟设置</system:String>
+    <system:String x:Key="MainWindow.Menu.RealTime.Train">Train</system:String>
+    <system:String x:Key="MainWindow.Menu.RealTime.Train.Setting">Train 模拟设置</system:String>
+
+    <system:String x:Key="MainWindow.Menu.Tools">工具</system:String>
+    <system:String x:Key="MainWindow.Menu.Tools.AutoVoltage">自动设置调制度</system:String>
+    <system:String x:Key="MainWindow.Menu.Tools.FreeRunAmpZero">将断电时的调制度设为零</system:String>
+    <system:String x:Key="MainWindow.Menu.Tools.FreeRunEndAmplitudeContinuous">将断电时的调制度设置为连续的</system:String>
+    <system:String x:Key="MainWindow.Menu.Tools.MIDI">MIDI Conversion</system:String>
+
+    <system:String x:Key="MainWindow.Menu.Window">杂项</system:String>
+    <system:String x:Key="MainWindow.Menu.Window.LinearCalculator">线性计算器</system:String>
+    <system:String x:Key="MainWindow.Menu.Window.TaskProgress">任务管理</system:String>
+    <system:String x:Key="MainWindow.Menu.Window.BaseFreqPattern">基频变化速率编辑器</system:String>
+    <system:String x:Key="MainWindow.Menu.Window.TrainSound">走行音设置</system:String>
+    <system:String x:Key="MainWindow.Menu.Window.Preference">偏好</system:String>
+
+    <system:String x:Key="MainWindow.TabControl.Settings">基本设置</system:String>
+    <system:String x:Key="MainWindow.TabControl.Settings.PwmLevel">电平</system:String>
+    <system:String x:Key="MainWindow.TabControl.Settings.MinimumFrequency">最低频率</system:String>
+    <system:String x:Key="MainWindow.TabControl.Settings.JerkSetting">通断电设置</system:String>
+    <system:String x:Key="MainWindow.TabControl.Accelerate">加速程序</system:String>
+    <system:String x:Key="MainWindow.TabControl.Brake">制动程序</system:String>
+
+    <system:String x:Key="MainWindow.TaskDescription.Generate.Audio.Vvvf.Line">线电压音频生成：</system:String>
+    <system:String x:Key="MainWindow.TaskDescription.Generate.Audio.Vvvf.Phases">相电压音频生成：</system:String>
+    <system:String x:Key="MainWindow.TaskDescription.Generate.Audio.Train">列车走行音生成：</system:String>
+    <system:String x:Key="MainWindow.TaskDescription.Generate.Movie.Control.Original">控制信息（样式1）生成：</system:String>
+    <system:String x:Key="MainWindow.TaskDescription.Generate.Movie.Control.Original2">控制信息（样式2）生成：</system:String>
+    <system:String x:Key="MainWindow.TaskDescription.Generate.Movie.WaveForm.Original">线电压波形（样式1）生成：</system:String>
+    <system:String x:Key="MainWindow.TaskDescription.Generate.Movie.WaveForm.Spaced">线电压波形（样式2）生成：</system:String>
+    <system:String x:Key="MainWindow.TaskDescription.Generate.Movie.WaveForm.UVW">相电压波形生成：</system:String>
+    <system:String x:Key="MainWindow.TaskDescription.Generate.Movie.Hexagon.Original">电压磁链视频生成：</system:String>
+    <system:String x:Key="MainWindow.TaskDescription.Generate.Movie.Hexagon.Explain">电压磁链 Render Progress 视频生成：</system:String>
+    <system:String x:Key="MainWindow.TaskDescription.Generate.Movie.FFT.Original">FFT 视频生成：</system:String>
+
+    <system:String x:Key="MainWindow.Message.File.Save.Ok.Title">Great</system:String>
+    <system:String x:Key="MainWindow.Message.File.Save.Ok.Message">保存成功</system:String>
+    <system:String x:Key="MainWindow.Message.File.Save.Error.Message">保存失败</system:String>
+    <system:String x:Key="MainWindow.Message.File.SaveAs.Ok.Title">Great</system:String>
+    <system:String x:Key="MainWindow.Message.File.SaveAs.Ok.Message">保存成功</system:String>
+    <system:String x:Key="MainWindow.Message.File.SaveAs.Error.Message">保存失败</system:String>
+    <system:String x:Key="MainWindow.Message.File.Load.Ok.Title">Great</system:String>
+    <system:String x:Key="MainWindow.Message.File.Load.Ok.Message">加载成功</system:String>
+    <system:String x:Key="MainWindow.Message.File.Load.Error.Message">加载失败</system:String>
+    <system:String x:Key="MainWindow.Message.Generate.Movie.Hexagon.Original.EnableZeroVector">Enable Zero-Vector Point?</system:String>
+    <system:String x:Key="MainWindow.Message.Generate.Movie.Hexagon.Explain.EnableZeroVector">Enable Zero-Vector Point?</system:String>
+    <system:String x:Key="MainWindow.Message.Generate.Image.Hexagon.Original.EnableZeroVector">Enable Zero-Vector Point?</system:String>
+    <system:String x:Key="MainWindow.Message.Generate.Movie.Hexagon.Explain.EnterFrequency">Enter the frequency to render</system:String>
+    <system:String x:Key="MainWindow.Message.Generate.Image.Hexagon.Original.EnterFrequency">Enter the frequency to render</system:String>
+    <system:String x:Key="MainWindow.Message.Generate.Image.FFT.Original.EnterFrequency">Enter the frequency to render</system:String>
+    <system:String x:Key="MainWindow.Message.Generate.SourceCode.RPi3.Ok.Title">YEAH</system:String>
+    <system:String x:Key="MainWindow.Message.Generate.SourceCode.RPi3.Ok.Message">Exported as C</system:String>
+    <system:String x:Key="MainWindow.Message.Tools.AutoVoltage.Error">
+        Check the following when using Auto Modulation Index.\n
+        ・Accelerate and brake patterns have to consist of more than two patterns.\n
+        ・All patterns' From values must be greater than or equal to 0.
+    </system:String>
+
+    <system:String x:Key="MainWindow.Dialog.Tools.AutoVoltage.Title">自动设置调制度</system:String>
+    <system:String x:Key="MainWindow.Dialog.Tools.AutoVoltage.AcceleratePatternMaxFrequency">加速程序满电压频率</system:String>
+    <system:String x:Key="MainWindow.Dialog.Tools.AutoVoltage.AcceleratePatternMaxVoltage">加速程序最大电压</system:String>
+    <system:String x:Key="MainWindow.Dialog.Tools.AutoVoltage.BrakePatternMaxFrequency">制动程序满电压频率</system:String>
+    <system:String x:Key="MainWindow.Dialog.Tools.AutoVoltage.BrakePatternMaxVoltage">制动程序最大电压</system:String>
+    <system:String x:Key="MainWindow.Dialog.Tools.AutoVoltage.MaxEffort">尝试匹配调制度的最大次数</system:String>
+    <system:String x:Key="MainWindow.Dialog.Tools.AutoVoltage.Precision">精度</system:String>
+
+    <system:String x:Key="TextBoxListWindow.Title">请输入数值</system:String>
+    <system:String x:Key="TextBoxListWindow.Label">请输入数值</system:String>
+    <system:String x:Key="TextBoxListWindow.OK">确定</system:String>
+
+    <system:String x:Key="LinearCalculator.Title">线性计算器</system:String>
+    <system:String x:Key="LinearCalculator.Copy">复制</system:String>
+
+    <system:String x:Key="DoubleNumberInput.Title">请输入数值</system:String>
+    <system:String x:Key="DoubleNumberInput.Label">请输入数值</system:String>
+    <system:String x:Key="DoubleNumberInput.OK">确定</system:String>
+
+    <system:String x:Key="TaskViewer.Title">任务管理</system:String>
+    <system:String x:Key="TaskViewer.Button.Cancel">取消</system:String>
+    <system:String x:Key="TaskViewer.Status.Canceled">已取消</system:String>
+    <system:String x:Key="TaskViewer.Status.Complete">已完成</system:String>
+    <system:String x:Key="TaskViewer.Status.Running">运行中</system:String>
+
+    <system:String x:Key="BitmapViewer.Title.Default">图像显示</system:String>
+
+    <system:String x:Key="TrainAudio.SettingWindow.Title">列车走行音参数设置</system:String>
+
+    <system:String x:Key="TrainAudio.SettingWindow.Menu.File">文件</system:String>
+    <system:String x:Key="TrainAudio.SettingWindow.Menu.File.Save">保存</system:String>
+    <system:String x:Key="TrainAudio.SettingWindow.Menu.File.Open">打开</system:String>
+    <system:String x:Key="TrainAudio.SettingWindow.Menu.Parameter">参数</system:String>
+    <system:String x:Key="TrainAudio.SettingWindow.Menu.Parameter.Motor">电机</system:String>
+    <system:String x:Key="TrainAudio.SettingWindow.Menu.Parameter.Gear">齿轮</system:String>
+    <system:String x:Key="TrainAudio.SettingWindow.Menu.Mixer">合成器</system:String>
+    <system:String x:Key="TrainAudio.SettingWindow.Menu.Mixer.Volume">音量</system:String>
+    <system:String x:Key="TrainAudio.SettingWindow.Menu.Mixer.FrequencyFilter">频率滤波器</system:String>
+    <system:String x:Key="TrainAudio.SettingWindow.Menu.Mixer.ConvolutionFilter">环绕声滤波器</system:String>
+
+    <system:String x:Key="TrainAudio.SettingWindow.Message.File.Open.Ok.Message">加载成功</system:String>
+    <system:String x:Key="TrainAudio.SettingWindow.Message.File.Save.Ok.Message">保存成功</system:String>
+    <system:String x:Key="TrainAudio.SettingWindow.Message.File.Open.Error.Message">加载失败</system:String>
+    <system:String x:Key="TrainAudio.SettingWindow.Message.File.Save.Error.Message">保存失败</system:String>
+
+    <system:String x:Key="TrainAudio.Pages.HarmonicSetting.BasicSetting">基本设置</system:String>
+    <system:String x:Key="TrainAudio.Pages.HarmonicSetting.BasicSetting.Harmonic">谐波次数</system:String>
+    <system:String x:Key="TrainAudio.Pages.HarmonicSetting.BasicSetting.DisappearFrequency">消音时的基频</system:String>
+
+    <system:String x:Key="TrainAudio.Pages.HarmonicSetting.RangeSetting">范围设置</system:String>
+    <system:String x:Key="TrainAudio.Pages.HarmonicSetting.RangeSetting.StartFrequency">开始频率</system:String>
+    <system:String x:Key="TrainAudio.Pages.HarmonicSetting.RangeSetting.EndFrequency">结束频率</system:String>
+
+    <system:String x:Key="TrainAudio.Pages.HarmonicSetting.AmplitudeSetting">幅值设置</system:String>
+    <system:String x:Key="TrainAudio.Pages.HarmonicSetting.AmplitudeSetting.StartFrequency">开始频率</system:String>
+    <system:String x:Key="TrainAudio.Pages.HarmonicSetting.AmplitudeSetting.EndFrequency">结束频率</system:String>
+    <system:String x:Key="TrainAudio.Pages.HarmonicSetting.AmplitudeSetting.StartAmplitude">开始幅值</system:String>
+    <system:String x:Key="TrainAudio.Pages.HarmonicSetting.AmplitudeSetting.EndAmplitude">结束幅值</system:String>
+    <system:String x:Key="TrainAudio.Pages.HarmonicSetting.AmplitudeSetting.MaxAmplitude">最大幅值</system:String>
+    <system:String x:Key="TrainAudio.Pages.HarmonicSetting.AmplitudeSetting.MinAmplitude">最小幅值</system:String>
+
+    <system:String x:Key="TrainAudio.Pages.MotorSetting.MotorSpecification">电机参数</system:String>
+    <system:String x:Key="TrainAudio.Pages.MotorSetting.MotorSpecification.StatorResistance">定子电感</system:String>
+    <system:String x:Key="TrainAudio.Pages.MotorSetting.MotorSpecification.RotorResistance">转子电感</system:String>
+    <system:String x:Key="TrainAudio.Pages.MotorSetting.MotorSpecification.StatorInductance">定子电阻</system:String>
+    <system:String x:Key="TrainAudio.Pages.MotorSetting.MotorSpecification.RotorInductancce">转子电阻</system:String>
+    <system:String x:Key="TrainAudio.Pages.MotorSetting.MotorSpecification.MutualInductance">相互电感</system:String>
+    <system:String x:Key="TrainAudio.Pages.MotorSetting.MotorSpecification.PolarLogarithm">极对数</system:String>
+    <system:String x:Key="TrainAudio.Pages.MotorSetting.MotorSpecification.Damping">阻尼</system:String>
+    <system:String x:Key="TrainAudio.Pages.MotorSetting.MotorSpecification.RotationalInertiaMass">旋转惯性质量</system:String>
+    <system:String x:Key="TrainAudio.Pages.MotorSetting.MotorSpecification.StaticFriction">静摩擦力</system:String>
+
+    <system:String x:Key="TrainAudio.Pages.MotorSetting.MotorSounds">电机声音</system:String>
+
+    <system:String x:Key="TrainAudio.Pages.Mixer.Volume.MasterVolume">主音量</system:String>
+    <system:String x:Key="TrainAudio.Pages.Mixer.Volume.MotorVolume">电机音量</system:String>
+    <system:String x:Key="TrainAudio.Pages.Mixer.Volume.FrequencyFilter">频率滤波器</system:String>
+    <system:String x:Key="TrainAudio.Pages.Mixer.Volume.ConvolutionFilter">环绕声滤波器</system:String>
+
+    <system:String x:Key="TrainAudio.Pages.Mixer.ConvolutionFilter.ImpulseResponse">脉冲响应</system:String>
+    <system:String x:Key="TrainAudio.Pages.Mixer.ConvolutionFilter.Load">加载</system:String>
+    <system:String x:Key="TrainAudio.Pages.Mixer.ConvolutionFilter.Message.Load.Ok">加载成功</system:String>
+    <system:String x:Key="TrainAudio.Pages.Mixer.ConvolutionFilter.Message.Load.Reset">恢复默认</system:String>
+
+    <system:String x:Key="TrainAudio.Pages.Mixer.FrequencyFilter.FilterType">类型</system:String>
+    <system:String x:Key="TrainAudio.Pages.Mixer.FrequencyFilter.Frequency">频率 (Hz)</system:String>
+    <system:String x:Key="TrainAudio.Pages.Mixer.FrequencyFilter.Q">Q</system:String>
+    <system:String x:Key="TrainAudio.Pages.Mixer.FrequencyFilter.Gain">增益 (dB)</system:String>
+
+    <system:String x:Key="TrainAudio.Pages.Gear.GearSetting.Calculate">齿轮比计算</system:String>
+
+    <system:String x:Key="TrainAudio.Pages.Gear.GearCalculate.Title">齿轮比计算</system:String>
+    <system:String x:Key="TrainAudio.Pages.Gear.GearCalculate.Gear">齿轮</system:String>
+    <system:String x:Key="TrainAudio.Pages.Gear.GearCalculate.Count">齿数</system:String>
+
+    <system:String x:Key="Simulator.RealTime.MasconWindow.Title">Controller</system:String>
+    <FontFamily x:Key="Simulator.RealTime.MasconWindow.Font.Number">/GUI/Resource/Fonts/MPlus1Code/#M PLUS 1 Code</FontFamily>
+    <FontFamily x:Key="Simulator.RealTime.MasconWindow.Font.Notch">SimHei</FontFamily>
+    <system:String x:Key="Simulator.RealTime.MasconWindow.SineFrequency">频率</system:String>
+    <system:String x:Key="Simulator.RealTime.MasconWindow.Voltage">电压</system:String>
+    <system:String x:Key="Simulator.RealTime.MasconWindow.PulseState">调制方式</system:String>
+    <system:String x:Key="Simulator.RealTime.MasconWindow.MenuItem.DeviceSetting">设置</system:String>
+
+    <system:String x:Key="Simulator.RealTime.RealtimeWindows.ControlStatus.Title">Control Status</system:String>
+
+    <system:String x:Key="Simulator.RealTime.RealtimeWindows.FFT.Title">频谱</system:String>
+
+    <system:String x:Key="Simulator.RealTime.RealtimeWindows.Hexagon.Title">磁链</system:String>
+
+    <system:String x:Key="Simulator.RealTime.RealtimeWindows.WaveForm.Title">波形</system:String>
+
+    <system:String x:Key="Simulator.RealTime.UniqueWindow.Fs.Title">Fourier Series</system:String>
+    <system:String x:Key="Simulator.RealTime.UniqueWindow.Fs.CopyCoefficients">Copy Coefficients</system:String>
+
+    <system:String x:Key="Simulator.RealTime.Setting.MasconDevice.Title">设置</system:String>
+    <system:String x:Key="Simulator.RealTime.Setting.MasconDevice.FrequencyRate">加速度</system:String>
+    <system:String x:Key="Simulator.RealTime.Setting.MasconDevice.DeviceMode">设备模式</system:String>
+    <system:String x:Key="Simulator.RealTime.Setting.MasconDevice.Port">端口</system:String>
+    <system:String x:Key="Simulator.RealTime.Setting.MasconDevice.AccelerateKey">牵引键</system:String>
+    <system:String x:Key="Simulator.RealTime.Setting.MasconDevice.NeutralKey">空挡键</system:String>
+    <system:String x:Key="Simulator.RealTime.Setting.MasconDevice.BrakeKey">制动键</system:String>
+
+    <system:String x:Key="Simulator.RealTime.Setting.ComPortSelector.Title">Select port</system:String>
+    <system:String x:Key="Simulator.RealTime.Setting.ComPortSelector.ComPort">COM Port</system:String>
+
+    <system:String x:Key="Simulator.RealTime.Setting.Basic.Title.Vvvf">VVVF 模拟设置</system:String>
+    <system:String x:Key="Simulator.RealTime.Setting.Basic.Title.Train">走行音模拟设置</system:String>
+    <system:String x:Key="Simulator.RealTime.Setting.Basic.AudioBuffSize">缓冲区大小</system:String>
+    <system:String x:Key="Simulator.RealTime.Setting.Basic.SamplingFrequency">采样率</system:String>
+    <system:String x:Key="Simulator.RealTime.Setting.Basic.CalculateDivision">计算精度</system:String>
+    <system:String x:Key="Simulator.RealTime.Setting.Basic.WaveForm">波形</system:String>
+    <system:String x:Key="Simulator.RealTime.Setting.Basic.WaveForm.Show.Line">显示线电压</system:String>
+    <system:String x:Key="Simulator.RealTime.Setting.Basic.WaveForm.Show.Phase">显示相电压</system:String>
+    <system:String x:Key="Simulator.RealTime.Setting.Basic.ControlStatus">控制信息</system:String>
+    <system:String x:Key="Simulator.RealTime.Setting.Basic.ControlStatus.Show">显示</system:String>
+    <system:String x:Key="Simulator.RealTime.Setting.Basic.ControlStatus.Design">样式</system:String>
+    <system:String x:Key="Simulator.RealTime.Setting.Basic.ControlStatus.PreciseCalculation">精确计算</system:String>
+    <system:String x:Key="Simulator.RealTime.Setting.Basic.VoltageVector">磁链</system:String>
+    <system:String x:Key="Simulator.RealTime.Setting.Basic.VoltageVector.Show">显示</system:String>
+    <system:String x:Key="Simulator.RealTime.Setting.Basic.VoltageVector.Design">样式</system:String>
+    <system:String x:Key="Simulator.RealTime.Setting.Basic.VoltageVector.ShowZeroVector">显示零矢量</system:String>
+    <system:String x:Key="Simulator.RealTime.Setting.Basic.Others">其他</system:String>
+    <system:String x:Key="Simulator.RealTime.Setting.Basic.Others.FFT.Show">显示 FFT</system:String>
+    <system:String x:Key="Simulator.RealTime.Setting.Basic.Others.FS.Show">显示 FS</system:String>
+    <system:String x:Key="Simulator.RealTime.Setting.Basic.Others.EditRealTime">模拟时允许编辑</system:String>
+
+    <system:String x:Key="Simulator.RealTime.Setting.Basic.Message.NoFont">字体未安装:</system:String>
+
+    <system:String x:Key="MidiConvert.Main.Title">MIDI Conversion</system:String>
+    <system:String x:Key="MidiConvert.Main.Browse">Browse</system:String>
+    <system:String x:Key="MidiConvert.Main.Select">Save Location</system:String>
+    <system:String x:Key="MidiConvert.Main.Config">Configuration</system:String>
+    <system:String x:Key="MidiConvert.Main.Convert">Convert</system:String>
+
+    <system:String x:Key="MidiConvert.Config.Title">MIDI Conversion</system:String>
+    <system:String x:Key="MidiConvert.Config.MultiThreading">Multi Thread</system:String>
+
+    <system:String x:Key="Mascon.EditPage.Order">顺序</system:String>
+    <system:String x:Key="Mascon.EditPage.Duration">时间</system:String>
+    <system:String x:Key="Mascon.EditPage.Rate">变化速率</system:String>
+    <system:String x:Key="Mascon.EditPage.Other">其他</system:String>
+    <system:String x:Key="Mascon.EditPage.Other.MasconOn">通电</system:String>
+    <system:String x:Key="Mascon.EditPage.Other.Brake">制动</system:String>
+
+    <system:String x:Key="Mascon.LoadMidi.Title">Load MIDI</system:String>
+    <system:String x:Key="Mascon.LoadMidi.File">文件</system:String>
+    <system:String x:Key="Mascon.LoadMidi.File.Select">选择</system:String>
+    <system:String x:Key="Mascon.LoadMidi.Track">Track</system:String>
+    <system:String x:Key="Mascon.LoadMidi.Priority">Priority</system:String>
+
+    <system:String x:Key="Mascon.ControlEditor.Title">基频变化速率编辑器</system:String>
+    <system:String x:Key="Mascon.ControlEditor.Menu.File">文件</system:String>
+    <system:String x:Key="Mascon.ControlEditor.Menu.File.Save">保存</system:String>
+    <system:String x:Key="Mascon.ControlEditor.Menu.File.Load">加载</system:String>
+    <system:String x:Key="Mascon.ControlEditor.Menu.Edit">编辑</system:String>
+    <system:String x:Key="Mascon.ControlEditor.Menu.Edit.Reset">重置</system:String>
+    <system:String x:Key="Mascon.ControlEditor.Menu.Edit.Midi">Load MIDI</system:String>
+
+    <system:String x:Key="Mascon.ControlEditor.Message.File.Load.Ok.Title"></system:String>
+    <system:String x:Key="Mascon.ControlEditor.Message.File.Load.Ok.Message">操作成功完成。</system:String>
+    <system:String x:Key="Mascon.ControlEditor.Message.File.Load.Error.Message">读取失败: </system:String>
+    <system:String x:Key="Mascon.ControlEditor.Message.File.Save.Ok.Title"></system:String>
+    <system:String x:Key="Mascon.ControlEditor.Message.File.Save.Ok.Message">操作成功完成。</system:String>
+    <system:String x:Key="Mascon.ControlEditor.Message.File.Save.Error.Message">保存失败</system:String>
+
+    <system:String x:Key="Create.Settings.Jerk.Jerk">通断电设置</system:String>
+    <system:String x:Key="Create.Settings.Jerk.JerkOn">通电</system:String>
+    <system:String x:Key="Create.Settings.Jerk.JerkOff">断电</system:String>
+    <system:String x:Key="Create.Settings.Jerk.Accelerate">加速</system:String>
+    <system:String x:Key="Create.Settings.Jerk.Brake">制动</system:String>
+    <system:String x:Key="Create.Settings.Jerk.MaxVoltageFrequency">最大电压频率</system:String>
+    <system:String x:Key="Create.Settings.Jerk.FrequencyChangeRate">变化速率</system:String>
+
+    <system:String x:Key="Create.Settings.Level.Level">PWM 电平</system:String>
+    <system:String x:Key="Create.Settings.Level.2Level">两电平</system:String>
+    <system:String x:Key="Create.Settings.Level.3Level">三电平</system:String>
+
+    <system:String x:Key="Create.Settings.MinimumFrequency.MinimumFrequency">最低频率</system:String>
+    <system:String x:Key="Create.Settings.MinimumFrequency.Accelerating">加速</system:String>
+    <system:String x:Key="Create.Settings.MinimumFrequency.Braking">制动</system:String>
+
+    <system:String x:Key="Create.Settings.Waveform.Single.ControlFreeRun.Title">通断电设置</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Single.ControlFreeRun.On">通电</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Single.ControlFreeRun.Off">断电</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Single.ControlFreeRun.Skip">跳过此调制</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Single.ControlFreeRun.StuckAtHere">保留此调制</system:String>
+
+    <system:String x:Key="Create.Settings.Waveform.Single.ControlAmplitude.Title.Default">调制度</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Single.ControlAmplitude.Title.JerkOn">通电时调制度</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Single.ControlAmplitude.Title.JerkOff">断电时调制度</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Single.ControlAmplitude.Mode">模式</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Single.ControlAmplitude.Value">值</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Single.ControlAmplitude.StartFrequency">开始频率</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Single.ControlAmplitude.EndFrequency">结束频率</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Single.ControlAmplitude.StartAmplitude">开始调制度</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Single.ControlAmplitude.EndAmplitude">结束调制度</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Single.ControlAmplitude.CutoffAmplitude">切断时调制度</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Single.ControlAmplitude.MaxAmplitude">最大调制度</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Single.ControlAmplitude.Polynomial">多项式拟合</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Single.ControlAmplitude.CurveRate">曲线速率</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Single.ControlAmplitude.DisableRangeLimit">禁用范围限制</system:String>
+
+    <system:String x:Key="Create.Settings.Waveform.Dipolar.ControlDipolar.Title">极性设置</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Dipolar.ControlDipolar.ParamType">模式</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Dipolar.ControlDipolar.Param">值</system:String>
+
+    <system:String x:Key="Create.Settings.Waveform.Common.ControlConstSetting.ConstValue">值</system:String>
+
+    <system:String x:Key="Create.Settings.Waveform.Common.ControlMovingSetting.MoveType">变化类型</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Common.ControlMovingSetting.Start">开始时基波频率</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Common.ControlMovingSetting.StartValue">开始时的值(Hz)</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Common.ControlMovingSetting.End">结束时基波频率</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Common.ControlMovingSetting.EndValue">结束时的值(Hz)</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Common.ControlMovingSetting.Exponential">指数</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Common.ControlMovingSetting.CurveRate">曲线速率</system:String>
+
+    <system:String x:Key="Create.Settings.Waveform.Basic.PulseSetting.Title">脉冲模式</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.PulseSetting.Type">类型</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.PulseSetting.PulseCount">脉冲数</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.PulseSetting.Detail">更多</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.PulseSetting.Shifted">反相</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.PulseSetting.Square">方波</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.PulseSetting.HarmonicSetting">谐波设置</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.PulseSetting.DiscreteSetting">离散设置</system:String>
+
+    <system:String x:Key="Create.Settings.Waveform.Basic.ConditionSetting.Title">基本设置</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.ConditionSetting.From">开始频率</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.ConditionSetting.SineFrom">生效最低频率</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.ConditionSetting.SineBelow">生效最高频率</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.ConditionSetting.Keep">保持</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.ConditionSetting.Keep.JerkOn">上电</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.ConditionSetting.Keep.JerkOff">断电</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.ConditionSetting.Enable">生效</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.ConditionSetting.Enable.NormalState">正常状态</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.ConditionSetting.Enable.JerkOn">上电</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.ConditionSetting.Enable.JerkOff">断电</system:String>
+
+    <system:String x:Key="Create.Settings.Waveform.Basic.ControlBasicHarmonic.Title">谐波设置</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.ControlBasicHarmonic.Add">添加</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.ControlBasicHarmonic.Set">设定</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.ControlBasicHarmonic.Type">类型</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.ControlBasicHarmonic.Harmonic">谐波次数</system:String>
+    <Span x:Key="Create.Settings.Waveform.Basic.ControlBasicHarmonic.HarmonicProportional">谐波<LineBreak /> 成比例</Span>
+    <system:String x:Key="Create.Settings.Waveform.Basic.ControlBasicHarmonic.Amplitude">调制度</system:String>
+    <Span x:Key="Create.Settings.Waveform.Basic.ControlBasicHarmonic.AmplitudeProportional">调制度<LineBreak/>成比例</Span>
+    <system:String x:Key="Create.Settings.Waveform.Basic.ControlBasicHarmonic.InitialPhase">初始相位</system:String>
+
+    <system:String x:Key="Create.Settings.Waveform.Basic.DiscreteSetting.Title">离散设置</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.DiscreteSetting.DiscreteSetting">离散设置</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.DiscreteSetting.Enable">启用</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.DiscreteSetting.Enabled">已启用</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.DiscreteSetting.Steps">步</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.DiscreteSetting.Mode">模式</system:String>
+
+    <system:String x:Key="Create.Settings.Waveform.Async.ControlAsync.CarrierFrequencySetting">异步调制载波频率设置</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Async.ControlAsync.CarrierFrequencySetting.Random">随机载波设置</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Async.ControlAsync.CarrierFrequencySetting.Random.Range">幅度 (Hz)</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Async.ControlAsync.CarrierFrequencySetting.Random.Interval">间隔 (秒)</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Async.ControlAsync.CarrierFrequencySetting.Carrier">载波模式</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Async.ControlAsync.CarrierFrequencySetting.Param">载波频率</system:String>
+
+    <system:String x:Key="Create.Settings.Waveform.Async.Vibrato.ControlAsyncVibrato.Basic">基本设置</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Async.Vibrato.ControlAsyncVibrato.Basic.Continuous">连续</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Async.Vibrato.ControlAsyncVibrato.Interval">间隔</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Async.Vibrato.ControlAsyncVibrato.Highest">最高载波频率</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Async.Vibrato.ControlAsyncVibrato.Lowest">最低载波频率</system:String>
+
+    <system:String x:Key="Create.Settings.Waveform.Async.Carrier.ControlAsyncCarrierTable.Carrier">载波频率</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Async.Carrier.ControlAsyncCarrierTable.From">从</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Async.Carrier.ControlAsyncCarrierTable.StuckAtHere">Keep this on Jerk</system:String>
+
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.ControlDipolar.ParamType.Name.Const">恒定</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.ControlDipolar.ParamType.Name.Moving">可变</system:String>
+
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.ControlMovingSetting.MoveType.Name.Proportional">线性</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.ControlMovingSetting.MoveType.Name.InvProportional">反比例</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.ControlMovingSetting.MoveType.Name.Pow2Exponential">指数</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.ControlMovingSetting.MoveType.Name.Sine">正弦</system:String>
+
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.FrequencyFilter.FilterType.PeakingEQ">顶峰滤波器</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.FrequencyFilter.FilterType.HighPassFilter">高通</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.FrequencyFilter.FilterType.LowPassFilter">低通</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.FrequencyFilter.FilterType.NotchFilter">陷波滤波器</system:String>
+
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.MasconDevice.DeviceMode.KeyBoard">键盘</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.MasconDevice.DeviceMode.PicoMascon">Pico Mascon</system:String>
+
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.ControlStatus.Design.Original1">样式 1</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.ControlStatus.Design.Original2">样式 2</system:String>
+
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.VoltageVector.Design.Original">样式 1</system:String>
+
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.AmplitudeMode.Name.Linear">线性</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.AmplitudeMode.Name.Wide3Pulse">广域3分频</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.AmplitudeMode.Name.InvProportional">反比例</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.AmplitudeMode.Name.Exponential">指数</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.AmplitudeMode.Name.LinearPolynomial">多项式拟合</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.AmplitudeMode.Name.Sine">正弦</system:String>
+
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.BaseWaveType.Name.Sine">正弦波</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.BaseWaveType.Name.Saw">三角波</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.BaseWaveType.Name.ModifiedSine1">改进型正弦波-1</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.BaseWaveType.Name.ModifiedSine2">改进型正弦波-2</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.BaseWaveType.Name.ModifiedSaw1">改进型三角波</system:String>
+
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseAlternative.Name.Default">默认</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseAlternative.Name.Alt">Alt</system:String>
+
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseModeName.Name.Async">异步调制</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseModeName.Name.Sync">同步调制</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseModeName.Name.Chm">CHMPWM</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseModeName.Name.She">SHEPWM</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseModeName.Name.Ho">HOP</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseModeName.Name.Pulse">分频</system:String>
+
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseHarmonicType.Name.Sine">正弦波</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseHarmonicType.Name.Saw">三角波</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseHarmonicType.Name.Square">方波</system:String>
+
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.DiscreteTimeMode.Name.Left">Left</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.DiscreteTimeMode.Name.Middle">Middle</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.DiscreteTimeMode.Name.Right">Right</system:String>
+
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.YamlAsyncParameterRandomValueMode.Name.Const">恒定</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.YamlAsyncParameterRandomValueMode.Name.Moving">可变</system:String>
+
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.YamlAsyncCarrierMode.Name.Const">恒定频率</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.YamlAsyncCarrierMode.Name.Moving">可变频率</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.YamlAsyncCarrierMode.Name.Vibrato">振动</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.YamlAsyncCarrierMode.Name.Table">列表</system:String>
+
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.YamlAsyncParameterVibratoMode.Name.Const">恒定</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.YamlAsyncParameterVibratoMode.Name.Moving">可变</system:String>
+
+
+</ResourceDictionary>

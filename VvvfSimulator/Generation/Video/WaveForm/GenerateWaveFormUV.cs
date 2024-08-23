@@ -8,8 +8,8 @@ using VvvfSimulator.GUI.Util;
 using VvvfSimulator.Yaml.VvvfSound;
 using static VvvfSimulator.Generation.GenerateCommon;
 using static VvvfSimulator.Generation.GenerateCommon.GenerationBasicParameter;
-using static VvvfSimulator.VvvfCalculate;
-using static VvvfSimulator.VvvfStructs;
+using static VvvfSimulator.Vvvf.Calculate;
+using static VvvfSimulator.Vvvf.Struct;
 using static VvvfSimulator.Yaml.MasconControl.YamlMasconAnalyze;
 
 namespace VvvfSimulator.Generation.Video.WaveForm
@@ -64,8 +64,8 @@ namespace VvvfSimulator.Generation.Video.WaveForm
             Graphics g = Graphics.FromImage(image);
             g.FillRectangle(new SolidBrush(Color.White), 0, 0, Width, Height);
 
-            List<int> points_x = new();
-            List<int> points_y = new();
+            List<int> points_x = [];
+            List<int> points_y = [];
 
             points_x.Add(Spacing);
             points_y.Add((int)(Height / 2.0));
@@ -108,9 +108,9 @@ namespace VvvfSimulator.Generation.Video.WaveForm
             MainWindow.Invoke(() => Viewer = new BitmapViewerManager());
             Viewer?.Show();
 
-            YamlVvvfSoundData vvvfData = generationBasicParameter.vvvfData;
-            YamlMasconDataCompiled masconData = generationBasicParameter.masconData;
-            ProgressData progressData = generationBasicParameter.progressData;
+            YamlVvvfSoundData vvvfData = generationBasicParameter.VvvfData;
+            YamlMasconDataCompiled masconData = generationBasicParameter.MasconData;
+            ProgressData progressData = generationBasicParameter.Progress;
 
             VvvfValues control = new();
             control.ResetControlValues();
@@ -165,14 +165,7 @@ namespace VvvfSimulator.Generation.Video.WaveForm
                 control.SetSineTime(0);
                 control.SetSawTime(0);
 
-                ControlStatus cv = new()
-                {
-                    brake = control.IsBraking(),
-                    mascon_on = !control.IsMasconOff(),
-                    free_run = control.IsFreeRun(),
-                    wave_stat = control.GetControlFrequency()
-                };
-                PwmCalculateValues calculated_Values = YamlVvvfWave.CalculateYaml(control, cv, vvvfData);
+                PwmCalculateValues calculated_Values = YamlVvvfWave.CalculateYaml(control, vvvfData);
 
                 Bitmap image = GetImage(control.Clone(), calculated_Values, image_width, image_height, wave_height, 2, calculate_div, 100);
 
@@ -226,9 +219,9 @@ namespace VvvfSimulator.Generation.Video.WaveForm
             MainWindow.Invoke(() => Viewer = new BitmapViewerManager());
             Viewer?.Show();
 
-            YamlVvvfSoundData vvvfData = generationBasicParameter.vvvfData;
-            YamlMasconDataCompiled masconData = generationBasicParameter.masconData;
-            ProgressData progressData = generationBasicParameter.progressData;
+            YamlVvvfSoundData vvvfData = generationBasicParameter.VvvfData;
+            YamlMasconDataCompiled masconData = generationBasicParameter.MasconData;
+            ProgressData progressData = generationBasicParameter.Progress;
 
             VvvfValues control = new();
             control.ResetControlValues();
@@ -284,14 +277,7 @@ namespace VvvfSimulator.Generation.Video.WaveForm
                 control.SetSineTime(0);
                 control.SetSawTime(0);
 
-                ControlStatus cv = new()
-                {
-                    brake = control.IsBraking(),
-                    mascon_on = !control.IsMasconOff(),
-                    free_run = control.IsFreeRun(),
-                    wave_stat = control.GetControlFrequency()
-                };
-                PwmCalculateValues calculated_Values = YamlVvvfWave.CalculateYaml(control, cv, vvvfData);
+                PwmCalculateValues calculated_Values = YamlVvvfWave.CalculateYaml(control, vvvfData);
                 Bitmap image = GetImage(control.Clone(), calculated_Values, image_width, image_height, wave_height, 1, calculate_div, 0);
 
                 MemoryStream ms = new();
