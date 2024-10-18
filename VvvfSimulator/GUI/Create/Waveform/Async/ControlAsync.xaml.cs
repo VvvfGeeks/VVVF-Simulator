@@ -66,21 +66,21 @@ namespace VvvfSimulator.GUI.Create.Waveform
             }
             else if (tag.Equals("Param"))
             {
-                YamlAsyncCarrierMode selected = (YamlAsyncCarrierMode)carrier_freq_mode.SelectedValue;
+                CarrierFrequencyValueMode selected = (CarrierFrequencyValueMode)carrier_freq_mode.SelectedValue;
                 Data.AsyncModulationData.CarrierWaveData.Mode = selected;
                 ShowSelectedCarrierMode(selected);
             }
         }
 
-        private void ShowSelectedCarrierMode(YamlAsyncCarrierMode selected)
+        private void ShowSelectedCarrierMode(CarrierFrequencyValueMode selected)
         {
-            if (selected == YamlAsyncCarrierMode.Const)
+            if (selected == CarrierFrequencyValueMode.Const)
                 carrier_setting.Navigate(new ControlConstSetting(Data.AsyncModulationData.CarrierWaveData.GetType(), Data.AsyncModulationData.CarrierWaveData));
-            else if (selected == YamlAsyncCarrierMode.Moving)
+            else if (selected == CarrierFrequencyValueMode.Moving)
                 carrier_setting.Navigate(new ControlMovingSetting(Data.AsyncModulationData.CarrierWaveData.MovingValue));
-            else if (selected == YamlAsyncCarrierMode.Vibrato)
+            else if (selected == CarrierFrequencyValueMode.Vibrato)
                 carrier_setting.Navigate(new ControlAsyncVibrato(Data));
-            else if(selected == YamlAsyncCarrierMode.Table)
+            else if(selected == CarrierFrequencyValueMode.Table)
                 carrier_setting.Navigate(new ControlAsyncCarrierTable(Data));
         }
 

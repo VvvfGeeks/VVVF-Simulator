@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using YamlDotNet.Serialization;
 using static VvvfSimulator.Vvvf.Calculate;
@@ -133,7 +134,6 @@ namespace VvvfSimulator.Yaml.VvvfSound
             public bool StuckFreeRunOff { get; set; } = false;
             public bool EnableNormal { get; set; } = true;
 
-            // Null check !
             public YamlPulseMode PulseMode { get; set; } = new();
             public YamlAmplitude Amplitude { get; set; } = new YamlAmplitude();
             public YamlAsync AsyncModulationData { get; set; } = new YamlAsync();
@@ -205,6 +205,12 @@ namespace VvvfSimulator.Yaml.VvvfSound
                     {
                         clone_pulse_harmonics.Add(PulseHarmonics[i].Clone());
                     }
+                    Dictionary<PulseDataKey, PulseDataValue> ClonePulseData = [];
+                    for(int i = 0; i < PulseData.Count; i++)
+                    {
+                        ClonePulseData.Add(PulseData.Keys.ToArray()[i], PulseData.Values.ToArray()[i].Clone());
+                    }
+                    x.PulseData = ClonePulseData;
                     x.PulseHarmonics = clone_pulse_harmonics;
                     x.DiscreteTime = DiscreteTime.Clone();
                     return x;
@@ -292,13 +298,52 @@ namespace VvvfSimulator.Yaml.VvvfSound
                         return (PulseHarmonic)MemberwiseClone();
                     }
                 }
+
+
+                //
+                // Pulse Custom Variable
+                //
+                public Dictionary<PulseDataKey, PulseDataValue> PulseData { get; set; } = [];
+                public enum PulseDataKey
+                {
+                    Dipolar, L3P3Alt1Width
+                }
+                public class PulseDataValue
+                {
+                    public PulseDataValueMode Mode { get; set; } = PulseDataValueMode.Const;
+                    public double Constant { get; set; } = -1;
+                    public YamlMovingValue MovingValue { get; set; } = new YamlMovingValue();
+                    public override string ToString()
+                    {
+                        Type t = typeof(PulseDataValue);
+                        string final = "[\r\n";
+                        foreach (var f in t.GetFields())
+                        {
+                            final += string.Format("{0} : {1}", f.Name, GetValueString(f.GetValue(t))) + "\r\n";
+                        }
+                        final += "]";
+                        return final;
+                    }
+                    public PulseDataValue Clone()
+                    {
+                        PulseDataValue clone = (PulseDataValue)MemberwiseClone();
+                        clone.MovingValue = this.MovingValue.Clone();
+                        return clone;
+                    }
+
+                    public enum PulseDataValueMode
+                    {
+                        Const, Moving
+                    }
+                }
+
+
             }
 
             public class YamlAsync
             {
                 public RandomModulation RandomData { get; set; } = new();
                 public CarrierFrequency CarrierWaveData { get; set; } = new();
-                public Dipolar DipolarData { get; set; } = new();
                 public override string ToString()
                 {
                     Type t = typeof(YamlAsync);
@@ -310,16 +355,13 @@ namespace VvvfSimulator.Yaml.VvvfSound
                     final += "]";
                     return final;
                 }
-
                 public YamlAsync Clone()
                 {
                     YamlAsync clone = (YamlAsync)MemberwiseClone();
                     clone.RandomData = RandomData.Clone();
                     clone.CarrierWaveData = CarrierWaveData.Clone();
-                    clone.DipolarData = DipolarData.Clone();
                     return clone;
                 }
-
                 public class RandomModulation
                 {
                     public YamlAsyncParameterRandomValue Range { get; set; } = new();
@@ -376,7 +418,7 @@ namespace VvvfSimulator.Yaml.VvvfSound
                 }
                 public class CarrierFrequency
                 {
-                    public YamlAsyncCarrierMode Mode { get; set; }
+                    public CarrierFrequencyValueMode Mode { get; set; }
                     public double Constant { get; set; } = -1.0;
                     public YamlMovingValue MovingValue { get; set; } = new YamlMovingValue();
                     public YamlAsyncParameterCarrierFreqVibrato VibratoData { get; set; } = new YamlAsyncParameterCarrierFreqVibrato();
@@ -404,7 +446,7 @@ namespace VvvfSimulator.Yaml.VvvfSound
                         return clone;
                     }
 
-                    public enum YamlAsyncCarrierMode
+                    public enum CarrierFrequencyValueMode
                     {
                         Const, Moving, Vibrato, Table
                     }
@@ -513,37 +555,6 @@ namespace VvvfSimulator.Yaml.VvvfSound
                         }
                     }
                 }
-                public class Dipolar
-                {
-                    public YamlAsyncParameterDipolarMode Mode { get; set; } = YamlAsyncParameterDipolarMode.Const;
-                    public double Constant { get; set; } = -1;
-                    public YamlMovingValue MovingValue { get; set; } = new YamlMovingValue();
-                    public override string ToString()
-                    {
-                        Type t = typeof(Dipolar);
-                        string final = "[\r\n";
-                        foreach (var f in t.GetFields())
-                        {
-                            final += string.Format("{0} : {1}", f.Name, GetValueString(f.GetValue(t))) + "\r\n";
-                        }
-                        final += "]";
-                        return final;
-                    }
-                    public Dipolar Clone()
-                    {
-                        Dipolar clone = (Dipolar)MemberwiseClone();
-                        clone.MovingValue = this.MovingValue.Clone();
-                        return clone;
-                    }
-
-                    public enum YamlAsyncParameterDipolarMode
-                    {
-                        Const, Moving
-                    }
-
-
-                }
-
             }
 
             public class YamlAmplitude
@@ -658,7 +669,7 @@ namespace VvvfSimulator.Yaml.VvvfSound
         {
             try
             {
-                using TextWriter writer = File.CreateText(path);
+                using StreamWriter writer = File.CreateText(path);
                 var serializer = new Serializer();
                 serializer.Serialize(writer, CurrentData);
                 writer.Close();

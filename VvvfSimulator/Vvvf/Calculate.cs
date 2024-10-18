@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using static VvvfSimulator.Vvvf.MyMath;
 using static VvvfSimulator.Vvvf.Struct;
 using static VvvfSimulator.Yaml.VvvfSound.YamlVvvfSoundData.YamlControlData;
@@ -325,10 +326,10 @@ namespace VvvfSimulator.Vvvf
 
             if (value.None) return new WaveValues(0, 0, 0);
 
-            control.SetVideoPulseMode(value.Pulse);
+            control.SetVideoPulseMode(value.PulseMode);
             control.SetVideoSineAmplitude(value.Amplitude);
             if (value.Carrier != null) control.SetVideoCarrierFrequency(value.Carrier.Clone());
-            control.SetVideoDipolar(value.Dipolar);
+            control.SetVideoCalculatedPulseData(value.PulseData);
 
             int U = 0, V = 0, W = 0;
 
@@ -371,15 +372,15 @@ namespace VvvfSimulator.Vvvf
             double SawTime = Control.GetSawTime();
 
             double Amplitude = Value.Amplitude;
-            YamlPulseMode PulseMode = Value.Pulse;
+            YamlPulseMode PulseMode = Value.PulseMode;
             PulseTypeName PulseType = PulseMode.PulseType;
             PulseAlternative Alternate = PulseMode.Alternative;
+            Dictionary<PulseDataKey, double> PulseData = Value.PulseData;
             int PulseCount = PulseMode.PulseCount;
             CarrierFreq Carrier = Value.Carrier;
 
             double SineX = SineAngleFrequency * SineTime + InitialPhase;
-            if (PulseMode.DiscreteTime.Enabled) SineX = DiscreteTimeLine(SineX, PulseMode.DiscreteTime.Steps, PulseMode.DiscreteTime.Mode);
-            double dipolar = Value.Dipolar;           
+            if (PulseMode.DiscreteTime.Enabled) SineX = DiscreteTimeLine(SineX, PulseMode.DiscreteTime.Steps, PulseMode.DiscreteTime.Mode);    
 
             switch (PulseType)
             {
@@ -400,7 +401,9 @@ namespace VvvfSimulator.Vvvf
                         double SawVal = GetSaw(Control.GetSawTime() * Control.GetSawAngleFrequency());
                         if (PulseMode.Shift)
                             SawVal = -SawVal;
-                        SawVal *= (dipolar != -1 ? dipolar : 0.5);
+
+                        double Dipolar = PulseData.GetValueOrDefault(PulseDataKey.Dipolar, -1);
+                        SawVal *= (Dipolar != -1 ? Dipolar : 0.5);
 
                         return ModulateSin(SineVal, SawVal + 0.5) + ModulateSin(SineVal, SawVal - 0.5);
                     }
@@ -420,12 +423,42 @@ namespace VvvfSimulator.Vvvf
                             }
                         }
 
+                        if(PulseCount == 5)
+                        {
+                            if(Alternate == PulseAlternative.Alt1)
+                            {
+                                double Period = SineX % M_2PI;
+                                int Orthant = (int)(Period / M_PI_2);
+                                double Quater = Period % M_PI_2;
+
+                                int _GetPwm(double t)
+                                {
+                                    double a = M_PI_2 - Value.Amplitude;
+                                    double b = PulseData.GetValueOrDefault(PulseDataKey.L3P3Alt1Width, 0);
+                                    if (t < a) return 1;
+                                    if (t < a + b) return 2;
+                                    if (t < a + 2 * b) return 1;
+                                    return 2;
+                                }
+
+                                return Orthant switch
+                                {
+                                    0 => _GetPwm(Quater),
+                                    1 => _GetPwm(M_PI_2 - Quater),
+                                    2 => 2 - _GetPwm(Quater),
+                                    _ => 2 - _GetPwm(M_PI_2 - Quater)
+                                };
+                            }
+                        }
+
                         { // nP DEFAULT
                             double SineVal = GetSineValueWithHarmonic(PulseMode.Clone(), SineX, Amplitude, Control.GetGenerationCurrentTime(), InitialPhase);
                             double SawVal = GetSaw(PulseCount * SineX);
                             if (PulseMode.Shift)
                                 SawVal = -SawVal;
-                            SawVal *= (dipolar != -1 ? dipolar : 0.5);
+
+                            double Dipolar = PulseData.GetValueOrDefault(PulseDataKey.Dipolar, -1);
+                            SawVal *= (Dipolar != -1 ? Dipolar : 0.5);
 
                             Control.SetSawAngleFrequency(SineAngleFrequency * PulseCount);
                             Control.SetSawTime(SineTime);
@@ -435,78 +468,66 @@ namespace VvvfSimulator.Vvvf
                     }
                 case PulseTypeName.SHE:
                     {
-                        switch (PulseCount)
+                        return PulseCount switch
                         {
-                            case 21:
-                                return PulseMode.Alternative switch
-                                {
-                                    PulseAlternative.Default => CustomPwm.L3She21Default.GetPwm(Value.Amplitude, SineX),
-                                    _ => 0
-                                };
-                            case 19:
-                                return PulseMode.Alternative switch
-                                {
-                                    PulseAlternative.Default => CustomPwm.L3She19Default.GetPwm(Value.Amplitude, SineX),
-                                    _ => 0
-                                };
-                            case 17:
-                                return PulseMode.Alternative switch
-                                {
-                                    PulseAlternative.Default => CustomPwm.L3She17Default.GetPwm(Value.Amplitude, SineX),
-                                    _ => 0
-                                };
-                            case 15:
-                                return PulseMode.Alternative switch
-                                {
-                                    PulseAlternative.Default => CustomPwm.L3She15Default.GetPwm(Value.Amplitude, SineX),
-                                    _ => 0
-                                };
-                            case 13:
-                                return PulseMode.Alternative switch
-                                {
-                                    PulseAlternative.Default => CustomPwm.L3She13Default.GetPwm(Value.Amplitude, SineX),
-                                    _ => 0
-                                };
-                            case 11:
-                                return PulseMode.Alternative switch
-                                {
-                                    PulseAlternative.Default => CustomPwm.L3She11Default.GetPwm(Value.Amplitude, SineX),
-                                    _ => 0
-                                };
-                            case 9:
-                                return PulseMode.Alternative switch
-                                {
-                                    PulseAlternative.Default => CustomPwm.L3She9Default.GetPwm(Value.Amplitude, SineX),
-                                    _ => 0
-                                };
-                            case 7:
-                                return PulseMode.Alternative switch
-                                {
-                                    PulseAlternative.Default => CustomPwm.L3She7Default.GetPwm(Value.Amplitude, SineX),
-                                    _ => 0
-                                };
-                            case 5:
-                                return PulseMode.Alternative switch
-                                {
-                                    PulseAlternative.Default => CustomPwm.L3She5Default.GetPwm(Value.Amplitude, SineX),
-                                    _ => 0
-                                };
-                            case 3:
-                                return PulseMode.Alternative switch
-                                {
-                                    PulseAlternative.Default => CustomPwm.L3She3Default.GetPwm(Value.Amplitude, SineX),
-                                    PulseAlternative.Alt1 => CustomPwm.L3She3Alt1.GetPwm(Value.Amplitude, SineX),
-                                    _ => 0
-                                };
-                            case 1:
-                                return PulseMode.Alternative switch
-                                {
-                                    PulseAlternative.Default => CustomPwm.L3She1Default.GetPwm(Value.Amplitude, SineX),
-                                    _ => 0
-                                };
-                            default:
-                                return 0;
-                        }
+                            21 => PulseMode.Alternative switch
+                            {
+                                PulseAlternative.Default => CustomPwm.L3She21Default.GetPwm(Value.Amplitude, SineX),
+                                _ => 0
+                            },
+                            19 => PulseMode.Alternative switch
+                            {
+                                PulseAlternative.Default => CustomPwm.L3She19Default.GetPwm(Value.Amplitude, SineX),
+                                _ => 0
+                            },
+                            17 => PulseMode.Alternative switch
+                            {
+                                PulseAlternative.Default => CustomPwm.L3She17Default.GetPwm(Value.Amplitude, SineX),
+                                _ => 0
+                            },
+                            15 => PulseMode.Alternative switch
+                            {
+                                PulseAlternative.Default => CustomPwm.L3She15Default.GetPwm(Value.Amplitude, SineX),
+                                _ => 0
+                            },
+                            13 => PulseMode.Alternative switch
+                            {
+                                PulseAlternative.Default => CustomPwm.L3She13Default.GetPwm(Value.Amplitude, SineX),
+                                _ => 0
+                            },
+                            11 => PulseMode.Alternative switch
+                            {
+                                PulseAlternative.Default => CustomPwm.L3She11Default.GetPwm(Value.Amplitude, SineX),
+                                _ => 0
+                            },
+                            9 => PulseMode.Alternative switch
+                            {
+                                PulseAlternative.Default => CustomPwm.L3She9Default.GetPwm(Value.Amplitude, SineX),
+                                _ => 0
+                            },
+                            7 => PulseMode.Alternative switch
+                            {
+                                PulseAlternative.Default => CustomPwm.L3She7Default.GetPwm(Value.Amplitude, SineX),
+                                _ => 0
+                            },
+                            5 => PulseMode.Alternative switch
+                            {
+                                PulseAlternative.Default => CustomPwm.L3She5Default.GetPwm(Value.Amplitude, SineX),
+                                _ => 0
+                            },
+                            3 => PulseMode.Alternative switch
+                            {
+                                PulseAlternative.Default => CustomPwm.L3She3Default.GetPwm(Value.Amplitude, SineX),
+                                PulseAlternative.Alt1 => CustomPwm.L3She3Alt1.GetPwm(Value.Amplitude, SineX),
+                                _ => 0
+                            },
+                            1 => PulseMode.Alternative switch
+                            {
+                                PulseAlternative.Default => CustomPwm.L3She1Default.GetPwm(Value.Amplitude, SineX),
+                                _ => 0
+                            },
+                            _ => 0,
+                        };
                     }
                 case PulseTypeName.CHM:
                     {
@@ -750,7 +771,7 @@ namespace VvvfSimulator.Vvvf
             double SawTime = Control.GetSawTime();
 
             double Amplitude = Value.Amplitude;
-            YamlPulseMode PulseMode = Value.Pulse;
+            YamlPulseMode PulseMode = Value.PulseMode;
             PulseTypeName PulseType = PulseMode.PulseType;
             PulseAlternative Alternate = PulseMode.Alternative;
             int PulseCount = PulseMode.PulseCount;
@@ -846,97 +867,54 @@ namespace VvvfSimulator.Vvvf
                     }
                 case PulseTypeName.SHE:
                     {
-                        switch (PulseCount)
+                        return PulseCount switch
                         {
-                            case 3:
-                                {
-                                    switch (PulseMode.Alternative)
-                                    {
-                                        case PulseAlternative.Default:
-                                            return CustomPwm.L2She3Default.GetPwm(Amplitude, SineX);
-                                        case PulseAlternative.Alt1:
-                                            return CustomPwm.L2She3Alt1.GetPwm(Amplitude, SineX);
-                                    }
-                                    break;
-                                }
-                            case 5:
-                                switch (PulseMode.Alternative)
-                                {
-                                    case PulseAlternative.Default:
-                                        return CustomPwm.L2She5Default.GetPwm(Amplitude, SineX);
-                                    case PulseAlternative.Alt1:
-                                        return CustomPwm.L2She5Alt1.GetPwm(Amplitude, SineX);
-                                    case PulseAlternative.Alt2:
-                                        return CustomPwm.L2She5Alt2.GetPwm(Amplitude, SineX);
-                                    default: break;
-                                }
-                                break;
-                            case 7:
-                                {
-                                    switch (PulseMode.Alternative)
-                                    {
-                                        case PulseAlternative.Default:
-                                            return CustomPwm.L2She7Default.GetPwm(Amplitude, SineX);
-                                        case PulseAlternative.Alt1:
-                                            return CustomPwm.L2She7Alt1.GetPwm(Amplitude, SineX);
-                                    }
-                                    break;
-                                }
-                            case 9:
-                                {
-                                    switch (PulseMode.Alternative)
-                                    {
-                                        case PulseAlternative.Default:
-                                            return CustomPwm.L2She9Default.GetPwm(Amplitude, SineX);
-                                        case PulseAlternative.Alt1:
-                                            return CustomPwm.L2She9Alt1.GetPwm(Amplitude, SineX);
-                                        case PulseAlternative.Alt2:
-                                            return CustomPwm.L2She9Alt2.GetPwm(Amplitude, SineX);
-                                    }
-                                    break;
-                                }
-                            case 11:
-                                {
-                                    switch (PulseMode.Alternative)
-                                    {
-                                        case PulseAlternative.Default:
-                                            return CustomPwm.L2She11Default.GetPwm(Amplitude, SineX);
-                                        case PulseAlternative.Alt1:
-                                            return CustomPwm.L2She11Alt1.GetPwm(Amplitude, SineX);
-                                        default: break;
-                                    }
-                                    break;
-                                }
-                            case 13:
-                                {
-                                    switch (PulseMode.Alternative)
-                                    {
-                                        case PulseAlternative.Default:
-                                            return CustomPwm.L2She13Default.GetPwm(Amplitude, SineX);
-                                        case PulseAlternative.Alt1:
-                                            return CustomPwm.L2She13Alt1.GetPwm(Amplitude, SineX);
-                                        default: break;
-                                    }
-                                    break;
-                                }
-                            case 15:
-                                {
-                                    switch (PulseMode.Alternative)
-                                    {
-                                        case PulseAlternative.Default:
-                                            return CustomPwm.L2She15Default.GetPwm(Amplitude, SineX);
-                                        case PulseAlternative.Alt1:
-                                            return CustomPwm.L2She15Alt1.GetPwm(Amplitude, SineX);
-                                        default: break;
-                                    }
-                                    break;
-                                }
-                            default:
-                                {
-                                    break;
-                                }
-                        }
-                        return 0;
+                            3 => PulseMode.Alternative switch
+                            {
+                                PulseAlternative.Default => CustomPwm.L2She3Default.GetPwm(Amplitude, SineX),
+                                PulseAlternative.Alt1 => CustomPwm.L2She3Alt1.GetPwm(Amplitude, SineX),
+                                _ => 0,
+                            },
+                            5 => PulseMode.Alternative switch
+                            {
+                                PulseAlternative.Default => CustomPwm.L2She5Default.GetPwm(Amplitude, SineX),
+                                PulseAlternative.Alt1 => CustomPwm.L2She5Alt1.GetPwm(Amplitude, SineX),
+                                PulseAlternative.Alt2 => CustomPwm.L2She5Alt2.GetPwm(Amplitude, SineX),
+                                _ => 0,
+                            },
+                            7 => PulseMode.Alternative switch
+                            {
+                                PulseAlternative.Default => CustomPwm.L2She7Default.GetPwm(Amplitude, SineX),
+                                PulseAlternative.Alt1 => CustomPwm.L2She7Alt1.GetPwm(Amplitude, SineX),
+                                _ => 0,
+                            },
+                            9 => PulseMode.Alternative switch
+                            {
+                                PulseAlternative.Default => CustomPwm.L2She9Default.GetPwm(Amplitude, SineX),
+                                PulseAlternative.Alt1 => CustomPwm.L2She9Alt1.GetPwm(Amplitude, SineX),
+                                PulseAlternative.Alt2 => CustomPwm.L2She9Alt2.GetPwm(Amplitude, SineX),
+                                _ => 0,
+                            },
+                            11 => PulseMode.Alternative switch
+                            {
+                                PulseAlternative.Default => CustomPwm.L2She11Default.GetPwm(Amplitude, SineX),
+                                PulseAlternative.Alt1 => CustomPwm.L2She11Alt1.GetPwm(Amplitude, SineX),
+                                _ => 0,
+                            },
+                            13 => PulseMode.Alternative switch
+                            {
+                                PulseAlternative.Default => CustomPwm.L2She13Default.GetPwm(Amplitude, SineX),
+                                PulseAlternative.Alt1 => CustomPwm.L2She13Alt1.GetPwm(Amplitude, SineX),
+                                _ => 0,
+                            },
+                            15 => PulseMode.Alternative switch
+                            {
+                                PulseAlternative.Default => CustomPwm.L2She15Default.GetPwm(Amplitude, SineX),
+                                PulseAlternative.Alt1 => CustomPwm.L2She15Alt1.GetPwm(Amplitude, SineX),
+                                _ => 0,
+                            },
+                            _ => 0,
+                        };
                     }
                 case PulseTypeName.CHM:
                     {
@@ -1172,9 +1150,8 @@ namespace VvvfSimulator.Vvvf
                                     };
                                 }
                             default:
-                                break;
+                                return 0;
                         }
-                        return 0;
                     }
                 default:
                     return 0;

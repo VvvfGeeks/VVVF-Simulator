@@ -1,9 +1,9 @@
-﻿<UserControl x:Class="VvvfSimulator.GUI.Create.Waveform.Dipolar.ControlDipolar"
+﻿<UserControl x:Class="VvvfSimulator.GUI.Create.Waveform.Common.PulseDataSetting"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:VvvfSimulator.GUI.Create.Waveform.Dipolar"
+             xmlns:local="clr-namespace:VvvfSimulator.GUI.Create.Waveform.Common"
              mc:Ignorable="d" 
              d:DesignHeight="500" d:DesignWidth="661">
     <UserControl.Resources>
@@ -22,7 +22,7 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Border Background="{DynamicResource TitleBarBrush}" CornerRadius="25,25,0,0">
-                <Label x:Name="carrier_title" Content="{DynamicResource Create.Settings.Waveform.Dipolar.ControlDipolar.Title}" Style="{DynamicResource TitleBarText}"/>
+                <Label x:Name="SettingTitle" d:Content="{DynamicResource Resource.Language.FriendlyNameConverter.PulseDataSetting.Key.Name.L3P3Alt1Width}" Style="{DynamicResource TitleBarText}"/>
             </Border>
             <Grid Grid.Row="1">
                 <Grid>
@@ -31,10 +31,10 @@
                         <ColumnDefinition Width="11*"/>
                     </Grid.ColumnDefinitions>
                     <Grid Background="{DynamicResource SubTitleBarBrush}">
-                        <Label Content="{DynamicResource Create.Settings.Waveform.Dipolar.ControlDipolar.ParamType}" Style="{DynamicResource SubTitleBarText}"/>
+                        <Label Content="{DynamicResource Create.Settings.Waveform.Common.PulseDataSetting.ParamType}" Style="{DynamicResource SubTitleBarText}"/>
                     </Grid>
                     <Grid Grid.Column="1" Background="{DynamicResource BackgroundBrush}" HorizontalAlignment="Stretch">
-                        <ComboBox Style="{DynamicResource SlimComboBoxStyle}"  x:Name="dipolar_mode" SelectionChanged="ValueModeSelectionChanged" SelectedValuePath="Key" DisplayMemberPath="Value"/>
+                        <ComboBox Style="{DynamicResource SlimComboBoxStyle}"  x:Name="ValueMode" SelectionChanged="ValueModeSelectionChanged" SelectedValuePath="Key" DisplayMemberPath="Value"/>
 
                     </Grid>
                 </Grid>
@@ -47,7 +47,7 @@
                         <ColumnDefinition Width="11*"/>
                     </Grid.ColumnDefinitions>
                     <Border Background="{DynamicResource SubTitleBarBrush}" VerticalAlignment="Stretch" CornerRadius="0,0,0,25">
-                        <Label Content="{DynamicResource Create.Settings.Waveform.Dipolar.ControlDipolar.Param}" Style="{DynamicResource SubTitleBarText}"/>
+                        <Label Content="{DynamicResource Create.Settings.Waveform.Common.PulseDataSetting.Param}" Style="{DynamicResource SubTitleBarText}"/>
                     </Border>
                     <Border Grid.Column="1" Background="{DynamicResource BackgroundBrush}" HorizontalAlignment="Stretch" CornerRadius="0,0,25,0">
                         <Frame x:Name="dipolar_param" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"  />

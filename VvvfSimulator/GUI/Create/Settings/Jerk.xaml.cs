@@ -32,8 +32,16 @@ namespace VvvfSimulator.GUI.Create.Settings
                 this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
             }
         }
+        public Jerk()
+        {
+            IgnoreUpdateValue = true;
+            InitializeComponent();
+            DataContext = new Controller();
+            SetView();
+            IgnoreUpdateValue = false;
+        }
 
-        public void updateView()
+        public void SetView()
         {
             Controller dc = (Controller)this.DataContext;
             YamlMasconData mascon = YamlVvvfManage.CurrentData.MasconData;
@@ -43,10 +51,12 @@ namespace VvvfSimulator.GUI.Create.Settings
             FreqChangeRateInput.Text = mode.FrequencyChangeRate.ToString();
         }
 
-        public void UpdateValue()
+        bool IgnoreUpdateValue = false;
+        private void ValueUpdated(object sender, TextChangedEventArgs e)
         {
             Controller dc = (Controller)this.DataContext;
-            if(dc == null) return;
+            if (dc == null) return;
+            if (IgnoreUpdateValue) return;
 
             YamlMasconData mascon = YamlVvvfManage.CurrentData.MasconData;
             YamlMasconDataPattern pattern = dc.IsAccelerateActive ? mascon.Accelerating : mascon.Braking;
@@ -55,33 +65,22 @@ namespace VvvfSimulator.GUI.Create.Settings
             mode.FrequencyChangeRate = ParseTextBox.ParseDouble(FreqChangeRateInput);
         }
 
-        public Jerk()
-        {
-            InitializeComponent();
-            DataContext = new Controller();
-            updateView();
-        }
-
-        private void ValueUpdated(object sender, TextChangedEventArgs e)
-        {
-
-            UpdateValue();
-
-        }
-
-        private void onClick(object sender, RoutedEventArgs e)
+        private void OnButtonClick(object sender, RoutedEventArgs e)
         {
             
             Button button = (Button)sender;
             Controller dc = (Controller)this.DataContext;
+
+            IgnoreUpdateValue = true;
 
             string name = button.Name;
             if (name.Equals("ButtonModeAccelerate")) dc.IsAccelerateActive = true;
             else if (name.Equals("ButtonModeBrake")) dc.IsAccelerateActive = false;
             if (name.Equals("ButtonTurnOn")) dc.IsTurnOnActive = true;
             else if (name.Equals("ButtonTurnOff")) dc.IsTurnOnActive = false;
+            SetView();
 
-            updateView();
+            IgnoreUpdateValue = false;
 
         }
     }

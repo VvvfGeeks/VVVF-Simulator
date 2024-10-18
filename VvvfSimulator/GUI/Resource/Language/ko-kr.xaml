@@ -351,9 +351,8 @@
     <system:String x:Key="Create.Settings.Waveform.Single.ControlAmplitude.CurveRate">곡률</system:String>
     <system:String x:Key="Create.Settings.Waveform.Single.ControlAmplitude.DisableRangeLimit">진폭 범위 제한 비활성화</system:String>
 
-    <system:String x:Key="Create.Settings.Waveform.Dipolar.ControlDipolar.Title">다이폴라 설정</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Dipolar.ControlDipolar.ParamType">모드</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Dipolar.ControlDipolar.Param">값</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Common.PulseDataSetting.ParamType">모드</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Common.PulseDataSetting.Param">값</system:String>
 
     <system:String x:Key="Create.Settings.Waveform.Common.ControlConstSetting.ConstValue">값</system:String>
 
@@ -420,8 +419,11 @@
     <system:String x:Key="Create.Settings.Waveform.Async.Carrier.ControlAsyncCarrierTable.From">시작 주파수</system:String>
     <system:String x:Key="Create.Settings.Waveform.Async.Carrier.ControlAsyncCarrierTable.StuckAtHere">타행 시 유지</system:String>
 
-    <system:String x:Key="Resource.Language.FriendlyNameConverter.ControlDipolar.ParamType.Name.Const">일정</system:String>
-    <system:String x:Key="Resource.Language.FriendlyNameConverter.ControlDipolar.ParamType.Name.Moving">가변</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseDataSetting.Value.Mode.Name.Const">일정</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseDataSetting.Value.Mode.Name.Moving">가변</system:String>
+
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseDataSetting.Key.Name.Dipolar">다이폴라</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseDataSetting.Key.Name.L3P3Alt1Width">펄스 폭</system:String>
 
     <system:String x:Key="Resource.Language.FriendlyNameConverter.ControlMovingSetting.MoveType.Name.Proportional">정비례</system:String>
     <system:String x:Key="Resource.Language.FriendlyNameConverter.ControlMovingSetting.MoveType.Name.InvProportional">반비례</system:String>

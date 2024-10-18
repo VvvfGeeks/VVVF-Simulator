@@ -351,9 +351,8 @@
     <system:String x:Key="Create.Settings.Waveform.Single.ControlAmplitude.CurveRate">曲率</system:String>
     <system:String x:Key="Create.Settings.Waveform.Single.ControlAmplitude.DisableRangeLimit">変調率を始点と終点の間に限定しない</system:String>
 
-    <system:String x:Key="Create.Settings.Waveform.Dipolar.ControlDipolar.Title">ダイポーラ設定</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Dipolar.ControlDipolar.ParamType">値の種類</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Dipolar.ControlDipolar.Param">変数</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Common.PulseDataSetting.ParamType">値の種類</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Common.PulseDataSetting.Param">変数</system:String>
 
     <system:String x:Key="Create.Settings.Waveform.Common.ControlConstSetting.ConstValue">定数</system:String>
 
@@ -420,9 +419,12 @@
     <system:String x:Key="Create.Settings.Waveform.Async.Carrier.ControlAsyncCarrierTable.From">開始周波数</system:String>
     <system:String x:Key="Create.Settings.Waveform.Async.Carrier.ControlAsyncCarrierTable.StuckAtHere">ジャーク時維持</system:String>
 
-    <system:String x:Key="Resource.Language.FriendlyNameConverter.ControlDipolar.ParamType.Name.Const">定数</system:String>
-    <system:String x:Key="Resource.Language.FriendlyNameConverter.ControlDipolar.ParamType.Name.Moving">変数</system:String>
-    
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseDataSetting.Value.Mode.Name.Const">定数</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseDataSetting.Value.Mode.Name.Moving">変数</system:String>
+
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseDataSetting.Key.Name.Dipolar">ダイポーラ</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseDataSetting.Key.Name.L3P3Alt1Width">パルス幅</system:String>
+
     <system:String x:Key="Resource.Language.FriendlyNameConverter.ControlMovingSetting.MoveType.Name.Proportional">比例</system:String>
     <system:String x:Key="Resource.Language.FriendlyNameConverter.ControlMovingSetting.MoveType.Name.InvProportional">反比例</system:String>
     <system:String x:Key="Resource.Language.FriendlyNameConverter.ControlMovingSetting.MoveType.Name.Pow2Exponential">2の指数</system:String>

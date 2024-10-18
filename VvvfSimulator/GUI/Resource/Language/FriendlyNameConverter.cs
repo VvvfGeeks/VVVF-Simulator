@@ -9,11 +9,11 @@ using static VvvfSimulator.Yaml.TrainAudioSetting.YamlTrainSoundAnalyze.YamlTrai
 using static VvvfSimulator.Yaml.VvvfSound.YamlVvvfSoundData.YamlControlData;
 using static VvvfSimulator.Yaml.VvvfSound.YamlVvvfSoundData.YamlControlData.YamlAsync.CarrierFrequency;
 using static VvvfSimulator.Yaml.VvvfSound.YamlVvvfSoundData.YamlControlData.YamlAsync.CarrierFrequency.YamlAsyncParameterCarrierFreqVibrato.YamlAsyncParameterVibratoValue;
-using static VvvfSimulator.Yaml.VvvfSound.YamlVvvfSoundData.YamlControlData.YamlAsync.Dipolar;
 using static VvvfSimulator.Yaml.VvvfSound.YamlVvvfSoundData.YamlControlData.YamlAsync.RandomModulation.YamlAsyncParameterRandomValue;
 using static VvvfSimulator.Yaml.VvvfSound.YamlVvvfSoundData.YamlControlData.YamlMovingValue;
 using static VvvfSimulator.Yaml.VvvfSound.YamlVvvfSoundData.YamlControlData.YamlPulseMode;
 using static VvvfSimulator.Yaml.VvvfSound.YamlVvvfSoundData.YamlControlData.YamlPulseMode.DiscreteTimeConfiguration;
+using static VvvfSimulator.Yaml.VvvfSound.YamlVvvfSoundData.YamlControlData.YamlPulseMode.PulseDataValue;
 using static VvvfSimulator.Yaml.VvvfSound.YamlVvvfSoundData.YamlControlData.YamlPulseMode.PulseHarmonic;
 
 namespace VvvfSimulator.GUI.Resource.Language
@@ -115,22 +115,36 @@ namespace VvvfSimulator.GUI.Resource.Language
             };
         }
 
-        public static Dictionary<YamlAsyncParameterDipolarMode, string> GetDipolarModeNames()
+        public static Dictionary<PulseDataValueMode, string> GetPulseDataValueModeNames()
         {
-            Dictionary<YamlAsyncParameterDipolarMode, string> Names = [];
-            foreach (YamlAsyncParameterDipolarMode type in (YamlAsyncParameterDipolarMode[])Enum.GetValues(typeof(YamlAsyncParameterDipolarMode)))
+            Dictionary<PulseDataValueMode, string> Names = [];
+            foreach (PulseDataValueMode type in (PulseDataValueMode[])Enum.GetValues(typeof(PulseDataValueMode)))
             {
-                Names.Add(type, GetDipolarModeName(type));
+                Names.Add(type, GetPulseDataValueModeName(type));
             }
             return Names;
         }
-        public static string GetDipolarModeName(YamlAsyncParameterDipolarMode filterType)
+        public static string GetPulseDataValueModeName(PulseDataValueMode Mode)
         {
-            return filterType switch
+            return Mode switch
             {
-                YamlAsyncParameterDipolarMode.Const => LanguageManager.GetString("Resource.Language.FriendlyNameConverter.ControlDipolar.ParamType.Name.Const"),
-                _ => LanguageManager.GetString("Resource.Language.FriendlyNameConverter.ControlDipolar.ParamType.Name.Moving")
+                PulseDataValueMode.Const => LanguageManager.GetString("Resource.Language.FriendlyNameConverter.PulseDataSetting.Value.Mode.Name.Const"),
+                _ => LanguageManager.GetString("Resource.Language.FriendlyNameConverter.PulseDataSetting.Value.Mode.Name.Moving")
             };
+        }
+
+        public static Dictionary<PulseDataKey, string> GetPulseDataKeyNames()
+        {
+            Dictionary<PulseDataKey, string> Names = [];
+            foreach (PulseDataKey type in (PulseDataKey[])Enum.GetValues(typeof(PulseDataKey)))
+            {
+                Names.Add(type, GetPulseDataKeyName(type));
+            }
+            return Names;
+        }
+        public static string GetPulseDataKeyName(PulseDataKey Key)
+        {
+            return LanguageManager.GetString("Resource.Language.FriendlyNameConverter.PulseDataSetting.Key.Name." + Key.ToString());
         }
 
         public static Dictionary<MovingValueType, string> GetMovingValueTypeNames()
@@ -305,22 +319,22 @@ namespace VvvfSimulator.GUI.Resource.Language
             };
         }
 
-        public static Dictionary<YamlAsyncCarrierMode, string> GetYamlAsyncCarrierModeName()
+        public static Dictionary<CarrierFrequencyValueMode, string> GetYamlAsyncCarrierModeName()
         {
-            Dictionary<YamlAsyncCarrierMode, string> Names = [];
-            foreach (YamlAsyncCarrierMode type in (YamlAsyncCarrierMode[])Enum.GetValues(typeof(YamlAsyncCarrierMode)))
+            Dictionary<CarrierFrequencyValueMode, string> Names = [];
+            foreach (CarrierFrequencyValueMode type in (CarrierFrequencyValueMode[])Enum.GetValues(typeof(CarrierFrequencyValueMode)))
             {
                 Names.Add(type, GetYamlAsyncCarrierModeName(type));
             }
             return Names;
         }
-        public static string GetYamlAsyncCarrierModeName(YamlAsyncCarrierMode Mode)
+        public static string GetYamlAsyncCarrierModeName(CarrierFrequencyValueMode Mode)
         {
             return Mode switch
             {
-                YamlAsyncCarrierMode.Const => LanguageManager.GetString("Resource.Language.FriendlyNameConverter.YamlAsyncCarrierMode.Name.Const"),
-                YamlAsyncCarrierMode.Moving => LanguageManager.GetString("Resource.Language.FriendlyNameConverter.YamlAsyncCarrierMode.Name.Moving"),
-                YamlAsyncCarrierMode.Vibrato => LanguageManager.GetString("Resource.Language.FriendlyNameConverter.YamlAsyncCarrierMode.Name.Vibrato"),
+                CarrierFrequencyValueMode.Const => LanguageManager.GetString("Resource.Language.FriendlyNameConverter.YamlAsyncCarrierMode.Name.Const"),
+                CarrierFrequencyValueMode.Moving => LanguageManager.GetString("Resource.Language.FriendlyNameConverter.YamlAsyncCarrierMode.Name.Moving"),
+                CarrierFrequencyValueMode.Vibrato => LanguageManager.GetString("Resource.Language.FriendlyNameConverter.YamlAsyncCarrierMode.Name.Vibrato"),
                 _ => LanguageManager.GetString("Resource.Language.FriendlyNameConverter.YamlAsyncCarrierMode.Name.Table"),
             };
         }

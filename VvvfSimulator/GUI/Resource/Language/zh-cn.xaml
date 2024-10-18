@@ -351,17 +351,16 @@
     <system:String x:Key="Create.Settings.Waveform.Single.ControlAmplitude.CurveRate">曲线速率</system:String>
     <system:String x:Key="Create.Settings.Waveform.Single.ControlAmplitude.DisableRangeLimit">禁用范围限制</system:String>
 
-    <system:String x:Key="Create.Settings.Waveform.Dipolar.ControlDipolar.Title">极性设置</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Dipolar.ControlDipolar.ParamType">模式</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Dipolar.ControlDipolar.Param">值</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Common.PulseDataSetting.ParamType">模式</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Common.PulseDataSetting.Param">值</system:String>
 
     <system:String x:Key="Create.Settings.Waveform.Common.ControlConstSetting.ConstValue">值</system:String>
 
     <system:String x:Key="Create.Settings.Waveform.Common.ControlMovingSetting.MoveType">变化类型</system:String>
     <system:String x:Key="Create.Settings.Waveform.Common.ControlMovingSetting.Start">开始时基波频率</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Common.ControlMovingSetting.StartValue">开始时的值(Hz)</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Common.ControlMovingSetting.StartValue">开始时的值</system:String>
     <system:String x:Key="Create.Settings.Waveform.Common.ControlMovingSetting.End">结束时基波频率</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Common.ControlMovingSetting.EndValue">结束时的值(Hz)</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Common.ControlMovingSetting.EndValue">结束时的值</system:String>
     <system:String x:Key="Create.Settings.Waveform.Common.ControlMovingSetting.Exponential">指数</system:String>
     <system:String x:Key="Create.Settings.Waveform.Common.ControlMovingSetting.CurveRate">曲线速率</system:String>
 
@@ -420,8 +419,11 @@
     <system:String x:Key="Create.Settings.Waveform.Async.Carrier.ControlAsyncCarrierTable.From">从</system:String>
     <system:String x:Key="Create.Settings.Waveform.Async.Carrier.ControlAsyncCarrierTable.StuckAtHere">Keep this on Jerk</system:String>
 
-    <system:String x:Key="Resource.Language.FriendlyNameConverter.ControlDipolar.ParamType.Name.Const">恒定</system:String>
-    <system:String x:Key="Resource.Language.FriendlyNameConverter.ControlDipolar.ParamType.Name.Moving">可变</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseDataSetting.Value.Mode.Name.Const">恒定</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseDataSetting.Value.Mode.Name.Moving">可变</system:String>
+
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseDataSetting.Key.Name.Dipolar">极性</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseDataSetting.Key.Name.L3P3Alt1Width">脉冲宽度</system:String>
 
     <system:String x:Key="Resource.Language.FriendlyNameConverter.ControlMovingSetting.MoveType.Name.Proportional">线性</system:String>
     <system:String x:Key="Resource.Language.FriendlyNameConverter.ControlMovingSetting.MoveType.Name.InvProportional">反比例</system:String>

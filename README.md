@@ -105,7 +105,7 @@ I highly suggest looking at the sample VVVF files as messing with those will mak
 
 # Support
 - Join our [discord](https://discord.gg/SQr2tXJgVq)! You can ask frequently about vvvf simulator!
-- [Sample Files](https://github.com/VvvfGeeks/VVVF-Simulator/releases/download/v1.8.0.0/yaml_samples.zip)
+- [Sample Files](https://github.com/VvvfGeeks/VVVF-Simulator/releases/download/v1.9.0.1/yaml_samples.zip)
 
 # Related projects
  - [Raspberry Pi Zero Vvvf](https://github.com/VvvfGeeks/RPi-Zero-VVVF)
@@ -113,5 +113,9 @@ I highly suggest looking at the sample VVVF files as messing with those will mak
  - [Youtube](https://www.youtube.com/channel/UCdo7fDodYWO29-Q_0G1S59g)
 
 # Contributor
+## Early Contributor
  - [Thunderfeng](https://github.com/Leifengfengfeng)
  - [Geek of the Week](https://github.com/geekotw)
+## Language Translation
+ - turtle713
+ - 02001

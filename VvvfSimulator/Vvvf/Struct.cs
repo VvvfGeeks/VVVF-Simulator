@@ -1,4 +1,6 @@
-﻿using static VvvfSimulator.Yaml.VvvfSound.YamlVvvfSoundData.YamlControlData;
+﻿using System.Collections.Generic;
+using System.Linq;
+using static VvvfSimulator.Yaml.VvvfSound.YamlVvvfSoundData.YamlControlData;
 using static VvvfSimulator.Yaml.VvvfSound.YamlVvvfSoundData.YamlControlData.YamlPulseMode;
 
 namespace VvvfSimulator.Vvvf
@@ -126,7 +128,7 @@ namespace VvvfSimulator.Vvvf
             private YamlPulseMode VideoPulseMode { get; set; } = new();
             private double VideoSineAmplitude { get; set; }
             private CarrierFreq VideoCarrierFrequency { get; set; } = new CarrierFreq(0, 0, 0.0005);
-            private double VideoDipolarValue { get; set; }
+            private Dictionary<PulseDataKey, double> VideoPulseData { get; set; } = new();
             private double VideoSineFrequency { get; set; }
 
             public void SetVideoPulseMode(YamlPulseMode p) { VideoPulseMode = p; }
@@ -138,8 +140,9 @@ namespace VvvfSimulator.Vvvf
             public void SetVideoCarrierFrequency(CarrierFreq c) { VideoCarrierFrequency = c; }
             public CarrierFreq GetVideoCarrierFrequency() { return VideoCarrierFrequency; }
 
-            public void SetVideoDipolar(double d) { VideoDipolarValue = d; }
-            public double GetVideoDipolar() { return VideoDipolarValue; }
+            public void SetVideoCalculatedPulseData(Dictionary<PulseDataKey, double> Data) { VideoPulseData = Data; }
+            public Dictionary<PulseDataKey, double> GetVideoCalculatedPulseData() { return VideoPulseData; }
+
             public void SetVideoSineFrequency(double d) { VideoSineFrequency = d; }
             public double GetVideoSineFrequency() { return VideoSineFrequency; }
 
@@ -176,10 +179,10 @@ namespace VvvfSimulator.Vvvf
 
         public class PwmCalculateValues
         {
-            public YamlPulseMode Pulse = new();
+            public YamlPulseMode PulseMode = new();
             public CarrierFreq Carrier = new(100, 0, 0.0005);
 
-            public double Dipolar;
+            public Dictionary<PulseDataKey, double> PulseData { get; set; } = [];
             public int Level;
             public bool None;
 
@@ -189,8 +192,10 @@ namespace VvvfSimulator.Vvvf
             public PwmCalculateValues Clone()
             {
                 var clone = (PwmCalculateValues)MemberwiseClone();
+
+                clone.PulseData = new Dictionary<PulseDataKey, double>(PulseData);
                 clone.Carrier = Carrier.Clone();
-                clone.Pulse = Pulse.Clone();
+                clone.PulseMode = PulseMode.Clone();
 
                 return clone;
             }
@@ -307,7 +312,7 @@ namespace VvvfSimulator.Vvvf
                         return PulseCount switch
                         {
                             1 => [PulseAlternative.Default, PulseAlternative.Alt1],
-                            3 => [PulseAlternative.Default],
+                            5 => [PulseAlternative.Default, PulseAlternative.Alt1],
                             _ => [PulseAlternative.Default],
                         };
                     }
@@ -411,6 +416,32 @@ namespace VvvfSimulator.Vvvf
                 }
 
                 return [PulseAlternative.Default];
+            }
+            public static PulseDataKey[] GetAvailablePulseDataKey(YamlPulseMode PulseMode, int Level)
+            {
+
+                if(Level == 2)
+                {
+                    return [];
+                }
+
+                if(Level == 3)
+                {
+                    if(PulseMode.PulseCount == 5)
+                    {
+                        if(PulseMode.Alternative == PulseAlternative.Alt1)
+                        {
+                            return [PulseDataKey.L3P3Alt1Width];
+                        }
+                    }
+
+                    if(PulseMode.PulseType == PulseTypeName.ASYNC)
+                        return [PulseDataKey.Dipolar];
+
+                    return [];
+                }
+
+                return [];
             }
         }
     }

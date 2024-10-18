@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using VvvfSimulator.Yaml.VvvfSound;
 using static VvvfSimulator.Vvvf.Calculate;
+using static VvvfSimulator.Vvvf.Struct;
 using static VvvfSimulator.Yaml.VvvfSound.YamlVvvfSoundData;
 using static VvvfSimulator.Yaml.VvvfSound.YamlVvvfSoundData.YamlControlData.YamlAsync.CarrierFrequency.YamlAsyncParameterCarrierFreqTable;
+using static VvvfSimulator.Yaml.VvvfSound.YamlVvvfSoundData.YamlControlData.YamlPulseMode;
 
 namespace VvvfSimulator.Generation.Pi3Generator
 {
@@ -33,7 +36,8 @@ namespace VvvfSimulator.Generation.Pi3Generator
        
         private static void WriteWaveStatChange(
             Pi3Compiler compiler,
-            YamlVvvfSoundData.YamlMasconData.YamlMasconDataPattern yaml,
+            YamlVvvfSoundData reference,
+            YamlMasconData.YamlMasconDataPattern yaml,
             double min_freq
         )
         {
@@ -69,7 +73,8 @@ namespace VvvfSimulator.Generation.Pi3Generator
 
         private static void WriteWavePatterns(
             Pi3Compiler compiler,
-            List<YamlVvvfSoundData.YamlControlData> list,
+            YamlVvvfSoundData reference,
+            List<YamlControlData> list,
             YamlMasconData.YamlMasconDataPattern freqInfo
         )
         {
@@ -311,15 +316,15 @@ namespace VvvfSimulator.Generation.Pi3Generator
 
                 }
 
-                if (data.PulseMode.PulseType == YamlControlData.YamlPulseMode.PulseTypeName.ASYNC)
+                if (data.PulseMode.PulseType == PulseTypeName.ASYNC)
                 {
                     {
                         YamlControlData.YamlAsync.CarrierFrequency async = data.AsyncModulationData.CarrierWaveData;
-                        if (async.Mode == YamlControlData.YamlAsync.CarrierFrequency.YamlAsyncCarrierMode.Const)
+                        if (async.Mode == YamlControlData.YamlAsync.CarrierFrequency.CarrierFrequencyValueMode.Const)
                         {
                             compiler.WriteLineCode("pwm->carrier_freq.base_freq = " + async.Constant + ";");
                         }
-                        else if (async.Mode == YamlControlData.YamlAsync.CarrierFrequency.YamlAsyncCarrierMode.Moving)
+                        else if (async.Mode == YamlControlData.YamlAsync.CarrierFrequency.CarrierFrequencyValueMode.Moving)
                         {
                             YamlControlData.YamlMovingValue moving = async.MovingValue;
                             if (moving.Type == YamlControlData.YamlMovingValue.MovingValueType.Proportional)
@@ -344,7 +349,7 @@ namespace VvvfSimulator.Generation.Pi3Generator
                                 compiler.WriteLineCode(" // @ 20231018205819");
                             }
 
-                        }else if (async.Mode == YamlControlData.YamlAsync.CarrierFrequency.YamlAsyncCarrierMode.Table)
+                        }else if (async.Mode == YamlControlData.YamlAsync.CarrierFrequency.CarrierFrequencyValueMode.Table)
                         {
                             List<YamlAsyncParameterCarrierFreqTableValue> _list = new(async.CarrierFrequencyTable.CarrierFrequencyTableValues);
                             _list.Sort((a, b) => b.ControlFrequencyFrom.CompareTo(a.ControlFrequencyFrom));
@@ -425,34 +430,36 @@ namespace VvvfSimulator.Generation.Pi3Generator
                             compiler.WriteLineCode(" // @ 20231018210117 ");
                         }
                     }
+                }
 
+                if (PulseModeConfiguration.GetAvailablePulseDataKey(data.PulseMode, reference.Level).ToList().Contains(PulseDataKey.Dipolar)){
+                    PulseDataValue? Value = data.PulseMode.PulseData.GetValueOrDefault(PulseDataKey.Dipolar);
+                    if (Value == null) continue;
+
+                    if (Value.Mode == PulseDataValue.PulseDataValueMode.Const)
                     {
-                        YamlControlData.YamlAsync.Dipolar dipolar = data.AsyncModulationData.DipolarData;
-                        if (dipolar.Mode == YamlControlData.YamlAsync.Dipolar.YamlAsyncParameterDipolarMode.Const)
+                        compiler.WriteLineCode("pwm->dipolar = " + Value.Constant + ";");
+                    }
+                    else if (Value.Mode == PulseDataValue.PulseDataValueMode.Moving)
+                    {
+                        YamlControlData.YamlMovingValue moving = Value.MovingValue;
+                        if (moving.Type == YamlControlData.YamlMovingValue.MovingValueType.Proportional)
                         {
-                            compiler.WriteLineCode("pwm->dipolar = " + dipolar.Constant + ";");
-                        }
-                        else if (dipolar.Mode == YamlControlData.YamlAsync.Dipolar.YamlAsyncParameterDipolarMode.Moving)
-                        {
-                            YamlControlData.YamlMovingValue moving = dipolar.MovingValue;
-                            if (moving.Type == YamlControlData.YamlMovingValue.MovingValueType.Proportional)
-                            {
-                                compiler.WriteLineCode("{"); compiler.AddIndent();
-                                double _a = (moving.EndValue - moving.StartValue) / (moving.End - moving.Start);
-                                double _b = -_a * moving.Start + moving.StartValue;
-                                compiler.WriteLineCode("pwm->dipolar = " + _a + " * _wave_stat + " + _b + ";");
-                                compiler.DecrementIndent(); compiler.WriteLineCode("}");
-                            }
-                            else
-                            {
-                                compiler.WriteLineCode(" // @ 20231018210510 ");
-                            }
-
+                            compiler.WriteLineCode("{"); compiler.AddIndent();
+                            double _a = (moving.EndValue - moving.StartValue) / (moving.End - moving.Start);
+                            double _b = -_a * moving.Start + moving.StartValue;
+                            compiler.WriteLineCode("pwm->dipolar = " + _a + " * _wave_stat + " + _b + ";");
+                            compiler.DecrementIndent(); compiler.WriteLineCode("}");
                         }
                         else
                         {
-                            compiler.WriteLineCode(" // @ 20231018210517 ");
+                            compiler.WriteLineCode(" // @ 20231018210510 ");
                         }
+
+                    }
+                    else
+                    {
+                        compiler.WriteLineCode(" // @ 20231018210517 ");
                     }
                 }
 
@@ -498,8 +505,8 @@ namespace VvvfSimulator.Generation.Pi3Generator
             compiler.WriteLineCode("{");
             compiler.AddIndent();
 
-            WriteWaveStatChange(compiler, vfsoundData.MasconData.Braking, vfsoundData.MinimumFrequency.Braking);
-            WriteWavePatterns(compiler, vfsoundData.BrakingPattern, vfsoundData.MasconData.Braking);
+            WriteWaveStatChange(compiler, vfsoundData, vfsoundData.MasconData.Braking, vfsoundData.MinimumFrequency.Braking);
+            WriteWavePatterns(compiler, vfsoundData, vfsoundData.BrakingPattern, vfsoundData.MasconData.Braking);
 
             compiler.DecrementIndent();
             compiler.WriteLineCode("}");
@@ -507,8 +514,8 @@ namespace VvvfSimulator.Generation.Pi3Generator
             compiler.WriteLineCode("{");
             compiler.AddIndent();
 
-            WriteWaveStatChange(compiler, vfsoundData.MasconData.Accelerating, vfsoundData.MinimumFrequency.Accelerating);
-            WriteWavePatterns(compiler, vfsoundData.AcceleratePattern, vfsoundData.MasconData.Accelerating);
+            WriteWaveStatChange(compiler, vfsoundData, vfsoundData.MasconData.Accelerating, vfsoundData.MinimumFrequency.Accelerating);
+            WriteWavePatterns(compiler, vfsoundData, vfsoundData.AcceleratePattern, vfsoundData.MasconData.Accelerating);
 
             compiler.DecrementIndent();
             compiler.WriteLineCode("}");

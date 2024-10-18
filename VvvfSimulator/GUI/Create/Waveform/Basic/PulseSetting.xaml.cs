@@ -155,6 +155,8 @@ namespace VvvfSimulator.GUI.Create.Waveform.Basic
                 Target.PulseMode.PulseCount = ParseTextBox.ParseInt(tb, Minimum:1, ErrorValue:1);
                 MainWindow.GetInstance()?.UpdateControlList();
                 SetPulseSettingControls();
+                Editor.SetPulseDataContent();
+                Editor.UpdateVisibility();
             }
         }
 
@@ -213,7 +215,6 @@ namespace VvvfSimulator.GUI.Create.Waveform.Basic
             {
                 PulseTypeName selected = (PulseTypeName)cb.SelectedValue;
                 Target.PulseMode.PulseType = selected;
-                Editor.UpdateVisibility();
             }
             else if (tag.Equals("PulseCount"))
             {
@@ -232,6 +233,8 @@ namespace VvvfSimulator.GUI.Create.Waveform.Basic
             }
 
             MainWindow.GetInstance()?.UpdateControlList();
+            Editor.SetPulseDataContent();
+            Editor.UpdateVisibility();
             SetPulseSettingControls();
         }
     }

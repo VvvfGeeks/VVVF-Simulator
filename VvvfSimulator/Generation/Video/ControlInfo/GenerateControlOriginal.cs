@@ -1,5 +1,6 @@
 ﻿using OpenCvSharp;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
@@ -40,9 +41,10 @@ namespace VvvfSimulator.Generation.Video.ControlInfo
                             count++;
                         }
 
-                        if (control.GetVideoDipolar() != -1)
+                        double Dipolar = control.GetVideoCalculatedPulseData().GetValueOrDefault(PulseDataKey.Dipolar, -1);
+                        if (Dipolar != -1)
                         {
-                            names[count] = String.Format("Dipolar : " + control.GetVideoDipolar().ToString("F0")).PadLeft(6);
+                            names[count] = String.Format("Dipolar : " + Dipolar.ToString("F0")).PadLeft(6);
                             //count++;
                         }
                         return names;
@@ -50,8 +52,9 @@ namespace VvvfSimulator.Generation.Video.ControlInfo
                 case PulseTypeName.SYNC:
                     {
                         string ModeName = PulseCount + " Pulse";
-                        if (control.GetVideoDipolar() == -1) return [ModeName];
-                        else return [ModeName, "Dipolar : " + control.GetVideoDipolar().ToString("F1")];
+                        double Dipolar = control.GetVideoCalculatedPulseData().GetValueOrDefault(PulseDataKey.Dipolar, -1);
+                        if (Dipolar == -1) return [ModeName];
+                        else return [ModeName, "Dipolar : " + Dipolar.ToString("F1")];
                     }
                 case PulseTypeName.CHM:
                     {

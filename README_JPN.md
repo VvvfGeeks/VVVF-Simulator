@@ -107,7 +107,7 @@ URLを貼り付け、クローンをクリックします。次に「ソリュ�
 
 # サポート
 - [discord](https://discord.gg/SQr2tXJgVq)に参加してください！VVVFシミュレータに関する質問が頻繁にできます！
-- [サンプルファイル](https://github.com/VvvfGeeks/VVVF-Simulator/releases/download/v1.8.0.0/yaml_samples.zip)
+- [サンプルファイル](https://github.com/VvvfGeeks/VVVF-Simulator/releases/download/v1.9.0.1/yaml_samples.zip)
 
 # 関連プロジェクト
  - [Raspberry Pi Zero Vvvf](https://github.com/VvvfGeeks/RPi-Zero-VVVF)
@@ -115,5 +115,9 @@ URLを貼り付け、クローンをクリックします。次に「ソリュ�
  - [Youtube](https://www.youtube.com/channel/UCdo7fDodYWO29-Q_0G1S59g)
 
 # 貢献者
+## 早期貢献者
  - [Thunderfeng](https://github.com/Leifengfengfeng)
  - [Geek of the Week](https://github.com/geekotw)
+## 言語翻訳
+ - turtle713
+ - 02001

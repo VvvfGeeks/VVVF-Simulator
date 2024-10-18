@@ -351,9 +351,8 @@
     <system:String x:Key="Create.Settings.Waveform.Single.ControlAmplitude.CurveRate">Curve Rate</system:String>
     <system:String x:Key="Create.Settings.Waveform.Single.ControlAmplitude.DisableRangeLimit">Disable Range Limit</system:String>
 
-    <system:String x:Key="Create.Settings.Waveform.Dipolar.ControlDipolar.Title">Dipolar Setting</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Dipolar.ControlDipolar.ParamType">Mode</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Dipolar.ControlDipolar.Param">Value</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Common.PulseDataSetting.ParamType">Mode</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Common.PulseDataSetting.Param">Value</system:String>
 
     <system:String x:Key="Create.Settings.Waveform.Common.ControlConstSetting.ConstValue">Constant</system:String>
 
@@ -420,8 +419,11 @@
     <system:String x:Key="Create.Settings.Waveform.Async.Carrier.ControlAsyncCarrierTable.From">From</system:String>
     <system:String x:Key="Create.Settings.Waveform.Async.Carrier.ControlAsyncCarrierTable.StuckAtHere">Keep this on Jerk</system:String>
 
-    <system:String x:Key="Resource.Language.FriendlyNameConverter.ControlDipolar.ParamType.Name.Const">Constant</system:String>
-    <system:String x:Key="Resource.Language.FriendlyNameConverter.ControlDipolar.ParamType.Name.Moving">Variable</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseDataSetting.Value.Mode.Name.Const">Constant</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseDataSetting.Value.Mode.Name.Moving">Variable</system:String>
+
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseDataSetting.Key.Name.Dipolar">Dipolar</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseDataSetting.Key.Name.L3P3Alt1Width">Pulse Width</system:String>
 
     <system:String x:Key="Resource.Language.FriendlyNameConverter.ControlMovingSetting.MoveType.Name.Proportional">Proportioanl</system:String>
     <system:String x:Key="Resource.Language.FriendlyNameConverter.ControlMovingSetting.MoveType.Name.InvProportional">Inverse Proportional</system:String>

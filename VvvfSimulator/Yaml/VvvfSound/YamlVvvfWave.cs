@@ -8,6 +8,7 @@ using static VvvfSimulator.Yaml.VvvfSound.YamlVvvfSoundData.YamlControlData;
 using static VvvfSimulator.Yaml.VvvfSound.YamlVvvfSoundData.YamlControlData.YamlAmplitude;
 using static VvvfSimulator.Yaml.VvvfSound.YamlVvvfSoundData.YamlControlData.YamlAsync.CarrierFrequency.YamlAsyncParameterCarrierFreqTable;
 using static VvvfSimulator.Yaml.VvvfSound.YamlVvvfSoundData.YamlControlData.YamlAsync.RandomModulation.YamlAsyncParameterRandomValue;
+using static VvvfSimulator.Yaml.VvvfSound.YamlVvvfSoundData.YamlControlData.YamlPulseMode;
 using static VvvfSimulator.Yaml.VvvfSound.YamlVvvfSoundData.YamlMasconData;
 
 namespace VvvfSimulator.Yaml.VvvfSound
@@ -29,41 +30,41 @@ namespace VvvfSimulator.Yaml.VvvfSound
 			return amp;
 		}
 
-		private static double GetMovingValue(YamlMovingValue moving_val, double current)
+		private static double GetMovingValue(YamlMovingValue Data, double Current)
 		{
 			double val = 1000;
-			if (moving_val.Type == YamlMovingValue.MovingValueType.Proportional)
+			if (Data.Type == YamlMovingValue.MovingValueType.Proportional)
 				val = GetChangingValue(
-					moving_val.Start,
-					moving_val.StartValue,
-					moving_val.End,
-					moving_val.EndValue,
-					current
+					Data.Start,
+					Data.StartValue,
+					Data.End,
+					Data.EndValue,
+					Current
 				);
-			else if (moving_val.Type == YamlMovingValue.MovingValueType.Pow2_Exponential)
-				val = (Math.Pow(2, Math.Pow((current - moving_val.Start) / (moving_val.End - moving_val.Start), moving_val.Degree)) - 1) * (moving_val.EndValue - moving_val.StartValue) + moving_val.StartValue;
-			else if(moving_val.Type == YamlMovingValue.MovingValueType.Inv_Proportional)
+			else if (Data.Type == YamlMovingValue.MovingValueType.Pow2_Exponential)
+				val = (Math.Pow(2, Math.Pow((Current - Data.Start) / (Data.End - Data.Start), Data.Degree)) - 1) * (Data.EndValue - Data.StartValue) + Data.StartValue;
+			else if(Data.Type == YamlMovingValue.MovingValueType.Inv_Proportional)
             {
 				double x = GetChangingValue(
-					moving_val.Start,
-					1 / moving_val.StartValue,
-					moving_val.End,
-					1 / moving_val.EndValue,
-					current
+					Data.Start,
+					1 / Data.StartValue,
+					Data.End,
+					1 / Data.EndValue,
+					Current
 				);
 
-				double c = -moving_val.CurveRate;
-				double k = moving_val.EndValue;
-				double l = moving_val.StartValue;
+				double c = -Data.CurveRate;
+				double k = Data.EndValue;
+				double l = Data.StartValue;
 				double a = 1 / ((1 / l) - (1 / k)) * (1 / (l - c) - 1 / (k - c));
 				double b = 1 / (1 - (1 / l) * k) * (1 / (l - c) - (1 / l) * k / (k - c));
 
 				val = 1 / (a * x + b) + c;
 			}
-            else if (moving_val.Type == YamlMovingValue.MovingValueType.Sine)
+            else if (Data.Type == YamlMovingValue.MovingValueType.Sine)
 			{
-				double x = (MyMath.M_PI_2 - Math.Asin(moving_val.StartValue / moving_val.EndValue)) / (moving_val.End - moving_val.Start) * (current - moving_val.Start) + Math.Asin(moving_val.StartValue / moving_val.EndValue);
-				val = Math.Sin(x) * moving_val.EndValue;
+				double x = (MyMath.M_PI_2 - Math.Asin(Data.StartValue / Data.EndValue)) / (Data.End - Data.Start) * (Current - Data.Start) + Math.Asin(Data.StartValue / Data.EndValue);
+				val = Math.Sin(x) * Data.EndValue;
             }
 
             return val;
@@ -105,7 +106,6 @@ namespace VvvfSimulator.Yaml.VvvfSound
 			YamlPulseMode pulse_mode;
 			CarrierFreq carrier_freq = new(0, 0, 0.0005);
 			double amplitude = 0;
-			double dipolar = -1;
 
 			//
 			// mascon off solve
@@ -213,11 +213,11 @@ namespace VvvfSimulator.Yaml.VvvfSound
 				var carrier_data = async_data.CarrierWaveData;
 				var carrier_freq_mode = carrier_data.Mode;
 				double carrier_freq_val = 100;
-				if (carrier_freq_mode == YamlAsync.CarrierFrequency.YamlAsyncCarrierMode.Const)
+				if (carrier_freq_mode == YamlAsync.CarrierFrequency.CarrierFrequencyValueMode.Const)
 					carrier_freq_val = carrier_data.Constant;
-				else if (carrier_freq_mode == YamlAsync.CarrierFrequency.YamlAsyncCarrierMode.Moving)
+				else if (carrier_freq_mode == YamlAsync.CarrierFrequency.CarrierFrequencyValueMode.Moving)
 					carrier_freq_val = GetMovingValue(carrier_data.MovingValue, original_wave_stat);
-				else if (carrier_freq_mode == YamlAsync.CarrierFrequency.YamlAsyncCarrierMode.Table)
+				else if (carrier_freq_mode == YamlAsync.CarrierFrequency.CarrierFrequencyValueMode.Table)
 				{
 					var table_data = carrier_data.CarrierFrequencyTable;
 
@@ -238,7 +238,7 @@ namespace VvvfSimulator.Yaml.VvvfSound
 					}
 					
 				}
-				else if(carrier_freq_mode == YamlAsync.CarrierFrequency.YamlAsyncCarrierMode.Vibrato)
+				else if(carrier_freq_mode == YamlAsync.CarrierFrequency.CarrierFrequencyValueMode.Vibrato)
 				{
 					var vibrato_data = carrier_data.VibratoData;
 
@@ -279,21 +279,6 @@ namespace VvvfSimulator.Yaml.VvvfSound
 				else random_interval = GetMovingValue(async_data.RandomData.Interval.MovingValue, original_wave_stat);
 
 				carrier_freq = new CarrierFreq(carrier_freq_val, random_range, random_interval);
-
-				//
-				// dipolar solve
-				//
-				var dipolar_data = async_data.DipolarData;
-				if (dipolar_data.Mode == YamlAsync.Dipolar.YamlAsyncParameterDipolarMode.Const)
-					dipolar = dipolar_data.Constant;
-				else
-				{
-					var moving_val = dipolar_data.MovingValue;
-					dipolar = GetMovingValue(moving_val, original_wave_stat);
-				}
-
-
-
 			}
 
 			amplitude = YamlAmplitudeCalculate(solve_data.Amplitude.DefaultAmplitude, Control.GetControlFrequency());
@@ -348,16 +333,36 @@ namespace VvvfSimulator.Yaml.VvvfSound
 				if (Control.IsMasconOff() && amplitude == 0) Control.SetControlFrequency(0);
 			}
 
-			if (Control.GetControlFrequency() == 0) return new PwmCalculateValues() { None = true };
+			Dictionary<PulseDataKey, double> CalculatedPulseData = [];
+			PulseDataKey[] PulseDataKeys = PulseModeConfiguration.GetAvailablePulseDataKey(pulse_mode, yvs.Level);
+            for (int i = 0; i < PulseDataKeys.Length; i++)
+			{
+				PulseDataValue? Value = pulse_mode.PulseData.GetValueOrDefault(PulseDataKeys[i]);
+				double Val = 0;
+				if(Value != null)
+				{
+                    Val = Value.Mode switch
+                    {
+                        PulseDataValue.PulseDataValueMode.Moving => GetMovingValue(Value.MovingValue, original_wave_stat),
+                        _ => Value.Constant,
+                    };
+                }
+
+				CalculatedPulseData.Add(PulseDataKeys[i], Val);
+			}
+
+
+            if (Control.GetControlFrequency() == 0) return new PwmCalculateValues() { None = true };
 			if (amplitude == 0) return new PwmCalculateValues() { None = true };
 
 			PwmCalculateValues values = new()
 			{
 				None = false,
-				Carrier = carrier_freq,
-				Pulse = pulse_mode,
-				Level = yvs.Level,
-				Dipolar = dipolar,
+                Level = yvs.Level,
+                PulseMode = pulse_mode,
+
+                Carrier = carrier_freq,
+				PulseData = CalculatedPulseData,
 
 				MinimumFrequency = minimum_sine_freq,
 				Amplitude = amplitude,
