@@ -136,6 +136,7 @@ namespace VvvfSimulator.Vvvf
         public static readonly CustomPwm L2Chm11Alt9 = new(Assembly.GetExecutingAssembly().GetManifestResourceStream("VvvfSimulator.Vvvf.SwitchAngle.L2Chm11Alt9.bin"));
         public static readonly CustomPwm L2Chm11Alt10 = new(Assembly.GetExecutingAssembly().GetManifestResourceStream("VvvfSimulator.Vvvf.SwitchAngle.L2Chm11Alt10.bin"));
         public static readonly CustomPwm L2Chm11Alt11 = new(Assembly.GetExecutingAssembly().GetManifestResourceStream("VvvfSimulator.Vvvf.SwitchAngle.L2Chm11Alt11.bin"));
+        public static readonly CustomPwm L2Chm11Alt12 = new(Assembly.GetExecutingAssembly().GetManifestResourceStream("VvvfSimulator.Vvvf.SwitchAngle.L2Chm11Alt12.bin"));
 
         public static readonly CustomPwm L2Chm13Default = new(Assembly.GetExecutingAssembly().GetManifestResourceStream("VvvfSimulator.Vvvf.SwitchAngle.L2Chm13Default.bin"));
         public static readonly CustomPwm L2Chm13Alt1 = new(Assembly.GetExecutingAssembly().GetManifestResourceStream("VvvfSimulator.Vvvf.SwitchAngle.L2Chm13Alt1.bin"));

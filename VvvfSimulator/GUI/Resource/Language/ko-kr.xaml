@@ -315,8 +315,8 @@
     <system:String x:Key="Mascon.ControlEditor.Message.File.Save.Error.Message">파일을 저장하지 못했습니다</system:String>
 
     <system:String x:Key="Create.Settings.Jerk.Jerk">타행 설정</system:String>
-    <system:String x:Key="Create.Settings.Jerk.JerkOn">타행 종료 시</system:String>
-    <system:String x:Key="Create.Settings.Jerk.JerkOff">타행 진입 시</system:String>
+    <system:String x:Key="Create.Settings.Jerk.On">타행 종료 시</system:String>
+    <system:String x:Key="Create.Settings.Jerk.Off">타행 진입 시</system:String>
     <system:String x:Key="Create.Settings.Jerk.Accelerate">역행</system:String>
     <system:String x:Key="Create.Settings.Jerk.Brake">제동</system:String>
     <system:String x:Key="Create.Settings.Jerk.MaxVoltageFrequency">최대 전압 주파수</system:String>
@@ -330,26 +330,20 @@
     <system:String x:Key="Create.Settings.MinimumFrequency.Accelerating">역행</system:String>
     <system:String x:Key="Create.Settings.MinimumFrequency.Braking">제동</system:String>
 
-    <system:String x:Key="Create.Settings.Waveform.Single.ControlFreeRun.Title">타행 설정</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Single.ControlFreeRun.On">타행 종료 시</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Single.ControlFreeRun.Off">타행 진입 시</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Single.ControlFreeRun.Skip">이 펄스 건너뛰기</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Single.ControlFreeRun.StuckAtHere">이 펄스 유지</system:String>
-
-    <system:String x:Key="Create.Settings.Waveform.Single.ControlAmplitude.Title.Default">진폭 설정</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Single.ControlAmplitude.Title.JerkOn">타행 종료 시 진폭 설정</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Single.ControlAmplitude.Title.JerkOff">타행 진입 시 진폭 설정</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Single.ControlAmplitude.Mode">모드</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Single.ControlAmplitude.Value">값</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Single.ControlAmplitude.StartFrequency">시작 주파수</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Single.ControlAmplitude.EndFrequency">끝 주파수</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Single.ControlAmplitude.StartAmplitude">시작 진폭</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Single.ControlAmplitude.EndAmplitude">끝 진폭</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Single.ControlAmplitude.CutoffAmplitude">컷오프 진폭</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Single.ControlAmplitude.MaxAmplitude">최대 진폭</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Single.ControlAmplitude.Polynomial">차수</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Single.ControlAmplitude.CurveRate">곡률</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Single.ControlAmplitude.DisableRangeLimit">진폭 범위 제한 비활성화</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.ControlAmplitude.Title.Default">진폭 설정</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.ControlAmplitude.Title.On">타행 종료 시 진폭 설정</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.ControlAmplitude.Title.Off">타행 진입 시 진폭 설정</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.ControlAmplitude.Mode">모드</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.ControlAmplitude.Value">값</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.ControlAmplitude.StartFrequency">시작 주파수</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.ControlAmplitude.EndFrequency">끝 주파수</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.ControlAmplitude.StartAmplitude">시작 진폭</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.ControlAmplitude.EndAmplitude">끝 진폭</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.ControlAmplitude.CutoffAmplitude">컷오프 진폭</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.ControlAmplitude.MaxAmplitude">최대 진폭</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.ControlAmplitude.Polynomial">차수</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.ControlAmplitude.CurveRate">곡률</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.ControlAmplitude.DisableRangeLimit">진폭 범위 제한 비활성화</system:String>
 
     <system:String x:Key="Create.Settings.Waveform.Common.PulseDataSetting.ParamType">모드</system:String>
     <system:String x:Key="Create.Settings.Waveform.Common.PulseDataSetting.Param">값</system:String>
@@ -378,12 +372,12 @@
     <system:String x:Key="Create.Settings.Waveform.Basic.ConditionSetting.SineFrom">최소 주파수</system:String>
     <system:String x:Key="Create.Settings.Waveform.Basic.ConditionSetting.SineBelow">최대 주파수</system:String>
     <system:String x:Key="Create.Settings.Waveform.Basic.ConditionSetting.Keep">유지 조건</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Basic.ConditionSetting.Keep.JerkOn">타행 종료</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Basic.ConditionSetting.Keep.JerkOff">타행 진입</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.ConditionSetting.Keep.On">타행 종료</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.ConditionSetting.Keep.Off">타행 진입</system:String>
     <system:String x:Key="Create.Settings.Waveform.Basic.ConditionSetting.Enable">활성화 조건</system:String>
     <system:String x:Key="Create.Settings.Waveform.Basic.ConditionSetting.Enable.NormalState">역행 및 제동</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Basic.ConditionSetting.Enable.JerkOn">타행 종료</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Basic.ConditionSetting.Enable.JerkOff">타행 진입</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.ConditionSetting.Enable.On">타행 종료</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.ConditionSetting.Enable.Off">타행 진입</system:String>
 
     <system:String x:Key="Create.Settings.Waveform.Basic.ControlBasicHarmonic.Title">고조파 설정</system:String>
     <system:String x:Key="Create.Settings.Waveform.Basic.ControlBasicHarmonic.Add">추가</system:String>
@@ -423,7 +417,7 @@
     <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseDataSetting.Value.Mode.Name.Moving">가변</system:String>
 
     <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseDataSetting.Key.Name.Dipolar">다이폴라</system:String>
-    <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseDataSetting.Key.Name.L3P3Alt1Width">펄스 폭</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseDataSetting.Key.Name.PulseWidth">펄스 폭</system:String>
 
     <system:String x:Key="Resource.Language.FriendlyNameConverter.ControlMovingSetting.MoveType.Name.Proportional">정비례</system:String>
     <system:String x:Key="Resource.Language.FriendlyNameConverter.ControlMovingSetting.MoveType.Name.InvProportional">반비례</system:String>

@@ -1,12 +1,14 @@
 ﻿using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Forms;
 using VvvfSimulator.GUI.Create.Waveform.Basic;
 using VvvfSimulator.GUI.Create.Waveform.Common;
 using VvvfSimulator.GUI.Resource.Class;
 using static VvvfSimulator.Vvvf.Struct;
 using static VvvfSimulator.Yaml.VvvfSound.YamlVvvfSoundData;
 using static VvvfSimulator.Yaml.VvvfSound.YamlVvvfSoundData.YamlControlData.YamlPulseMode;
+using UserControl = System.Windows.Controls.UserControl;
 
 namespace VvvfSimulator.GUI.Create.Waveform
 {
@@ -29,11 +31,11 @@ namespace VvvfSimulator.GUI.Create.Waveform
             private Visibility _AmplitudeDefaultVisible;
             public Visibility AmplitudeDefaultVisible { get { return _AmplitudeDefaultVisible; } set { _AmplitudeDefaultVisible = value; RaisePropertyChanged(nameof(AmplitudeDefaultVisible)); } }
 
-            private Visibility _AmplitudeJerkOnVisible;
-            public Visibility AmplitudeJerkOnVisible { get { return _AmplitudeJerkOnVisible; } set { _AmplitudeJerkOnVisible = value; RaisePropertyChanged(nameof(AmplitudeJerkOnVisible)); } }
+            private Visibility _AmplitudePowerOnVisible;
+            public Visibility AmplitudePowerOnVisible { get { return _AmplitudePowerOnVisible; } set { _AmplitudePowerOnVisible = value; RaisePropertyChanged(nameof(AmplitudePowerOnVisible)); } }
 
-            private Visibility _AmplitudeJerkOffVisible;
-            public Visibility AmplitudeJerkOffVisible { get { return _AmplitudeJerkOffVisible; } set { _AmplitudeJerkOffVisible = value; RaisePropertyChanged(nameof(AmplitudeJerkOffVisible)); } }
+            private Visibility _AmplitudePowerOffVisible;
+            public Visibility AmplitudePowerOffVisible { get { return _AmplitudePowerOffVisible; } set { _AmplitudePowerOffVisible = value; RaisePropertyChanged(nameof(AmplitudePowerOffVisible)); } }
 
             private Visibility _PulseDataVisible;
             public Visibility PulseDataVisible { get { return _PulseDataVisible; } set { _PulseDataVisible = value; RaisePropertyChanged(nameof(PulseDataVisible)); } }
@@ -51,8 +53,8 @@ namespace VvvfSimulator.GUI.Create.Waveform
             viewModel.PulseDataVisible = PulseDataSettings.Children.Count > 0 ? Visibility.Visible : Visibility.Collapsed;
             viewModel.AsyncVisible = mode == PulseTypeName.ASYNC ? Visibility.Visible : Visibility.Collapsed;
             viewModel.AmplitudeDefaultVisible = Visibility.Visible;
-            viewModel.AmplitudeJerkOnVisible = Control.EnableFreeRunOn ? Visibility.Visible : Visibility.Collapsed;
-            viewModel.AmplitudeJerkOffVisible = Control.EnableFreeRunOff ? Visibility.Visible : Visibility.Collapsed;
+            viewModel.AmplitudePowerOnVisible = Control.EnableFreeRunOn ? Visibility.Visible : Visibility.Collapsed;
+            viewModel.AmplitudePowerOffVisible = Control.EnableFreeRunOff ? Visibility.Visible : Visibility.Collapsed;
         }
 
         public void SetContent()
@@ -61,8 +63,8 @@ namespace VvvfSimulator.GUI.Create.Waveform
             PulseSetting.Navigate(new PulseSetting(this, Control, Level));
             AsyncSetting.Navigate(new ControlAsync(this, Control));
             Control_Amplitude_Default.Navigate(new ControlAmplitude(this, Control.Amplitude.DefaultAmplitude, ControlAmplitudeContent.Default));
-            Control_Amplitude_FreeRun_On.Navigate(new ControlAmplitude(this, Control.Amplitude.FreeRunAmplitude.On, ControlAmplitudeContent.JerkOn));
-            Control_Amplitude_FreeRun_Off.Navigate(new ControlAmplitude(this, Control.Amplitude.FreeRunAmplitude.Off, ControlAmplitudeContent.JerkOff));
+            Control_Amplitude_FreeRun_On.Navigate(new ControlAmplitude(this, Control.Amplitude.FreeRunAmplitude.On, ControlAmplitudeContent.PowerOn));
+            Control_Amplitude_FreeRun_Off.Navigate(new ControlAmplitude(this, Control.Amplitude.FreeRunAmplitude.Off, ControlAmplitudeContent.PowerOff));
         }
 
         public void SetPulseDataContent()
@@ -75,7 +77,11 @@ namespace VvvfSimulator.GUI.Create.Waveform
             }
             for (int i = 0; i < PulseDataKeys.Length; i++)
             {
-                PulseDataSettings.Children.Add(new PulseDataSetting(this, Control.PulseMode.PulseData, PulseDataKeys[i]));
+                UserControl PulseDataEditor = new PulseDataSetting(this, Control.PulseMode.PulseData, PulseDataKeys[i])
+                {
+                    Margin = new Thickness(0, 2, 0, 0)
+                };
+                PulseDataSettings.Children.Add(PulseDataEditor);
             }
         }
 

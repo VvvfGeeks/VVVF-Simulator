@@ -89,8 +89,8 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
                     <Border Grid.ColumnSpan="3" Background="{DynamicResource BackgroundBrush}" CornerRadius="0,0,25,0"/>
-                    <CheckBox Style="{DynamicResource SlimCheckBox}" x:Name="Keep_FreeRun_On_Check" Content="{DynamicResource Create.Settings.Waveform.Basic.ConditionSetting.Keep.JerkOn}" HorizontalAlignment="Center" VerticalAlignment="Center" Checked="CheckedChanged" Tag="Keep.JerkOn" Unchecked="CheckedChanged"/>
-                    <CheckBox Style="{DynamicResource SlimCheckBox}" x:Name="Keep_FreeRun_Off_Check" Content="{DynamicResource Create.Settings.Waveform.Basic.ConditionSetting.Keep.JerkOff}" HorizontalAlignment="Center" VerticalAlignment="Center" Checked="CheckedChanged" Tag="Keep.JerkOff" Unchecked="CheckedChanged" Grid.Column="1"/>
+                    <CheckBox Style="{DynamicResource SlimCheckBox}" x:Name="Keep_FreeRun_On_Check" Content="{DynamicResource Create.Settings.Waveform.Basic.ConditionSetting.Keep.On}" HorizontalAlignment="Center" VerticalAlignment="Center" Checked="CheckedChanged" Tag="Keep.On" Unchecked="CheckedChanged"/>
+                    <CheckBox Style="{DynamicResource SlimCheckBox}" x:Name="Keep_FreeRun_Off_Check" Content="{DynamicResource Create.Settings.Waveform.Basic.ConditionSetting.Keep.Off}" HorizontalAlignment="Center" VerticalAlignment="Center" Checked="CheckedChanged" Tag="Keep.Off" Unchecked="CheckedChanged" Grid.Column="1"/>
                 </Grid>
             </Grid>
             <Grid Grid.Row="5">
@@ -109,8 +109,8 @@
                     </Grid.ColumnDefinitions>
                     <Border Grid.ColumnSpan="3" Background="{DynamicResource BackgroundBrush}" CornerRadius="0,0,25,0"/>
                     <CheckBox Style="{DynamicResource SlimCheckBox}" x:Name="Enable_Normal_Check" Content="{DynamicResource Create.Settings.Waveform.Basic.ConditionSetting.Enable.NormalState}" HorizontalAlignment="Center" VerticalAlignment="Center" Checked="CheckedChanged" Tag="Enable.Normal" Unchecked="CheckedChanged"/>
-                    <CheckBox Style="{DynamicResource SlimCheckBox}" x:Name="Enable_FreeRun_On_Check" Content="{DynamicResource Create.Settings.Waveform.Basic.ConditionSetting.Enable.JerkOn}" HorizontalAlignment="Center" VerticalAlignment="Center" Checked="CheckedChanged" Tag="Enable.JerkOn" Unchecked="CheckedChanged" Grid.Column="1"/>
-                    <CheckBox Style="{DynamicResource SlimCheckBox}" x:Name="Enable_FreeRun_Off_Check" Content="{DynamicResource Create.Settings.Waveform.Basic.ConditionSetting.Enable.JerkOff}" HorizontalAlignment="Center" VerticalAlignment="Center" Checked="CheckedChanged" Tag="Enable.JerkOff" Unchecked="CheckedChanged" Grid.Column="2"/>
+                    <CheckBox Style="{DynamicResource SlimCheckBox}" x:Name="Enable_FreeRun_On_Check" Content="{DynamicResource Create.Settings.Waveform.Basic.ConditionSetting.Enable.On}" HorizontalAlignment="Center" VerticalAlignment="Center" Checked="CheckedChanged" Tag="Enable.On" Unchecked="CheckedChanged" Grid.Column="1"/>
+                    <CheckBox Style="{DynamicResource SlimCheckBox}" x:Name="Enable_FreeRun_Off_Check" Content="{DynamicResource Create.Settings.Waveform.Basic.ConditionSetting.Enable.Off}" HorizontalAlignment="Center" VerticalAlignment="Center" Checked="CheckedChanged" Tag="Enable.Off" Unchecked="CheckedChanged" Grid.Column="2"/>
                 </Grid>
             </Grid>
         </Grid>

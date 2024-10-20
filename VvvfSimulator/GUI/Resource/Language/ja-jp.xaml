@@ -315,8 +315,8 @@
     <system:String x:Key="Mascon.ControlEditor.Message.File.Save.Error.Message">保存できませんでした</system:String>
 
     <system:String x:Key="Create.Settings.Jerk.Jerk">ジャーク設定</system:String>
-    <system:String x:Key="Create.Settings.Jerk.JerkOn">ジャークON時</system:String>
-    <system:String x:Key="Create.Settings.Jerk.JerkOff">ジャークOFF時</system:String>
+    <system:String x:Key="Create.Settings.Jerk.On">通電時</system:String>
+    <system:String x:Key="Create.Settings.Jerk.Off">遮断時</system:String>
     <system:String x:Key="Create.Settings.Jerk.Accelerate">力行</system:String>
     <system:String x:Key="Create.Settings.Jerk.Brake">回生</system:String>
     <system:String x:Key="Create.Settings.Jerk.MaxVoltageFrequency">最大電圧周波数</system:String>
@@ -330,26 +330,20 @@
     <system:String x:Key="Create.Settings.MinimumFrequency.Accelerating">力行時</system:String>
     <system:String x:Key="Create.Settings.MinimumFrequency.Braking">回生時</system:String>
 
-    <system:String x:Key="Create.Settings.Waveform.Single.ControlFreeRun.Title">ジャーク時設定</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Single.ControlFreeRun.On">ON時</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Single.ControlFreeRun.Off">OFF時</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Single.ControlFreeRun.Skip">このパルスをスキップ</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Single.ControlFreeRun.StuckAtHere">このパルスで維持</system:String>
-
-    <system:String x:Key="Create.Settings.Waveform.Single.ControlAmplitude.Title.Default">変調率</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Single.ControlAmplitude.Title.JerkOn">ジャークON時変調率</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Single.ControlAmplitude.Title.JerkOff">ジャークOFF時変調率</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Single.ControlAmplitude.Mode">モード</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Single.ControlAmplitude.Value">各種値</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Single.ControlAmplitude.StartFrequency">始点周波数</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Single.ControlAmplitude.EndFrequency">終点周波数</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Single.ControlAmplitude.StartAmplitude">始点変調率</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Single.ControlAmplitude.EndAmplitude">終点変調率</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Single.ControlAmplitude.CutoffAmplitude">切捨変調率</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Single.ControlAmplitude.MaxAmplitude">最大変調率</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Single.ControlAmplitude.Polynomial">次数</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Single.ControlAmplitude.CurveRate">曲率</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Single.ControlAmplitude.DisableRangeLimit">変調率を始点と終点の間に限定しない</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.ControlAmplitude.Title.Default">変調率</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.ControlAmplitude.Title.On">通電時変調率</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.ControlAmplitude.Title.Off">遮断時変調率</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.ControlAmplitude.Mode">モード</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.ControlAmplitude.Value">各種値</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.ControlAmplitude.StartFrequency">始点周波数</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.ControlAmplitude.EndFrequency">終点周波数</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.ControlAmplitude.StartAmplitude">始点変調率</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.ControlAmplitude.EndAmplitude">終点変調率</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.ControlAmplitude.CutoffAmplitude">切捨変調率</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.ControlAmplitude.MaxAmplitude">最大変調率</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.ControlAmplitude.Polynomial">次数</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.ControlAmplitude.CurveRate">曲率</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.ControlAmplitude.DisableRangeLimit">変調率を始点と終点の間に限定しない</system:String>
 
     <system:String x:Key="Create.Settings.Waveform.Common.PulseDataSetting.ParamType">値の種類</system:String>
     <system:String x:Key="Create.Settings.Waveform.Common.PulseDataSetting.Param">変数</system:String>
@@ -378,12 +372,12 @@
     <system:String x:Key="Create.Settings.Waveform.Basic.ConditionSetting.SineFrom">回転以上</system:String>
     <system:String x:Key="Create.Settings.Waveform.Basic.ConditionSetting.SineBelow">回転以下</system:String>
     <system:String x:Key="Create.Settings.Waveform.Basic.ConditionSetting.Keep">維持</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Basic.ConditionSetting.Keep.JerkOn">ジャークON時</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Basic.ConditionSetting.Keep.JerkOff">ジャークOFF時</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.ConditionSetting.Keep.On">通電時</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.ConditionSetting.Keep.Off">遮断時</system:String>
     <system:String x:Key="Create.Settings.Waveform.Basic.ConditionSetting.Enable">有効化</system:String>
     <system:String x:Key="Create.Settings.Waveform.Basic.ConditionSetting.Enable.NormalState">通常時</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Basic.ConditionSetting.Enable.JerkOn">ジャークON時</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Basic.ConditionSetting.Enable.JerkOff">ジャークOFF時</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.ConditionSetting.Enable.On">通電時</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.ConditionSetting.Enable.Off">遮断時</system:String>
 
     <system:String x:Key="Create.Settings.Waveform.Basic.ControlBasicHarmonic.Title">高調波設定</system:String>
     <system:String x:Key="Create.Settings.Waveform.Basic.ControlBasicHarmonic.Add">追加</system:String>
@@ -423,7 +417,7 @@
     <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseDataSetting.Value.Mode.Name.Moving">変数</system:String>
 
     <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseDataSetting.Key.Name.Dipolar">ダイポーラ</system:String>
-    <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseDataSetting.Key.Name.L3P3Alt1Width">パルス幅</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseDataSetting.Key.Name.PulseWidth">パルス幅</system:String>
 
     <system:String x:Key="Resource.Language.FriendlyNameConverter.ControlMovingSetting.MoveType.Name.Proportional">比例</system:String>
     <system:String x:Key="Resource.Language.FriendlyNameConverter.ControlMovingSetting.MoveType.Name.InvProportional">反比例</system:String>

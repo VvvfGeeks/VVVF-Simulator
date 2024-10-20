@@ -92,7 +92,7 @@ namespace VvvfSimulator.Vvvf
             return BaseValue;
         }
 
-        public static int ModulateSin(double sin_value, double saw_value)
+        public static int ModulateSignal(double sin_value, double saw_value)
         {
             return sin_value > saw_value ? 1 : 0;
         }
@@ -130,7 +130,7 @@ namespace VvvfSimulator.Vvvf
             else modulated = -1;
             if (x % M_2PI > M_PI) modulated = -modulated;
 
-            return ModulateSin(modulated, saw_value) * 2;
+            return ModulateSignal(modulated, saw_value) * 2;
         }
 
         //
@@ -405,7 +405,7 @@ namespace VvvfSimulator.Vvvf
                         double Dipolar = PulseData.GetValueOrDefault(PulseDataKey.Dipolar, -1);
                         SawVal *= (Dipolar != -1 ? Dipolar : 0.5);
 
-                        return ModulateSin(SineVal, SawVal + 0.5) + ModulateSin(SineVal, SawVal - 0.5);
+                        return ModulateSignal(SineVal, SawVal + 0.5) + ModulateSignal(SineVal, SawVal - 0.5);
                     }
                 case PulseTypeName.SYNC:
                     {
@@ -425,6 +425,7 @@ namespace VvvfSimulator.Vvvf
 
                         if(PulseCount == 5)
                         {
+                            // SYNC 5 ALTERNATE 1
                             if(Alternate == PulseAlternative.Alt1)
                             {
                                 double Period = SineX % M_2PI;
@@ -434,7 +435,7 @@ namespace VvvfSimulator.Vvvf
                                 int _GetPwm(double t)
                                 {
                                     double a = M_PI_2 - Value.Amplitude;
-                                    double b = PulseData.GetValueOrDefault(PulseDataKey.L3P3Alt1Width, 0);
+                                    double b = PulseData.GetValueOrDefault(PulseDataKey.PulseWidth, 0);
                                     if (t < a) return 1;
                                     if (t < a + b) return 2;
                                     if (t < a + 2 * b) return 1;
@@ -463,7 +464,7 @@ namespace VvvfSimulator.Vvvf
                             Control.SetSawAngleFrequency(SineAngleFrequency * PulseCount);
                             Control.SetSawTime(SineTime);
 
-                            return ModulateSin(SineVal, SawVal + 0.5) + ModulateSin(SineVal, SawVal - 0.5);
+                            return ModulateSignal(SineVal, SawVal + 0.5) + ModulateSignal(SineVal, SawVal - 0.5);
                         }                        
                     }
                 case PulseTypeName.SHE:
@@ -801,7 +802,7 @@ namespace VvvfSimulator.Vvvf
                         Control.SetSawAngleFrequency(SawAngleFrequency);
                         Control.SetSawTime(SawTime);
 
-                        return ModulateSin(SineVal, SawVal) * 2;
+                        return ModulateSignal(SineVal, SawVal) * 2;
                     }
                 case PulseTypeName.SYNC:
                     {
@@ -812,7 +813,7 @@ namespace VvvfSimulator.Vvvf
                             double SawVal = GetSaw(SineX);
                             double Pwm = (SineVal - SawVal > 0 ? 1 : -1) * Amplitude;
                             double Negate = SawVal > 0 ? SawVal - 1 : SawVal + 1;
-                            return ModulateSin(Pwm, Negate) * 2;
+                            return ModulateSignal(Pwm, Negate) * 2;
                         }
 
                         // SYNC 5 9 13 17 ALTERNATE 1
@@ -823,7 +824,20 @@ namespace VvvfSimulator.Vvvf
                             double FixedSineX = (int)(SineX / M_PI_2) % 2 == 1 ? M_PI_2 - SineX % M_PI_2 : SineX % M_PI_2;
                             Control.SetSawAngleFrequency(27 * SineAngleFrequency);
                             Control.SetSawTime(SineTime);
-                            return (FixedSineX < M_PI * PulseMode.PulseCount / 54) ? ModulateSin(sin_value, saw_value) * 2 : (int)(SineX / M_PI_2) % 4 > 1 ? 0 : 2;
+                            return (FixedSineX < M_PI * PulseMode.PulseCount / 54) ? ModulateSignal(sin_value, saw_value) * 2 : (int)(SineX / M_PI_2) % 4 > 1 ? 0 : 2;
+                        }
+
+                        // SYNC 6 8 ALTERNATE 1
+                        if ((PulseCount == 6 || PulseCount == 8) && Alternate == PulseAlternative.Alt1)
+                        {
+                            int C = PulseCount == 6 ? 6 : 9;
+                            double Saw = GetSaw(C * SineX + M_PI_2);
+                            int Orthant = (int)((SineX % M_2PI) / M_PI_2);
+                            double FixX = Orthant % 2 == 1 ? M_PI_2 - (SineX % M_PI_2) : (SineX % M_PI_2);
+                            double Sig = Orthant > 1 ? 1 : -1;
+                            if (FixX > Value.PulseData.GetValueOrDefault(PulseDataKey.PulseWidth, 0)) Sig = Orthant > 1 ? -1 : 1;
+                            Sig *= Amplitude;
+                            return ModulateSignal(Sig, Saw) * 2;
                         }
 
                         // SYNC N WITH SQUARE CONFIGURATION
@@ -835,7 +849,7 @@ namespace VvvfSimulator.Vvvf
                             double SawVal = -GetSaw(SineX);
                             if (PulseMode.Shift)
                                 SawVal = -SawVal;
-                            return ModulateSin(SawVal > 0 ? Amplitude : -Amplitude, CarrierVal) * 2;
+                            return ModulateSignal(SawVal > 0 ? Amplitude : -Amplitude, CarrierVal) * 2;
                         }
 
                         // SYNC N
@@ -846,7 +860,7 @@ namespace VvvfSimulator.Vvvf
                                 SawVal = -SawVal;
                             Control.SetSawAngleFrequency(SineAngleFrequency * PulseMode.PulseCount);
                             Control.SetSawTime(SineTime);
-                            return ModulateSin(SineVal, SawVal) * 2; ;
+                            return ModulateSignal(SineVal, SawVal) * 2; ;
                         }
                     }
                 case PulseTypeName.HO:
@@ -1097,6 +1111,7 @@ namespace VvvfSimulator.Vvvf
                                         PulseAlternative.Alt9 => CustomPwm.L2Chm11Alt9.GetPwm(Amplitude, SineX),
                                         PulseAlternative.Alt10 => CustomPwm.L2Chm11Alt10.GetPwm(Amplitude, SineX),
                                         PulseAlternative.Alt11 => CustomPwm.L2Chm11Alt11.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt12 => CustomPwm.L2Chm11Alt12.GetPwm(Amplitude, SineX),
                                         _ => 0
                                     };
                                 }

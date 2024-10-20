@@ -315,8 +315,8 @@
     <system:String x:Key="Mascon.ControlEditor.Message.File.Save.Error.Message">Failed to save</system:String>
 
     <system:String x:Key="Create.Settings.Jerk.Jerk">Jerk Setting</system:String>
-    <system:String x:Key="Create.Settings.Jerk.JerkOn">Jerk On</system:String>
-    <system:String x:Key="Create.Settings.Jerk.JerkOff">Jerk Off</system:String>
+    <system:String x:Key="Create.Settings.Jerk.On">Power On</system:String>
+    <system:String x:Key="Create.Settings.Jerk.Off">Power Off</system:String>
     <system:String x:Key="Create.Settings.Jerk.Accelerate">Accelerate</system:String>
     <system:String x:Key="Create.Settings.Jerk.Brake">Brake</system:String>
     <system:String x:Key="Create.Settings.Jerk.MaxVoltageFrequency">Max Voltage Frequency</system:String>
@@ -330,26 +330,20 @@
     <system:String x:Key="Create.Settings.MinimumFrequency.Accelerating">Accelerating</system:String>
     <system:String x:Key="Create.Settings.MinimumFrequency.Braking">Braking</system:String>
 
-    <system:String x:Key="Create.Settings.Waveform.Single.ControlFreeRun.Title">Jerk Setting</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Single.ControlFreeRun.On">ON</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Single.ControlFreeRun.Off">OFF</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Single.ControlFreeRun.Skip">Skip this pulse</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Single.ControlFreeRun.StuckAtHere">Keep this pulse</system:String>
-
-    <system:String x:Key="Create.Settings.Waveform.Single.ControlAmplitude.Title.Default">Modulation Index</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Single.ControlAmplitude.Title.JerkOn">Jerk On Modulation Index</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Single.ControlAmplitude.Title.JerkOff">Jerk Off Modulation Index</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Single.ControlAmplitude.Mode">Mode</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Single.ControlAmplitude.Value">Value</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Single.ControlAmplitude.StartFrequency">Start Frequency</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Single.ControlAmplitude.EndFrequency">End Frequency</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Single.ControlAmplitude.StartAmplitude">Start Amplitude</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Single.ControlAmplitude.EndAmplitude">End Amplitude</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Single.ControlAmplitude.CutoffAmplitude">Cutoff Amplitude</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Single.ControlAmplitude.MaxAmplitude">Max Amplitude</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Single.ControlAmplitude.Polynomial">Polynomial</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Single.ControlAmplitude.CurveRate">Curve Rate</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Single.ControlAmplitude.DisableRangeLimit">Disable Range Limit</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.ControlAmplitude.Title.Default">Modulation Index</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.ControlAmplitude.Title.On">Power On Modulation Index</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.ControlAmplitude.Title.Off">Power Off Modulation Index</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.ControlAmplitude.Mode">Mode</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.ControlAmplitude.Value">Value</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.ControlAmplitude.StartFrequency">Start Frequency</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.ControlAmplitude.EndFrequency">End Frequency</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.ControlAmplitude.StartAmplitude">Start Amplitude</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.ControlAmplitude.EndAmplitude">End Amplitude</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.ControlAmplitude.CutoffAmplitude">Cutoff Amplitude</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.ControlAmplitude.MaxAmplitude">Max Amplitude</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.ControlAmplitude.Polynomial">Polynomial</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.ControlAmplitude.CurveRate">Curve Rate</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.ControlAmplitude.DisableRangeLimit">Disable Range Limit</system:String>
 
     <system:String x:Key="Create.Settings.Waveform.Common.PulseDataSetting.ParamType">Mode</system:String>
     <system:String x:Key="Create.Settings.Waveform.Common.PulseDataSetting.Param">Value</system:String>
@@ -378,12 +372,12 @@
     <system:String x:Key="Create.Settings.Waveform.Basic.ConditionSetting.SineFrom">Rotate From</system:String>
     <system:String x:Key="Create.Settings.Waveform.Basic.ConditionSetting.SineBelow">Rotate Below</system:String>
     <system:String x:Key="Create.Settings.Waveform.Basic.ConditionSetting.Keep">Keep</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Basic.ConditionSetting.Keep.JerkOn">Jerk On</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Basic.ConditionSetting.Keep.JerkOff">Jerk Off</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.ConditionSetting.Keep.On">Power On</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.ConditionSetting.Keep.Off">Power Off</system:String>
     <system:String x:Key="Create.Settings.Waveform.Basic.ConditionSetting.Enable">Enable</system:String>
     <system:String x:Key="Create.Settings.Waveform.Basic.ConditionSetting.Enable.NormalState">Normal State</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Basic.ConditionSetting.Enable.JerkOn">Jerk On</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Basic.ConditionSetting.Enable.JerkOff">Jerk Off</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.ConditionSetting.Enable.On">Power On</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.ConditionSetting.Enable.Off">Power Off</system:String>
 
     <system:String x:Key="Create.Settings.Waveform.Basic.ControlBasicHarmonic.Title">Harmonic Setting</system:String>
     <system:String x:Key="Create.Settings.Waveform.Basic.ControlBasicHarmonic.Add">Add</system:String>
@@ -423,7 +417,7 @@
     <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseDataSetting.Value.Mode.Name.Moving">Variable</system:String>
 
     <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseDataSetting.Key.Name.Dipolar">Dipolar</system:String>
-    <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseDataSetting.Key.Name.L3P3Alt1Width">Pulse Width</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseDataSetting.Key.Name.PulseWidth">Pulse Width</system:String>
 
     <system:String x:Key="Resource.Language.FriendlyNameConverter.ControlMovingSetting.MoveType.Name.Proportional">Proportioanl</system:String>
     <system:String x:Key="Resource.Language.FriendlyNameConverter.ControlMovingSetting.MoveType.Name.InvProportional">Inverse Proportional</system:String>

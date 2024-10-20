@@ -29,12 +29,10 @@
                 <Frame x:Name="ConditionSetting" Visibility="{Binding ConditionSettingVisible}" NavigationUIVisibility="Hidden" Margin="0"/>
                 <Frame x:Name="PulseSetting" Visibility="{Binding PulseSettingVisible}" NavigationUIVisibility="Hidden"/>
                 <Frame x:Name="AsyncSetting" Visibility="{Binding AsyncVisible}" NavigationUIVisibility="Hidden" />
-                <StackPanel x:Name="PulseDataSettings" Visibility="{Binding PulseDataVisible}">
-                    
-                </StackPanel>
+                <StackPanel x:Name="PulseDataSettings" Visibility="{Binding PulseDataVisible}"/>
                 <Frame x:Name="Control_Amplitude_Default" Visibility="{Binding AmplitudeDefaultVisible}" NavigationUIVisibility="Hidden"/>
-                <Frame x:Name="Control_Amplitude_FreeRun_On" Visibility="{Binding AmplitudeJerkOnVisible}" NavigationUIVisibility="Hidden" />
-                <Frame x:Name="Control_Amplitude_FreeRun_Off" Visibility="{Binding AmplitudeJerkOffVisible}" NavigationUIVisibility="Hidden"/>
+                <Frame x:Name="Control_Amplitude_FreeRun_On" Visibility="{Binding AmplitudePowerOnVisible}" NavigationUIVisibility="Hidden" />
+                <Frame x:Name="Control_Amplitude_FreeRun_Off" Visibility="{Binding AmplitudePowerOffVisible}" NavigationUIVisibility="Hidden"/>
                 
                 
             </StackPanel>

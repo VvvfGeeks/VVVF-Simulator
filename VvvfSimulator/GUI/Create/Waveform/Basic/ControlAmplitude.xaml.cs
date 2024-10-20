@@ -58,13 +58,13 @@ namespace VvvfSimulator.GUI.Create.Waveform
             InitializeComponent();
 
             if (cac == ControlAmplitudeContent.Default)
-                title.Content = LanguageManager.GetString("Create.Settings.Waveform.Single.ControlAmplitude.Title.Default");
+                title.Content = LanguageManager.GetString("Create.Settings.Waveform.Basic.ControlAmplitude.Title.Default");
 
-            else if (cac == ControlAmplitudeContent.JerkOn)
-                title.Content = LanguageManager.GetString("Create.Settings.Waveform.Single.ControlAmplitude.Title.JerkOn");
+            else if (cac == ControlAmplitudeContent.PowerOn)
+                title.Content = LanguageManager.GetString("Create.Settings.Waveform.Basic.ControlAmplitude.Title.On");
 
             else
-                title.Content = LanguageManager.GetString("Create.Settings.Waveform.Single.ControlAmplitude.Title.JerkOff");
+                title.Content = LanguageManager.GetString("Create.Settings.Waveform.Basic.ControlAmplitude.Title.Off");
 
             VisibleHandler = new VisibleClass();
             DataContext = VisibleHandler;
@@ -169,7 +169,7 @@ namespace VvvfSimulator.GUI.Create.Waveform
 
             if (cac == ControlAmplitudeContent.Default)
                 condition_2 = [true, true, true, true, true, true, true, true, true];
-            else if (cac == ControlAmplitudeContent.JerkOn)
+            else if (cac == ControlAmplitudeContent.PowerOn)
                 condition_2 = [true, true, true, true, true, true, true, true, true];
             else
                 condition_2 = [true, true, true, true, true, true, true, true, true];
@@ -183,6 +183,6 @@ namespace VvvfSimulator.GUI.Create.Waveform
     }
     public enum ControlAmplitudeContent
     {
-        Default,JerkOn,JerkOff
+        Default,PowerOn,PowerOff
     }
 }

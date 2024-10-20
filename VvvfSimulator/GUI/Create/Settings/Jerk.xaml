@@ -115,7 +115,7 @@
                     <ColumnDefinition Width="1*"/>
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
-                <Button x:Name="ButtonTurnOn" Content="{DynamicResource Create.Settings.Jerk.JerkOn}" BorderBrush="{x:Null}" FontFamily="{DynamicResource Generic.Font}" FontWeight="Bold" Click="OnButtonClick" FontSize="15">
+                <Button x:Name="ButtonTurnOn" Content="{DynamicResource Create.Settings.Jerk.On}" BorderBrush="{x:Null}" FontFamily="{DynamicResource Generic.Font}" FontWeight="Bold" Click="OnButtonClick" FontSize="15">
                     <Button.Resources>
                         <Style TargetType="{x:Type Border}">
                             <Setter Property="CornerRadius" Value="7,7,0,0"/>
@@ -136,7 +136,7 @@
                         </Style>
                     </Button.Resources>
                 </Button>
-                <Button x:Name="ButtonTurnOff" Content="{DynamicResource Create.Settings.Jerk.JerkOff}" BorderBrush="{x:Null}" FontFamily="{DynamicResource Generic.Font}" FontWeight="Bold" Grid.Column="1" Click="OnButtonClick" FontSize="15">
+                <Button x:Name="ButtonTurnOff" Content="{DynamicResource Create.Settings.Jerk.Off}" BorderBrush="{x:Null}" FontFamily="{DynamicResource Generic.Font}" FontWeight="Bold" Grid.Column="1" Click="OnButtonClick" FontSize="15">
                     <Button.Resources>
                         <Style TargetType="{x:Type Border}">
                             <Setter Property="CornerRadius" Value="7,7,0,0"/>

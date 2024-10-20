@@ -355,7 +355,9 @@ namespace VvvfSimulator.Vvvf
                         {
                             3 => [PulseAlternative.Default, PulseAlternative.Alt1],
                             5 => [PulseAlternative.Default, PulseAlternative.Alt1],
-                            9 => [PulseAlternative.Default, PulseAlternative.Alt1],
+                            6 => [PulseAlternative.Default, PulseAlternative.Alt1],
+                            8 => AlternativesDefaultToX(1),
+                            9 => AlternativesDefaultToX(1),
                             13 => [PulseAlternative.Default, PulseAlternative.Alt1],
                             17 => [PulseAlternative.Default, PulseAlternative.Alt1],
                             _ => [PulseAlternative.Default],
@@ -370,7 +372,7 @@ namespace VvvfSimulator.Vvvf
                             5 => AlternativesDefaultToX(3),
                             7 => AlternativesDefaultToX(5),
                             9 => AlternativesDefaultToX(8),
-                            11 => AlternativesDefaultToX(11),
+                            11 => AlternativesDefaultToX(12),
                             13 => AlternativesDefaultToX(13),
                             15 => AlternativesDefaultToX(23),
                             17 => AlternativesDefaultToX(11),
@@ -422,23 +424,41 @@ namespace VvvfSimulator.Vvvf
 
                 if(Level == 2)
                 {
-                    return [];
+                    return PulseMode.PulseType switch
+                    {
+                        PulseTypeName.SYNC => PulseMode.PulseCount switch
+                        {
+                            6 => PulseMode.Alternative switch { 
+                                PulseAlternative.Alt1 => [PulseDataKey.PulseWidth],
+                                _ => [],
+                            },
+                            8 => PulseMode.Alternative switch
+                            {
+                                PulseAlternative.Alt1 => [PulseDataKey.PulseWidth],
+                                _ => [],
+                            },
+                            _ => []
+                        },
+                        _ => []
+                    };
                 }
 
                 if(Level == 3)
                 {
-                    if(PulseMode.PulseCount == 5)
+                    return PulseMode.PulseType switch
                     {
-                        if(PulseMode.Alternative == PulseAlternative.Alt1)
+                        PulseTypeName.SYNC => PulseMode.PulseCount switch
                         {
-                            return [PulseDataKey.L3P3Alt1Width];
-                        }
-                    }
-
-                    if(PulseMode.PulseType == PulseTypeName.ASYNC)
-                        return [PulseDataKey.Dipolar];
-
-                    return [];
+                            5 => PulseMode.Alternative switch
+                            {
+                                PulseAlternative.Alt1 => [PulseDataKey.PulseWidth],
+                                _ => [],
+                            },
+                            _ => []
+                        },
+                        PulseTypeName.ASYNC => [PulseDataKey.Dipolar],
+                        _ => []
+                    };
                 }
 
                 return [];

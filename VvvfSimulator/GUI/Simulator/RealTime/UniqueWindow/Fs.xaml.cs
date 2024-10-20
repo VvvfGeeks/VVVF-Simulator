@@ -42,10 +42,14 @@ namespace VvvfSimulator.GUI.Simulator.RealTime.UniqueWindow
                 {
                     UpdateControl();
                 }
-                Dispatcher.Invoke(() =>
+                try
                 {
-                    Close();
-                });
+                    Dispatcher.Invoke(() =>
+                    {
+                        Close();
+                    });
+                }
+                catch { }
             });
         }
 

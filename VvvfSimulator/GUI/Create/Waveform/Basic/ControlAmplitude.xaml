@@ -44,7 +44,7 @@
                         <ColumnDefinition Width="11*"/>
                     </Grid.ColumnDefinitions>
                     <Grid Background="{DynamicResource SubTitleBarBrush}">
-                        <Label Content="{DynamicResource Create.Settings.Waveform.Single.ControlAmplitude.Mode}" Style="{DynamicResource SubTitleBarText}"/>
+                        <Label Content="{DynamicResource Create.Settings.Waveform.Basic.ControlAmplitude.Mode}" Style="{DynamicResource SubTitleBarText}"/>
                     </Grid>
                     <Grid Grid.Column="1" Background="{DynamicResource BackgroundBrush}" HorizontalAlignment="Stretch">
                         <ComboBox x:Name="amplitude_mode_selector" Style="{DynamicResource SlimComboBoxStyle}" SelectionChanged="AmplitudeModeSelectorUpdate" SelectedValuePath="Key" DisplayMemberPath="Value"/>
@@ -59,7 +59,7 @@
                         <ColumnDefinition x:Name="Value" Width="11*"/>
                     </Grid.ColumnDefinitions>
                     <Border CornerRadius="0,0,0,25" Background="{DynamicResource SubTitleBarBrush}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                        <Label Content="{DynamicResource Create.Settings.Waveform.Single.ControlAmplitude.Value}" Style="{DynamicResource SubTitleBarText}"/>
+                        <Label Content="{DynamicResource Create.Settings.Waveform.Basic.ControlAmplitude.Value}" Style="{DynamicResource SubTitleBarText}"/>
                     </Border>
                     <Border CornerRadius="0,0,25,0"  Grid.Column="1" Background="{DynamicResource BackgroundBrush}">
                         <Grid>
@@ -79,7 +79,7 @@
                                     <ColumnDefinition Width="1*"/>
                                     <ColumnDefinition Width="2*"/>
                                 </Grid.ColumnDefinitions>
-                                <Label Content="{DynamicResource Create.Settings.Waveform.Single.ControlAmplitude.StartFrequency}" Style="{DynamicResource ValueDescription}"/>
+                                <Label Content="{DynamicResource Create.Settings.Waveform.Basic.ControlAmplitude.StartFrequency}" Style="{DynamicResource ValueDescription}"/>
                                 <TextBox x:Name="start_freq_box" Style="{DynamicResource SlimTextBox}" TextChanged="TextboxUpdate" Tag="start_freq" Grid.Column="1" />
                             </Grid>
                             <Grid Grid.Column="1" Grid.Row="0" Visibility="{Binding start_amp_visible, Converter={StaticResource BooleanToVisibilityConverter}}" x:Name="start_amp_grid">
@@ -87,7 +87,7 @@
                                     <ColumnDefinition Width="1*"/>
                                     <ColumnDefinition Width="2*"/>
                                 </Grid.ColumnDefinitions>
-                                <Label Content="{DynamicResource Create.Settings.Waveform.Single.ControlAmplitude.StartAmplitude}" Style="{DynamicResource ValueDescription}"/>
+                                <Label Content="{DynamicResource Create.Settings.Waveform.Basic.ControlAmplitude.StartAmplitude}" Style="{DynamicResource ValueDescription}"/>
                                 <TextBox x:Name="start_amp_box" Style="{DynamicResource SlimTextBox}" TextChanged="TextboxUpdate" Tag="start_amp" Grid.Column="1" />
                             </Grid>
                             <Grid Grid.Column="0" Grid.Row="1" Visibility="{Binding end_freq_visible, Converter={StaticResource BooleanToVisibilityConverter}}" x:Name="end_freq_grid">
@@ -95,7 +95,7 @@
                                     <ColumnDefinition Width="1*"/>
                                     <ColumnDefinition Width="2*"/>
                                 </Grid.ColumnDefinitions>
-                                <Label Content="{DynamicResource Create.Settings.Waveform.Single.ControlAmplitude.EndFrequency}" Style="{DynamicResource ValueDescription}"/>
+                                <Label Content="{DynamicResource Create.Settings.Waveform.Basic.ControlAmplitude.EndFrequency}" Style="{DynamicResource ValueDescription}"/>
                                 <TextBox x:Name="end_freq_box" Style="{DynamicResource SlimTextBox}" TextChanged="TextboxUpdate" Tag="end_freq" Grid.Column="1" />
                             </Grid>
                             <Grid Grid.Column="1" Grid.Row="1" Visibility="{Binding end_amp_visible, Converter={StaticResource BooleanToVisibilityConverter}}" x:Name="end_amp_grid">
@@ -103,7 +103,7 @@
                                     <ColumnDefinition Width="1*"/>
                                     <ColumnDefinition Width="2*"/>
                                 </Grid.ColumnDefinitions>
-                                <Label Content="{DynamicResource Create.Settings.Waveform.Single.ControlAmplitude.EndAmplitude}" Style="{DynamicResource ValueDescription}"/>
+                                <Label Content="{DynamicResource Create.Settings.Waveform.Basic.ControlAmplitude.EndAmplitude}" Style="{DynamicResource ValueDescription}"/>
                                 <TextBox x:Name="end_amp_box" Style="{DynamicResource SlimTextBox}" TextChanged="TextboxUpdate" Tag="end_amp" Grid.Column="1" />
                             </Grid>
                             <Grid Grid.Row="2" Visibility="{Binding cut_off_amp_visible, Converter={StaticResource BooleanToVisibilityConverter}}" x:Name="cut_off_amp_grid">
@@ -111,7 +111,7 @@
                                     <ColumnDefinition Width="1*"/>
                                     <ColumnDefinition Width="2*"/>
                                 </Grid.ColumnDefinitions>
-                                <Label Content="{DynamicResource Create.Settings.Waveform.Single.ControlAmplitude.CutoffAmplitude}" Style="{DynamicResource ValueDescription}"/>
+                                <Label Content="{DynamicResource Create.Settings.Waveform.Basic.ControlAmplitude.CutoffAmplitude}" Style="{DynamicResource ValueDescription}"/>
                                 <TextBox x:Name="cutoff_amp_box" Style="{DynamicResource SlimTextBox}" TextChanged="TextboxUpdate" Tag="cutoff_amp" Grid.Column="1" />
                             </Grid>
                             <Grid Grid.Column="1" Grid.Row="2" Visibility="{Binding max_amp_visible, Converter={StaticResource BooleanToVisibilityConverter}}" x:Name="max_amp_grid">
@@ -119,7 +119,7 @@
                                     <ColumnDefinition Width="1*"/>
                                     <ColumnDefinition Width="2*"/>
                                 </Grid.ColumnDefinitions>
-                                <Label Content="{DynamicResource Create.Settings.Waveform.Single.ControlAmplitude.MaxAmplitude}" Style="{DynamicResource ValueDescription}"/>
+                                <Label Content="{DynamicResource Create.Settings.Waveform.Basic.ControlAmplitude.MaxAmplitude}" Style="{DynamicResource ValueDescription}"/>
                                 <TextBox x:Name="max_amp_box" Style="{DynamicResource SlimTextBox}" TextChanged="TextboxUpdate" Tag="max_amp" Grid.Column="1" />
                             </Grid>
                             <Grid Grid.Column="1" Grid.Row="3" Visibility="{Binding curve_rate_visible, Converter={StaticResource BooleanToVisibilityConverter}}" x:Name="curve_change_grid">
@@ -127,7 +127,7 @@
                                     <ColumnDefinition Width="1*"/>
                                     <ColumnDefinition Width="2*"/>
                                 </Grid.ColumnDefinitions>
-                                <Label Content="{DynamicResource Create.Settings.Waveform.Single.ControlAmplitude.CurveRate}" Style="{DynamicResource ValueDescription}"/>
+                                <Label Content="{DynamicResource Create.Settings.Waveform.Basic.ControlAmplitude.CurveRate}" Style="{DynamicResource ValueDescription}"/>
                                 <TextBox x:Name="curve_rate_box" Style="{DynamicResource SlimTextBox}" TextChanged="TextboxUpdate" Tag="curve_rate" Grid.Column="1" />
                             </Grid>
                             <Grid Grid.Row="3" Visibility="{Binding polynomial_visible, Converter={StaticResource BooleanToVisibilityConverter}}" x:Name="polynomial_grid">
@@ -135,11 +135,11 @@
                                     <ColumnDefinition Width="1*"/>
                                     <ColumnDefinition Width="2*"/>
                                 </Grid.ColumnDefinitions>
-                                <Label Content="{DynamicResource Create.Settings.Waveform.Single.ControlAmplitude.Polynomial}" Style="{DynamicResource ValueDescription}"/>
+                                <Label Content="{DynamicResource Create.Settings.Waveform.Basic.ControlAmplitude.Polynomial}" Style="{DynamicResource ValueDescription}"/>
                                 <TextBox x:Name="polynomial_box" Style="{DynamicResource SlimTextBox}" TextChanged="TextboxUpdate" Tag="polynomial" Grid.Column="1" />
                             </Grid>
                             <Grid Grid.Row="4" Visibility="{Binding disable_range_visible, Converter={StaticResource BooleanToVisibilityConverter}}" x:Name="disable_range_grid">
-                                <CheckBox Style="{DynamicResource SlimCheckBox}" x:Name="disable_range_limit_check" Content="{DynamicResource Create.Settings.Waveform.Single.ControlAmplitude.DisableRangeLimit}" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Checked="CheckBoxUpdate" Unchecked="CheckBoxUpdate"/>
+                                <CheckBox Style="{DynamicResource SlimCheckBox}" x:Name="disable_range_limit_check" Content="{DynamicResource Create.Settings.Waveform.Basic.ControlAmplitude.DisableRangeLimit}" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Checked="CheckBoxUpdate" Unchecked="CheckBoxUpdate"/>
                             </Grid>
 
                         </Grid>

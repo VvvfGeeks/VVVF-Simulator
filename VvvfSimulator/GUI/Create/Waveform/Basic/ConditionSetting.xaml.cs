@@ -83,15 +83,15 @@ namespace VvvfSimulator.GUI.Create.Waveform.Basic
             {
                 if (Tags[1].Equals("Normal"))
                     Target.EnableNormal = check;
-                else if (Tags[1].Equals("JerkOn"))
+                else if (Tags[1].Equals("On"))
                     Target.EnableFreeRunOn = check;
-                else if (Tags[1].Equals("JerkOff"))
+                else if (Tags[1].Equals("Off"))
                     Target.EnableFreeRunOff = check;
             }else if (Tags[0].Equals("Keep"))
             {
-                if (Tags[1].Equals("JerkOn"))
+                if (Tags[1].Equals("On"))
                     Target.StuckFreeRunOn = check;
-                else if (Tags[1].Equals("JerkOff"))
+                else if (Tags[1].Equals("Off"))
                     Target.StuckFreeRunOff = check;
             }
 
