@@ -39,8 +39,6 @@
     <system:String x:Key="MainWindow.Menu.Edit.Reset">白紙に戻す</system:String>
 
     <system:String x:Key="MainWindow.Menu.Generate">生成</system:String>
-    <system:String x:Key="MainWindow.Menu.Generate.SourceCode">ソースコード</system:String>
-    <system:String x:Key="MainWindow.Menu.Generate.SourceCode.RPi3">RPi3</system:String>
     <system:String x:Key="MainWindow.Menu.Generate.Audio">音声</system:String>
     <system:String x:Key="MainWindow.Menu.Generate.Audio.VVVF">VVVF</system:String>
     <system:String x:Key="MainWindow.Menu.Generate.Audio.VVVF.Line">線間電圧</system:String>
@@ -87,6 +85,11 @@
     <system:String x:Key="MainWindow.Menu.Window.TrainSound">列車音設定</system:String>
     <system:String x:Key="MainWindow.Menu.Window.Preference">設定</system:String>
 
+    <system:String x:Key="MainWindow.Menu.Help">ヘルプ</system:String>
+    <system:String x:Key="MainWindow.Menu.Help.About">VVVF Simulator について</system:String>
+    <system:String x:Key="MainWindow.Menu.Help.About.Title">VVVF Simulator について</system:String>
+    <system:String x:Key="MainWindow.Menu.Help.About.Version.Unkown">バージョン不明</system:String>
+
     <system:String x:Key="MainWindow.TabControl.Settings">基本</system:String>
     <system:String x:Key="MainWindow.TabControl.Settings.PwmLevel">電位レベル</system:String>
     <system:String x:Key="MainWindow.TabControl.Settings.MinimumFrequency">最小周波数</system:String>
@@ -121,8 +124,6 @@
     <system:String x:Key="MainWindow.Message.Generate.Movie.Hexagon.Explain.EnterFrequency">描画する周波数を入力</system:String>
     <system:String x:Key="MainWindow.Message.Generate.Image.Hexagon.Original.EnterFrequency">描画する周波数を入力</system:String>
     <system:String x:Key="MainWindow.Message.Generate.Image.FFT.Original.EnterFrequency">描画する周波数を入力</system:String>
-    <system:String x:Key="MainWindow.Message.Generate.SourceCode.RPi3.Ok.Title">やったー</system:String>
-    <system:String x:Key="MainWindow.Message.Generate.SourceCode.RPi3.Ok.Message">C言語で書き出しました</system:String>
     <system:String x:Key="MainWindow.Message.Tools.AutoVoltage.Error">
         変調率自動設定を使用する際は、次の事項を確認してください。\n
         ・力行、回生パターンともに、2つ以上のパターンがあること。\n
@@ -135,11 +136,17 @@
     <system:String x:Key="MainWindow.Dialog.Tools.AutoVoltage.BrakePatternMaxFrequency">回生パターン最大周波数</system:String>
     <system:String x:Key="MainWindow.Dialog.Tools.AutoVoltage.BrakePatternMaxVoltage">回生パターン最大電圧</system:String>
     <system:String x:Key="MainWindow.Dialog.Tools.AutoVoltage.MaxEffort">最大試行回数</system:String>
+    <system:String x:Key="MainWindow.Dialog.Tools.AutoVoltage.CalculationType">計算方法</system:String>
     <system:String x:Key="MainWindow.Dialog.Tools.AutoVoltage.Precision">精度</system:String>
+    <system:String x:Key="MainWindow.Dialog.Tools.AutoVoltage.Message.Error">変調率の自動設定に失敗\n変調率:{0}\n回生:{1}\n周波数:{2}Hz\nエラー内容:{3}</system:String>
 
-    <system:String x:Key="TextBoxListWindow.Title">値の入力</system:String>
-    <system:String x:Key="TextBoxListWindow.Label">値を入力</system:String>
-    <system:String x:Key="TextBoxListWindow.OK">完了</system:String>
+    <system:String x:Key="MainWindow.Dialog.Tools.AutoVoltage.Table.Title">離散変調率設定</system:String>
+    <system:String x:Key="MainWindow.Dialog.Tools.AutoVoltage.Table.Division">分割数</system:String>
+    <system:String x:Key="MainWindow.Dialog.Tools.AutoVoltage.Table.IsDivisionPerHz">1Hzあたりに分割</system:String>
+    
+    <system:String x:Key="DialogInputWindow.Title">値の入力</system:String>
+    <system:String x:Key="DialogInputWindow.Label">値を入力</system:String>
+    <system:String x:Key="DialogInputWindow.OK">完了</system:String>
 
     <system:String x:Key="LinearCalculator.Title">一次関数電卓</system:String>
     <system:String x:Key="LinearCalculator.Copy">コピー</system:String>
@@ -194,9 +201,9 @@
     <system:String x:Key="TrainAudio.Pages.MotorSetting.MotorSpecification.StatorResistance">固定子抵抗値</system:String>
     <system:String x:Key="TrainAudio.Pages.MotorSetting.MotorSpecification.RotorResistance">回転子抵抗値</system:String>
     <system:String x:Key="TrainAudio.Pages.MotorSetting.MotorSpecification.StatorInductance">固定子誘導係数</system:String>
-    <system:String x:Key="TrainAudio.Pages.MotorSetting.MotorSpecification.RotorInductancce">回転子誘導係数</system:String>
+    <system:String x:Key="TrainAudio.Pages.MotorSetting.MotorSpecification.RotorInductance">回転子誘導係数</system:String>
     <system:String x:Key="TrainAudio.Pages.MotorSetting.MotorSpecification.MutualInductance">相互誘導係数</system:String>
-    <system:String x:Key="TrainAudio.Pages.MotorSetting.MotorSpecification.PolarLogarithm">極対数</system:String>
+    <system:String x:Key="TrainAudio.Pages.MotorSetting.MotorSpecification.PolePairCount">極対数</system:String>
     <system:String x:Key="TrainAudio.Pages.MotorSetting.MotorSpecification.Damping">減衰係数</system:String>
     <system:String x:Key="TrainAudio.Pages.MotorSetting.MotorSpecification.RotationalInertiaMass">回転慣性質量</system:String>
     <system:String x:Key="TrainAudio.Pages.MotorSetting.MotorSpecification.StaticFriction">静止摩擦係数</system:String>
@@ -224,13 +231,18 @@
     <system:String x:Key="TrainAudio.Pages.Gear.GearCalculate.Gear">歯車</system:String>
     <system:String x:Key="TrainAudio.Pages.Gear.GearCalculate.Count">歯数</system:String>
 
-    <system:String x:Key="Simulator.RealTime.MasconWindow.Title">コントローラ</system:String>
-    <FontFamily x:Key="Simulator.RealTime.MasconWindow.Font.Number">/GUI/Resource/Fonts/MPlus1Code/#M PLUS 1 Code</FontFamily>
-    <FontFamily x:Key="Simulator.RealTime.MasconWindow.Font.Notch">/GUI/Resource/Fonts/MPlus1Code/#M PLUS 1 Code</FontFamily>
-    <system:String x:Key="Simulator.RealTime.MasconWindow.SineFrequency">駆動周波数</system:String>
-    <system:String x:Key="Simulator.RealTime.MasconWindow.Voltage">電圧</system:String>
-    <system:String x:Key="Simulator.RealTime.MasconWindow.PulseState">パルス状態</system:String>
-    <system:String x:Key="Simulator.RealTime.MasconWindow.MenuItem.DeviceSetting">入力設定</system:String>
+    <system:String x:Key="Simulator.RealTime.Controller.Title">コントローラ</system:String>
+    <FontFamily x:Key="Simulator.RealTime.Controller.Font.Number">/GUI/Resource/Fonts/MPlus1Code/#M PLUS 1 Code</FontFamily>
+    <FontFamily x:Key="Simulator.RealTime.Controller.Font.Notch">/GUI/Resource/Fonts/MPlus1Code/#M PLUS 1 Code</FontFamily>
+    <FontFamily x:Key="Simulator.RealTime.Controller.Font.Topic">/GUI/Resource/Fonts/RocknRoll_One/#RocknRoll One</FontFamily>
+    <FontFamily x:Key="Simulator.RealTime.Controller.Font.Unit">/GUI/Resource/Fonts/RocknRoll_One/#RocknRoll One</FontFamily>
+    <system:String x:Key="Simulator.RealTime.Controller.SineFrequency">駆動周波数</system:String>
+    <system:String x:Key="Simulator.RealTime.Controller.Voltage">電圧</system:String>
+    <system:String x:Key="Simulator.RealTime.Controller.PulseState">パルス状態</system:String>
+    
+    <system:String x:Key="Simulator.RealTime.Controller.MenuItem.DeviceSetting">入力設定</system:String>
+
+    <system:String x:Key="Simulator.RealTime.Controller.Design2.MenuItem.CalculateDivision">計算精度設定</system:String>
 
     <system:String x:Key="Simulator.RealTime.RealtimeWindows.ControlStatus.Title">制御状態</system:String>
 
@@ -259,6 +271,7 @@
     <system:String x:Key="Simulator.RealTime.Setting.Basic.AudioBuffSize">バッファーサイズ</system:String>
     <system:String x:Key="Simulator.RealTime.Setting.Basic.SamplingFrequency">サンプリング周波数</system:String>
     <system:String x:Key="Simulator.RealTime.Setting.Basic.CalculateDivision">単位計算数</system:String>
+    <system:String x:Key="Simulator.RealTime.Setting.Basic.Controller">コントローラ</system:String>
     <system:String x:Key="Simulator.RealTime.Setting.Basic.WaveForm">波形</system:String>
     <system:String x:Key="Simulator.RealTime.Setting.Basic.WaveForm.Show.Line">線間電圧を表示</system:String>
     <system:String x:Key="Simulator.RealTime.Setting.Basic.WaveForm.Show.Phase">相電圧を表示</system:String>
@@ -277,11 +290,17 @@
 
     <system:String x:Key="Simulator.RealTime.Setting.Basic.Message.NoFont">次のフォントがシステムにインストールされていません</system:String>
 
+    <system:String x:Key="Simulator.RealTime.Message.NoUsbDevice">USBデバイスが検出できませんでした。</system:String>
+    <system:String x:Key="Simulator.RealTime.Message.UsbDeviceRemoved">USBデバイスが取り外されました。</system:String>
+
     <system:String x:Key="MidiConvert.Main.Title">MIDIの変換</system:String>
     <system:String x:Key="MidiConvert.Main.Browse">開く</system:String>
     <system:String x:Key="MidiConvert.Main.Select">保存先</system:String>
     <system:String x:Key="MidiConvert.Main.Config">設定</system:String>
     <system:String x:Key="MidiConvert.Main.Convert">変換する</system:String>
+
+    <system:String x:Key="MidiConvert.Main.Message.MidiConvertError">このMIDIは変換できません。</system:String>
+    <system:String x:Key="MidiConvert.TaskDescription.Convert.Description">MIDI:{0}、トラック{1}、第{2}部の変換</system:String>
 
     <system:String x:Key="MidiConvert.Config.Title">MIDIの変換</system:String>
     <system:String x:Key="MidiConvert.Config.MultiThreading">並行処理</system:String>
@@ -307,6 +326,8 @@
     <system:String x:Key="Mascon.ControlEditor.Menu.Edit.Reset">白紙に戻す</system:String>
     <system:String x:Key="Mascon.ControlEditor.Menu.Edit.Midi">MIDIを読み込む</system:String>
 
+    <system:String x:Key="Mascon.ControlEditor.Message.MidiConvertError">このMIDIは変換できません。</system:String>
+
     <system:String x:Key="Mascon.ControlEditor.Message.File.Load.Ok.Title">いいね</system:String>
     <system:String x:Key="Mascon.ControlEditor.Message.File.Load.Ok.Message">ファイルを読み込みました</system:String>
     <system:String x:Key="Mascon.ControlEditor.Message.File.Load.Error.Message">このファイルは読めません</system:String>
@@ -330,6 +351,19 @@
     <system:String x:Key="Create.Settings.MinimumFrequency.Accelerating">力行時</system:String>
     <system:String x:Key="Create.Settings.MinimumFrequency.Braking">回生時</system:String>
 
+    <system:String x:Key="Create.Settings.Waveform.Common.PulseDataSetting.ParamType">値の種類</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Common.PulseDataSetting.Param">変数</system:String>
+
+    <system:String x:Key="Create.Settings.Waveform.Common.ControlConstSetting.ConstValue">定数</system:String>
+
+    <system:String x:Key="Create.Settings.Waveform.Common.ControlMovingSetting.MoveType">関数の種類</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Common.ControlMovingSetting.Start">始点</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Common.ControlMovingSetting.StartValue">始点の値</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Common.ControlMovingSetting.End">終点</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Common.ControlMovingSetting.EndValue">終点の値</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Common.ControlMovingSetting.Exponential">指数</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Common.ControlMovingSetting.CurveRate">曲率</system:String>
+    
     <system:String x:Key="Create.Settings.Waveform.Basic.ControlAmplitude.Title.Default">変調率</system:String>
     <system:String x:Key="Create.Settings.Waveform.Basic.ControlAmplitude.Title.On">通電時変調率</system:String>
     <system:String x:Key="Create.Settings.Waveform.Basic.ControlAmplitude.Title.Off">遮断時変調率</system:String>
@@ -344,19 +378,8 @@
     <system:String x:Key="Create.Settings.Waveform.Basic.ControlAmplitude.Polynomial">次数</system:String>
     <system:String x:Key="Create.Settings.Waveform.Basic.ControlAmplitude.CurveRate">曲率</system:String>
     <system:String x:Key="Create.Settings.Waveform.Basic.ControlAmplitude.DisableRangeLimit">変調率を始点と終点の間に限定しない</system:String>
-
-    <system:String x:Key="Create.Settings.Waveform.Common.PulseDataSetting.ParamType">値の種類</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Common.PulseDataSetting.Param">変数</system:String>
-
-    <system:String x:Key="Create.Settings.Waveform.Common.ControlConstSetting.ConstValue">定数</system:String>
-
-    <system:String x:Key="Create.Settings.Waveform.Common.ControlMovingSetting.MoveType">関数の種類</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Common.ControlMovingSetting.Start">始点</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Common.ControlMovingSetting.StartValue">始点の値</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Common.ControlMovingSetting.End">終点</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Common.ControlMovingSetting.EndValue">終点の値</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Common.ControlMovingSetting.Exponential">指数</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Common.ControlMovingSetting.CurveRate">曲率</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.ControlAmplitude.TableInterpolation">離散点を補間する</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.ControlAmplitude.TableEdit">離散点を編集</system:String>
 
     <system:String x:Key="Create.Settings.Waveform.Basic.PulseSetting.Title">パルスモード</system:String>
     <system:String x:Key="Create.Settings.Waveform.Basic.PulseSetting.Type">種類</system:String>
@@ -389,6 +412,10 @@
     <system:String x:Key="Create.Settings.Waveform.Basic.ControlBasicHarmonic.AmplitudeProportional">振幅比例</system:String>
     <system:String x:Key="Create.Settings.Waveform.Basic.ControlBasicHarmonic.InitialPhase">初期位相</system:String>
 
+    <system:String x:Key="Create.Settings.Waveform.Basic.AmplitudeTableEditor.Title">離散変調率編集</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.AmplitudeTableEditor.Frequency">周波数</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.AmplitudeTableEditor.Amplitude">変調率</system:String>
+    
     <system:String x:Key="Create.Settings.Waveform.Basic.DiscreteSetting.Title">離散設定</system:String>
     <system:String x:Key="Create.Settings.Waveform.Basic.DiscreteSetting.DiscreteSetting">離散設定</system:String>
     <system:String x:Key="Create.Settings.Waveform.Basic.DiscreteSetting.Enable">有効設定</system:String>
@@ -429,6 +456,9 @@
     <system:String x:Key="Resource.Language.FriendlyNameConverter.FrequencyFilter.FilterType.LowPassFilter">ローパスフィルター</system:String>
     <system:String x:Key="Resource.Language.FriendlyNameConverter.FrequencyFilter.FilterType.NotchFilter">ノッチフィルター</system:String>
 
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.RealTime.Controller.Design1">標準</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.RealTime.Controller.Design2">波形付き</system:String>
+    
     <system:String x:Key="Resource.Language.FriendlyNameConverter.MasconDevice.DeviceMode.KeyBoard">キーボード</system:String>
     <system:String x:Key="Resource.Language.FriendlyNameConverter.MasconDevice.DeviceMode.PicoMascon">ピコマスコン</system:String>
     
@@ -438,11 +468,11 @@
     <system:String x:Key="Resource.Language.FriendlyNameConverter.VoltageVector.Design.Original">デザイン1</system:String>
 
     <system:String x:Key="Resource.Language.FriendlyNameConverter.AmplitudeMode.Name.Linear">比例</system:String>
-    <system:String x:Key="Resource.Language.FriendlyNameConverter.AmplitudeMode.Name.Wide3Pulse">広域3パルス用</system:String>
-    <system:String x:Key="Resource.Language.FriendlyNameConverter.AmplitudeMode.Name.InvProportional">反比例</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.AmplitudeMode.Name.InverseProportional">反比例</system:String>
     <system:String x:Key="Resource.Language.FriendlyNameConverter.AmplitudeMode.Name.Exponential">指数</system:String>
     <system:String x:Key="Resource.Language.FriendlyNameConverter.AmplitudeMode.Name.LinearPolynomial">N次比例</system:String>
     <system:String x:Key="Resource.Language.FriendlyNameConverter.AmplitudeMode.Name.Sine">正弦波状</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.AmplitudeMode.Name.Table">離散点</system:String>
 
     <system:String x:Key="Resource.Language.FriendlyNameConverter.BaseWaveType.Name.Sine">正弦波</system:String>
     <system:String x:Key="Resource.Language.FriendlyNameConverter.BaseWaveType.Name.Saw">三角波</system:String>
@@ -478,6 +508,12 @@
 
     <system:String x:Key="Resource.Language.FriendlyNameConverter.YamlAsyncParameterVibratoMode.Name.Const">定数</system:String>
     <system:String x:Key="Resource.Language.FriendlyNameConverter.YamlAsyncParameterVibratoMode.Name.Moving">変数</system:String>
+
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.MyMath.EquationSolver.EquationSolverType.Name.Newton">ニュートン法</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.MyMath.EquationSolver.EquationSolverType.Name.Bisection">二分法</system:String>
+
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.Bool.True">はい</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.Bool.False">いいえ</system:String>
 
 
 </ResourceDictionary>

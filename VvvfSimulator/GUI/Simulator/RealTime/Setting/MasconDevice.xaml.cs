@@ -7,6 +7,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using VvvfSimulator.GUI.Resource.Class;
 using VvvfSimulator.GUI.Resource.Language;
+using VvvfSimulator.GUI.Simulator.RealTime.Controller;
 
 namespace VvvfSimulator.GUI.Simulator.RealTime.Setting
 {
@@ -16,7 +17,7 @@ namespace VvvfSimulator.GUI.Simulator.RealTime.Setting
     public partial class MasconDevice : Window
     {
         private readonly ViewModel Model = new();
-        public class ViewModel : ViewModelBase
+        public partial class ViewModel : ViewModelBase
         {
 
             private Visibility _PortVisibility = Visibility.Visible;
@@ -35,23 +36,23 @@ namespace VvvfSimulator.GUI.Simulator.RealTime.Setting
             public Visibility FrequencyRateVisibility { get { return _FrequencyRateVisibility; } set { _FrequencyRateVisibility = value; RaisePropertyChanged(nameof(FrequencyRateVisibility)); } }
         };
 
-        private readonly MasconWindow Main;
-        public MasconDevice(MasconWindow Main)
+        private readonly IController Controller;
+        public MasconDevice(IController Controller)
         {
-            this.Main = Main;
-            Owner = Main;
+            this.Controller = Controller;
+            Owner = Controller.GetInstance();
             DataContext = Model;
 
             InitializeComponent();
             ModeSelector.ItemsSource = FriendlyNameConverter.GetMasconDeviceModeNames();
-            ModeSelector.SelectedValue = Main.CurrentMode;
+            ModeSelector.SelectedValue = Controller.GetControllerMode();
             SetCOMPorts();
-            PortSelector.SelectedItem = Main.MasconComPort;
+            PortSelector.SelectedIndex = 0;
 
             SetTextBoxKey();
             SetDoubleInputTextBox();
 
-            SetVisibility(Main.CurrentMode);
+            SetVisibility(Controller.GetControllerMode());
         }
 
         private readonly Dictionary<DeviceMode, string> DevideModeNames = [];
@@ -82,18 +83,18 @@ namespace VvvfSimulator.GUI.Simulator.RealTime.Setting
             if (tag.Equals("Mode"))
             {
                 DeviceMode mode = (DeviceMode)cb.SelectedValue;
-                Main.CurrentMode = mode;
+                Controller.SetControllerMode(mode);
                 SetVisibility(mode);
             }else if (tag.Equals("Port"))
             {
                 string port = (string)cb.SelectedItem;
-                Main.MasconComPort = port;
+                Controller.SetComPort(port);
             }
         }
 
         private void Window_Closing(object sender, CancelEventArgs e)
         {
-            Main.SetConfig();
+            Controller.PrepareController();
         }
 
         private void OnWindowControlButtonClick(object sender, RoutedEventArgs e)

@@ -29,7 +29,7 @@ namespace VvvfSimulator.Generation.Motor
                 public double L_s { get; set; } = 0.196; /*Stator inductance(H)*/
                 public double L_r { get; set; } = 0.196; /*Rotor inductance(H)*/
                 public double L_m { get; set; } = 0.187; /*Mutual inductance(H)*/
-                public double NP { get; set; } = 2;/* Polar logarithm*/
+                public double NP { get; set; } = 2;/* Number of pole pair */
                 public double DAMPING { get; set; } = 500.0;/* damping */
                 public double INERTIA { get; set; } = 0.05; /*Rotational inertia mass(kg.m^2)*/
                 public double STATICF { get; set; } = 0.005879; /*Static friction(N.m.s)*/

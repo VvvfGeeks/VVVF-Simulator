@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
+using VvvfSimulator.GUI.Create.Waveform.Basic;
 using VvvfSimulator.GUI.Resource.Class;
 using VvvfSimulator.GUI.Resource.Language;
-using static VvvfSimulator.Vvvf.Calculate;
 using static VvvfSimulator.Yaml.VvvfSound.YamlVvvfSoundData.YamlControlData.YamlAmplitude;
+using static VvvfSimulator.Yaml.VvvfSound.YamlVvvfSoundData.YamlControlData.YamlAmplitude.AmplitudeParameter;
 
 namespace VvvfSimulator.GUI.Create.Waveform
 {
@@ -14,7 +15,7 @@ namespace VvvfSimulator.GUI.Create.Waveform
     /// </summary>
     public partial class ControlAmplitude : UserControl
     {
-        private readonly YamlControlDataAmplitude Context;
+        private readonly AmplitudeParameter Context;
         private readonly ControlAmplitudeContent ContextType;
         private readonly WaveformEditor Editor;
         private readonly bool IgnoreUpdate = true;
@@ -50,7 +51,7 @@ namespace VvvfSimulator.GUI.Create.Waveform
             public bool disable_range_visible { get { return _disable_range_visible; } set { _disable_range_visible = value; RaisePropertyChanged(nameof(disable_range_visible)); } }
         };
 
-        public ControlAmplitude(WaveformEditor Editor, YamlControlDataAmplitude ycd, ControlAmplitudeContent cac)
+        public ControlAmplitude(WaveformEditor Editor, AmplitudeParameter ycd, ControlAmplitudeContent cac)
         {
             Context = ycd;
             ContextType = cac;
@@ -79,65 +80,39 @@ namespace VvvfSimulator.GUI.Create.Waveform
             amplitude_mode_selector.ItemsSource = FriendlyNameConverter.GetAmplitudeModeNames();
             amplitude_mode_selector.SelectedValue = Context.Mode;
 
-            start_freq_box.Text = Context.Parameter.StartFrequency.ToString();
-            start_amp_box.Text = Context.Parameter.StartAmplitude.ToString();
-            end_freq_box.Text = Context.Parameter.EndFrequency.ToString();
-            end_amp_box.Text = Context.Parameter.EndAmplitude.ToString();
-            cutoff_amp_box.Text = Context.Parameter.CutOffAmplitude.ToString();
-            max_amp_box.Text = Context.Parameter.MaxAmplitude.ToString();
-            polynomial_box.Text = Context.Parameter.Polynomial.ToString();
-            curve_rate_box.Text = Context.Parameter.CurveChangeRate.ToString();
-            disable_range_limit_check.IsChecked = Context.Parameter.DisableRangeLimit;
+            start_freq_box.Text = Context.StartFrequency.ToString();
+            start_amp_box.Text = Context.StartAmplitude.ToString();
+            end_freq_box.Text = Context.EndFrequency.ToString();
+            end_amp_box.Text = Context.EndAmplitude.ToString();
+            cutoff_amp_box.Text = Context.CutOffAmplitude.ToString();
+            max_amp_box.Text = Context.MaxAmplitude.ToString();
+            polynomial_box.Text = Context.Polynomial.ToString();
+            curve_rate_box.Text = Context.CurveChangeRate.ToString();
+            DisableRateLimitCheckBox.IsChecked = Context.DisableRangeLimit;
+            AmplitudeTableInterpolationCheck.IsChecked = Context.AmplitudeTableInterpolation;
 
-            SetGridVisibility(Context.Mode, ContextType);
+            UpdateVisibility();
         }
-        private void TextboxUpdate(object sender, TextChangedEventArgs e)
+        private void UpdateVisibility()
         {
-            if (IgnoreUpdate) return;
-
-            TextBox tb = (TextBox)sender;
-            Object? tag = tb.Tag;
-            if (tag == null) return;
-
-            if (tag.Equals("start_freq"))
-                Context.Parameter.StartFrequency = ParseTextBox.ParseDouble(tb);
-            else if (tag.Equals("start_amp"))
-                Context.Parameter.StartAmplitude = ParseTextBox.ParseDouble(tb);
-            else if (tag.Equals("end_freq"))
-                Context.Parameter.EndFrequency = ParseTextBox.ParseDouble(tb);
-            else if (tag.Equals("end_amp"))
-                Context.Parameter.EndAmplitude = ParseTextBox.ParseDouble(tb);
-            else if (tag.Equals("cutoff_amp"))
-                Context.Parameter.CutOffAmplitude = ParseTextBox.ParseDouble(tb);
-            else if (tag.Equals("max_amp"))
-                Context.Parameter.MaxAmplitude = ParseTextBox.ParseDouble(tb);
-            else if(tag.Equals("curve_rate"))
-                Context.Parameter.CurveChangeRate = ParseTextBox.ParseDouble(tb);
-            else if (tag.Equals("polynomial"))
-                Context.Parameter.Polynomial = ParseTextBox.ParseDouble(tb);
-
-            MainWindow.GetInstance()?.UpdateControlList();
+            SetParameterVisibility(Context.Mode);
+            SetFunctionParameterGridsVisibility(Context.Mode, ContextType);
         }
-        private void CheckBoxUpdate(object sender, RoutedEventArgs e)
+        private void SetParameterVisibility(AmplitudeMode Mode)
         {
-            if (IgnoreUpdate) return;
+            TableParameter.Visibility = Mode switch
+            {
+                AmplitudeMode.Table => Visibility.Visible,
+                _ => Visibility.Collapsed,
+            };
 
-            CheckBox cb = (CheckBox)sender;
-            Context.Parameter.DisableRangeLimit = cb.IsChecked != false;
-            MainWindow.GetInstance()?.UpdateControlList();
+            FunctionParameter.Visibility = Mode switch
+            {
+                AmplitudeMode.Table => Visibility.Collapsed,
+                _ => Visibility.Visible,
+            };
         }
-        private readonly Dictionary<AmplitudeMode, string> AmplitudeModeSelection = [];
-        
-        private void AmplitudeModeSelectorUpdate(object sender, RoutedEventArgs e)
-        {
-            if (IgnoreUpdate) return;
-
-            Context.Mode = (AmplitudeMode)amplitude_mode_selector.SelectedValue;
-            SetGridVisibility(Context.Mode, ContextType);
-
-            MainWindow.GetInstance()?.UpdateControlList();            
-        }
-        private void SetGridVisibility(AmplitudeMode mode , ControlAmplitudeContent cac)
+        private void SetFunctionParameterGridsVisibility(AmplitudeMode mode, ControlAmplitudeContent cac)
         {
             void _SetVisiblity(int i, bool b)
             {
@@ -156,13 +131,11 @@ namespace VvvfSimulator.GUI.Create.Waveform
 
             if (mode == AmplitudeMode.Linear)
                 condition_1 = [true, true, true, true, true, true, false, false, true];
-            else if (mode == AmplitudeMode.Wide_3_Pulse)
-                condition_1 = [true, true, true, true, true, true, false, false, true];
-            else if (mode == AmplitudeMode.Inv_Proportional)
+            else if (mode == AmplitudeMode.InverseProportional)
                 condition_1 = [true, true, true, true, true, true, false, true, true];
             else if (mode == AmplitudeMode.Exponential)
                 condition_1 = [false, false, true, true, true, true, false, false, true];
-            else if (mode == AmplitudeMode.Linear_Polynomial)
+            else if (mode == AmplitudeMode.LinearPolynomial)
                 condition_1 = [false, false, true, true, true, true, true, false, true];
             else
                 condition_1 = [false, false, true, true, true, true, false, false, true];
@@ -174,10 +147,65 @@ namespace VvvfSimulator.GUI.Create.Waveform
             else
                 condition_2 = [true, true, true, true, true, true, true, true, true];
 
-            for (int i =0; i < 9; i++)
+            for (int i = 0; i < 9; i++)
             {
                 _SetVisiblity(i, (condition_1[i] && condition_2[i]));
 
+            }
+        }
+        private void TextboxUpdate(object sender, TextChangedEventArgs e)
+        {
+            if (IgnoreUpdate) return;
+
+            TextBox tb = (TextBox)sender;
+            Object? tag = tb.Tag;
+            if (tag == null) return;
+
+            if (tag.Equals("start_freq"))
+                Context.StartFrequency = ParseTextBox.ParseDouble(tb);
+            else if (tag.Equals("start_amp"))
+                Context.StartAmplitude = ParseTextBox.ParseDouble(tb);
+            else if (tag.Equals("end_freq"))
+                Context.EndFrequency = ParseTextBox.ParseDouble(tb);
+            else if (tag.Equals("end_amp"))
+                Context.EndAmplitude = ParseTextBox.ParseDouble(tb);
+            else if (tag.Equals("cutoff_amp"))
+                Context.CutOffAmplitude = ParseTextBox.ParseDouble(tb);
+            else if (tag.Equals("max_amp"))
+                Context.MaxAmplitude = ParseTextBox.ParseDouble(tb);
+            else if(tag.Equals("curve_rate"))
+                Context.CurveChangeRate = ParseTextBox.ParseDouble(tb);
+            else if (tag.Equals("polynomial"))
+                Context.Polynomial = ParseTextBox.ParseDouble(tb);
+        }
+        private void CheckBoxUpdate(object sender, RoutedEventArgs e)
+        {
+            if (IgnoreUpdate) return;
+            CheckBox Box = (CheckBox)sender;
+            string Name = Box.Name;
+            bool Checked = Box.IsChecked ?? false;
+
+            if (Name.Equals("DisableRateLimitCheckBox")) Context.DisableRangeLimit = Checked;
+            else if (Name.Equals("AmplitudeTableInterpolationCheck")) Context.AmplitudeTableInterpolation = Checked;
+        }        
+        private void AmplitudeModeSelectorUpdate(object sender, RoutedEventArgs e)
+        {
+            if (IgnoreUpdate) return;
+
+            Context.Mode = (AmplitudeMode)amplitude_mode_selector.SelectedValue;
+            UpdateVisibility();
+        }
+        private void ButtonClicked(object sender, RoutedEventArgs e)
+        {
+            if (IgnoreUpdate) return;
+            Button Btn = (Button)sender;
+            string Name = Btn.Name;
+
+            if(Name.Equals("OpenAmplitudeTableEditorButton"))
+            {
+                MainWindow.SetInteractive(false);
+                new AmplitudeTableEditor(MainWindow.GetInstance(), Context).ShowDialog();
+                MainWindow.SetInteractive(true);
             }
         }
     }

@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using static VvvfSimulator.Vvvf.MyMath;
 using static VvvfSimulator.Vvvf.Struct;
 using static VvvfSimulator.Yaml.VvvfSound.YamlVvvfSoundData.YamlControlData;
-using static VvvfSimulator.Yaml.VvvfSound.YamlVvvfSoundData.YamlControlData.YamlAmplitude.YamlControlDataAmplitude;
+using static VvvfSimulator.Yaml.VvvfSound.YamlVvvfSoundData.YamlControlData.YamlAmplitude;
+using static VvvfSimulator.Yaml.VvvfSound.YamlVvvfSoundData.YamlControlData.YamlAmplitude.AmplitudeParameter;
 using static VvvfSimulator.Yaml.VvvfSound.YamlVvvfSoundData.YamlControlData.YamlPulseMode;
 
 
@@ -133,121 +134,93 @@ namespace VvvfSimulator.Vvvf
             return ModulateSignal(modulated, saw_value) * 2;
         }
 
-        //
-        // Amplitude Calculation
-        //
-        public enum AmplitudeMode
+        public static double GetAmplitude(AmplitudeParameter Param, double Current)
         {
-            Linear, Linear_Polynomial, Inv_Proportional, Exponential, Sine, Wide_3_Pulse
-        }
-        public class AmplitudeArgument
-        {
-            public double min_freq = 0;
-            public double min_amp = 0;
-            public double max_freq = 0;
-            public double max_amp = 0;
+            double Amplitude = 0;
 
-            public bool disable_range_limit = false;
-            public double change_const = 0.43;
-            public double polynomial = 1.0;
-
-            public double current = 0;
-
-            public AmplitudeArgument() { }
-            public AmplitudeArgument(YamlControlDataAmplitudeParameter config, double current)
+            if (Param.EndAmplitude == Param.StartAmplitude) Amplitude = Param.StartAmplitude;
+            else if (Param.Mode == AmplitudeMode.Linear)
             {
-                change_const = config.CurveChangeRate;
-                this.current = current;
-                disable_range_limit = config.DisableRangeLimit;
-                polynomial = config.Polynomial;
-
-                max_amp = config.EndAmplitude;
-                max_freq = config.EndFrequency;
-                min_amp = config.StartAmplitude;
-                min_freq = config.StartFrequency;
+                if (!Param.DisableRangeLimit)
+                {
+                    if (Current < Param.StartFrequency) Current = Param.StartFrequency;
+                    if (Current > Param.EndFrequency) Current = Param.EndFrequency;
+                }
+                Amplitude = (Param.EndAmplitude - Param.StartAmplitude) / (Param.EndFrequency - Param.StartFrequency) * (Current - Param.StartFrequency) + Param.StartAmplitude;
             }
-        }
-
-        public static double GetAmplitude(AmplitudeMode mode, AmplitudeArgument arg)
-        {
-            if (arg.max_amp == arg.min_amp) return arg.min_amp;
-
-            switch (mode)
+            else if (Param.Mode == AmplitudeMode.InverseProportional)
             {
-                case AmplitudeMode.Linear:
-                    if (!arg.disable_range_limit)
-                    {
-                        if (arg.current < arg.min_freq) arg.current = arg.min_freq;
-                        if (arg.current > arg.max_freq) arg.current = arg.max_freq;
-                    }
-                    return (arg.max_amp - arg.min_amp) / (arg.max_freq - arg.min_freq) * (arg.current - arg.min_freq) + arg.min_amp;
-                case AmplitudeMode.Wide_3_Pulse:
-                    if (!arg.disable_range_limit)
-                    {
-                        if (arg.current < arg.min_freq) arg.current = arg.min_freq;
-                        if (arg.current > arg.max_freq) arg.current = arg.max_freq;
-                    }
-                    return 0.2 * ((arg.current - arg.min_freq) * ((arg.max_amp - arg.min_amp) / (arg.max_freq - arg.min_freq)) + arg.min_amp) + 0.8;
-                case AmplitudeMode.Inv_Proportional:
-                    {
-                        if (!arg.disable_range_limit)
-                        {
-                            if (arg.current < arg.min_freq) arg.current = arg.min_freq;
-                            if (arg.current > arg.max_freq) arg.current = arg.max_freq;
-                        }
+                if (!Param.DisableRangeLimit)
+                {
+                    if (Current < Param.StartFrequency) Current = Param.StartFrequency;
+                    if (Current > Param.EndFrequency) Current = Param.EndFrequency;
+                }
 
-                        double x = GetAmplitude(AmplitudeMode.Linear, new AmplitudeArgument()
-                        {
-                            min_freq = arg.min_freq,
-                            min_amp = 1 / arg.min_amp,
-                            max_freq = arg.max_freq,
-                            max_amp = 1 / arg.max_amp,
-                            current = arg.current,
-                            disable_range_limit = arg.disable_range_limit
-                        });
+                double x = (1.0 / Param.EndAmplitude - 1.0 / Param.StartAmplitude) / (Param.EndFrequency - Param.StartFrequency) * (Current - Param.StartFrequency) + 1.0 / Param.StartAmplitude;
 
-                        double c = -arg.change_const;
-                        double k = arg.max_amp;
-                        double l = arg.min_amp;
-                        double a = 1 / (1 / l - 1 / k) * (1 / (l - c) - 1 / (k - c));
-                        double b = 1 / (1 - 1 / l * k) * (1 / (l - c) - 1 / l * k / (k - c));
+                double c = -Param.CurveChangeRate;
+                double k = Param.EndAmplitude;
+                double l = Param.StartAmplitude;
+                double a = 1 / (1 / l - 1 / k) * (1 / (l - c) - 1 / (k - c));
+                double b = 1 / (1 - 1 / l * k) * (1 / (l - c) - 1 / l * k / (k - c));
 
-                        return 1 / (a * x + b) + c;
-                    }
-
-                case AmplitudeMode.Exponential:
-                    {
-
-                        if (!arg.disable_range_limit)
-                        {
-                            if (arg.current > arg.max_freq) arg.current = arg.max_freq;
-                        }
-
-                        double t = 1 / arg.max_freq * Math.Log(arg.max_amp + 1);
-
-                        return Math.Pow(Math.E, t * arg.current) - 1;
-                    }
-
-                case AmplitudeMode.Linear_Polynomial:
-                    if (!arg.disable_range_limit)
-                    {
-                        if (arg.current > arg.max_freq) arg.current = arg.max_freq;
-                    }
-                    return Math.Pow(arg.current, arg.polynomial) / Math.Pow(arg.max_freq, arg.polynomial) * arg.max_amp;
-                case AmplitudeMode.Sine:
-                    {
-                        if (!arg.disable_range_limit)
-                        {
-                            if (arg.current > arg.max_freq) arg.current = arg.max_freq;
-                        }
-
-                        double x = Math.PI * arg.current / (2.0 * arg.max_freq);
-
-                        return Math.Sin(x) * arg.max_amp;
-                    }
-                default:
-                    return 0;
+                Amplitude = 1 / (a * x + b) + c;
             }
+            else if (Param.Mode == AmplitudeMode.Exponential)
+            {
+                if (!Param.DisableRangeLimit)
+                {
+                    if (Current > Param.EndFrequency) Current = Param.EndFrequency;
+                }
+
+                double t = 1 / Param.EndFrequency * Math.Log(Param.EndAmplitude + 1);
+
+                Amplitude = Math.Pow(Math.E, t * Current) - 1;
+            }
+            else if (Param.Mode == AmplitudeMode.LinearPolynomial)
+            {
+                if (!Param.DisableRangeLimit)
+                {
+                    if (Current > Param.EndFrequency) Current = Param.EndFrequency;
+                }
+                Amplitude = Math.Pow(Current, Param.Polynomial) / Math.Pow(Param.EndFrequency, Param.Polynomial) * Param.EndAmplitude;
+            }
+            else if (Param.Mode == AmplitudeMode.Sine)
+            {
+                if (!Param.DisableRangeLimit)
+                {
+                    if (Current > Param.EndFrequency) Current = Param.EndFrequency;
+                }
+
+                double x = Math.PI * Current / (2.0 * Param.EndFrequency);
+
+                Amplitude = Math.Sin(x) * Param.EndAmplitude;
+            }
+            else if (Param.Mode == AmplitudeMode.Table)
+            {
+                int TargetIndex = 0;
+                for (int i = 0; i < Param.AmplitudeTable.Length; i++)
+                {
+                    if (Param.AmplitudeTable[i].Frequency > Current) break;
+                    TargetIndex = i;
+                }
+
+                if (Param.AmplitudeTableInterpolation && (TargetIndex + 1 < Param.AmplitudeTable.Length))
+                {
+                    (double FrequencyStart, double AmplitudeStart) = Param.AmplitudeTable[TargetIndex];
+                    (double FrequencyEnd, double AmplitudeEnd) = Param.AmplitudeTable[TargetIndex + 1];
+                    Amplitude = (AmplitudeEnd - AmplitudeStart) / (FrequencyEnd - FrequencyStart) * (Current - FrequencyStart) + AmplitudeStart;
+                }
+                else
+                {
+                    Amplitude = Param.AmplitudeTable[TargetIndex].Amplitude;
+                }
+            }
+
+            if (Param.CutOffAmplitude > Amplitude) Amplitude = 0;
+            if (Param.MaxAmplitude != -1 && Param.MaxAmplitude < Amplitude) Amplitude = Param.MaxAmplitude;
+
+            return Amplitude;
         }
 
         //
@@ -378,6 +351,9 @@ namespace VvvfSimulator.Vvvf
             Dictionary<PulseDataKey, double> PulseData = Value.PulseData;
             int PulseCount = PulseMode.PulseCount;
             CarrierFreq Carrier = Value.Carrier;
+
+            if (Value.None)
+                return 0;
 
             double SineX = SineAngleFrequency * SineTime + InitialPhase;
             if (PulseMode.DiscreteTime.Enabled) SineX = DiscreteTimeLine(SineX, PulseMode.DiscreteTime.Steps, PulseMode.DiscreteTime.Mode);    
@@ -811,7 +787,7 @@ namespace VvvfSimulator.Vvvf
                         {
                             double SineVal = GetSine(SineX);
                             double SawVal = GetSaw(SineX);
-                            double Pwm = (SineVal - SawVal > 0 ? 1 : -1) * Amplitude;
+                            double Pwm = (SineVal > 0 ? 1 : -1) * (Amplitude * 2 / 3.0 + 1 / 3.0);
                             double Negate = SawVal > 0 ? SawVal - 1 : SawVal + 1;
                             return ModulateSignal(Pwm, Negate) * 2;
                         }

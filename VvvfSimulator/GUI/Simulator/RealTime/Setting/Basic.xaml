@@ -18,19 +18,8 @@
         </ResourceDictionary>
     </Window.Resources>
 
-    <Grid Background="{DynamicResource VoidBackgroundBrush}">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="25"/>
-            <RowDefinition Height="50"/>
-            <RowDefinition Height="50"/>
-            <RowDefinition Height="50"/>
-            <RowDefinition Height="50"/>
-            <RowDefinition Height="100"/>
-            <RowDefinition Height="100"/>
-            <RowDefinition Height="100"/>
-            
-        </Grid.RowDefinitions>
-        <Grid>
+    <StackPanel Background="{DynamicResource VoidBackgroundBrush}">
+        <Grid Height="25">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="25"/>
                 <ColumnDefinition Width="*"/>
@@ -40,7 +29,7 @@
             <Label Grid.Column="1" x:Name="WindowTitle" Content="Title" Style="{StaticResource WindowTitleStyle}"/>
             <Button Grid.Column="2" Tag="Close" Click="OnWindowControlButtonClick" Style="{DynamicResource WindowCloseButton}"/>
         </Grid>
-        <Grid Grid.Row="1">
+        <Grid  Height="50">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2*"/>
                 <ColumnDefinition Width="6*"/>
@@ -50,7 +39,7 @@
             </Border>
             <TextBox x:Name="TextBuffSize" Grid.Column="1" Text="40000" TextChanged="TextBoxChanged" Tag="AudioBuffSize" Style="{DynamicResource SlimTextBox}"/>
         </Grid>
-        <Grid Grid.Row="2">
+        <Grid Height="50">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2*"/>
                 <ColumnDefinition Width="6*"/>
@@ -60,7 +49,7 @@
             </Border>
             <TextBox x:Name="SamplingFrequencyInput" Grid.Column="1" Text="200000" TextChanged="TextBoxChanged" Tag="SamplingFrequency" Style="{DynamicResource SlimTextBox}"/>
         </Grid>
-        <Grid Grid.Row="3">
+        <Grid Height="50">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2*"/>
                 <ColumnDefinition Width="6*"/>
@@ -70,7 +59,7 @@
             </Border>
             <TextBox x:Name="CalculateDivisionInput" Grid.Column="1" Text="64" TextChanged="TextBoxChanged" Tag="CalculateDivision" Style="{DynamicResource SlimTextBox}"/>
         </Grid>
-        <Grid Grid.Row="4">
+        <Grid Height="50">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2*"/>
                 <ColumnDefinition Width="6*"/>
@@ -87,7 +76,19 @@
                 <CheckBox Style="{DynamicResource SlimCheckBox}" x:Name="BoxWaveFormPhase" Tag="WaveForm.Phase" Content="{DynamicResource Simulator.RealTime.Setting.Basic.WaveForm.Show.Phase}" HorizontalAlignment="Center" VerticalAlignment="Center" Checked="BoxChecked" Unchecked="BoxChecked" Grid.Column="1"/>
             </Grid>
         </Grid>
-        <Grid Grid.Row="5" Height="100">
+        <Grid Height="50">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="6*"/>
+            </Grid.ColumnDefinitions>
+            <Border Background="{DynamicResource SubTitleBarBrush}" CornerRadius="0,0,0,0">
+                <Label Content="{DynamicResource Simulator.RealTime.Setting.Basic.Controller}" Style="{DynamicResource SubTitleBarText}"/>
+            </Border>
+            <Grid Grid.Column="1">
+                <ComboBox x:Name="SelectorControllerStyle" SelectionChanged="SelectorChanged" Tag="ControllerStyle" Grid.Column="1" Style="{DynamicResource SlimComboBoxStyle}" SelectedValuePath="Key" DisplayMemberPath="Value"/>
+            </Grid>
+        </Grid>
+        <Grid Height="100">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2*"/>
                 <ColumnDefinition Width="6*"/>
@@ -116,7 +117,7 @@
                 </Grid>
             </Grid>
         </Grid>
-        <Grid Grid.Row="6" Height="100">
+        <Grid Height="100">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2*"/>
                 <ColumnDefinition Width="6*"/>
@@ -145,7 +146,7 @@
                 </Grid>
             </Grid>
         </Grid>
-        <Grid Grid.Row="7" Height="100">
+        <Grid Height="100">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2*"/>
                 <ColumnDefinition Width="6*"/>
@@ -168,5 +169,5 @@
             </Grid>
         </Grid>
 
-    </Grid>
+    </StackPanel>
 </Window>

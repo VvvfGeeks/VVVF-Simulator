@@ -1,95 +1,9 @@
-﻿using System;
-using System.Drawing;
-using VvvfSimulator.Vvvf;
-using VvvfSimulator.Yaml.VvvfSound;
-using static VvvfSimulator.Vvvf.Struct;
+﻿using System.Drawing;
 
 namespace VvvfSimulator.Generation.Video.FS
 {
     public class GenerateFourierSeries
     {
-
-        public static double GetFourier(ref WaveValues[] UVW, int N)
-        {
-            double integral = 0;
-            double dt = 1.0 / (UVW.Length - 1);
-
-            for (int i = 0; i < UVW.Length; i++)
-            {
-                double iTime = MyMath.M_2PI * i / (UVW.Length - 1);
-                double sum = (UVW[i].U - UVW[i].V) * Math.Sin(N * iTime) * dt;
-                integral += sum;
-            }
-            double bn = integral;
-            return bn;
-        }
-
-        public static double GetFourierFast(ref WaveValues[] UVW, int N)
-        {
-            double integral = 0;
-
-            int Ft = 0;
-            double Time = 0;
-
-            for (int i = 0; i < UVW.Length; i++)
-            {
-                int iFt = UVW[i].U - UVW[i].V;
-
-                if (i == 0)
-                {
-                    Ft = iFt;
-                    continue;
-                }
-
-                if (Ft == iFt) continue;
-                double iTime = MyMath.M_2PI * i / (UVW.Length - 1);
-                double sum = (-Math.Cos(N * iTime) + Math.Cos(N * Time)) * Ft / N;
-                integral += sum;
-
-                Time = iTime;
-                Ft = iFt;
-            }
-            double bn = integral / MyMath.M_2PI;
-            return bn;
-        }
-
-        public static double[] GetFourierCoefficients(ref WaveValues[] UVW, int N)
-        {
-            double[] coefficients = new double[N];
-            for (int n = 1; n <= N; n++)
-            {
-                double result = GetFourierFast(ref UVW, n);
-                coefficients[n-1] = result;
-            }
-            return coefficients;
-        }
-
-        /// <summary>
-        /// Gets Fourier series coefficients
-        /// </summary>
-        /// <param name="Control">Make sure you put cloned data.</param>
-        /// <param name="Sound"></param>
-        /// <param name="Delta"></param>
-        /// <param name="N"></param>
-        /// <returns></returns>
-        public static double[] GetFourierCoefficients(VvvfValues Control, YamlVvvfSoundData Sound, int Delta, int N)
-        {
-            Control.SetRandomFrequencyMoveAllowed(false);
-            WaveValues[] PWM_Array = GenerateBasic.GetUVWCycle(Control, Sound, MyMath.M_PI_6, Delta, false);
-            return GetFourierCoefficients(ref PWM_Array, N);
-        }
-
-        public static string GetDesmosFourierCoefficientsArray(ref double[] coefficients)
-        {
-            String array = "C = [";
-            for(int i = 0; i < coefficients.Length; i++)
-            {
-                array += (i == 0 ? "" : " ,") + coefficients[i];
-            }
-            array += "]";
-            return array;
-        }
-
         private static class MagnitudeColor
         {
 
@@ -138,7 +52,7 @@ namespace VvvfSimulator.Generation.Video.FS
             for (int i = 0; i < count; i++)
             {
                 double result = Coefficients[i];
-                double ratio = result / ControlInfo.GenerateControlCommon.VoltageConvertFactor;
+                double ratio = result / GenerateBasic.Fourier.VoltageConvertFactor;
                 int height = (int)(ratio * 500);
                 SolidBrush solidBrush = new(MagnitudeColor.GetColor(ratio));
                 if(height < 0) g.FillRectangle(solidBrush, width * i, 500, width, -height);

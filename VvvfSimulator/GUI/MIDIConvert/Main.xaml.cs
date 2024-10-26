@@ -3,14 +3,15 @@ using NextMidi.Data.Track;
 using NextMidi.Filing.Midi;
 using System;
 using System.IO;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Forms;
-using System.Threading.Tasks;
-using Button = System.Windows.Controls.Button;
-using MessageBox = System.Windows.Forms.MessageBox;
+using VvvfSimulator.GUI.Resource.Language;
 using VvvfSimulator.GUI.TaskViewer;
 using VvvfSimulator.Yaml.VvvfSound;
 using static VvvfSimulator.Generation.GenerateCommon;
+using Button = System.Windows.Controls.Button;
+using MessageBox = System.Windows.Forms.MessageBox;
 
 namespace VvvfSimulator.GUI.MIDIConvert
 {
@@ -34,7 +35,7 @@ namespace VvvfSimulator.GUI.MIDIConvert
             }
             catch
             {
-                MessageBox.Show("This MIDI cannot be converted.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(LanguageManager.GetString("MidiConvert.Main.Message.MidiConvertError"), LanguageManager.GetString("Generic.Title.Error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
 
@@ -64,7 +65,7 @@ namespace VvvfSimulator.GUI.MIDIConvert
                         new GenerationBasicParameter.ProgressData()
                     );
 
-                    String task_description = "Generation of MIDI(" + Path.GetFileNameWithoutExtension(midi_path) + ") Sound part " + i + " of " + priority;
+                    string task_description = string.Format(LanguageManager.GetString("MidiConvert.TaskDescription.Convert.Description"), Path.GetFileNameWithoutExtension(midi_path), i, priority);
                     String export_path = Path.GetFullPath(file_path + "_" + i.ToString() + "_" + priority.ToString() + Path.GetExtension(output_path));
 
                     Task task = Task.Run(() =>
@@ -76,7 +77,7 @@ namespace VvvfSimulator.GUI.MIDIConvert
                         }
                         catch(Exception ex)
                         {
-                            MessageBox.Show("Error on " + task_description + "\r\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MessageBox.Show(task_description + "\r\n" + ex.Message, LanguageManager.GetString("Generic.Title.Error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                     });
 

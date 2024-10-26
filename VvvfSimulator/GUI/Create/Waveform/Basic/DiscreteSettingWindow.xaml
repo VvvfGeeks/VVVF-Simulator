@@ -56,7 +56,7 @@
             <Label Content="{DynamicResource Create.Settings.Waveform.Basic.DiscreteSetting.Enable}" Style="{DynamicResource SubTitleBarText}" Grid.Row="1"/>
             <Label Content="{DynamicResource Create.Settings.Waveform.Basic.DiscreteSetting.Steps}" Style="{DynamicResource SubTitleBarText}" Grid.Row="2"/>
             <Label Content="{DynamicResource Create.Settings.Waveform.Basic.DiscreteSetting.Mode}" Style="{DynamicResource SubTitleBarText}" Grid.Row="3"/>
-            <CheckBox Style="{DynamicResource SlimCheckBox}" x:Name="EnabledCheckBox" Grid.Column="1" Content="{DynamicResource Create.Settings.Waveform.Basic.DiscreteSetting.Enabled}" HorizontalAlignment="Center" Grid.Row="1" VerticalAlignment="Center" Checked="EnabledCheckBox_Checked"/>
+            <CheckBox Style="{DynamicResource SlimCheckBox}" x:Name="EnabledCheckBox" Grid.Column="1" Content="{DynamicResource Create.Settings.Waveform.Basic.DiscreteSetting.Enabled}" HorizontalAlignment="Center" Grid.Row="1" VerticalAlignment="Center" Checked="EnabledCheckBoxChanged" Unchecked="EnabledCheckBoxChanged"/>
             <TextBox Style="{DynamicResource SlimTextBox}" x:Name="StepsInput" Grid.Column="1" Grid.Row="2" Text="TextBox" TextChanged="StepsInput_TextChanged"/>
             <ComboBox Style="{DynamicResource SlimComboBoxStyle}" x:Name="ModeComboBox" Grid.Column="1" Grid.Row="3" SelectionChanged="ModeComboBox_SelectionChanged" SelectedValuePath="Key" DisplayMemberPath="Value"/>
         </Grid>

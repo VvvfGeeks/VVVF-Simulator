@@ -478,5 +478,53 @@ namespace VvvfSimulator.Properties {
                 this["RealTime_Train_WaveForm_Phase_Show"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int RealTime_VVVF_Controller_Style {
+            get {
+                return ((int)(this["RealTime_VVVF_Controller_Style"]));
+            }
+            set {
+                this["RealTime_VVVF_Controller_Style"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int RealTime_Train_Controller_Style {
+            get {
+                return ((int)(this["RealTime_Train_Controller_Style"]));
+            }
+            set {
+                this["RealTime_Train_Controller_Style"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("10000")]
+        public int RealTime_VVVF_Controller_Design2_CalculatePrecision {
+            get {
+                return ((int)(this["RealTime_VVVF_Controller_Design2_CalculatePrecision"]));
+            }
+            set {
+                this["RealTime_VVVF_Controller_Design2_CalculatePrecision"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("10000")]
+        public int RealTime_Train_Controller_Design2_CalculatePrecision {
+            get {
+                return ((int)(this["RealTime_Train_Controller_Design2_CalculatePrecision"]));
+            }
+            set {
+                this["RealTime_Train_Controller_Design2_CalculatePrecision"] = value;
+            }
+        }
     }
 }

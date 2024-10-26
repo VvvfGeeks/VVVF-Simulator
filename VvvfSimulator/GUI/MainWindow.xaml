@@ -160,9 +160,6 @@
                 </MenuItem>
 
                 <MenuItem Header="{DynamicResource MainWindow.Menu.Generate}">
-                    <MenuItem Header="{DynamicResource MainWindow.Menu.Generate.SourceCode}">
-                        <MenuItem Header="{DynamicResource MainWindow.Menu.Generate.SourceCode.RPi3}" Tag="SourceCode_RPi3" Click="Generation_Menu_Click"/>
-                    </MenuItem>
                     <MenuItem Header="{DynamicResource MainWindow.Menu.Generate.Audio}">
                         <MenuItem Header="{DynamicResource MainWindow.Menu.Generate.Audio.VVVF}">
                             <MenuItem Header="{DynamicResource MainWindow.Menu.Generate.Audio.VVVF.Line}" Tag="VVVF_WAV_LINE" Click="Generation_Menu_Click"/>
@@ -215,6 +212,10 @@
                     <MenuItem Header="{DynamicResource MainWindow.Menu.Tools.FreeRunAmpZero}" Tag="FreeRunAmpZero" Click="Tools_Menu_Click"/>
                     <MenuItem Header="{DynamicResource MainWindow.Menu.Tools.FreeRunEndAmplitudeContinuous}" Tag="EndAmplitudeContinuous" Click="Tools_Menu_Click"/>
                     <MenuItem Header="{DynamicResource MainWindow.Menu.Tools.MIDI}" Tag="MIDI" Click="Tools_Menu_Click"/>
+                </MenuItem>
+
+                <MenuItem Header="{DynamicResource MainWindow.Menu.Help}">
+                    <MenuItem Header="{DynamicResource MainWindow.Menu.Help.About}" Tag="About" Click="Help_Menu_Click"/>
                 </MenuItem>
             </Menu>
             <Button Grid.Column="2" Tag="Minimize" Style="{DynamicResource WindowMimizeButton}" Click="OnWindowControlButtonClick"/>

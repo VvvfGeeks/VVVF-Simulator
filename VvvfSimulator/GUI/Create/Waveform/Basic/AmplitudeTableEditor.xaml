@@ -1,0 +1,51 @@
+﻿<Window x:Class="VvvfSimulator.GUI.Create.Waveform.Basic.AmplitudeTableEditor"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:VvvfSimulator.GUI.Create.Waveform.Basic"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterOwner"
+        Style="{DynamicResource DialogWindowStyle}"
+        Closing="WindowClosing"
+        Title="{DynamicResource Create.Settings.Waveform.Basic.AmplitudeTableEditor.Title}" Height="450" Width="450">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/GUI/Resource/Dictionary/Common.xaml"/>
+                <ResourceDictionary Source="/GUI/Resource/Dictionary/Window.xaml"/>
+                <ResourceDictionary Source="/GUI/Resource/Dictionary/DataGrid.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Grid Background="{DynamicResource VoidBackgroundBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="25"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="46"/>
+                <ColumnDefinition Width="46"/>
+                <ColumnDefinition Width="46"/>
+            </Grid.ColumnDefinitions>
+            <Image Style="{StaticResource WindowIconStyle}"/>
+
+            <Label Grid.Column="1" x:Name="WindowTitle" Content="{DynamicResource Create.Settings.Waveform.Basic.AmplitudeTableEditor.Title}" Style="{StaticResource WindowTitleStyle}"/>
+            <Button Grid.Column="4" Tag="Close" Style="{DynamicResource WindowCloseButton}" Click="OnWindowControlButtonClick"/>
+        </Grid>
+        <Grid Grid.Row="1">
+            <DataGrid ItemsSource="{Binding}" TargetUpdated="DataGridUpdated" d:ItemsSource="{d:SampleData ItemCount=5}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="{DynamicResource Create.Settings.Waveform.Basic.AmplitudeTableEditor.Frequency}" Width="1*" Binding="{Binding Frequency, Mode=TwoWay}" EditingElementStyle="{StaticResource SlimTextBox}" ElementStyle="{StaticResource DataGridTextBlockStyle}"/>
+                    <DataGridTextColumn Header="{DynamicResource Create.Settings.Waveform.Basic.AmplitudeTableEditor.Amplitude}" Width="1*" Binding="{Binding Amplitude, Mode=TwoWay}" EditingElementStyle="{StaticResource SlimTextBox}" ElementStyle="{StaticResource DataGridTextBlockStyle}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+    </Grid>
+</Window>

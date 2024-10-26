@@ -56,9 +56,9 @@
                 <Label Content="{DynamicResource TrainAudio.Pages.MotorSetting.MotorSpecification.StatorResistance}" Grid.Row="1" Style="{DynamicResource SubTitleBarText}"/>
                 <Label Content="{DynamicResource TrainAudio.Pages.MotorSetting.MotorSpecification.RotorResistance}" Grid.Row="2" Style="{DynamicResource SubTitleBarText}"/>
                 <Label Content="{DynamicResource TrainAudio.Pages.MotorSetting.MotorSpecification.StatorInductance}" Grid.Row="3" Style="{DynamicResource SubTitleBarText}"/>
-                <Label Content="{DynamicResource TrainAudio.Pages.MotorSetting.MotorSpecification.RotorInductancce}" Grid.Row="4" Style="{DynamicResource SubTitleBarText}"/>
+                <Label Content="{DynamicResource TrainAudio.Pages.MotorSetting.MotorSpecification.RotorInductance}" Grid.Row="4" Style="{DynamicResource SubTitleBarText}"/>
                 <Label Content="{DynamicResource TrainAudio.Pages.MotorSetting.MotorSpecification.MutualInductance}" Grid.Row="5" Style="{DynamicResource SubTitleBarText}"/>
-                <Label Content="{DynamicResource TrainAudio.Pages.MotorSetting.MotorSpecification.PolarLogarithm}" Grid.Row="6" Style="{DynamicResource SubTitleBarText}"/>
+                <Label Content="{DynamicResource TrainAudio.Pages.MotorSetting.MotorSpecification.PolePairCount}" Grid.Row="6" Style="{DynamicResource SubTitleBarText}"/>
                 <Label Content="{DynamicResource TrainAudio.Pages.MotorSetting.MotorSpecification.Damping}" Grid.Row="7" Style="{DynamicResource SubTitleBarText}"/>
                 <Label Content="{DynamicResource TrainAudio.Pages.MotorSetting.MotorSpecification.RotationalInertiaMass}" Grid.Row="8" Style="{DynamicResource SubTitleBarText}"/>
                 <Label Content="{DynamicResource TrainAudio.Pages.MotorSetting.MotorSpecification.StaticFriction}" Grid.Row="9" Style="{DynamicResource SubTitleBarText}"/>

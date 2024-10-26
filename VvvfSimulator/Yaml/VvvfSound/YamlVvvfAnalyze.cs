@@ -5,7 +5,6 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using YamlDotNet.Serialization;
-using static VvvfSimulator.Vvvf.Calculate;
 
 namespace VvvfSimulator.Yaml.VvvfSound
 {
@@ -559,8 +558,44 @@ namespace VvvfSimulator.Yaml.VvvfSound
 
             public class YamlAmplitude
             {
-                public YamlControlDataAmplitude DefaultAmplitude { get; set; } = new YamlControlDataAmplitude();
-                public YamlControlDataAmplitudeFreeRun FreeRunAmplitude { get; set; } = new YamlControlDataAmplitudeFreeRun();
+                public class AmplitudeParameter
+                {
+                    public enum AmplitudeMode
+                    {
+                        Linear, LinearPolynomial, InverseProportional, Exponential, Sine, Table
+                    }
+                    public AmplitudeMode Mode { get; set; } = AmplitudeMode.Linear;
+                    public double StartFrequency { get; set; } = -1;
+                    public double StartAmplitude { get; set; } = -1;
+                    public double EndFrequency { get; set; } = -1;
+                    public double EndAmplitude { get; set; } = -1;
+                    public double CurveChangeRate { get; set; } = 0;
+                    public double CutOffAmplitude { get; set; } = -1;
+                    public double MaxAmplitude { get; set; } = -1;
+                    public bool DisableRangeLimit { get; set; } = false;
+                    public double Polynomial { get; set; } = 0;
+                    public bool AmplitudeTableInterpolation { get; set; } = false;
+                    public (double Frequency, double Amplitude)[] AmplitudeTable { get; set; } = [];
+                    public override string ToString()
+                    {
+                        Type t = typeof(AmplitudeParameter);
+                        string final = "[\r\n";
+                        foreach (var f in t.GetFields())
+                        {
+                            final += string.Format("{0} : {1}", f.Name, GetValueString(f.GetValue(t))) + "\r\n";
+                        }
+                        final += "]";
+                        return final;
+                    }
+                    public AmplitudeParameter Clone()
+                    {
+                        AmplitudeParameter clone = (AmplitudeParameter)MemberwiseClone();
+                        return clone;
+                    }
+                }
+                public AmplitudeParameter Default { get; set; } = new();
+                public AmplitudeParameter PowerOn { get; set; } = new();
+                public AmplitudeParameter PowerOff { get; set; } = new();
                 public override string ToString()
                 {
                     Type t = typeof(YamlAmplitude);
@@ -575,89 +610,16 @@ namespace VvvfSimulator.Yaml.VvvfSound
 
                 public YamlAmplitude Clone()
                 {
-                    YamlAmplitude clone = (YamlAmplitude)MemberwiseClone();
+                    YamlAmplitude Cloned = (YamlAmplitude)MemberwiseClone();
 
                     //Deep copy
-                    clone.DefaultAmplitude = DefaultAmplitude.Clone();
-                    clone.FreeRunAmplitude = FreeRunAmplitude.Clone();
+                    Cloned.Default = Default.Clone();
+                    Cloned.PowerOn = PowerOn.Clone();
+                    Cloned.PowerOff = PowerOff.Clone();
 
-                    return clone;
+                    return Cloned;
                 }
-
-                public class YamlControlDataAmplitudeFreeRun
-                {
-                    public YamlControlDataAmplitude On { get; set; } = new YamlControlDataAmplitude();
-                    public YamlControlDataAmplitude Off { get; set; } = new YamlControlDataAmplitude();
-                    public override string ToString()
-                    {
-                        Type t = typeof(YamlControlDataAmplitudeFreeRun);
-                        string final = "[\r\n";
-                        foreach (var f in t.GetFields())
-                        {
-                            final += string.Format("{0} : {1}", f.Name, GetValueString(f.GetValue(t))) + "\r\n";
-                        }
-                        final += "]";
-                        return final;
-                    }
-                    public YamlControlDataAmplitudeFreeRun Clone()
-                    {
-                        YamlControlDataAmplitudeFreeRun clone = (YamlControlDataAmplitudeFreeRun)MemberwiseClone();
-                        clone.On = On.Clone();
-                        clone.Off = Off.Clone();
-                        return clone;
-                    }
-
-                }
-                public class YamlControlDataAmplitude
-                {
-                    public AmplitudeMode Mode { get; set; } = AmplitudeMode.Linear;
-                    public YamlControlDataAmplitudeParameter Parameter { get; set; } = new YamlControlDataAmplitudeParameter();
-                    public override string ToString()
-                    {
-                        Type t = typeof(YamlControlDataAmplitude);
-                        string final = "[\r\n";
-                        foreach (var f in t.GetFields())
-                        {
-                            final += string.Format("{0} : {1}", f.Name, GetValueString(f.GetValue(t))) + "\r\n";
-                        }
-                        final += "]";
-                        return final;
-                    }
-                    public YamlControlDataAmplitude Clone()
-                    {
-                        YamlControlDataAmplitude clone = (YamlControlDataAmplitude)MemberwiseClone();
-                        clone.Parameter = Parameter.Clone();
-                        return clone;
-                    }
-                    public class YamlControlDataAmplitudeParameter
-                    {
-                        public double StartFrequency { get; set; } = -1;
-                        public double StartAmplitude { get; set; } = -1;
-                        public double EndFrequency { get; set; } = -1;
-                        public double EndAmplitude { get; set; } = -1;
-                        public double CurveChangeRate { get; set; } = 0;
-                        public double CutOffAmplitude { get; set; } = -1;
-                        public double MaxAmplitude { get; set; } = -1;
-                        public bool DisableRangeLimit { get; set; } = false;
-                        public double Polynomial { get; set; } = 0;
-                        public override string ToString()
-                        {
-                            Type t = typeof(YamlControlDataAmplitudeParameter);
-                            string final = "[\r\n";
-                            foreach (var f in t.GetFields())
-                            {
-                                final += string.Format("{0} : {1}", f.Name, GetValueString(f.GetValue(t))) + "\r\n";
-                            }
-                            final += "]";
-                            return final;
-                        }
-                        public YamlControlDataAmplitudeParameter Clone()
-                        {
-                            YamlControlDataAmplitudeParameter clone = (YamlControlDataAmplitudeParameter)MemberwiseClone();
-                            return clone;
-                        }
-                    }
-                }
+                
             }
         }
     }
