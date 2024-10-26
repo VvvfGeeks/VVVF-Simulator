@@ -244,6 +244,7 @@ namespace VvvfSimulator.Vvvf
             {
                 if (Level == 2 && PulseMode.PulseType == PulseTypeName.SYNC)
                 {
+                    if (PulseMode.PulseCount == 1) return false;
                     if (PulseMode.Alternative > PulseAlternative.Default) return false;
                     return true;
                 }
@@ -255,7 +256,11 @@ namespace VvvfSimulator.Vvvf
                 {
                     if (IsPulseSquareAvail(PulseMode, Level) && PulseMode.Square) return false;
                     if (PulseMode.Alternative > PulseAlternative.Default) return false;
-                    if (PulseMode.PulseType == PulseTypeName.SYNC) return true;
+                    if (PulseMode.PulseType == PulseTypeName.SYNC)
+                    {
+                        if (PulseMode.PulseCount == 1) return false;
+                        return true;
+                    }
                     if (PulseMode.PulseType == PulseTypeName.ASYNC) return true;
                     return false;
                 }
@@ -274,7 +279,11 @@ namespace VvvfSimulator.Vvvf
                 if (Level == 2)
                 {
                     if (PulseMode.Alternative > PulseAlternative.Default) return false;
-                    if (PulseMode.PulseType == PulseTypeName.SYNC) return true;
+                    if (PulseMode.PulseType == PulseTypeName.SYNC)
+                    {
+                        if (PulseMode.PulseCount == 1) return false;
+                        return true;
+                    }
                     if (PulseMode.PulseType == PulseTypeName.ASYNC) return true;
                     return false;
                 }

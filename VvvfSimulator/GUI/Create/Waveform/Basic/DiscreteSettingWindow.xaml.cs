@@ -29,7 +29,7 @@ namespace VvvfSimulator.GUI.Create.Waveform.Basic
             ModeComboBox.SelectedValue = pulseMode.DiscreteTime.Mode;
         }
 
-        private void EnabledCheckBox_Checked(object sender, RoutedEventArgs e)
+        private void EnabledCheckBoxChanged(object sender, RoutedEventArgs e)
         {
             if (ignoreUpdate) return;
             pulseMode.DiscreteTime.Enabled = EnabledCheckBox.IsChecked ?? false;

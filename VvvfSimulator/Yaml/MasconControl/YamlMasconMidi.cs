@@ -34,16 +34,7 @@ namespace VvvfSimulator.Yaml.MasconControl
         public static YamlMasconData? Convert(GUI.Mascon.LoadMidi.MidiLoadData loadData)
         {
             //MIDIDataを変換
-            MidiData midiData;
-            try
-            {
-                midiData = MidiReader.ReadFrom(loadData.path);
-            }
-            catch
-            {
-                MessageBox.Show("This MIDI cannot be converted.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return null;
-            }
+            MidiData midiData = MidiReader.ReadFrom(loadData.path);
 
             List<NoteEventSimple> converted_Constructs = GetTimeLine(midiData, loadData.track);
             YamlMasconData mascon_Data = new();

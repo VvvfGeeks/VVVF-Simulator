@@ -39,8 +39,6 @@
     <system:String x:Key="MainWindow.Menu.Edit.Reset">Reset</system:String>
 
     <system:String x:Key="MainWindow.Menu.Generate">Generate</system:String>
-    <system:String x:Key="MainWindow.Menu.Generate.SourceCode">SourceCode</system:String>
-    <system:String x:Key="MainWindow.Menu.Generate.SourceCode.RPi3">RPi3</system:String>
     <system:String x:Key="MainWindow.Menu.Generate.Audio">Audio</system:String>
     <system:String x:Key="MainWindow.Menu.Generate.Audio.VVVF">VVVF</system:String>
     <system:String x:Key="MainWindow.Menu.Generate.Audio.VVVF.Line">Line Output</system:String>
@@ -86,6 +84,11 @@
     <system:String x:Key="MainWindow.Menu.Window.BaseFreqPattern">Generation Base Frequency Editor</system:String>
     <system:String x:Key="MainWindow.Menu.Window.TrainSound">Train Sound Setting</system:String>
     <system:String x:Key="MainWindow.Menu.Window.Preference">Preference</system:String>
+
+    <system:String x:Key="MainWindow.Menu.Help">Help</system:String>
+    <system:String x:Key="MainWindow.Menu.Help.About">About VVVF Simulator</system:String>
+    <system:String x:Key="MainWindow.Menu.Help.About.Title">About VVVF Simulator</system:String>
+    <system:String x:Key="MainWindow.Menu.Help.About.Version.Unkown">Unkown version</system:String>
 
     <system:String x:Key="MainWindow.TabControl.Settings">Basic</system:String>
     <system:String x:Key="MainWindow.TabControl.Settings.PwmLevel">Level</system:String>
@@ -135,11 +138,13 @@
     <system:String x:Key="MainWindow.Dialog.Tools.AutoVoltage.BrakePatternMaxFrequency">Brake Pattern Max Frequency</system:String>
     <system:String x:Key="MainWindow.Dialog.Tools.AutoVoltage.BrakePatternMaxVoltage">Brake Pattern Max Voltage</system:String>
     <system:String x:Key="MainWindow.Dialog.Tools.AutoVoltage.MaxEffort">Max Effort</system:String>
+    <system:String x:Key="MainWindow.Dialog.Tools.AutoVoltage.CalculationType">Calculation Method</system:String>
     <system:String x:Key="MainWindow.Dialog.Tools.AutoVoltage.Precision">Precision</system:String>
-
-    <system:String x:Key="TextBoxListWindow.Title">Enter the value</system:String>
-    <system:String x:Key="TextBoxListWindow.Label">Enter the value</system:String>
-    <system:String x:Key="TextBoxListWindow.OK">OK</system:String>
+    <system:String x:Key="MainWindow.Dialog.Tools.AutoVoltage.Message.Error">Auto Modulation Index Fail\nModulation Index:{0}\nFrequency:{1}Hz\nOn End:{2}\nContext:{3}</system:String>
+    
+    <system:String x:Key="DialogInputWindow.Title">Enter the value</system:String>
+    <system:String x:Key="DialogInputWindow.Label">Enter the value</system:String>
+    <system:String x:Key="DialogInputWindow.OK">OK</system:String>
 
     <system:String x:Key="LinearCalculator.Title">Linear Calculator</system:String>
     <system:String x:Key="LinearCalculator.Copy">Copy</system:String>
@@ -194,7 +199,7 @@
     <system:String x:Key="TrainAudio.Pages.MotorSetting.MotorSpecification.StatorResistance">Stator Resistance</system:String>
     <system:String x:Key="TrainAudio.Pages.MotorSetting.MotorSpecification.RotorResistance">Rotor Resistance</system:String>
     <system:String x:Key="TrainAudio.Pages.MotorSetting.MotorSpecification.StatorInductance">Stator Inductance</system:String>
-    <system:String x:Key="TrainAudio.Pages.MotorSetting.MotorSpecification.RotorInductancce">Rotor Inductancce</system:String>
+    <system:String x:Key="TrainAudio.Pages.MotorSetting.MotorSpecification.RotorInductance">Rotor Inductance</system:String>
     <system:String x:Key="TrainAudio.Pages.MotorSetting.MotorSpecification.MutualInductance">Mutual Inductance</system:String>
     <system:String x:Key="TrainAudio.Pages.MotorSetting.MotorSpecification.PolarLogarithm">Polar Logarithm</system:String>
     <system:String x:Key="TrainAudio.Pages.MotorSetting.MotorSpecification.Damping">Damping</system:String>
@@ -224,13 +229,18 @@
     <system:String x:Key="TrainAudio.Pages.Gear.GearCalculate.Gear">Gear</system:String>
     <system:String x:Key="TrainAudio.Pages.Gear.GearCalculate.Count">Count</system:String>
 
-    <system:String x:Key="Simulator.RealTime.MasconWindow.Title">Controller</system:String>
-    <FontFamily x:Key="Simulator.RealTime.MasconWindow.Font.Number">/GUI/Resource/Fonts/MPlus1Code/#M PLUS 1 Code</FontFamily>
-    <FontFamily x:Key="Simulator.RealTime.MasconWindow.Font.Notch">/GUI/Resource/Fonts/MPlus1Code/#M PLUS 1 Code</FontFamily>
-    <system:String x:Key="Simulator.RealTime.MasconWindow.SineFrequency">Frequency</system:String>
-    <system:String x:Key="Simulator.RealTime.MasconWindow.Voltage">Voltage</system:String>
-    <system:String x:Key="Simulator.RealTime.MasconWindow.PulseState">Pulse</system:String>
-    <system:String x:Key="Simulator.RealTime.MasconWindow.MenuItem.DeviceSetting">Device Setting</system:String>
+    <system:String x:Key="Simulator.RealTime.Controller.Title">Controller</system:String>
+    <FontFamily x:Key="Simulator.RealTime.Controller.Font.Number">/GUI/Resource/Fonts/MPlus1Code/#M PLUS 1 Code</FontFamily>
+    <FontFamily x:Key="Simulator.RealTime.Controller.Font.Notch">/GUI/Resource/Fonts/MPlus1Code/#M PLUS 1 Code</FontFamily>
+    <FontFamily x:Key="Simulator.RealTime.Controller.Font.Topic">/GUI/Resource/Fonts/Fugaz_One/#Fugaz One</FontFamily>
+    <FontFamily x:Key="Simulator.RealTime.Controller.Font.Unit">/GUI/Resource/Fonts/Fugaz_One/#Fugaz One</FontFamily>
+    <system:String x:Key="Simulator.RealTime.Controller.SineFrequency">Frequency</system:String>
+    <system:String x:Key="Simulator.RealTime.Controller.Voltage">Voltage</system:String>
+    <system:String x:Key="Simulator.RealTime.Controller.PulseState">Pulse</system:String>
+    
+    <system:String x:Key="Simulator.RealTime.Controller.MenuItem.DeviceSetting">Device Setting</system:String>
+
+    <system:String x:Key="Simulator.RealTime.Controller.Design2.MenuItem.CalculateDivision">Calculate Precision Setting</system:String>
 
     <system:String x:Key="Simulator.RealTime.RealtimeWindows.ControlStatus.Title">Control Status</system:String>
 
@@ -259,6 +269,7 @@
     <system:String x:Key="Simulator.RealTime.Setting.Basic.AudioBuffSize">Audio Buffer Size</system:String>
     <system:String x:Key="Simulator.RealTime.Setting.Basic.SamplingFrequency">Sampling Frequency</system:String>
     <system:String x:Key="Simulator.RealTime.Setting.Basic.CalculateDivision">Calculation Division</system:String>
+    <system:String x:Key="Simulator.RealTime.Setting.Basic.Controller">Controller</system:String>
     <system:String x:Key="Simulator.RealTime.Setting.Basic.WaveForm">Waveform</system:String>
     <system:String x:Key="Simulator.RealTime.Setting.Basic.WaveForm.Show.Line">Show Line Voltage</system:String>
     <system:String x:Key="Simulator.RealTime.Setting.Basic.WaveForm.Show.Phase">Show Phase Voltage</system:String>
@@ -277,12 +288,18 @@
 
     <system:String x:Key="Simulator.RealTime.Setting.Basic.Message.NoFont">Following fonts are not installed on your system</system:String>
 
+    <system:String x:Key="Simulator.RealTime.Message.NoUsbDevice">The selected USB device cannot be recognized.</system:String>
+    <system:String x:Key="Simulator.RealTime.Message.UsbDeviceRemoved">The USB device was removed.</system:String>
+
     <system:String x:Key="MidiConvert.Main.Title">MIDI Conversion</system:String>
     <system:String x:Key="MidiConvert.Main.Browse">Browse</system:String>
     <system:String x:Key="MidiConvert.Main.Select">Save Location</system:String>
     <system:String x:Key="MidiConvert.Main.Config">Configuration</system:String>
     <system:String x:Key="MidiConvert.Main.Convert">Convert</system:String>
 
+    <system:String x:Key="MidiConvert.Main.Message.MidiConvertError">This Midi cannot be converted.</system:String>
+    <system:String x:Key="MidiConvert.TaskDescription.Convert.Description">Conversion of MIDI:{0}, Track{1}, Part{2}</system:String>
+    
     <system:String x:Key="MidiConvert.Config.Title">MIDI Conversion</system:String>
     <system:String x:Key="MidiConvert.Config.MultiThreading">Multi Thread</system:String>
 
@@ -307,6 +324,8 @@
     <system:String x:Key="Mascon.ControlEditor.Menu.Edit.Reset">Reset</system:String>
     <system:String x:Key="Mascon.ControlEditor.Menu.Edit.Midi">Load MIDI</system:String>
 
+    <system:String x:Key="Mascon.ControlEditor.Message.MidiConvertError">This Midi cannot be converted.</system:String>
+
     <system:String x:Key="Mascon.ControlEditor.Message.File.Load.Ok.Title">Great</system:String>
     <system:String x:Key="Mascon.ControlEditor.Message.File.Load.Ok.Message">The file was successfully load</system:String>
     <system:String x:Key="Mascon.ControlEditor.Message.File.Load.Error.Message">This file cannot be read</system:String>
@@ -330,6 +349,19 @@
     <system:String x:Key="Create.Settings.MinimumFrequency.Accelerating">Accelerating</system:String>
     <system:String x:Key="Create.Settings.MinimumFrequency.Braking">Braking</system:String>
 
+    <system:String x:Key="Create.Settings.Waveform.Common.PulseDataSetting.ParamType">Mode</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Common.PulseDataSetting.Param">Value</system:String>
+
+    <system:String x:Key="Create.Settings.Waveform.Common.ControlConstSetting.ConstValue">Constant</system:String>
+
+    <system:String x:Key="Create.Settings.Waveform.Common.ControlMovingSetting.MoveType">Function Type</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Common.ControlMovingSetting.Start">Start</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Common.ControlMovingSetting.StartValue">Start Value</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Common.ControlMovingSetting.End">End</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Common.ControlMovingSetting.EndValue">End Value</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Common.ControlMovingSetting.Exponential">Exponential</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Common.ControlMovingSetting.CurveRate">Curve Rate</system:String>
+    
     <system:String x:Key="Create.Settings.Waveform.Basic.ControlAmplitude.Title.Default">Modulation Index</system:String>
     <system:String x:Key="Create.Settings.Waveform.Basic.ControlAmplitude.Title.On">Power On Modulation Index</system:String>
     <system:String x:Key="Create.Settings.Waveform.Basic.ControlAmplitude.Title.Off">Power Off Modulation Index</system:String>
@@ -344,19 +376,8 @@
     <system:String x:Key="Create.Settings.Waveform.Basic.ControlAmplitude.Polynomial">Polynomial</system:String>
     <system:String x:Key="Create.Settings.Waveform.Basic.ControlAmplitude.CurveRate">Curve Rate</system:String>
     <system:String x:Key="Create.Settings.Waveform.Basic.ControlAmplitude.DisableRangeLimit">Disable Range Limit</system:String>
-
-    <system:String x:Key="Create.Settings.Waveform.Common.PulseDataSetting.ParamType">Mode</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Common.PulseDataSetting.Param">Value</system:String>
-
-    <system:String x:Key="Create.Settings.Waveform.Common.ControlConstSetting.ConstValue">Constant</system:String>
-
-    <system:String x:Key="Create.Settings.Waveform.Common.ControlMovingSetting.MoveType">Function Type</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Common.ControlMovingSetting.Start">Start</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Common.ControlMovingSetting.StartValue">Start Value</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Common.ControlMovingSetting.End">End</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Common.ControlMovingSetting.EndValue">End Value</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Common.ControlMovingSetting.Exponential">Exponential</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Common.ControlMovingSetting.CurveRate">Curve Rate</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.ControlAmplitude.TableInterpolation">Interpolation</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.ControlAmplitude.TableEdit">Edit Points</system:String>
 
     <system:String x:Key="Create.Settings.Waveform.Basic.PulseSetting.Title">Pulse Mode</system:String>
     <system:String x:Key="Create.Settings.Waveform.Basic.PulseSetting.Type">Type</system:String>
@@ -386,8 +407,12 @@
     <system:String x:Key="Create.Settings.Waveform.Basic.ControlBasicHarmonic.Harmonic">Harmonic</system:String>
     <Span x:Key="Create.Settings.Waveform.Basic.ControlBasicHarmonic.HarmonicProportional">Harmonic<LineBreak />Proportional</Span>
     <system:String x:Key="Create.Settings.Waveform.Basic.ControlBasicHarmonic.Amplitude">Amplitude</system:String>
-    <Span x:Key="Create.Settings.Waveform.Basic.ControlBasicHarmonic.AmplitudeProportional">Amplitude<LineBreak/>Proportioanl</Span>
+    <Span x:Key="Create.Settings.Waveform.Basic.ControlBasicHarmonic.AmplitudeProportional">Amplitude<LineBreak/>Proportional</Span>
     <system:String x:Key="Create.Settings.Waveform.Basic.ControlBasicHarmonic.InitialPhase">Initial Phase</system:String>
+
+    <system:String x:Key="Create.Settings.Waveform.Basic.AmplitudeTableEditor.Title">Discrete Index Edit</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.AmplitudeTableEditor.Frequency">Frequency</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.AmplitudeTableEditor.Amplitude">Amplitude</system:String>
 
     <system:String x:Key="Create.Settings.Waveform.Basic.DiscreteSetting.Title">Discrete Setting</system:String>
     <system:String x:Key="Create.Settings.Waveform.Basic.DiscreteSetting.DiscreteSetting">Discrete Setting</system:String>
@@ -419,7 +444,7 @@
     <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseDataSetting.Key.Name.Dipolar">Dipolar</system:String>
     <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseDataSetting.Key.Name.PulseWidth">Pulse Width</system:String>
 
-    <system:String x:Key="Resource.Language.FriendlyNameConverter.ControlMovingSetting.MoveType.Name.Proportional">Proportioanl</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.ControlMovingSetting.MoveType.Name.Proportional">Proportional</system:String>
     <system:String x:Key="Resource.Language.FriendlyNameConverter.ControlMovingSetting.MoveType.Name.InvProportional">Inverse Proportional</system:String>
     <system:String x:Key="Resource.Language.FriendlyNameConverter.ControlMovingSetting.MoveType.Name.Pow2Exponential">Exponential</system:String>
     <system:String x:Key="Resource.Language.FriendlyNameConverter.ControlMovingSetting.MoveType.Name.Sine">Sinusoidal</system:String>
@@ -428,6 +453,9 @@
     <system:String x:Key="Resource.Language.FriendlyNameConverter.FrequencyFilter.FilterType.HighPassFilter">High Pass Filter</system:String>
     <system:String x:Key="Resource.Language.FriendlyNameConverter.FrequencyFilter.FilterType.LowPassFilter">Low Pass Filter</system:String>
     <system:String x:Key="Resource.Language.FriendlyNameConverter.FrequencyFilter.FilterType.NotchFilter">Notch Filter</system:String>
+
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.RealTime.Controller.Design1">Simple</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.RealTime.Controller.Design2">With Waveform</system:String>
 
     <system:String x:Key="Resource.Language.FriendlyNameConverter.MasconDevice.DeviceMode.KeyBoard">KeyBoard</system:String>
     <system:String x:Key="Resource.Language.FriendlyNameConverter.MasconDevice.DeviceMode.PicoMascon">Pico Mascon</system:String>
@@ -438,11 +466,11 @@
     <system:String x:Key="Resource.Language.FriendlyNameConverter.VoltageVector.Design.Original">Design1</system:String>
 
     <system:String x:Key="Resource.Language.FriendlyNameConverter.AmplitudeMode.Name.Linear">Proportional</system:String>
-    <system:String x:Key="Resource.Language.FriendlyNameConverter.AmplitudeMode.Name.Wide3Pulse">Wide 3 Pulse</system:String>
-    <system:String x:Key="Resource.Language.FriendlyNameConverter.AmplitudeMode.Name.InvProportional">Inverse Proportioanl</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.AmplitudeMode.Name.InverseProportional">Inverse Proportional</system:String>
     <system:String x:Key="Resource.Language.FriendlyNameConverter.AmplitudeMode.Name.Exponential">Exponential</system:String>
     <system:String x:Key="Resource.Language.FriendlyNameConverter.AmplitudeMode.Name.LinearPolynomial">Polynomial</system:String>
     <system:String x:Key="Resource.Language.FriendlyNameConverter.AmplitudeMode.Name.Sine">Sinusoidal</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.AmplitudeMode.Name.Table">Discrete Points</system:String>
 
     <system:String x:Key="Resource.Language.FriendlyNameConverter.BaseWaveType.Name.Sine">Sinusoidal</system:String>
     <system:String x:Key="Resource.Language.FriendlyNameConverter.BaseWaveType.Name.Saw">Triangle</system:String>
@@ -479,5 +507,10 @@
     <system:String x:Key="Resource.Language.FriendlyNameConverter.YamlAsyncParameterVibratoMode.Name.Const">Constant</system:String>
     <system:String x:Key="Resource.Language.FriendlyNameConverter.YamlAsyncParameterVibratoMode.Name.Moving">Variable</system:String>
 
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.MyMath.EquationSolver.EquationSolverType.Name.Newton">Newton Method</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.MyMath.EquationSolver.EquationSolverType.Name.Bisection">Bisection Method</system:String>
+
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.Bool.True">Yes</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.Bool.False">No</system:String>
 
 </ResourceDictionary>

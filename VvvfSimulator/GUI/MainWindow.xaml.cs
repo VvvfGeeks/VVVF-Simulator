@@ -7,17 +7,18 @@ using System.Media;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using VvvfSimulator.Generation.Pi3Generator;
 using VvvfSimulator.GUI.Create.Waveform;
 using VvvfSimulator.GUI.Mascon;
 using VvvfSimulator.GUI.Resource.Class;
 using VvvfSimulator.GUI.Resource.Language;
 using VvvfSimulator.GUI.Simulator.RealTime;
+using VvvfSimulator.GUI.Simulator.RealTime.Controller;
 using VvvfSimulator.GUI.Simulator.RealTime.Setting;
 using VvvfSimulator.GUI.Simulator.RealTime.UniqueWindow;
 using VvvfSimulator.GUI.TaskViewer;
 using VvvfSimulator.GUI.TrainAudio;
 using VvvfSimulator.GUI.Util;
+using VvvfSimulator.Vvvf;
 using VvvfSimulator.Yaml.VvvfSound;
 using YamlDotNet.Core;
 using static VvvfSimulator.Generation.Audio.GenerateRealTimeCommon;
@@ -400,9 +401,11 @@ namespace VvvfSimulator
                         }
                     }
 
-                    MasconWindow mascon = new(parameter);
-                    mascon.Show();
-                    mascon.StartTask();
+                    IController Controller = GUI.Simulator.RealTime.Controller.Controller.GetWindow(
+                        (ControllerStyle)Properties.Settings.Default.RealTime_VVVF_Controller_Style, 
+                        parameter, PropertyType.VVVF);
+                    Controller.GetInstance().Show();
+                    Controller.StartTask();
 
                     if (Properties.Settings.Default.RealTime_VVVF_WaveForm_Line_Show)
                     {
@@ -515,9 +518,11 @@ namespace VvvfSimulator
                         Quit = false
                     };
 
-                    MasconWindow mascon = new(parameter);
-                    mascon.Show();
-                    mascon.StartTask();
+                    IController Controller = GUI.Simulator.RealTime.Controller.Controller.GetWindow(
+                        (ControllerStyle)Properties.Settings.Default.RealTime_Train_Controller_Style,
+                        parameter, PropertyType.Train);
+                    Controller.GetInstance().Show();
+                    Controller.StartTask();
 
                     if (Properties.Settings.Default.RealTime_Train_WaveForm_Line_Show)
                     {
@@ -719,15 +724,15 @@ namespace VvvfSimulator
                     if (dialog.ShowDialog() == false) return true;
                     MessageBoxResult result = MessageBox.Show(LanguageManager.GetString("MainWindow.Message.Generate.Movie.Hexagon.Explain.EnableZeroVector"), LanguageManager.GetString("Generic.Title.Ask"), MessageBoxButton.YesNo, MessageBoxImage.Question);
                     bool circle = result == MessageBoxResult.Yes;
-                    double frequency = new DoubleNumberInput(this, LanguageManager.GetString("MainWindow.Message.Generate.Movie.Hexagon.Explain.EnterFrequency")).GetEnteredValue();
-                    if(double.IsNaN(frequency)) return true;
+                    DoubleNumberInput Input = new(this, LanguageManager.GetString("MainWindow.Message.Generate.Movie.Hexagon.Explain.EnterFrequency"));
+                    if(!Input.IsEnteredValueValid()) return true;
 
                     GenerationBasicParameter generationBasicParameter = GetGenerationBasicParameter();
                     Task task = Task.Run(() =>
                     {
                         try
                         {
-                            new Generation.Video.Hexagon.GenerateHexagonExplain().ExportVideo(generationBasicParameter, dialog.FileName, circle, frequency);
+                            new Generation.Video.Hexagon.GenerateHexagonExplain().ExportVideo(generationBasicParameter, dialog.FileName, circle, Input.GetEnteredValue());
                         }
                         catch (Exception e)
                         {
@@ -745,15 +750,15 @@ namespace VvvfSimulator
                     if (dialog.ShowDialog() == false) return true;
                     MessageBoxResult result = MessageBox.Show(LanguageManager.GetString("MainWindow.Message.Generate.Image.Hexagon.Original.EnableZeroVector"), LanguageManager.GetString("Generic.Title.Ask"), MessageBoxButton.YesNo, MessageBoxImage.Question);
                     bool circle = result == MessageBoxResult.Yes;
-                    double frequency = new DoubleNumberInput(this, LanguageManager.GetString("MainWindow.Message.Generate.Image.Hexagon.Original.EnterFrequency")).GetEnteredValue();
-                    if (double.IsNaN(frequency)) return true;
+                    DoubleNumberInput Input = new(this, LanguageManager.GetString("MainWindow.Message.Generate.Image.Hexagon.Original.EnterFrequency"));
+                    if (!Input.IsEnteredValueValid()) return true;
 
                     Task task = Task.Run(() =>
                     {
                         try
                         {
                             YamlVvvfSoundData clone = YamlVvvfManage.DeepClone(YamlVvvfManage.CurrentData);
-                            new Generation.Video.Hexagon.GenerateHexagonOriginal().ExportImage(dialog.FileName, clone, circle, frequency);
+                            new Generation.Video.Hexagon.GenerateHexagonOriginal().ExportImage(dialog.FileName, clone, circle, Input.GetEnteredValue());
                         }
                         catch (Exception e)
                         {
@@ -792,15 +797,15 @@ namespace VvvfSimulator
                 {
                     var dialog = new SaveFileDialog { Filter = "png (*.png)|*.png" };
                     if (dialog.ShowDialog() == false) return true;
-                    double frequency = new DoubleNumberInput(this, LanguageManager.GetString("MainWindow.Message.Generate.Image.FFT.Original.EnterFrequency")).GetEnteredValue();
-                    if (double.IsNaN(frequency)) return true;
+                    DoubleNumberInput Input = new(this, LanguageManager.GetString("MainWindow.Message.Generate.Image.FFT.Original.EnterFrequency"));
+                    if (!Input.IsEnteredValueValid()) return true;
 
                     Task task = Task.Run(() =>
                     {
                         try
                         {
                             YamlVvvfSoundData clone = YamlVvvfManage.DeepClone(YamlVvvfManage.CurrentData);
-                            new Generation.Video.FFT.GenerateFFT().ExportImage(dialog.FileName, clone, frequency);
+                            new Generation.Video.FFT.GenerateFFT().ExportImage(dialog.FileName, clone, Input.GetEnteredValue());
                         }
                         catch (Exception e)
                         {
@@ -809,35 +814,6 @@ namespace VvvfSimulator
                         SystemSounds.Beep.Play();
                     });
                 }
-
-            }
-            else if (command[0].Equals("SourceCode"))
-            {
-                if (command[1].Equals("RPi3"))
-                {
-                    var dialog = new SaveFileDialog
-                    {
-                        Filter = "C (*.c)|*.c",
-                        FileName = GetLoadedYamlName()
-                    };
-
-                    // ダイアログを表示する
-                    if (dialog.ShowDialog() == false) return false;
-
-                    try
-                    {
-                        using (StreamWriter outputFile = new(dialog.FileName))
-                        {
-                            outputFile.Write(Pi3Generate.GenerateC(YamlVvvfManage.CurrentData, Path.GetFileNameWithoutExtension(dialog.FileName)));
-                        }
-                        MessageBox.Show(LanguageManager.GetString("MainWindow.Message.Generate.SourceCode.RPi3.Ok.Message"), LanguageManager.GetString("MainWindow.Message.Generate.SourceCode.RPi3.Ok.Title"), MessageBoxButton.OK, MessageBoxImage.Information);
-                    }
-                    catch (Exception e)
-                    {
-                        MessageBox.Show(e.Message, LanguageManager.GetString("Generic.Title.Error"), MessageBoxButton.OK, MessageBoxImage.Error);
-                    }
-                }
-                
 
             }
             return true;
@@ -927,38 +903,40 @@ namespace VvvfSimulator
                     SystemSounds.Beep.Play();
                 }
 
-                List<TextBoxListWindow.InputContext> inputs =
+                List<DialogInputWindow.InputContext> inputs =
                 [
-                    new (LanguageManager.GetString("MainWindow.Dialog.Tools.AutoVoltage.AcceleratePatternMaxFrequency"), DefaultAccelerateMaxFrequency, typeof(double)),
-                    new (LanguageManager.GetString("MainWindow.Dialog.Tools.AutoVoltage.AcceleratePatternMaxVoltage"), 100.0, typeof(double)),
-                    new (LanguageManager.GetString("MainWindow.Dialog.Tools.AutoVoltage.BrakePatternMaxFrequency"), DefaultBrakeMaxFrequency, typeof(double)),
-                    new (LanguageManager.GetString("MainWindow.Dialog.Tools.AutoVoltage.BrakePatternMaxVoltage"), 100.0, typeof(double)),
-                    new (LanguageManager.GetString("MainWindow.Dialog.Tools.AutoVoltage.MaxEffort"), 50, typeof(int)),
-                    new (LanguageManager.GetString("MainWindow.Dialog.Tools.AutoVoltage.Precision"), 0.5, typeof(double)),
+                    new (LanguageManager.GetString("MainWindow.Dialog.Tools.AutoVoltage.AcceleratePatternMaxFrequency"), DialogInputWindow.InputContextMode.TextBox, DefaultAccelerateMaxFrequency, typeof(double)),
+                    new (LanguageManager.GetString("MainWindow.Dialog.Tools.AutoVoltage.AcceleratePatternMaxVoltage"), DialogInputWindow.InputContextMode.TextBox, 100.0, typeof(double)),
+                    new (LanguageManager.GetString("MainWindow.Dialog.Tools.AutoVoltage.BrakePatternMaxFrequency"), DialogInputWindow.InputContextMode.TextBox, DefaultBrakeMaxFrequency, typeof(double)),
+                    new (LanguageManager.GetString("MainWindow.Dialog.Tools.AutoVoltage.BrakePatternMaxVoltage"), DialogInputWindow.InputContextMode.TextBox, 100.0, typeof(double)),
+                    new (LanguageManager.GetString("MainWindow.Dialog.Tools.AutoVoltage.CalculationType"), DialogInputWindow.InputContextMode.ComboBox, FriendlyNameConverter.GetEquationSolverTypeNames(), typeof(MyMath.EquationSolver.EquationSolverType)),
+                    new (LanguageManager.GetString("MainWindow.Dialog.Tools.AutoVoltage.MaxEffort"), DialogInputWindow.InputContextMode.TextBox, 50, typeof(int)),
+                    new (LanguageManager.GetString("MainWindow.Dialog.Tools.AutoVoltage.Precision"), DialogInputWindow.InputContextMode.TextBox, 0.5, typeof(double)),
                 ];
 
-                TextBoxListWindow InputWindow = new(this, LanguageManager.GetString("MainWindow.Dialog.Tools.AutoVoltage.Title"), inputs);
+                DialogInputWindow InputWindow = new(this, LanguageManager.GetString("MainWindow.Dialog.Tools.AutoVoltage.Title"), inputs);
                 if (InputWindow.Contexts == null)
                 {
                     Quit();
                     return;
                 }
 
-                AutoModulationIndexConfiguration Configuration = new()
+                AutoModulationIndexSolver.SolveConfiguration Configuration = new()
                 {
                     Data = YamlVvvfManage.CurrentData,
-                    AccelEndFrequency = (double)InputWindow.Contexts[0].Value,
-                    AccelMaxVoltage = (double)InputWindow.Contexts[1].Value,
-                    BrakeEndFrequency = (double)InputWindow.Contexts[2].Value,
-                    BrakeMaxVoltage = (double)InputWindow.Contexts[3].Value,
-                    MaxEffort = (int)InputWindow.Contexts[4].Value,
-                    Precision = (double)InputWindow.Contexts[5].Value,
+                    AccelEndFrequency = InputWindow.GetValue<double>(0),
+                    AccelMaxVoltage = InputWindow.GetValue<double>(1),
+                    BrakeEndFrequency = InputWindow.GetValue<double>(2),
+                    BrakeMaxVoltage = InputWindow.GetValue<double>(3),
+                    SolverType = InputWindow.GetValue<MyMath.EquationSolver.EquationSolverType>(4),
+                    MaxEffort = InputWindow.GetValue<int>(5),
+                    Precision = InputWindow.GetValue<double>(6),
                 };
 
                 Task.Run(() =>
                 {
                     
-                    bool result = YamlVvvfUtil.AutoModulationIndex(Configuration);
+                    bool result = AutoModulationIndexSolver.Run(Configuration);
                     if (!result)
                         MessageBox.Show(LanguageManager.GetStringWithNewLine("MainWindow.Message.Tools.AutoVoltage.Error"), LanguageManager.GetString("Generic.Title.Error"), MessageBoxButton.OK, MessageBoxImage.Error);
 
@@ -1008,6 +986,22 @@ namespace VvvfSimulator
                 YamlVvvfManage.CurrentData = new();
                 SettingContentViewer.Navigate(null);
                 UpdateControlList();
+            }
+        }
+
+        private void Help_Menu_Click(object sender, RoutedEventArgs e)
+        {
+            MenuItem button = (MenuItem)sender;
+            Object? tag = button.Tag;
+            if (tag == null) return;
+            String? tag_str = tag.ToString();
+            if (tag_str == null) return;
+
+            if (tag_str.Equals("About"))
+            {
+                SetInteractive(false);
+                new GUI.Simulator.About(this).ShowDialog();
+                SetInteractive(true);
             }
         }
 

@@ -6,6 +6,7 @@ using System.Windows;
 using System.Windows.Controls;
 using VvvfSimulator.GUI.Resource.Class;
 using VvvfSimulator.GUI.Resource.Language;
+using VvvfSimulator.GUI.Simulator.RealTime.Controller;
 using FontFamily = System.Drawing.FontFamily;
 
 namespace VvvfSimulator.GUI.Simulator.RealTime.Setting
@@ -31,15 +32,12 @@ namespace VvvfSimulator.GUI.Simulator.RealTime.Setting
             SetControl();
             IgnoreUpdate = false;
         }
-
-        private readonly Dictionary<RealtimeDisplay.ControlStatus.RealTimeControlStatStyle, string> ControlDesignList = new();
-        
-        private readonly Dictionary<RealtimeDisplay.Hexagon.RealTimeHexagonStyle, string> HexagonStyleList = new();
         
         private void InitializeCombobox()
         {
             SelectorControlDesign.ItemsSource = FriendlyNameConverter.GetRealTimeControlStatStyleNames();
             SelectorHexagonDesign.ItemsSource = FriendlyNameConverter.GetRealTimeHexagonStyleNames();
+            SelectorControllerStyle.ItemsSource = FriendlyNameConverter.GetRealTimeControllerStyleNames();
         }
 
         private void SetControl()
@@ -51,6 +49,9 @@ namespace VvvfSimulator.GUI.Simulator.RealTime.Setting
             if (_SettingType.Equals(RealTimeBasicSettingMode.VVVF))
             {
                 TextBuffSize.Text = Prop.RealTime_VVVF_BuffSize.ToString();
+
+                SelectorControllerStyle.SelectedValue = (ControllerStyle)Prop.RealTime_VVVF_Controller_Style;
+
                 BoxWaveFormLine.IsChecked = Prop.RealTime_VVVF_WaveForm_Line_Show;
                 BoxWaveFormPhase.IsChecked = Prop.RealTime_VVVF_WaveForm_Phase_Show;
                 BoxFFT.IsChecked = Prop.RealTime_VVVF_FFT_Show;
@@ -73,6 +74,9 @@ namespace VvvfSimulator.GUI.Simulator.RealTime.Setting
             else
             {
                 TextBuffSize.Text = Prop.RealTime_Train_BuffSize.ToString();
+
+                SelectorControllerStyle.SelectedValue = (ControllerStyle)Prop.RealTime_Train_Controller_Style;
+
                 BoxWaveFormLine.IsChecked = Prop.RealTime_Train_WaveForm_Line_Show;
                 BoxWaveFormPhase.IsChecked = Prop.RealTime_Train_WaveForm_Phase_Show;
                 BoxFFT.IsChecked = Prop.RealTime_Train_FFT_Show;
@@ -256,13 +260,19 @@ namespace VvvfSimulator.GUI.Simulator.RealTime.Setting
                 else if (_SettingType.Equals(RealTimeBasicSettingMode.Train))
                     Properties.Settings.Default.RealTime_Train_Control_Language = (int)cb.SelectedValue;
             }
-
             else if (tag.Equals("HexagonDesign"))
             {
                 if (_SettingType.Equals(RealTimeBasicSettingMode.VVVF))
                     Properties.Settings.Default.RealTime_VVVF_Hexagon_Style = (int)cb.SelectedValue;
                 else if (_SettingType.Equals(RealTimeBasicSettingMode.Train))
                     Properties.Settings.Default.RealTime_Train_Hexagon_Style = (int)cb.SelectedValue;               
+            }
+            else if (tag.Equals("ControllerStyle"))
+            {
+                if (_SettingType.Equals(RealTimeBasicSettingMode.VVVF))
+                    Properties.Settings.Default.RealTime_VVVF_Controller_Style = (int)cb.SelectedValue;
+                else if (_SettingType.Equals(RealTimeBasicSettingMode.Train))
+                    Properties.Settings.Default.RealTime_Train_Controller_Style = (int)cb.SelectedValue;
             }
         }
 

@@ -1,33 +1,10 @@
 ﻿using System;
 using System.Drawing;
-using VvvfSimulator.Vvvf;
-using VvvfSimulator.Yaml.VvvfSound;
-using static VvvfSimulator.Vvvf.Struct;
 
 namespace VvvfSimulator.Generation.Video.ControlInfo
 {
     public class GenerateControlCommon
-    {
-
-        public const double VoltageConvertFactor = 1.1023241394759375;
-
-        /// <summary>
-        /// Do clone about control!
-        /// </summary>
-        /// <param name="Sound"></param>
-        /// <param name="Control"></param>
-        /// <returns></returns>
-        public static double GetVoltageRate(VvvfValues Control, YamlVvvfSoundData Sound, bool Precise)
-        {
-            WaveValues[] PWM_Array = GenerateBasic.GetUVWCycle(Control, Sound, MyMath.M_PI_6, 120000, Precise);
-            return GetVoltageRate(ref PWM_Array);
-        }
-        public static double GetVoltageRate(ref WaveValues[] UVW)
-        {
-            double result = FS.GenerateFourierSeries.GetFourierFast(ref UVW, 1);
-            result = Math.Abs(result) / VoltageConvertFactor;
-            return result;
-        }
+    {       
         public static void FilledCornerCurvedRectangle(Graphics g, Brush br, Point start, Point end, int round_radius)
         {
             int width = end.X - start.X;

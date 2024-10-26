@@ -1,0 +1,52 @@
+﻿<Window x:Class="VvvfSimulator.GUI.Simulator.About"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:VvvfSimulator.GUI.Simulator"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterOwner"
+        Style="{DynamicResource DialogWindowStyle}"
+        Title="{DynamicResource MainWindow.Menu.Help.About.Title}" Height="200" Width="400">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/GUI/Resource/Dictionary/Common.xaml"/>
+                <ResourceDictionary Source="/GUI/Resource/Dictionary/MenuBar.xaml"/>
+                <ResourceDictionary Source="/GUI/Resource/Dictionary/Window.xaml"/>
+                <ResourceDictionary Source="/GUI/Resource/Dictionary/MenuItem.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Grid Background="{DynamicResource VoidBackgroundBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="25"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="46"/>
+                <ColumnDefinition Width="46"/>
+                <ColumnDefinition Width="46"/>
+            </Grid.ColumnDefinitions>
+            <Image Style="{StaticResource WindowIconStyle}"/>
+            <Label Grid.Column="1" x:Name="WindowTitle" Content="{DynamicResource MainWindow.Menu.Help.About.Title}" Style="{StaticResource WindowTitleStyle}"/>
+            <Button Grid.Column="4" Tag="Close" Style="{DynamicResource WindowCloseButton}" Click="OnWindowControlButtonClick"/>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="5"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Border Grid.Row="1" Margin="20 0" Background="{DynamicResource BackgroundTextBrush}"/>
+            <Label Content="VVVF Simulator" HorizontalContentAlignment="Center" VerticalContentAlignment="Bottom" Foreground="{DynamicResource BackgroundTextBrush}" FontFamily="/GUI/Resource/Fonts/Fugaz_One/#Fugaz One" FontSize="30" VerticalAlignment="Bottom" HorizontalAlignment="Center"/>
+            <Label Grid.Row="2" x:Name="VersionLabel" Content="vX.X.X.X" HorizontalContentAlignment="Center" VerticalContentAlignment="Top" Foreground="{DynamicResource BackgroundTextBrush}" FontFamily="/GUI/Resource/Fonts/MPlus1Code/#M PLUS 1 Code" FontSize="15" VerticalAlignment="Top" HorizontalAlignment="Center"/>
+        </Grid>
+    </Grid>
+
+</Window>

@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:VvvfSimulator.GUI.Create.Waveform"
              mc:Ignorable="d" 
-             d:DesignHeight="302" d:DesignWidth="661" >
+             d:DesignWidth="661" >
 
     <UserControl.Resources>
         <ResourceDictionary>
@@ -28,16 +28,11 @@
         </ResourceDictionary>
     </UserControl.Resources>
     <Border Style="{DynamicResource ControlBorder}">
-        <Grid Margin="0,0,0,0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="50"/>
-                <RowDefinition Height="50"/>
-                <RowDefinition Height="200"/>
-            </Grid.RowDefinitions>
-            <Border CornerRadius="25,25,0,0"  Background="{DynamicResource ResourceKey=TitleBarBrush}">
+        <StackPanel>
+            <Border Height="50" CornerRadius="25,25,0,0"  Background="{DynamicResource ResourceKey=TitleBarBrush}">
                 <Label x:Name="title" Content="Title Here" Style="{DynamicResource TitleBarText}"/>
             </Border>
-            <Grid Grid.Row="1">
+            <Grid Height="50">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="2*"/>
@@ -52,11 +47,30 @@
                 </Grid>
 
             </Grid>
-            <Grid Grid.Row="2" Height="200">
+            <Grid Height="100" Name="TableParameter" Visibility="Visible">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="11*"/>
+                </Grid.ColumnDefinitions>
+                <Border CornerRadius="0,0,0,25" Background="{DynamicResource SubTitleBarBrush}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <Label Content="{DynamicResource Create.Settings.Waveform.Basic.ControlAmplitude.Value}" Style="{DynamicResource SubTitleBarText}"/>
+                </Border>
+                <Border CornerRadius="0,0,25,0"  Grid.Column="1" Background="{DynamicResource BackgroundBrush}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <CheckBox Style="{DynamicResource SlimCheckBox}" x:Name="AmplitudeTableInterpolationCheck" Content="{DynamicResource Create.Settings.Waveform.Basic.ControlAmplitude.TableInterpolation}" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Checked="CheckBoxUpdate" Unchecked="CheckBoxUpdate"/>
+                        <Button Style="{DynamicResource SlimButton}" x:Name="OpenAmplitudeTableEditorButton" Content="{DynamicResource Create.Settings.Waveform.Basic.ControlAmplitude.TableEdit}" Click="ButtonClicked" Grid.Row="1"/>
+                    </Grid>
+                </Border>
+            </Grid>
+            <Grid Height="200" Name="FunctionParameter" Visibility="Visible">
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition x:Name="Title" Width="2*"/>
-                        <ColumnDefinition x:Name="Value" Width="11*"/>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="11*"/>
                     </Grid.ColumnDefinitions>
                     <Border CornerRadius="0,0,0,25" Background="{DynamicResource SubTitleBarBrush}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                         <Label Content="{DynamicResource Create.Settings.Waveform.Basic.ControlAmplitude.Value}" Style="{DynamicResource SubTitleBarText}"/>
@@ -139,7 +153,7 @@
                                 <TextBox x:Name="polynomial_box" Style="{DynamicResource SlimTextBox}" TextChanged="TextboxUpdate" Tag="polynomial" Grid.Column="1" />
                             </Grid>
                             <Grid Grid.Row="4" Visibility="{Binding disable_range_visible, Converter={StaticResource BooleanToVisibilityConverter}}" x:Name="disable_range_grid">
-                                <CheckBox Style="{DynamicResource SlimCheckBox}" x:Name="disable_range_limit_check" Content="{DynamicResource Create.Settings.Waveform.Basic.ControlAmplitude.DisableRangeLimit}" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Checked="CheckBoxUpdate" Unchecked="CheckBoxUpdate"/>
+                                <CheckBox Style="{DynamicResource SlimCheckBox}" x:Name="DisableRateLimitCheckBox" Content="{DynamicResource Create.Settings.Waveform.Basic.ControlAmplitude.DisableRangeLimit}" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Checked="CheckBoxUpdate" Unchecked="CheckBoxUpdate"/>
                             </Grid>
 
                         </Grid>
@@ -147,7 +161,7 @@
                 </Grid>
             </Grid>
 
-        </Grid>
+        </StackPanel>
 
     </Border>
 

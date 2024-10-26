@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
+using VvvfSimulator.Generation;
 using VvvfSimulator.GUI.Resource.Class;
 using VvvfSimulator.Yaml.VvvfSound;
 using static VvvfSimulator.Generation.Audio.GenerateRealTimeCommon;
@@ -64,8 +65,8 @@ namespace VvvfSimulator.GUI.Simulator.RealTime.UniqueWindow
             control.SetSineTime(0);
             control.SetSawTime(0);
 
-            double[] Coefficients = GetFourierCoefficients(control, ysd, 10000, N);
-            StrCoefficients = GetDesmosFourierCoefficientsArray(ref Coefficients);
+            double[] Coefficients = GenerateBasic.Fourier.GetFourierCoefficients(control, ysd, 10000, N);
+            StrCoefficients = GenerateBasic.Fourier.GetDesmosFourierCoefficientsArray(ref Coefficients);
             Bitmap image = GetImage(ref Coefficients);
 
             if (!Resized)

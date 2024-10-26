@@ -62,9 +62,9 @@ namespace VvvfSimulator.GUI.Create.Waveform
             ConditionSetting.Navigate(new ConditionSetting(this, Control));
             PulseSetting.Navigate(new PulseSetting(this, Control, Level));
             AsyncSetting.Navigate(new ControlAsync(this, Control));
-            Control_Amplitude_Default.Navigate(new ControlAmplitude(this, Control.Amplitude.DefaultAmplitude, ControlAmplitudeContent.Default));
-            Control_Amplitude_FreeRun_On.Navigate(new ControlAmplitude(this, Control.Amplitude.FreeRunAmplitude.On, ControlAmplitudeContent.PowerOn));
-            Control_Amplitude_FreeRun_Off.Navigate(new ControlAmplitude(this, Control.Amplitude.FreeRunAmplitude.Off, ControlAmplitudeContent.PowerOff));
+            Control_Amplitude_Default.Navigate(new ControlAmplitude(this, Control.Amplitude.Default, ControlAmplitudeContent.Default));
+            Control_Amplitude_FreeRun_On.Navigate(new ControlAmplitude(this, Control.Amplitude.PowerOn, ControlAmplitudeContent.PowerOn));
+            Control_Amplitude_FreeRun_Off.Navigate(new ControlAmplitude(this, Control.Amplitude.PowerOff, ControlAmplitudeContent.PowerOff));
         }
 
         public void SetPulseDataContent()

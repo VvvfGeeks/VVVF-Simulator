@@ -228,7 +228,13 @@
         </LinearGradientBrush.GradientStops>
     </LinearGradientBrush>
 
-    <SolidColorBrush x:Key="MasconDefaultBackgroundBrush" Color="{DynamicResource BackgroundColor}"/>
+    <SolidColorBrush x:Key="RealtimeControllerDefaultBackgroundBrush" Color="{DynamicResource BackgroundColor}"/>
+    <SolidColorBrush x:Key="RealtimeControllerTopicBackgroundBrush" Color="{DynamicResource KeyUltraLightColor}"/>
+    <SolidColorBrush x:Key="RealtimeControllerTopicForegroundBrush" Color="{DynamicResource BackgroundTextColor}"/>
+    <SolidColorBrush x:Key="RealtimeControllerTopicBorderBrush" Color="{DynamicResource KeyLightColor}"/>
+    <SolidColorBrush x:Key="RealtimeControllerSeparatorBrush" Color="{DynamicResource KeyLightColor}"/>
+    <SolidColorBrush x:Key="RealtimeControllerWaveformBrush" Color="{DynamicResource BackgroundTextColor}"/>
+    <SolidColorBrush x:Key="RealtimeControllerWaveformBorderBrush" Color="{DynamicResource KeyLightColor}"/>
     <SolidColorBrush x:Key="MasconB4Brush" Color="#DD290E"/>
     <SolidColorBrush x:Key="MasconB3Brush" Color="#E04010"/>
     <SolidColorBrush x:Key="MasconB2Brush" Color="#E35611"/>
