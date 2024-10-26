@@ -70,6 +70,7 @@
         <Setter Property="FontSize" Value="13"/>
         <Setter Property="FontFamily" Value="{DynamicResource Generic.Font}"/>
         <Setter Property="FontWeight" Value="Thin"/>
+        <Setter Property="Padding" Value="0"/>
     </Style>
 
     <Style TargetType="Image" x:Key="WindowIconStyle">

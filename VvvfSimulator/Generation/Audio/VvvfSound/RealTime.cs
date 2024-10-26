@@ -3,6 +3,7 @@ using NAudio.Wave;
 using System;
 using System.IO.Ports;
 using System.Windows;
+using VvvfSimulator.GUI.Resource.Language;
 using VvvfSimulator.Properties;
 using VvvfSimulator.Yaml.VvvfSound;
 using static VvvfSimulator.Generation.Audio.GenerateRealTimeCommon;
@@ -27,7 +28,7 @@ namespace VvvfSimulator.Generation.Audio.VvvfSound
             }
             catch
             {
-                MessageBox.Show("USB device was not recognized!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(LanguageManager.GetString("Simulator.RealTime.Message.NoUsbDevice"), "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return 0;
             }
 
@@ -85,7 +86,7 @@ namespace VvvfSimulator.Generation.Audio.VvvfSound
             }
             catch
             {
-                MessageBox.Show("USB device was removed!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(LanguageManager.GetString("Simulator.RealTime.Message.UsbDeviceRemoved"), "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 end_result = 0;
             }
 

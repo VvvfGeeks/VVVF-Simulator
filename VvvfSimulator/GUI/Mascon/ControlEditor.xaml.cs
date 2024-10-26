@@ -120,9 +120,9 @@ namespace VvvfSimulator.GUI.Mascon
                     YamlMasconManage.CurrentData = data;
                     UpdateItemList();
                 }
-                catch (Exception ex)
+                catch
                 {
-                    MessageBox.Show(ex.Message, LanguageManager.GetString("Generic.Title.Error"), MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show(LanguageManager.GetString("Mascon.ControlEditor.Message.MidiConvertError"), LanguageManager.GetString("Generic.Title.Error"), MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
             else if (tag.Equals("Reset"))

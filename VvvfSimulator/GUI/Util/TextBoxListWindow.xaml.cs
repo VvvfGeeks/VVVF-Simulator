@@ -11,10 +11,10 @@ namespace VvvfSimulator.GUI.Util
     /// </summary>
     public partial class TextBoxListWindow : Window
     {
-        public class InputContext(string title, object value, Type type)
+        public class InputContext(string? title, object value, Type type)
         {
             public Type Type { get; set; } = type;
-            public string Title { get; set; } = title;
+            public string? Title { get; set; } = title;
             public object Value { get; set; } = value;
 
         }
@@ -37,14 +37,17 @@ namespace VvvfSimulator.GUI.Util
             wrapper.RowDefinitions.Add(new RowDefinition());
             wrapper.RowDefinitions.Add(new RowDefinition() { Height=new(50) });
 
-            Label label = new();
-            label.Content = Context.Title;
-            label.HorizontalAlignment = HorizontalAlignment.Left;
-            label.VerticalAlignment = VerticalAlignment.Center;
-            label.SetResourceReference(Control.ForegroundProperty, "BackgroundTextBrush");
-            Grid.SetRow(label, 0);
-            Grid.SetColumn(label, 0);
-            wrapper.Children.Add(label);
+            if(Context.Title != null)
+            {
+                Label label = new();
+                label.Content = Context.Title;
+                label.HorizontalAlignment = HorizontalAlignment.Left;
+                label.VerticalAlignment = VerticalAlignment.Center;
+                label.SetResourceReference(Control.ForegroundProperty, "BackgroundTextBrush");
+                Grid.SetRow(label, 0);
+                Grid.SetColumn(label, 0);
+                wrapper.Children.Add(label);
+            }
 
             TextBox box = new();
             box.Text = Context.Value.ToString();

@@ -87,6 +87,11 @@
     <system:String x:Key="MainWindow.Menu.Window.TrainSound">주행음 설정</system:String>
     <system:String x:Key="MainWindow.Menu.Window.Preference">설정</system:String>
 
+    <system:String x:Key="MainWindow.Menu.Help">도움말</system:String>
+    <system:String x:Key="MainWindow.Menu.Help.About">VVVF Simulator에 대하여</system:String>
+    <system:String x:Key="MainWindow.Menu.Help.About.Title">VVVF Simulator에 대하여</system:String>
+    <system:String x:Key="MainWindow.Menu.Help.About.Version.Unkown">버전 불명</system:String>
+
     <system:String x:Key="MainWindow.TabControl.Settings">기본</system:String>
     <system:String x:Key="MainWindow.TabControl.Settings.PwmLevel">레벨</system:String>
     <system:String x:Key="MainWindow.TabControl.Settings.MinimumFrequency">최소 주파수</system:String>
@@ -136,6 +141,7 @@
     <system:String x:Key="MainWindow.Dialog.Tools.AutoVoltage.BrakePatternMaxVoltage">제동 패턴 최대 전압(%)</system:String>
     <system:String x:Key="MainWindow.Dialog.Tools.AutoVoltage.MaxEffort">최대 시도 횟수</system:String>
     <system:String x:Key="MainWindow.Dialog.Tools.AutoVoltage.Precision">정확도</system:String>
+    <system:String x:Key="MainWindow.Dialog.Tools.AutoVoltage.Message.Error">자동 변조 인덱스 실패\n변조 지수:{0}\n브레이크 켜기:{1}\n온 엔드:{2}\n컨텍스트:{3}</system:String>
 
     <system:String x:Key="TextBoxListWindow.Title">값 입력</system:String>
     <system:String x:Key="TextBoxListWindow.Label">값 입력</system:String>
@@ -194,7 +200,7 @@
     <system:String x:Key="TrainAudio.Pages.MotorSetting.MotorSpecification.StatorResistance">고정자 저항</system:String>
     <system:String x:Key="TrainAudio.Pages.MotorSetting.MotorSpecification.RotorResistance">회전자 저항</system:String>
     <system:String x:Key="TrainAudio.Pages.MotorSetting.MotorSpecification.StatorInductance">고정자 인덕턴스</system:String>
-    <system:String x:Key="TrainAudio.Pages.MotorSetting.MotorSpecification.RotorInductancce">회전자 인덕턴스</system:String>
+    <system:String x:Key="TrainAudio.Pages.MotorSetting.MotorSpecification.RotorInductance">회전자 인덕턴스</system:String>
     <system:String x:Key="TrainAudio.Pages.MotorSetting.MotorSpecification.MutualInductance">상호 인덕턴스</system:String>
     <system:String x:Key="TrainAudio.Pages.MotorSetting.MotorSpecification.PolarLogarithm">극 로그값</system:String>
     <system:String x:Key="TrainAudio.Pages.MotorSetting.MotorSpecification.Damping">감쇠 계수</system:String>
@@ -224,13 +230,18 @@
     <system:String x:Key="TrainAudio.Pages.Gear.GearCalculate.Gear">기어</system:String>
     <system:String x:Key="TrainAudio.Pages.Gear.GearCalculate.Count">톱니 수</system:String>
 
-    <system:String x:Key="Simulator.RealTime.MasconWindow.Title">컨트롤러</system:String>
-    <FontFamily x:Key="Simulator.RealTime.MasconWindow.Font.Number">/GUI/Resource/Fonts/MPlus1Code/#M PLUS 1 Code</FontFamily>
-    <FontFamily x:Key="Simulator.RealTime.MasconWindow.Font.Notch">/GUI/Resource/Fonts/MPlus1Code/#M PLUS 1 Code</FontFamily>
-    <system:String x:Key="Simulator.RealTime.MasconWindow.SineFrequency">주파수</system:String>
-    <system:String x:Key="Simulator.RealTime.MasconWindow.Voltage">전압</system:String>
-    <system:String x:Key="Simulator.RealTime.MasconWindow.PulseState">펄스</system:String>
-    <system:String x:Key="Simulator.RealTime.MasconWindow.MenuItem.DeviceSetting">입력 설정</system:String>
+    <system:String x:Key="Simulator.RealTime.Controller.Title">컨트롤러</system:String>
+    <FontFamily x:Key="Simulator.RealTime.Controller.Font.Number">/GUI/Resource/Fonts/MPlus1Code/#M PLUS 1 Code</FontFamily>
+    <FontFamily x:Key="Simulator.RealTime.Controller.Font.Notch">/GUI/Resource/Fonts/MPlus1Code/#M PLUS 1 Code</FontFamily>
+    <FontFamily x:Key="Simulator.RealTime.Controller.Font.Topic">/GUI/Resource/Fonts/Gasoek_One/#Gasoek One</FontFamily>
+    <FontFamily x:Key="Simulator.RealTime.Controller.Font.Unit">/GUI/Resource/Fonts/Gasoek_One/#Gasoek One</FontFamily>
+    <system:String x:Key="Simulator.RealTime.Controller.SineFrequency">주파수</system:String>
+    <system:String x:Key="Simulator.RealTime.Controller.Voltage">전압</system:String>
+    <system:String x:Key="Simulator.RealTime.Controller.PulseState">펄스</system:String>
+    
+    <system:String x:Key="Simulator.RealTime.Controller.MenuItem.DeviceSetting">입력 설정</system:String>
+
+    <system:String x:Key="Simulator.RealTime.Controller.Design2.MenuItem.CalculateDivision">정밀도 설정 계산</system:String>
 
     <system:String x:Key="Simulator.RealTime.RealtimeWindows.ControlStatus.Title">제어 상태</system:String>
 
@@ -259,6 +270,7 @@
     <system:String x:Key="Simulator.RealTime.Setting.Basic.AudioBuffSize">오디오 버퍼 크기</system:String>
     <system:String x:Key="Simulator.RealTime.Setting.Basic.SamplingFrequency">샘플링 주파수</system:String>
     <system:String x:Key="Simulator.RealTime.Setting.Basic.CalculateDivision">계산 단위</system:String>
+    <system:String x:Key="Simulator.RealTime.Setting.Basic.Controller">제어기</system:String>
     <system:String x:Key="Simulator.RealTime.Setting.Basic.WaveForm">파형</system:String>
     <system:String x:Key="Simulator.RealTime.Setting.Basic.WaveForm.Show.Line">선간전압 표시</system:String>
     <system:String x:Key="Simulator.RealTime.Setting.Basic.WaveForm.Show.Phase">상전압 표시</system:String>
@@ -277,11 +289,17 @@
 
     <system:String x:Key="Simulator.RealTime.Setting.Basic.Message.NoFont">필요한 폰트가 설치되지 않았습니다.\n아래 폰트를 설치해 주세요.</system:String>
 
+    <system:String x:Key="Simulator.RealTime.Message.NoUsbDevice">선택한 USB 장치를 인식할 수 없습니다.</system:String>
+    <system:String x:Key="Simulator.RealTime.Message.UsbDeviceRemoved">USB 장치가 제거되었습니다.</system:String>
+
     <system:String x:Key="MidiConvert.Main.Title">MIDI 변환</system:String>
     <system:String x:Key="MidiConvert.Main.Browse">MIDI 파일 열기</system:String>
     <system:String x:Key="MidiConvert.Main.Select">다른 이름으로 저장</system:String>
     <system:String x:Key="MidiConvert.Main.Config">설정</system:String>
     <system:String x:Key="MidiConvert.Main.Convert">변환하기</system:String>
+
+    <system:String x:Key="MidiConvert.Main.Message.MidiConvertError">이 미디는 변환할 수 없습니다.</system:String>
+    <system:String x:Key="MidiConvert.TaskDescription.Convert.Description">미디:{0}, 트랙{1}, 파트{2}의 변환</system:String>
 
     <system:String x:Key="MidiConvert.Config.Title">MIDI 변환</system:String>
     <system:String x:Key="MidiConvert.Config.MultiThreading">병렬 처리</system:String>
@@ -306,6 +324,8 @@
     <system:String x:Key="Mascon.ControlEditor.Menu.Edit">편집</system:String>
     <system:String x:Key="Mascon.ControlEditor.Menu.Edit.Reset">초기화</system:String>
     <system:String x:Key="Mascon.ControlEditor.Menu.Edit.Midi">MIDI 열기</system:String>
+
+    <system:String x:Key="Mascon.ControlEditor.Message.MidiConvertError">이 미디는 변환할 수 없습니다.</system:String>
 
     <system:String x:Key="Mascon.ControlEditor.Message.File.Load.Ok.Title">성공</system:String>
     <system:String x:Key="Mascon.ControlEditor.Message.File.Load.Ok.Message">파일을 불러왔습니다</system:String>
@@ -429,6 +449,9 @@
     <system:String x:Key="Resource.Language.FriendlyNameConverter.FrequencyFilter.FilterType.LowPassFilter">로우 패스 필터</system:String>
     <system:String x:Key="Resource.Language.FriendlyNameConverter.FrequencyFilter.FilterType.NotchFilter">밴드 스톱 필터</system:String>
 
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.RealTime.Controller.Design1">표준</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.RealTime.Controller.Design2">파형 표시 포함</system:String>
+
     <system:String x:Key="Resource.Language.FriendlyNameConverter.MasconDevice.DeviceMode.KeyBoard">키보드</system:String>
     <system:String x:Key="Resource.Language.FriendlyNameConverter.MasconDevice.DeviceMode.PicoMascon">Pico 마스콘</system:String>
 
@@ -479,5 +502,7 @@
     <system:String x:Key="Resource.Language.FriendlyNameConverter.YamlAsyncParameterVibratoMode.Name.Const">일정</system:String>
     <system:String x:Key="Resource.Language.FriendlyNameConverter.YamlAsyncParameterVibratoMode.Name.Moving">가변</system:String>
 
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.Bool.True">예</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.Bool.False">아니요</system:String>
 
 </ResourceDictionary>

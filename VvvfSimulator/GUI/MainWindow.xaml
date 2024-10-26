@@ -216,6 +216,10 @@
                     <MenuItem Header="{DynamicResource MainWindow.Menu.Tools.FreeRunEndAmplitudeContinuous}" Tag="EndAmplitudeContinuous" Click="Tools_Menu_Click"/>
                     <MenuItem Header="{DynamicResource MainWindow.Menu.Tools.MIDI}" Tag="MIDI" Click="Tools_Menu_Click"/>
                 </MenuItem>
+
+                <MenuItem Header="{DynamicResource MainWindow.Menu.Help}">
+                    <MenuItem Header="{DynamicResource MainWindow.Menu.Help.About}" Tag="About" Click="Help_Menu_Click"/>
+                </MenuItem>
             </Menu>
             <Button Grid.Column="2" Tag="Minimize" Style="{DynamicResource WindowMimizeButton}" Click="OnWindowControlButtonClick"/>
             <Button Grid.Column="3" Tag="Maximize" Style="{DynamicResource WindowMaximizeButton}" Click="OnWindowControlButtonClick"/>

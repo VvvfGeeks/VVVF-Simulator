@@ -2,6 +2,7 @@
 using NAudio.Wave;
 using System;
 using System.Windows;
+using VvvfSimulator.GUI.Resource.Language;
 using VvvfSimulator.Properties;
 using VvvfSimulator.Yaml.VvvfSound;
 using static VvvfSimulator.Generation.Audio.GenerateRealTimeCommon;
@@ -81,7 +82,7 @@ namespace VvvfSimulator.Generation.Audio.TrainSound
                 {
                     stat = Calculate(bufferedWaveProvider, Sound, control, Param);
                 }
-                catch
+                catch(Exception e)
                 {
                     wavPlayer.Stop();
                     wavPlayer.Dispose();
@@ -89,7 +90,7 @@ namespace VvvfSimulator.Generation.Audio.TrainSound
                     mmDevice.Dispose();
                     bufferedWaveProvider.ClearBuffer();
 
-                    MessageBox.Show("An error occured on Audio processing.");
+                    MessageBox.Show(e.Message, LanguageManager.GetString("Generic.Title.Error"), MessageBoxButton.OK, MessageBoxImage.Error);
 
                     throw;
                 }

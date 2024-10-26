@@ -87,6 +87,11 @@
     <system:String x:Key="MainWindow.Menu.Window.TrainSound">列車音設定</system:String>
     <system:String x:Key="MainWindow.Menu.Window.Preference">設定</system:String>
 
+    <system:String x:Key="MainWindow.Menu.Help">ヘルプ</system:String>
+    <system:String x:Key="MainWindow.Menu.Help.About">VVVF Simulator について</system:String>
+    <system:String x:Key="MainWindow.Menu.Help.About.Title">VVVF Simulator について</system:String>
+    <system:String x:Key="MainWindow.Menu.Help.About.Version.Unkown">バージョン不明</system:String>
+
     <system:String x:Key="MainWindow.TabControl.Settings">基本</system:String>
     <system:String x:Key="MainWindow.TabControl.Settings.PwmLevel">電位レベル</system:String>
     <system:String x:Key="MainWindow.TabControl.Settings.MinimumFrequency">最小周波数</system:String>
@@ -136,6 +141,7 @@
     <system:String x:Key="MainWindow.Dialog.Tools.AutoVoltage.BrakePatternMaxVoltage">回生パターン最大電圧</system:String>
     <system:String x:Key="MainWindow.Dialog.Tools.AutoVoltage.MaxEffort">最大試行回数</system:String>
     <system:String x:Key="MainWindow.Dialog.Tools.AutoVoltage.Precision">精度</system:String>
+    <system:String x:Key="MainWindow.Dialog.Tools.AutoVoltage.Message.Error">変調率の自動設定に失敗\n変調率:{0}\n回生:{1}\n終点:{2}\nエラー内容:{3}</system:String>
 
     <system:String x:Key="TextBoxListWindow.Title">値の入力</system:String>
     <system:String x:Key="TextBoxListWindow.Label">値を入力</system:String>
@@ -194,7 +200,7 @@
     <system:String x:Key="TrainAudio.Pages.MotorSetting.MotorSpecification.StatorResistance">固定子抵抗値</system:String>
     <system:String x:Key="TrainAudio.Pages.MotorSetting.MotorSpecification.RotorResistance">回転子抵抗値</system:String>
     <system:String x:Key="TrainAudio.Pages.MotorSetting.MotorSpecification.StatorInductance">固定子誘導係数</system:String>
-    <system:String x:Key="TrainAudio.Pages.MotorSetting.MotorSpecification.RotorInductancce">回転子誘導係数</system:String>
+    <system:String x:Key="TrainAudio.Pages.MotorSetting.MotorSpecification.RotorInductance">回転子誘導係数</system:String>
     <system:String x:Key="TrainAudio.Pages.MotorSetting.MotorSpecification.MutualInductance">相互誘導係数</system:String>
     <system:String x:Key="TrainAudio.Pages.MotorSetting.MotorSpecification.PolarLogarithm">極対数</system:String>
     <system:String x:Key="TrainAudio.Pages.MotorSetting.MotorSpecification.Damping">減衰係数</system:String>
@@ -224,13 +230,18 @@
     <system:String x:Key="TrainAudio.Pages.Gear.GearCalculate.Gear">歯車</system:String>
     <system:String x:Key="TrainAudio.Pages.Gear.GearCalculate.Count">歯数</system:String>
 
-    <system:String x:Key="Simulator.RealTime.MasconWindow.Title">コントローラ</system:String>
-    <FontFamily x:Key="Simulator.RealTime.MasconWindow.Font.Number">/GUI/Resource/Fonts/MPlus1Code/#M PLUS 1 Code</FontFamily>
-    <FontFamily x:Key="Simulator.RealTime.MasconWindow.Font.Notch">/GUI/Resource/Fonts/MPlus1Code/#M PLUS 1 Code</FontFamily>
-    <system:String x:Key="Simulator.RealTime.MasconWindow.SineFrequency">駆動周波数</system:String>
-    <system:String x:Key="Simulator.RealTime.MasconWindow.Voltage">電圧</system:String>
-    <system:String x:Key="Simulator.RealTime.MasconWindow.PulseState">パルス状態</system:String>
-    <system:String x:Key="Simulator.RealTime.MasconWindow.MenuItem.DeviceSetting">入力設定</system:String>
+    <system:String x:Key="Simulator.RealTime.Controller.Title">コントローラ</system:String>
+    <FontFamily x:Key="Simulator.RealTime.Controller.Font.Number">/GUI/Resource/Fonts/MPlus1Code/#M PLUS 1 Code</FontFamily>
+    <FontFamily x:Key="Simulator.RealTime.Controller.Font.Notch">/GUI/Resource/Fonts/MPlus1Code/#M PLUS 1 Code</FontFamily>
+    <FontFamily x:Key="Simulator.RealTime.Controller.Font.Topic">/GUI/Resource/Fonts/RocknRoll_One/#RocknRoll One</FontFamily>
+    <FontFamily x:Key="Simulator.RealTime.Controller.Font.Unit">/GUI/Resource/Fonts/RocknRoll_One/#RocknRoll One</FontFamily>
+    <system:String x:Key="Simulator.RealTime.Controller.SineFrequency">駆動周波数</system:String>
+    <system:String x:Key="Simulator.RealTime.Controller.Voltage">電圧</system:String>
+    <system:String x:Key="Simulator.RealTime.Controller.PulseState">パルス状態</system:String>
+    
+    <system:String x:Key="Simulator.RealTime.Controller.MenuItem.DeviceSetting">入力設定</system:String>
+
+    <system:String x:Key="Simulator.RealTime.Controller.Design2.MenuItem.CalculateDivision">計算精度設定</system:String>
 
     <system:String x:Key="Simulator.RealTime.RealtimeWindows.ControlStatus.Title">制御状態</system:String>
 
@@ -259,6 +270,7 @@
     <system:String x:Key="Simulator.RealTime.Setting.Basic.AudioBuffSize">バッファーサイズ</system:String>
     <system:String x:Key="Simulator.RealTime.Setting.Basic.SamplingFrequency">サンプリング周波数</system:String>
     <system:String x:Key="Simulator.RealTime.Setting.Basic.CalculateDivision">単位計算数</system:String>
+    <system:String x:Key="Simulator.RealTime.Setting.Basic.Controller">コントローラ</system:String>
     <system:String x:Key="Simulator.RealTime.Setting.Basic.WaveForm">波形</system:String>
     <system:String x:Key="Simulator.RealTime.Setting.Basic.WaveForm.Show.Line">線間電圧を表示</system:String>
     <system:String x:Key="Simulator.RealTime.Setting.Basic.WaveForm.Show.Phase">相電圧を表示</system:String>
@@ -277,11 +289,17 @@
 
     <system:String x:Key="Simulator.RealTime.Setting.Basic.Message.NoFont">次のフォントがシステムにインストールされていません</system:String>
 
+    <system:String x:Key="Simulator.RealTime.Message.NoUsbDevice">USBデバイスが検出できませんでした。</system:String>
+    <system:String x:Key="Simulator.RealTime.Message.UsbDeviceRemoved">USBデバイスが取り外されました。</system:String>
+
     <system:String x:Key="MidiConvert.Main.Title">MIDIの変換</system:String>
     <system:String x:Key="MidiConvert.Main.Browse">開く</system:String>
     <system:String x:Key="MidiConvert.Main.Select">保存先</system:String>
     <system:String x:Key="MidiConvert.Main.Config">設定</system:String>
     <system:String x:Key="MidiConvert.Main.Convert">変換する</system:String>
+
+    <system:String x:Key="MidiConvert.Main.Message.MidiConvertError">このMIDIは変換できません。</system:String>
+    <system:String x:Key="MidiConvert.TaskDescription.Convert.Description">MIDI:{0}、トラック{1}、第{2}部の変換</system:String>
 
     <system:String x:Key="MidiConvert.Config.Title">MIDIの変換</system:String>
     <system:String x:Key="MidiConvert.Config.MultiThreading">並行処理</system:String>
@@ -306,6 +324,8 @@
     <system:String x:Key="Mascon.ControlEditor.Menu.Edit">編集</system:String>
     <system:String x:Key="Mascon.ControlEditor.Menu.Edit.Reset">白紙に戻す</system:String>
     <system:String x:Key="Mascon.ControlEditor.Menu.Edit.Midi">MIDIを読み込む</system:String>
+
+    <system:String x:Key="Mascon.ControlEditor.Message.MidiConvertError">このMIDIは変換できません。</system:String>
 
     <system:String x:Key="Mascon.ControlEditor.Message.File.Load.Ok.Title">いいね</system:String>
     <system:String x:Key="Mascon.ControlEditor.Message.File.Load.Ok.Message">ファイルを読み込みました</system:String>
@@ -429,6 +449,9 @@
     <system:String x:Key="Resource.Language.FriendlyNameConverter.FrequencyFilter.FilterType.LowPassFilter">ローパスフィルター</system:String>
     <system:String x:Key="Resource.Language.FriendlyNameConverter.FrequencyFilter.FilterType.NotchFilter">ノッチフィルター</system:String>
 
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.RealTime.Controller.Design1">標準</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.RealTime.Controller.Design2">波形付き</system:String>
+    
     <system:String x:Key="Resource.Language.FriendlyNameConverter.MasconDevice.DeviceMode.KeyBoard">キーボード</system:String>
     <system:String x:Key="Resource.Language.FriendlyNameConverter.MasconDevice.DeviceMode.PicoMascon">ピコマスコン</system:String>
     
@@ -478,6 +501,9 @@
 
     <system:String x:Key="Resource.Language.FriendlyNameConverter.YamlAsyncParameterVibratoMode.Name.Const">定数</system:String>
     <system:String x:Key="Resource.Language.FriendlyNameConverter.YamlAsyncParameterVibratoMode.Name.Moving">変数</system:String>
+
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.Bool.True">はい</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.Bool.False">いいえ</system:String>
 
 
 </ResourceDictionary>

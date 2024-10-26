@@ -9,9 +9,13 @@ namespace VvvfSimulator.GUI.Util
     /// </summary>
     public partial class DoubleNumberInput : Window
     {
-        public DoubleNumberInput(Window Owner,string Title,double DefaultValue=10.0)
+        private readonly double LeastValue = 0.0;
+        private readonly double DefaultValue = 0.0;
+        public DoubleNumberInput(Window Owner,string Title, double LeastValue = 0.0,double DefaultValue=10.0)
         {
             this.Owner = Owner;
+            this.LeastValue = LeastValue;
+            this.DefaultValue = DefaultValue;
             InitializeComponent();
             DescriptionBox.Content = Title;
             NumberEnterBox.Text = DefaultValue.ToString();
@@ -19,15 +23,21 @@ namespace VvvfSimulator.GUI.Util
         }
 
         private double EnteredValue = 0.0;
+        private bool EnteredValueValid = false;
         public double GetEnteredValue()
         {
             return EnteredValue;
         }
+        public bool IsEnteredValueValid()
+        {
+            return EnteredValueValid;
+        }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             TextBox tb = NumberEnterBox;
-            double d = ParseTextBox.ParseDouble(tb);
+            double d = ParseTextBox.ParseDouble(tb, LeastValue, DefaultValue);
             EnteredValue = d;
+            EnteredValueValid = true;
             Close();
         }
 
@@ -46,7 +56,6 @@ namespace VvvfSimulator.GUI.Util
 
             if (tag.Equals("Close"))
             {
-                EnteredValue = double.NaN;
                 Close();
             }
                 

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Windows;
 using VvvfSimulator.GUI.Resource.Theme;
+using VvvfSimulator.GUI.Simulator.RealTime.Controller;
 using VvvfSimulator.GUI.Simulator.RealTime.Setting;
 using static VvvfSimulator.GUI.Simulator.RealTime.RealtimeDisplay.ControlStatus;
 using static VvvfSimulator.GUI.Simulator.RealTime.RealtimeDisplay.Hexagon;
@@ -79,7 +81,19 @@ namespace VvvfSimulator.GUI.Resource.Language
                 _ => LanguageManager.GetString("Resource.Language.FriendlyNameConverter.MasconDevice.DeviceMode.PicoMascon")
             };
         }
-
+        public static Dictionary<ControllerStyle, string> GetRealTimeControllerStyleNames()
+        {
+            Dictionary<ControllerStyle, string> Names = [];
+            foreach (ControllerStyle type in (ControllerStyle[])Enum.GetValues(typeof(ControllerStyle)))
+            {
+                Names.Add(type, GetRealTimeControllerStyleName(type));
+            }
+            return Names;
+        }
+        public static string GetRealTimeControllerStyleName(ControllerStyle design)
+        {
+            return LanguageManager.GetString("Resource.Language.FriendlyNameConverter.RealTime.Controller." + design.ToString());
+        }
         public static Dictionary<RealTimeControlStatStyle, string> GetRealTimeControlStatStyleNames()
         {
             Dictionary<RealTimeControlStatStyle, string> Names = [];
@@ -354,6 +368,22 @@ namespace VvvfSimulator.GUI.Resource.Language
             {
                 YamlAsyncParameterVibratoMode.Const => LanguageManager.GetString("Resource.Language.FriendlyNameConverter.YamlAsyncParameterVibratoMode.Name.Const"),
                 _ => LanguageManager.GetString("Resource.Language.FriendlyNameConverter.YamlAsyncParameterVibratoMode.Name.Moving"),
+            };
+        }
+
+        public static Dictionary<bool, string> GetBoolNames()
+        {
+            Dictionary<bool, string> Names = [];
+            Names.Add(false, GetBoolName(false));
+            Names.Add(true, GetBoolName(true));
+            return Names;
+        }
+        public static string GetBoolName(bool b)
+        {
+            return b switch
+            {
+                true => LanguageManager.GetString("Resource.Language.FriendlyNameConverter.Bool.True"),
+                _ => LanguageManager.GetString("Resource.Language.FriendlyNameConverter.Bool.False"),
             };
         }
 

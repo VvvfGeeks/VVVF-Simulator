@@ -2,48 +2,15 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows;
+using VvvfSimulator.Generation;
+using VvvfSimulator.GUI.Resource.Language;
+using VvvfSimulator.Vvvf;
 using static VvvfSimulator.Vvvf.Struct;
 
 namespace VvvfSimulator.Yaml.VvvfSound
 {
     public class YamlVvvfUtil
     {
-        public class NewtonMethod(NewtonMethod.Function function, double dx)
-        {
-            public delegate double Function(double x);
-            private readonly Function function = function;
-
-            public double Calculate(double begin, double tolerance, int n)
-            {
-                double x = begin;
-                for (int i = 0; i < n; i++)
-                {
-                    double pre_x = x;
-                    x = GetZeroIntersect(x);
-                    if (pre_x == x || double.IsNaN(x) || double.IsInfinity(x)) x = pre_x + dx;
-                    double fx = Math.Abs(function(x));
-                    if (fx < tolerance) return x;
-                }
-                return x;
-            }
-
-            private double GetDerivative(double x)
-            {
-                double Fxdx = function(x + dx);
-                double Fx = function(x);
-                double Dy = Fxdx - Fx;
-                double Dx = dx;
-                double Derivative = Dy / Dx;
-                return Derivative;
-            }
-
-            private double GetZeroIntersect(double x)
-            {
-                double zeroX = -function(x) / GetDerivative(x) + x;
-                return zeroX;
-            }
-        }
-
         private static void AutoModulationIndexTask(YamlVvvfSoundData SoundData,bool IsBrakePattern, bool IsEnd,int Index, double MaxFrequency, double MaxVoltageRate, double Presicion, int N)
         {
             List<YamlVvvfSoundData.YamlControlData> ysd = IsBrakePattern ? SoundData.BrakingPattern : SoundData.AcceleratePattern;
@@ -87,22 +54,23 @@ namespace VvvfSimulator.Yaml.VvvfSound
             control.SetBraking(IsBrakePattern);
             control.SetRandomFrequencyMoveAllowed(false);
 
-            NewtonMethod.Function CalculateVoltageDifference = delegate (double amplitude)
+            double CalculateVoltageDifference(double amplitude)
             {
                 if (IsEnd) parameter.EndAmplitude = amplitude;
                 else parameter.StartAmplitude = amplitude;
-                double difference = Generation.Video.ControlInfo.GenerateControlCommon.GetVoltageRate(control, SoundData, true) - DesireVoltageRate;
+                double difference = GenerateBasic.Fourier.GetVoltageRate(control, SoundData, true, FixSign: false) - DesireVoltageRate;
                 return difference * 100;
-            };
+            }
 
-            NewtonMethod Calculator = new(CalculateVoltageDifference, 0.05);
+            MyMath.EquationSolver.BisectionMethod Calculator = new(CalculateVoltageDifference);
             double ProperAmplitude = 0;
             try
             {
-                ProperAmplitude = Calculator.Calculate(DesireVoltageRate, Presicion, N);
+                ProperAmplitude = Calculator.Calculate(0,10, Presicion, N);
             }
             catch (Exception ex) {
-                MessageBox.Show($"Auto Modulation Index set failed on item,\r\nIndex:{Index}\r\nIsBrake:{IsBrakePattern}\r\nIsEnd:{IsEnd}\r\nStackTrace:{ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                string message = string.Format(LanguageManager.GetStringWithNewLine("MainWindow.Dialog.Tools.AutoVoltage.Message.Error"), Index, FriendlyNameConverter.GetBoolName(IsBrakePattern), FriendlyNameConverter.GetBoolName(IsEnd), ex.Message);
+                MessageBox.Show(message, LanguageManager.GetString("Generic.Title.Error"), MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
             if (IsEnd)
