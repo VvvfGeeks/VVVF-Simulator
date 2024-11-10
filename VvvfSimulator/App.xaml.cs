@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using VvvfSimulator.GUI.Resource.Language;
 using VvvfSimulator.GUI.Resource.Theme;
+using VvvfSimulator.Yaml.VvvfSound;
 
 namespace VvvfSimulator
 {
@@ -13,6 +14,11 @@ namespace VvvfSimulator
         {
             ThemeManager.InitializeColorTheme();
             LanguageManager.Initialize();
+            if (e.Args.Length > 0)
+            {
+                YamlVvvfManage.HasArgs = true;
+                YamlVvvfManage.StartupArgs = e.Args;
+            }
         }
     }
 }

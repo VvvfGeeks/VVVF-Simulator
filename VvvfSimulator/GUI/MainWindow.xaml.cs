@@ -74,6 +74,7 @@ namespace VvvfSimulator
             Instance = this;
             DataContext = BindingData;
             InitializeComponent();
+            if (YamlVvvfManage.HasArgs) LoadYaml(YamlVvvfManage.StartupArgs[0]);
         }
 
         private void SettingButtonClick(object sender, RoutedEventArgs e)
@@ -249,6 +250,37 @@ namespace VvvfSimulator
         {
             return Path.GetFileNameWithoutExtension(load_path);
         }
+        public void LoadYaml(string path)
+        {
+            YamlVvvfSoundData ysd = YamlVvvfManage.CurrentData;
+            try
+            {
+                YamlVvvfManage.Load(path);
+                load_path = path;
+                UpdateControlList();
+                MessageBox.Show(LanguageManager.GetString("MainWindow.Message.File.Load.Ok.Message"), LanguageManager.GetString("MainWindow.Message.File.Load.Ok.Title"), MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            catch (YamlException ex)
+            {
+                String error_message = LanguageManager.GetString("MainWindow.Message.File.Load.Error.Message");
+                error_message += "\r\n";
+                error_message += "\r\n" + ex.End.ToString() + "\r\n";
+                MessageBox.Show(error_message, LanguageManager.GetString("Generic.Title.Error"), MessageBoxButton.OK, MessageBoxImage.Error);
+                YamlVvvfManage.CurrentData = ysd;
+                return;
+            }
+            catch (Exception ex)
+            {
+                String error_message = LanguageManager.GetString("MainWindow.Message.File.Load.Error.Message");
+                error_message += "\r\n";
+                error_message += "\r\n" + ex.Message + "\r\n";
+                MessageBox.Show(error_message, LanguageManager.GetString("Generic.Title.Error"), MessageBoxButton.OK, MessageBoxImage.Error);
+                YamlVvvfManage.CurrentData = ysd;
+                return;
+            }
+
+            SettingContentViewer.Navigate(null);
+        }
         private void File_Menu_Click(object sender, RoutedEventArgs e)
         {
             MenuItem button = (MenuItem)sender;
@@ -262,24 +294,7 @@ namespace VvvfSimulator
                 };
                 if (dialog.ShowDialog() == false) return;
 
-                try
-                {
-                    YamlVvvfManage.Load(dialog.FileName);
-                    MessageBox.Show(LanguageManager.GetString("MainWindow.Message.File.Load.Ok.Message"), LanguageManager.GetString("MainWindow.Message.File.Load.Ok.Title"), MessageBoxButton.OK, MessageBoxImage.Information);
-                }
-                catch (YamlException ex)
-                {
-                    String error_message = LanguageManager.GetString("MainWindow.Message.File.Load.Error.Message");
-                    error_message += "\r\n";
-                    error_message += "\r\n" + ex.End.ToString() + "\r\n";
-                    MessageBox.Show(error_message, LanguageManager.GetString("Generic.Title.Error"), MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-
-
-                load_path = dialog.FileName;
-                UpdateControlList();
-                //update_Control_Showing();
-                SettingContentViewer.Navigate(null);
+                LoadYaml(dialog.FileName);
 
             }
             else if (tag.Equals("Save_As"))
@@ -333,7 +348,7 @@ namespace VvvfSimulator
         }
         private Boolean SolveCommand(String[] command)
         {
-
+            if (YamlVvvfManage.CurrentData.HasCustomPwm()) CustomPwm.LoadPreset();
             if (command[0].Equals("VVVF"))
             {
                 if (command[1].Equals("WAV"))
@@ -400,6 +415,8 @@ namespace VvvfSimulator
                             return true;
                         }
                     }
+
+                    if (Properties.Settings.Default.RealTime_VVVF_EditAllow) CustomPwm.LoadPreset();
 
                     IController Controller = GUI.Simulator.RealTime.Controller.Controller.GetWindow(
                         (ControllerStyle)Properties.Settings.Default.RealTime_VVVF_Controller_Style, 
@@ -517,6 +534,8 @@ namespace VvvfSimulator
                     {
                         Quit = false
                     };
+
+                    if (Properties.Settings.Default.RealTime_Train_EditAllow) CustomPwm.LoadPreset();
 
                     IController Controller = GUI.Simulator.RealTime.Controller.Controller.GetWindow(
                         (ControllerStyle)Properties.Settings.Default.RealTime_Train_Controller_Style,

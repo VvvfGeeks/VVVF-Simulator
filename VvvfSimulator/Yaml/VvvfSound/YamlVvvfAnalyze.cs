@@ -42,6 +42,13 @@ namespace VvvfSimulator.Yaml.VvvfSound
         {
             BrakingPattern.Sort((a, b) => Math.Sign(Inverse ? (a.ControlFrequencyFrom - b.ControlFrequencyFrom) : (b.ControlFrequencyFrom - a.ControlFrequencyFrom)));
         }
+        public bool HasCustomPwm()
+        {
+            List<YamlControlData> pattern = [];
+            pattern.AddRange(AcceleratePattern);
+            pattern.AddRange(BrakingPattern);
+            return pattern.Any(ycd => ycd.PulseMode.PulseType is YamlControlData.YamlPulseMode.PulseTypeName.CHM or YamlControlData.YamlPulseMode.PulseTypeName.SHE);
+        }
         public override string ToString()
         {
             Type t = typeof(YamlVvvfSoundData);
@@ -625,6 +632,8 @@ namespace VvvfSimulator.Yaml.VvvfSound
     }
     public static class YamlVvvfManage
     {
+        public static bool HasArgs = false;
+        public static string[] StartupArgs = [];
         public static YamlVvvfSoundData CurrentData = new();
 
         public static bool Save(String path)

@@ -27,6 +27,7 @@ namespace VvvfSimulator.GUI.MIDIConvert
 
         public static bool Conversion(String midi_path, String output_path, MidiConvertConfig midi_Convert_Config)
         {
+            if (YamlVvvfManage.CurrentData.HasCustomPwm()) Vvvf.CustomPwm.LoadPreset();
             //MIDIDataを変換
             MidiData midiData;
             try
