@@ -61,7 +61,17 @@ namespace VvvfSimulator.GUI.Mascon
             mascon_control_list.ItemsSource = YamlMasconManage.CurrentData.points;
         }
 
-        private String load_path = "";
+        private string LoadPath = "";
+        private void LoadYaml(string path)
+        {
+            if (YamlMasconManage.LoadYaml(path))
+            {
+                MessageBox.Show(LanguageManager.GetString("Mascon.ControlEditor.Message.File.Load.Ok.Message"), LanguageManager.GetString("Mascon.ControlEditor.Message.File.Load.Ok.Title"), MessageBoxButton.OK, MessageBoxImage.Information);
+                LoadPath = path;
+            }
+            else MessageBox.Show(LanguageManager.GetString("Mascon.ControlEditor.Message.File.Load.Error.Message"), LanguageManager.GetString("Generic.Title.Error"), MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+
         private void FileMenuClick(object sender, RoutedEventArgs e)
         {
             MenuItem button = (MenuItem)sender;
@@ -74,23 +84,15 @@ namespace VvvfSimulator.GUI.Mascon
                     Filter = "Yaml (*.yaml)|*.yaml|All (*.*)|*.*"
                 };
                 if (dialog.ShowDialog() == false) return;
-
-                if (YamlMasconManage.LoadYaml(dialog.FileName))
-                    MessageBox.Show(LanguageManager.GetString("Mascon.ControlEditor.Message.File.Load.Ok.Message"), LanguageManager.GetString("Mascon.ControlEditor.Message.File.Load.Ok.Title"), MessageBoxButton.OK, MessageBoxImage.Information);
-                else
-                    MessageBox.Show(LanguageManager.GetString("Mascon.ControlEditor.Message.File.Load.Error.Message"), LanguageManager.GetString("Generic.Title.Error"), MessageBoxButton.OK, MessageBoxImage.Error);
-
-                load_path = dialog.FileName;
-
+                LoadYaml(dialog.FileName);
                 UpdateItemList();
-
             }
             else if (tag.Equals("Save"))
             {
                 var dialog = new SaveFileDialog
                 {
                     Filter = "Yaml (*.yaml)|*.yaml",
-                    FileName = Path.GetFileName(load_path)
+                    FileName = Path.GetFileName(LoadPath)
                 };
 
                 // ダイアログを表示する
@@ -212,5 +214,14 @@ namespace VvvfSimulator.GUI.Mascon
                 WindowState = WindowState.Minimized;
         }
 
+        private void Window_Drop(object sender, DragEventArgs e)
+        {
+            string path = (((Array)e.Data.GetData(DataFormats.FileDrop)).GetValue(0) ?? "").ToString() ?? "";
+            if (path.ToLower().EndsWith(".yaml"))
+            {
+                LoadYaml(path);
+                UpdateItemList();
+            }
+        }
     }
 }

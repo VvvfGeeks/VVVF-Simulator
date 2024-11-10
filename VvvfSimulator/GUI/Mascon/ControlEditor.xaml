@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:VvvfSimulator.GUI.Mascon"
         mc:Ignorable="d"
         Style="{DynamicResource MinimumWindowStyle}"
-        Title="{DynamicResource Mascon.ControlEditor.Title}" Height="500" Width="960">
+        Title="{DynamicResource Mascon.ControlEditor.Title}" Height="500" Width="960" AllowDrop="True" Drop="Window_Drop">
 
     <Window.Resources>
         <ResourceDictionary>

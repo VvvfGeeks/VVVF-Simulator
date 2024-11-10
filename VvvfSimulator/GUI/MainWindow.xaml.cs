@@ -74,6 +74,13 @@ namespace VvvfSimulator
             Instance = this;
             DataContext = BindingData;
             InitializeComponent();
+            OnFirstLoad();
+        }
+
+        private void OnFirstLoad()
+        {
+            if (App.HasArgs) LoadYaml(App.StartupArgs[0]);
+            CustomPwmPresets.Load();
         }
 
         private void SettingButtonClick(object sender, RoutedEventArgs e)
@@ -244,10 +251,41 @@ namespace VvvfSimulator
             }
         }
 
-        private String load_path = "";
-        public String GetLoadedYamlName()
+        private string LoadPath = "";
+        public string GetLoadedYamlName()
         {
-            return Path.GetFileNameWithoutExtension(load_path);
+            return Path.GetFileNameWithoutExtension(LoadPath);
+        }
+        public void LoadYaml(string path)
+        {
+            YamlVvvfSoundData Current = YamlVvvfManage.CurrentData;
+            try
+            {
+                YamlVvvfManage.Load(path);
+                LoadPath = path;
+                UpdateControlList();
+                MessageBox.Show(LanguageManager.GetString("MainWindow.Message.File.Load.Ok.Message"), LanguageManager.GetString("MainWindow.Message.File.Load.Ok.Title"), MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            catch (YamlException ex)
+            {
+                String error_message = LanguageManager.GetString("MainWindow.Message.File.Load.Error.Message");
+                error_message += "\r\n";
+                error_message += "\r\n" + ex.End.ToString() + "\r\n";
+                MessageBox.Show(error_message, LanguageManager.GetString("Generic.Title.Error"), MessageBoxButton.OK, MessageBoxImage.Error);
+                YamlVvvfManage.CurrentData = Current;
+                return;
+            }
+            catch (Exception ex)
+            {
+                String error_message = LanguageManager.GetString("MainWindow.Message.File.Load.Error.Message");
+                error_message += "\r\n";
+                error_message += "\r\n" + ex.Message + "\r\n";
+                MessageBox.Show(error_message, LanguageManager.GetString("Generic.Title.Error"), MessageBoxButton.OK, MessageBoxImage.Error);
+                YamlVvvfManage.CurrentData = Current;
+                return;
+            }
+
+            SettingContentViewer.Navigate(null);
         }
         private void File_Menu_Click(object sender, RoutedEventArgs e)
         {
@@ -262,24 +300,7 @@ namespace VvvfSimulator
                 };
                 if (dialog.ShowDialog() == false) return;
 
-                try
-                {
-                    YamlVvvfManage.Load(dialog.FileName);
-                    MessageBox.Show(LanguageManager.GetString("MainWindow.Message.File.Load.Ok.Message"), LanguageManager.GetString("MainWindow.Message.File.Load.Ok.Title"), MessageBoxButton.OK, MessageBoxImage.Information);
-                }
-                catch (YamlException ex)
-                {
-                    String error_message = LanguageManager.GetString("MainWindow.Message.File.Load.Error.Message");
-                    error_message += "\r\n";
-                    error_message += "\r\n" + ex.End.ToString() + "\r\n";
-                    MessageBox.Show(error_message, LanguageManager.GetString("Generic.Title.Error"), MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-
-
-                load_path = dialog.FileName;
-                UpdateControlList();
-                //update_Control_Showing();
-                SettingContentViewer.Navigate(null);
+                LoadYaml(dialog.FileName);
 
             }
             else if (tag.Equals("Save_As"))
@@ -292,7 +313,7 @@ namespace VvvfSimulator
 
                 // ダイアログを表示する
                 if (dialog.ShowDialog() == false) return;
-                load_path = dialog.FileName;
+                LoadPath = dialog.FileName;
                 if (YamlVvvfManage.Save(dialog.FileName))
                     MessageBox.Show(LanguageManager.GetString("MainWindow.Message.File.SaveAs.Ok.Message"), LanguageManager.GetString("MainWindow.Message.File.SaveAs.Ok.Title"), MessageBoxButton.OK, MessageBoxImage.Information);
                 else
@@ -300,7 +321,7 @@ namespace VvvfSimulator
             }
             else if (tag.Equals("Save"))
             {
-                String save_path = load_path;
+                String save_path = LoadPath;
                 if (save_path.Length == 0)
                 {
                     var dialog = new SaveFileDialog
@@ -311,8 +332,8 @@ namespace VvvfSimulator
 
                     // ダイアログを表示する
                     if (dialog.ShowDialog() == false) return;
-                    load_path = dialog.FileName;
-                    save_path = load_path;
+                    LoadPath = dialog.FileName;
+                    save_path = LoadPath;
                 }
                 if (YamlVvvfManage.Save(save_path))
                     MessageBox.Show(LanguageManager.GetString("MainWindow.Message.File.Save.Ok.Message"), LanguageManager.GetString("MainWindow.Message.File.Save.Ok.Title"), MessageBoxButton.OK, MessageBoxImage.Information);
@@ -333,7 +354,6 @@ namespace VvvfSimulator
         }
         private Boolean SolveCommand(String[] command)
         {
-
             if (command[0].Equals("VVVF"))
             {
                 if (command[1].Equals("WAV"))
@@ -1056,6 +1076,15 @@ namespace VvvfSimulator
             }
             else if (tag.Equals("Minimize"))
                 WindowState = WindowState.Minimized;
+        }
+
+        private void Window_Drop(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                string path = (((Array)e.Data.GetData(DataFormats.FileDrop)).GetValue(0) ?? "").ToString() ?? "";
+                if (path.ToLower().EndsWith(".yaml")) LoadYaml(path);
+            }
         }
     }
 }

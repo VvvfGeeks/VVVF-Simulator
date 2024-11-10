@@ -6,7 +6,7 @@
         xmlns:converter="clr-namespace:VvvfSimulator.GUI.Resource.Converter"
         mc:Ignorable="d"
         Style="{DynamicResource MinimumWindowStyle}"
-        Title="{DynamicResource MainWindow.Title}" Height="500" Width="960" Closing="Window_Closing" WindowStartupLocation="CenterScreen">
+        Title="{DynamicResource MainWindow.Title}" Height="500" Width="960" Closing="Window_Closing" WindowStartupLocation="CenterScreen" AllowDrop="True" Drop="Window_Drop">
 
     <Window.Resources>
         <ResourceDictionary>

@@ -11,6 +11,7 @@ using VvvfSimulator.GUI.TaskViewer;
 using VvvfSimulator.Yaml.VvvfSound;
 using static VvvfSimulator.Generation.GenerateCommon;
 using Button = System.Windows.Controls.Button;
+using DataFormats = System.Windows.DataFormats;
 using MessageBox = System.Windows.Forms.MessageBox;
 
 namespace VvvfSimulator.GUI.MIDIConvert
@@ -177,6 +178,16 @@ namespace VvvfSimulator.GUI.MIDIConvert
             }
             else if (tag.Equals("Minimize"))
                 WindowState = WindowState.Minimized;
+        }
+
+        private void Window_Drop(object sender, System.Windows.DragEventArgs e)
+        {
+            string path = (((Array)e.Data.GetData(DataFormats.FileDrop)).GetValue(0) ?? "").ToString() ?? "";
+            if (path.ToLower().EndsWith(".yaml"))
+            {
+                midi_path = path;
+                midi_selected = true;
+            }
         }
     }
 }

@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Style="{DynamicResource DialogWindowStyle}"
         WindowStartupLocation="CenterOwner"
-        Title="{DynamicResource Mascon.LoadMidi.Title}" Width="400" ResizeMode="NoResize" SizeToContent="Height">
+        Title="{DynamicResource Mascon.LoadMidi.Title}" Width="400" ResizeMode="NoResize" SizeToContent="Height" AllowDrop="True" Drop="Window_Drop">
 
     <Window.Resources>
         <ResourceDictionary>
