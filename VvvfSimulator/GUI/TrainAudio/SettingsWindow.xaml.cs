@@ -120,5 +120,28 @@ namespace VvvfSimulator.GUI.TrainAudio
             else if (tag.Equals("Minimize"))
                 WindowState = WindowState.Minimized;
         }
+
+        private void Window_Drop(object sender, DragEventArgs e)
+        {
+            string path = (((Array)e.Data.GetData(DataFormats.FileDrop)).GetValue(0) ?? "").ToString() ?? "";
+            if (path.ToLower().EndsWith(".yaml"))
+            {
+                try
+                {
+                    YamlTrainSoundDataManage.CurrentData = YamlTrainSoundDataManage.LoadYaml(path);
+                    this.soundData = YamlTrainSoundDataManage.CurrentData;
+                    PageFrame.Navigate(new MotorSetting(soundData));
+                    MessageBox.Show(LanguageManager.GetString("TrainAudio.SettingWindow.Message.File.Open.Ok.Message"), LanguageManager.GetString("Generic.Title.Info"), MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                catch (YamlException ex)
+                {
+                    String error_message = LanguageManager.GetString("TrainAudio.SettingWindow.Message.File.Open.Error.Message");
+                    error_message += "\r\n";
+                    error_message += "\r\n" + ex.End.ToString() + "\r\n";
+                    MessageBox.Show(error_message, LanguageManager.GetString("Generic.Title.Error"), MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                load_path = path;
+            }
+        }
     }
 }

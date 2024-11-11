@@ -76,12 +76,12 @@ namespace VvvfSimulator.GUI.Mascon
                 if (dialog.ShowDialog() == false) return;
 
                 if (YamlMasconManage.LoadYaml(dialog.FileName))
+                {
                     MessageBox.Show(LanguageManager.GetString("Mascon.ControlEditor.Message.File.Load.Ok.Message"), LanguageManager.GetString("Mascon.ControlEditor.Message.File.Load.Ok.Title"), MessageBoxButton.OK, MessageBoxImage.Information);
-                else
-                    MessageBox.Show(LanguageManager.GetString("Mascon.ControlEditor.Message.File.Load.Error.Message"), LanguageManager.GetString("Generic.Title.Error"), MessageBoxButton.OK, MessageBoxImage.Error);
-
-                load_path = dialog.FileName;
-
+                    load_path = dialog.FileName;
+                }
+                else MessageBox.Show(LanguageManager.GetString("Mascon.ControlEditor.Message.File.Load.Error.Message"), LanguageManager.GetString("Generic.Title.Error"), MessageBoxButton.OK, MessageBoxImage.Error);
+                
                 UpdateItemList();
 
             }
@@ -212,5 +212,20 @@ namespace VvvfSimulator.GUI.Mascon
                 WindowState = WindowState.Minimized;
         }
 
+        private void Window_Drop(object sender, DragEventArgs e)
+        {
+            string path = (((Array)e.Data.GetData(DataFormats.FileDrop)).GetValue(0) ?? "").ToString() ?? "";
+            if (path.ToLower().EndsWith(".yaml"))
+            {
+                if (YamlMasconManage.LoadYaml(path))
+                {
+                    MessageBox.Show(LanguageManager.GetString("Mascon.ControlEditor.Message.File.Load.Ok.Message"), LanguageManager.GetString("Mascon.ControlEditor.Message.File.Load.Ok.Title"), MessageBoxButton.OK, MessageBoxImage.Information);
+                    load_path = path;
+                }
+                else MessageBox.Show(LanguageManager.GetString("Mascon.ControlEditor.Message.File.Load.Error.Message"), LanguageManager.GetString("Generic.Title.Error"), MessageBoxButton.OK, MessageBoxImage.Error);
+                
+                UpdateItemList();
+            }
+        }
     }
 }

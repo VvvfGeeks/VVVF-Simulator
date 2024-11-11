@@ -12,6 +12,7 @@
 		<PackageIcon>vvvf-simulator.png</PackageIcon>
 		<AllowUnsafeBlocks>False</AllowUnsafeBlocks>
 		<AssemblyVersion>1.9.1.0</AssemblyVersion>
+		<ApplicationManifest>app.manifest</ApplicationManifest>
 	</PropertyGroup>
 
 	<ItemGroup>

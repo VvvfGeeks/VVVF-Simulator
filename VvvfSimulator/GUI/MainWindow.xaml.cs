@@ -1047,5 +1047,14 @@ namespace VvvfSimulator
             else if (tag.Equals("Minimize"))
                 WindowState = WindowState.Minimized;
         }
+
+        private void Window_Drop(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                string path = (((Array)e.Data.GetData(DataFormats.FileDrop)).GetValue(0) ?? "").ToString() ?? "";
+                if (path.ToLower().EndsWith(".yaml")) LoadYaml(path);
+            }
+        }
     }
 }
