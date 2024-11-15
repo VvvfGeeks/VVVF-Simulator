@@ -135,5 +135,8 @@ I highly suggest looking at the sample VVVF files as messing with those will mak
  - [Thunderfeng](https://github.com/Leifengfengfeng)
  - [Geek of the Week](https://github.com/geekotw)
 ## Language Translation
- - [turtle713](https://github.com/intel713) (Korean)
- - [02001](https://github.com/Jerethon) (Simplified Chinese)
+ - Korean
+    - [turtle713](https://github.com/intel713)
+ - Simplified Chinese
+    - [02001](https://github.com/Jerethon)
+    - [YAJ-54S12G-1](https://github.com/YJ-321-C4)

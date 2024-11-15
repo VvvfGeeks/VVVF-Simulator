@@ -160,5 +160,8 @@ ZIPファイルを展開し、`VVVF-Simulator.exe`を実行します。<br>
  - [Thunderfeng](https://github.com/Leifengfengfeng)
  - [Geek of the Week](https://github.com/geekotw)
 ## 言語翻訳
- - [turtle713](https://github.com/intel713) (韓国語)
- - [02001](https://github.com/Jerethon) (簡体中文)
+ - 韓国語
+    - [turtle713](https://github.com/intel713)
+ - 簡体中文
+    - [02001](https://github.com/Jerethon)
+    - [YAJ-54S12G-1](https://github.com/YJ-321-C4)

@@ -166,5 +166,8 @@ https://github.com/VvvfGeeks/VVVF-Simulator
  - [Thunderfeng](https://github.com/Leifengfengfeng)
  - [Geek of the Week](https://github.com/geekotw)
 ## 언어 번역
- - [turtle713](https://github.com/intel713) (한국어)
- - [02001](https://github.com/Jerethon) (중국어)
+ - 한국어
+    - [turtle713](https://github.com/intel713)
+ - 중국어
+    - [02001](https://github.com/Jerethon)
+    - [YAJ-54S12G-1](https://github.com/YJ-321-C4)
