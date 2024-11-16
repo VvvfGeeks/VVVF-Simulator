@@ -186,12 +186,12 @@
     <system:String x:Key="TrainAudio.Pages.HarmonicSetting.BasicSetting.DisappearFrequency">消音时的基频</system:String>
 
     <system:String x:Key="TrainAudio.Pages.HarmonicSetting.RangeSetting">范围设置</system:String>
-    <system:String x:Key="TrainAudio.Pages.HarmonicSetting.RangeSetting.StartFrequency">开始频率</system:String>
-    <system:String x:Key="TrainAudio.Pages.HarmonicSetting.RangeSetting.EndFrequency">结束频率</system:String>
+    <system:String x:Key="TrainAudio.Pages.HarmonicSetting.RangeSetting.StartFrequency">起始频率</system:String>
+    <system:String x:Key="TrainAudio.Pages.HarmonicSetting.RangeSetting.EndFrequency">终止频率</system:String>
 
     <system:String x:Key="TrainAudio.Pages.HarmonicSetting.AmplitudeSetting">幅值设置</system:String>
-    <system:String x:Key="TrainAudio.Pages.HarmonicSetting.AmplitudeSetting.StartFrequency">开始频率</system:String>
-    <system:String x:Key="TrainAudio.Pages.HarmonicSetting.AmplitudeSetting.EndFrequency">结束频率</system:String>
+    <system:String x:Key="TrainAudio.Pages.HarmonicSetting.AmplitudeSetting.StartFrequency">起始频率</system:String>
+    <system:String x:Key="TrainAudio.Pages.HarmonicSetting.AmplitudeSetting.EndFrequency">终止频率</system:String>
     <system:String x:Key="TrainAudio.Pages.HarmonicSetting.AmplitudeSetting.StartAmplitude">开始幅值</system:String>
     <system:String x:Key="TrainAudio.Pages.HarmonicSetting.AmplitudeSetting.EndAmplitude">结束幅值</system:String>
     <system:String x:Key="TrainAudio.Pages.HarmonicSetting.AmplitudeSetting.MaxAmplitude">最大幅值</system:String>
@@ -369,8 +369,8 @@
     <system:String x:Key="Create.Settings.Waveform.Basic.ControlAmplitude.Title.Off">断电时调制度</system:String>
     <system:String x:Key="Create.Settings.Waveform.Basic.ControlAmplitude.Mode">模式</system:String>
     <system:String x:Key="Create.Settings.Waveform.Basic.ControlAmplitude.Value">值</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Basic.ControlAmplitude.StartFrequency">开始频率</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Basic.ControlAmplitude.EndFrequency">结束频率</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.ControlAmplitude.StartFrequency">起始频率</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.ControlAmplitude.EndFrequency">终止频率</system:String>
     <system:String x:Key="Create.Settings.Waveform.Basic.ControlAmplitude.StartAmplitude">开始调制度</system:String>
     <system:String x:Key="Create.Settings.Waveform.Basic.ControlAmplitude.EndAmplitude">结束调制度</system:String>
     <system:String x:Key="Create.Settings.Waveform.Basic.ControlAmplitude.CutoffAmplitude">切断时调制度</system:String>
@@ -391,7 +391,7 @@
     <system:String x:Key="Create.Settings.Waveform.Basic.PulseSetting.DiscreteSetting">离散设置</system:String>
 
     <system:String x:Key="Create.Settings.Waveform.Basic.ConditionSetting.Title">基本设置</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Basic.ConditionSetting.From">开始频率</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.ConditionSetting.From">起始频率</system:String>
     <system:String x:Key="Create.Settings.Waveform.Basic.ConditionSetting.SineFrom">生效最低频率</system:String>
     <system:String x:Key="Create.Settings.Waveform.Basic.ConditionSetting.SineBelow">生效最高频率</system:String>
     <system:String x:Key="Create.Settings.Waveform.Basic.ConditionSetting.Keep">保持</system:String>
