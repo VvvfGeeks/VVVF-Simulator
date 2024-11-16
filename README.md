@@ -1,5 +1,5 @@
 # Language
-- English (You are here)
+- English (Current language)
 - [日本語](README_JPN.md)
 - [简体中文](README_CHS.md)
 - [한국어](README_KOR.md)
