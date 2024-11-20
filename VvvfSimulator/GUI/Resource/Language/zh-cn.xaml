@@ -54,7 +54,7 @@
     <system:String x:Key="MainWindow.Menu.Generate.Movie.WaveForm.UVW">UVW 相电压</system:String>
     <system:String x:Key="MainWindow.Menu.Generate.Movie.Hexagon">磁链</system:String>
     <system:String x:Key="MainWindow.Menu.Generate.Movie.Hexagon.Original">样式 1</system:String>
-    <system:String x:Key="MainWindow.Menu.Generate.Movie.Hexagon.Explain">Render Progress</system:String>
+    <system:String x:Key="MainWindow.Menu.Generate.Movie.Hexagon.Explain">渲染进度</system:String>
     <system:String x:Key="MainWindow.Menu.Generate.Movie.FFT">FFT</system:String>
     <system:String x:Key="MainWindow.Menu.Generate.Movie.FFT.Original">样式 1</system:String>
     <system:String x:Key="MainWindow.Menu.Generate.Image">图片</system:String>
@@ -65,7 +65,7 @@
 
     <system:String x:Key="MainWindow.Menu.RealTime">实时模拟</system:String>
     <system:String x:Key="MainWindow.Menu.RealTime.VVVF">VVVF</system:String><!--不用翻译-->
-    <system:String x:Key="MainWindow.Menu.RealTime.VVVF.USB">VVVF- USB 直通</system:String>
+    <system:String x:Key="MainWindow.Menu.RealTime.VVVF.USB">VVVF-USB 直通</system:String>
     <system:String x:Key="MainWindow.Menu.RealTime.VVVF.USB.Error.Title">出现错误</system:String>
     <system:String x:Key="MainWindow.Menu.RealTime.VVVF.USB.Error.Message">端口无效。</system:String>
     <system:String x:Key="MainWindow.Menu.RealTime.VVVF.Setting">VVVF 模拟设置</system:String>
@@ -75,7 +75,7 @@
     <system:String x:Key="MainWindow.Menu.Tools">工具</system:String>
     <system:String x:Key="MainWindow.Menu.Tools.AutoVoltage">自动设置调制度</system:String>
     <system:String x:Key="MainWindow.Menu.Tools.FreeRunAmpZero">将断电时的调制度设为零</system:String>
-    <system:String x:Key="MainWindow.Menu.Tools.FreeRunEndAmplitudeContinuous">将断电时的调制度设置为连续的</system:String>
+    <system:String x:Key="MainWindow.Menu.Tools.FreeRunEndAmplitudeContinuous">将设置连续的断电时调制度</system:String>
     <system:String x:Key="MainWindow.Menu.Tools.MIDI">MIDI Conversion</system:String>
 
     <system:String x:Key="MainWindow.Menu.Window">杂项</system:String>
@@ -83,7 +83,7 @@
     <system:String x:Key="MainWindow.Menu.Window.TaskProgress">任务管理</system:String>
     <system:String x:Key="MainWindow.Menu.Window.BaseFreqPattern">基频变化速率编辑器</system:String>
     <system:String x:Key="MainWindow.Menu.Window.TrainSound">走行音设置</system:String>
-    <system:String x:Key="MainWindow.Menu.Window.Preference">偏好</system:String>
+    <system:String x:Key="MainWindow.Menu.Window.Preference">偏好设置</system:String>
 
     <system:String x:Key="MainWindow.Menu.Help">帮助</system:String>
     <system:String x:Key="MainWindow.Menu.Help.About">关于 VVVF Simulator</system:String>
@@ -106,7 +106,7 @@
     <system:String x:Key="MainWindow.TaskDescription.Generate.Movie.WaveForm.Spaced">线电压波形（样式2）生成：</system:String>
     <system:String x:Key="MainWindow.TaskDescription.Generate.Movie.WaveForm.UVW">相电压波形生成：</system:String>
     <system:String x:Key="MainWindow.TaskDescription.Generate.Movie.Hexagon.Original">电压磁链视频生成：</system:String>
-    <system:String x:Key="MainWindow.TaskDescription.Generate.Movie.Hexagon.Explain">电压磁链 Render Progress 视频生成：</system:String>
+    <system:String x:Key="MainWindow.TaskDescription.Generate.Movie.Hexagon.Explain">电压磁链渲染进度视频生成：</system:String>
     <system:String x:Key="MainWindow.TaskDescription.Generate.Movie.FFT.Original">FFT 视频生成：</system:String>
 
     <system:String x:Key="MainWindow.Message.File.Save.Ok.Title">信息</system:String>
@@ -126,8 +126,8 @@
     <system:String x:Key="MainWindow.Message.Generate.Image.FFT.Original.EnterFrequency">Enter the frequency to render</system:String>
     <system:String x:Key="MainWindow.Message.Tools.AutoVoltage.Error">
         使用自动设置调制度时请检查以下内容：\n
-        ・加速和制动程序必须要有两个或两个以上的调制方式\n
-        ・所有调制方式的起始频率值必须大于或等于 0
+        - 加速和制动程序必须要有两个或两个以上的调制方式\n
+        - 所有调制方式的起始频率值必须大于或等于 0
     </system:String>
 
     <system:String x:Key="MainWindow.Dialog.Tools.AutoVoltage.Title">自动设置调制度</system:String>
