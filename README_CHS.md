@@ -16,7 +16,7 @@
 
 # 描述
 `VVVF-Simulator` 是用于在 PC 上模拟 VVVF 逆变器声音的应用程序。<br>
-该软件适用于 C# WPF 应用程序。<br>
+该软件基于 C# WPF 应用程序。<br>
 
 # 使用条款
 您可以自由使用本程序中的任何代码用于**非商业用途**。<br>
@@ -142,7 +142,10 @@
 我强烈建议您查看示例文件，因为通过这些示例文件会让您更容易理解如何创建并设置自己的调制方式。
 
 # 支持
-- 加入我们的[Discord](https://discord.gg/SQr2tXJgVq)服务器！您可以经常询问有关VVVF-SIM的问题！
+- 您可以加入以下讨论组来询问有关VVVF-SIM的问题：
+   - [Discord](https://discord.gg/SQr2tXJgVq)服务器
+   - QQ频道：[VVVF-SIM交流频道](https://pd.qq.com/s/dimdwulea)
+   - QQ群：[861610259](https://qm.qq.com/q/IqTqqqNOEM)
 - [示例文件](https://github.com/VvvfGeeks/VVVF-Simulator/releases/download/v1.9.1.0/yaml_samples.zip)
 
 # 相关项目
