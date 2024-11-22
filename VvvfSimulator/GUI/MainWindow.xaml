@@ -162,8 +162,9 @@
                 <MenuItem Header="{DynamicResource MainWindow.Menu.Generate}">
                     <MenuItem Header="{DynamicResource MainWindow.Menu.Generate.Audio}">
                         <MenuItem Header="{DynamicResource MainWindow.Menu.Generate.Audio.VVVF}">
-                            <MenuItem Header="{DynamicResource MainWindow.Menu.Generate.Audio.VVVF.Line}" Tag="VVVF_WAV_LINE" Click="Generation_Menu_Click"/>
-                            <MenuItem Header="{DynamicResource MainWindow.Menu.Generate.Audio.VVVF.Phases}" Tag="VVVF_WAV_PHASES" Click="Generation_Menu_Click"/>
+                            <MenuItem Header="{DynamicResource MainWindow.Menu.Generate.Audio.VVVF.Line}" Tag="VVVF_WAV_Line" Click="Generation_Menu_Click"/>
+                            <MenuItem Header="{DynamicResource MainWindow.Menu.Generate.Audio.VVVF.Phases}" Tag="VVVF_WAV_Phases" Click="Generation_Menu_Click"/>
+                            <MenuItem Header="{DynamicResource MainWindow.Menu.Generate.Audio.VVVF.PhaseCurrent}" Tag="VVVF_WAV_PhaseCurrent" Click="Generation_Menu_Click"/>
                         </MenuItem>
                         <Separator/>
                         <MenuItem Header="{DynamicResource MainWindow.Menu.Generate.Audio.Train}" Tag="Train_WAV" Click="Generation_Menu_Click"/>

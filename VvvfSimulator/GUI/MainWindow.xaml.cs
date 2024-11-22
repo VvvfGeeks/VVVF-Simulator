@@ -68,6 +68,11 @@ namespace VvvfSimulator
             if (Instance == null) return;
             Instance.BindingData.Blocked = !val;
         }
+        public static bool IsInteractable()
+        {
+            if (Instance == null) return false;
+            return !Instance.BindingData.Blocked;
+        }
 
         public MainWindow()
         {
@@ -364,7 +369,6 @@ namespace VvvfSimulator
                         FilterIndex = 1
                     };
                     if (dialog.ShowDialog() == false) return true;
-                    bool IsLine = command[2].Equals("LINE");
 
                     int sample_freq = new int[] { 192000, 5000000, 192000, 5000000 }[dialog.FilterIndex - 1];
                     bool raw = new bool[] { false, false, true, true }[dialog.FilterIndex - 1];
@@ -375,10 +379,12 @@ namespace VvvfSimulator
                     {
                         try
                         {
-                            if (IsLine)
+                            if (command[2].Equals("Line"))
                                 Generation.Audio.VvvfSound.Audio.ExportWavLine(generationBasicParameter, sample_freq, raw, dialog.FileName);
-                            else
+                            else if (command[2].Equals("Phases"))
                                 Generation.Audio.VvvfSound.Audio.ExportWavPhases(generationBasicParameter, sample_freq, raw, dialog.FileName);
+                            else if (command[2].Equals("PhaseCurrent"))
+                                Generation.Audio.VvvfSound.Audio.ExportWavPhaseCurrent(generationBasicParameter, sample_freq, raw, dialog.FileName);
                         }
                         catch (Exception e)
                         {
@@ -388,7 +394,7 @@ namespace VvvfSimulator
                     });
 
                     TaskProgressData taskProgressData = new(task, generationBasicParameter.Progress, 
-                        LanguageManager.GetString("MainWindow.TaskDescription.Generate.Audio.Vvvf." + (IsLine ? "Line" : "Phases")) + GetLoadedYamlName()
+                        LanguageManager.GetString("MainWindow.TaskDescription.Generate.Audio.Vvvf." + command[2]) + GetLoadedYamlName()
                     );
                     TaskViewer.TaskList.Add(taskProgressData);
                 }
@@ -1080,7 +1086,7 @@ namespace VvvfSimulator
 
         private void Window_Drop(object sender, DragEventArgs e)
         {
-            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            if (e.Data.GetDataPresent(DataFormats.FileDrop) && IsInteractable())
             {
                 string path = (((Array)e.Data.GetData(DataFormats.FileDrop)).GetValue(0) ?? "").ToString() ?? "";
                 if (path.ToLower().EndsWith(".yaml")) LoadYaml(path);
