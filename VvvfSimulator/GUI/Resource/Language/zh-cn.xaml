@@ -42,7 +42,8 @@
     <system:String x:Key="MainWindow.Menu.Generate.Audio">音频</system:String>
     <system:String x:Key="MainWindow.Menu.Generate.Audio.VVVF">VVVF</system:String><!--不用翻译-->
     <system:String x:Key="MainWindow.Menu.Generate.Audio.VVVF.Line">线电压音频</system:String>
-    <system:String x:Key="MainWindow.Menu.Generate.Audio.VVVF.Phases">UVW 相电压音频</system:String>
+    <system:String x:Key="MainWindow.Menu.Generate.Audio.VVVF.Phases">相电压音频</system:String>
+    <system:String x:Key="MainWindow.Menu.Generate.Audio.VVVF.PhaseCurrent">相电流音频</system:String>
     <system:String x:Key="MainWindow.Menu.Generate.Audio.Train">走行音</system:String>
     <system:String x:Key="MainWindow.Menu.Generate.Movie">视频</system:String>
     <system:String x:Key="MainWindow.Menu.Generate.Movie.Control">控制信息</system:String>
@@ -74,8 +75,8 @@
 
     <system:String x:Key="MainWindow.Menu.Tools">工具</system:String>
     <system:String x:Key="MainWindow.Menu.Tools.AutoVoltage">自动设置调制度</system:String>
-    <system:String x:Key="MainWindow.Menu.Tools.FreeRunAmpZero">将断电时的调制度设为零</system:String>
-    <system:String x:Key="MainWindow.Menu.Tools.FreeRunEndAmplitudeContinuous">将设置连续的断电时调制度</system:String>
+    <system:String x:Key="MainWindow.Menu.Tools.FreeRunAmpZero">将断电时的调制度值设为零</system:String>
+    <system:String x:Key="MainWindow.Menu.Tools.FreeRunEndAmplitudeContinuous">将断电时调制度设置为连续</system:String>
     <system:String x:Key="MainWindow.Menu.Tools.MIDI">MIDI Conversion</system:String>
 
     <system:String x:Key="MainWindow.Menu.Window">杂项</system:String>
@@ -99,6 +100,7 @@
 
     <system:String x:Key="MainWindow.TaskDescription.Generate.Audio.Vvvf.Line">线电压音频生成：</system:String>
     <system:String x:Key="MainWindow.TaskDescription.Generate.Audio.Vvvf.Phases">相电压音频生成：</system:String>
+    <system:String x:Key="MainWindow.TaskDescription.Generate.Audio.Vvvf.PhaseCurrent">相电流音频生成：</system:String>
     <system:String x:Key="MainWindow.TaskDescription.Generate.Audio.Train">列车走行音生成：</system:String>
     <system:String x:Key="MainWindow.TaskDescription.Generate.Movie.Control.Original">控制信息（样式1）生成：</system:String>
     <system:String x:Key="MainWindow.TaskDescription.Generate.Movie.Control.Original2">控制信息（样式2）生成：</system:String>
@@ -118,16 +120,16 @@
     <system:String x:Key="MainWindow.Message.File.Load.Ok.Title">信息</system:String>
     <system:String x:Key="MainWindow.Message.File.Load.Ok.Message">加载成功</system:String>
     <system:String x:Key="MainWindow.Message.File.Load.Error.Message">加载失败</system:String>
-    <system:String x:Key="MainWindow.Message.Generate.Movie.Hexagon.Original.EnableZeroVector">Enable Zero-Vector Point?</system:String>
-    <system:String x:Key="MainWindow.Message.Generate.Movie.Hexagon.Explain.EnableZeroVector">Enable Zero-Vector Point?</system:String>
-    <system:String x:Key="MainWindow.Message.Generate.Image.Hexagon.Original.EnableZeroVector">Enable Zero-Vector Point?</system:String>
-    <system:String x:Key="MainWindow.Message.Generate.Movie.Hexagon.Explain.EnterFrequency">Enter the frequency to render</system:String>
-    <system:String x:Key="MainWindow.Message.Generate.Image.Hexagon.Original.EnterFrequency">Enter the frequency to render</system:String>
-    <system:String x:Key="MainWindow.Message.Generate.Image.FFT.Original.EnterFrequency">Enter the frequency to render</system:String>
+    <system:String x:Key="MainWindow.Message.Generate.Movie.Hexagon.Original.EnableZeroVector">启用零矢量点？</system:String>
+    <system:String x:Key="MainWindow.Message.Generate.Movie.Hexagon.Explain.EnableZeroVector">启用零矢量点？</system:String>
+    <system:String x:Key="MainWindow.Message.Generate.Image.Hexagon.Original.EnableZeroVector">启用零矢量点？</system:String>
+    <system:String x:Key="MainWindow.Message.Generate.Movie.Hexagon.Explain.EnterFrequency">输入渲染频率</system:String>
+    <system:String x:Key="MainWindow.Message.Generate.Image.Hexagon.Original.EnterFrequency">输入渲染频率</system:String>
+    <system:String x:Key="MainWindow.Message.Generate.Image.FFT.Original.EnterFrequency">输入渲染频率</system:String>
     <system:String x:Key="MainWindow.Message.Tools.AutoVoltage.Error">
         使用自动设置调制度时请检查以下内容：\n
-        - 加速和制动程序必须要有两个或两个以上的调制方式\n
-        - 所有调制方式的起始频率值必须大于或等于 0
+        ・加速和制动程序必须要有两个或两个以上的调制方式\n
+        ・所有调制方式的起始频率值必须大于或等于 0
     </system:String>
 
     <system:String x:Key="MainWindow.Dialog.Tools.AutoVoltage.Title">自动设置调制度</system:String>
@@ -205,7 +207,7 @@
     <system:String x:Key="TrainAudio.Pages.MotorSetting.MotorSpecification.MutualInductance">耦合电感</system:String>
     <system:String x:Key="TrainAudio.Pages.MotorSetting.MotorSpecification.PolePairCount">极对数</system:String>
     <system:String x:Key="TrainAudio.Pages.MotorSetting.MotorSpecification.Damping">阻尼</system:String>
-    <system:String x:Key="TrainAudio.Pages.MotorSetting.MotorSpecification.RotationalInertiaMass">旋转惯性质量</system:String>
+    <system:String x:Key="TrainAudio.Pages.MotorSetting.MotorSpecification.RotationalInertiaMass">转动惯量</system:String>
     <system:String x:Key="TrainAudio.Pages.MotorSetting.MotorSpecification.StaticFriction">静摩擦力</system:String>
 
     <system:String x:Key="TrainAudio.Pages.MotorSetting.MotorSounds">电机声音</system:String>
@@ -385,8 +387,6 @@
     <system:String x:Key="Create.Settings.Waveform.Basic.PulseSetting.Type">类型</system:String>
     <system:String x:Key="Create.Settings.Waveform.Basic.PulseSetting.PulseCount">脉冲数</system:String>
     <system:String x:Key="Create.Settings.Waveform.Basic.PulseSetting.Detail">更多</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Basic.PulseSetting.Shifted">反相</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Basic.PulseSetting.Square">方波</system:String>
     <system:String x:Key="Create.Settings.Waveform.Basic.PulseSetting.HarmonicSetting">谐波设置</system:String>
     <system:String x:Key="Create.Settings.Waveform.Basic.PulseSetting.DiscreteSetting">离散设置</system:String>
 
@@ -476,11 +476,15 @@
 
     <system:String x:Key="Resource.Language.FriendlyNameConverter.BaseWaveType.Name.Sine">正弦波</system:String>
     <system:String x:Key="Resource.Language.FriendlyNameConverter.BaseWaveType.Name.Saw">三角波</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.BaseWaveType.Name.Square">方波</system:String>
     <system:String x:Key="Resource.Language.FriendlyNameConverter.BaseWaveType.Name.ModifiedSine1">改进型正弦波-1</system:String>
     <system:String x:Key="Resource.Language.FriendlyNameConverter.BaseWaveType.Name.ModifiedSine2">改进型正弦波-2</system:String>
     <system:String x:Key="Resource.Language.FriendlyNameConverter.BaseWaveType.Name.ModifiedSaw1">改进型三角波</system:String>
 
     <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseAlternative.Name.Default">默认</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseAlternative.Name.Shifted">反相</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseAlternative.Name.CP">中心脉冲</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseAlternative.Name.Square">方波</system:String>
     <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseAlternative.Name.Alt">Alt</system:String>
 
     <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseModeName.Name.Async">异步调制</system:String>

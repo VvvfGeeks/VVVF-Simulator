@@ -41,8 +41,9 @@
     <system:String x:Key="MainWindow.Menu.Generate">Generate</system:String>
     <system:String x:Key="MainWindow.Menu.Generate.Audio">Audio</system:String>
     <system:String x:Key="MainWindow.Menu.Generate.Audio.VVVF">VVVF</system:String>
-    <system:String x:Key="MainWindow.Menu.Generate.Audio.VVVF.Line">Line Output</system:String>
-    <system:String x:Key="MainWindow.Menu.Generate.Audio.VVVF.Phases">Phase Output</system:String>
+    <system:String x:Key="MainWindow.Menu.Generate.Audio.VVVF.Line">Line Voltage</system:String>
+    <system:String x:Key="MainWindow.Menu.Generate.Audio.VVVF.Phases">Phase Voltage</system:String>
+    <system:String x:Key="MainWindow.Menu.Generate.Audio.VVVF.PhaseCurrent">Phase Current</system:String>
     <system:String x:Key="MainWindow.Menu.Generate.Audio.Train">Train</system:String>
     <system:String x:Key="MainWindow.Menu.Generate.Movie">Movie</system:String>
     <system:String x:Key="MainWindow.Menu.Generate.Movie.Control">Control</system:String>
@@ -97,8 +98,9 @@
     <system:String x:Key="MainWindow.TabControl.Accelerate">Accelerate</system:String>
     <system:String x:Key="MainWindow.TabControl.Brake">Brake</system:String>
 
-    <system:String x:Key="MainWindow.TaskDescription.Generate.Audio.Vvvf.Line">Line Output Audio Generation : </system:String>
-    <system:String x:Key="MainWindow.TaskDescription.Generate.Audio.Vvvf.Phases">Phase Output Audio Generation ：</system:String>
+    <system:String x:Key="MainWindow.TaskDescription.Generate.Audio.Vvvf.Line">Line Voltage Audio Generation : </system:String>
+    <system:String x:Key="MainWindow.TaskDescription.Generate.Audio.Vvvf.Phases">Phase Voltage Audio Generation : </system:String>
+    <system:String x:Key="MainWindow.TaskDescription.Generate.Audio.Vvvf.PhaseCurrent">Phase Current Audio Generation : </system:String>
     <system:String x:Key="MainWindow.TaskDescription.Generate.Audio.Train">Train Audio Generation：</system:String>
     <system:String x:Key="MainWindow.TaskDescription.Generate.Movie.Control.Original">Control(Design1) Movie Generation：</system:String>
     <system:String x:Key="MainWindow.TaskDescription.Generate.Movie.Control.Original2">Control(Design2) Movie Generation：</system:String>
@@ -203,7 +205,7 @@
     <system:String x:Key="TrainAudio.Pages.MotorSetting.MotorSpecification.StatorInductance">Stator Inductance</system:String>
     <system:String x:Key="TrainAudio.Pages.MotorSetting.MotorSpecification.RotorInductance">Rotor Inductance</system:String>
     <system:String x:Key="TrainAudio.Pages.MotorSetting.MotorSpecification.MutualInductance">Mutual Inductance</system:String>
-    <system:String x:Key="TrainAudio.Pages.MotorSetting.MotorSpecification.PolePairCount">Number of Pair Poles</system:String>
+    <system:String x:Key="TrainAudio.Pages.MotorSetting.MotorSpecification.PolePairCount">Number of Pole Pairs</system:String>
     <system:String x:Key="TrainAudio.Pages.MotorSetting.MotorSpecification.Damping">Damping</system:String>
     <system:String x:Key="TrainAudio.Pages.MotorSetting.MotorSpecification.RotationalInertiaMass">Rotational InertiaMass</system:String>
     <system:String x:Key="TrainAudio.Pages.MotorSetting.MotorSpecification.StaticFriction">Static Friction</system:String>
@@ -385,8 +387,6 @@
     <system:String x:Key="Create.Settings.Waveform.Basic.PulseSetting.Type">Type</system:String>
     <system:String x:Key="Create.Settings.Waveform.Basic.PulseSetting.PulseCount">Count</system:String>
     <system:String x:Key="Create.Settings.Waveform.Basic.PulseSetting.Detail">Detail</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Basic.PulseSetting.Shifted">Shifted</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Basic.PulseSetting.Square">Square</system:String>
     <system:String x:Key="Create.Settings.Waveform.Basic.PulseSetting.HarmonicSetting">Harmonic Setting</system:String>
     <system:String x:Key="Create.Settings.Waveform.Basic.PulseSetting.DiscreteSetting">Discrete Setting</system:String>
 
@@ -476,11 +476,15 @@
 
     <system:String x:Key="Resource.Language.FriendlyNameConverter.BaseWaveType.Name.Sine">Sinusoidal</system:String>
     <system:String x:Key="Resource.Language.FriendlyNameConverter.BaseWaveType.Name.Saw">Triangle</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.BaseWaveType.Name.Square">Square</system:String>
     <system:String x:Key="Resource.Language.FriendlyNameConverter.BaseWaveType.Name.ModifiedSine1">Modified Sinusoidal 1</system:String>
     <system:String x:Key="Resource.Language.FriendlyNameConverter.BaseWaveType.Name.ModifiedSine2">Modified Sinusoidal 2</system:String>
     <system:String x:Key="Resource.Language.FriendlyNameConverter.BaseWaveType.Name.ModifiedSaw1">Modified Triangle</system:String>
 
     <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseAlternative.Name.Default">Default</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseAlternative.Name.Shifted">Shifted</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseAlternative.Name.CP">Center Pulse</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseAlternative.Name.Square">Square</system:String>
     <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseAlternative.Name.Alt">Alternate</system:String>
 
     <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseModeName.Name.Async">Async</system:String>

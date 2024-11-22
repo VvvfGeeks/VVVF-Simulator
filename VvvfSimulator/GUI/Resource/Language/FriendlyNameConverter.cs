@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Windows;
 using VvvfSimulator.GUI.Resource.Theme;
 using VvvfSimulator.GUI.Simulator.RealTime.Controller;
 using VvvfSimulator.GUI.Simulator.RealTime.Setting;
 using static VvvfSimulator.GUI.Simulator.RealTime.RealtimeDisplay.ControlStatus;
 using static VvvfSimulator.GUI.Simulator.RealTime.RealtimeDisplay.Hexagon;
-using static VvvfSimulator.Vvvf.Calculate;
 using static VvvfSimulator.Vvvf.MyMath.EquationSolver;
 using static VvvfSimulator.Yaml.TrainAudioSetting.YamlTrainSoundAnalyze.YamlTrainSoundData.SoundFilter;
 using static VvvfSimulator.Yaml.VvvfSound.YamlVvvfSoundData.YamlControlData;
@@ -198,6 +196,7 @@ namespace VvvfSimulator.GUI.Resource.Language
             {
                 BaseWaveType.Sine => LanguageManager.GetString("Resource.Language.FriendlyNameConverter.BaseWaveType.Name.Sine"),
                 BaseWaveType.Saw => LanguageManager.GetString("Resource.Language.FriendlyNameConverter.BaseWaveType.Name.Saw"),
+                BaseWaveType.Square => LanguageManager.GetString("Resource.Language.FriendlyNameConverter.BaseWaveType.Name.Square"),
                 BaseWaveType.ModifiedSine1 => LanguageManager.GetString("Resource.Language.FriendlyNameConverter.BaseWaveType.Name.ModifiedSine1"),
                 BaseWaveType.ModifiedSine2 => LanguageManager.GetString("Resource.Language.FriendlyNameConverter.BaseWaveType.Name.ModifiedSine2"),
                 _ => LanguageManager.GetString("Resource.Language.FriendlyNameConverter.BaseWaveType.Name.ModifiedSaw1"),
@@ -219,7 +218,10 @@ namespace VvvfSimulator.GUI.Resource.Language
             return Mode switch
             {
                 PulseAlternative.Default => LanguageManager.GetString("Resource.Language.FriendlyNameConverter.PulseAlternative.Name.Default"),
-                _ => LanguageManager.GetString("Resource.Language.FriendlyNameConverter.PulseAlternative.Name.Alt") + ((int)Mode),
+                PulseAlternative.Shifted => LanguageManager.GetString("Resource.Language.FriendlyNameConverter.PulseAlternative.Name.Shifted"),
+                PulseAlternative.CP => LanguageManager.GetString("Resource.Language.FriendlyNameConverter.PulseAlternative.Name.CP"),
+                PulseAlternative.Square => LanguageManager.GetString("Resource.Language.FriendlyNameConverter.PulseAlternative.Name.Square"),
+                _ => LanguageManager.GetString("Resource.Language.FriendlyNameConverter.PulseAlternative.Name.Alt") + ((int)Mode - (int)PulseAlternative.Alt1 + 1),
             };
         }
 

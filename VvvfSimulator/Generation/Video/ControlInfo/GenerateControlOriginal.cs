@@ -6,6 +6,7 @@ using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.IO;
 using VvvfSimulator.GUI.Util;
+using VvvfSimulator.Yaml.MasconControl;
 using VvvfSimulator.Yaml.VvvfSound;
 using static VvvfSimulator.Generation.GenerateCommon;
 using static VvvfSimulator.Generation.GenerateCommon.GenerationBasicParameter;
@@ -313,7 +314,7 @@ namespace VvvfSimulator.Generation.Video.ControlInfo
                     continue;
                 }
 
-                video_finished = !CheckForFreqChange(control, masconData, vvvfData, 1.0 / fps);
+                video_finished = !YamlMasconControl.CheckForFreqChange(control, masconData, vvvfData, 1.0 / fps);
                 if (video_finished)
                 {
                     final_show = true;

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using static VvvfSimulator.Vvvf.MyMath;
+using static VvvfSimulator.Vvvf.MyMath.Functions;
 using static VvvfSimulator.Vvvf.Struct;
 using static VvvfSimulator.Yaml.VvvfSound.YamlVvvfSoundData.YamlControlData;
 using static VvvfSimulator.Yaml.VvvfSound.YamlVvvfSoundData.YamlControlData.YamlAmplitude;
@@ -12,57 +13,29 @@ namespace VvvfSimulator.Vvvf
 {
     public class Calculate
     {
-        //
-        // Basic Calculation
-        //
-        public static double GetSaw(double x)
-        {
-            double val;
-            double fixed_x = x - (double)((int)(x * M_1_2PI) * M_2PI);
-            if (0 <= fixed_x && fixed_x < M_PI_2)
-                val = M_2_PI * fixed_x;
-            else if (M_PI_2 <= fixed_x && fixed_x < 3.0 * M_PI_2)
-                val = -M_2_PI * fixed_x + 2;
-            else
-                val = M_2_PI * fixed_x - 4;
-
-            return -val;
-        }
-
-        public static double GetSine(double x)
-        {
-            return Math.Sin(x);
-        }
-
-        public static double GetSquare(double x)
-        {
-            double fixed_x = x - (double)((int)(x * M_1_2PI) * M_2PI);
-            if (fixed_x / M_PI > 1) return -1;
-            return 1;
-        }
-
         public static double GetModifiedSine(double x, int level)
         {
-            double sine = GetSine(x) * level;
+            double sine = Sine(x) * level;
             double value = Math.Round(sine) / level;
             return value;
         }
 
         public static double GetModifiedSaw(double x)
         {
-            double sine = -GetSaw(x) * M_PI_2;
+            double sine = -Saw(x) * M_PI_2;
             int D = sine > 0 ? 1 : -1;
             if (Math.Abs(sine) > 0.5) sine = D;
 
             return sine;
         }
 
-        public static double GetSineValueWithHarmonic(YamlPulseMode mode, double x, double amplitude, double T, double InitialPhase)
+        public static double GetBaseWaveform(YamlPulseMode mode, double x, double amplitude, double T, double InitialPhase)
         {
             double BaseValue = mode.BaseWave switch
             {
-                BaseWaveType.Sine => GetSine(x),
-                BaseWaveType.Saw => -GetSaw(x),
+                BaseWaveType.Sine => Sine(x),
+                BaseWaveType.Saw => -Saw(x),
+                BaseWaveType.Square => Square(x),
                 BaseWaveType.ModifiedSine1 => GetModifiedSine(x, 1),
                 BaseWaveType.ModifiedSine2 => GetModifiedSine(x, 2),
                 BaseWaveType.ModifiedSaw1 => GetModifiedSaw(x),
@@ -80,9 +53,9 @@ namespace VvvfSimulator.Vvvf
                 };
                 double harmonic_value = harmonic.Type switch
                 {
-                    PulseHarmonic.PulseHarmonicType.Sine => GetSine(harmonic_x),
-                    PulseHarmonic.PulseHarmonicType.Saw => -GetSaw(harmonic_x),
-                    PulseHarmonic.PulseHarmonicType.Square => GetSquare(harmonic_x),
+                    PulseHarmonic.PulseHarmonicType.Sine => Sine(harmonic_x),
+                    PulseHarmonic.PulseHarmonicType.Saw => -Saw(harmonic_x),
+                    PulseHarmonic.PulseHarmonicType.Square => Square(harmonic_x),
                     _ => throw new NotImplementedException(),
                 };
                 BaseValue += harmonic_value * harmonic.Amplitude * (harmonic.IsAmplitudeProportional ? amplitude : 1);
@@ -122,7 +95,7 @@ namespace VvvfSimulator.Vvvf
         {
             int totalSteps = carrier * 2;
             double fixed_x = x % M_PI / (M_PI / totalSteps);
-            double saw_value = -GetSaw(carrier * x);
+            double saw_value = -Saw(carrier * x);
             double modulated;
             if (fixed_x > totalSteps - 1) modulated = -1;
             else if (fixed_x > totalSteps / 2 + width) modulated = 1;
@@ -373,9 +346,10 @@ namespace VvvfSimulator.Vvvf
                         Control.SetSawAngleFrequency(SawAngleFrequency);
                         Control.SetSawTime(SawTime);
 
-                        double SineVal = GetSineValueWithHarmonic(PulseMode.Clone(), SineX, Amplitude, Control.GetGenerationCurrentTime(), InitialPhase);
-                        double SawVal = GetSaw(Control.GetSawTime() * Control.GetSawAngleFrequency());
-                        if (PulseMode.Shift)
+                        double SineVal = GetBaseWaveform(PulseMode.Clone(), SineX, Amplitude, Control.GetGenerationCurrentTime(), InitialPhase);
+                        double SawVal = Saw(Control.GetSawTime() * Control.GetSawAngleFrequency());
+                        
+                        if (PulseMode.Alternative == PulseAlternative.Shifted)
                             SawVal = -SawVal;
 
                         double Dipolar = PulseData.GetValueOrDefault(PulseDataKey.Dipolar, -1);
@@ -389,7 +363,7 @@ namespace VvvfSimulator.Vvvf
                         {
                             if (Alternate == PulseAlternative.Alt1)
                             {
-                                double SineVal = GetSine(SineX);
+                                double SineVal = Sine(SineX);
                                 int D = SineVal > 0 ? 1 : -1;
                                 double voltage_fix = D * (1 - Amplitude);
 
@@ -429,9 +403,9 @@ namespace VvvfSimulator.Vvvf
                         }
 
                         { // nP DEFAULT
-                            double SineVal = GetSineValueWithHarmonic(PulseMode.Clone(), SineX, Amplitude, Control.GetGenerationCurrentTime(), InitialPhase);
-                            double SawVal = GetSaw(PulseCount * SineX);
-                            if (PulseMode.Shift)
+                            double SineVal = GetBaseWaveform(PulseMode.Clone(), SineX, Amplitude, Control.GetGenerationCurrentTime(), InitialPhase);
+                            double SawVal = Saw(PulseCount * SineX);
+                            if (PulseMode.Alternative == PulseAlternative.Shifted)
                                 SawVal = -SawVal;
 
                             double Dipolar = PulseData.GetValueOrDefault(PulseDataKey.Dipolar, -1);
@@ -772,8 +746,11 @@ namespace VvvfSimulator.Vvvf
                             SawTime = SawAngleFrequency / desire_saw_angle_freq * SawTime;
                         SawAngleFrequency = desire_saw_angle_freq;
 
-                        double SineVal = GetSineValueWithHarmonic(PulseMode.Clone(), SineX, Amplitude, Control.GetGenerationCurrentTime(), InitialPhase);
-                        double SawVal = GetSaw(SawTime * SawAngleFrequency);
+                        double SineVal = GetBaseWaveform(PulseMode.Clone(), SineX, Amplitude, Control.GetGenerationCurrentTime(), InitialPhase);
+                        double SawVal = Saw(SawTime * SawAngleFrequency);
+
+                        if (PulseMode.Alternative == PulseAlternative.Shifted)
+                            SawVal = -SawVal;
 
                         Control.SetSawAngleFrequency(SawAngleFrequency);
                         Control.SetSawTime(SawTime);
@@ -785,8 +762,8 @@ namespace VvvfSimulator.Vvvf
                         // SYNC 3 ALTERNATE 1
                         if(PulseCount == 3 && PulseMode.Alternative == PulseAlternative.Alt1)
                         {
-                            double SineVal = GetSine(SineX);
-                            double SawVal = GetSaw(SineX);
+                            double SineVal = Sine(SineX);
+                            double SawVal = Saw(SineX);
                             double Pwm = (SineVal > 0 ? 1 : -1) * (Amplitude * 2 / 3.0 + 1 / 3.0);
                             double Negate = SawVal > 0 ? SawVal - 1 : SawVal + 1;
                             return ModulateSignal(Pwm, Negate) * 2;
@@ -795,44 +772,58 @@ namespace VvvfSimulator.Vvvf
                         // SYNC 5 9 13 17 ALTERNATE 1
                         if((PulseCount == 5 || PulseCount == 9 || PulseCount == 13 || PulseCount == 17) && Alternate == PulseAlternative.Alt1)
                         {
-                            double saw_value = GetSaw(27 * SineX);
-                            double sin_value = GetSineValueWithHarmonic(PulseMode.Clone(), SineX, Amplitude, Control.GetGenerationCurrentTime(), InitialPhase);
+                            double SawValue = Saw(27 * SineX);
+                            double SineVal = GetBaseWaveform(PulseMode.Clone(), SineX, Amplitude, Control.GetGenerationCurrentTime(), InitialPhase);
                             double FixedSineX = (int)(SineX / M_PI_2) % 2 == 1 ? M_PI_2 - SineX % M_PI_2 : SineX % M_PI_2;
                             Control.SetSawAngleFrequency(27 * SineAngleFrequency);
                             Control.SetSawTime(SineTime);
-                            return (FixedSineX < M_PI * PulseMode.PulseCount / 54) ? ModulateSignal(sin_value, saw_value) * 2 : (int)(SineX / M_PI_2) % 4 > 1 ? 0 : 2;
+                            return (FixedSineX < M_PI * PulseMode.PulseCount / 54) ? ModulateSignal(SineVal, SawValue) * 2 : (int)(SineX / M_PI_2) % 4 > 1 ? 0 : 2;
                         }
 
                         // SYNC 6 8 ALTERNATE 1
                         if ((PulseCount == 6 || PulseCount == 8) && Alternate == PulseAlternative.Alt1)
                         {
                             int C = PulseCount == 6 ? 6 : 9;
-                            double Saw = GetSaw(C * SineX + M_PI_2);
+                            double SawVal = Saw(C * SineX + M_PI_2);
                             int Orthant = (int)((SineX % M_2PI) / M_PI_2);
                             double FixX = Orthant % 2 == 1 ? M_PI_2 - (SineX % M_PI_2) : (SineX % M_PI_2);
                             double Sig = Orthant > 1 ? 1 : -1;
                             if (FixX > Value.PulseData.GetValueOrDefault(PulseDataKey.PulseWidth, 0)) Sig = Orthant > 1 ? -1 : 1;
                             Sig *= Amplitude;
-                            return ModulateSignal(Sig, Saw) * 2;
+                            return ModulateSignal(Sig, SawVal) * 2;
+                        }
+
+                        // SYNC N WITH CP CONFIGURATION
+                        if(Alternate == PulseAlternative.CP)
+                        {
+                            double SineVal = GetBaseWaveform(PulseMode.Clone(), SineX, Amplitude, Control.GetGenerationCurrentTime(), InitialPhase);
+                            
+                            int CarrierFrequency = PulseMode.PulseCount / 2 * 6;
+                            double SawVal = CarrierFrequency == 0 ? 0 : (Saw(CarrierFrequency * SineX + M_PI_2) * ((PulseMode.PulseCount % 2 == 1) ? 0.5 : -0.5) + 0.5);
+                            double X = SineAngleFrequency * SineTime + InitialPhase;
+                            double CycleX = X % M_2PI;
+                            int Orthant = (int)((X % M_PI) / M_PI_3);
+                            if (CycleX >= M_PI) SawVal = -SawVal;
+                            if (Orthant != 1) SawVal = 0;
+                            
+                            return ModulateSignal(SineVal, SawVal) * 2;
                         }
 
                         // SYNC N WITH SQUARE CONFIGURATION
-                        if (PulseMode.Square && PulseModeConfiguration.IsPulseSquareAvail(PulseMode, 2))
+                        if (Alternate == PulseAlternative.Square)
                         {
                             PulseCount = PulseMode.PulseCount % 2 == 0 ? (int)(PulseMode.PulseCount * 1.5) : (int)((PulseMode.PulseCount - 1) * 1.5);
                             double CarrierPhase = PulseMode.PulseCount % 2 == 0 ? M_PI_2 : 0;
-                            double CarrierVal = -GetSaw(PulseCount * SineX + CarrierPhase);
-                            double SawVal = -GetSaw(SineX);
-                            if (PulseMode.Shift)
-                                SawVal = -SawVal;
+                            double CarrierVal = -Saw(PulseCount * SineX + CarrierPhase);
+                            double SawVal = -Saw(SineX);
                             return ModulateSignal(SawVal > 0 ? Amplitude : -Amplitude, CarrierVal) * 2;
                         }
 
                         // SYNC N
                         {
-                            double SineVal = GetSineValueWithHarmonic(PulseMode.Clone(), SineX, Amplitude, Control.GetGenerationCurrentTime(), InitialPhase);
-                            double SawVal = GetSaw(PulseMode.PulseCount * (SineAngleFrequency * SineTime + InitialPhase));
-                            if (PulseMode.Shift)
+                            double SineVal = GetBaseWaveform(PulseMode.Clone(), SineX, Amplitude, Control.GetGenerationCurrentTime(), InitialPhase);
+                            double SawVal = Saw(PulseMode.PulseCount * (SineAngleFrequency * SineTime + InitialPhase));
+                            if (PulseMode.Alternative == PulseAlternative.Shifted)
                                 SawVal = -SawVal;
                             Control.SetSawAngleFrequency(SineAngleFrequency * PulseMode.PulseCount);
                             Control.SetSawTime(SineTime);
@@ -1152,9 +1143,6 @@ namespace VvvfSimulator.Vvvf
 
     public class SVM
     {
-        private static readonly double SQRT3 = Math.Sqrt(3);
-        private static readonly double SQRT3_2 = Math.Sqrt(3) / 2.0;
-        //private double __2PI_3 = Math.PI * 2 / 3.0;
         public class FunctionTime
         {
             public double T0;
@@ -1175,9 +1163,18 @@ namespace VvvfSimulator.Vvvf
                 T2 = a.T2 * d
             };
         };
-
         public class Vabc
         {
+            public static implicit operator Vabc(WaveValues uvw)
+            {
+                return new Vabc()
+                {
+                    Ua = uvw.U,
+                    Ub = uvw.V,
+                    Uc = uvw.W
+                };
+            }
+
             public double Ua;
             public double Ub;
             public double Uc;
@@ -1210,17 +1207,21 @@ namespace VvvfSimulator.Vvvf
                 Uc = a.Uc - b.Uc
             };
         };
-
         public class Valbe
         {
             public double Ualpha;
             public double Ubeta;
+
+            public static implicit operator PointD(Valbe Uab0)
+            {
+                return new PointD(Uab0.Ualpha, Uab0.Ubeta);
+            }
         };
         public static int EstimateSector(Valbe U)
         {
             int A = U.Ubeta > 0.0 ? 0 : 1;
-            int B = U.Ubeta - SQRT3 * U.Ualpha > 0.0 ? 0 : 1;
-            int C = U.Ubeta + SQRT3 * U.Ualpha > 0.0 ? 0 : 1;
+            int B = U.Ubeta - M_SQRT3 * U.Ualpha > 0.0 ? 0 : 1;
+            int C = U.Ubeta + M_SQRT3 * U.Ualpha > 0.0 ? 0 : 1;
             return (4 * A + 2 * B + C) switch
             {
                 0 => 2,
@@ -1241,38 +1242,38 @@ namespace VvvfSimulator.Vvvf
             {
                 case 1:
                     {
-                        ft.T1 = SQRT3_2 * Vin.Ualpha - 0.5 * Vin.Ubeta;
+                        ft.T1 = M_SQRT3_2 * Vin.Ualpha - 0.5 * Vin.Ubeta;
                         ft.T2 = Vin.Ubeta;
                     }
                     break;
                 case 2:
                     {
-                        ft.T1 = SQRT3_2 * Vin.Ualpha + 0.5 * Vin.Ubeta;
-                        ft.T2 = 0.5 * Vin.Ubeta - SQRT3_2 * Vin.Ualpha;
+                        ft.T1 = M_SQRT3_2 * Vin.Ualpha + 0.5 * Vin.Ubeta;
+                        ft.T2 = 0.5 * Vin.Ubeta - M_SQRT3_2 * Vin.Ualpha;
                     }
                     break;
                 case 3:
                     {
                         ft.T1 = Vin.Ubeta;
-                        ft.T2 = -(SQRT3_2 * Vin.Ualpha + 0.5 * Vin.Ubeta);
+                        ft.T2 = -(M_SQRT3_2 * Vin.Ualpha + 0.5 * Vin.Ubeta);
                     }
                     break;
                 case 4:
                     {
-                        ft.T1 = 0.5 * Vin.Ubeta - SQRT3_2 * Vin.Ualpha;
+                        ft.T1 = 0.5 * Vin.Ubeta - M_SQRT3_2 * Vin.Ualpha;
                         ft.T2 = -Vin.Ubeta;
                     }
                     break;
                 case 5:
                     {
-                        ft.T1 = -(SQRT3_2 * Vin.Ualpha + 0.5 * Vin.Ubeta);
-                        ft.T2 = SQRT3_2 * Vin.Ualpha - 0.5 * Vin.Ubeta;
+                        ft.T1 = -(M_SQRT3_2 * Vin.Ualpha + 0.5 * Vin.Ubeta);
+                        ft.T2 = M_SQRT3_2 * Vin.Ualpha - 0.5 * Vin.Ubeta;
                     }
                     break;
                 case 6:
                     {
                         ft.T1 = -Vin.Ubeta;
-                        ft.T2 = SQRT3_2 * Vin.Ualpha + 0.5 * Vin.Ubeta;
+                        ft.T2 = M_SQRT3_2 * Vin.Ualpha + 0.5 * Vin.Ubeta;
                     }
                     break;
             }
@@ -1334,7 +1335,7 @@ namespace VvvfSimulator.Vvvf
             Valbe Vin = new()
             {
                 Ualpha = 0.66666666666666666666666666666667 * (V0.Ua - 0.5 * V0.Ub - 0.5 * V0.Uc),
-                Ubeta = 0.66666666666666666666666666666667 * (SQRT3_2 * (V0.Ub - V0.Uc))
+                Ubeta = 0.66666666666666666666666666666667 * (M_SQRT3_2 * (V0.Ub - V0.Uc))
             };
             return Vin;
         }

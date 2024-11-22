@@ -6,9 +6,11 @@ using System.Drawing.Imaging;
 using System.IO;
 using VvvfSimulator.GUI.Util;
 using VvvfSimulator.Vvvf;
+using VvvfSimulator.Yaml.MasconControl;
 using VvvfSimulator.Yaml.VvvfSound;
 using static VvvfSimulator.Generation.GenerateCommon;
 using static VvvfSimulator.Generation.GenerateCommon.GenerationBasicParameter;
+using static VvvfSimulator.Vvvf.MyMath;
 using static VvvfSimulator.Vvvf.Struct;
 using static VvvfSimulator.Yaml.MasconControl.YamlMasconAnalyze;
 using Point = System.Drawing.Point;
@@ -50,44 +52,7 @@ namespace VvvfSimulator.Generation.Video.Hexagon
             Bitmap image = GetImage(ref PWM_Array, Control.GetControlFrequency(), Width, Height, Thickness, ZeroVectorCircle);
             return image;
         }
-        private class PointD(double X, double Y)
-        {
-            public double X { get; set; } = X;
-            public double Y { get; set; } = Y;
-
-            public bool IsZero()
-            {
-                return X == 0 && Y == 0;
-            }
-
-            public Point ToPoint()
-            {
-                return new Point((int)X, (int)Y);
-            }
-
-            public static PointD operator +(PointD a, PointD b)
-            {
-                return new PointD(a.X + b.X, a.Y + b.Y);
-            }
-
-            public static PointD operator *(double k, PointD a)
-            {
-                return new PointD(k * a.X, k * a.Y);
-            }
-
-            public static PointD Max(PointD a, PointD b)
-            {
-                return new PointD(a.X > b.X ? a.X : b.X, a.Y > b.Y ? a.Y : b.Y);
-            }
-
-            public static PointD Min(PointD a, PointD b)
-            {
-                return new PointD(a.X < b.X ? a.X : b.X, a.Y < b.Y ? a.Y : b.Y);
-            }
-
-
-
-        }
+        
         public static Bitmap GetImage(
             ref WaveValues[] UVW,
             double ControlFrequency,
@@ -260,7 +225,7 @@ namespace VvvfSimulator.Generation.Video.Hexagon
                 Mat mat = Mat.FromImageData(img);
                 vr.Write(mat);
 
-                loop = CheckForFreqChange(control, masconData, vvvfData, 1.0 / fps);
+                loop = YamlMasconControl.CheckForFreqChange(control, masconData, vvvfData, 1.0 / fps);
                 if (progressData.Cancel) loop = false;
 
                 // PROGRESS CHANGE

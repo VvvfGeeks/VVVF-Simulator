@@ -6,6 +6,7 @@ using System.Drawing.Imaging;
 using System.IO;
 using VvvfSimulator.GUI.Util;
 using VvvfSimulator.Vvvf;
+using VvvfSimulator.Yaml.MasconControl;
 using VvvfSimulator.Yaml.VvvfSound;
 using static VvvfSimulator.Generation.GenerateCommon;
 using static VvvfSimulator.Generation.GenerateCommon.GenerationBasicParameter;
@@ -129,7 +130,7 @@ namespace VvvfSimulator.Generation.Video.FFT
 
                 image.Dispose();
 
-                loop = GenerateCommon.CheckForFreqChange(control, masconData, vvvfData, 1.0 / fps);
+                loop = YamlMasconControl.CheckForFreqChange(control, masconData, vvvfData, 1.0 / fps);
                 if (progressData.Cancel) loop = false;
 
                 // PROGRESS CHANGE
@@ -138,7 +139,7 @@ namespace VvvfSimulator.Generation.Video.FFT
 
             Boolean END_WAIT = true;
             if (END_WAIT)
-                GenerateCommon.AddEmptyFrames(image_width, image_height, 60, vr);
+                AddEmptyFrames(image_width, image_height, 60, vr);
 
             // PROGRESS CHANGE
             progressData.Progress += 60;

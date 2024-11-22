@@ -32,12 +32,6 @@ namespace VvvfSimulator.GUI.Create.Waveform.Basic
             private bool _AltModeSelector_Visible = true;
             public bool AltModeSelector_Visible { get { return _AltModeSelector_Visible; } set { _AltModeSelector_Visible = value; RaisePropertyChanged(nameof(AltModeSelector_Visible)); } }
 
-            private bool _Shifted_Visible = true;
-            public bool Shifted_Visible { get { return _Shifted_Visible; } set { _Shifted_Visible = value; RaisePropertyChanged(nameof(Shifted_Visible)); } }
-
-            private bool _Square_Visible = true;
-            public bool Square_Visible { get { return _Square_Visible; } set { _Square_Visible = value; RaisePropertyChanged(nameof(Square_Visible)); } }
-
             private bool _Discrete_Visible = true;
             public bool Discrete_Visible { get { return _Discrete_Visible; } set { _Discrete_Visible = value; RaisePropertyChanged(nameof(Discrete_Visible)); } }
 
@@ -58,11 +52,8 @@ namespace VvvfSimulator.GUI.Create.Waveform.Basic
 
         private void InitializeView()
         {
-            PulseTypeSelector.ItemsSource = FriendlyNameConverter.GetPulseTypeNames(PulseModeConfiguration.GetAvailablePuseType(Level));
+            PulseTypeSelector.ItemsSource = FriendlyNameConverter.GetPulseTypeNames(PulseModeConfiguration.GetAvailablePulseType(Level));
             PulseTypeSelector.SelectedValue = Target.PulseMode.PulseType;
-
-            Shifted_Box.IsChecked = Target.PulseMode.Shift;
-            Square_Box.IsChecked = Target.PulseMode.Square;
 
             BaseWaveSelector.ItemsSource = FriendlyNameConverter.GetBaseWaveTypeNames();
             BaseWaveSelector.SelectedValue = Target.PulseMode.BaseWave;
@@ -83,9 +74,7 @@ namespace VvvfSimulator.GUI.Create.Waveform.Basic
         {
             YamlPulseMode Mode = Target.PulseMode;
             BindingData.Harmonic_Visible = PulseModeConfiguration.IsCompareWaveEditable(Mode, Level);
-            BindingData.Shifted_Visible = PulseModeConfiguration.IsPulseShiftedAvailable(Mode, Level);
             BindingData.BaseWaveSelector_Visible = PulseModeConfiguration.IsCompareWaveEditable(Mode, Level);
-            BindingData.Square_Visible = PulseModeConfiguration.IsPulseSquareAvail(Mode, Level);
             BindingData.Discrete_Visible = true;
         }
 
@@ -159,29 +148,6 @@ namespace VvvfSimulator.GUI.Create.Waveform.Basic
                 Editor.UpdateVisibility();
             }
         }
-
-        private void CheckedChanged(object sender, RoutedEventArgs e)
-        {
-            if (IgnoreUpdate) return;
-
-            CheckBox tb = (CheckBox)sender;
-            Object? tag = tb.Tag;
-            if (tag == null) return;
-            String? tag_str = tag.ToString();
-            if (tag_str == null) return;
-
-            bool check = tb.IsChecked != false;
-
-            if (tag_str.Equals("Shifted"))
-                Target.PulseMode.Shift = check;
-            else if (tag_str.Equals("Square"))
-                Target.PulseMode.Square = check;
-
-            SetPulseSettingControls();
-            MainWindow.GetInstance()?.UpdateControlList();
-            return;
-        }
-
         private void ButtonClick(object sender, RoutedEventArgs e)
         {
             if (IgnoreUpdate) return;
