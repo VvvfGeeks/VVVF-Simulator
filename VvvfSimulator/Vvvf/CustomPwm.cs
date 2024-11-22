@@ -93,7 +93,6 @@ namespace VvvfSimulator.Vvvf
             return Pwm;
         }
     }
-
     public static class CustomPwmPresets
     {
         public static void Load()
@@ -442,7 +441,7 @@ namespace VvvfSimulator.Vvvf
             t.Wait();
             Loading = false;
         }
-        internal static bool Loaded = false;
+        public static bool Loaded = false;
         private static bool Loading = false;
 
         private static CustomPwm? _L2Chm3Default;

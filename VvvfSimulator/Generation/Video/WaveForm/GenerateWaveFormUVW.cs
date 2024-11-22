@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using VvvfSimulator.GUI.Util;
+using VvvfSimulator.Yaml.MasconControl;
 using VvvfSimulator.Yaml.VvvfSound;
 using static VvvfSimulator.Generation.GenerateCommon;
 using static VvvfSimulator.Generation.GenerateCommon.GenerationBasicParameter;
@@ -126,7 +127,7 @@ namespace VvvfSimulator.Generation.Video.WaveForm
                 Viewer?.SetImage(final_image);
                 final_image.Dispose();
 
-                if (!CheckForFreqChange(Control, masconData, vvvfData, 1.0 / fps)) break;
+                if (!YamlMasconControl.CheckForFreqChange(Control, masconData, vvvfData, 1.0 / fps)) break;
                 if (progressData.Cancel) break;
                 progressData.Progress++;
             }

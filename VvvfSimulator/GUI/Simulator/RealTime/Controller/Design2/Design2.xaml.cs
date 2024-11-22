@@ -106,9 +106,19 @@ namespace VvvfSimulator.GUI.Simulator.RealTime.Controller.Design2
             Task.Run(() => {
                 while (!Param.Quit)
                 {
-                    CarrierFreq Carrier = Param.Control.GetVideoCarrierFrequency();
-                    PulseTypeName Type = Param.Control.GetVideoPulseMode().PulseType;
-                    int PulseCount = Param.Control.GetVideoPulseMode().PulseCount;
+                    YamlVvvfSoundData Sound = Param.VvvfSoundData;
+                    VvvfValues Control = Param.Control.Clone();
+
+                    Control.SetSawTime(0);
+                    Control.SetSineTime(0);
+
+                    Control.SetRandomFrequencyMoveAllowed(false);
+                    PwmCalculateValues Values = YamlVvvfWave.CalculateYaml(Control, Sound);
+                    Calculate.CalculatePhases(Control, Values, 0);
+
+                    CarrierFreq Carrier = Control.GetVideoCarrierFrequency();
+                    PulseTypeName Type = Control.GetVideoPulseMode().PulseType;
+                    int PulseCount = Control.GetVideoPulseMode().PulseCount;
 
                     Model.PulseState = Type switch
                     {

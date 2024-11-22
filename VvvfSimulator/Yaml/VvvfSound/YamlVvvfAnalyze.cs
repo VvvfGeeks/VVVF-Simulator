@@ -239,17 +239,11 @@ namespace VvvfSimulator.Yaml.VvvfSound
                 public PulseAlternative Alternative { get; set; } = PulseAlternative.Default;
                 public enum PulseAlternative
                 {
-                    Default,
+                    Default, Shifted, CP, Square,
                     Alt1, Alt2, Alt3, Alt4, Alt5, Alt6, Alt7, Alt8, Alt9, Alt10,
                     Alt11, Alt12, Alt13, Alt14, Alt15, Alt16, Alt17, Alt18, Alt19, Alt20,
                     Alt21, Alt22, Alt23, Alt24, Alt25, Alt26, Alt27, Alt28, Alt29, Alt30,
                 }
-
-                //
-                // Flat Configurations
-                //
-                public bool Shift { get; set; } = false;
-                public bool Square { get; set; } = false;
 
                 //
                 // Discrete Time Configuration
@@ -278,7 +272,7 @@ namespace VvvfSimulator.Yaml.VvvfSound
                 public BaseWaveType BaseWave { get; set; } = BaseWaveType.Sine;
                 public enum BaseWaveType
                 {
-                    Sine, Saw, ModifiedSine1, ModifiedSine2, ModifiedSaw1
+                    Sine, Saw, Square, ModifiedSine1, ModifiedSine2, ModifiedSaw1
                 }
 
                 //

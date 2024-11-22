@@ -1,6 +1,5 @@
-﻿using System;
+﻿using VvvfSimulator.Generation.Motor;
 using VvvfSimulator.Yaml.VvvfSound;
-using static VvvfSimulator.Generation.Motor.GenerateMotorCore;
 using static VvvfSimulator.Vvvf.Struct;
 using static VvvfSimulator.Yaml.TrainAudioSetting.YamlTrainSoundAnalyze;
 using static VvvfSimulator.Yaml.VvvfSound.YamlVvvfSoundData.YamlMasconData;
@@ -14,15 +13,15 @@ namespace VvvfSimulator.Generation.Audio
         public class RealTimeParameter
         {
             public double FrequencyChangeRate { get; set; } = 0;
-            public Boolean IsBraking { get; set; } = false;
-            public Boolean Quit { get; set; } = false;
-            public Boolean IsFreeRunning { get; set; } = false;
+            public bool IsBraking { get; set; } = false;
+            public bool Quit { get; set; } = false;
+            public bool IsFreeRunning { get; set; } = false;
 
             public VvvfValues Control { get; set; } = new();
             public YamlVvvfSoundData VvvfSoundData { get; set; } = new();
-            public MotorData Motor { get; set; } = new();
+            public GenerateMotorCore.Motor Motor { get; set; } = new(0, new(), new());
             public YamlTrainSoundData TrainSoundData { get; set; } = YamlTrainSoundDataManage.CurrentData.Clone();
-            public String AudioDeviceId { get; set; } = new NAudio.CoreAudioApi.MMDeviceEnumerator().GetDefaultAudioEndpoint(NAudio.CoreAudioApi.DataFlow.Render, NAudio.CoreAudioApi.Role.Multimedia).ID;
+            public string AudioDeviceId { get; set; } = new NAudio.CoreAudioApi.MMDeviceEnumerator().GetDefaultAudioEndpoint(NAudio.CoreAudioApi.DataFlow.Render, NAudio.CoreAudioApi.Role.Multimedia).ID;
         }
 
         public static int RealTimeFrequencyControl(VvvfValues Control, RealTimeParameter Param, double dt)

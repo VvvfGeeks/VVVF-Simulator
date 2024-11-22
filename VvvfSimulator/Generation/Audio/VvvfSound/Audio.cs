@@ -3,6 +3,7 @@ using NAudio.Wave.SampleProviders;
 using System;
 using System.IO;
 using VvvfSimulator.Vvvf;
+using VvvfSimulator.Yaml.MasconControl;
 using VvvfSimulator.Yaml.VvvfSound;
 using static VvvfSimulator.Generation.GenerateCommon;
 using static VvvfSimulator.Vvvf.Struct;
@@ -68,7 +69,7 @@ namespace VvvfSimulator.Generation.Audio.VvvfSound
             {
                 PwmCalculateValues calculated_Values = YamlVvvfWave.CalculateYaml(control, sound_data);
                 WaveValues value = Calculate.CalculatePhases(control, calculated_Values, MyMath.M_PI_6);
-                double pwm_value = value.U - value.V;
+                double pwm_value = (value.U - value.V) / 2.0;
                 return [pwm_value];
             };
             ExportWavFile(GenParam, SampleGen, SamplingFreq, UseRaw, [Path]);
@@ -89,6 +90,18 @@ namespace VvvfSimulator.Generation.Audio.VvvfSound
                 System.IO.Path.GetDirectoryName(Path) + "\\" + System.IO.Path.GetFileNameWithoutExtension(Path) + "_W.wav",
             ];
             ExportWavFile(GenParam, SampleGen, SamplingFreq, UseRaw, ExportPath);
+        }
+
+        public static void ExportWavPhaseCurrent(GenerationBasicParameter GenParam, int SamplingFreq, bool UseRaw, string Path)
+        {
+            GetSampleDelegate SampleGen = (VvvfValues control, YamlVvvfSoundData sound_data) =>
+            {
+                PwmCalculateValues calculated_Values = YamlVvvfWave.CalculateYaml(control, sound_data);
+                WaveValues value = Calculate.CalculatePhases(control, calculated_Values, 0);
+                double pwm_value = (2 * value.U - value.V - value.W) / 8.0;
+                return [pwm_value];
+            };
+            ExportWavFile(GenParam, SampleGen, SamplingFreq, UseRaw, [Path]);
         }
 
         private static void ExportWavFile(GenerationBasicParameter GenParam, GetSampleDelegate GetSample, int SamplingFreq, bool UseRaw, string[] Path)
@@ -123,7 +136,7 @@ namespace VvvfSimulator.Generation.Audio.VvvfSound
                 }
 
                 GenParam.Progress.Progress++;
-                bool flag_continue = CheckForFreqChange(Control, GenParam.MasconData, GenParam.VvvfData, 1.0 / SamplingFreq);
+                bool flag_continue = YamlMasconControl.CheckForFreqChange(Control, GenParam.MasconData, GenParam.VvvfData, 1.0 / SamplingFreq);
                 bool flag_cancel = GenParam.Progress.Cancel;
                 if (flag_cancel || !flag_continue) break;
             }

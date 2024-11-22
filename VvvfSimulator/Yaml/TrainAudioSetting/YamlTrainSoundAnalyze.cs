@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using YamlDotNet.Serialization;
-using static VvvfSimulator.Generation.Motor.GenerateMotorCore.MotorData;
+using static VvvfSimulator.Generation.Motor.GenerateMotorCore;
 
 namespace VvvfSimulator.Yaml.TrainAudioSetting
 {
@@ -23,8 +23,8 @@ namespace VvvfSimulator.Yaml.TrainAudioSetting
             public bool UseConvolutionFilter { get; set; } = true;
             public float[] ImpulseResponse { get; set; } = Generation.Audio.TrainSound.AudioResourceManager.ReadResourceAudioFileSample(Generation.Audio.TrainSound.AudioResourceManager.SampleIrPath);
             public MotorSpecification MotorSpec { get; set; } = new MotorSpecification();
-            public double MotorVolumeDb { get; set; } = 0.0;
-            public double TotalVolumeDb { get; set; } = -2.8;
+            public double MotorVolumeDb { get; set; } = 1.0;
+            public double TotalVolumeDb { get; set; } = -2.5;
 
             public class SoundFilter
             {

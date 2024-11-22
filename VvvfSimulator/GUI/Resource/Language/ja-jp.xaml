@@ -43,6 +43,7 @@
     <system:String x:Key="MainWindow.Menu.Generate.Audio.VVVF">VVVF</system:String>
     <system:String x:Key="MainWindow.Menu.Generate.Audio.VVVF.Line">線間電圧</system:String>
     <system:String x:Key="MainWindow.Menu.Generate.Audio.VVVF.Phases">相電圧</system:String>
+    <system:String x:Key="MainWindow.Menu.Generate.Audio.VVVF.PhaseCurrent">相電流</system:String>
     <system:String x:Key="MainWindow.Menu.Generate.Audio.Train">車両</system:String>
     <system:String x:Key="MainWindow.Menu.Generate.Movie">動画</system:String>
     <system:String x:Key="MainWindow.Menu.Generate.Movie.Control">制御状態</system:String>
@@ -97,8 +98,9 @@
     <system:String x:Key="MainWindow.TabControl.Accelerate">力行</system:String>
     <system:String x:Key="MainWindow.TabControl.Brake">回生</system:String>
 
-    <system:String x:Key="MainWindow.TaskDescription.Generate.Audio.Vvvf.Line">線間出力音声の生成：</system:String>
-    <system:String x:Key="MainWindow.TaskDescription.Generate.Audio.Vvvf.Phases">相出力音声の生成：</system:String>
+    <system:String x:Key="MainWindow.TaskDescription.Generate.Audio.Vvvf.Line">線間電圧音声の生成：</system:String>
+    <system:String x:Key="MainWindow.TaskDescription.Generate.Audio.Vvvf.Phases">相電圧音声の生成：</system:String>
+    <system:String x:Key="MainWindow.TaskDescription.Generate.Audio.Vvvf.PhaseCurrent">相電流音声の生成：</system:String>
     <system:String x:Key="MainWindow.TaskDescription.Generate.Audio.Train">列車音声の生成：</system:String>
     <system:String x:Key="MainWindow.TaskDescription.Generate.Movie.Control.Original">制御状態（デザイン1）の動画生成：</system:String>
     <system:String x:Key="MainWindow.TaskDescription.Generate.Movie.Control.Original2">制御状態（デザイン2）の動画生成：</system:String>
@@ -385,8 +387,6 @@
     <system:String x:Key="Create.Settings.Waveform.Basic.PulseSetting.Type">種類</system:String>
     <system:String x:Key="Create.Settings.Waveform.Basic.PulseSetting.PulseCount">パルス数</system:String>
     <system:String x:Key="Create.Settings.Waveform.Basic.PulseSetting.Detail">詳細</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Basic.PulseSetting.Shifted">位相をずらす</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Basic.PulseSetting.Square">矩形波</system:String>
     <system:String x:Key="Create.Settings.Waveform.Basic.PulseSetting.HarmonicSetting">高調波設定</system:String>
     <system:String x:Key="Create.Settings.Waveform.Basic.PulseSetting.DiscreteSetting">離散設定</system:String>
 
@@ -476,11 +476,15 @@
 
     <system:String x:Key="Resource.Language.FriendlyNameConverter.BaseWaveType.Name.Sine">正弦波</system:String>
     <system:String x:Key="Resource.Language.FriendlyNameConverter.BaseWaveType.Name.Saw">三角波</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.BaseWaveType.Name.Square">矩形波</system:String>
     <system:String x:Key="Resource.Language.FriendlyNameConverter.BaseWaveType.Name.ModifiedSine1">修正正弦波1</system:String>
     <system:String x:Key="Resource.Language.FriendlyNameConverter.BaseWaveType.Name.ModifiedSine2">修正正弦波2</system:String>
     <system:String x:Key="Resource.Language.FriendlyNameConverter.BaseWaveType.Name.ModifiedSaw1">修正三角波</system:String>
 
     <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseAlternative.Name.Default">標準</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseAlternative.Name.Shifted">キャリア反転</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseAlternative.Name.CP">中央60度</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseAlternative.Name.Square">矩形波</system:String>
     <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseAlternative.Name.Alt">種類</system:String>
 
     <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseModeName.Name.Async">非同期</system:String>

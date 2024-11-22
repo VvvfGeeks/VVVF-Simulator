@@ -4,11 +4,12 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using VvvfSimulator.Vvvf;
+using VvvfSimulator.Yaml.MasconControl;
 using VvvfSimulator.Yaml.VvvfSound;
 using static VvvfSimulator.Generation.Audio.TrainSound.AudioFilter;
 using static VvvfSimulator.Generation.GenerateCommon;
 using static VvvfSimulator.Generation.GenerateCommon.GenerationBasicParameter;
-using static VvvfSimulator.Generation.Motor.GenerateMotorCore;
+using static VvvfSimulator.Vvvf.MyMath;
 using static VvvfSimulator.Vvvf.Struct;
 using static VvvfSimulator.Yaml.MasconControl.YamlMasconAnalyze;
 using static VvvfSimulator.Yaml.TrainAudioSetting.YamlTrainSoundAnalyze;
@@ -19,18 +20,15 @@ namespace VvvfSimulator.Generation.Audio.TrainSound
     public class Audio
     {
         // -------- TRAIN SOUND --------------
-        public static double CalculateMotorSound(VvvfValues control, YamlVvvfSoundData sound_data, MotorData motor)
+        public static double CalculateMotorSound(VvvfValues Control, YamlVvvfSoundData Sound, Motor.GenerateMotorCore.Motor Motor)
         {
-            PwmCalculateValues calculated_Values = YamlVvvfWave.CalculateYaml(control, sound_data);
-            WaveValues value = Calculate.CalculatePhases(control, calculated_Values, 0);
+            PwmCalculateValues calculated_Values = YamlVvvfWave.CalculateYaml(Control, Sound);
+            WaveValues Voltage = Calculate.CalculatePhases(Control, calculated_Values, 0);
 
-            motor.motor_Param.sitamr = control.GetVideoSineFrequency() * Math.PI * 2 * control.GetSineTime();
-            motor.AynMotorControler(new(value.W, value.V, value.U));
-            motor.Asyn_Moduleabc();
+            double Theta = Control.GetVideoSineFrequency() * M_2PI * Control.GetSineTime();
+            Motor.UpdateParameter(new(Voltage.W, Voltage.V, Voltage.U), Theta);
 
-            double motorTorqueSound = motor.motor_Param.Te - motor.motor_Param.TePre;
-
-            return motorTorqueSound;
+            return Motor.Parameter.DiffIdq0[0];
         }
 
         public static double CalculateHarmonicSounds(VvvfValues control, List<HarmonicData> harmonics)
@@ -62,7 +60,7 @@ namespace VvvfSimulator.Generation.Audio.TrainSound
             return sound;
         }
 
-        public static double CalculateTrainSound(VvvfValues control, YamlVvvfSoundData sound_data, MotorData motor, YamlTrainSoundData train_sound_data)
+        public static double CalculateTrainSound(VvvfValues control, YamlVvvfSoundData sound_data, Motor.GenerateMotorCore.Motor motor, YamlTrainSoundData train_sound_data)
         {
             double motorPwmSound = CalculateMotorSound(control, sound_data, motor) * Math.Pow(10, train_sound_data.MotorVolumeDb);
             double motorSound = CalculateHarmonicSounds(control, train_sound_data.HarmonicSound);
@@ -122,12 +120,8 @@ namespace VvvfSimulator.Generation.Audio.TrainSound
             if (soundData.UseConvolutionFilter) sampleProvider = new CppConvolutionFilter(sampleProvider, 4096, soundData.ImpulseResponse);
             WaveFileWriter writer = new(raw ? path : pathTemp, sampleProvider.WaveFormat);
 
-            MotorData motor = new()
-            {
-                motor_Specification = soundData.MotorSpec.Clone(),
-                SIM_SAMPLE_FREQ = SamplingFrequency,
-            };
-            motor.motor_Param.TL = 0.0;
+            Motor.GenerateMotorCore.Motor motor = new(SamplingFrequency, soundData.MotorSpec.Clone(), new());
+            motor.Parameter.TL = 0.0;
 
             progressData.Total = masconData.GetEstimatedSteps(1.0 / SamplingFrequency) + (raw ? 0 : 100);
 
@@ -144,7 +138,7 @@ namespace VvvfSimulator.Generation.Audio.TrainSound
 
                 progressData.Progress++;
 
-                bool flag_continue = CheckForFreqChange(control, masconData, vvvfData, 1.0 / SamplingFrequency);
+                bool flag_continue = YamlMasconControl.CheckForFreqChange(control, masconData, vvvfData, 1.0 / SamplingFrequency);
                 bool flag_cancel = progressData.Cancel;
                 if (!flag_continue || flag_cancel) break;
             }

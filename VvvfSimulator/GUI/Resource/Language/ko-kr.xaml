@@ -43,6 +43,7 @@
     <system:String x:Key="MainWindow.Menu.Generate.Audio.VVVF">VVVF음</system:String>
     <system:String x:Key="MainWindow.Menu.Generate.Audio.VVVF.Line">선간전압</system:String>
     <system:String x:Key="MainWindow.Menu.Generate.Audio.VVVF.Phases">상전압</system:String>
+    <system:String x:Key="MainWindow.Menu.Generate.Audio.VVVF.PhaseCurrent">상전류</system:String>
     <system:String x:Key="MainWindow.Menu.Generate.Audio.Train">주행음</system:String>
     <system:String x:Key="MainWindow.Menu.Generate.Movie">영상</system:String>
     <system:String x:Key="MainWindow.Menu.Generate.Movie.Control">제어</system:String>
@@ -99,6 +100,7 @@
 
     <system:String x:Key="MainWindow.TaskDescription.Generate.Audio.Vvvf.Line">선간전압 오디오 생성：</system:String>
     <system:String x:Key="MainWindow.TaskDescription.Generate.Audio.Vvvf.Phases">상전압 오디오 생성：</system:String>
+    <system:String x:Key="MainWindow.TaskDescription.Generate.Audio.Vvvf.PhaseCurrent">상전류 오디오 생성：</system:String>
     <system:String x:Key="MainWindow.TaskDescription.Generate.Audio.Train">주행음 생성：</system:String>
     <system:String x:Key="MainWindow.TaskDescription.Generate.Movie.Control.Original">제어(디자인1) 영상 생성：</system:String>
     <system:String x:Key="MainWindow.TaskDescription.Generate.Movie.Control.Original2">제어(디자인2) 영상 생성：</system:String>
@@ -385,8 +387,6 @@
     <system:String x:Key="Create.Settings.Waveform.Basic.PulseSetting.Type">종류</system:String>
     <system:String x:Key="Create.Settings.Waveform.Basic.PulseSetting.PulseCount">펄스 수</system:String>
     <system:String x:Key="Create.Settings.Waveform.Basic.PulseSetting.Detail">상세</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Basic.PulseSetting.Shifted">위상 반전</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Basic.PulseSetting.Square">구형파</system:String>
     <system:String x:Key="Create.Settings.Waveform.Basic.PulseSetting.HarmonicSetting">고조파 설정</system:String>
     <system:String x:Key="Create.Settings.Waveform.Basic.PulseSetting.DiscreteSetting">이산 설정</system:String>
 
@@ -476,11 +476,15 @@
 
     <system:String x:Key="Resource.Language.FriendlyNameConverter.BaseWaveType.Name.Sine">사인파</system:String>
     <system:String x:Key="Resource.Language.FriendlyNameConverter.BaseWaveType.Name.Saw">삼각파</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.BaseWaveType.Name.Square">사각파</system:String>
     <system:String x:Key="Resource.Language.FriendlyNameConverter.BaseWaveType.Name.ModifiedSine1">변형 사인파1</system:String>
     <system:String x:Key="Resource.Language.FriendlyNameConverter.BaseWaveType.Name.ModifiedSine2">변형 사인파2</system:String>
     <system:String x:Key="Resource.Language.FriendlyNameConverter.BaseWaveType.Name.ModifiedSaw1">변형 삼각파</system:String>
 
     <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseAlternative.Name.Default">기본</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseAlternative.Name.Shifted">위상 반전</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseAlternative.Name.CP">센터 펄스</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseAlternative.Name.Square">사각파</system:String>
     <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseAlternative.Name.Alt">변형</system:String>
 
     <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseModeName.Name.Async">비동기</system:String>
