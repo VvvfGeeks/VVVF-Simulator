@@ -1,6 +1,7 @@
 ﻿using NAudio.Dsp;
 using OpenCvSharp;
 using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
@@ -69,7 +70,9 @@ namespace VvvfSimulator.Generation.Video.FFT
         }
 
         private BitmapViewerManager? Viewer { get; set; }
-        public void ExportVideo(GenerationBasicParameter generationBasicParameter, String fileName)
+        private int _index = 1;
+        private string _tempPath = "";
+        public void ExportVideo(GenerationBasicParameter generationBasicParameter, string fileName)
         {
             MainWindow.Invoke(() => Viewer = new BitmapViewerManager());
             Viewer?.Show();
@@ -84,30 +87,34 @@ namespace VvvfSimulator.Generation.Video.FFT
 
             control.SetRandomFrequencyMoveAllowed(false);
 
+            DirectoryInfo tempDirInfo = Directory.CreateDirectory(Path.GetDirectoryName(fileName) + "\\" + DateTime.Now.ToString("yyyyMMddHHmmss") + Path.GetFileNameWithoutExtension(fileName) + "_fft_tmp");
+            tempDirInfo.Attributes |= FileAttributes.Hidden;
+            _tempPath = tempDirInfo.FullName + "\\";
+
             int fps = 60;
 
             int image_width = 1000;
             int image_height = 1000;
 
-            VideoWriter vr = new(fileName, OpenCvSharp.FourCC.H264, fps, new OpenCvSharp.Size(image_width, image_height));
+            //VideoWriter vr = new(fileName, OpenCvSharp.FourCC.H264, fps, new OpenCvSharp.Size(image_width, image_height));
 
 
-            if (!vr.IsOpened())
-            {
-                return;
-            }
+            //if (!vr.IsOpened())
+            //{
+            //    return;
+            //}
 
             // Progress Initialize
-            progressData.Total = masconData.GetEstimatedSteps(1.0 / fps) + 120;
+            progressData.Total = masconData.GetEstimatedSteps(1.0 / fps) + fps * 2;
 
-            Boolean START_WAIT = true;
+            bool START_WAIT = true;
             if (START_WAIT)
-                GenerateCommon.AddEmptyFrames(image_width, image_height, 60, vr);
+                GenerateCommon.AddEmptyFrames(image_width, image_height, fps, _tempPath, ref _index);
 
             // PROGRESS CHANGE
-            progressData.Progress+=60;
+            progressData.Progress += fps;
 
-            Boolean loop = true;
+            bool loop = true;
             while (loop)
             {
 
@@ -120,9 +127,11 @@ namespace VvvfSimulator.Generation.Video.FFT
                 MemoryStream ms = new();
                 image.Save(ms, ImageFormat.Png);
                 byte[] img = ms.GetBuffer();
-                Mat mat = OpenCvSharp.Mat.FromImageData(img);
-                vr.Write(mat);
-                mat.Dispose();
+                File.WriteAllBytes(_tempPath + _index.ToString("D10") + ".png", img);
+                _index++;
+                //Mat mat = OpenCvSharp.Mat.FromImageData(img);
+                //vr.Write(mat);
+                //mat.Dispose();
                 ms.Dispose();
 
                 Viewer?.SetImage(image);
@@ -136,20 +145,29 @@ namespace VvvfSimulator.Generation.Video.FFT
                 progressData.Progress++;
             }
 
-            Boolean END_WAIT = true;
+            bool END_WAIT = true;
             if (END_WAIT)
-                GenerateCommon.AddEmptyFrames(image_width, image_height, 60, vr);
+                GenerateCommon.AddEmptyFrames(image_width, image_height, 60, _tempPath, ref _index);
 
             // PROGRESS CHANGE
-            progressData.Progress += 60;
+            progressData.Progress += fps;
 
-            vr.Release();
-            vr.Dispose();
+            //vr.Release();
+            //vr.Dispose();
 
             Viewer?.Close();
+            Process? ffmpeg_proc = Process.Start(new ProcessStartInfo()
+            {
+                FileName = "ffmpeg",
+                Arguments = FormatFFmpegArgs(_tempPath, fileName, fps),
+                UseShellExecute = true
+            }) ?? throw new Exception();
+            while (!ffmpeg_proc.HasExited) { }
+            if (ffmpeg_proc.ExitCode != 0) throw new Exception() { HResult = ffmpeg_proc.ExitCode };
+            tempDirInfo.Delete(true);
         }
 
-        public void ExportImage(String fileName, YamlVvvfSoundData sound_data, double d)
+        public void ExportImage(string fileName, YamlVvvfSoundData sound_data, double d)
         {
             MainWindow.Invoke(() => Viewer = new BitmapViewerManager());
             Viewer?.Show();
@@ -168,7 +186,7 @@ namespace VvvfSimulator.Generation.Video.FFT
             MemoryStream ms = new();
             image.Save(ms, ImageFormat.Png);
             byte[] img = ms.GetBuffer();
-            Mat mat = Mat.FromImageData(img);
+            //Mat mat = Mat.FromImageData(img);
 
             image.Save(fileName, ImageFormat.Png);
             Viewer?.SetImage(image);

@@ -34,15 +34,15 @@ namespace VvvfSimulator.GUI.Create.Waveform.Basic
             {
                 case PresetHarmonics.THI:
                     return [ 
-                        new() { Amplitude = 0.2, Harmonic = 3 } 
+                        new() { Amplitude = 0.16666666666666666, Harmonic = 3 } 
                     ];
                 case PresetHarmonics.SVM:
                     return [ 
-                        new() { Amplitude = 0.25, Harmonic = 3 , Type = PulseHarmonic.PulseHarmonicType.Saw} 
+                        new() { Amplitude = 0.25, Harmonic = 3, Type = PulseHarmonic.PulseHarmonicType.Saw} 
                     ];
                 case PresetHarmonics.HFI:
                     return [
-                        new () { Amplitude = 0.5, Harmonic = 250 , Type = PulseHarmonic.PulseHarmonicType.Sine, InitialPhase=0, IsAmplitudeProportional=false, IsHarmonicProportional = false}
+                        new () { Amplitude = 0.5, Harmonic = 250,  IsAmplitudeProportional=false, IsHarmonicProportional = false}
                     ];
                 case PresetHarmonics.DPM1:
                     return [
@@ -59,7 +59,7 @@ namespace VvvfSimulator.GUI.Create.Waveform.Basic
                         new () { Amplitude = -0.05, Harmonic = 3, InitialPhase = -1.57079633, Type = PulseHarmonic.PulseHarmonicType.Saw},
                         new () { Amplitude = 0.2, Harmonic = 3, Type = PulseHarmonic.PulseHarmonicType.Square }
                     ];
-                case PresetHarmonics.DPM4: //case Preset_Harmonics.DPM4:
+                case PresetHarmonics.DPM4:
                     return [
                         new () { Amplitude = 0.05, Harmonic = 3, Type = PulseHarmonic.PulseHarmonicType.Saw},
                         new () { Amplitude = 0.2, Harmonic = 3, Type = PulseHarmonic.PulseHarmonicType.Square }

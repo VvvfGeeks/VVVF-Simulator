@@ -128,5 +128,8 @@
     <Setting Name="RealTime_Train_Controller_Design2_CalculatePrecision" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">10000</Value>
     </Setting>
+    <Setting Name="FFmpegArgs" Type="System.String" Scope="User">
+      <Value Profile="(Default)">-r {framerate} -i {input} -b:v 2M -c:v libx264 -pix_fmt yuv420p -y {output}</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

@@ -1,6 +1,7 @@
 ﻿using OpenCvSharp;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
@@ -25,7 +26,9 @@ namespace VvvfSimulator.Generation.Video.WaveForm
         /// <param name="Width"></param>
         /// <param name="Height"></param>
         /// <param name="WaveHeight"></param>
+        /// <param name="WaveWidth"></param>
         /// <param name="Delta"></param>
+        /// <param name="Spacing"></param>
         /// <returns></returns>
         public static Bitmap GetImage(
             VvvfValues Control,
@@ -103,7 +106,9 @@ namespace VvvfSimulator.Generation.Video.WaveForm
         }
 
         private BitmapViewerManager? Viewer { get; set; }
-        public void ExportVideo1(GenerationBasicParameter generationBasicParameter, String fileName)
+        private int _index = 1;
+        private string _tempPath = "";
+        public void ExportVideo1(GenerationBasicParameter generationBasicParameter, string fileName)
         {
             MainWindow.Invoke(() => Viewer = new BitmapViewerManager());
             Viewer?.Show();
@@ -124,20 +129,22 @@ namespace VvvfSimulator.Generation.Video.WaveForm
             int image_height = 540;
 
             int wave_height = 100;
-            int calculate_div = 30;
+            int calculate_div = 30; // Hz
 
-            VideoWriter vr = new(fileName, OpenCvSharp.FourCC.H264, fps, new OpenCvSharp.Size(image_width, image_height));
+            //VideoWriter vr = new(fileName, OpenCvSharp.FourCC.H264, fps, new OpenCvSharp.Size(image_width, image_height));
+            DirectoryInfo tempDirInfo = Directory.CreateDirectory(Path.GetDirectoryName(fileName) + "\\" + DateTime.Now.ToString("yyyyMMddHHmmss") + Path.GetFileNameWithoutExtension(fileName) + "_wfuv1_tmp");
+            tempDirInfo.Attributes |= FileAttributes.Hidden;
+            _tempPath = tempDirInfo.FullName + "\\";
 
-
-            if (!vr.IsOpened())
-            {
-                return;
-            }
+            //if (!vr.IsOpened())
+            //{
+            //    return;
+            //}
 
             // Progress Initialize
-            progressData.Total = masconData.GetEstimatedSteps(1.0 / fps) + 120;
+            progressData.Total = masconData.GetEstimatedSteps(1.0 / fps) + fps * 2;
 
-            Boolean START_WAIT = true;
+            bool START_WAIT = true;
             if (START_WAIT)
             {
                 Bitmap image = new(image_width, image_height);
@@ -146,19 +153,21 @@ namespace VvvfSimulator.Generation.Video.WaveForm
                 MemoryStream ms = new();
                 image.Save(ms, ImageFormat.Png);
                 byte[] img = ms.GetBuffer();
-                Mat mat = OpenCvSharp.Mat.FromImageData(img);
-                for (int i = 0; i < 60; i++)
+                //Mat mat = OpenCvSharp.Mat.FromImageData(img);
+                for (int i = 0; i < fps; i++)
                 {
                     // PROGRESS CHANGE
                     progressData.Progress++;
-
-                    vr.Write(mat);
+                    File.WriteAllBytes(_tempPath + _index.ToString("D10") + ".png", img);
+                    _index++;
+                    //vr.Write(mat);
                 }
                 g.Dispose();
                 image.Dispose();
+                ms.Dispose();
             }
 
-            Boolean loop = true;
+            bool loop = true;
             while (loop)
             {
 
@@ -173,9 +182,11 @@ namespace VvvfSimulator.Generation.Video.WaveForm
                 MemoryStream ms = new();
                 image.Save(ms, ImageFormat.Png);
                 byte[] img = ms.GetBuffer();
-                Mat mat = OpenCvSharp.Mat.FromImageData(img);
-                vr.Write(mat);
-                mat.Dispose();
+                File.WriteAllBytes(_tempPath + _index.ToString("D10") + ".png", img);
+                _index++;
+                //Mat mat = OpenCvSharp.Mat.FromImageData(img);
+                //vr.Write(mat);
+                //mat.Dispose();
                 ms.Dispose();
 
                 Viewer?.SetImage(image);
@@ -188,7 +199,7 @@ namespace VvvfSimulator.Generation.Video.WaveForm
                 progressData.Progress++;
             }
 
-            Boolean END_WAIT = true;
+            bool END_WAIT = true;
             if (END_WAIT)
             {
                 Bitmap image = new(image_width, image_height);
@@ -197,24 +208,35 @@ namespace VvvfSimulator.Generation.Video.WaveForm
                 MemoryStream ms = new();
                 image.Save(ms, ImageFormat.Png);
                 byte[] img = ms.GetBuffer();
-                Mat mat = OpenCvSharp.Mat.FromImageData(img);
-                for (int i = 0; i < 60; i++)
+                //Mat mat = OpenCvSharp.Mat.FromImageData(img);
+                for (int i = 0; i < fps; i++)
                 {
                     // PROGRESS CHANGE
                     progressData.Progress++;
-
-                    vr.Write(mat);
+                    File.WriteAllBytes(_tempPath + _index.ToString("D10") + ".png", img);
+                    _index++;
+                    //vr.Write(mat);
                 }
                 g.Dispose();
                 image.Dispose();
+                ms.Dispose();
             }
 
-            vr.Release();
-            vr.Dispose();
+            //vr.Release();
+            //vr.Dispose();
             Viewer?.Close();
+            Process? ffmpeg_proc = Process.Start(new ProcessStartInfo()
+            {
+                FileName = "ffmpeg",
+                Arguments = FormatFFmpegArgs(_tempPath, fileName, fps),
+                UseShellExecute = true
+            }) ?? throw new Exception();
+            while (!ffmpeg_proc.HasExited) { }
+            if (ffmpeg_proc.ExitCode != 0) throw new Exception() { HResult = ffmpeg_proc.ExitCode };
+            tempDirInfo.Delete(true);
         }
 
-        public void ExportVideo2(GenerationBasicParameter generationBasicParameter, String fileName)
+        public void ExportVideo2(GenerationBasicParameter generationBasicParameter, string fileName)
         {
             MainWindow.Invoke(() => Viewer = new BitmapViewerManager());
             Viewer?.Show();
@@ -236,18 +258,20 @@ namespace VvvfSimulator.Generation.Video.WaveForm
             int wave_height = 100;
             int calculate_div = 10;
 
-            VideoWriter vr = new(fileName, OpenCvSharp.FourCC.H264, fps, new OpenCvSharp.Size(image_width, image_height));
+            //VideoWriter vr = new(fileName, OpenCvSharp.FourCC.H264, fps, new OpenCvSharp.Size(image_width, image_height));
+            DirectoryInfo tempDirInfo = Directory.CreateDirectory(Path.GetDirectoryName(fileName) + "\\" + DateTime.Now.ToString("yyyyMMddHHmmss") + Path.GetFileNameWithoutExtension(fileName) + "_wfuv2_tmp");
+            tempDirInfo.Attributes |= FileAttributes.Hidden;
+            _tempPath = tempDirInfo.FullName + "\\";
 
-
-            if (!vr.IsOpened())
-            {
-                return;
-            }
+            //if (!vr.IsOpened())
+            //{
+            //    return;
+            //}
 
             // Progress Initialize
-            progressData.Total = masconData.GetEstimatedSteps(1.0 / fps) + 120;
+            progressData.Total = masconData.GetEstimatedSteps(1.0 / fps) + fps * 2;
 
-            Boolean START_WAIT = true;
+            bool START_WAIT = true;
             if (START_WAIT)
             {
                 Bitmap image = new(image_width, image_height);
@@ -257,20 +281,21 @@ namespace VvvfSimulator.Generation.Video.WaveForm
                 MemoryStream ms = new();
                 image.Save(ms, ImageFormat.Png);
                 byte[] img = ms.GetBuffer();
-                Mat mat = OpenCvSharp.Mat.FromImageData(img);
+                //Mat mat = OpenCvSharp.Mat.FromImageData(img);
 
-                for (int i = 0; i < 60; i++)
+                for (int i = 0; i < fps; i++)
                 {
                     // PROGRESS CHANGE
                     progressData.Progress++;
-
-                    vr.Write(mat);
+                    File.WriteAllBytes(_tempPath + _index.ToString("D10") + ".png", img);
+                    _index++;
+                    //vr.Write(mat);
                 }
                 g.Dispose();
                 image.Dispose();
             }
 
-            Boolean loop = true;
+            bool loop = true;
             while (loop)
             {
 
@@ -283,10 +308,12 @@ namespace VvvfSimulator.Generation.Video.WaveForm
                 MemoryStream ms = new();
                 image.Save(ms, ImageFormat.Png);
                 byte[] img = ms.GetBuffer();
-                Mat mat = OpenCvSharp.Mat.FromImageData(img);
+                //Mat mat = OpenCvSharp.Mat.FromImageData(img);
 
                 Viewer?.SetImage(image);
-                vr.Write(mat);
+                File.WriteAllBytes(_tempPath + _index.ToString("D10") + ".png", img);
+                _index++;
+                //vr.Write(mat);
 
                 image.Dispose();
                 loop = CheckForFreqChange(control, masconData, vvvfData, 1.0 / fps);
@@ -297,7 +324,7 @@ namespace VvvfSimulator.Generation.Video.WaveForm
 
             }
 
-            Boolean END_WAIT = true;
+            bool END_WAIT = true;
             if (END_WAIT)
             {
                 Bitmap image = new(image_width, image_height);
@@ -307,21 +334,31 @@ namespace VvvfSimulator.Generation.Video.WaveForm
                 MemoryStream ms = new();
                 image.Save(ms, ImageFormat.Png);
                 byte[] img = ms.GetBuffer();
-                Mat mat = OpenCvSharp.Mat.FromImageData(img);
-                for (int i = 0; i < 60; i++)
+                //Mat mat = OpenCvSharp.Mat.FromImageData(img);
+                for (int i = 0; i < fps; i++)
                 {
                     // PROGRESS CHANGE
                     progressData.Progress++;
-
-                    vr.Write(mat);
+                    File.WriteAllBytes(_tempPath + _index.ToString("D10") + ".png", img);
+                    _index++;
+                    //vr.Write(mat);
                 }
                 g.Dispose();
                 image.Dispose();
             }
 
-            vr.Release();
-            vr.Dispose();
+            //vr.Release();
+            //vr.Dispose();
             Viewer?.Close();
+            Process? ffmpeg_proc = Process.Start(new ProcessStartInfo()
+            {
+                FileName = "ffmpeg",
+                Arguments = FormatFFmpegArgs(_tempPath, fileName, fps),
+                UseShellExecute = true
+            }) ?? throw new Exception();
+            while (!ffmpeg_proc.HasExited) { }
+            if (ffmpeg_proc.ExitCode != 0) throw new Exception() { HResult = ffmpeg_proc.ExitCode };
+            tempDirInfo.Delete(true);
         }
     }
 }

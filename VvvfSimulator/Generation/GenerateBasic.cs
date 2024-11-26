@@ -14,8 +14,9 @@ namespace VvvfSimulator.Generation
             /// </summary>
             /// <param name="Control"></param>
             /// <param name="Sound"></param>
+            /// <param name="InitialPhase"></param>
             /// <param name="Division"> Recommend : 120000 , Brief : 2000 </param>
-            /// <param name="Precise"> True for more precise calculation when Freq < 1 </param>
+            /// <param name="Precise"><![CDATA[]]> True for more precise calculation when Freq &lt; 1 </param>
             /// <returns> One cycle of UVW </returns>
             public static WaveValues[] GetUVWCycle(VvvfValues Control, YamlVvvfSoundData Sound, double InitialPhase, int Division, bool Precise)
             {
@@ -40,7 +41,7 @@ namespace VvvfSimulator.Generation
             /// <param name="Sound"></param>
             /// <param name="InitialPhase"></param>
             /// <param name="Division"> Recommend : 120000 , Brief : 2000 </param>
-            /// <param name="Precise"> True for more precise calculation when Freq < 1</param>
+            /// <param name="Precise"> True for more precise calculation when Freq &lt; 1</param>
             /// <returns> WaveForm of UVW in 1 sec.</returns>
             public static WaveValues[] GetUVWSec(VvvfValues Control, YamlVvvfSoundData Sound, double InitialPhase, int Division, bool Precise)
             {
@@ -161,6 +162,8 @@ namespace VvvfSimulator.Generation
             /// Do clone about control!
             /// </summary>
             /// <param name="Sound"></param>
+            /// <param name="Precise"></param>
+            /// <param name="FixSign"></param>
             /// <param name="Control"></param>
             /// <returns></returns>
             public static double GetVoltageRate(VvvfValues Control, YamlVvvfSoundData Sound, bool Precise, bool FixSign = true)

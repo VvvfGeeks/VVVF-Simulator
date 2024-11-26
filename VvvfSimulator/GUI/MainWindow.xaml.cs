@@ -68,6 +68,11 @@ namespace VvvfSimulator
             if (Instance == null) return;
             Instance.BindingData.Blocked = !val;
         }
+        public static bool GetInteractive()
+        {
+            if (Instance == null) return false;
+            return !Instance.BindingData.Blocked;
+        }
 
         public MainWindow()
         {
@@ -1080,7 +1085,7 @@ namespace VvvfSimulator
 
         private void Window_Drop(object sender, DragEventArgs e)
         {
-            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            if (e.Data.GetDataPresent(DataFormats.FileDrop) && GetInteractive())
             {
                 string path = (((Array)e.Data.GetData(DataFormats.FileDrop)).GetValue(0) ?? "").ToString() ?? "";
                 if (path.ToLower().EndsWith(".yaml")) LoadYaml(path);
