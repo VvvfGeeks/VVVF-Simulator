@@ -1,6 +1,7 @@
 ﻿using OpenCvSharp;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
@@ -186,9 +187,11 @@ namespace VvvfSimulator.Generation.Video.ControlInfo
         }
 
         private BitmapViewerManager? Viewer { get; set; }
-        private void GenerateOpening(int image_width, int image_height, VideoWriter vr)
+        private int _index = 1;
+        private string _tempPath = "";
+        private void GenerateOpening(int image_width, int image_height, double fps)//, VideoWriter vr)
         {
-            double change_per_frame = 60 / vr.Fps;
+            double change_per_frame = 60 / fps;
             for (double i = 0; i < 128; i += change_per_frame)
             {
                 Bitmap image = new(image_width, image_height);
@@ -247,9 +250,11 @@ namespace VvvfSimulator.Generation.Video.ControlInfo
                 MemoryStream ms = new();
                 image.Save(ms, ImageFormat.Png);
                 byte[] img = ms.GetBuffer();
-                Mat mat = OpenCvSharp.Mat.FromImageData(img);
+                File.WriteAllBytes(_tempPath + _index.ToString("D10") + ".png", img);
+                _index++;
+                //Mat mat = OpenCvSharp.Mat.FromImageData(img);
 
-                vr.Write(mat);
+                //vr.Write(mat);
                 Viewer?.SetImage(image);
                 image.Dispose();
             }
@@ -269,14 +274,19 @@ namespace VvvfSimulator.Generation.Video.ControlInfo
 
             int image_width = 500;
             int image_height = 1080;
-            VideoWriter vr = new(output_path, OpenCvSharp.FourCC.H264, fps, new OpenCvSharp.Size(image_width, image_height));
 
-            if (!vr.IsOpened())
-            {
-                return;
-            }
+            DirectoryInfo tempDirInfo = Directory.CreateDirectory(Path.GetDirectoryName(output_path) + "\\" + DateTime.Now.ToString("yyyyMMddHHmmss") + Path.GetFileNameWithoutExtension(output_path) + "_ctrlo1_tmp");
+            tempDirInfo.Attributes |= FileAttributes.Hidden;
+            _tempPath = tempDirInfo.FullName + "\\";
 
-            GenerateOpening(image_width, image_height, vr);
+            //VideoWriter vr = new(output_path, OpenCvSharp.FourCC.H264, fps, new OpenCvSharp.Size(image_width, image_height));
+
+            //if (!vr.IsOpened())
+            //{
+            //    return;
+            //}
+
+            GenerateOpening(image_width, image_height, fps);
 
             bool loop = true, video_finished, final_show = false, first_show = true;
             int freeze_count = 0;
@@ -295,8 +305,10 @@ namespace VvvfSimulator.Generation.Video.ControlInfo
                 image.Save(ms, ImageFormat.Png);
                 Viewer?.SetImage(image);
                 byte[] img = ms.GetBuffer();
-                Mat mat = OpenCvSharp.Mat.FromImageData(img);
-                vr.Write(mat);
+                File.WriteAllBytes(_tempPath + _index.ToString("D10") + ".png", img);
+                _index++;
+                //Mat mat = OpenCvSharp.Mat.FromImageData(img);
+                //vr.Write(mat);
                 image.Dispose();              
 
                 //PROGRESS ADD
@@ -324,10 +336,19 @@ namespace VvvfSimulator.Generation.Video.ControlInfo
 
 
             }
-            vr.Release();
-            vr.Dispose();
+            //vr.Release();
+            //vr.Dispose();
 
             Viewer?.Close();
+            Process? ffmpeg_proc = Process.Start(new ProcessStartInfo()
+            {
+                FileName = "ffmpeg",
+                Arguments = FormatFFmpegArgs(_tempPath, output_path, fps),
+                UseShellExecute = true
+            }) ?? throw new Exception();
+            while (!ffmpeg_proc.HasExited) { }
+            if (ffmpeg_proc.ExitCode != 0) throw new Exception() { HResult = ffmpeg_proc.ExitCode };
+            tempDirInfo.Delete(true);
         }
     }
 }

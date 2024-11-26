@@ -1,5 +1,6 @@
 ﻿using OpenCvSharp;
 using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
@@ -16,7 +17,9 @@ namespace VvvfSimulator.Generation.Video.Hexagon
     public class GenerateHexagonExplain
     {
         private BitmapViewerManager? Viewer { get; set; }
-        public bool ExportVideo(GenerationBasicParameter generationBasicParameter, String output_path, bool circle, double d)
+        private int _index = 1;
+        private string _tempPath = "";
+        public bool ExportVideo(GenerationBasicParameter generationBasicParameter, string output_path, bool circle, double d)
         {
             MainWindow.Invoke(() => Viewer = new BitmapViewerManager());
             Viewer?.Show();
@@ -41,15 +44,18 @@ namespace VvvfSimulator.Generation.Video.Hexagon
             int hex_div_seed = 10000;
             int hex_div = 6 * hex_div_seed;
 
-            Boolean draw_zero_vector_circle = circle;
+            bool draw_zero_vector_circle = circle;
 
-            VideoWriter vr = new(output_path, FourCC.H264, fps, new OpenCvSharp.Size(image_width, image_height));
-            if (!vr.IsOpened()) return false;
+            DirectoryInfo tempDirInfo = Directory.CreateDirectory(Path.GetDirectoryName(output_path) + "\\" + DateTime.Now.ToString("yyyyMMddHHmmss") + Path.GetFileNameWithoutExtension(output_path) + "_hexe_tmp");
+            tempDirInfo.Attributes |= FileAttributes.Hidden;
+            _tempPath = tempDirInfo.FullName + "\\";
+            //VideoWriter vr = new(output_path, FourCC.H264, fps, new OpenCvSharp.Size(image_width, image_height));
+            //if (!vr.IsOpened()) return false;
 
             // Progress Initialize
-            progressData.Total = hex_div + 120;
+            progressData.Total = hex_div + fps * 2;
 
-            Boolean START_WAIT = false;
+            bool START_WAIT = false;
             if (START_WAIT)
             {
                 Bitmap free_image = new(image_width, image_height);
@@ -60,15 +66,17 @@ namespace VvvfSimulator.Generation.Video.Hexagon
                 byte[] free_img = free_ms.GetBuffer();
                 Mat free_mat = OpenCvSharp.Mat.FromImageData(free_img);
 
-                for (int i = 0; i < 60; i++)
+                for (int i = 0; i < fps; i++)
                 {
                     // PROGRESS CHANGE
                     progressData.Progress++;
-
-                    vr.Write(free_mat);
+                    File.WriteAllBytes(_tempPath + _index.ToString("D10") + ".png", free_img);
+                    _index++;
+                    //vr.Write(free_mat);
                 }
                 free_g.Dispose();
                 free_image.Dispose();
+                free_ms.Dispose();
             }
 
             control.SetSineTime(0);
@@ -89,7 +97,7 @@ namespace VvvfSimulator.Generation.Video.Hexagon
             Graphics hexagon_g = Graphics.FromImage(hexagon_image);
             hexagon_g.FillRectangle(new SolidBrush(Color.White), 0, 0, hexagon_image_size, hexagon_image_size);
 
-            Boolean drawn_circle = false;
+            bool drawn_circle = false;
             Bitmap zero_circle_image = new(hexagon_image_size, hexagon_image_size);
             Graphics zero_circle_g = Graphics.FromImage(zero_circle_image);
 
@@ -169,13 +177,15 @@ namespace VvvfSimulator.Generation.Video.Hexagon
                 MemoryStream ms = new();
                 whole_image.Save(ms, ImageFormat.Png);
                 byte[] img = ms.GetBuffer();
-                Mat mat = OpenCvSharp.Mat.FromImageData(img);
+                //Mat mat = OpenCvSharp.Mat.FromImageData(img);
 
                 Viewer?.SetImage(whole_image);
 
-                for (int i = 0; i < 60; i++)
+                for (int i = 0; i < fps; i++)
                 {
-                    vr.Write(mat);
+                    File.WriteAllBytes(_tempPath + _index.ToString("D10") + ".png", img);
+                    _index++;
+                    //vr.Write(mat);
                 }
             }
 
@@ -267,17 +277,20 @@ namespace VvvfSimulator.Generation.Video.Hexagon
                     MemoryStream ms = new();
                     whole_image.Save(ms, ImageFormat.Png);
                     byte[] img = ms.GetBuffer();
-                    Mat mat = OpenCvSharp.Mat.FromImageData(img);
+                    //Mat mat = OpenCvSharp.Mat.FromImageData(img);
 
                     Viewer?.SetImage(whole_image);
 
                     for (int frame = 0; frame < 1; frame++)
                     {
-                        vr.Write(mat);
+                        File.WriteAllBytes(_tempPath + _index.ToString("D10") + ".png", img);
+                        _index++;
+                        //vr.Write(mat);
                     }
 
                     resized_hexagon_g.Dispose();
                     resized_hexagon.Dispose();
+                    ms.Dispose();
                 }
 
                 hexagon_g_with_dot.Dispose();
@@ -291,21 +304,23 @@ namespace VvvfSimulator.Generation.Video.Hexagon
 
 
 
-            Boolean END_WAIT = true;
+            bool END_WAIT = true;
             if (END_WAIT)
             {
                 MemoryStream free_ms = new();
                 whole_image.Save(free_ms, ImageFormat.Png);
                 byte[] free_img = free_ms.GetBuffer();
-                Mat free_mat = OpenCvSharp.Mat.FromImageData(free_img);
+                //Mat free_mat = OpenCvSharp.Mat.FromImageData(free_img);
 
-                for (int i = 0; i < 60; i++)
+                for (int i = 0; i < fps; i++)
                 {
                     // PROGRESS CHANGE
                     progressData.Progress++;
-
-                    vr.Write(free_mat);
+                    File.WriteAllBytes(_tempPath + _index.ToString("D10") + ".png", free_img);
+                    _index++;
+                    //vr.Write(free_mat);
                 }
+                free_ms.Dispose();
             }
 
             PWM_wave_g.Dispose();
@@ -317,11 +332,19 @@ namespace VvvfSimulator.Generation.Video.Hexagon
             zero_circle_g.Dispose();
             zero_circle_image.Dispose();
 
-            vr.Release();
-            vr.Dispose();
+            //vr.Release();
+            //vr.Dispose();
 
             Viewer?.Close();
-
+            Process? ffmpeg_proc = Process.Start(new ProcessStartInfo()
+            {
+                FileName = "ffmpeg",
+                Arguments = FormatFFmpegArgs(_tempPath, output_path, fps),
+                UseShellExecute = true
+            }) ?? throw new Exception();
+            while (!ffmpeg_proc.HasExited) { }
+            if (ffmpeg_proc.ExitCode != 0) throw new Exception() { HResult = ffmpeg_proc.ExitCode };
+            tempDirInfo.Delete(true);
             return true;
         }
     }

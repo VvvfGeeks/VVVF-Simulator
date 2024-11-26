@@ -443,6 +443,7 @@ namespace VvvfSimulator.Vvvf
                             return ModulateSignal(SineVal, SawVal + 0.5) + ModulateSignal(SineVal, SawVal - 0.5);
                         }                        
                     }
+                #region CustomPwm (CHM, SHE)
                 case PulseTypeName.SHE:
                     {
                         return PulseCount switch
@@ -727,6 +728,7 @@ namespace VvvfSimulator.Vvvf
                         }
                         return 0;
                     }
+                #endregion
                 default:
                     return 0;
             }
@@ -855,6 +857,7 @@ namespace VvvfSimulator.Vvvf
                         int Index = (int)PulseMode.Alternative + 1 > Keys.Length / 2 ? 0 : (int)PulseMode.Alternative;
                         return GetHopPulse(SineX, Amplitude, Keys[2 * Index], Keys[2 * Index + 1]);
                     }
+                #region CustomPwm (CHM, SHE)
                 case PulseTypeName.SHE:
                     {
                         return PulseCount switch
@@ -1144,6 +1147,7 @@ namespace VvvfSimulator.Vvvf
                                 return 0;
                         }
                     }
+                #endregion
                 default:
                     return 0;
             }
@@ -1178,6 +1182,16 @@ namespace VvvfSimulator.Vvvf
 
         public class Vabc
         {
+            public static implicit operator Vabc(WaveValues uvw)
+            {
+                return new Vabc()
+                {
+                    Ua = uvw.U,
+                    Ub = uvw.V,
+                    Uc = uvw.W
+                };
+            }
+
             public double Ua;
             public double Ub;
             public double Uc;
@@ -1215,6 +1229,10 @@ namespace VvvfSimulator.Vvvf
         {
             public double Ualpha;
             public double Ubeta;
+            public static implicit operator Generation.Video.Hexagon.GenerateHexagonOriginal.PointD(Valbe Uab0)
+            {
+                return new Generation.Video.Hexagon.GenerateHexagonOriginal.PointD(Uab0.Ualpha, Uab0.Ubeta);
+            }
         };
         public static int EstimateSector(Valbe U)
         {

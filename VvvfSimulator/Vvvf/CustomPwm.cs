@@ -442,24 +442,28 @@ namespace VvvfSimulator.Vvvf
             t.Wait();
             Loading = false;
         }
-        internal static bool Loaded = false;
+        public static bool Loaded = false;
         private static bool Loading = false;
-
+        #region fields
+        #region L2CHM3
         private static CustomPwm? _L2Chm3Default;
         private static CustomPwm? _L2Chm3Alt1;
-
+        #endregion
+        #region L2CHM5
         private static CustomPwm? _L2Chm5Default;
         private static CustomPwm? _L2Chm5Alt1;
         private static CustomPwm? _L2Chm5Alt2;
         private static CustomPwm? _L2Chm5Alt3;
-
+        #endregion
+        #region L2CHM7
         private static CustomPwm? _L2Chm7Default;
         private static CustomPwm? _L2Chm7Alt1;
         private static CustomPwm? _L2Chm7Alt2;
         private static CustomPwm? _L2Chm7Alt3;
         private static CustomPwm? _L2Chm7Alt4;
         private static CustomPwm? _L2Chm7Alt5;
-
+        #endregion
+        #region L2CHM9
         private static CustomPwm? _L2Chm9Default;
         private static CustomPwm? _L2Chm9Alt1;
         private static CustomPwm? _L2Chm9Alt2;
@@ -469,7 +473,8 @@ namespace VvvfSimulator.Vvvf
         private static CustomPwm? _L2Chm9Alt6;
         private static CustomPwm? _L2Chm9Alt7;
         private static CustomPwm? _L2Chm9Alt8;
-
+        #endregion
+        #region L2CHM11
         private static CustomPwm? _L2Chm11Default;
         private static CustomPwm? _L2Chm11Alt1;
         private static CustomPwm? _L2Chm11Alt2;
@@ -483,7 +488,8 @@ namespace VvvfSimulator.Vvvf
         private static CustomPwm? _L2Chm11Alt10;
         private static CustomPwm? _L2Chm11Alt11;
         private static CustomPwm? _L2Chm11Alt12;
-
+        #endregion
+        #region L2CHM13
         private static CustomPwm? _L2Chm13Default;
         private static CustomPwm? _L2Chm13Alt1;
         private static CustomPwm? _L2Chm13Alt2;
@@ -498,7 +504,8 @@ namespace VvvfSimulator.Vvvf
         private static CustomPwm? _L2Chm13Alt11;
         private static CustomPwm? _L2Chm13Alt12;
         private static CustomPwm? _L2Chm13Alt13;
-
+        #endregion
+        #region L2CHM15
         private static CustomPwm? _L2Chm15Default;
         private static CustomPwm? _L2Chm15Alt1;
         private static CustomPwm? _L2Chm15Alt2;
@@ -523,7 +530,8 @@ namespace VvvfSimulator.Vvvf
         private static CustomPwm? _L2Chm15Alt21;
         private static CustomPwm? _L2Chm15Alt22;
         private static CustomPwm? _L2Chm15Alt23;
-
+        #endregion
+        #region L2CHM17
         private static CustomPwm? _L2Chm17Default;
         private static CustomPwm? _L2Chm17Alt1;
         private static CustomPwm? _L2Chm17Alt2;
@@ -536,7 +544,8 @@ namespace VvvfSimulator.Vvvf
         private static CustomPwm? _L2Chm17Alt9;
         private static CustomPwm? _L2Chm17Alt10;
         private static CustomPwm? _L2Chm17Alt11;
-
+        #endregion
+        #region L2CHM19
         private static CustomPwm? _L2Chm19Default;
         private static CustomPwm? _L2Chm19Alt1;
         private static CustomPwm? _L2Chm19Alt2;
@@ -549,7 +558,8 @@ namespace VvvfSimulator.Vvvf
         private static CustomPwm? _L2Chm19Alt9;
         private static CustomPwm? _L2Chm19Alt10;
         private static CustomPwm? _L2Chm19Alt11;
-
+        #endregion
+        #region L2CHM21
         private static CustomPwm? _L2Chm21Default;
         private static CustomPwm? _L2Chm21Alt1;
         private static CustomPwm? _L2Chm21Alt2;
@@ -564,7 +574,8 @@ namespace VvvfSimulator.Vvvf
         private static CustomPwm? _L2Chm21Alt11;
         private static CustomPwm? _L2Chm21Alt12;
         private static CustomPwm? _L2Chm21Alt13;
-
+        #endregion
+        #region L2CHM23
         private static CustomPwm? _L2Chm23Default;
         private static CustomPwm? _L2Chm23Alt1;
         private static CustomPwm? _L2Chm23Alt2;
@@ -580,7 +591,8 @@ namespace VvvfSimulator.Vvvf
         private static CustomPwm? _L2Chm23Alt12;
         private static CustomPwm? _L2Chm23Alt13;
         private static CustomPwm? _L2Chm23Alt14;
-
+        #endregion
+        #region L2CHM25
         private static CustomPwm? _L2Chm25Default;
         private static CustomPwm? _L2Chm25Alt1;
         private static CustomPwm? _L2Chm25Alt2;
@@ -602,19 +614,23 @@ namespace VvvfSimulator.Vvvf
         private static CustomPwm? _L2Chm25Alt18;
         private static CustomPwm? _L2Chm25Alt19;
         private static CustomPwm? _L2Chm25Alt20;
-
+        #endregion
+        #region L3CHM1
         private static CustomPwm? _L3Chm1Default;
-
+        #endregion
+        #region L3CHM3
         private static CustomPwm? _L3Chm3Default;
         private static CustomPwm? _L3Chm3Alt1;
         private static CustomPwm? _L3Chm3Alt2;
-
+        #endregion
+        #region L3CHM5
         private static CustomPwm? _L3Chm5Default;
         private static CustomPwm? _L3Chm5Alt1;
         private static CustomPwm? _L3Chm5Alt2;
         private static CustomPwm? _L3Chm5Alt3;
         private static CustomPwm? _L3Chm5Alt4;
-
+        #endregion
+        #region L3CHM7
         private static CustomPwm? _L3Chm7Default;
         private static CustomPwm? _L3Chm7Alt1;
         private static CustomPwm? _L3Chm7Alt2;
@@ -622,7 +638,8 @@ namespace VvvfSimulator.Vvvf
         private static CustomPwm? _L3Chm7Alt4;
         private static CustomPwm? _L3Chm7Alt5;
         private static CustomPwm? _L3Chm7Alt6;
-
+        #endregion
+        #region L3CHM9
         private static CustomPwm? _L3Chm9Default;
         private static CustomPwm? _L3Chm9Alt1;
         private static CustomPwm? _L3Chm9Alt2;
@@ -631,7 +648,8 @@ namespace VvvfSimulator.Vvvf
         private static CustomPwm? _L3Chm9Alt5;
         private static CustomPwm? _L3Chm9Alt6;
         private static CustomPwm? _L3Chm9Alt7;
-
+        #endregion
+        #region L3CHM11
         private static CustomPwm? _L3Chm11Default;
         private static CustomPwm? _L3Chm11Alt1;
         private static CustomPwm? _L3Chm11Alt2;
@@ -643,7 +661,8 @@ namespace VvvfSimulator.Vvvf
         private static CustomPwm? _L3Chm11Alt8;
         private static CustomPwm? _L3Chm11Alt9;
         private static CustomPwm? _L3Chm11Alt10;
-
+        #endregion
+        #region L3CHM13
         private static CustomPwm? _L3Chm13Default;
         private static CustomPwm? _L3Chm13Alt1;
         private static CustomPwm? _L3Chm13Alt2;
@@ -659,7 +678,8 @@ namespace VvvfSimulator.Vvvf
         private static CustomPwm? _L3Chm13Alt12;
         private static CustomPwm? _L3Chm13Alt13;
         private static CustomPwm? _L3Chm13Alt14;
-
+        #endregion
+        #region L3CHM15
         private static CustomPwm? _L3Chm15Default;
         private static CustomPwm? _L3Chm15Alt1;
         private static CustomPwm? _L3Chm15Alt2;
@@ -678,7 +698,8 @@ namespace VvvfSimulator.Vvvf
         private static CustomPwm? _L3Chm15Alt15;
         private static CustomPwm? _L3Chm15Alt16;
         private static CustomPwm? _L3Chm15Alt17;
-
+        #endregion
+        #region L3CHM17
         private static CustomPwm? _L3Chm17Default;
         private static CustomPwm? _L3Chm17Alt1;
         private static CustomPwm? _L3Chm17Alt2;
@@ -699,7 +720,8 @@ namespace VvvfSimulator.Vvvf
         private static CustomPwm? _L3Chm17Alt17;
         private static CustomPwm? _L3Chm17Alt18;
         private static CustomPwm? _L3Chm17Alt19;
-
+        #endregion
+        #region L3CHM19
         private static CustomPwm? _L3Chm19Default;
         private static CustomPwm? _L3Chm19Alt1;
         private static CustomPwm? _L3Chm19Alt2;
@@ -726,7 +748,8 @@ namespace VvvfSimulator.Vvvf
         private static CustomPwm? _L3Chm19Alt23;
         private static CustomPwm? _L3Chm19Alt24;
         private static CustomPwm? _L3Chm19Alt25;
-
+        #endregion
+        #region L3CHM21
         private static CustomPwm? _L3Chm21Default;
         private static CustomPwm? _L3Chm21Alt1;
         private static CustomPwm? _L3Chm21Alt2;
@@ -750,7 +773,8 @@ namespace VvvfSimulator.Vvvf
         private static CustomPwm? _L3Chm21Alt20;
         private static CustomPwm? _L3Chm21Alt21;
         private static CustomPwm? _L3Chm21Alt22;
-
+        #endregion
+        #region L2SHE
         private static CustomPwm? _L2She3Default;
         private static CustomPwm? _L2She3Alt1;
         private static CustomPwm? _L2She9Default;
@@ -767,7 +791,8 @@ namespace VvvfSimulator.Vvvf
         private static CustomPwm? _L2She13Alt1;
         private static CustomPwm? _L2She15Default;
         private static CustomPwm? _L2She15Alt1;
-
+        #endregion
+        #region L3SHE
         private static CustomPwm? _L3She1Default;
         private static CustomPwm? _L3She3Default;
         private static CustomPwm? _L3She3Alt1;
@@ -780,22 +805,28 @@ namespace VvvfSimulator.Vvvf
         private static CustomPwm? _L3She17Default;
         private static CustomPwm? _L3She19Default;
         private static CustomPwm? _L3She21Default;
-
+        #endregion
+        #endregion
+        #region properties
+        #region L2CHM3
         public static CustomPwm L2Chm3Default { get => _L2Chm3Default ?? new(null); }
         public static CustomPwm L2Chm3Alt1 { get => _L2Chm3Alt1 ?? new(null); }
-
+        #endregion
+        #region L2CHM5
         public static CustomPwm L2Chm5Default { get => _L2Chm5Default ?? new(null); }
         public static CustomPwm L2Chm5Alt1 { get => _L2Chm5Alt1 ?? new(null); }
         public static CustomPwm L2Chm5Alt2 { get => _L2Chm5Alt2 ?? new(null); }
         public static CustomPwm L2Chm5Alt3 { get => _L2Chm5Alt3 ?? new(null); }
-
+        #endregion
+        #region L2CHM7
         public static CustomPwm L2Chm7Default { get => _L2Chm7Default ?? new(null); }
         public static CustomPwm L2Chm7Alt1 { get => _L2Chm7Alt1 ?? new(null); }
         public static CustomPwm L2Chm7Alt2 { get => _L2Chm7Alt2 ?? new(null); }
         public static CustomPwm L2Chm7Alt3 { get => _L2Chm7Alt3 ?? new(null); }
         public static CustomPwm L2Chm7Alt4 { get => _L2Chm7Alt4 ?? new(null); }
         public static CustomPwm L2Chm7Alt5 { get => _L2Chm7Alt5 ?? new(null); }
-
+        #endregion
+        #region L2CHM9
         public static CustomPwm L2Chm9Default { get => _L2Chm9Default ?? new(null); }
         public static CustomPwm L2Chm9Alt1 { get => _L2Chm9Alt1 ?? new(null); }
         public static CustomPwm L2Chm9Alt2 { get => _L2Chm9Alt2 ?? new(null); }
@@ -805,7 +836,8 @@ namespace VvvfSimulator.Vvvf
         public static CustomPwm L2Chm9Alt6 { get => _L2Chm9Alt6 ?? new(null); }
         public static CustomPwm L2Chm9Alt7 { get => _L2Chm9Alt7 ?? new(null); }
         public static CustomPwm L2Chm9Alt8 { get => _L2Chm9Alt8 ?? new(null); }
-
+        #endregion
+        #region L2CHM11
         public static CustomPwm L2Chm11Default { get => _L2Chm11Default ?? new(null); }
         public static CustomPwm L2Chm11Alt1 { get => _L2Chm11Alt1 ?? new(null); }
         public static CustomPwm L2Chm11Alt2 { get => _L2Chm11Alt2 ?? new(null); }
@@ -819,7 +851,8 @@ namespace VvvfSimulator.Vvvf
         public static CustomPwm L2Chm11Alt10 { get => _L2Chm11Alt10 ?? new(null); }
         public static CustomPwm L2Chm11Alt11 { get => _L2Chm11Alt11 ?? new(null); }
         public static CustomPwm L2Chm11Alt12 { get => _L2Chm11Alt12 ?? new(null); }
-
+        #endregion
+        #region L2CHM13
         public static CustomPwm L2Chm13Default { get => _L2Chm13Default ?? new(null); }
         public static CustomPwm L2Chm13Alt1 { get => _L2Chm13Alt1 ?? new(null); }
         public static CustomPwm L2Chm13Alt2 { get => _L2Chm13Alt2 ?? new(null); }
@@ -834,7 +867,8 @@ namespace VvvfSimulator.Vvvf
         public static CustomPwm L2Chm13Alt11 { get => _L2Chm13Alt11 ?? new(null); }
         public static CustomPwm L2Chm13Alt12 { get => _L2Chm13Alt12 ?? new(null); }
         public static CustomPwm L2Chm13Alt13 { get => _L2Chm13Alt13 ?? new(null); }
-
+        #endregion
+        #region L2CHM15
         public static CustomPwm L2Chm15Default { get => _L2Chm15Default ?? new(null); }
         public static CustomPwm L2Chm15Alt1 { get => _L2Chm15Alt1 ?? new(null); }
         public static CustomPwm L2Chm15Alt2 { get => _L2Chm15Alt2 ?? new(null); }
@@ -859,7 +893,8 @@ namespace VvvfSimulator.Vvvf
         public static CustomPwm L2Chm15Alt21 { get => _L2Chm15Alt21 ?? new(null); }
         public static CustomPwm L2Chm15Alt22 { get => _L2Chm15Alt22 ?? new(null); }
         public static CustomPwm L2Chm15Alt23 { get => _L2Chm15Alt23 ?? new(null); }
-
+        #endregion
+        #region L2CHM17
         public static CustomPwm L2Chm17Default { get => _L2Chm17Default ?? new(null); }
         public static CustomPwm L2Chm17Alt1 { get => _L2Chm17Alt1 ?? new(null); }
         public static CustomPwm L2Chm17Alt2 { get => _L2Chm17Alt2 ?? new(null); }
@@ -872,7 +907,8 @@ namespace VvvfSimulator.Vvvf
         public static CustomPwm L2Chm17Alt9 { get => _L2Chm17Alt9 ?? new(null); }
         public static CustomPwm L2Chm17Alt10 { get => _L2Chm17Alt10 ?? new(null); }
         public static CustomPwm L2Chm17Alt11 { get => _L2Chm17Alt11 ?? new(null); }
-
+        #endregion
+        #region L2CHM19
         public static CustomPwm L2Chm19Default { get => _L2Chm19Default ?? new(null); }
         public static CustomPwm L2Chm19Alt1 { get => _L2Chm19Alt1 ?? new(null); }
         public static CustomPwm L2Chm19Alt2 { get => _L2Chm19Alt2 ?? new(null); }
@@ -885,7 +921,8 @@ namespace VvvfSimulator.Vvvf
         public static CustomPwm L2Chm19Alt9 { get => _L2Chm19Alt9 ?? new(null); }
         public static CustomPwm L2Chm19Alt10 { get => _L2Chm19Alt10 ?? new(null); }
         public static CustomPwm L2Chm19Alt11 { get => _L2Chm19Alt11 ?? new(null); }
-
+        #endregion
+        #region L2CHM21
         public static CustomPwm L2Chm21Default { get => _L2Chm21Default ?? new(null); }
         public static CustomPwm L2Chm21Alt1 { get => _L2Chm21Alt1 ?? new(null); }
         public static CustomPwm L2Chm21Alt2 { get => _L2Chm21Alt2 ?? new(null); }
@@ -900,7 +937,8 @@ namespace VvvfSimulator.Vvvf
         public static CustomPwm L2Chm21Alt11 { get => _L2Chm21Alt11 ?? new(null); }
         public static CustomPwm L2Chm21Alt12 { get => _L2Chm21Alt12 ?? new(null); }
         public static CustomPwm L2Chm21Alt13 { get => _L2Chm21Alt13 ?? new(null); }
-
+        #endregion
+        #region L2CHM23
         public static CustomPwm L2Chm23Default { get => _L2Chm23Default ?? new(null); }
         public static CustomPwm L2Chm23Alt1 { get => _L2Chm23Alt1 ?? new(null); }
         public static CustomPwm L2Chm23Alt2 { get => _L2Chm23Alt2 ?? new(null); }
@@ -916,7 +954,8 @@ namespace VvvfSimulator.Vvvf
         public static CustomPwm L2Chm23Alt12 { get => _L2Chm23Alt12 ?? new(null); }
         public static CustomPwm L2Chm23Alt13 { get => _L2Chm23Alt13 ?? new(null); }
         public static CustomPwm L2Chm23Alt14 { get => _L2Chm23Alt14 ?? new(null); }
-
+        #endregion
+        #region L2CHM25
         public static CustomPwm L2Chm25Default { get => _L2Chm25Default ?? new(null); }
         public static CustomPwm L2Chm25Alt1 { get => _L2Chm25Alt1 ?? new(null); }
         public static CustomPwm L2Chm25Alt2 { get => _L2Chm25Alt2 ?? new(null); }
@@ -938,19 +977,23 @@ namespace VvvfSimulator.Vvvf
         public static CustomPwm L2Chm25Alt18 { get => _L2Chm25Alt18 ?? new(null); }
         public static CustomPwm L2Chm25Alt19 { get => _L2Chm25Alt19 ?? new(null); }
         public static CustomPwm L2Chm25Alt20 { get => _L2Chm25Alt20 ?? new(null); }
-
+        #endregion
+        #region L3CHM1
         public static CustomPwm L3Chm1Default { get => _L3Chm1Default ?? new(null); }
-
+        #endregion
+        #region L3CHM3
         public static CustomPwm L3Chm3Default { get => _L3Chm3Default ?? new(null); }
         public static CustomPwm L3Chm3Alt1 { get => _L3Chm3Alt1 ?? new(null); }
         public static CustomPwm L3Chm3Alt2 { get => _L3Chm3Alt2 ?? new(null); }
-
+        #endregion
+        #region L3CHM5
         public static CustomPwm L3Chm5Default { get => _L3Chm5Default ?? new(null); }
         public static CustomPwm L3Chm5Alt1 { get => _L3Chm5Alt1 ?? new(null); }
         public static CustomPwm L3Chm5Alt2 { get => _L3Chm5Alt2 ?? new(null); }
         public static CustomPwm L3Chm5Alt3 { get => _L3Chm5Alt3 ?? new(null); }
         public static CustomPwm L3Chm5Alt4 { get => _L3Chm5Alt4 ?? new(null); }
-
+        #endregion
+        #region L3CHM7
         public static CustomPwm L3Chm7Default { get => _L3Chm7Default ?? new(null); }
         public static CustomPwm L3Chm7Alt1 { get => _L3Chm7Alt1 ?? new(null); }
         public static CustomPwm L3Chm7Alt2 { get => _L3Chm7Alt2 ?? new(null); }
@@ -958,7 +1001,8 @@ namespace VvvfSimulator.Vvvf
         public static CustomPwm L3Chm7Alt4 { get => _L3Chm7Alt4 ?? new(null); }
         public static CustomPwm L3Chm7Alt5 { get => _L3Chm7Alt5 ?? new(null); }
         public static CustomPwm L3Chm7Alt6 { get => _L3Chm7Alt6 ?? new(null); }
-
+        #endregion
+        #region L3CHM9
         public static CustomPwm L3Chm9Default { get => _L3Chm9Default ?? new(null); }
         public static CustomPwm L3Chm9Alt1 { get => _L3Chm9Alt1 ?? new(null); }
         public static CustomPwm L3Chm9Alt2 { get => _L3Chm9Alt2 ?? new(null); }
@@ -967,7 +1011,8 @@ namespace VvvfSimulator.Vvvf
         public static CustomPwm L3Chm9Alt5 { get => _L3Chm9Alt5 ?? new(null); }
         public static CustomPwm L3Chm9Alt6 { get => _L3Chm9Alt6 ?? new(null); }
         public static CustomPwm L3Chm9Alt7 { get => _L3Chm9Alt7 ?? new(null); }
-
+        #endregion
+        #region L3CHM11
         public static CustomPwm L3Chm11Default { get => _L3Chm11Default ?? new(null); }
         public static CustomPwm L3Chm11Alt1 { get => _L3Chm11Alt1 ?? new(null); }
         public static CustomPwm L3Chm11Alt2 { get => _L3Chm11Alt2 ?? new(null); }
@@ -979,7 +1024,8 @@ namespace VvvfSimulator.Vvvf
         public static CustomPwm L3Chm11Alt8 { get => _L3Chm11Alt8 ?? new(null); }
         public static CustomPwm L3Chm11Alt9 { get => _L3Chm11Alt9 ?? new(null); }
         public static CustomPwm L3Chm11Alt10 { get => _L3Chm11Alt10 ?? new(null); }
-
+        #endregion
+        #region L3CHM13
         public static CustomPwm L3Chm13Default { get => _L3Chm13Default ?? new(null); }
         public static CustomPwm L3Chm13Alt1 { get => _L3Chm13Alt1 ?? new(null); }
         public static CustomPwm L3Chm13Alt2 { get => _L3Chm13Alt2 ?? new(null); }
@@ -995,7 +1041,8 @@ namespace VvvfSimulator.Vvvf
         public static CustomPwm L3Chm13Alt12 { get => _L3Chm13Alt12 ?? new(null); }
         public static CustomPwm L3Chm13Alt13 { get => _L3Chm13Alt13 ?? new(null); }
         public static CustomPwm L3Chm13Alt14 { get => _L3Chm13Alt14 ?? new(null); }
-
+        #endregion
+        #region L3CHM15
         public static CustomPwm L3Chm15Default { get => _L3Chm15Default ?? new(null); }
         public static CustomPwm L3Chm15Alt1 { get => _L3Chm15Alt1 ?? new(null); }
         public static CustomPwm L3Chm15Alt2 { get => _L3Chm15Alt2 ?? new(null); }
@@ -1014,7 +1061,8 @@ namespace VvvfSimulator.Vvvf
         public static CustomPwm L3Chm15Alt15 { get => _L3Chm15Alt15 ?? new(null); }
         public static CustomPwm L3Chm15Alt16 { get => _L3Chm15Alt16 ?? new(null); }
         public static CustomPwm L3Chm15Alt17 { get => _L3Chm15Alt17 ?? new(null); }
-
+        #endregion
+        #region L3CHM17
         public static CustomPwm L3Chm17Default { get => _L3Chm17Default ?? new(null); }
         public static CustomPwm L3Chm17Alt1 { get => _L3Chm17Alt1 ?? new(null); }
         public static CustomPwm L3Chm17Alt2 { get => _L3Chm17Alt2 ?? new(null); }
@@ -1035,7 +1083,8 @@ namespace VvvfSimulator.Vvvf
         public static CustomPwm L3Chm17Alt17 { get => _L3Chm17Alt17 ?? new(null); }
         public static CustomPwm L3Chm17Alt18 { get => _L3Chm17Alt18 ?? new(null); }
         public static CustomPwm L3Chm17Alt19 { get => _L3Chm17Alt19 ?? new(null); }
-
+        #endregion
+        #region L3CHM19
         public static CustomPwm L3Chm19Default { get => _L3Chm19Default ?? new(null); }
         public static CustomPwm L3Chm19Alt1 { get => _L3Chm19Alt1 ?? new(null); }
         public static CustomPwm L3Chm19Alt2 { get => _L3Chm19Alt2 ?? new(null); }
@@ -1062,7 +1111,8 @@ namespace VvvfSimulator.Vvvf
         public static CustomPwm L3Chm19Alt23 { get => _L3Chm19Alt23 ?? new(null); }
         public static CustomPwm L3Chm19Alt24 { get => _L3Chm19Alt24 ?? new(null); }
         public static CustomPwm L3Chm19Alt25 { get => _L3Chm19Alt25 ?? new(null); }
-
+        #endregion
+        #region L3CHM21
         public static CustomPwm L3Chm21Default { get => _L3Chm21Default ?? new(null); }
         public static CustomPwm L3Chm21Alt1 { get => _L3Chm21Alt1 ?? new(null); }
         public static CustomPwm L3Chm21Alt2 { get => _L3Chm21Alt2 ?? new(null); }
@@ -1086,7 +1136,8 @@ namespace VvvfSimulator.Vvvf
         public static CustomPwm L3Chm21Alt20 { get => _L3Chm21Alt20 ?? new(null); }
         public static CustomPwm L3Chm21Alt21 { get => _L3Chm21Alt21 ?? new(null); }
         public static CustomPwm L3Chm21Alt22 { get => _L3Chm21Alt22 ?? new(null); }
-
+        #endregion
+        #region L2SHE
         public static CustomPwm L2She3Default { get => _L2She3Default ?? new(null); }
         public static CustomPwm L2She3Alt1 { get => _L2She3Alt1 ?? new(null); }
         public static CustomPwm L2She9Default { get => _L2She9Default ?? new(null); }
@@ -1103,7 +1154,8 @@ namespace VvvfSimulator.Vvvf
         public static CustomPwm L2She13Alt1 { get => _L2She13Alt1 ?? new(null); }
         public static CustomPwm L2She15Default { get => _L2She15Default ?? new(null); }
         public static CustomPwm L2She15Alt1 { get => _L2She15Alt1 ?? new(null); }
-
+        #endregion
+        #region L3SHE
         public static CustomPwm L3She1Default { get => _L3She1Default ?? new(null); }
         public static CustomPwm L3She3Default { get => _L3She3Default ?? new(null); }
         public static CustomPwm L3She3Alt1 { get => _L3She3Alt1 ?? new(null); }
@@ -1116,5 +1168,7 @@ namespace VvvfSimulator.Vvvf
         public static CustomPwm L3She17Default { get => _L3She17Default ?? new(null); }
         public static CustomPwm L3She19Default { get => _L3She19Default ?? new(null); }
         public static CustomPwm L3She21Default { get => _L3She21Default ?? new(null); }
+        #endregion
+        #endregion
     }
 }

@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
+using VvvfSimulator.Properties;
 using VvvfSimulator.Yaml.MasconControl;
 using VvvfSimulator.Yaml.VvvfSound;
 using static VvvfSimulator.Vvvf.Struct;
@@ -25,7 +26,7 @@ namespace VvvfSimulator.Generation
         }
 
 
-        public static void AddEmptyFrames(int image_width, int image_height,int frames, VideoWriter vr)
+        public static void AddEmptyFrames(int image_width, int image_height, int frames, string path, ref int index)
         {
             Bitmap image = new(image_width, image_height);
             Graphics g = Graphics.FromImage(image);
@@ -33,35 +34,43 @@ namespace VvvfSimulator.Generation
             MemoryStream ms = new();
             image.Save(ms, ImageFormat.Png);
             byte[] img = ms.GetBuffer();
-            Mat mat = OpenCvSharp.Mat.FromImageData(img);
-            for (int i = 0; i < frames; i++) { vr.Write(mat); }
+            for (int i = 0; i < frames; i++)
+            {
+                File.WriteAllBytes(path + index.ToString("D10") + ".png", img);
+                index++;
+            }
             g.Dispose();
             image.Dispose();
         }
 
-        public static void AddImageFrames(Bitmap image, int frames, VideoWriter vr)
+        public static void AddImageFrames(Bitmap image, int frames, string path, ref int index)
         {
             MemoryStream ms = new();
             image.Save(ms, ImageFormat.Png);
             byte[] img = ms.GetBuffer();
-            Mat mat = OpenCvSharp.Mat.FromImageData(img);
-            for (int i = 0; i < frames; i++) { vr.Write(mat); }
+            //Mat mat = OpenCvSharp.Mat.FromImageData(img);
+            for (int i = 0; i < frames; i++)
+            {
+                File.WriteAllBytes(path + index.ToString("D10") + ".png", img);
+                index++;
+            }
         }
 
-        
-
-        public class GenerationBasicParameter
+        public static string FormatFFmpegArgs(string temp_path, string output_path, double framerate)
         {
-            public YamlMasconDataCompiled MasconData { get; set; }
-            public YamlVvvfSoundData VvvfData { get; set; }
-            public ProgressData Progress { get; set; }
+            string s = Settings.Default.FFmpegArgs;
+            s = s.Replace("{framerate}", framerate.ToString());
+            s = s.Replace("{input}", $"\"{temp_path}%10d.png\"");
+            s = s.Replace("{output}", $"\"{output_path}\"");
+            return s;
+        }
 
-            public GenerationBasicParameter(YamlMasconDataCompiled MasconData, YamlVvvfSoundData VvvfData, ProgressData Progress)
-            {
-                this.MasconData = MasconData;
-                this.VvvfData = VvvfData;
-                this.Progress = Progress;
-            }
+        public class GenerationBasicParameter(YamlMasconDataCompiled MasconData, YamlVvvfSoundData VvvfData, GenerationBasicParameter.ProgressData Progress)
+        {
+            public YamlMasconDataCompiled MasconData { get; set; } = MasconData;
+            public YamlVvvfSoundData VvvfData { get; set; } = VvvfData;
+            public ProgressData Progress { get; set; } = Progress;
+
             public class ProgressData
             {
                 public double Progress = 1;

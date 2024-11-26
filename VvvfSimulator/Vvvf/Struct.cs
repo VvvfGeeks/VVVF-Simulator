@@ -128,7 +128,7 @@ namespace VvvfSimulator.Vvvf
             private YamlPulseMode VideoPulseMode { get; set; } = new();
             private double VideoSineAmplitude { get; set; }
             private CarrierFreq VideoCarrierFrequency { get; set; } = new CarrierFreq(0, 0, 0.0005);
-            private Dictionary<PulseDataKey, double> VideoPulseData { get; set; } = new();
+            private Dictionary<PulseDataKey, double> VideoPulseData { get; set; } = [];
             private double VideoSineFrequency { get; set; }
 
             public void SetVideoPulseMode(YamlPulseMode p) { VideoPulseMode = p; }

@@ -9,14 +9,14 @@ namespace VvvfSimulator.Generation.Motor
     {
         public class MotorData
         {
-            readonly public static double M_2PI = 6.283185307179586476925286766559;
-            readonly public static double M_PI = 3.1415926535897932384626433832795;
-            readonly public static double M_PI_2 = 1.5707963267948966192313216916398;
-            readonly public static double M_2_PI = 0.63661977236758134307553505349006;
-            readonly public static double M_1_PI = 0.31830988618379067153776752674503;
-            readonly public static double M_1_2PI = 0.15915494309189533576888376337251;
-            readonly public static double M_PI_180 = 0.01745329251994329576923690768489;
-            readonly public static double M_PI_4 = 0.78539816339744830961566084581988;
+            public const double M_2PI = 6.283185307179586;
+            public const double M_PI = 3.141592653589793;
+            public const double M_PI_2 = 1.5707963267948966;
+            public const double M_2_PI = 0.6366197723675814;
+            public const double M_1_PI = 0.3183098861837907;
+            public const double M_1_2PI = 0.15915494309189535;
+            public const double M_PI_180 = 0.017453292519943295;
+            public const double M_PI_4 = 0.7853981633974483;
 
             public double SIM_SAMPLE_FREQ = 192000.0;
             public MotorSpecification motor_Specification = new();

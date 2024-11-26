@@ -1,5 +1,6 @@
 ﻿using OpenCvSharp;
 using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
@@ -74,6 +75,8 @@ namespace VvvfSimulator.Generation.Video.WaveForm
         }
 
         private BitmapViewerManager? Viewer { get; set; }
+        private int _index = 1;
+        private string _tempPath = "";
         public void ExportVideo(GenerationBasicParameter generationBasicParameter, String fileName)
         {
             MainWindow.Invoke(() => Viewer = new BitmapViewerManager());
@@ -86,10 +89,13 @@ namespace VvvfSimulator.Generation.Video.WaveForm
             VvvfValues Control = new();
             Control.ResetControlValues();
             Control.ResetMathematicValues();
-
+            DirectoryInfo tempDirInfo = Directory.CreateDirectory(Path.GetDirectoryName(fileName) + "\\" + DateTime.Now.ToString("yyyyMMddHHmmss") + Path.GetFileNameWithoutExtension(fileName) + "_wfuvw_tmp");
+            tempDirInfo.Attributes |= FileAttributes.Hidden;
+            _tempPath = tempDirInfo.FullName + "\\";
             int fps = 60;
-            VideoWriter vr = new(fileName, OpenCvSharp.FourCC.H264, fps, new OpenCvSharp.Size(image_width, image_height));
-            if (!vr.IsOpened()) return;
+            //VideoWriter vr = new(fileName, OpenCvSharp.FourCC.H264, fps, new OpenCvSharp.Size(image_width, image_height));
+            
+            //if (!vr.IsOpened()) return;
 
             // PROGRESS INITIALIZE
             progressData.Total = masconData.GetEstimatedSteps(1.0 / fps) + 2 * fps;
@@ -104,7 +110,7 @@ namespace VvvfSimulator.Generation.Video.WaveForm
                 Control.SetSineAngleFrequency(0);
                 Bitmap final_image = GetImage(Control, vvvfData);
 
-                AddImageFrames(final_image, fps, vr);
+                AddImageFrames(final_image, fps, _tempPath, ref _index);
                 Viewer?.SetImage(final_image);
                 final_image.Dispose();
             }
@@ -119,10 +125,12 @@ namespace VvvfSimulator.Generation.Video.WaveForm
                 MemoryStream ms = new();
                 final_image.Save(ms, ImageFormat.Png);
                 byte[] img = ms.GetBuffer();
-                Mat mat = OpenCvSharp.Mat.FromImageData(img);
-                vr.Write(mat);
+                //Mat mat = OpenCvSharp.Mat.FromImageData(img);
+                File.WriteAllBytes(_tempPath + _index.ToString("D10") + ".png", img);
+                _index++;
+                //vr.Write(mat);
                 ms.Dispose();
-                mat.Dispose();
+                //mat.Dispose();
                 Viewer?.SetImage(final_image);
                 final_image.Dispose();
 
@@ -140,7 +148,7 @@ namespace VvvfSimulator.Generation.Video.WaveForm
                 Control.SetControlFrequency(0);
                 Control.SetSineAngleFrequency(0);
                 Bitmap final_image = GetImage(Control, vvvfData);
-                AddImageFrames(final_image, fps, vr);
+                AddImageFrames(final_image, fps, _tempPath, ref _index);
                 Viewer?.SetImage(final_image);
                 final_image.Dispose();
             }
@@ -148,10 +156,19 @@ namespace VvvfSimulator.Generation.Video.WaveForm
             //PROGRESS ADD
             progressData.Progress += fps;
 
-            vr.Release();
-            vr.Dispose();
+            //vr.Release();
+            //vr.Dispose();
 
             Viewer?.Close();
+            Process? ffmpeg_proc = Process.Start(new ProcessStartInfo()
+            {
+                FileName = "ffmpeg",
+                Arguments = FormatFFmpegArgs(_tempPath, fileName, fps),
+                UseShellExecute = true
+            }) ?? throw new Exception();
+            while (!ffmpeg_proc.HasExited) { }
+            if (ffmpeg_proc.ExitCode != 0) throw new Exception() { HResult = ffmpeg_proc.ExitCode };
+            tempDirInfo.Delete(true);
         }
 
     }
