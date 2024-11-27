@@ -74,8 +74,8 @@
 
     <system:String x:Key="MainWindow.Menu.Tools">工具</system:String>
     <system:String x:Key="MainWindow.Menu.Tools.AutoVoltage">自动设置调制度</system:String>
-    <system:String x:Key="MainWindow.Menu.Tools.FreeRunAmpZero">将断电时的调制度设为零</system:String>
-    <system:String x:Key="MainWindow.Menu.Tools.FreeRunEndAmplitudeContinuous">将设置连续的断电时调制度</system:String>
+    <system:String x:Key="MainWindow.Menu.Tools.FreeRunAmpZero">将断电时的调制度值设为零</system:String>
+    <system:String x:Key="MainWindow.Menu.Tools.FreeRunEndAmplitudeContinuous">将断电时调制度设置为连续</system:String>
     <system:String x:Key="MainWindow.Menu.Tools.MIDI">MIDI Conversion</system:String>
 
     <system:String x:Key="MainWindow.Menu.Window">杂项</system:String>
@@ -118,12 +118,12 @@
     <system:String x:Key="MainWindow.Message.File.Load.Ok.Title">信息</system:String>
     <system:String x:Key="MainWindow.Message.File.Load.Ok.Message">加载成功</system:String>
     <system:String x:Key="MainWindow.Message.File.Load.Error.Message">加载失败</system:String>
-    <system:String x:Key="MainWindow.Message.Generate.Movie.Hexagon.Original.EnableZeroVector">Enable Zero-Vector Point?</system:String>
-    <system:String x:Key="MainWindow.Message.Generate.Movie.Hexagon.Explain.EnableZeroVector">Enable Zero-Vector Point?</system:String>
-    <system:String x:Key="MainWindow.Message.Generate.Image.Hexagon.Original.EnableZeroVector">Enable Zero-Vector Point?</system:String>
-    <system:String x:Key="MainWindow.Message.Generate.Movie.Hexagon.Explain.EnterFrequency">Enter the frequency to render</system:String>
-    <system:String x:Key="MainWindow.Message.Generate.Image.Hexagon.Original.EnterFrequency">Enter the frequency to render</system:String>
-    <system:String x:Key="MainWindow.Message.Generate.Image.FFT.Original.EnterFrequency">Enter the frequency to render</system:String>
+    <system:String x:Key="MainWindow.Message.Generate.Movie.Hexagon.Original.EnableZeroVector">启用零矢量点？</system:String>
+    <system:String x:Key="MainWindow.Message.Generate.Movie.Hexagon.Explain.EnableZeroVector">启用零矢量点？</system:String>
+    <system:String x:Key="MainWindow.Message.Generate.Image.Hexagon.Original.EnableZeroVector">启用零矢量点？</system:String>
+    <system:String x:Key="MainWindow.Message.Generate.Movie.Hexagon.Explain.EnterFrequency">输入渲染频率</system:String>
+    <system:String x:Key="MainWindow.Message.Generate.Image.Hexagon.Original.EnterFrequency">输入渲染频率</system:String>
+    <system:String x:Key="MainWindow.Message.Generate.Image.FFT.Original.EnterFrequency">输入渲染频率</system:String>
     <system:String x:Key="MainWindow.Message.Tools.AutoVoltage.Error">
         使用自动设置调制度时请检查以下内容：\n
         ・加速和制动程序必须要有两个或两个以上的调制方式\n
