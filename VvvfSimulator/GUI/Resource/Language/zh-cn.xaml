@@ -205,7 +205,7 @@
     <system:String x:Key="TrainAudio.Pages.MotorSetting.MotorSpecification.MutualInductance">耦合电感</system:String>
     <system:String x:Key="TrainAudio.Pages.MotorSetting.MotorSpecification.PolePairCount">极对数</system:String>
     <system:String x:Key="TrainAudio.Pages.MotorSetting.MotorSpecification.Damping">阻尼</system:String>
-    <system:String x:Key="TrainAudio.Pages.MotorSetting.MotorSpecification.RotationalInertiaMass">旋转惯性质量</system:String>
+    <system:String x:Key="TrainAudio.Pages.MotorSetting.MotorSpecification.RotationalInertiaMass">转动惯量</system:String>
     <system:String x:Key="TrainAudio.Pages.MotorSetting.MotorSpecification.StaticFriction">静摩擦力</system:String>
 
     <system:String x:Key="TrainAudio.Pages.MotorSetting.MotorSounds">电机声音</system:String>
