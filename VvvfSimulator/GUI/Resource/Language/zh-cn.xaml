@@ -126,8 +126,8 @@
     <system:String x:Key="MainWindow.Message.Generate.Image.FFT.Original.EnterFrequency">Enter the frequency to render</system:String>
     <system:String x:Key="MainWindow.Message.Tools.AutoVoltage.Error">
         使用自动设置调制度时请检查以下内容：\n
-        - 加速和制动程序必须要有两个或两个以上的调制方式\n
-        - 所有调制方式的起始频率值必须大于或等于 0
+        ・加速和制动程序必须要有两个或两个以上的调制方式\n
+        ・所有调制方式的起始频率值必须大于或等于 0
     </system:String>
 
     <system:String x:Key="MainWindow.Dialog.Tools.AutoVoltage.Title">自动设置调制度</system:String>
