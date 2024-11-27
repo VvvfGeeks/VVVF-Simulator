@@ -11,7 +11,8 @@
 		<Description>A simple application to simulate VVVF sound</Description>
 		<PackageIcon>vvvf-simulator.png</PackageIcon>
 		<AllowUnsafeBlocks>False</AllowUnsafeBlocks>
-		<AssemblyVersion>1.9.1.0</AssemblyVersion>
+		<AssemblyVersion>1.9.1.1</AssemblyVersion>
+		<ApplicationManifest>app.manifest</ApplicationManifest>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -43,6 +44,7 @@
 		<Resource Include="GUI\Resource\Fonts\fonts-DSEG_v046\DSEG7-Modern\DSEG7Modern-Regular.ttf" />
 		<Resource Include="GUI\Resource\Fonts\Fugaz_One\FugazOne-Regular.ttf" />
 		<Resource Include="GUI\Resource\Fonts\Gasoek_One\GasoekOne-Regular.ttf" />
+		<Resource Include="GUI\Resource\Fonts\lxgw_marker_gothic\LXGWMarkerGothic-Regular.ttf" />
 		<Resource Include="GUI\Resource\Fonts\MPlus1Code\MPLUS1Code-Bold.ttf" />
 		<Resource Include="GUI\Resource\Fonts\MPlus1Code\MPLUS1Code-ExtraLight.ttf" />
 		<Resource Include="GUI\Resource\Fonts\MPlus1Code\MPLUS1Code-Light.ttf" />
@@ -59,7 +61,6 @@
 		<Resource Include="GUI\Resource\Fonts\Roboto_Condensed\RobotoCondensed-Medium.ttf" />
 		<Resource Include="GUI\Resource\Fonts\Noto_Sans_SC\NotoSansSC-Medium.ttf" />
 		<Resource Include="GUI\Resource\Fonts\RocknRoll_One\RocknRollOne-Regular.ttf" />
-		<Resource Include="GUI\Resource\Fonts\ZCOOL_QingKe_HuangYou\ZCOOLQingKeHuangYou-Regular.ttf" />
 		<Resource Include="GUI\Resource\Images\MIDIConvert\B_MultiTask.png" />
 		<Resource Include="GUI\Resource\Images\MIDIConvert\B_Spanner.png" />
 		<Resource Include="GUI\Resource\Images\MIDIConvert\B_Start.png" />

@@ -3,13 +3,12 @@ using System;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
-using VvvfSimulator.GUI.TrainAudio.Pages.Mixer;
+using VvvfSimulator.GUI.Resource.Language;
 using VvvfSimulator.GUI.TrainAudio.Pages.Gear;
+using VvvfSimulator.GUI.TrainAudio.Pages.Mixer;
 using VvvfSimulator.GUI.TrainAudio.Pages.Motor;
 using YamlDotNet.Core;
 using static VvvfSimulator.Yaml.TrainAudioSetting.YamlTrainSoundAnalyze;
-using System.Diagnostics;
-using VvvfSimulator.GUI.Resource.Language;
 
 namespace VvvfSimulator.GUI.TrainAudio
 {
@@ -36,7 +35,26 @@ namespace VvvfSimulator.GUI.TrainAudio
                 PageFrame.Navigate(new MotorSetting(soundData));
 
         }
-        private string load_path = "acoustic.yaml";
+        private string LoadPath = "acoustic.yaml";
+        private void LoadYaml(string path)
+        {
+            try
+            {
+
+                YamlTrainSoundDataManage.CurrentData = YamlTrainSoundDataManage.LoadYaml(path);
+                this.soundData = YamlTrainSoundDataManage.CurrentData;
+                PageFrame.Navigate(new MotorSetting(soundData));
+                MessageBox.Show(LanguageManager.GetString("TrainAudio.SettingWindow.Message.File.Open.Ok.Message"), LanguageManager.GetString("Generic.Title.Info"), MessageBoxButton.OK, MessageBoxImage.Information);
+                LoadPath = path;
+            }
+            catch (YamlException ex)
+            {
+                String error_message = LanguageManager.GetString("TrainAudio.SettingWindow.Message.File.Open.Error.Message");
+                error_message += "\r\n";
+                error_message += "\r\n" + ex.End.ToString() + "\r\n";
+                MessageBox.Show(error_message, LanguageManager.GetString("Generic.Title.Error"), MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
         private void MenuFileClick(object sender, RoutedEventArgs e)
         {
             MenuItem btn = (MenuItem)sender;
@@ -49,25 +67,7 @@ namespace VvvfSimulator.GUI.TrainAudio
                     Filter = "Yaml (*.yaml)|*.yaml|All (*.*)|*.*"
                 };
                 if (dialog.ShowDialog() == false) return;
-
-                try
-                {
-                    
-                    YamlTrainSoundDataManage.CurrentData = YamlTrainSoundDataManage.LoadYaml(dialog.FileName);
-                    this.soundData = YamlTrainSoundDataManage.CurrentData;
-                    PageFrame.Navigate(new MotorSetting(soundData));
-                    MessageBox.Show(LanguageManager.GetString("TrainAudio.SettingWindow.Message.File.Open.Ok.Message"), LanguageManager.GetString("Generic.Title.Info"), MessageBoxButton.OK, MessageBoxImage.Information);
-                }
-                catch (YamlException ex)
-                {
-                    String error_message = LanguageManager.GetString("TrainAudio.SettingWindow.Message.File.Open.Error.Message");
-                    error_message += "\r\n";
-                    error_message += "\r\n" + ex.End.ToString() + "\r\n";
-                    MessageBox.Show(error_message, LanguageManager.GetString("Generic.Title.Error"), MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-
-
-                load_path = dialog.FileName;
+                LoadYaml(dialog.FileName);
                 return;
             }
 
@@ -76,7 +76,7 @@ namespace VvvfSimulator.GUI.TrainAudio
                 var dialog = new SaveFileDialog
                 {
                     Filter = "Yaml (*.yaml)|*.yaml",
-                    FileName = Path.GetFileName(load_path)
+                    FileName = Path.GetFileName(LoadPath)
                 };
                 if (dialog.ShowDialog() == false) return;
 
@@ -119,6 +119,15 @@ namespace VvvfSimulator.GUI.TrainAudio
             }
             else if (tag.Equals("Minimize"))
                 WindowState = WindowState.Minimized;
+        }
+
+        private void Window_Drop(object sender, DragEventArgs e)
+        {
+            string path = (((Array)e.Data.GetData(DataFormats.FileDrop)).GetValue(0) ?? "").ToString() ?? "";
+            if (path.ToLower().EndsWith(".yaml"))
+            {
+                LoadYaml(path);
+            }
         }
     }
 }

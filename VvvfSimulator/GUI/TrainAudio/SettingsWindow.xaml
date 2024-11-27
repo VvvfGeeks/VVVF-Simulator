@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:VvvfSimulator.GUI.TrainAudio"
         mc:Ignorable="d"
         Style="{DynamicResource MinimumWindowStyle}"
-        Title="{DynamicResource TrainAudio.SettingWindow.Title}" Height="500" Width="800">
+        Title="{DynamicResource TrainAudio.SettingWindow.Title}" Height="500" Width="800" AllowDrop="True" Drop="Window_Drop">
 
     <Window.Resources>
         <ResourceDictionary>

@@ -80,5 +80,14 @@ namespace VvvfSimulator.GUI.Mascon
             else if (tag.Equals("Minimize"))
                 WindowState = WindowState.Minimized;
         }
+
+        private void Window_Drop(object sender, DragEventArgs e)
+        {
+            string path = (((Array)e.Data.GetData(DataFormats.FileDrop)).GetValue(0) ?? "").ToString() ?? "";
+            if (path.ToLower().EndsWith(".mid"))
+            {
+                LoadConfiguration.path = path;
+            }
+        }
     }
 }

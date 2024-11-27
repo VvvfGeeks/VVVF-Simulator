@@ -7,7 +7,7 @@
     x:Class="VvvfSimulator.GUI.MIDIConvert.Main"
     mc:Ignorable="d"
     Style="{DynamicResource MinimumWindowStyle}" ResizeMode="NoResize"
-    Title="{DynamicResource MidiConvert.Main.Title}" Height="600" Width="200">
+    Title="{DynamicResource MidiConvert.Main.Title}" Height="600" Width="200" AllowDrop="True" Drop="Window_Drop">
 
     <Window.Resources>
         <ResourceDictionary>

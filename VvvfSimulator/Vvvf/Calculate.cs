@@ -449,58 +449,58 @@ namespace VvvfSimulator.Vvvf
                         {
                             21 => PulseMode.Alternative switch
                             {
-                                PulseAlternative.Default => CustomPwm.L3She21Default.GetPwm(Value.Amplitude, SineX),
+                                PulseAlternative.Default => CustomPwmPresets.L3She21Default.GetPwm(Value.Amplitude, SineX),
                                 _ => 0
                             },
                             19 => PulseMode.Alternative switch
                             {
-                                PulseAlternative.Default => CustomPwm.L3She19Default.GetPwm(Value.Amplitude, SineX),
+                                PulseAlternative.Default => CustomPwmPresets.L3She19Default.GetPwm(Value.Amplitude, SineX),
                                 _ => 0
                             },
                             17 => PulseMode.Alternative switch
                             {
-                                PulseAlternative.Default => CustomPwm.L3She17Default.GetPwm(Value.Amplitude, SineX),
+                                PulseAlternative.Default => CustomPwmPresets.L3She17Default.GetPwm(Value.Amplitude, SineX),
                                 _ => 0
                             },
                             15 => PulseMode.Alternative switch
                             {
-                                PulseAlternative.Default => CustomPwm.L3She15Default.GetPwm(Value.Amplitude, SineX),
+                                PulseAlternative.Default => CustomPwmPresets.L3She15Default.GetPwm(Value.Amplitude, SineX),
                                 _ => 0
                             },
                             13 => PulseMode.Alternative switch
                             {
-                                PulseAlternative.Default => CustomPwm.L3She13Default.GetPwm(Value.Amplitude, SineX),
+                                PulseAlternative.Default => CustomPwmPresets.L3She13Default.GetPwm(Value.Amplitude, SineX),
                                 _ => 0
                             },
                             11 => PulseMode.Alternative switch
                             {
-                                PulseAlternative.Default => CustomPwm.L3She11Default.GetPwm(Value.Amplitude, SineX),
+                                PulseAlternative.Default => CustomPwmPresets.L3She11Default.GetPwm(Value.Amplitude, SineX),
                                 _ => 0
                             },
                             9 => PulseMode.Alternative switch
                             {
-                                PulseAlternative.Default => CustomPwm.L3She9Default.GetPwm(Value.Amplitude, SineX),
+                                PulseAlternative.Default => CustomPwmPresets.L3She9Default.GetPwm(Value.Amplitude, SineX),
                                 _ => 0
                             },
                             7 => PulseMode.Alternative switch
                             {
-                                PulseAlternative.Default => CustomPwm.L3She7Default.GetPwm(Value.Amplitude, SineX),
+                                PulseAlternative.Default => CustomPwmPresets.L3She7Default.GetPwm(Value.Amplitude, SineX),
                                 _ => 0
                             },
                             5 => PulseMode.Alternative switch
                             {
-                                PulseAlternative.Default => CustomPwm.L3She5Default.GetPwm(Value.Amplitude, SineX),
+                                PulseAlternative.Default => CustomPwmPresets.L3She5Default.GetPwm(Value.Amplitude, SineX),
                                 _ => 0
                             },
                             3 => PulseMode.Alternative switch
                             {
-                                PulseAlternative.Default => CustomPwm.L3She3Default.GetPwm(Value.Amplitude, SineX),
-                                PulseAlternative.Alt1 => CustomPwm.L3She3Alt1.GetPwm(Value.Amplitude, SineX),
+                                PulseAlternative.Default => CustomPwmPresets.L3She3Default.GetPwm(Value.Amplitude, SineX),
+                                PulseAlternative.Alt1 => CustomPwmPresets.L3She3Alt1.GetPwm(Value.Amplitude, SineX),
                                 _ => 0
                             },
                             1 => PulseMode.Alternative switch
                             {
-                                PulseAlternative.Default => CustomPwm.L3She1Default.GetPwm(Value.Amplitude, SineX),
+                                PulseAlternative.Default => CustomPwmPresets.L3She1Default.GetPwm(Value.Amplitude, SineX),
                                 _ => 0
                             },
                             _ => 0,
@@ -514,29 +514,29 @@ namespace VvvfSimulator.Vvvf
                                 {
                                     return PulseMode.Alternative switch
                                     {
-                                        PulseAlternative.Default => CustomPwm.L3Chm21Default.GetPwm(Value.Amplitude, SineX),
-                                        PulseAlternative.Alt1 => CustomPwm.L3Chm21Alt1.GetPwm(Value.Amplitude, SineX),
-                                        PulseAlternative.Alt2 => CustomPwm.L3Chm21Alt2.GetPwm(Value.Amplitude, SineX),
-                                        PulseAlternative.Alt3 => CustomPwm.L3Chm21Alt3.GetPwm(Value.Amplitude, SineX),
-                                        PulseAlternative.Alt4 => CustomPwm.L3Chm21Alt4.GetPwm(Value.Amplitude, SineX),
-                                        PulseAlternative.Alt5 => CustomPwm.L3Chm21Alt5.GetPwm(Value.Amplitude, SineX),
-                                        PulseAlternative.Alt6 => CustomPwm.L3Chm21Alt6.GetPwm(Value.Amplitude, SineX),
-                                        PulseAlternative.Alt7 => CustomPwm.L3Chm21Alt7.GetPwm(Value.Amplitude, SineX),
-                                        PulseAlternative.Alt8 => CustomPwm.L3Chm21Alt8.GetPwm(Value.Amplitude, SineX),
-                                        PulseAlternative.Alt9 => CustomPwm.L3Chm21Alt9.GetPwm(Value.Amplitude, SineX),
-                                        PulseAlternative.Alt10 => CustomPwm.L3Chm21Alt10.GetPwm(Value.Amplitude, SineX),
-                                        PulseAlternative.Alt11 => CustomPwm.L3Chm21Alt11.GetPwm(Value.Amplitude, SineX),
-                                        PulseAlternative.Alt12 => CustomPwm.L3Chm21Alt12.GetPwm(Value.Amplitude, SineX),
-                                        PulseAlternative.Alt13 => CustomPwm.L3Chm21Alt13.GetPwm(Value.Amplitude, SineX),
-                                        PulseAlternative.Alt14 => CustomPwm.L3Chm21Alt14.GetPwm(Value.Amplitude, SineX),
-                                        PulseAlternative.Alt15 => CustomPwm.L3Chm21Alt15.GetPwm(Value.Amplitude, SineX),
-                                        PulseAlternative.Alt16 => CustomPwm.L3Chm21Alt16.GetPwm(Value.Amplitude, SineX),
-                                        PulseAlternative.Alt17 => CustomPwm.L3Chm21Alt17.GetPwm(Value.Amplitude, SineX),
-                                        PulseAlternative.Alt18 => CustomPwm.L3Chm21Alt18.GetPwm(Value.Amplitude, SineX),
-                                        PulseAlternative.Alt19 => CustomPwm.L3Chm21Alt19.GetPwm(Value.Amplitude, SineX),
-                                        PulseAlternative.Alt20 => CustomPwm.L3Chm21Alt20.GetPwm(Value.Amplitude, SineX),
-                                        PulseAlternative.Alt21 => CustomPwm.L3Chm21Alt21.GetPwm(Value.Amplitude, SineX),
-                                        PulseAlternative.Alt22 => CustomPwm.L3Chm21Alt22.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Default => CustomPwmPresets.L3Chm21Default.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Alt1 => CustomPwmPresets.L3Chm21Alt1.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Alt2 => CustomPwmPresets.L3Chm21Alt2.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Alt3 => CustomPwmPresets.L3Chm21Alt3.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Alt4 => CustomPwmPresets.L3Chm21Alt4.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Alt5 => CustomPwmPresets.L3Chm21Alt5.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Alt6 => CustomPwmPresets.L3Chm21Alt6.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Alt7 => CustomPwmPresets.L3Chm21Alt7.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Alt8 => CustomPwmPresets.L3Chm21Alt8.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Alt9 => CustomPwmPresets.L3Chm21Alt9.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Alt10 => CustomPwmPresets.L3Chm21Alt10.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Alt11 => CustomPwmPresets.L3Chm21Alt11.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Alt12 => CustomPwmPresets.L3Chm21Alt12.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Alt13 => CustomPwmPresets.L3Chm21Alt13.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Alt14 => CustomPwmPresets.L3Chm21Alt14.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Alt15 => CustomPwmPresets.L3Chm21Alt15.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Alt16 => CustomPwmPresets.L3Chm21Alt16.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Alt17 => CustomPwmPresets.L3Chm21Alt17.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Alt18 => CustomPwmPresets.L3Chm21Alt18.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Alt19 => CustomPwmPresets.L3Chm21Alt19.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Alt20 => CustomPwmPresets.L3Chm21Alt20.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Alt21 => CustomPwmPresets.L3Chm21Alt21.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Alt22 => CustomPwmPresets.L3Chm21Alt22.GetPwm(Value.Amplitude, SineX),
                                         _ => 0
                                     };
                                 }
@@ -544,32 +544,32 @@ namespace VvvfSimulator.Vvvf
                                 {
                                     return PulseMode.Alternative switch
                                     {
-                                        PulseAlternative.Default => CustomPwm.L3Chm19Default.GetPwm(Value.Amplitude, SineX),
-                                        PulseAlternative.Alt1 => CustomPwm.L3Chm19Alt1.GetPwm(Value.Amplitude, SineX),
-                                        PulseAlternative.Alt2 => CustomPwm.L3Chm19Alt2.GetPwm(Value.Amplitude, SineX),
-                                        PulseAlternative.Alt3 => CustomPwm.L3Chm19Alt3.GetPwm(Value.Amplitude, SineX),
-                                        PulseAlternative.Alt4 => CustomPwm.L3Chm19Alt4.GetPwm(Value.Amplitude, SineX),
-                                        PulseAlternative.Alt5 => CustomPwm.L3Chm19Alt5.GetPwm(Value.Amplitude, SineX),
-                                        PulseAlternative.Alt6 => CustomPwm.L3Chm19Alt6.GetPwm(Value.Amplitude, SineX),
-                                        PulseAlternative.Alt7 => CustomPwm.L3Chm19Alt7.GetPwm(Value.Amplitude, SineX),
-                                        PulseAlternative.Alt8 => CustomPwm.L3Chm19Alt8.GetPwm(Value.Amplitude, SineX),
-                                        PulseAlternative.Alt9 => CustomPwm.L3Chm19Alt9.GetPwm(Value.Amplitude, SineX),
-                                        PulseAlternative.Alt10 => CustomPwm.L3Chm19Alt10.GetPwm(Value.Amplitude, SineX),
-                                        PulseAlternative.Alt11 => CustomPwm.L3Chm19Alt11.GetPwm(Value.Amplitude, SineX),
-                                        PulseAlternative.Alt12 => CustomPwm.L3Chm19Alt12.GetPwm(Value.Amplitude, SineX),
-                                        PulseAlternative.Alt13 => CustomPwm.L3Chm19Alt13.GetPwm(Value.Amplitude, SineX),
-                                        PulseAlternative.Alt14 => CustomPwm.L3Chm19Alt14.GetPwm(Value.Amplitude, SineX),
-                                        PulseAlternative.Alt15 => CustomPwm.L3Chm19Alt15.GetPwm(Value.Amplitude, SineX),
-                                        PulseAlternative.Alt16 => CustomPwm.L3Chm19Alt16.GetPwm(Value.Amplitude, SineX),
-                                        PulseAlternative.Alt17 => CustomPwm.L3Chm19Alt17.GetPwm(Value.Amplitude, SineX),
-                                        PulseAlternative.Alt18 => CustomPwm.L3Chm19Alt18.GetPwm(Value.Amplitude, SineX),
-                                        PulseAlternative.Alt19 => CustomPwm.L3Chm19Alt19.GetPwm(Value.Amplitude, SineX),
-                                        PulseAlternative.Alt20 => CustomPwm.L3Chm19Alt20.GetPwm(Value.Amplitude, SineX),
-                                        PulseAlternative.Alt21 => CustomPwm.L3Chm19Alt21.GetPwm(Value.Amplitude, SineX),
-                                        PulseAlternative.Alt22 => CustomPwm.L3Chm19Alt22.GetPwm(Value.Amplitude, SineX),
-                                        PulseAlternative.Alt23 => CustomPwm.L3Chm19Alt23.GetPwm(Value.Amplitude, SineX),
-                                        PulseAlternative.Alt24 => CustomPwm.L3Chm19Alt24.GetPwm(Value.Amplitude, SineX),
-                                        PulseAlternative.Alt25 => CustomPwm.L3Chm19Alt25.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Default => CustomPwmPresets.L3Chm19Default.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Alt1 => CustomPwmPresets.L3Chm19Alt1.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Alt2 => CustomPwmPresets.L3Chm19Alt2.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Alt3 => CustomPwmPresets.L3Chm19Alt3.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Alt4 => CustomPwmPresets.L3Chm19Alt4.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Alt5 => CustomPwmPresets.L3Chm19Alt5.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Alt6 => CustomPwmPresets.L3Chm19Alt6.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Alt7 => CustomPwmPresets.L3Chm19Alt7.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Alt8 => CustomPwmPresets.L3Chm19Alt8.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Alt9 => CustomPwmPresets.L3Chm19Alt9.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Alt10 => CustomPwmPresets.L3Chm19Alt10.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Alt11 => CustomPwmPresets.L3Chm19Alt11.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Alt12 => CustomPwmPresets.L3Chm19Alt12.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Alt13 => CustomPwmPresets.L3Chm19Alt13.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Alt14 => CustomPwmPresets.L3Chm19Alt14.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Alt15 => CustomPwmPresets.L3Chm19Alt15.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Alt16 => CustomPwmPresets.L3Chm19Alt16.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Alt17 => CustomPwmPresets.L3Chm19Alt17.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Alt18 => CustomPwmPresets.L3Chm19Alt18.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Alt19 => CustomPwmPresets.L3Chm19Alt19.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Alt20 => CustomPwmPresets.L3Chm19Alt20.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Alt21 => CustomPwmPresets.L3Chm19Alt21.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Alt22 => CustomPwmPresets.L3Chm19Alt22.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Alt23 => CustomPwmPresets.L3Chm19Alt23.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Alt24 => CustomPwmPresets.L3Chm19Alt24.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Alt25 => CustomPwmPresets.L3Chm19Alt25.GetPwm(Value.Amplitude, SineX),
                                         _ => 0
                                     };
                                 }
@@ -577,26 +577,26 @@ namespace VvvfSimulator.Vvvf
                                 {
                                     return PulseMode.Alternative switch
                                     {
-                                        PulseAlternative.Default => CustomPwm.L3Chm17Default.GetPwm(Value.Amplitude,SineX),
-                                        PulseAlternative.Alt1 => CustomPwm.L3Chm17Alt1.GetPwm(Value.Amplitude, SineX),
-                                        PulseAlternative.Alt2 => CustomPwm.L3Chm17Alt2.GetPwm(Value.Amplitude, SineX),
-                                        PulseAlternative.Alt3 => CustomPwm.L3Chm17Alt3.GetPwm(Value.Amplitude, SineX),
-                                        PulseAlternative.Alt4 => CustomPwm.L3Chm17Alt4.GetPwm(Value.Amplitude, SineX),
-                                        PulseAlternative.Alt5 => CustomPwm.L3Chm17Alt5.GetPwm(Value.Amplitude, SineX),
-                                        PulseAlternative.Alt6 => CustomPwm.L3Chm17Alt6.GetPwm(Value.Amplitude, SineX),
-                                        PulseAlternative.Alt7 => CustomPwm.L3Chm17Alt7.GetPwm(Value.Amplitude, SineX),
-                                        PulseAlternative.Alt8 => CustomPwm.L3Chm17Alt8.GetPwm(Value.Amplitude, SineX),
-                                        PulseAlternative.Alt9 => CustomPwm.L3Chm17Alt9.GetPwm(Value.Amplitude, SineX),
-                                        PulseAlternative.Alt10 => CustomPwm.L3Chm17Alt10.GetPwm(Value.Amplitude, SineX),
-                                        PulseAlternative.Alt11 => CustomPwm.L3Chm17Alt11.GetPwm(Value.Amplitude, SineX),
-                                        PulseAlternative.Alt12 => CustomPwm.L3Chm17Alt12.GetPwm(Value.Amplitude, SineX),
-                                        PulseAlternative.Alt13 => CustomPwm.L3Chm17Alt13.GetPwm(Value.Amplitude, SineX),
-                                        PulseAlternative.Alt14 => CustomPwm.L3Chm17Alt14.GetPwm(Value.Amplitude, SineX),
-                                        PulseAlternative.Alt15 => CustomPwm.L3Chm17Alt15.GetPwm(Value.Amplitude, SineX),
-                                        PulseAlternative.Alt16 => CustomPwm.L3Chm17Alt16.GetPwm(Value.Amplitude, SineX),
-                                        PulseAlternative.Alt17 => CustomPwm.L3Chm17Alt17.GetPwm(Value.Amplitude, SineX),
-                                        PulseAlternative.Alt18 => CustomPwm.L3Chm17Alt18.GetPwm(Value.Amplitude, SineX),
-                                        PulseAlternative.Alt19 => CustomPwm.L3Chm17Alt19.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Default => CustomPwmPresets.L3Chm17Default.GetPwm(Value.Amplitude,SineX),
+                                        PulseAlternative.Alt1 => CustomPwmPresets.L3Chm17Alt1.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Alt2 => CustomPwmPresets.L3Chm17Alt2.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Alt3 => CustomPwmPresets.L3Chm17Alt3.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Alt4 => CustomPwmPresets.L3Chm17Alt4.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Alt5 => CustomPwmPresets.L3Chm17Alt5.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Alt6 => CustomPwmPresets.L3Chm17Alt6.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Alt7 => CustomPwmPresets.L3Chm17Alt7.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Alt8 => CustomPwmPresets.L3Chm17Alt8.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Alt9 => CustomPwmPresets.L3Chm17Alt9.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Alt10 => CustomPwmPresets.L3Chm17Alt10.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Alt11 => CustomPwmPresets.L3Chm17Alt11.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Alt12 => CustomPwmPresets.L3Chm17Alt12.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Alt13 => CustomPwmPresets.L3Chm17Alt13.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Alt14 => CustomPwmPresets.L3Chm17Alt14.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Alt15 => CustomPwmPresets.L3Chm17Alt15.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Alt16 => CustomPwmPresets.L3Chm17Alt16.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Alt17 => CustomPwmPresets.L3Chm17Alt17.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Alt18 => CustomPwmPresets.L3Chm17Alt18.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Alt19 => CustomPwmPresets.L3Chm17Alt19.GetPwm(Value.Amplitude, SineX),
                                         _ => 0
                                     };
                                 }
@@ -604,24 +604,24 @@ namespace VvvfSimulator.Vvvf
                                 {
                                     return PulseMode.Alternative switch
                                     {
-                                        PulseAlternative.Default => CustomPwm.L3Chm15Default.GetPwm(Value.Amplitude,SineX),
-                                        PulseAlternative.Alt1 => CustomPwm.L3Chm15Alt1.GetPwm(Value.Amplitude, SineX),
-                                        PulseAlternative.Alt2 => CustomPwm.L3Chm15Alt2.GetPwm(Value.Amplitude, SineX),
-                                        PulseAlternative.Alt3 => CustomPwm.L3Chm15Alt3.GetPwm(Value.Amplitude, SineX),
-                                        PulseAlternative.Alt4 => CustomPwm.L3Chm15Alt4.GetPwm(Value.Amplitude, SineX),
-                                        PulseAlternative.Alt5 => CustomPwm.L3Chm15Alt5.GetPwm(Value.Amplitude, SineX),
-                                        PulseAlternative.Alt6 => CustomPwm.L3Chm15Alt6.GetPwm(Value.Amplitude, SineX),
-                                        PulseAlternative.Alt7 => CustomPwm.L3Chm15Alt7.GetPwm(Value.Amplitude, SineX),
-                                        PulseAlternative.Alt8 => CustomPwm.L3Chm15Alt8.GetPwm(Value.Amplitude, SineX),
-                                        PulseAlternative.Alt9 => CustomPwm.L3Chm15Alt9.GetPwm(Value.Amplitude, SineX),
-                                        PulseAlternative.Alt10 => CustomPwm.L3Chm15Alt10.GetPwm(Value.Amplitude, SineX),
-                                        PulseAlternative.Alt11 => CustomPwm.L3Chm15Alt11.GetPwm(Value.Amplitude, SineX),
-                                        PulseAlternative.Alt12 => CustomPwm.L3Chm15Alt12.GetPwm(Value.Amplitude, SineX),
-                                        PulseAlternative.Alt13 => CustomPwm.L3Chm15Alt13.GetPwm(Value.Amplitude, SineX),
-                                        PulseAlternative.Alt14 => CustomPwm.L3Chm15Alt14.GetPwm(Value.Amplitude, SineX),
-                                        PulseAlternative.Alt15 => CustomPwm.L3Chm15Alt15.GetPwm(Value.Amplitude, SineX),
-                                        PulseAlternative.Alt16 => CustomPwm.L3Chm15Alt16.GetPwm(Value.Amplitude, SineX),
-                                        PulseAlternative.Alt17 => CustomPwm.L3Chm15Alt17.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Default => CustomPwmPresets.L3Chm15Default.GetPwm(Value.Amplitude,SineX),
+                                        PulseAlternative.Alt1 => CustomPwmPresets.L3Chm15Alt1.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Alt2 => CustomPwmPresets.L3Chm15Alt2.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Alt3 => CustomPwmPresets.L3Chm15Alt3.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Alt4 => CustomPwmPresets.L3Chm15Alt4.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Alt5 => CustomPwmPresets.L3Chm15Alt5.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Alt6 => CustomPwmPresets.L3Chm15Alt6.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Alt7 => CustomPwmPresets.L3Chm15Alt7.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Alt8 => CustomPwmPresets.L3Chm15Alt8.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Alt9 => CustomPwmPresets.L3Chm15Alt9.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Alt10 => CustomPwmPresets.L3Chm15Alt10.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Alt11 => CustomPwmPresets.L3Chm15Alt11.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Alt12 => CustomPwmPresets.L3Chm15Alt12.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Alt13 => CustomPwmPresets.L3Chm15Alt13.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Alt14 => CustomPwmPresets.L3Chm15Alt14.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Alt15 => CustomPwmPresets.L3Chm15Alt15.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Alt16 => CustomPwmPresets.L3Chm15Alt16.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Alt17 => CustomPwmPresets.L3Chm15Alt17.GetPwm(Value.Amplitude, SineX),
                                         _ => 0
                                     };
                                 }
@@ -629,21 +629,21 @@ namespace VvvfSimulator.Vvvf
                                 {
                                     return PulseMode.Alternative switch
                                     {
-                                        PulseAlternative.Default => CustomPwm.L3Chm13Default.GetPwm(Value.Amplitude,SineX),
-                                        PulseAlternative.Alt1 => CustomPwm.L3Chm13Alt1.GetPwm(Value.Amplitude, SineX),
-                                        PulseAlternative.Alt2 => CustomPwm.L3Chm13Alt2.GetPwm(Value.Amplitude, SineX),
-                                        PulseAlternative.Alt3 => CustomPwm.L3Chm13Alt3.GetPwm(Value.Amplitude, SineX),
-                                        PulseAlternative.Alt4 => CustomPwm.L3Chm13Alt4.GetPwm(Value.Amplitude, SineX),
-                                        PulseAlternative.Alt5 => CustomPwm.L3Chm13Alt5.GetPwm(Value.Amplitude, SineX),
-                                        PulseAlternative.Alt6 => CustomPwm.L3Chm13Alt6.GetPwm(Value.Amplitude, SineX),
-                                        PulseAlternative.Alt7 => CustomPwm.L3Chm13Alt7.GetPwm(Value.Amplitude, SineX),
-                                        PulseAlternative.Alt8 => CustomPwm.L3Chm13Alt8.GetPwm(Value.Amplitude, SineX),
-                                        PulseAlternative.Alt9 => CustomPwm.L3Chm13Alt9.GetPwm(Value.Amplitude, SineX),
-                                        PulseAlternative.Alt10 => CustomPwm.L3Chm13Alt10.GetPwm(Value.Amplitude, SineX),
-                                        PulseAlternative.Alt11 => CustomPwm.L3Chm13Alt11.GetPwm(Value.Amplitude, SineX),
-                                        PulseAlternative.Alt12 => CustomPwm.L3Chm13Alt12.GetPwm(Value.Amplitude, SineX),
-                                        PulseAlternative.Alt13 => CustomPwm.L3Chm13Alt13.GetPwm(Value.Amplitude, SineX),
-                                        PulseAlternative.Alt14 => CustomPwm.L3Chm13Alt14.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Default => CustomPwmPresets.L3Chm13Default.GetPwm(Value.Amplitude,SineX),
+                                        PulseAlternative.Alt1 => CustomPwmPresets.L3Chm13Alt1.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Alt2 => CustomPwmPresets.L3Chm13Alt2.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Alt3 => CustomPwmPresets.L3Chm13Alt3.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Alt4 => CustomPwmPresets.L3Chm13Alt4.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Alt5 => CustomPwmPresets.L3Chm13Alt5.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Alt6 => CustomPwmPresets.L3Chm13Alt6.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Alt7 => CustomPwmPresets.L3Chm13Alt7.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Alt8 => CustomPwmPresets.L3Chm13Alt8.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Alt9 => CustomPwmPresets.L3Chm13Alt9.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Alt10 => CustomPwmPresets.L3Chm13Alt10.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Alt11 => CustomPwmPresets.L3Chm13Alt11.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Alt12 => CustomPwmPresets.L3Chm13Alt12.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Alt13 => CustomPwmPresets.L3Chm13Alt13.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Alt14 => CustomPwmPresets.L3Chm13Alt14.GetPwm(Value.Amplitude, SineX),
                                         _ => 0
                                     };
                                 }
@@ -651,17 +651,17 @@ namespace VvvfSimulator.Vvvf
                                 {
                                     return PulseMode.Alternative switch
                                     {
-                                        PulseAlternative.Default => CustomPwm.L3Chm11Default.GetPwm(Value.Amplitude,SineX),
-                                        PulseAlternative.Alt1 => CustomPwm.L3Chm11Alt1.GetPwm(Value.Amplitude, SineX),
-                                        PulseAlternative.Alt2 => CustomPwm.L3Chm11Alt2.GetPwm(Value.Amplitude, SineX),
-                                        PulseAlternative.Alt3 => CustomPwm.L3Chm11Alt3.GetPwm(Value.Amplitude, SineX),
-                                        PulseAlternative.Alt4 => CustomPwm.L3Chm11Alt4.GetPwm(Value.Amplitude, SineX),
-                                        PulseAlternative.Alt5 => CustomPwm.L3Chm11Alt5.GetPwm(Value.Amplitude, SineX),
-                                        PulseAlternative.Alt6 => CustomPwm.L3Chm11Alt6.GetPwm(Value.Amplitude, SineX),
-                                        PulseAlternative.Alt7 => CustomPwm.L3Chm11Alt7.GetPwm(Value.Amplitude, SineX),
-                                        PulseAlternative.Alt8 => CustomPwm.L3Chm11Alt8.GetPwm(Value.Amplitude, SineX),
-                                        PulseAlternative.Alt9 => CustomPwm.L3Chm11Alt9.GetPwm(Value.Amplitude, SineX),
-                                        PulseAlternative.Alt10 => CustomPwm.L3Chm11Alt10.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Default => CustomPwmPresets.L3Chm11Default.GetPwm(Value.Amplitude,SineX),
+                                        PulseAlternative.Alt1 => CustomPwmPresets.L3Chm11Alt1.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Alt2 => CustomPwmPresets.L3Chm11Alt2.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Alt3 => CustomPwmPresets.L3Chm11Alt3.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Alt4 => CustomPwmPresets.L3Chm11Alt4.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Alt5 => CustomPwmPresets.L3Chm11Alt5.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Alt6 => CustomPwmPresets.L3Chm11Alt6.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Alt7 => CustomPwmPresets.L3Chm11Alt7.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Alt8 => CustomPwmPresets.L3Chm11Alt8.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Alt9 => CustomPwmPresets.L3Chm11Alt9.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Alt10 => CustomPwmPresets.L3Chm11Alt10.GetPwm(Value.Amplitude, SineX),
                                         _ => 0
                                     };
                                 }
@@ -669,14 +669,14 @@ namespace VvvfSimulator.Vvvf
                                 {
                                     return PulseMode.Alternative switch
                                     {
-                                        PulseAlternative.Default => CustomPwm.L3Chm9Default.GetPwm(Value.Amplitude,SineX),
-                                        PulseAlternative.Alt1 => CustomPwm.L3Chm9Alt1.GetPwm(Value.Amplitude, SineX),
-                                        PulseAlternative.Alt2 => CustomPwm.L3Chm9Alt2.GetPwm(Value.Amplitude, SineX),
-                                        PulseAlternative.Alt3 => CustomPwm.L3Chm9Alt3.GetPwm(Value.Amplitude, SineX),
-                                        PulseAlternative.Alt4 => CustomPwm.L3Chm9Alt4.GetPwm(Value.Amplitude, SineX),
-                                        PulseAlternative.Alt5 => CustomPwm.L3Chm9Alt5.GetPwm(Value.Amplitude, SineX),
-                                        PulseAlternative.Alt6 => CustomPwm.L3Chm9Alt6.GetPwm(Value.Amplitude, SineX),
-                                        PulseAlternative.Alt7 => CustomPwm.L3Chm9Alt7.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Default => CustomPwmPresets.L3Chm9Default.GetPwm(Value.Amplitude,SineX),
+                                        PulseAlternative.Alt1 => CustomPwmPresets.L3Chm9Alt1.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Alt2 => CustomPwmPresets.L3Chm9Alt2.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Alt3 => CustomPwmPresets.L3Chm9Alt3.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Alt4 => CustomPwmPresets.L3Chm9Alt4.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Alt5 => CustomPwmPresets.L3Chm9Alt5.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Alt6 => CustomPwmPresets.L3Chm9Alt6.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Alt7 => CustomPwmPresets.L3Chm9Alt7.GetPwm(Value.Amplitude, SineX),
                                         _ => 0
                                     };
                                 }
@@ -684,13 +684,13 @@ namespace VvvfSimulator.Vvvf
                                 {
                                     return PulseMode.Alternative switch
                                     {
-                                        PulseAlternative.Default => CustomPwm.L3Chm7Default.GetPwm(Value.Amplitude,SineX),
-                                        PulseAlternative.Alt1 => CustomPwm.L3Chm7Alt1.GetPwm(Value.Amplitude, SineX),
-                                        PulseAlternative.Alt2 => CustomPwm.L3Chm7Alt2.GetPwm(Value.Amplitude, SineX),
-                                        PulseAlternative.Alt3 => CustomPwm.L3Chm7Alt3.GetPwm(Value.Amplitude, SineX),
-                                        PulseAlternative.Alt4 => CustomPwm.L3Chm7Alt4.GetPwm(Value.Amplitude, SineX),
-                                        PulseAlternative.Alt5 => CustomPwm.L3Chm7Alt5.GetPwm(Value.Amplitude, SineX),
-                                        PulseAlternative.Alt6 => CustomPwm.L3Chm7Alt6.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Default => CustomPwmPresets.L3Chm7Default.GetPwm(Value.Amplitude,SineX),
+                                        PulseAlternative.Alt1 => CustomPwmPresets.L3Chm7Alt1.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Alt2 => CustomPwmPresets.L3Chm7Alt2.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Alt3 => CustomPwmPresets.L3Chm7Alt3.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Alt4 => CustomPwmPresets.L3Chm7Alt4.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Alt5 => CustomPwmPresets.L3Chm7Alt5.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Alt6 => CustomPwmPresets.L3Chm7Alt6.GetPwm(Value.Amplitude, SineX),
                                         _ => 0
                                     };
                                 }
@@ -698,11 +698,11 @@ namespace VvvfSimulator.Vvvf
                                 {
                                     return PulseMode.Alternative switch
                                     {
-                                        PulseAlternative.Default => CustomPwm.L3Chm5Default.GetPwm(Value.Amplitude, SineX),
-                                        PulseAlternative.Alt1 => CustomPwm.L3Chm5Alt1.GetPwm(Value.Amplitude, SineX),
-                                        PulseAlternative.Alt2 => CustomPwm.L3Chm5Alt2.GetPwm(Value.Amplitude, SineX),
-                                        PulseAlternative.Alt3 => CustomPwm.L3Chm5Alt3.GetPwm(Value.Amplitude, SineX),
-                                        PulseAlternative.Alt4 => CustomPwm.L3Chm5Alt4.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Default => CustomPwmPresets.L3Chm5Default.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Alt1 => CustomPwmPresets.L3Chm5Alt1.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Alt2 => CustomPwmPresets.L3Chm5Alt2.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Alt3 => CustomPwmPresets.L3Chm5Alt3.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Alt4 => CustomPwmPresets.L3Chm5Alt4.GetPwm(Value.Amplitude, SineX),
                                         _ => 0
                                     };
                                 }
@@ -710,9 +710,9 @@ namespace VvvfSimulator.Vvvf
                                 {
                                     return PulseMode.Alternative switch
                                     {
-                                        PulseAlternative.Default => CustomPwm.L3Chm3Default.GetPwm(Value.Amplitude,SineX),
-                                        PulseAlternative.Alt1 => CustomPwm.L3Chm3Alt1.GetPwm(Value.Amplitude, SineX),
-                                        PulseAlternative.Alt2 => CustomPwm.L3Chm3Alt2.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Default => CustomPwmPresets.L3Chm3Default.GetPwm(Value.Amplitude,SineX),
+                                        PulseAlternative.Alt1 => CustomPwmPresets.L3Chm3Alt1.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Alt2 => CustomPwmPresets.L3Chm3Alt2.GetPwm(Value.Amplitude, SineX),
                                         _ => 0
                                     };
                                 }
@@ -720,7 +720,7 @@ namespace VvvfSimulator.Vvvf
                                 {
                                     return PulseMode.Alternative switch
                                     {
-                                        PulseAlternative.Default => CustomPwm.L3Chm1Default.GetPwm(Value.Amplitude, SineX),
+                                        PulseAlternative.Default => CustomPwmPresets.L3Chm1Default.GetPwm(Value.Amplitude, SineX),
                                         _ => 0
                                     };
                                 }
@@ -861,46 +861,46 @@ namespace VvvfSimulator.Vvvf
                         {
                             3 => PulseMode.Alternative switch
                             {
-                                PulseAlternative.Default => CustomPwm.L2She3Default.GetPwm(Amplitude, SineX),
-                                PulseAlternative.Alt1 => CustomPwm.L2She3Alt1.GetPwm(Amplitude, SineX),
+                                PulseAlternative.Default => CustomPwmPresets.L2She3Default.GetPwm(Amplitude, SineX),
+                                PulseAlternative.Alt1 => CustomPwmPresets.L2She3Alt1.GetPwm(Amplitude, SineX),
                                 _ => 0,
                             },
                             5 => PulseMode.Alternative switch
                             {
-                                PulseAlternative.Default => CustomPwm.L2She5Default.GetPwm(Amplitude, SineX),
-                                PulseAlternative.Alt1 => CustomPwm.L2She5Alt1.GetPwm(Amplitude, SineX),
-                                PulseAlternative.Alt2 => CustomPwm.L2She5Alt2.GetPwm(Amplitude, SineX),
+                                PulseAlternative.Default => CustomPwmPresets.L2She5Default.GetPwm(Amplitude, SineX),
+                                PulseAlternative.Alt1 => CustomPwmPresets.L2She5Alt1.GetPwm(Amplitude, SineX),
+                                PulseAlternative.Alt2 => CustomPwmPresets.L2She5Alt2.GetPwm(Amplitude, SineX),
                                 _ => 0,
                             },
                             7 => PulseMode.Alternative switch
                             {
-                                PulseAlternative.Default => CustomPwm.L2She7Default.GetPwm(Amplitude, SineX),
-                                PulseAlternative.Alt1 => CustomPwm.L2She7Alt1.GetPwm(Amplitude, SineX),
+                                PulseAlternative.Default => CustomPwmPresets.L2She7Default.GetPwm(Amplitude, SineX),
+                                PulseAlternative.Alt1 => CustomPwmPresets.L2She7Alt1.GetPwm(Amplitude, SineX),
                                 _ => 0,
                             },
                             9 => PulseMode.Alternative switch
                             {
-                                PulseAlternative.Default => CustomPwm.L2She9Default.GetPwm(Amplitude, SineX),
-                                PulseAlternative.Alt1 => CustomPwm.L2She9Alt1.GetPwm(Amplitude, SineX),
-                                PulseAlternative.Alt2 => CustomPwm.L2She9Alt2.GetPwm(Amplitude, SineX),
+                                PulseAlternative.Default => CustomPwmPresets.L2She9Default.GetPwm(Amplitude, SineX),
+                                PulseAlternative.Alt1 => CustomPwmPresets.L2She9Alt1.GetPwm(Amplitude, SineX),
+                                PulseAlternative.Alt2 => CustomPwmPresets.L2She9Alt2.GetPwm(Amplitude, SineX),
                                 _ => 0,
                             },
                             11 => PulseMode.Alternative switch
                             {
-                                PulseAlternative.Default => CustomPwm.L2She11Default.GetPwm(Amplitude, SineX),
-                                PulseAlternative.Alt1 => CustomPwm.L2She11Alt1.GetPwm(Amplitude, SineX),
+                                PulseAlternative.Default => CustomPwmPresets.L2She11Default.GetPwm(Amplitude, SineX),
+                                PulseAlternative.Alt1 => CustomPwmPresets.L2She11Alt1.GetPwm(Amplitude, SineX),
                                 _ => 0,
                             },
                             13 => PulseMode.Alternative switch
                             {
-                                PulseAlternative.Default => CustomPwm.L2She13Default.GetPwm(Amplitude, SineX),
-                                PulseAlternative.Alt1 => CustomPwm.L2She13Alt1.GetPwm(Amplitude, SineX),
+                                PulseAlternative.Default => CustomPwmPresets.L2She13Default.GetPwm(Amplitude, SineX),
+                                PulseAlternative.Alt1 => CustomPwmPresets.L2She13Alt1.GetPwm(Amplitude, SineX),
                                 _ => 0,
                             },
                             15 => PulseMode.Alternative switch
                             {
-                                PulseAlternative.Default => CustomPwm.L2She15Default.GetPwm(Amplitude, SineX),
-                                PulseAlternative.Alt1 => CustomPwm.L2She15Alt1.GetPwm(Amplitude, SineX),
+                                PulseAlternative.Default => CustomPwmPresets.L2She15Default.GetPwm(Amplitude, SineX),
+                                PulseAlternative.Alt1 => CustomPwmPresets.L2She15Alt1.GetPwm(Amplitude, SineX),
                                 _ => 0,
                             },
                             _ => 0,
@@ -914,27 +914,27 @@ namespace VvvfSimulator.Vvvf
                                 {
                                     return PulseMode.Alternative switch
                                     {
-                                        PulseAlternative.Default => CustomPwm.L2Chm25Default.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt1 => CustomPwm.L2Chm25Alt1.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt2 => CustomPwm.L2Chm25Alt2.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt3 => CustomPwm.L2Chm25Alt3.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt4 => CustomPwm.L2Chm25Alt4.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt5 => CustomPwm.L2Chm25Alt5.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt6 => CustomPwm.L2Chm25Alt6.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt7 => CustomPwm.L2Chm25Alt7.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt8 => CustomPwm.L2Chm25Alt8.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt9 => CustomPwm.L2Chm25Alt9.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt10 => CustomPwm.L2Chm25Alt10.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt11 => CustomPwm.L2Chm25Alt11.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt12 => CustomPwm.L2Chm25Alt12.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt13 => CustomPwm.L2Chm25Alt13.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt14 => CustomPwm.L2Chm25Alt14.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt15 => CustomPwm.L2Chm25Alt15.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt16 => CustomPwm.L2Chm25Alt16.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt17 => CustomPwm.L2Chm25Alt17.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt18 => CustomPwm.L2Chm25Alt18.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt19 => CustomPwm.L2Chm25Alt19.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt20 => CustomPwm.L2Chm25Alt20.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Default => CustomPwmPresets.L2Chm25Default.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt1 => CustomPwmPresets.L2Chm25Alt1.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt2 => CustomPwmPresets.L2Chm25Alt2.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt3 => CustomPwmPresets.L2Chm25Alt3.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt4 => CustomPwmPresets.L2Chm25Alt4.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt5 => CustomPwmPresets.L2Chm25Alt5.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt6 => CustomPwmPresets.L2Chm25Alt6.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt7 => CustomPwmPresets.L2Chm25Alt7.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt8 => CustomPwmPresets.L2Chm25Alt8.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt9 => CustomPwmPresets.L2Chm25Alt9.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt10 => CustomPwmPresets.L2Chm25Alt10.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt11 => CustomPwmPresets.L2Chm25Alt11.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt12 => CustomPwmPresets.L2Chm25Alt12.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt13 => CustomPwmPresets.L2Chm25Alt13.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt14 => CustomPwmPresets.L2Chm25Alt14.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt15 => CustomPwmPresets.L2Chm25Alt15.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt16 => CustomPwmPresets.L2Chm25Alt16.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt17 => CustomPwmPresets.L2Chm25Alt17.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt18 => CustomPwmPresets.L2Chm25Alt18.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt19 => CustomPwmPresets.L2Chm25Alt19.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt20 => CustomPwmPresets.L2Chm25Alt20.GetPwm(Amplitude, SineX),
                                         _ => 0
                                     };
                                 }
@@ -942,21 +942,21 @@ namespace VvvfSimulator.Vvvf
                                 {
                                     return PulseMode.Alternative switch
                                     {
-                                        PulseAlternative.Default => CustomPwm.L2Chm23Default.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt1 => CustomPwm.L2Chm23Alt1.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt2 => CustomPwm.L2Chm23Alt2.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt3 => CustomPwm.L2Chm23Alt3.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt4 => CustomPwm.L2Chm23Alt4.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt5 => CustomPwm.L2Chm23Alt5.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt6 => CustomPwm.L2Chm23Alt6.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt7 => CustomPwm.L2Chm23Alt7.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt8 => CustomPwm.L2Chm23Alt8.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt9 => CustomPwm.L2Chm23Alt9.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt10 => CustomPwm.L2Chm23Alt10.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt11 => CustomPwm.L2Chm23Alt11.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt12 => CustomPwm.L2Chm23Alt12.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt13 => CustomPwm.L2Chm23Alt13.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt14 => CustomPwm.L2Chm23Alt14.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Default => CustomPwmPresets.L2Chm23Default.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt1 => CustomPwmPresets.L2Chm23Alt1.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt2 => CustomPwmPresets.L2Chm23Alt2.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt3 => CustomPwmPresets.L2Chm23Alt3.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt4 => CustomPwmPresets.L2Chm23Alt4.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt5 => CustomPwmPresets.L2Chm23Alt5.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt6 => CustomPwmPresets.L2Chm23Alt6.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt7 => CustomPwmPresets.L2Chm23Alt7.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt8 => CustomPwmPresets.L2Chm23Alt8.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt9 => CustomPwmPresets.L2Chm23Alt9.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt10 => CustomPwmPresets.L2Chm23Alt10.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt11 => CustomPwmPresets.L2Chm23Alt11.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt12 => CustomPwmPresets.L2Chm23Alt12.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt13 => CustomPwmPresets.L2Chm23Alt13.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt14 => CustomPwmPresets.L2Chm23Alt14.GetPwm(Amplitude, SineX),
                                         _ => 0
                                     };
                                 }
@@ -964,20 +964,20 @@ namespace VvvfSimulator.Vvvf
                                 {
                                     return PulseMode.Alternative switch
                                     {
-                                        PulseAlternative.Default => CustomPwm.L2Chm21Default.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt1 => CustomPwm.L2Chm21Alt1.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt2 => CustomPwm.L2Chm21Alt2.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt3 => CustomPwm.L2Chm21Alt3.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt4 => CustomPwm.L2Chm21Alt4.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt5 => CustomPwm.L2Chm21Alt5.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt6 => CustomPwm.L2Chm21Alt6.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt7 => CustomPwm.L2Chm21Alt7.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt8 => CustomPwm.L2Chm21Alt8.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt9 => CustomPwm.L2Chm21Alt9.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt10 => CustomPwm.L2Chm21Alt10.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt11 => CustomPwm.L2Chm21Alt11.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt12 => CustomPwm.L2Chm21Alt12.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt13 => CustomPwm.L2Chm21Alt13.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Default => CustomPwmPresets.L2Chm21Default.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt1 => CustomPwmPresets.L2Chm21Alt1.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt2 => CustomPwmPresets.L2Chm21Alt2.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt3 => CustomPwmPresets.L2Chm21Alt3.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt4 => CustomPwmPresets.L2Chm21Alt4.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt5 => CustomPwmPresets.L2Chm21Alt5.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt6 => CustomPwmPresets.L2Chm21Alt6.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt7 => CustomPwmPresets.L2Chm21Alt7.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt8 => CustomPwmPresets.L2Chm21Alt8.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt9 => CustomPwmPresets.L2Chm21Alt9.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt10 => CustomPwmPresets.L2Chm21Alt10.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt11 => CustomPwmPresets.L2Chm21Alt11.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt12 => CustomPwmPresets.L2Chm21Alt12.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt13 => CustomPwmPresets.L2Chm21Alt13.GetPwm(Amplitude, SineX),
                                         _ => 0
                                     };
                                 }
@@ -985,18 +985,18 @@ namespace VvvfSimulator.Vvvf
                                 {
                                     return PulseMode.Alternative switch
                                     {
-                                        PulseAlternative.Default => CustomPwm.L2Chm19Default.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt1 => CustomPwm.L2Chm19Alt1.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt2 => CustomPwm.L2Chm19Alt2.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt3 => CustomPwm.L2Chm19Alt3.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt4 => CustomPwm.L2Chm19Alt4.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt5 => CustomPwm.L2Chm19Alt5.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt6 => CustomPwm.L2Chm19Alt6.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt7 => CustomPwm.L2Chm19Alt7.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt8 => CustomPwm.L2Chm19Alt8.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt9 => CustomPwm.L2Chm19Alt9.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt10 => CustomPwm.L2Chm19Alt10.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt11 => CustomPwm.L2Chm19Alt11.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Default => CustomPwmPresets.L2Chm19Default.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt1 => CustomPwmPresets.L2Chm19Alt1.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt2 => CustomPwmPresets.L2Chm19Alt2.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt3 => CustomPwmPresets.L2Chm19Alt3.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt4 => CustomPwmPresets.L2Chm19Alt4.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt5 => CustomPwmPresets.L2Chm19Alt5.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt6 => CustomPwmPresets.L2Chm19Alt6.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt7 => CustomPwmPresets.L2Chm19Alt7.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt8 => CustomPwmPresets.L2Chm19Alt8.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt9 => CustomPwmPresets.L2Chm19Alt9.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt10 => CustomPwmPresets.L2Chm19Alt10.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt11 => CustomPwmPresets.L2Chm19Alt11.GetPwm(Amplitude, SineX),
                                         _ => 0
                                     };
                                 }
@@ -1004,18 +1004,18 @@ namespace VvvfSimulator.Vvvf
                                 {
                                     return PulseMode.Alternative switch
                                     {
-                                        PulseAlternative.Default => CustomPwm.L2Chm17Default.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt1 => CustomPwm.L2Chm17Alt1.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt2 => CustomPwm.L2Chm17Alt2.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt3 => CustomPwm.L2Chm17Alt3.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt4 => CustomPwm.L2Chm17Alt4.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt5 => CustomPwm.L2Chm17Alt5.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt6 => CustomPwm.L2Chm17Alt6.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt7 => CustomPwm.L2Chm17Alt7.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt8 => CustomPwm.L2Chm17Alt8.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt9 => CustomPwm.L2Chm17Alt9.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt10 => CustomPwm.L2Chm17Alt10.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt11 => CustomPwm.L2Chm17Alt11.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Default => CustomPwmPresets.L2Chm17Default.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt1 => CustomPwmPresets.L2Chm17Alt1.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt2 => CustomPwmPresets.L2Chm17Alt2.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt3 => CustomPwmPresets.L2Chm17Alt3.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt4 => CustomPwmPresets.L2Chm17Alt4.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt5 => CustomPwmPresets.L2Chm17Alt5.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt6 => CustomPwmPresets.L2Chm17Alt6.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt7 => CustomPwmPresets.L2Chm17Alt7.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt8 => CustomPwmPresets.L2Chm17Alt8.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt9 => CustomPwmPresets.L2Chm17Alt9.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt10 => CustomPwmPresets.L2Chm17Alt10.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt11 => CustomPwmPresets.L2Chm17Alt11.GetPwm(Amplitude, SineX),
                                         _ => 0
                                     };
                                 }
@@ -1023,30 +1023,30 @@ namespace VvvfSimulator.Vvvf
                                 {
                                     return PulseMode.Alternative switch
                                     {
-                                        PulseAlternative.Default => CustomPwm.L2Chm15Default.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt1 => CustomPwm.L2Chm15Alt1.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt2 => CustomPwm.L2Chm15Alt2.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt3 => CustomPwm.L2Chm15Alt3.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt4 => CustomPwm.L2Chm15Alt4.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt5 => CustomPwm.L2Chm15Alt5.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt6 => CustomPwm.L2Chm15Alt6.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt7 => CustomPwm.L2Chm15Alt7.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt8 => CustomPwm.L2Chm15Alt8.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt9 => CustomPwm.L2Chm15Alt9.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt10 => CustomPwm.L2Chm15Alt10.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt11 => CustomPwm.L2Chm15Alt11.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt12 => CustomPwm.L2Chm15Alt12.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt13 => CustomPwm.L2Chm15Alt13.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt14 => CustomPwm.L2Chm15Alt14.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt15 => CustomPwm.L2Chm15Alt15.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt16 => CustomPwm.L2Chm15Alt16.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt17 => CustomPwm.L2Chm15Alt17.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt18 => CustomPwm.L2Chm15Alt18.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt19 => CustomPwm.L2Chm15Alt19.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt20 => CustomPwm.L2Chm15Alt20.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt21 => CustomPwm.L2Chm15Alt21.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt22 => CustomPwm.L2Chm15Alt22.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt23 => CustomPwm.L2Chm15Alt23.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Default => CustomPwmPresets.L2Chm15Default.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt1 => CustomPwmPresets.L2Chm15Alt1.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt2 => CustomPwmPresets.L2Chm15Alt2.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt3 => CustomPwmPresets.L2Chm15Alt3.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt4 => CustomPwmPresets.L2Chm15Alt4.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt5 => CustomPwmPresets.L2Chm15Alt5.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt6 => CustomPwmPresets.L2Chm15Alt6.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt7 => CustomPwmPresets.L2Chm15Alt7.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt8 => CustomPwmPresets.L2Chm15Alt8.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt9 => CustomPwmPresets.L2Chm15Alt9.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt10 => CustomPwmPresets.L2Chm15Alt10.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt11 => CustomPwmPresets.L2Chm15Alt11.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt12 => CustomPwmPresets.L2Chm15Alt12.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt13 => CustomPwmPresets.L2Chm15Alt13.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt14 => CustomPwmPresets.L2Chm15Alt14.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt15 => CustomPwmPresets.L2Chm15Alt15.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt16 => CustomPwmPresets.L2Chm15Alt16.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt17 => CustomPwmPresets.L2Chm15Alt17.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt18 => CustomPwmPresets.L2Chm15Alt18.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt19 => CustomPwmPresets.L2Chm15Alt19.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt20 => CustomPwmPresets.L2Chm15Alt20.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt21 => CustomPwmPresets.L2Chm15Alt21.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt22 => CustomPwmPresets.L2Chm15Alt22.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt23 => CustomPwmPresets.L2Chm15Alt23.GetPwm(Amplitude, SineX),
                                         _ => 0
                                     };
                                 }
@@ -1054,20 +1054,20 @@ namespace VvvfSimulator.Vvvf
                                 {
                                     return PulseMode.Alternative switch
                                     {
-                                        PulseAlternative.Default => CustomPwm.L2Chm13Default.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt1 => CustomPwm.L2Chm13Alt1.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt2 => CustomPwm.L2Chm13Alt2.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt3 => CustomPwm.L2Chm13Alt3.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt4 => CustomPwm.L2Chm13Alt4.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt5 => CustomPwm.L2Chm13Alt5.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt6 => CustomPwm.L2Chm13Alt6.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt7 => CustomPwm.L2Chm13Alt7.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt8 => CustomPwm.L2Chm13Alt8.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt9 => CustomPwm.L2Chm13Alt9.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt10 => CustomPwm.L2Chm13Alt10.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt11 => CustomPwm.L2Chm13Alt11.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt12 => CustomPwm.L2Chm13Alt12.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt13 => CustomPwm.L2Chm13Alt13.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Default => CustomPwmPresets.L2Chm13Default.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt1 => CustomPwmPresets.L2Chm13Alt1.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt2 => CustomPwmPresets.L2Chm13Alt2.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt3 => CustomPwmPresets.L2Chm13Alt3.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt4 => CustomPwmPresets.L2Chm13Alt4.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt5 => CustomPwmPresets.L2Chm13Alt5.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt6 => CustomPwmPresets.L2Chm13Alt6.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt7 => CustomPwmPresets.L2Chm13Alt7.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt8 => CustomPwmPresets.L2Chm13Alt8.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt9 => CustomPwmPresets.L2Chm13Alt9.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt10 => CustomPwmPresets.L2Chm13Alt10.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt11 => CustomPwmPresets.L2Chm13Alt11.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt12 => CustomPwmPresets.L2Chm13Alt12.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt13 => CustomPwmPresets.L2Chm13Alt13.GetPwm(Amplitude, SineX),
                                         _ => 0
                                     };
                                 }
@@ -1075,19 +1075,19 @@ namespace VvvfSimulator.Vvvf
                                 {
                                     return PulseMode.Alternative switch
                                     {
-                                        PulseAlternative.Default => CustomPwm.L2Chm11Default.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt1 => CustomPwm.L2Chm11Alt1.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt2 => CustomPwm.L2Chm11Alt2.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt3 => CustomPwm.L2Chm11Alt3.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt4 => CustomPwm.L2Chm11Alt4.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt5 => CustomPwm.L2Chm11Alt5.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt6 => CustomPwm.L2Chm11Alt6.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt7 => CustomPwm.L2Chm11Alt7.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt8 => CustomPwm.L2Chm11Alt8.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt9 => CustomPwm.L2Chm11Alt9.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt10 => CustomPwm.L2Chm11Alt10.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt11 => CustomPwm.L2Chm11Alt11.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt12 => CustomPwm.L2Chm11Alt12.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Default => CustomPwmPresets.L2Chm11Default.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt1 => CustomPwmPresets.L2Chm11Alt1.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt2 => CustomPwmPresets.L2Chm11Alt2.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt3 => CustomPwmPresets.L2Chm11Alt3.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt4 => CustomPwmPresets.L2Chm11Alt4.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt5 => CustomPwmPresets.L2Chm11Alt5.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt6 => CustomPwmPresets.L2Chm11Alt6.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt7 => CustomPwmPresets.L2Chm11Alt7.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt8 => CustomPwmPresets.L2Chm11Alt8.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt9 => CustomPwmPresets.L2Chm11Alt9.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt10 => CustomPwmPresets.L2Chm11Alt10.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt11 => CustomPwmPresets.L2Chm11Alt11.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt12 => CustomPwmPresets.L2Chm11Alt12.GetPwm(Amplitude, SineX),
                                         _ => 0
                                     };
                                 }
@@ -1095,15 +1095,15 @@ namespace VvvfSimulator.Vvvf
                                 {
                                     return PulseMode.Alternative switch
                                     {
-                                        PulseAlternative.Default => CustomPwm.L2Chm9Default.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt1 => CustomPwm.L2Chm9Alt1.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt2 => CustomPwm.L2Chm9Alt2.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt3 => CustomPwm.L2Chm9Alt3.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt4 => CustomPwm.L2Chm9Alt4.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt5 => CustomPwm.L2Chm9Alt5.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt6 => CustomPwm.L2Chm9Alt6.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt7 => CustomPwm.L2Chm9Alt7.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt8 => CustomPwm.L2Chm9Alt8.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Default => CustomPwmPresets.L2Chm9Default.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt1 => CustomPwmPresets.L2Chm9Alt1.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt2 => CustomPwmPresets.L2Chm9Alt2.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt3 => CustomPwmPresets.L2Chm9Alt3.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt4 => CustomPwmPresets.L2Chm9Alt4.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt5 => CustomPwmPresets.L2Chm9Alt5.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt6 => CustomPwmPresets.L2Chm9Alt6.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt7 => CustomPwmPresets.L2Chm9Alt7.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt8 => CustomPwmPresets.L2Chm9Alt8.GetPwm(Amplitude, SineX),
                                         _ => 0
                                     };
                                 }
@@ -1111,12 +1111,12 @@ namespace VvvfSimulator.Vvvf
                                 {
                                     return PulseMode.Alternative switch
                                     {
-                                        PulseAlternative.Default => CustomPwm.L2Chm7Default.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt1 => CustomPwm.L2Chm7Alt1.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt2 => CustomPwm.L2Chm7Alt2.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt3 => CustomPwm.L2Chm7Alt3.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt4 => CustomPwm.L2Chm7Alt4.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt5 => CustomPwm.L2Chm7Alt5.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Default => CustomPwmPresets.L2Chm7Default.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt1 => CustomPwmPresets.L2Chm7Alt1.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt2 => CustomPwmPresets.L2Chm7Alt2.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt3 => CustomPwmPresets.L2Chm7Alt3.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt4 => CustomPwmPresets.L2Chm7Alt4.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt5 => CustomPwmPresets.L2Chm7Alt5.GetPwm(Amplitude, SineX),
                                         _ => 0
                                     };
                                 }
@@ -1124,10 +1124,10 @@ namespace VvvfSimulator.Vvvf
                                 {
                                     return PulseMode.Alternative switch
                                     {
-                                        PulseAlternative.Default => CustomPwm.L2Chm5Default.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt1 => CustomPwm.L2Chm5Alt1.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt2 => CustomPwm.L2Chm5Alt2.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt3 => CustomPwm.L2Chm5Alt3.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Default => CustomPwmPresets.L2Chm5Default.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt1 => CustomPwmPresets.L2Chm5Alt1.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt2 => CustomPwmPresets.L2Chm5Alt2.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt3 => CustomPwmPresets.L2Chm5Alt3.GetPwm(Amplitude, SineX),
                                         _ => 0
                                     };
                                 }
@@ -1135,8 +1135,8 @@ namespace VvvfSimulator.Vvvf
                                 {
                                     return PulseMode.Alternative switch
                                     {
-                                        PulseAlternative.Default => CustomPwm.L2Chm3Default.GetPwm(Amplitude, SineX),
-                                        PulseAlternative.Alt1 => CustomPwm.L2Chm3Alt1.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Default => CustomPwmPresets.L2Chm3Default.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt1 => CustomPwmPresets.L2Chm3Alt1.GetPwm(Amplitude, SineX),
                                         _ => 0
                                     };
                                 }
