@@ -64,15 +64,14 @@ namespace VvvfSimulator.GUI.Create.Waveform.Basic
                         new () { Amplitude = 0.05, Harmonic = 3, Type = PulseHarmonic.PulseHarmonicType.Saw},
                         new () { Amplitude = 0.2, Harmonic = 3, Type = PulseHarmonic.PulseHarmonicType.Square }
                     ];
+                case PresetHarmonics.SquareFourier:
+                    return [
+                        new() { Amplitude = 1, Harmonic = 1, Type = PulseHarmonic.PulseHarmonicType.Square },
+                        new() { Amplitude = -1, Harmonic = 1, Type = PulseHarmonic.PulseHarmonicType.Sine }
+                    ];
                 default:
                     List<PulseHarmonic> harmonics = [];
-                    for (int i = 0; i < 10; i++)
-                    {
-                        harmonics.Add(new PulseHarmonic() { Amplitude = 1.0 / (2 * i + 3), Harmonic = 2 * i + 3 });
-                    }
                     return harmonics;
-
-
             }
         }
 
