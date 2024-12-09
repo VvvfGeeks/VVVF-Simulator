@@ -143,7 +143,7 @@
 
 # 支持
 - 您可以加入以下讨论组来询问有关VVVF-SIM的问题：
-   - [Discord](https://discord.gg/SQr2tXJgVq)服务器
+   - [Discord](https://discord.gg/SQr2tXJgVq) 服务器
    - QQ频道：[VVVF-SIM交流频道](https://pd.qq.com/s/dimdwulea)
    - QQ群：[861610259](https://qm.qq.com/q/IqTqqqNOEM)
 - [示例文件](https://github.com/VvvfGeeks/VVVF-Simulator/releases/download/v1.9.1.0/yaml_samples.zip)
@@ -163,4 +163,4 @@
     - [turtle713](https://github.com/intel713)
  - 简体中文
     - [02001](https://github.com/Jerethon)
-    - [YAJ-54S12G-1](https://github.com/YJ-321-C4)
+    - [YAJ-54S12G-1](https://github.com/YJ-305-A2)
