@@ -42,7 +42,8 @@
     <system:String x:Key="MainWindow.Menu.Generate.Audio">音频</system:String>
     <system:String x:Key="MainWindow.Menu.Generate.Audio.VVVF">VVVF</system:String><!--不用翻译-->
     <system:String x:Key="MainWindow.Menu.Generate.Audio.VVVF.Line">线电压音频</system:String>
-    <system:String x:Key="MainWindow.Menu.Generate.Audio.VVVF.Phases">UVW 相电压音频</system:String>
+    <system:String x:Key="MainWindow.Menu.Generate.Audio.VVVF.Phases">相电压音频</system:String>
+    <system:String x:Key="MainWindow.Menu.Generate.Audio.VVVF.PhaseCurrent">相电流音频</system:String>
     <system:String x:Key="MainWindow.Menu.Generate.Audio.Train">走行音</system:String>
     <system:String x:Key="MainWindow.Menu.Generate.Movie">视频</system:String>
     <system:String x:Key="MainWindow.Menu.Generate.Movie.Control">控制信息</system:String>
@@ -99,6 +100,7 @@
 
     <system:String x:Key="MainWindow.TaskDescription.Generate.Audio.Vvvf.Line">线电压音频生成：</system:String>
     <system:String x:Key="MainWindow.TaskDescription.Generate.Audio.Vvvf.Phases">相电压音频生成：</system:String>
+    <system:String x:Key="MainWindow.TaskDescription.Generate.Audio.Vvvf.PhaseCurrent">相电流音频生成：</system:String>
     <system:String x:Key="MainWindow.TaskDescription.Generate.Audio.Train">列车走行音生成：</system:String>
     <system:String x:Key="MainWindow.TaskDescription.Generate.Movie.Control.Original">控制信息（样式1）生成：</system:String>
     <system:String x:Key="MainWindow.TaskDescription.Generate.Movie.Control.Original2">控制信息（样式2）生成：</system:String>
@@ -385,8 +387,6 @@
     <system:String x:Key="Create.Settings.Waveform.Basic.PulseSetting.Type">类型</system:String>
     <system:String x:Key="Create.Settings.Waveform.Basic.PulseSetting.PulseCount">脉冲数</system:String>
     <system:String x:Key="Create.Settings.Waveform.Basic.PulseSetting.Detail">更多</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Basic.PulseSetting.Shifted">反相</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Basic.PulseSetting.Square">方波</system:String>
     <system:String x:Key="Create.Settings.Waveform.Basic.PulseSetting.HarmonicSetting">谐波设置</system:String>
     <system:String x:Key="Create.Settings.Waveform.Basic.PulseSetting.DiscreteSetting">离散设置</system:String>
 
@@ -476,11 +476,15 @@
 
     <system:String x:Key="Resource.Language.FriendlyNameConverter.BaseWaveType.Name.Sine">正弦波</system:String>
     <system:String x:Key="Resource.Language.FriendlyNameConverter.BaseWaveType.Name.Saw">三角波</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.BaseWaveType.Name.Square">方波</system:String>
     <system:String x:Key="Resource.Language.FriendlyNameConverter.BaseWaveType.Name.ModifiedSine1">改进型正弦波-1</system:String>
     <system:String x:Key="Resource.Language.FriendlyNameConverter.BaseWaveType.Name.ModifiedSine2">改进型正弦波-2</system:String>
     <system:String x:Key="Resource.Language.FriendlyNameConverter.BaseWaveType.Name.ModifiedSaw1">改进型三角波</system:String>
 
     <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseAlternative.Name.Default">默认</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseAlternative.Name.Shifted">反相</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseAlternative.Name.CP">中心脉冲</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseAlternative.Name.Square">方波</system:String>
     <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseAlternative.Name.Alt">Alt</system:String>
 
     <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseModeName.Name.Async">异步调制</system:String>

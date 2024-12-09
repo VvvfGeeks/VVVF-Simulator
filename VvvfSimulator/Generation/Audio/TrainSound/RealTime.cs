@@ -2,13 +2,13 @@
 using NAudio.Wave;
 using System;
 using System.Windows;
+using VvvfSimulator.Generation.Motor;
 using VvvfSimulator.GUI.Resource.Language;
 using VvvfSimulator.Properties;
 using VvvfSimulator.Yaml.VvvfSound;
 using static VvvfSimulator.Generation.Audio.GenerateRealTimeCommon;
 using static VvvfSimulator.Generation.Audio.TrainSound.Audio;
 using static VvvfSimulator.Generation.Audio.TrainSound.AudioFilter;
-using static VvvfSimulator.Generation.Motor.GenerateMotorCore;
 using static VvvfSimulator.Vvvf.Struct;
 using static VvvfSimulator.Yaml.TrainAudioSetting.YamlTrainSoundAnalyze;
 
@@ -52,10 +52,7 @@ namespace VvvfSimulator.Generation.Audio.TrainSound
         {
             Param.Quit = false;
             Param.VvvfSoundData = Sound;
-            Param.Motor = new MotorData() { 
-                SIM_SAMPLE_FREQ = Settings.Default.RealtimeTrainSamplingFrequency,
-                motor_Specification = Param.TrainSoundData.MotorSpec.Clone(),
-            };
+            Param.Motor = new GenerateMotorCore.Motor(Settings.Default.RealtimeTrainSamplingFrequency, Param.TrainSoundData.MotorSpec.Clone(), new());
 
             YamlTrainSoundData SoundConfiguration = Param.TrainSoundData;
 
