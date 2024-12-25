@@ -812,11 +812,10 @@ namespace VvvfSimulator.Vvvf
                         // SYNC N WITH SQUARE CONFIGURATION
                         if (Alternate == PulseAlternative.Square)
                         {
-                            PulseCount = PulseMode.PulseCount % 2 == 0 ? (int)(PulseMode.PulseCount * 1.5) : (int)((PulseMode.PulseCount - 1) * 1.5);
-                            double CarrierPhase = PulseMode.PulseCount % 2 == 0 ? M_PI_2 : 0;
-                            double CarrierVal = -Saw(PulseCount * SineX + CarrierPhase);
-                            double SawVal = -Saw(SineX);
-                            return ModulateSignal(SawVal > 0 ? Amplitude : -Amplitude, CarrierVal) * 2;
+                            PulseCount = PulseMode.PulseCount;
+                            PulseCount += PulseMode.PulseCount % 2 == 0 ? 0 : -1;
+                            double CarrierVal = 0.5 * ((PulseMode.PulseCount % 2 == 0 ? -1 : 1) * Saw(3 * PulseCount * SineX + M_PI_2) + 1);
+                            return ModulateSignal(SineX % M_2PI < M_PI ? Amplitude : -Amplitude, CarrierVal) * 2;
                         }
 
                         // SYNC N

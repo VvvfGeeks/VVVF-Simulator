@@ -198,8 +198,6 @@ namespace VvvfSimulator.Vvvf
                 return clone;
             }
         }
-
-        // "Pulse Mode" Configuration
         public class PulseModeConfiguration
         {
             public static int[] GetAvailablePulseCount(PulseTypeName PulseType, int Level)

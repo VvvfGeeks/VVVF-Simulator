@@ -484,7 +484,7 @@
     <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseAlternative.Name.Default">기본</system:String>
     <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseAlternative.Name.Shifted">위상 반전</system:String>
     <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseAlternative.Name.CP">센터 펄스</system:String>
-    <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseAlternative.Name.Square">구형파</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseAlternative.Name.Square">사각파</system:String>
     <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseAlternative.Name.Alt">변형</system:String>
 
     <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseModeName.Name.Async">비동기</system:String>
