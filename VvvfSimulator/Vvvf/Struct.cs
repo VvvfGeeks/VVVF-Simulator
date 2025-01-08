@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using static VvvfSimulator.Yaml.VvvfSound.YamlVvvfSoundData.YamlControlData;
 using static VvvfSimulator.Yaml.VvvfSound.YamlVvvfSoundData.YamlControlData.YamlPulseMode;
 
@@ -339,6 +338,7 @@ namespace VvvfSimulator.Vvvf
                             6 => AlternativesDefaultToX(1, [PulseAlternative.Shifted, PulseAlternative.CP, PulseAlternative.Square,]),
                             8 => AlternativesDefaultToX(1, [PulseAlternative.Shifted, PulseAlternative.CP, PulseAlternative.Square,]),
                             9 => AlternativesDefaultToX(1, [PulseAlternative.Shifted, PulseAlternative.CP, PulseAlternative.Square,]),
+                            11 => AlternativesDefaultToX(1, [PulseAlternative.Shifted, PulseAlternative.CP, PulseAlternative.Square,]),
                             13 => AlternativesDefaultToX(1, [PulseAlternative.Shifted, PulseAlternative.CP, PulseAlternative.Square,]),
                             17 => AlternativesDefaultToX(1, [PulseAlternative.Shifted, PulseAlternative.CP, PulseAlternative.Square,]),
                             _ => [PulseAlternative.Default, PulseAlternative.Shifted, PulseAlternative.CP, PulseAlternative.Square,],
@@ -414,6 +414,10 @@ namespace VvvfSimulator.Vvvf
                     {
                         PulseTypeName.SYNC => PulseMode.PulseCount switch
                         {
+                            3 => PulseMode.Alternative switch {
+                                PulseAlternative.Alt1 => [PulseDataKey.Phase],
+                                _ => [],
+                            },
                             6 => PulseMode.Alternative switch { 
                                 PulseAlternative.Alt1 => [PulseDataKey.PulseWidth],
                                 _ => [],
@@ -449,6 +453,17 @@ namespace VvvfSimulator.Vvvf
 
                 return [];
             }
+            public static double GetPulseDataKeyDefaultConstant(PulseDataKey Key)
+            {
+                return Key switch
+                {
+                    PulseDataKey.Dipolar => -1,
+                    PulseDataKey.Phase => 0,
+                    PulseDataKey.PulseWidth => 0.2,
+                    _ => 0,
+                };
+            }
+
         }
     }
 }

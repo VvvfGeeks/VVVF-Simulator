@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Windows.Controls;
 using VvvfSimulator.GUI.Resource.Language;
+using VvvfSimulator.Vvvf;
 using static VvvfSimulator.Yaml.VvvfSound.YamlVvvfSoundData.YamlControlData.YamlPulseMode;
 using static VvvfSimulator.Yaml.VvvfSound.YamlVvvfSoundData.YamlControlData.YamlPulseMode.PulseDataValue;
 
@@ -31,7 +32,14 @@ namespace VvvfSimulator.GUI.Create.Waveform.Common
         {
             ValueMode.ItemsSource = FriendlyNameConverter.GetPulseDataValueModeNames();
             if(Data.GetValueOrDefault(DataKey) == null)
-                Data.Add(DataKey, new());
+            {
+                PulseDataValue Value = new()
+                {
+                    Constant = Struct.PulseModeConfiguration.GetPulseDataKeyDefaultConstant(DataKey)
+                };
+                Data.Add(DataKey, Value);
+            }
+                
             ValueMode.SelectedValue = Data.GetValueOrDefault(DataKey, new()).Mode;
             SetSelectedMode((PulseDataValueMode)ValueMode.SelectedValue);
         }
@@ -48,9 +56,9 @@ namespace VvvfSimulator.GUI.Create.Waveform.Common
         {
             PulseDataValue Value = Data.GetValueOrDefault(DataKey, new());
             if (selected == PulseDataValueMode.Const)
-                dipolar_param.Navigate(new ControlConstSetting(typeof(PulseDataValue), Value));
+                ParameterFrame.Navigate(new ControlConstSetting(typeof(PulseDataValue), Value));
             else
-                dipolar_param.Navigate(new ControlMovingSetting(Value.MovingValue));
+                ParameterFrame.Navigate(new ControlMovingSetting(Value.MovingValue));
         }
     }
 }

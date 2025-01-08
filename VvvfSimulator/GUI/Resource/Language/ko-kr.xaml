@@ -236,8 +236,8 @@
     <system:String x:Key="Simulator.RealTime.Controller.Title">컨트롤러</system:String>
     <FontFamily x:Key="Simulator.RealTime.Controller.Font.Number">/GUI/Resource/Fonts/MPlus1Code/#M PLUS 1 Code</FontFamily>
     <FontFamily x:Key="Simulator.RealTime.Controller.Font.Notch">/GUI/Resource/Fonts/MPlus1Code/#M PLUS 1 Code</FontFamily>
-    <FontFamily x:Key="Simulator.RealTime.Controller.Font.Topic">/GUI/Resource/Fonts/Gasoek_One/#Gasoek One</FontFamily>
-    <FontFamily x:Key="Simulator.RealTime.Controller.Font.Unit">/GUI/Resource/Fonts/Gasoek_One/#Gasoek One</FontFamily>
+    <FontFamily x:Key="Simulator.RealTime.Controller.Font.Topic">/GUI/Resource/Fonts/GangWonEdu/#강원교육튼튼</FontFamily>
+    <FontFamily x:Key="Simulator.RealTime.Controller.Font.Unit">/GUI/Resource/Fonts/GangWonEdu/#강원교육튼튼</FontFamily>
     <system:String x:Key="Simulator.RealTime.Controller.SineFrequency">주파수</system:String>
     <system:String x:Key="Simulator.RealTime.Controller.Voltage">전압</system:String>
     <system:String x:Key="Simulator.RealTime.Controller.PulseState">펄스</system:String>
@@ -445,7 +445,8 @@
 
     <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseDataSetting.Key.Name.Dipolar">다이폴라</system:String>
     <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseDataSetting.Key.Name.PulseWidth">펄스 폭</system:String>
-
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseDataSetting.Key.Name.Phase">위상</system:String>
+    
     <system:String x:Key="Resource.Language.FriendlyNameConverter.ControlMovingSetting.MoveType.Name.Proportional">정비례</system:String>
     <system:String x:Key="Resource.Language.FriendlyNameConverter.ControlMovingSetting.MoveType.Name.InvProportional">반비례</system:String>
     <system:String x:Key="Resource.Language.FriendlyNameConverter.ControlMovingSetting.MoveType.Name.Pow2Exponential">지수</system:String>

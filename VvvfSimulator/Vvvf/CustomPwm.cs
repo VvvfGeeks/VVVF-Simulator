@@ -70,19 +70,29 @@ namespace VvvfSimulator.Vvvf
             int Index = (int)((M - MinimumModulationIndex) / ModulationIndexDivision);
             Index = Math.Clamp(Index, 0, (int)BlockCount - 1);
 
+            (double SwitchAngle, int Output)[] Alpha = new (double SwitchAngle, int Output)[SwitchCount];
+            bool Inverted = Polarity[Index];
+
+            for (int i = 0; i < SwitchCount; i++)
+            {
+                Alpha[i] = SwitchAngleTable[Index * SwitchCount + i];
+            }
+
+            return CustomPwm.GetPwm(ref Alpha, X, Inverted);
+        }
+    
+        public static int GetPwm(ref (double SwitchAngle, int Output)[] Alpha, double X, bool Inverted)
+        {
             X %= MyMath.M_2PI;
             int Orthant = (int)(X / MyMath.M_PI_2);
             double Angle = X % MyMath.M_PI_2;
 
             if ((Orthant & 0x01) == 1)
                 Angle = MyMath.M_PI_2 - Angle;
-
             int Pwm = 0;
-            bool Inverted = Polarity[Index];
-
-            for (int i = 0; i < SwitchCount; i++)
+            for (int i = 0; i < Alpha.Length; i++)
             {
-                (double SwitchAngle, int Output) = SwitchAngleTable[Index * SwitchCount + i];
+                (double SwitchAngle, int Output) = Alpha[i];
                 if (SwitchAngle <= Angle) Pwm = Output;
                 else break;
             }
