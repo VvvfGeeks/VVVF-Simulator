@@ -763,7 +763,7 @@ namespace VvvfSimulator.Vvvf
                         if(PulseCount == 3 && PulseMode.Alternative == PulseAlternative.Alt1)
                         {
                             double SineVal = Sine(SineX);
-                            double SawVal = Saw(SineX);
+                            double SawVal = Saw(SineX - Value.PulseData.GetValueOrDefault(PulseDataKey.Phase, 0) / 180.0 * M_PI);
                             double Pwm = (SineVal > 0 ? 1 : -1) * (Amplitude * 2 / 3.0 + 1 / 3.0);
                             double Negate = SawVal > 0 ? SawVal - 1 : SawVal + 1;
                             return ModulateSignal(Pwm, Negate) * 2;
@@ -778,6 +778,29 @@ namespace VvvfSimulator.Vvvf
                             Control.SetSawAngleFrequency(27 * SineAngleFrequency);
                             Control.SetSawTime(SineTime);
                             return (FixedSineX < M_PI * PulseMode.PulseCount / 54) ? ModulateSignal(SineVal, SawValue) * 2 : (int)(SineX / M_PI_2) % 4 > 1 ? 0 : 2;
+                        }
+
+                        // SYNC 11 ALTERNATE 1
+                        if (PulseCount == 11 && PulseMode.Alternative == PulseAlternative.Alt1)
+                        {
+                            (double, int)[] Alpha = [
+                                (M_PI / 15 - (1 + Math.Sqrt(5)) / (10 * Math.Sqrt(3)) * Amplitude - 2 * Sine(M_PI/30) / (5 * Math.Sqrt(3)) * Amplitude, 2),
+                                (M_PI / 15 + (Math.Sqrt(5) - 1) / (10 * Math.Sqrt(3)) * Amplitude + 2 * Sine(M_PI*7.0/30.0) / (5 * Math.Sqrt(3)) * Amplitude, 0),
+                                (M_PI / 6 - 1 / (5 * Math.Sqrt(3)) * Amplitude, 2),
+                                (M_PI * 2.0 / 5 - 2 * Sine(M_PI/30) / (5 * Math.Sqrt(3)) * Amplitude, 0),
+                                (M_PI * 2.0 / 5 + (Math.Sqrt(5) - 1) / (10 * Math.Sqrt(3)) * Amplitude, 2),
+                            ];
+
+                            if (Amplitude >= 0.9927) Alpha[0] = (0, 2);
+                            if(Amplitude >= 0.9203069589)
+                            {
+                                Alpha[1] = (0.417331, 0);
+                                Alpha[2] = (0.417331, 2);
+                                Alpha[3] = (1.23442104526 + 0.278769982056 * (Amplitude - 0.9203069589), 0);
+                                Alpha[4] = (1.32231416347 - 0.824126360283 * (Amplitude - 0.9203069589), 2);
+                            }
+
+                            return CustomPwm.GetPwm(ref Alpha, SineX, false);
                         }
 
                         // SYNC 6 8 ALTERNATE 1
@@ -826,7 +849,7 @@ namespace VvvfSimulator.Vvvf
                                 SawVal = -SawVal;
                             Control.SetSawAngleFrequency(SineAngleFrequency * PulseMode.PulseCount);
                             Control.SetSawTime(SineTime);
-                            return ModulateSignal(SineVal, SawVal) * 2; ;
+                            return ModulateSignal(SineVal, SawVal) * 2;
                         }
                     }
                 case PulseTypeName.HO:
@@ -891,6 +914,12 @@ namespace VvvfSimulator.Vvvf
                             {
                                 PulseAlternative.Default => CustomPwmPresets.L2She15Default.GetPwm(Amplitude, SineX),
                                 PulseAlternative.Alt1 => CustomPwmPresets.L2She15Alt1.GetPwm(Amplitude, SineX),
+                                _ => 0,
+                            },
+                            17 => PulseMode.Alternative switch
+                            {
+                                PulseAlternative.Default => CustomPwmPresets.L2She17Default.GetPwm(Amplitude, SineX),
+                                PulseAlternative.Alt1 => CustomPwmPresets.L2She17Alt1.GetPwm(Amplitude, SineX),
                                 _ => 0,
                             },
                             _ => 0,
