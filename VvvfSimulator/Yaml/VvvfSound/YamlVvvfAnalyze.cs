@@ -306,7 +306,7 @@ namespace VvvfSimulator.Yaml.VvvfSound
                 public Dictionary<PulseDataKey, PulseDataValue> PulseData { get; set; } = [];
                 public enum PulseDataKey
                 {
-                    Dipolar, PulseWidth
+                    Dipolar, PulseWidth, Phase
                 }
                 public class PulseDataValue
                 {

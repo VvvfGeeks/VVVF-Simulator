@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using static VvvfSimulator.Yaml.VvvfSound.YamlVvvfSoundData.YamlControlData;
 using static VvvfSimulator.Yaml.VvvfSound.YamlVvvfSoundData.YamlControlData.YamlPulseMode;
 
@@ -208,7 +207,7 @@ namespace VvvfSimulator.Vvvf
                     {
                         PulseTypeName.SYNC => [-1],
                         PulseTypeName.HO => [5,7,9,11,13,15,17],
-                        PulseTypeName.SHE => [3,5,7,9,11,13,15],
+                        PulseTypeName.SHE => [3,5,7,9,11,13,15,17],
                         PulseTypeName.CHM => [3,5,7,9,11,13,15,17,19,21,23,25],
                         _ => [],
                     };
@@ -339,6 +338,7 @@ namespace VvvfSimulator.Vvvf
                             6 => AlternativesDefaultToX(1, [PulseAlternative.Shifted, PulseAlternative.CP, PulseAlternative.Square,]),
                             8 => AlternativesDefaultToX(1, [PulseAlternative.Shifted, PulseAlternative.CP, PulseAlternative.Square,]),
                             9 => AlternativesDefaultToX(1, [PulseAlternative.Shifted, PulseAlternative.CP, PulseAlternative.Square,]),
+                            11 => AlternativesDefaultToX(1, [PulseAlternative.Shifted, PulseAlternative.CP, PulseAlternative.Square,]),
                             13 => AlternativesDefaultToX(1, [PulseAlternative.Shifted, PulseAlternative.CP, PulseAlternative.Square,]),
                             17 => AlternativesDefaultToX(1, [PulseAlternative.Shifted, PulseAlternative.CP, PulseAlternative.Square,]),
                             _ => [PulseAlternative.Default, PulseAlternative.Shifted, PulseAlternative.CP, PulseAlternative.Square,],
@@ -381,7 +381,8 @@ namespace VvvfSimulator.Vvvf
                             9 => [PulseAlternative.Default, PulseAlternative.Alt1, PulseAlternative.Alt2],
                             11 => [PulseAlternative.Default, PulseAlternative.Alt1],
                             13 => [PulseAlternative.Default, PulseAlternative.Alt1],
-                            15 => [PulseAlternative.Default, PulseAlternative.Alt1],
+                            15 => AlternativesDefaultToX(1, []),
+                            17 => AlternativesDefaultToX(1, []),
                             _ => [PulseAlternative.Default],
                         };
                     }
@@ -414,6 +415,10 @@ namespace VvvfSimulator.Vvvf
                     {
                         PulseTypeName.SYNC => PulseMode.PulseCount switch
                         {
+                            3 => PulseMode.Alternative switch {
+                                PulseAlternative.Alt1 => [PulseDataKey.Phase],
+                                _ => [],
+                            },
                             6 => PulseMode.Alternative switch { 
                                 PulseAlternative.Alt1 => [PulseDataKey.PulseWidth],
                                 _ => [],
@@ -449,6 +454,17 @@ namespace VvvfSimulator.Vvvf
 
                 return [];
             }
+            public static double GetPulseDataKeyDefaultConstant(PulseDataKey Key)
+            {
+                return Key switch
+                {
+                    PulseDataKey.Dipolar => -1,
+                    PulseDataKey.Phase => 0,
+                    PulseDataKey.PulseWidth => 0.2,
+                    _ => 0,
+                };
+            }
+
         }
     }
 }
