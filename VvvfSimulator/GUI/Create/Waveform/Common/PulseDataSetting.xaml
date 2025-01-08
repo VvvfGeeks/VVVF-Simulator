@@ -50,7 +50,7 @@
                         <Label Content="{DynamicResource Create.Settings.Waveform.Common.PulseDataSetting.Param}" Style="{DynamicResource SubTitleBarText}"/>
                     </Border>
                     <Border Grid.Column="1" Background="{DynamicResource BackgroundBrush}" HorizontalAlignment="Stretch" CornerRadius="0,0,25,0">
-                        <Frame x:Name="dipolar_param" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"  />
+                        <Frame x:Name="ParameterFrame" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"  />
                     </Border>
                 </Grid>
 
