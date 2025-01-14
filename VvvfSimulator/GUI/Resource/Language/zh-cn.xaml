@@ -498,9 +498,9 @@
     <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseHarmonicType.Name.Saw">三角波</system:String>
     <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseHarmonicType.Name.Square">方波</system:String>
 
-    <system:String x:Key="Resource.Language.FriendlyNameConverter.DiscreteTimeMode.Name.Left">Left</system:String>
-    <system:String x:Key="Resource.Language.FriendlyNameConverter.DiscreteTimeMode.Name.Middle">Middle</system:String>
-    <system:String x:Key="Resource.Language.FriendlyNameConverter.DiscreteTimeMode.Name.Right">Right</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.DiscreteTimeMode.Name.Left">靠左</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.DiscreteTimeMode.Name.Middle">居中</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.DiscreteTimeMode.Name.Right">靠右</system:String>
 
     <system:String x:Key="Resource.Language.FriendlyNameConverter.YamlAsyncParameterRandomValueMode.Name.Const">恒定</system:String>
     <system:String x:Key="Resource.Language.FriendlyNameConverter.YamlAsyncParameterRandomValueMode.Name.Moving">可变</system:String>
