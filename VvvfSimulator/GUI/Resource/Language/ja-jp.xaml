@@ -445,6 +445,7 @@
 
     <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseDataSetting.Key.Name.Dipolar">ダイポーラ</system:String>
     <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseDataSetting.Key.Name.PulseWidth">パルス幅</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseDataSetting.Key.Name.Phase">位相</system:String>
 
     <system:String x:Key="Resource.Language.FriendlyNameConverter.ControlMovingSetting.MoveType.Name.Proportional">比例</system:String>
     <system:String x:Key="Resource.Language.FriendlyNameConverter.ControlMovingSetting.MoveType.Name.InvProportional">反比例</system:String>

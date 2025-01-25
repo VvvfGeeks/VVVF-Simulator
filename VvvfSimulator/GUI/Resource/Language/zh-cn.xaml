@@ -445,7 +445,8 @@
 
     <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseDataSetting.Key.Name.Dipolar">极性</system:String>
     <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseDataSetting.Key.Name.PulseWidth">脉冲宽度</system:String>
-
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseDataSetting.Key.Name.Phase">相位</system:String>
+    
     <system:String x:Key="Resource.Language.FriendlyNameConverter.ControlMovingSetting.MoveType.Name.Proportional">线性</system:String>
     <system:String x:Key="Resource.Language.FriendlyNameConverter.ControlMovingSetting.MoveType.Name.InvProportional">反比例</system:String>
     <system:String x:Key="Resource.Language.FriendlyNameConverter.ControlMovingSetting.MoveType.Name.Pow2Exponential">指数</system:String>
