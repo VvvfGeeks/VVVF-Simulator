@@ -514,7 +514,7 @@
     <system:String x:Key="Resource.Language.FriendlyNameConverter.YamlAsyncParameterVibratoMode.Name.Const">일정</system:String>
     <system:String x:Key="Resource.Language.FriendlyNameConverter.YamlAsyncParameterVibratoMode.Name.Moving">가변</system:String>
 
-    <system:String x:Key="Resource.Language.FriendlyNameConverter.MyMath.EquationSolver.EquationSolverType.Name.Newton">뉴턴 방법</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.MyMath.EquationSolver.EquationSolverType.Name.Newton">뉴턴법</system:String>
     <system:String x:Key="Resource.Language.FriendlyNameConverter.MyMath.EquationSolver.EquationSolverType.Name.Bisection">이분법</system:String>
 
     <system:String x:Key="Resource.Language.FriendlyNameConverter.Bool.True">예</system:String>

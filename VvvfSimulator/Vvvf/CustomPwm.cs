@@ -433,6 +433,8 @@ namespace VvvfSimulator.Vvvf
                 _L2She13Alt1 = new(Assembly.GetExecutingAssembly().GetManifestResourceStream("VvvfSimulator.Vvvf.SwitchAngle.L2She13Alt1.bin"));
                 _L2She15Default = new(Assembly.GetExecutingAssembly().GetManifestResourceStream("VvvfSimulator.Vvvf.SwitchAngle.L2She15Default.bin"));
                 _L2She15Alt1 = new(Assembly.GetExecutingAssembly().GetManifestResourceStream("VvvfSimulator.Vvvf.SwitchAngle.L2She15Alt1.bin"));
+                _L2She17Default = new(Assembly.GetExecutingAssembly().GetManifestResourceStream("VvvfSimulator.Vvvf.SwitchAngle.L2She17Default.bin"));
+                _L2She17Alt1 = new(Assembly.GetExecutingAssembly().GetManifestResourceStream("VvvfSimulator.Vvvf.SwitchAngle.L2She17Alt1.bin"));
 
                 _L3She1Default = new(Assembly.GetExecutingAssembly().GetManifestResourceStream("VvvfSimulator.Vvvf.SwitchAngle.L3She1Default.bin"));
                 _L3She3Default = new(Assembly.GetExecutingAssembly().GetManifestResourceStream("VvvfSimulator.Vvvf.SwitchAngle.L3She3Default.bin"));
@@ -776,6 +778,8 @@ namespace VvvfSimulator.Vvvf
         private static CustomPwm? _L2She13Alt1;
         private static CustomPwm? _L2She15Default;
         private static CustomPwm? _L2She15Alt1;
+        private static CustomPwm? _L2She17Default;
+        private static CustomPwm? _L2She17Alt1;
 
         private static CustomPwm? _L3She1Default;
         private static CustomPwm? _L3She3Default;
@@ -1112,6 +1116,8 @@ namespace VvvfSimulator.Vvvf
         public static CustomPwm L2She13Alt1 { get => _L2She13Alt1 ?? new(null); }
         public static CustomPwm L2She15Default { get => _L2She15Default ?? new(null); }
         public static CustomPwm L2She15Alt1 { get => _L2She15Alt1 ?? new(null); }
+        public static CustomPwm L2She17Default { get => _L2She17Default ?? new(null); }
+        public static CustomPwm L2She17Alt1 { get => _L2She17Alt1 ?? new(null); }
 
         public static CustomPwm L3She1Default { get => _L3She1Default ?? new(null); }
         public static CustomPwm L3She3Default { get => _L3She3Default ?? new(null); }

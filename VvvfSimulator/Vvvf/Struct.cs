@@ -207,7 +207,7 @@ namespace VvvfSimulator.Vvvf
                     {
                         PulseTypeName.SYNC => [-1],
                         PulseTypeName.HO => [5,7,9,11,13,15,17],
-                        PulseTypeName.SHE => [3,5,7,9,11,13,15],
+                        PulseTypeName.SHE => [3,5,7,9,11,13,15,17],
                         PulseTypeName.CHM => [3,5,7,9,11,13,15,17,19,21,23,25],
                         _ => [],
                     };
@@ -381,7 +381,8 @@ namespace VvvfSimulator.Vvvf
                             9 => [PulseAlternative.Default, PulseAlternative.Alt1, PulseAlternative.Alt2],
                             11 => [PulseAlternative.Default, PulseAlternative.Alt1],
                             13 => [PulseAlternative.Default, PulseAlternative.Alt1],
-                            15 => [PulseAlternative.Default, PulseAlternative.Alt1],
+                            15 => AlternativesDefaultToX(1, []),
+                            17 => AlternativesDefaultToX(1, []),
                             _ => [PulseAlternative.Default],
                         };
                     }

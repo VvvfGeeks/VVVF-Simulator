@@ -916,6 +916,12 @@ namespace VvvfSimulator.Vvvf
                                 PulseAlternative.Alt1 => CustomPwmPresets.L2She15Alt1.GetPwm(Amplitude, SineX),
                                 _ => 0,
                             },
+                            17 => PulseMode.Alternative switch
+                            {
+                                PulseAlternative.Default => CustomPwmPresets.L2She17Default.GetPwm(Amplitude, SineX),
+                                PulseAlternative.Alt1 => CustomPwmPresets.L2She17Alt1.GetPwm(Amplitude, SineX),
+                                _ => 0,
+                            },
                             _ => 0,
                         };
                     }

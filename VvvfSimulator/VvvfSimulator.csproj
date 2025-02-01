@@ -382,7 +382,9 @@
 		<EmbeddedResource Include="Vvvf\SwitchAngle\L3Chm21Alt20.bin" />
 		<EmbeddedResource Include="Vvvf\SwitchAngle\L3Chm21Alt21.bin" />
 		<EmbeddedResource Include="Vvvf\SwitchAngle\L3Chm21Alt22.bin" />
-				
+
+		<EmbeddedResource Include="Vvvf\SwitchAngle\L2She17Alt1.bin" />
+		<EmbeddedResource Include="Vvvf\SwitchAngle\L2She17Default.bin" />
 		<EmbeddedResource Include="Vvvf\SwitchAngle\L2She15Alt1.bin" />
 		<EmbeddedResource Include="Vvvf\SwitchAngle\L2She15Default.bin" />
 		<EmbeddedResource Include="Vvvf\SwitchAngle\L2She13Alt1.bin" />
