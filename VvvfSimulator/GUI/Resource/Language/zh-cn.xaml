@@ -28,7 +28,7 @@
     <system:String x:Key="Resource.Language.FriendlyNameConverter.ColorTheme.Name.Light">浅色</system:String>
     <system:String x:Key="Resource.Language.FriendlyNameConverter.ColorTheme.Name.Dark">深色</system:String>
     
-    <system:String x:Key="MainWindow.Title">VVVF Simulator</system:String><!--不用翻译-->
+    <system:String x:Key="MainWindow.Title">VVVF Simulator</system:String>
 
     <system:String x:Key="MainWindow.Menu.File">文件</system:String>
     <system:String x:Key="MainWindow.Menu.File.Save">保存</system:String>
@@ -40,7 +40,7 @@
 
     <system:String x:Key="MainWindow.Menu.Generate">生成</system:String>
     <system:String x:Key="MainWindow.Menu.Generate.Audio">音频</system:String>
-    <system:String x:Key="MainWindow.Menu.Generate.Audio.VVVF">VVVF</system:String><!--不用翻译-->
+    <system:String x:Key="MainWindow.Menu.Generate.Audio.VVVF">VVVF</system:String>
     <system:String x:Key="MainWindow.Menu.Generate.Audio.VVVF.Line">线电压音频</system:String>
     <system:String x:Key="MainWindow.Menu.Generate.Audio.VVVF.Phases">相电压音频</system:String>
     <system:String x:Key="MainWindow.Menu.Generate.Audio.VVVF.PhaseCurrent">相电流音频</system:String>
@@ -65,7 +65,7 @@
     <system:String x:Key="MainWindow.Menu.Generate.Image.FFT.Original">样式 1</system:String>
 
     <system:String x:Key="MainWindow.Menu.RealTime">实时模拟</system:String>
-    <system:String x:Key="MainWindow.Menu.RealTime.VVVF">VVVF</system:String><!--不用翻译-->
+    <system:String x:Key="MainWindow.Menu.RealTime.VVVF">VVVF</system:String>
     <system:String x:Key="MainWindow.Menu.RealTime.VVVF.USB">VVVF-USB 直通</system:String>
     <system:String x:Key="MainWindow.Menu.RealTime.VVVF.USB.Error.Title">出现错误</system:String>
     <system:String x:Key="MainWindow.Menu.RealTime.VVVF.USB.Error.Message">端口无效。</system:String>
@@ -328,7 +328,7 @@
     <system:String x:Key="Mascon.ControlEditor.Menu.Edit.Reset">重置</system:String>
     <system:String x:Key="Mascon.ControlEditor.Menu.Edit.Midi">加载 MIDI</system:String>
 
-    <system:String x:Key="Mascon.ControlEditor.Message.MidiConvertError">该 Midi 无法转换</system:String>
+    <system:String x:Key="Mascon.ControlEditor.Message.MidiConvertError">该 MIDI 无法转换</system:String>
 
     <system:String x:Key="Mascon.ControlEditor.Message.File.Load.Ok.Title"></system:String>
     <system:String x:Key="Mascon.ControlEditor.Message.File.Load.Ok.Message">操作成功完成。</system:String>

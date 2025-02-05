@@ -180,7 +180,7 @@ namespace VvvfSimulator.Generation.Video.Hexagon
             }
 
             Font text_font = new(
-                new FontFamily("Fugaz One"),
+                FugazOneFont,
                 40,
                 FontStyle.Bold,
                 GraphicsUnit.Pixel);

@@ -803,12 +803,19 @@ namespace VvvfSimulator.Vvvf
                             return CustomPwm.GetPwm(ref Alpha, SineX, false);
                         }
 
-                        // SYNC 6 8 ALTERNATE 1
-                        if ((PulseCount == 6 || PulseCount == 8) && Alternate == PulseAlternative.Alt1)
+                        // SYNC 9 ALTERNATE 2
+                        if ((PulseCount == 9) && Alternate == PulseAlternative.Alt2)
                         {
-                            int C = PulseCount == 6 ? 6 : 9;
-                            double SawVal = Saw(C * SineX + M_PI_2);
-                            int Orthant = (int)((SineX % M_2PI) / M_PI_2);
+                            ((double SwitchAngle, int Output)[] Alpha, _) = CustomPwmPresets.L2Chm11Alt6.GetAlpha(Amplitude * 1.0731);
+                            Alpha[3].SwitchAngle = M_PI_3 - Alpha[0].SwitchAngle;
+                            return CustomPwm.GetPwm(ref Alpha, SineX, true);
+                        }
+
+                        // SYNC 6 ALTERNATE 1
+                        if ((PulseCount == 6) && Alternate == PulseAlternative.Alt1)
+                        {
+                            double SawVal = Saw(6 * SineX + M_PI_2);
+                            int Orthant = (int)(SineX % M_2PI / M_PI_2);
                             double FixX = Orthant % 2 == 1 ? M_PI_2 - (SineX % M_PI_2) : (SineX % M_PI_2);
                             double Sig = Orthant > 1 ? 1 : -1;
                             if (FixX > Value.PulseData.GetValueOrDefault(PulseDataKey.PulseWidth, 0)) Sig = Orthant > 1 ? -1 : 1;

@@ -152,10 +152,10 @@ namespace VvvfSimulator.Generation.Video.ControlInfo
 
             g.FillRectangle(new SolidBrush(back_color), 400, 0, 1520, 100);
 
-            Font stat_Font = new(new FontFamily("Fugaz One"), 40, FontStyle.Regular, GraphicsUnit.Pixel);
-            Font topic_Font = new(new FontFamily("Fugaz One"), 40, FontStyle.Regular, GraphicsUnit.Pixel);
-            Font value_Font = new(new FontFamily("DSEG14 Modern"), 40, FontStyle.Italic, GraphicsUnit.Pixel);
-            Font unit_font = new(new FontFamily("Fugaz One"), 25, FontStyle.Regular, GraphicsUnit.Pixel);
+            Font stat_Font = new(FugazOneFont, 40, FontStyle.Regular, GraphicsUnit.Pixel);
+            Font topic_Font = new(FugazOneFont, 40, FontStyle.Regular, GraphicsUnit.Pixel);
+            Font value_Font = new(DSEG14ModernItalicFont, 40, FontStyle.Regular, GraphicsUnit.Pixel);
+            Font unit_font = new(FugazOneFont, 25, FontStyle.Regular, GraphicsUnit.Pixel);
 
             SizeF stat_str_Size = g.MeasureString(stat_str, stat_Font);
             g.DrawString(stat_str, stat_Font, new SolidBrush(stat_str_color), new PointF((400 - stat_str_Size.Width) / 2 , (100 - stat_str_Size.Height) / 2 + 5));

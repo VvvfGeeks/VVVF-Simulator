@@ -86,6 +86,7 @@ namespace VvvfSimulator
         {
             if (App.HasArgs) LoadYaml(App.StartupArgs[0]);
             CustomPwmPresets.Load();
+            LoadFont();
         }
 
         private void SettingButtonClick(object sender, RoutedEventArgs e)

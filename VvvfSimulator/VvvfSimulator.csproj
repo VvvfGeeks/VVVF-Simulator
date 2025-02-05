@@ -10,7 +10,7 @@
 		<Authors>VvvfGeeks</Authors>
 		<Description>A simple application to simulate VVVF sound</Description>
 		<PackageIcon>vvvf-simulator.png</PackageIcon>
-		<AllowUnsafeBlocks>False</AllowUnsafeBlocks>
+		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 		<AssemblyVersion>1.9.1.2</AssemblyVersion>
 		<ApplicationManifest>app.manifest</ApplicationManifest>
 	</PropertyGroup>

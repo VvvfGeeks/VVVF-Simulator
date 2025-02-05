@@ -107,7 +107,7 @@ namespace VvvfSimulator.Generation.Video.ControlInfo
 
             g.FillRectangle(gb, 0, 0, image_width, image_height);
 
-            FontFamily title_fontFamily = new("Fugaz One");
+            FontFamily title_fontFamily = FugazOneFont;
             Font title_fnt = new(
                title_fontFamily,
                40,
@@ -198,7 +198,7 @@ namespace VvvfSimulator.Generation.Video.ControlInfo
                 LinearGradientBrush gb = new(new System.Drawing.Point(0, 0), new System.Drawing.Point(image_width, image_height), Color.FromArgb(0xFF, 0xFF, 0xFF), Color.FromArgb(0xFD, 0xE0, 0xE0));
                 g.FillRectangle(gb, 0, 0, image_width, image_height);
 
-                FontFamily simulator_title = new("Fugaz One");
+                FontFamily simulator_title = FugazOneFont;
                 Font simulator_title_fnt = new(
                     simulator_title,
                     40,
@@ -210,7 +210,7 @@ namespace VvvfSimulator.Generation.Video.ControlInfo
                     FontStyle.Bold,
                     GraphicsUnit.Pixel);
 
-                FontFamily title_fontFamily = new("Fugaz One");
+                FontFamily title_fontFamily = FugazOneFont;
                 Font title_fnt = new(
                     title_fontFamily,
                     40,
