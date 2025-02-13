@@ -170,4 +170,4 @@ https://github.com/VvvfGeeks/VVVF-Simulator
     - [turtle713](https://github.com/intel713)
  - 중국어
     - [02001](https://github.com/Jerethon)
-    - [YAJ-54S12G-1](https://github.com/YJ-321-C4)
+    - [YAJ-54S12G-1](https://github.com/YJ-305-A2)
