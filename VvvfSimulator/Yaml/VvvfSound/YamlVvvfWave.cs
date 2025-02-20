@@ -254,7 +254,7 @@ namespace VvvfSimulator.Yaml.VvvfSound
                     else
                         interval = GetMovingValue(vibrato_data.Interval.MovingValue, original_wave_stat);
 
-                    carrier_freq_val = GetVibratoFrequency(lowest, highest, interval, vibrato_data.Continuous, Control);
+                    carrier_freq_val = GetVibratoFrequency(lowest, highest, interval, vibrato_data.BaseWave, Control);
                 }
 
                 //

@@ -333,9 +333,11 @@ namespace VvvfSimulator.Vvvf
                     {
                         return PulseCount switch
                         {
+                            1 => AlternativesDefaultToX(2, []),
                             3 => AlternativesDefaultToX(1, [PulseAlternative.Shifted, PulseAlternative.CP, PulseAlternative.Square,]),
                             5 => AlternativesDefaultToX(1, [PulseAlternative.Shifted, PulseAlternative.CP, PulseAlternative.Square,]),
                             6 => AlternativesDefaultToX(1, [PulseAlternative.Shifted, PulseAlternative.CP, PulseAlternative.Square,]),
+                            8 => AlternativesDefaultToX(1, [PulseAlternative.Shifted, PulseAlternative.CP, PulseAlternative.Square,]),
                             9 => AlternativesDefaultToX(2, [PulseAlternative.Shifted, PulseAlternative.CP, PulseAlternative.Square,]),
                             11 => AlternativesDefaultToX(1, [PulseAlternative.Shifted, PulseAlternative.CP, PulseAlternative.Square,]),
                             13 => AlternativesDefaultToX(1, [PulseAlternative.Shifted, PulseAlternative.CP, PulseAlternative.Square,]),
@@ -353,7 +355,7 @@ namespace VvvfSimulator.Vvvf
                     {
                         return PulseCount switch
                         {
-                            3 => AlternativesDefaultToX(1, []),
+                            3 => AlternativesDefaultToX(2, []),
                             5 => AlternativesDefaultToX(3, []),
                             7 => AlternativesDefaultToX(5, []),
                             9 => AlternativesDefaultToX(8, []),

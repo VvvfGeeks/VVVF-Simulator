@@ -241,7 +241,12 @@
     <system:String x:Key="Simulator.RealTime.Controller.SineFrequency">频率</system:String>
     <system:String x:Key="Simulator.RealTime.Controller.Voltage">电压</system:String>
     <system:String x:Key="Simulator.RealTime.Controller.PulseState">调制方式</system:String>
-    
+
+    <system:String x:Key="Simulator.RealTime.Controller.MenuItem.WaveForm">输出波形</system:String>
+    <system:String x:Key="Simulator.RealTime.Controller.MenuItem.WaveForm.Line">线电压</system:String>
+    <system:String x:Key="Simulator.RealTime.Controller.MenuItem.WaveForm.Phase">相电压</system:String>
+    <system:String x:Key="Simulator.RealTime.Controller.MenuItem.WaveForm.PhaseCurrent">相电流</system:String>
+
     <system:String x:Key="Simulator.RealTime.Controller.MenuItem.DeviceSetting">设置</system:String>
 
     <system:String x:Key="Simulator.RealTime.Controller.Design2.MenuItem.CalculateDivision">计算精度设置</system:String>
@@ -511,6 +516,12 @@
     <system:String x:Key="Resource.Language.FriendlyNameConverter.YamlAsyncCarrierMode.Name.Vibrato">振动</system:String>
     <system:String x:Key="Resource.Language.FriendlyNameConverter.YamlAsyncCarrierMode.Name.Table">列表</system:String>
 
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.YamlAsyncParameterVibratoBaseWaveType.Name.Sine">正弦波</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.YamlAsyncParameterVibratoBaseWaveType.Name.Saw">三角波</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.YamlAsyncParameterVibratoBaseWaveType.Name.Square">方波</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.YamlAsyncParameterVibratoBaseWaveType.Name.ModifiedSaw1">锯齿波</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.YamlAsyncParameterVibratoBaseWaveType.Name.ModifiedSaw2">改进型锯齿波-1</system:String>
+    
     <system:String x:Key="Resource.Language.FriendlyNameConverter.YamlAsyncParameterVibratoMode.Name.Const">恒定</system:String>
     <system:String x:Key="Resource.Language.FriendlyNameConverter.YamlAsyncParameterVibratoMode.Name.Moving">可变</system:String>
 

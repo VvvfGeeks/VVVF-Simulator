@@ -134,6 +134,7 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="25"/>
                 <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="69"/>
                 <ColumnDefinition Width="46"/>
                 <ColumnDefinition Width="46"/>
                 <ColumnDefinition Width="46"/>
@@ -219,9 +220,10 @@
                     <MenuItem Header="{DynamicResource MainWindow.Menu.Help.About}" Tag="About" Click="Help_Menu_Click"/>
                 </MenuItem>
             </Menu>
-            <Button Grid.Column="2" Tag="Minimize" Style="{DynamicResource WindowMimizeButton}" Click="OnWindowControlButtonClick"/>
-            <Button Grid.Column="3" Tag="Maximize" Style="{DynamicResource WindowMaximizeButton}" Click="OnWindowControlButtonClick"/>
-            <Button Grid.Column="4" Tag="Close" Style="{DynamicResource WindowCloseButton}" Click="OnWindowControlButtonClick"/>
+            <Label Grid.Column="2" x:Name="VersionLabel" Content="vX.X.X.X" HorizontalContentAlignment="Center" VerticalContentAlignment="Top" Foreground="{DynamicResource BackgroundTextBrush}" FontFamily="/GUI/Resource/Fonts/MPlus1Code/#M PLUS 1 Code" FontSize="14" VerticalAlignment="Top" HorizontalAlignment="Center"/>
+            <Button Grid.Column="3" Tag="Minimize" Style="{DynamicResource WindowMimizeButton}" Click="OnWindowControlButtonClick"/>
+            <Button Grid.Column="4" Tag="Maximize" Style="{DynamicResource WindowMaximizeButton}" Click="OnWindowControlButtonClick"/>
+            <Button Grid.Column="5" Tag="Close" Style="{DynamicResource WindowCloseButton}" Click="OnWindowControlButtonClick"/>
         </Grid>
         <Grid x:Name="Hider" Background="#7F000000" Visibility="{Binding Blocked, Converter={StaticResource BooleanToVisibilityConverter}}" Grid.RowSpan="2" d:IsHidden="True"/>
     </Grid>

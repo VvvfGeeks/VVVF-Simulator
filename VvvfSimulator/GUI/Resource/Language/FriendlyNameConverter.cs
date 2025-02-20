@@ -10,6 +10,7 @@ using static VvvfSimulator.Yaml.TrainAudioSetting.YamlTrainSoundAnalyze.YamlTrai
 using static VvvfSimulator.Yaml.VvvfSound.YamlVvvfSoundData.YamlControlData;
 using static VvvfSimulator.Yaml.VvvfSound.YamlVvvfSoundData.YamlControlData.YamlAmplitude.AmplitudeParameter;
 using static VvvfSimulator.Yaml.VvvfSound.YamlVvvfSoundData.YamlControlData.YamlAsync.CarrierFrequency;
+using static VvvfSimulator.Yaml.VvvfSound.YamlVvvfSoundData.YamlControlData.YamlAsync.CarrierFrequency.YamlAsyncParameterCarrierFreqVibrato;
 using static VvvfSimulator.Yaml.VvvfSound.YamlVvvfSoundData.YamlControlData.YamlAsync.CarrierFrequency.YamlAsyncParameterCarrierFreqVibrato.YamlAsyncParameterVibratoValue;
 using static VvvfSimulator.Yaml.VvvfSound.YamlVvvfSoundData.YamlControlData.YamlAsync.RandomModulation.YamlAsyncParameterRandomValue;
 using static VvvfSimulator.Yaml.VvvfSound.YamlVvvfSoundData.YamlControlData.YamlMovingValue;
@@ -372,6 +373,26 @@ namespace VvvfSimulator.GUI.Resource.Language
             {
                 YamlAsyncParameterVibratoMode.Const => LanguageManager.GetString("Resource.Language.FriendlyNameConverter.YamlAsyncParameterVibratoMode.Name.Const"),
                 _ => LanguageManager.GetString("Resource.Language.FriendlyNameConverter.YamlAsyncParameterVibratoMode.Name.Moving"),
+            };
+        }
+        public static Dictionary<YamlAsyncParameterVibratoBaseWaveType, string> GetYamlAsyncParameterVibratoBaseWaveTypeNames()
+        {
+            Dictionary<YamlAsyncParameterVibratoBaseWaveType, string> Names = [];
+            foreach (YamlAsyncParameterVibratoBaseWaveType type in (YamlAsyncParameterVibratoBaseWaveType[])Enum.GetValues(typeof(YamlAsyncParameterVibratoBaseWaveType)))
+            {
+                Names.Add(type, GetYamlAsyncParameterVibratoBaseWaveTypeName(type));
+            }
+            return Names;
+        }
+        public static string GetYamlAsyncParameterVibratoBaseWaveTypeName(YamlAsyncParameterVibratoBaseWaveType Type)
+        {
+            return Type switch
+            {
+                YamlAsyncParameterVibratoBaseWaveType.Sine => LanguageManager.GetString("Resource.Language.FriendlyNameConverter.YamlAsyncParameterVibratoBaseWaveType.Name.Sine"),
+                YamlAsyncParameterVibratoBaseWaveType.Saw => LanguageManager.GetString("Resource.Language.FriendlyNameConverter.YamlAsyncParameterVibratoBaseWaveType.Name.Saw"),
+                YamlAsyncParameterVibratoBaseWaveType.Square => LanguageManager.GetString("Resource.Language.FriendlyNameConverter.YamlAsyncParameterVibratoBaseWaveType.Name.Square"),
+                YamlAsyncParameterVibratoBaseWaveType.ModifiedSaw1 => LanguageManager.GetString("Resource.Language.FriendlyNameConverter.YamlAsyncParameterVibratoBaseWaveType.Name.ModifiedSaw1"),
+                _ => LanguageManager.GetString("Resource.Language.FriendlyNameConverter.YamlAsyncParameterVibratoBaseWaveType.Name.ModifiedSaw2"),
             };
         }
 

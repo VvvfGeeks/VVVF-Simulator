@@ -456,7 +456,7 @@ namespace VvvfSimulator.Yaml.VvvfSound
                         public YamlAsyncParameterVibratoValue Highest { get; set; } = new();
                         public YamlAsyncParameterVibratoValue Lowest { get; set; } = new();
                         public YamlAsyncParameterVibratoValue Interval { get; set; } = new();
-                        public bool Continuous { get; set; } = true;
+                        public YamlAsyncParameterVibratoBaseWaveType BaseWave { get; set; } = YamlAsyncParameterVibratoBaseWaveType.Saw;
                         public override string ToString()
                         {
                             Type t = typeof(YamlAsyncParameterCarrierFreqVibrato);
@@ -503,6 +503,10 @@ namespace VvvfSimulator.Yaml.VvvfSound
                             {
                                 Const, Moving
                             }
+                        }
+                        public enum YamlAsyncParameterVibratoBaseWaveType
+                        {
+                            Sine, Saw, Square, ModifiedSaw1, ModifiedSaw2
                         }
 
                     }

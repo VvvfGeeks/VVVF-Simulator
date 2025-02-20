@@ -12,15 +12,16 @@ namespace VvvfSimulator.Generation.Audio
         // ---------- COMMON ---------------
         public class RealTimeParameter
         {
-            public double FrequencyChangeRate { get; set; } = 0;
+            public double FrequencyChangeRate { get; set; }
             public bool IsBraking { get; set; } = false;
             public bool Quit { get; set; } = false;
-            public bool IsFreeRunning { get; set; } = false;
+            public bool IsFreeRunning { get; set; }
+            public int OutputMode { get; set; } // 0:Line 1:Phase 2:PhaseCurrent
 
             public VvvfValues Control { get; set; } = new();
             public YamlVvvfSoundData VvvfSoundData { get; set; } = new();
             public GenerateMotorCore.Motor Motor { get; set; } = new(0, new(), new());
-            public YamlTrainSoundData TrainSoundData { get; set; } = YamlTrainSoundDataManage.CurrentData.Clone();
+            public YamlTrainSoundData TrainSoundData { get; set; } = YamlTrainSoundDataManage.CurrentData;
             public string AudioDeviceId { get; set; } = new NAudio.CoreAudioApi.MMDeviceEnumerator().GetDefaultAudioEndpoint(NAudio.CoreAudioApi.DataFlow.Render, NAudio.CoreAudioApi.Role.Multimedia).ID;
         }
 

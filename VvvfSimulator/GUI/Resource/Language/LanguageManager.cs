@@ -33,11 +33,11 @@ namespace VvvfSimulator.GUI.Resource.Language
         {
             try
             {
-                return (string)Application.Current.Resources[name];
+                return (string)Application.Current.Resources[name] ?? name;
             }
             catch
             {
-                return "_";
+                return name;
             }
         }
 
@@ -51,7 +51,7 @@ namespace VvvfSimulator.GUI.Resource.Language
             if (LanguageDictionary == null) return;
             Properties.Settings.Default.Language = (int)lang;
             Properties.Settings.Default.Save();
-            LanguageDictionary.Source = new System.Uri(lang.GetLanguageFilePath(), System.UriKind.Relative);
+            LanguageDictionary.Source = new Uri(lang.GetLanguageFilePath(), UriKind.Relative);
         }
 
         public static Language GetSystemLanguage()
@@ -61,7 +61,7 @@ namespace VvvfSimulator.GUI.Resource.Language
                 "ja-JP" => Language.JaJp,
                 "ko-KR" => Language.KoKr,
                 "zh-CN" => Language.ZhCn,
-                _ => Language.EnUs,
+                _ => Language.EnUs
             };
         }
 

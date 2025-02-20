@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Media;
+using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -28,6 +29,7 @@ using static VvvfSimulator.Yaml.MasconControl.YamlMasconAnalyze;
 using static VvvfSimulator.Yaml.TrainAudioSetting.YamlTrainSoundAnalyze;
 using static VvvfSimulator.Yaml.VvvfSound.YamlVvvfSoundData;
 using static VvvfSimulator.Yaml.VvvfSound.YamlVvvfUtil;
+using Version = System.Version;
 
 namespace VvvfSimulator
 {
@@ -80,6 +82,9 @@ namespace VvvfSimulator
             DataContext = BindingData;
             InitializeComponent();
             OnFirstLoad();
+            Version? version = Assembly.GetExecutingAssembly().GetName().Version;
+            if (version == null) VersionLabel.Content = LanguageManager.GetString("MainWindow.Menu.Help.About.Version.Unkown");
+            else VersionLabel.Content = "v" + version.ToString();
         }
 
         private void OnFirstLoad()
@@ -106,9 +111,9 @@ namespace VvvfSimulator
             Button btn = (Button)sender;
             object? tag = btn.Tag;
             if (tag == null) return;
-            String? tag_str = tag.ToString();
+            string? tag_str = tag.ToString();
             if (tag_str == null) return;
-            String[] command = tag_str.Split("_");
+            string[] command = tag_str.Split("_");
 
             var list_view = command[0].Equals("accelerate") ? accelerate_settings : brake_settings;
             var settings = command[0].Equals("accelerate") ? YamlVvvfManage.CurrentData.AcceleratePattern : YamlVvvfManage.CurrentData.BrakingPattern;
@@ -123,7 +128,7 @@ namespace VvvfSimulator
             ListView btn = (ListView)sender;
             object? tag = btn.Tag;
             if (tag == null) return;
-            String? tag_str = tag.ToString();
+            string? tag_str = tag.ToString();
             if (tag_str == null) return;
 
             if (tag.Equals("accelerate"))
@@ -142,7 +147,7 @@ namespace VvvfSimulator
             ListView btn = (ListView)sender;
             object? tag = btn.Tag;
             if (tag == null) return;
-            String? tag_str = tag.ToString();
+            string? tag_str = tag.ToString();
             if (tag_str == null) return;
 
 
@@ -206,9 +211,9 @@ namespace VvvfSimulator
             MenuItem mi = (MenuItem)sender;
             Object? tag = mi.Tag;
             if (tag == null) return;
-            String? tag_str = tag.ToString();
+            string? tag_str = tag.ToString();
             if (tag_str == null) return;
-            String[] command = tag_str.Split(".");
+            string[] command = tag_str.Split(".");
             if (command[0].Equals("brake"))
             {
                 if (command[1].Equals("sort"))
@@ -274,7 +279,7 @@ namespace VvvfSimulator
             }
             catch (YamlException ex)
             {
-                String error_message = LanguageManager.GetString("MainWindow.Message.File.Load.Error.Message");
+                string error_message = LanguageManager.GetString("MainWindow.Message.File.Load.Error.Message");
                 error_message += "\r\n";
                 error_message += "\r\n" + ex.End.ToString() + "\r\n";
                 MessageBox.Show(error_message, LanguageManager.GetString("Generic.Title.Error"), MessageBoxButton.OK, MessageBoxImage.Error);
@@ -283,7 +288,7 @@ namespace VvvfSimulator
             }
             catch (Exception ex)
             {
-                String error_message = LanguageManager.GetString("MainWindow.Message.File.Load.Error.Message");
+                string error_message = LanguageManager.GetString("MainWindow.Message.File.Load.Error.Message");
                 error_message += "\r\n";
                 error_message += "\r\n" + ex.Message + "\r\n";
                 MessageBox.Show(error_message, LanguageManager.GetString("Generic.Title.Error"), MessageBoxButton.OK, MessageBoxImage.Error);
@@ -327,7 +332,7 @@ namespace VvvfSimulator
             }
             else if (tag.Equals("Save"))
             {
-                String save_path = LoadPath;
+                string save_path = LoadPath;
                 if (save_path.Length == 0)
                 {
                     var dialog = new SaveFileDialog
@@ -358,7 +363,7 @@ namespace VvvfSimulator
 
             return generationBasicParameter;
         }
-        private Boolean SolveCommand(String[] command)
+        private bool SolveCommand(string[] command)
         {
             if (command[0].Equals("VVVF"))
             {
@@ -410,7 +415,7 @@ namespace VvvfSimulator
                     MainWindow.SetInteractive(false);
 
                     System.IO.Ports.SerialPort? serial = null;
-                    if (command.Length == 3)
+                    if (command.Length == 3) // USB
                     {
                         try
                         {
@@ -848,11 +853,11 @@ namespace VvvfSimulator
         private void Generation_Menu_Click(object sender, RoutedEventArgs e)
         {
             MenuItem button = (MenuItem)sender;
-            Object? tag = button.Tag;
+            object? tag = button.Tag;
             if (tag == null) return;
-            String? tag_str = tag.ToString();
+            string? tag_str = tag.ToString();
             if (tag_str == null) return;
-            String[] command = tag_str.Split("_");
+            string[] command = tag_str.Split("_");
 
 
             MainWindow.SetInteractive(false);
@@ -865,9 +870,9 @@ namespace VvvfSimulator
         private void Window_Menu_Click(object sender, RoutedEventArgs e)
         {
             MenuItem button = (MenuItem)sender;
-            Object? tag = button.Tag;
+            object? tag = button.Tag;
             if (tag == null) return;
-            String? tag_str = tag.ToString();
+            string? tag_str = tag.ToString();
             if (tag_str == null) return;
 
             if (tag_str.Equals("LCalc"))
@@ -908,7 +913,7 @@ namespace VvvfSimulator
             MenuItem button = (MenuItem)sender;
             Object? tag = button.Tag;
             if (tag == null) return;
-            String? tag_str = tag.ToString();
+            string? tag_str = tag.ToString();
             if (tag_str == null) return;
 
             if (tag_str.Equals("MIDI"))
@@ -1034,7 +1039,7 @@ namespace VvvfSimulator
             MenuItem button = (MenuItem)sender;
             Object? tag = button.Tag;
             if (tag == null) return;
-            String? tag_str = tag.ToString();
+            string? tag_str = tag.ToString();
             if (tag_str == null) return;
 
             if (tag_str.Equals("Reset"))
@@ -1050,7 +1055,7 @@ namespace VvvfSimulator
             MenuItem button = (MenuItem)sender;
             Object? tag = button.Tag;
             if (tag == null) return;
-            String? tag_str = tag.ToString();
+            string? tag_str = tag.ToString();
             if (tag_str == null) return;
 
             if (tag_str.Equals("About"))

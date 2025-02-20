@@ -6,6 +6,7 @@ using static VvvfSimulator.Vvvf.Struct;
 using static VvvfSimulator.Yaml.VvvfSound.YamlVvvfSoundData.YamlControlData;
 using static VvvfSimulator.Yaml.VvvfSound.YamlVvvfSoundData.YamlControlData.YamlAmplitude;
 using static VvvfSimulator.Yaml.VvvfSound.YamlVvvfSoundData.YamlControlData.YamlAmplitude.AmplitudeParameter;
+using static VvvfSimulator.Yaml.VvvfSound.YamlVvvfSoundData.YamlControlData.YamlAsync.CarrierFrequency.YamlAsyncParameterCarrierFreqVibrato;
 using static VvvfSimulator.Yaml.VvvfSound.YamlVvvfSoundData.YamlControlData.YamlPulseMode;
 
 
@@ -231,30 +232,24 @@ namespace VvvfSimulator.Vvvf
                 return data.BaseFrequency;
             }
         }
-        public static double GetVibratoFrequency(double lowest, double highest, double interval_time, bool continuous, VvvfValues control)
+        public static double GetVibratoFrequency(double lowest, double highest, double interval_time, YamlAsyncParameterVibratoBaseWaveType base_wave, VvvfValues control)
         {
 
             if (!control.IsRandomFrequencyMoveAllowed())
                 return (highest + lowest) / 2.0;
 
-            double random_freq;
             double current_t = control.GetGenerationCurrentTime();
             double solve_t = control.GetVibratoFrequencyPreviousTime();
+            double x = (current_t - solve_t) * M_2PI / interval_time;
 
-            if (continuous)
+            double random_freq = base_wave switch
             {
-                if (interval_time / 2.0 > current_t - solve_t)
-                    random_freq = lowest + (highest - lowest) / (interval_time / 2.0) * (current_t - solve_t);
-                else
-                    random_freq = highest + (lowest - highest) / (interval_time / 2.0) * (current_t - solve_t - interval_time / 2.0);
-            }
-            else
-            {
-                if (interval_time / 2.0 > current_t - solve_t)
-                    random_freq = highest;
-                else
-                    random_freq = lowest;
-            }
+                YamlAsyncParameterVibratoBaseWaveType.Sine => (highest - lowest) / 2 * (Sine(x) + 1) + lowest,
+                YamlAsyncParameterVibratoBaseWaveType.Saw => (highest - lowest) / 2 * (Saw(x) + 1) + lowest,
+                YamlAsyncParameterVibratoBaseWaveType.Square => (highest - lowest) / 2 * (Square(x) + 1) + lowest,
+                YamlAsyncParameterVibratoBaseWaveType.ModifiedSaw1 => (highest - lowest) / 2 * x * M_1_PI + lowest,
+                _ => (highest - lowest) / 2 * (2 - x * M_1_PI) + lowest
+            };
 
             if (current_t - solve_t > interval_time)
                 control.SetVibratoFrequencyPreviousTime(current_t);
@@ -759,8 +754,18 @@ namespace VvvfSimulator.Vvvf
                     }
                 case PulseTypeName.SYNC:
                     {
-                        // SYNC 3 ALTERNATE 1
-                        if(PulseCount == 3 && PulseMode.Alternative == PulseAlternative.Alt1)
+                        #region SYNC 1 ALTERNATE 1 2
+                        if (PulseCount == 1 && (PulseMode.Alternative == PulseAlternative.Alt1 || PulseMode.Alternative == PulseAlternative.Alt2))
+                        {
+                            int s = PulseMode.Alternative == PulseAlternative.Alt1 ? 1 : -1;
+                            double AmpAbs = Amplitude < 0 ? -Amplitude : Amplitude;
+                            int AmpSgn = Amplitude < 0 ? -1 : 1;
+                            double SineVal = Saw(SineX) + s - s * Math.Asin(Math.Clamp(AmpAbs * M_PI_4, 0, 1)) / M_PI_2;
+                            return SineVal > 0 ? -AmpSgn + 1 : AmpSgn + 1;
+                        }
+                        #endregion
+                        #region SYNC 3 ALTERNATE 1
+                        if (PulseCount == 3 && PulseMode.Alternative == PulseAlternative.Alt1)
                         {
                             double SineVal = Sine(SineX);
                             double SawVal = Saw(SineX - Value.PulseData.GetValueOrDefault(PulseDataKey.Phase, 0) / 180.0 * M_PI);
@@ -768,9 +773,9 @@ namespace VvvfSimulator.Vvvf
                             double Negate = SawVal > 0 ? SawVal - 1 : SawVal + 1;
                             return ModulateSignal(Pwm, Negate) * 2;
                         }
-
-                        // SYNC 5 9 13 17 ALTERNATE 1
-                        if((PulseCount == 5 || PulseCount == 9 || PulseCount == 13 || PulseCount == 17) && Alternate == PulseAlternative.Alt1)
+                        #endregion
+                        #region SYNC 5 9 13 17 ALTERNATE 1
+                        if ((PulseCount == 5 || PulseCount == 9 || PulseCount == 13 || PulseCount == 17) && Alternate == PulseAlternative.Alt1)
                         {
                             double SawValue = Saw(27 * SineX);
                             double SineVal = GetBaseWaveform(PulseMode.Clone(), SineX, Amplitude, Control.GetGenerationCurrentTime(), InitialPhase);
@@ -779,8 +784,8 @@ namespace VvvfSimulator.Vvvf
                             Control.SetSawTime(SineTime);
                             return (FixedSineX < M_PI * PulseMode.PulseCount / 54) ? ModulateSignal(SineVal, SawValue) * 2 : (int)(SineX / M_PI_2) % 4 > 1 ? 0 : 2;
                         }
-
-                        // SYNC 11 ALTERNATE 1
+                        #endregion
+                        #region SYNC 11 ALTERNATE 1
                         if (PulseCount == 11 && PulseMode.Alternative == PulseAlternative.Alt1)
                         {
                             (double, int)[] Alpha = [
@@ -802,29 +807,30 @@ namespace VvvfSimulator.Vvvf
 
                             return CustomPwm.GetPwm(ref Alpha, SineX, false);
                         }
-
-                        // SYNC 9 ALTERNATE 2
+                        #endregion
+                        #region SYNC 9 ALTERNATE 2
                         if ((PulseCount == 9) && Alternate == PulseAlternative.Alt2)
                         {
                             ((double SwitchAngle, int Output)[] Alpha, _) = CustomPwmPresets.L2Chm11Alt6.GetAlpha(Amplitude * 1.0731);
                             Alpha[3].SwitchAngle = M_PI_3 - Alpha[0].SwitchAngle;
                             return CustomPwm.GetPwm(ref Alpha, SineX, true);
                         }
-
-                        // SYNC 6 ALTERNATE 1
-                        if ((PulseCount == 6) && Alternate == PulseAlternative.Alt1)
+                        #endregion
+                        #region SYNC 6 8 ALTERNATE 1
+                        if ((PulseCount == 6 || PulseCount == 8) && Alternate == PulseAlternative.Alt1)
                         {
-                            double SawVal = Saw(6 * SineX + M_PI_2);
-                            int Orthant = (int)(SineX % M_2PI / M_PI_2);
+                            int C = PulseCount == 6 ? 6 : 9;
+                            double SawVal = Saw(C * SineX + M_PI_2);
+                            int Orthant = (int)((SineX % M_2PI) / M_PI_2);
                             double FixX = Orthant % 2 == 1 ? M_PI_2 - (SineX % M_PI_2) : (SineX % M_PI_2);
                             double Sig = Orthant > 1 ? 1 : -1;
                             if (FixX > Value.PulseData.GetValueOrDefault(PulseDataKey.PulseWidth, 0)) Sig = Orthant > 1 ? -1 : 1;
                             Sig *= Amplitude;
                             return ModulateSignal(Sig, SawVal) * 2;
                         }
-
-                        // SYNC N WITH CP CONFIGURATION
-                        if(Alternate == PulseAlternative.CP)
+                        #endregion
+                        #region SYNC N WITH CP CONFIGURATION
+                        if (Alternate == PulseAlternative.CP)
                         {
                             double SineVal = GetBaseWaveform(PulseMode.Clone(), SineX, Amplitude, Control.GetGenerationCurrentTime(), InitialPhase);
                             
@@ -838,8 +844,8 @@ namespace VvvfSimulator.Vvvf
                             
                             return ModulateSignal(SineVal, SawVal) * 2;
                         }
-
-                        // SYNC N WITH SQUARE CONFIGURATION
+                        #endregion
+                        #region SYNC N WITH SQUARE CONFIGURATION
                         if (Alternate == PulseAlternative.Square)
                         {
                             PulseCount = PulseMode.PulseCount;
@@ -847,8 +853,8 @@ namespace VvvfSimulator.Vvvf
                             double CarrierVal = 0.5 * ((PulseMode.PulseCount % 2 == 0 ? -1 : 1) * Saw(3 * PulseCount * SineX + M_PI_2) + 1);
                             return ModulateSignal(SineX % M_2PI < M_PI ? Amplitude : -Amplitude, CarrierVal) * 2;
                         }
-
-                        // SYNC N
+                        #endregion
+                        #region SYNC N
                         {
                             double SineVal = GetBaseWaveform(PulseMode.Clone(), SineX, Amplitude, Control.GetGenerationCurrentTime(), InitialPhase);
                             double SawVal = Saw(PulseMode.PulseCount * (SineAngleFrequency * SineTime + InitialPhase));
@@ -858,6 +864,7 @@ namespace VvvfSimulator.Vvvf
                             Control.SetSawTime(SineTime);
                             return ModulateSignal(SineVal, SawVal) * 2;
                         }
+                        #endregion
                     }
                 case PulseTypeName.HO:
                     {
@@ -877,6 +884,7 @@ namespace VvvfSimulator.Vvvf
                     }
                 case PulseTypeName.SHE:
                     {
+                        #region SHE 3 5 7 9 11 13 15 17
                         return PulseCount switch
                         {
                             3 => PulseMode.Alternative switch
@@ -931,9 +939,11 @@ namespace VvvfSimulator.Vvvf
                             },
                             _ => 0,
                         };
+                        #endregion
                     }
                 case PulseTypeName.CHM:
                     {
+                        #region CHM 3 5 7 9 11 13 15 17 19 21 23 25
                         switch (PulseCount)
                         {
                             case 25:
@@ -1163,12 +1173,14 @@ namespace VvvfSimulator.Vvvf
                                     {
                                         PulseAlternative.Default => CustomPwmPresets.L2Chm3Default.GetPwm(Amplitude, SineX),
                                         PulseAlternative.Alt1 => CustomPwmPresets.L2Chm3Alt1.GetPwm(Amplitude, SineX),
+                                        PulseAlternative.Alt2 => Amplitude < 1.195 ? CustomPwmPresets.L2Chm3Default.GetPwm(Amplitude, SineX) : CustomPwmPresets.L2Chm3Alt1.GetPwm(Amplitude, SineX),
                                         _ => 0
                                     };
                                 }
                             default:
                                 return 0;
                         }
+                        #endregion
                     }
                 default:
                     return 0;

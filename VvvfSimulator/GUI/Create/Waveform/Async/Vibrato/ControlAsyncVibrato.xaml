@@ -35,7 +35,7 @@
                 <Label Content="{DynamicResource Create.Settings.Waveform.Async.Vibrato.ControlAsyncVibrato.Basic}" Style="{DynamicResource InnerSubTitleBarText}"/>
             </Border>
             <Border Grid.Column="1" Background="{DynamicResource BackgroundBrush}" CornerRadius="0,25,0,0">
-                <CheckBox Style="{DynamicResource SlimCheckBox}" x:Name="Continuous_CheckBox" Content="{DynamicResource Create.Settings.Waveform.Async.Vibrato.ControlAsyncVibrato.Basic.Continuous}" HorizontalAlignment="Center" VerticalAlignment="Center" Checked="Continuous_CheckBox_Checked" Unchecked="Continuous_CheckBox_Checked"/>
+                <ComboBox Style="{DynamicResource SlimComboBoxStyle}" x:Name="base_wave" SelectionChanged="BaseWave_SelectionChanged" Tag="BaseWave" SelectedValuePath="Key" DisplayMemberPath="Value"/>
             </Border>
         </Grid>
 
