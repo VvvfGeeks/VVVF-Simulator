@@ -142,7 +142,7 @@ namespace VvvfSimulator.GUI.Create.Waveform.Basic
             if (tag.Equals("PulseCount"))
             {
                 Target.PulseMode.PulseCount = ParseTextBox.ParseInt(tb, Minimum:1, ErrorValue:1);
-                MainWindow.GetInstance()?.UpdateControlList();
+                MainWindow.                Instance?.UpdateControlList();
                 SetPulseSettingControls();
                 Editor.SetPulseDataContent();
                 Editor.UpdateVisibility();
@@ -157,14 +157,14 @@ namespace VvvfSimulator.GUI.Create.Waveform.Basic
             if (tag.Equals("HarmonicSetting"))
             {
                 MainWindow.SetInteractive(false);
-                ControlBasicHarmonic cbh = new(MainWindow.GetInstance(), Target.PulseMode);
+                ControlBasicHarmonic cbh = new(MainWindow.Instance, Target.PulseMode);
                 cbh.ShowDialog();
                 MainWindow.SetInteractive(true);
             }
             else if (tag.Equals("DiscreteSetting"))
             {
                 MainWindow.SetInteractive(false);
-                DiscreteSettingWindow discreteSetting = new(MainWindow.GetInstance(), Target.PulseMode);
+                DiscreteSettingWindow discreteSetting = new(MainWindow.Instance, Target.PulseMode);
                 discreteSetting.ShowDialog();
                 MainWindow.SetInteractive(true);
             }
@@ -198,7 +198,8 @@ namespace VvvfSimulator.GUI.Create.Waveform.Basic
                 Target.PulseMode.Alternative = selected;
             }
 
-            MainWindow.GetInstance()?.UpdateControlList();
+            MainWindow.
+            Instance?.UpdateControlList();
             Editor.SetPulseDataContent();
             Editor.UpdateVisibility();
             SetPulseSettingControls();

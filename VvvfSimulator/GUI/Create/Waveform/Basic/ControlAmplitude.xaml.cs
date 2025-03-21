@@ -204,7 +204,7 @@ namespace VvvfSimulator.GUI.Create.Waveform
             if(Name.Equals("OpenAmplitudeTableEditorButton"))
             {
                 MainWindow.SetInteractive(false);
-                new AmplitudeTableEditor(MainWindow.GetInstance(), Context).ShowDialog();
+                new AmplitudeTableEditor(MainWindow.Instance, Context).ShowDialog();
                 MainWindow.SetInteractive(true);
             }
         }

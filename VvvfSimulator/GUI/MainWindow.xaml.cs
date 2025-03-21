@@ -56,29 +56,26 @@ namespace VvvfSimulator
             }
         };
 
-        private static MainWindow? Instance;
-        public static MainWindow? GetInstance()
-        {
-            return Instance;
-        }
+        private static MainWindow? instance;
+        public static MainWindow? Instance => instance;
         public static void Invoke(Action callBack)
         {
-            Instance?.Dispatcher.Invoke(callBack);
+            instance?.Dispatcher.Invoke(callBack);
         }
         public static void SetInteractive(bool val)
         {
-            if (Instance == null) return;
-            Instance.BindingData.Blocked = !val;
+            if (instance == null) return;
+            instance.BindingData.Blocked = !val;
         }
         public static bool IsInteractable()
         {
-            if (Instance == null) return false;
-            return !Instance.BindingData.Blocked;
+            if (instance == null) return false;
+            return !instance.BindingData.Blocked;
         }
 
         public MainWindow()
         {
-            Instance = this;
+            instance = this;
             DataContext = BindingData;
             InitializeComponent();
             OnFirstLoad();
@@ -275,14 +272,14 @@ namespace VvvfSimulator
                 YamlVvvfManage.Load(path);
                 LoadPath = path;
                 UpdateControlList();
-                MessageBox.Show(LanguageManager.GetString("MainWindow.Message.File.Load.Ok.Message"), LanguageManager.GetString("MainWindow.Message.File.Load.Ok.Title"), MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show(Instance, LanguageManager.GetString("MainWindow.Message.File.Load.Ok.Message"), LanguageManager.GetString("MainWindow.Message.File.Load.Ok.Title"), MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch (YamlException ex)
             {
                 string error_message = LanguageManager.GetString("MainWindow.Message.File.Load.Error.Message");
                 error_message += "\r\n";
                 error_message += "\r\n" + ex.End.ToString() + "\r\n";
-                MessageBox.Show(error_message, LanguageManager.GetString("Generic.Title.Error"), MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(Instance, error_message, LanguageManager.GetString("Generic.Title.Error"), MessageBoxButton.OK, MessageBoxImage.Error);
                 YamlVvvfManage.CurrentData = Current;
                 return;
             }
@@ -291,7 +288,7 @@ namespace VvvfSimulator
                 string error_message = LanguageManager.GetString("MainWindow.Message.File.Load.Error.Message");
                 error_message += "\r\n";
                 error_message += "\r\n" + ex.Message + "\r\n";
-                MessageBox.Show(error_message, LanguageManager.GetString("Generic.Title.Error"), MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(Instance, error_message, LanguageManager.GetString("Generic.Title.Error"), MessageBoxButton.OK, MessageBoxImage.Error);
                 YamlVvvfManage.CurrentData = Current;
                 return;
             }

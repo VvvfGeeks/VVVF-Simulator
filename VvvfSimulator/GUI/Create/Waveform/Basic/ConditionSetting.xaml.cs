@@ -50,19 +50,19 @@ namespace VvvfSimulator.GUI.Create.Waveform.Basic
             {
                 double parsed = ParseTextBox.ParseDouble(tb);
                 Target.ControlFrequencyFrom = parsed;
-                MainWindow.GetInstance()?.UpdateControlList();
+                MainWindow.                Instance?.UpdateControlList();
             }
             else if (tag.Equals("SineFrom"))
             {
                 double parsed = ParseTextBox.ParseDouble(tb);
                 Target.RotateFrequencyFrom = parsed;
-                MainWindow.GetInstance()?.UpdateControlList();
+                MainWindow.                Instance?.UpdateControlList();
             }
             else if (tag.Equals("SineBelow"))
             {
                 double parsed = ParseTextBox.ParseDouble(tb);
                 Target.RotateFrequencyBelow = parsed;
-                MainWindow.GetInstance()?.UpdateControlList();
+                MainWindow.                Instance?.UpdateControlList();
             }
         }
 
@@ -97,15 +97,18 @@ namespace VvvfSimulator.GUI.Create.Waveform.Basic
 
             
 
-            MainWindow.GetInstance()?.UpdateControlList();
-            MainWindow.GetInstance()?.UpdateContentSelected();
+            MainWindow.
+            
+
+            Instance?.UpdateControlList();
+            MainWindow.            Instance?.UpdateContentSelected();
             return;
         }
 
         private void Open_Harmonic_Setting_Button_Click(object sender, RoutedEventArgs e)
         {
             MainWindow.SetInteractive(false);
-            ControlBasicHarmonic cbh = new(MainWindow.GetInstance(), Target.PulseMode);
+            ControlBasicHarmonic cbh = new(MainWindow.Instance, Target.PulseMode);
             cbh.ShowDialog();
             MainWindow.SetInteractive(true);
         }
@@ -113,7 +116,7 @@ namespace VvvfSimulator.GUI.Create.Waveform.Basic
         private void Open_Discrete_Setting_Button_Click(object sender, RoutedEventArgs e)
         {
             MainWindow.SetInteractive(false);
-            DiscreteSettingWindow discreteSetting = new(MainWindow.GetInstance(), Target.PulseMode);
+            DiscreteSettingWindow discreteSetting = new(MainWindow.Instance, Target.PulseMode);
             discreteSetting.ShowDialog();
             MainWindow.SetInteractive(true);
         }
