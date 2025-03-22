@@ -36,6 +36,7 @@ namespace VvvfSimulator.GUI.Simulator.RealTime.Controller.Design2
         public DeviceMode CurrentMode = DeviceMode.KeyBoard;
         public string MasconComPort = "";
         public SerialPort serialPort = new();
+        private int VvvfOutputMode { get => Param.OutputMode; set => Param.OutputMode = value; }
         public partial class ViewModel : ViewModelBase
         {
             private Brush _B4 = new SolidColorBrush(Color.FromRgb(0xA0, 0xA0, 0xA0));
@@ -95,8 +96,8 @@ namespace VvvfSimulator.GUI.Simulator.RealTime.Controller.Design2
                 PropertyType.VVVF => Properties.Settings.Default.RealTime_VVVF_Controller_Design2_CalculatePrecision,
                 _ => Properties.Settings.Default.RealTime_Train_Controller_Design2_CalculatePrecision
             };
-
             InitializeComponent();
+            if (PropType == PropertyType.Train) MenuItem_WaveForm.IsEnabled = false;
             SetState(0);
             DataContext = Model;
         }
@@ -144,23 +145,28 @@ namespace VvvfSimulator.GUI.Simulator.RealTime.Controller.Design2
                     Control.SetSineTime(0);
                     Control.SetRandomFrequencyMoveAllowed(false);
 
-                    WaveValues[] Pwm = GenerateBasic.WaveForm.GetUVWCycle(Control, Sound, MyMath.M_PI_6, CalculatePrecision, false);
+                    WaveValues[] Pwm = GenerateBasic.WaveForm.GetUVWCycle(Control, Sound, VvvfOutputMode == 0 ? MyMath.M_PI_6 : 0, CalculatePrecision, false);
 
                     double voltage = GenerateBasic.Fourier.GetVoltageRate(ref Pwm) * 100;
                     Model.Voltage = voltage;
 
-                    List<(double X, int Pwm)> Data = [];
+                    List<(double X, double Pwm)> Data = [];
                     Data.Add((0, 0));
 
                     for (int i = 0; i < Pwm.Length; i++)
                     {
-                        int NewPwmLine = Pwm[i].U - Pwm[i].V;
+                        double NewPwmLine = VvvfOutputMode switch
+                        {
+                            0 => Pwm[i].U - Pwm[i].V,
+                            1 => Pwm[i].U - 1,
+                            _ => Pwm[i].U - Pwm[i].V * 0.5 - Pwm[i].W * 0.5
+                        };
                         if (Data[^1].Pwm != NewPwmLine)
                             Data.Add(((double)i / Pwm.Length, NewPwmLine));
                     }
                     Data.Add((1.0, Data[^1].Pwm));
 
-                    double GetY(int Pwm)
+                    double GetY(double Pwm)
                     {
                         return -Pwm * WaveformViewer.ActualHeight / 2.0 * (1 / 2.0 - 1 / 10.0) + WaveformViewer.ActualHeight / 2.0;
                     }
@@ -436,6 +442,53 @@ namespace VvvfSimulator.GUI.Simulator.RealTime.Controller.Design2
             }
             else if (tag.Equals("Minimize"))
                 WindowState = WindowState.Minimized;
+        }
+
+
+        private void MenuItem_Checked(object sender, RoutedEventArgs e)
+        {
+            MenuItem button = (MenuItem)sender;
+            object? tag = button.Tag;
+            if (tag == null) return;
+            string? tag_str = tag.ToString();
+            if (tag_str == null) return;
+            if (!button.IsChecked)
+            {
+                switch (VvvfOutputMode)
+                {
+                    case 0:
+                        if (tag_str == "WaveForm_Line") button.IsChecked = true;
+                        break;
+                    case 1:
+                        if (tag_str == "WaveForm_Phase") button.IsChecked = true;
+                        break;
+                    default:
+                        if (tag_str == "WaveForm_PhaseCurrent") button.IsChecked = true;
+                        break;
+                }
+                return;
+            }
+            VvvfOutputMode = tag_str switch
+            {
+                "WaveForm_Line" => 0,
+                "WaveForm_Phase" => 1,
+                _ => 2,
+            };
+            switch (VvvfOutputMode)
+            {
+                case 0:
+                    MenuItem_Phase.IsChecked = false;
+                    MenuItem_PhaseCurrent.IsChecked = false;
+                    break;
+                case 1:
+                    MenuItem_Line.IsChecked = false;
+                    MenuItem_PhaseCurrent.IsChecked = false;
+                    break;
+                case 2:
+                    MenuItem_Line.IsChecked = false;
+                    MenuItem_Phase.IsChecked = false;
+                    break;
+            }
         }
     }
 }

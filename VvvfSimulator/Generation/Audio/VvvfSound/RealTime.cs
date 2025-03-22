@@ -61,9 +61,14 @@ namespace VvvfSimulator.Generation.Audio.VvvfSound
                     char cvalue = (char)(value.U << 4 | value.V << 2 | value.W);
                     data[i] = (byte)cvalue;
 
-                    double sound_byte = value.U - value.V;
-                    sound_byte /= 2.0;
-                    sound_byte *= 0.7;
+                    double sound_byte = realTime_Parameter.OutputMode switch
+                    {
+                        0 => value.U - value.V,
+                        1 => value.U - 1,
+                        _ => value.U - value.V * 0.5 - value.W * 0.5
+                    };
+                    sound_byte *= 0.5;
+                    //sound_byte *= 0.228;
 
                     AddSample((float)sound_byte, provider);
                 }
@@ -76,7 +81,7 @@ namespace VvvfSimulator.Generation.Audio.VvvfSound
                     break;
                 }
 
-                while (provider.BufferedBytes + CalcCount > Properties.Settings.Default.RealTime_VVVF_BuffSize) ;
+                while (provider.BufferedBytes + CalcCount > Settings.Default.RealTime_VVVF_BuffSize) ;
             }
 
             try

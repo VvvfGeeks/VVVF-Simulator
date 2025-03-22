@@ -69,7 +69,7 @@ namespace VvvfSimulator.Generation.Audio.VvvfSound
             {
                 PwmCalculateValues calculated_Values = YamlVvvfWave.CalculateYaml(control, sound_data);
                 WaveValues value = Calculate.CalculatePhases(control, calculated_Values, MyMath.M_PI_6);
-                double pwm_value = (value.U - value.V) / 2.0;
+                double pwm_value = (value.U - value.V) * 0.44;
                 return [pwm_value];
             };
             ExportWavFile(GenParam, SampleGen, SamplingFreq, UseRaw, [Path]);
@@ -81,7 +81,8 @@ namespace VvvfSimulator.Generation.Audio.VvvfSound
             {
                 PwmCalculateValues calculated_Values = YamlVvvfWave.CalculateYaml(control, sound_data);
                 WaveValues value = Calculate.CalculatePhases(control, calculated_Values, 0);
-                return [value.U, value.V, value.W];
+                const double volume = 0.6;
+                return [(value.U - 1) * volume, (value.V - 1) * volume, (value.W - 1) * volume];
             };
 
             string[] ExportPath = [
@@ -98,7 +99,7 @@ namespace VvvfSimulator.Generation.Audio.VvvfSound
             {
                 PwmCalculateValues calculated_Values = YamlVvvfWave.CalculateYaml(control, sound_data);
                 WaveValues value = Calculate.CalculatePhases(control, calculated_Values, 0);
-                double pwm_value = (2 * value.U - value.V - value.W) / 8.0;
+                double pwm_value = (2 * value.U - value.V - value.W) * 0.246;
                 return [pwm_value];
             };
             ExportWavFile(GenParam, SampleGen, SamplingFreq, UseRaw, [Path]);

@@ -4,6 +4,7 @@ using System.Windows.Controls;
 using VvvfSimulator.GUI.Create.Waveform.Common;
 using VvvfSimulator.GUI.Resource.Language;
 using static VvvfSimulator.Yaml.VvvfSound.YamlVvvfSoundData;
+using static VvvfSimulator.Yaml.VvvfSound.YamlVvvfSoundData.YamlControlData.YamlAsync.CarrierFrequency.YamlAsyncParameterCarrierFreqVibrato;
 using static VvvfSimulator.Yaml.VvvfSound.YamlVvvfSoundData.YamlControlData.YamlAsync.CarrierFrequency.YamlAsyncParameterCarrierFreqVibrato.YamlAsyncParameterVibratoValue;
 
 namespace VvvfSimulator.GUI.Create.Waveform.Async.Vibrato
@@ -25,6 +26,7 @@ namespace VvvfSimulator.GUI.Create.Waveform.Async.Vibrato
 
         private void apply_data()
         {
+            base_wave.ItemsSource = FriendlyNameConverter.GetYamlAsyncParameterVibratoBaseWaveTypeNames();
             highest_mode.ItemsSource = FriendlyNameConverter.GetYamlAsyncParameterVibratoModeNames();
             lowest_mode.ItemsSource = FriendlyNameConverter.GetYamlAsyncParameterVibratoModeNames();
             interval_mode.ItemsSource = FriendlyNameConverter.GetYamlAsyncParameterVibratoModeNames();
@@ -40,7 +42,7 @@ namespace VvvfSimulator.GUI.Create.Waveform.Async.Vibrato
             interval_mode.SelectedValue = vibrato_data.Interval.Mode;
             SetSelected(2, vibrato_data.Interval.Mode);
 
-            Continuous_CheckBox.IsChecked = vibrato_data.Continuous;
+            base_wave.SelectedValue = vibrato_data.BaseWave;
         }
 
         private void SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -56,7 +58,7 @@ namespace VvvfSimulator.GUI.Create.Waveform.Async.Vibrato
                 Target.AsyncModulationData.CarrierWaveData.VibratoData.Highest.Mode = mode;
                 SetSelected(0, mode);
             }
-            else if(tag.Equals("Lowest"))
+            else if (tag.Equals("Lowest"))
             {
                 Target.AsyncModulationData.CarrierWaveData.VibratoData.Lowest.Mode = mode;
                 SetSelected(1, mode);
@@ -67,6 +69,14 @@ namespace VvvfSimulator.GUI.Create.Waveform.Async.Vibrato
                 SetSelected(2, mode);
             }
 
+        }
+        private void BaseWave_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (IgnoreUpdate) return;
+
+            ComboBox cb = (ComboBox)sender;
+
+            Target.AsyncModulationData.CarrierWaveData.VibratoData.BaseWave = (YamlAsyncParameterVibratoBaseWaveType)cb.SelectedValue;
         }
 
         /// <summary>
@@ -99,13 +109,6 @@ namespace VvvfSimulator.GUI.Create.Waveform.Async.Vibrato
                 else
                     interval_mode_frame.Navigate(new ControlMovingSetting(Target.AsyncModulationData.CarrierWaveData.VibratoData.Interval.MovingValue));
             }
-        }
-
-        private void Continuous_CheckBox_Checked(object sender, RoutedEventArgs e)
-        {
-            if (IgnoreUpdate) return;
-
-            Target.AsyncModulationData.CarrierWaveData.VibratoData.Continuous = Continuous_CheckBox.IsChecked == true;
         }
     }
 }

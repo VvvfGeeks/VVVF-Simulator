@@ -328,7 +328,7 @@
     <system:String x:Key="Mascon.ControlEditor.Menu.Edit.Reset">Reset</system:String>
     <system:String x:Key="Mascon.ControlEditor.Menu.Edit.Midi">Load MIDI</system:String>
 
-    <system:String x:Key="Mascon.ControlEditor.Message.MidiConvertError">This Midi cannot be converted.</system:String>
+    <system:String x:Key="Mascon.ControlEditor.Message.MidiConvertError">This MIDI cannot be converted.</system:String>
 
     <system:String x:Key="Mascon.ControlEditor.Message.File.Load.Ok.Title">Great</system:String>
     <system:String x:Key="Mascon.ControlEditor.Message.File.Load.Ok.Message">The file was successfully load</system:String>

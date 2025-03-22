@@ -61,6 +61,12 @@
     
     <Window.ContextMenu>
         <ContextMenu Style="{DynamicResource SlimContextMenu}">
+            <MenuItem Header="{DynamicResource Simulator.RealTime.Controller.MenuItem.WaveForm}" x:Name="MenuItem_WaveForm">
+                <MenuItem x:Name="MenuItem_Line" IsCheckable="True" IsChecked="True" Checked="MenuItem_Checked" Unchecked="MenuItem_Checked" Header="{DynamicResource Simulator.RealTime.Controller.MenuItem.WaveForm.Line}" Tag="WaveForm_Line"/>
+                <MenuItem x:Name="MenuItem_Phase" IsCheckable="True" IsChecked="False" Checked="MenuItem_Checked" Unchecked="MenuItem_Checked" Header="{DynamicResource Simulator.RealTime.Controller.MenuItem.WaveForm.Phase}" Tag="WaveForm_Phase"/>
+                <MenuItem x:Name="MenuItem_PhaseCurrent" IsCheckable="True" IsChecked="False" Checked="MenuItem_Checked" Unchecked="MenuItem_Checked" Header="{DynamicResource Simulator.RealTime.Controller.MenuItem.WaveForm.PhaseCurrent}" Tag="WaveForm_PhaseCurrent"/>
+            </MenuItem>
+            <Separator/>
             <MenuItem Header="{DynamicResource Simulator.RealTime.Controller.Design2.MenuItem.CalculateDivision}" Click="MenuItem_Click" Tag="CalculateDivision"/>
             <MenuItem Header="{DynamicResource Simulator.RealTime.Controller.MenuItem.DeviceSetting}" Click="MenuItem_Click" Tag="DeviceSetting"/>
         </ContextMenu>
@@ -177,7 +183,7 @@
                             </Grid.ColumnDefinitions>
                             <Border Margin=" 0 10 0 10" BorderThickness="0 0 5 0" BorderBrush="{DynamicResource RealtimeControllerSeparatorBrush}"/>
                             <Label Content="{DynamicResource Simulator.RealTime.Controller.PulseState}" Style="{DynamicResource ValueTitle}" />
-                            <TextBlock Style="{DynamicResource Value}" Grid.Column="1" Text="{Binding PulseState}" d:Text="P1"/>
+                            <TextBlock Style="{DynamicResource Value}" Grid.Column="1" Text="{Binding PulseState}" d:Text="NaN"/>
                         </Grid>
                     </Border>
                     <Border Grid.Row="2" CornerRadius="10" BorderThickness="3" BorderBrush="{DynamicResource RealtimeControllerTopicBorderBrush}" Background="{DynamicResource RealtimeControllerTopicBackgroundBrush}">
@@ -190,7 +196,7 @@
                             <Border Margin=" 0 10 0 10" BorderThickness="0 0 5 0" BorderBrush="{DynamicResource RealtimeControllerSeparatorBrush}"/>
                             <Label Content="{DynamicResource Simulator.RealTime.Controller.SineFrequency}" Style="{DynamicResource ValueTitle}"/>
                             <Label Grid.Column="2" Content="Hz" Style="{DynamicResource ValueUnit}"/>
-                            <TextBlock Style="{DynamicResource Value}" Grid.Column="1" Text="{Binding SineFrequency, StringFormat=\{0:N1\}}" d:Text="100.0"/>
+                            <TextBlock Style="{DynamicResource Value}" Grid.Column="1" Text="{Binding SineFrequency, StringFormat=\{0:N1\}}" d:Text="NaN"/>
                         </Grid>
                     </Border>
                     <Border Grid.Row="4" CornerRadius="10" BorderThickness="3" BorderBrush="{DynamicResource RealtimeControllerTopicBorderBrush}" Background="{DynamicResource RealtimeControllerTopicBackgroundBrush}">
@@ -203,7 +209,7 @@
                             <Border Margin=" 0 10 0 10" BorderThickness="0 0 5 0" BorderBrush="{DynamicResource RealtimeControllerSeparatorBrush}"/>
                             <Label Content="{DynamicResource Simulator.RealTime.Controller.Voltage}" Style="{DynamicResource ValueTitle}"/>
                             <Label Grid.Column="2" Content="%" Style="{DynamicResource ValueUnit}"/>
-                            <TextBlock Style="{DynamicResource Value}" Grid.Column="1" Text="{Binding Voltage, StringFormat=\{0:N1\}}" d:Text="100"/>
+                            <TextBlock Style="{DynamicResource Value}" Grid.Column="1" Text="{Binding Voltage, StringFormat=\{0:N1\}}" d:Text="NaN"/>
                         </Grid>
                     </Border>
                     

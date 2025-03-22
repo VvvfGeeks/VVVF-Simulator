@@ -278,53 +278,7 @@ namespace VvvfSimulator.GUI.Simulator.RealTime.Setting
 
         private void Window_Closing(object sender, CancelEventArgs e)
         {
-
-            bool font_check = false;
-            if (_SettingType.Equals(RealTimeBasicSettingMode.VVVF) && Properties.Settings.Default.RealTime_VVVF_Control_Show) font_check = true;
-            if (_SettingType.Equals(RealTimeBasicSettingMode.Train) && Properties.Settings.Default.RealTime_Train_Control_Show) font_check = true;
             Properties.Settings.Default.Save();
-
-            if (!font_check) return;
-            var selected_style = Properties.Settings.Default.RealTime_VVVF_Control_Style;
-            if(selected_style == (int)RealtimeDisplay.ControlStatus.RealTimeControlStatStyle.Original1)
-            {
-                try
-                {
-                    Font[] fonts = new Font[]{
-                        new(new FontFamily("Fugaz One"), 75, System.Drawing.FontStyle.Regular, GraphicsUnit.Pixel), //topic
-                    };
-                }
-                catch
-                {
-                    MessageBox.Show(
-                        LanguageManager.GetString("Simulator.RealTime.Setting.Basic.Message.NoFont") + "\r\n\r\n" +
-                        "Fugaz One\r\n",
-                        LanguageManager.GetString("Generic.Title.Error"),
-                        MessageBoxButton.OK,
-                        MessageBoxImage.Error
-                        );
-
-                }
-            }
-            else if(selected_style == (int)RealtimeDisplay.ControlStatus.RealTimeControlStatStyle.Original2)
-            {
-                try
-                {
-                    Font value_Font = new(new FontFamily("DSEG14 Modern"), 40, System.Drawing.FontStyle.Italic, GraphicsUnit.Pixel);
-                    Font unit_font = new(new FontFamily("Fugaz One"), 25, System.Drawing.FontStyle.Regular, GraphicsUnit.Pixel);
-                }
-                catch
-                {
-                    MessageBox.Show(
-                        LanguageManager.GetString("Simulator.RealTime.Setting.Basic.Message.NoFont") + "\r\n\r\n" +
-                        "Fugaz One\r\n" +
-                        "DSEG14 Modern Italic\r\n",
-                        LanguageManager.GetString("Generic.Title.Error"),
-                        MessageBoxButton.OK,
-                        MessageBoxImage.Error
-                        );
-                }
-            }
         }
 
         private void OnWindowControlButtonClick(object sender, RoutedEventArgs e)
