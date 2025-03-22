@@ -24,14 +24,13 @@ namespace VvvfSimulator.Vvvf
             public static double Saw(double x)
             {
                 double val;
-                double fixed_x = x - (double)((int)(x * M_1_2PI) * M_2PI);
+                double fixed_x = x - Math.Floor(x * M_1_2PI) * M_2PI;
                 if (0 <= fixed_x && fixed_x < M_PI_2)
                     val = M_2_PI * fixed_x;
                 else if (M_PI_2 <= fixed_x && fixed_x < 3.0 * M_PI_2)
                     val = -M_2_PI * fixed_x + 2;
                 else
                     val = M_2_PI * fixed_x - 4;
-
                 return -val;
             }
 
@@ -42,7 +41,7 @@ namespace VvvfSimulator.Vvvf
 
             public static double Square(double x)
             {
-                double fixed_x = x - (double)((int)(x * M_1_2PI) * M_2PI);
+                double fixed_x = x - Math.Floor(x * M_1_2PI) * M_2PI;
                 if (fixed_x * M_1_PI > 1) return -1;
                 return 1;
             }
