@@ -2,12 +2,12 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:system="clr-namespace:System;assembly=mscorlib">
 
-    <FontFamily x:Key="Generic.Font">/GUI/Resource/Fonts/Noto_Sans_SC/#Noto Sans SC Medium</FontFamily>
+    <FontFamily x:Key="Generic.Font">/GUI/Resource/Fonts/Sarasa_UI_SC/#更纱黑体 UI SC</FontFamily>
     <FontFamily x:Key="Generic.Font.Input">/GUI/Resource/Fonts/MPlus1Code/#M PLUS 1 Code</FontFamily>
 
-    <system:String x:Key="Generic.Title.Error">出现错误</system:String>
+    <system:String x:Key="Generic.Title.Error">错误</system:String>
     <system:String x:Key="Generic.Title.Info">信息</system:String>
-    <system:String x:Key="Generic.Title.Ask">Ask</system:String>
+    <system:String x:Key="Generic.Title.Ask">提示</system:String>
     <system:String x:Key="Generic.Message.Error">遇到了一些错误</system:String>
     <system:String x:Key="Generic.MenuItem.Add">添加</system:String>
     <system:String x:Key="Generic.MenuItem.Copy">复制</system:String>
@@ -28,7 +28,7 @@
     <system:String x:Key="Resource.Language.FriendlyNameConverter.ColorTheme.Name.Light">浅色</system:String>
     <system:String x:Key="Resource.Language.FriendlyNameConverter.ColorTheme.Name.Dark">深色</system:String>
     
-    <system:String x:Key="MainWindow.Title">VVVF Simulator</system:String><!--不用翻译-->
+    <system:String x:Key="MainWindow.Title">VVVF-Simulator</system:String> <!--不用翻译-->
 
     <system:String x:Key="MainWindow.Menu.File">文件</system:String>
     <system:String x:Key="MainWindow.Menu.File.Save">保存</system:String>
@@ -40,10 +40,10 @@
 
     <system:String x:Key="MainWindow.Menu.Generate">生成</system:String>
     <system:String x:Key="MainWindow.Menu.Generate.Audio">音频</system:String>
-    <system:String x:Key="MainWindow.Menu.Generate.Audio.VVVF">VVVF</system:String><!--不用翻译-->
-    <system:String x:Key="MainWindow.Menu.Generate.Audio.VVVF.Line">线电压音频</system:String>
-    <system:String x:Key="MainWindow.Menu.Generate.Audio.VVVF.Phases">相电压音频</system:String>
-    <system:String x:Key="MainWindow.Menu.Generate.Audio.VVVF.PhaseCurrent">相电流音频</system:String>
+    <system:String x:Key="MainWindow.Menu.Generate.Audio.VVVF">VVVF</system:String> <!--不用翻译-->
+    <system:String x:Key="MainWindow.Menu.Generate.Audio.VVVF.Line">线电压</system:String>
+    <system:String x:Key="MainWindow.Menu.Generate.Audio.VVVF.Phases">每相电压</system:String>
+    <system:String x:Key="MainWindow.Menu.Generate.Audio.VVVF.PhaseCurrent">相电压</system:String>
     <system:String x:Key="MainWindow.Menu.Generate.Audio.Train">走行音</system:String>
     <system:String x:Key="MainWindow.Menu.Generate.Movie">视频</system:String>
     <system:String x:Key="MainWindow.Menu.Generate.Movie.Control">控制信息</system:String>
@@ -67,7 +67,7 @@
     <system:String x:Key="MainWindow.Menu.RealTime">实时模拟</system:String>
     <system:String x:Key="MainWindow.Menu.RealTime.VVVF">VVVF</system:String><!--不用翻译-->
     <system:String x:Key="MainWindow.Menu.RealTime.VVVF.USB">VVVF-USB 直通</system:String>
-    <system:String x:Key="MainWindow.Menu.RealTime.VVVF.USB.Error.Title">出现错误</system:String>
+    <system:String x:Key="MainWindow.Menu.RealTime.VVVF.USB.Error.Title">错误</system:String>
     <system:String x:Key="MainWindow.Menu.RealTime.VVVF.USB.Error.Message">端口无效。</system:String>
     <system:String x:Key="MainWindow.Menu.RealTime.VVVF.Setting">VVVF 模拟设置</system:String>
     <system:String x:Key="MainWindow.Menu.RealTime.Train">Train</system:String>
@@ -87,8 +87,8 @@
     <system:String x:Key="MainWindow.Menu.Window.Preference">偏好设置</system:String>
 
     <system:String x:Key="MainWindow.Menu.Help">帮助</system:String>
-    <system:String x:Key="MainWindow.Menu.Help.About">关于 VVVF Simulator</system:String>
-    <system:String x:Key="MainWindow.Menu.Help.About.Title">关于 VVVF Simulator</system:String>
+    <system:String x:Key="MainWindow.Menu.Help.About">关于 VVVF-Simulator</system:String>
+    <system:String x:Key="MainWindow.Menu.Help.About.Title">关于 VVVF-Simulator</system:String>
     <system:String x:Key="MainWindow.Menu.Help.About.Version.Unkown">版本未知</system:String>
 
     <system:String x:Key="MainWindow.TabControl.Settings">基本设置</system:String>
@@ -98,18 +98,18 @@
     <system:String x:Key="MainWindow.TabControl.Accelerate">加速程序</system:String>
     <system:String x:Key="MainWindow.TabControl.Brake">制动程序</system:String>
 
-    <system:String x:Key="MainWindow.TaskDescription.Generate.Audio.Vvvf.Line">线电压音频生成：</system:String>
-    <system:String x:Key="MainWindow.TaskDescription.Generate.Audio.Vvvf.Phases">相电压音频生成：</system:String>
-    <system:String x:Key="MainWindow.TaskDescription.Generate.Audio.Vvvf.PhaseCurrent">相电流音频生成：</system:String>
-    <system:String x:Key="MainWindow.TaskDescription.Generate.Audio.Train">列车走行音生成：</system:String>
-    <system:String x:Key="MainWindow.TaskDescription.Generate.Movie.Control.Original">控制信息（样式1）生成：</system:String>
-    <system:String x:Key="MainWindow.TaskDescription.Generate.Movie.Control.Original2">控制信息（样式2）生成：</system:String>
-    <system:String x:Key="MainWindow.TaskDescription.Generate.Movie.WaveForm.Original">线电压波形（样式1）生成：</system:String>
-    <system:String x:Key="MainWindow.TaskDescription.Generate.Movie.WaveForm.Spaced">线电压波形（样式2）生成：</system:String>
-    <system:String x:Key="MainWindow.TaskDescription.Generate.Movie.WaveForm.UVW">相电压波形生成：</system:String>
-    <system:String x:Key="MainWindow.TaskDescription.Generate.Movie.Hexagon.Original">电压磁链视频生成：</system:String>
-    <system:String x:Key="MainWindow.TaskDescription.Generate.Movie.Hexagon.Explain">电压磁链渲染进度视频生成：</system:String>
-    <system:String x:Key="MainWindow.TaskDescription.Generate.Movie.FFT.Original">FFT 视频生成：</system:String>
+    <system:String x:Key="MainWindow.TaskDescription.Generate.Audio.Vvvf.Line">生成音频 - 线电压</system:String>
+    <system:String x:Key="MainWindow.TaskDescription.Generate.Audio.Vvvf.Phases">生成音频 - 每相电压</system:String>
+    <system:String x:Key="MainWindow.TaskDescription.Generate.Audio.Vvvf.PhaseCurrent">生成音频 - 相电压</system:String>
+    <system:String x:Key="MainWindow.TaskDescription.Generate.Audio.Train">生成音频 - 列车走行音</system:String>
+    <system:String x:Key="MainWindow.TaskDescription.Generate.Movie.Control.Original">生成视频 - 控制信息（样式1）</system:String>
+    <system:String x:Key="MainWindow.TaskDescription.Generate.Movie.Control.Original2">生成视频 - 控制信息（样式2）</system:String>
+    <system:String x:Key="MainWindow.TaskDescription.Generate.Movie.WaveForm.Original">生成视频 - 线电压波形（样式1）</system:String>
+    <system:String x:Key="MainWindow.TaskDescription.Generate.Movie.WaveForm.Spaced">生成视频 - 线电压波形（样式2）</system:String>
+    <system:String x:Key="MainWindow.TaskDescription.Generate.Movie.WaveForm.UVW">生成视频 - 相电压波形</system:String>
+    <system:String x:Key="MainWindow.TaskDescription.Generate.Movie.Hexagon.Original">生成视频 - 电压积分</system:String>
+    <system:String x:Key="MainWindow.TaskDescription.Generate.Movie.Hexagon.Explain">生成视频 - 电压积分渲染进度</system:String>
+    <system:String x:Key="MainWindow.TaskDescription.Generate.Movie.FFT.Original">生成视频 - FFT</system:String>
 
     <system:String x:Key="MainWindow.Message.File.Save.Ok.Title">信息</system:String>
     <system:String x:Key="MainWindow.Message.File.Save.Ok.Message">保存成功</system:String>
@@ -120,9 +120,9 @@
     <system:String x:Key="MainWindow.Message.File.Load.Ok.Title">信息</system:String>
     <system:String x:Key="MainWindow.Message.File.Load.Ok.Message">加载成功</system:String>
     <system:String x:Key="MainWindow.Message.File.Load.Error.Message">加载失败</system:String>
-    <system:String x:Key="MainWindow.Message.Generate.Movie.Hexagon.Original.EnableZeroVector">启用零矢量点？</system:String>
-    <system:String x:Key="MainWindow.Message.Generate.Movie.Hexagon.Explain.EnableZeroVector">启用零矢量点？</system:String>
-    <system:String x:Key="MainWindow.Message.Generate.Image.Hexagon.Original.EnableZeroVector">启用零矢量点？</system:String>
+    <system:String x:Key="MainWindow.Message.Generate.Movie.Hexagon.Original.EnableZeroVector">是否启用零矢量点？</system:String>
+    <system:String x:Key="MainWindow.Message.Generate.Movie.Hexagon.Explain.EnableZeroVector">是否启用零矢量点？</system:String>
+    <system:String x:Key="MainWindow.Message.Generate.Image.Hexagon.Original.EnableZeroVector">是否启用零矢量点？</system:String>
     <system:String x:Key="MainWindow.Message.Generate.Movie.Hexagon.Explain.EnterFrequency">输入渲染频率</system:String>
     <system:String x:Key="MainWindow.Message.Generate.Image.Hexagon.Original.EnterFrequency">输入渲染频率</system:String>
     <system:String x:Key="MainWindow.Message.Generate.Image.FFT.Original.EnterFrequency">输入渲染频率</system:String>
@@ -140,7 +140,7 @@
     <system:String x:Key="MainWindow.Dialog.Tools.AutoVoltage.MaxEffort">尝试匹配调制度的最大次数</system:String>
     <system:String x:Key="MainWindow.Dialog.Tools.AutoVoltage.CalculationType">计算方式</system:String>
     <system:String x:Key="MainWindow.Dialog.Tools.AutoVoltage.Precision">精度</system:String>
-    <system:String x:Key="MainWindow.Dialog.Tools.AutoVoltage.Message.Error">自动调制索引失败\n调制指数:{0}\n制动时:{1}\n频率:{2}Hz\n内容:{3}</system:String>
+    <system:String x:Key="MainWindow.Dialog.Tools.AutoVoltage.Message.Error">自动调制索引失败\n调制指数:{0}\n制动时:{1}\n基波频率:{2}Hz\n内容:{3}</system:String>
 
     <system:String x:Key="MainWindow.Dialog.Tools.AutoVoltage.Table.Title">离散调制度设置</system:String>
     <system:String x:Key="MainWindow.Dialog.Tools.AutoVoltage.Table.Division">分割数</system:String>
@@ -218,7 +218,7 @@
     <system:String x:Key="TrainAudio.Pages.Mixer.Volume.ConvolutionFilter">环绕声滤波器</system:String>
 
     <system:String x:Key="TrainAudio.Pages.Mixer.ConvolutionFilter.ImpulseResponse">脉冲响应</system:String>
-    <system:String x:Key="TrainAudio.Pages.Mixer.ConvolutionFilter.Load">加载</system:String>
+    <system:String x:Key="TrainAudio.Pages.Mixer.ConvolutionFilter.Load">加载文件</system:String>
     <system:String x:Key="TrainAudio.Pages.Mixer.ConvolutionFilter.Message.Load.Ok">加载成功</system:String>
     <system:String x:Key="TrainAudio.Pages.Mixer.ConvolutionFilter.Message.Load.Reset">恢复默认</system:String>
 
@@ -238,7 +238,7 @@
     <FontFamily x:Key="Simulator.RealTime.Controller.Font.Notch">/GUI/Resource/Fonts/MPlus1Code/#M PLUS 1 Code</FontFamily>
     <FontFamily x:Key="Simulator.RealTime.Controller.Font.Topic">/GUI/Resource/Fonts/lxgw_marker_gothic/#霞鹜漫黑</FontFamily>
     <FontFamily x:Key="Simulator.RealTime.Controller.Font.Unit">/GUI/Resource/Fonts/lxgw_marker_gothic/#霞鹜漫黑</FontFamily>
-    <system:String x:Key="Simulator.RealTime.Controller.SineFrequency">频率</system:String>
+    <system:String x:Key="Simulator.RealTime.Controller.SineFrequency">基波频率</system:String>
     <system:String x:Key="Simulator.RealTime.Controller.Voltage">电压</system:String>
     <system:String x:Key="Simulator.RealTime.Controller.PulseState">调制方式</system:String>
     
@@ -276,7 +276,7 @@
     <system:String x:Key="Simulator.RealTime.Setting.Basic.Controller">控制器</system:String>
     <system:String x:Key="Simulator.RealTime.Setting.Basic.WaveForm">波形</system:String>
     <system:String x:Key="Simulator.RealTime.Setting.Basic.WaveForm.Show.Line">显示线电压</system:String>
-    <system:String x:Key="Simulator.RealTime.Setting.Basic.WaveForm.Show.Phase">显示相电压</system:String>
+    <system:String x:Key="Simulator.RealTime.Setting.Basic.WaveForm.Show.Phase">显示每相电压</system:String>
     <system:String x:Key="Simulator.RealTime.Setting.Basic.ControlStatus">控制信息</system:String>
     <system:String x:Key="Simulator.RealTime.Setting.Basic.ControlStatus.Show">显示</system:String>
     <system:String x:Key="Simulator.RealTime.Setting.Basic.ControlStatus.Design">样式</system:String>
@@ -290,9 +290,9 @@
     <system:String x:Key="Simulator.RealTime.Setting.Basic.Others.FS.Show">显示傅里叶级数</system:String>
     <system:String x:Key="Simulator.RealTime.Setting.Basic.Others.EditRealTime">模拟时允许编辑</system:String>
 
-    <system:String x:Key="Simulator.RealTime.Setting.Basic.Message.NoFont">未安装以下字体：</system:String>
+    <system:String x:Key="Simulator.RealTime.Setting.Basic.Message.NoFont">未安装以下字体</system:String>
 
-    <system:String x:Key="Simulator.RealTime.Message.NoUsbDevice">无法识别所选 USB 设备</system:String>
+    <system:String x:Key="Simulator.RealTime.Message.NoUsbDevice">无法识别所选的 USB 设备</system:String>
     <system:String x:Key="Simulator.RealTime.Message.UsbDeviceRemoved">USB 设备已移除</system:String>
 
     <system:String x:Key="MidiConvert.Main.Title">MIDI 转换</system:String>
@@ -301,7 +301,7 @@
     <system:String x:Key="MidiConvert.Main.Config">配置</system:String>
     <system:String x:Key="MidiConvert.Main.Convert">转换</system:String>
 
-    <system:String x:Key="MidiConvert.Main.Message.MidiConvertError">该 Midi 无法转换</system:String>
+    <system:String x:Key="MidiConvert.Main.Message.MidiConvertError">该 MIDI 无法转换</system:String>
     <system:String x:Key="MidiConvert.TaskDescription.Convert.Description">转换 MIDI:{0}、音轨{1}、部分{2}</system:String>
 
     <system:String x:Key="MidiConvert.Config.Title">MIDI 转换</system:String>
@@ -328,7 +328,7 @@
     <system:String x:Key="Mascon.ControlEditor.Menu.Edit.Reset">重置</system:String>
     <system:String x:Key="Mascon.ControlEditor.Menu.Edit.Midi">加载 MIDI</system:String>
 
-    <system:String x:Key="Mascon.ControlEditor.Message.MidiConvertError">该 Midi 无法转换</system:String>
+    <system:String x:Key="Mascon.ControlEditor.Message.MidiConvertError">该 MIDI 无法转换</system:String>
 
     <system:String x:Key="Mascon.ControlEditor.Message.File.Load.Ok.Title">信息</system:String>
     <system:String x:Key="Mascon.ControlEditor.Message.File.Load.Ok.Message">加载成功</system:String>

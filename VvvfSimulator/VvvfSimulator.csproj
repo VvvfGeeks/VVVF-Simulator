@@ -59,7 +59,11 @@
 		<Resource Include="GUI\Resource\Fonts\NanumSquareNeo\NanumSquareNeo-eHv.ttf" />
 		<Resource Include="GUI\Resource\Fonts\New_Amsterdam\NewAmsterdam-Regular.ttf" />
 		<Resource Include="GUI\Resource\Fonts\Roboto_Condensed\RobotoCondensed-Medium.ttf" />
-		<Resource Include="GUI\Resource\Fonts\Noto_Sans_SC\NotoSansSC-Medium.ttf" />
+		<Resource Include="GUI\Resource\Fonts\Sarasa_UI_SC\SarasaUiSC-Bold.ttf" />
+		<Resource Include="GUI\Resource\Fonts\Sarasa_UI_SC\SarasaUiSC-ExtraLight.ttf" />
+		<Resource Include="GUI\Resource\Fonts\Sarasa_UI_SC\SarasaUiSC-Light.ttf" />
+		<Resource Include="GUI\Resource\Fonts\Sarasa_UI_SC\SarasaUiSC-Regular.ttf" />
+		<Resource Include="GUI\Resource\Fonts\Sarasa_UI_SC\SarasaUiSC-SemiBold.ttf" />
 		<Resource Include="GUI\Resource\Fonts\RocknRoll_One\RocknRollOne-Regular.ttf" />
 		<Resource Include="GUI\Resource\Images\MIDIConvert\B_MultiTask.png" />
 		<Resource Include="GUI\Resource\Images\MIDIConvert\B_Spanner.png" />
