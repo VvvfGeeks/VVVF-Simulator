@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
-using static VvvfSimulator.Yaml.VvvfSound.YamlVvvfSoundData.YamlControlData.YamlAmplitude;
+using static VvvfSimulator.Data.Vvvf.Struct.PulseControl.AmplitudeValue;
 
 namespace VvvfSimulator.GUI.Create.Waveform.Basic
 {
@@ -11,7 +11,7 @@ namespace VvvfSimulator.GUI.Create.Waveform.Basic
     /// </summary>
     public partial class AmplitudeTableEditor : Window
     {
-        private readonly AmplitudeParameter Parameter;
+        private readonly Parameter Parameter;
         private class DataGridItem
         {
             public double Frequency { get; set; }
@@ -24,7 +24,7 @@ namespace VvvfSimulator.GUI.Create.Waveform.Basic
             }
             
         }
-        public AmplitudeTableEditor(Window? Owner,AmplitudeParameter Parameter)
+        public AmplitudeTableEditor(Window? Owner,Parameter Parameter)
         {
             this.Owner = Owner;
             this.Parameter = Parameter;

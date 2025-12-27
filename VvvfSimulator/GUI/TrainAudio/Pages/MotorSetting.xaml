@@ -34,34 +34,49 @@
                     <RowDefinition Height="50"/>
                     <RowDefinition Height="50"/>
                     <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="2*"/>
                     <ColumnDefinition Width="5*"/>
                 </Grid.ColumnDefinitions>
                 <Border Background="{DynamicResource TitleBarBrush}" Grid.Row="0" Grid.ColumnSpan="2" CornerRadius="25,25,0,0"/>
-                <Border Background="{DynamicResource SubTitleBarBrush}" Grid.Column="0" Grid.Row="1" Grid.RowSpan="9" CornerRadius="0,0,0,25"/>
-                <Border Background="{DynamicResource BackgroundBrush}" Grid.Column="1" Grid.Row="1" Grid.RowSpan="9" CornerRadius="0,0,25,0"/>
+                <Border Background="{DynamicResource SubTitleBarBrush}" Grid.Column="0" Grid.Row="1" Grid.RowSpan="14" CornerRadius="0,0,0,25"/>
+                <Border Background="{DynamicResource BackgroundBrush}" Grid.Column="1" Grid.Row="1" Grid.RowSpan="14" CornerRadius="0,0,25,0"/>
                 <Label Content="{DynamicResource TrainAudio.Pages.MotorSetting.MotorSpecification}" Style="{DynamicResource TitleBarText}" Grid.ColumnSpan="2"/>
 
-                <TextBox Grid.Column="1" Grid.Row="1" TextChanged="TextBox_TextChanged" Tag="SR" Name="SR" Style="{DynamicResource SlimTextBox}"/>
-                <TextBox Grid.Column="1" Grid.Row="2" TextChanged="TextBox_TextChanged" Tag="RR" Name="RR" Style="{DynamicResource SlimTextBox}"/>
-                <TextBox Grid.Column="1" Grid.Row="3" TextChanged="TextBox_TextChanged" Tag="SI" Name="SI" Style="{DynamicResource SlimTextBox}"/>
-                <TextBox Grid.Column="1" Grid.Row="4" TextChanged="TextBox_TextChanged" Tag="RI" Name="RI" Style="{DynamicResource SlimTextBox}"/>
-                <TextBox Grid.Column="1" Grid.Row="5" TextChanged="TextBox_TextChanged" Tag="MI" Name="MI" Style="{DynamicResource SlimTextBox}"/>
-                <TextBox Grid.Column="1" Grid.Row="6" TextChanged="TextBox_TextChanged" Tag="PL" Name="PL" Style="{DynamicResource SlimTextBox}"/>
-                <TextBox Grid.Column="1" Grid.Row="7" TextChanged="TextBox_TextChanged" Tag="D" Name="D" Style="{DynamicResource SlimTextBox}"/>
-                <TextBox Grid.Column="1" Grid.Row="8" TextChanged="TextBox_TextChanged" Tag="RIM" Name="RIM" Style="{DynamicResource SlimTextBox}"/>
-                <TextBox Grid.Column="1" Grid.Row="9" TextChanged="TextBox_TextChanged" Tag="SF" Name="SF" Style="{DynamicResource SlimTextBox}"/>
-                <Label Content="{DynamicResource TrainAudio.Pages.MotorSetting.MotorSpecification.StatorResistance}" Grid.Row="1" Style="{DynamicResource SubTitleBarText}"/>
-                <Label Content="{DynamicResource TrainAudio.Pages.MotorSetting.MotorSpecification.RotorResistance}" Grid.Row="2" Style="{DynamicResource SubTitleBarText}"/>
-                <Label Content="{DynamicResource TrainAudio.Pages.MotorSetting.MotorSpecification.StatorInductance}" Grid.Row="3" Style="{DynamicResource SubTitleBarText}"/>
-                <Label Content="{DynamicResource TrainAudio.Pages.MotorSetting.MotorSpecification.RotorInductance}" Grid.Row="4" Style="{DynamicResource SubTitleBarText}"/>
-                <Label Content="{DynamicResource TrainAudio.Pages.MotorSetting.MotorSpecification.MutualInductance}" Grid.Row="5" Style="{DynamicResource SubTitleBarText}"/>
-                <Label Content="{DynamicResource TrainAudio.Pages.MotorSetting.MotorSpecification.PolePairCount}" Grid.Row="6" Style="{DynamicResource SubTitleBarText}"/>
-                <Label Content="{DynamicResource TrainAudio.Pages.MotorSetting.MotorSpecification.Damping}" Grid.Row="7" Style="{DynamicResource SubTitleBarText}"/>
-                <Label Content="{DynamicResource TrainAudio.Pages.MotorSetting.MotorSpecification.RotationalInertiaMass}" Grid.Row="8" Style="{DynamicResource SubTitleBarText}"/>
-                <Label Content="{DynamicResource TrainAudio.Pages.MotorSetting.MotorSpecification.StaticFriction}" Grid.Row="9" Style="{DynamicResource SubTitleBarText}"/>
+                <TextBox Grid.Column="1" Grid.Row="1" TextChanged="TextBox_TextChanged" Name="V" Style="{DynamicResource SlimTextBox}"/>
+                <TextBox Grid.Column="1" Grid.Row="2" TextChanged="TextBox_TextChanged" Name="Rs" Style="{DynamicResource SlimTextBox}"/>
+                <TextBox Grid.Column="1" Grid.Row="3" TextChanged="TextBox_TextChanged" Name="Rr" Style="{DynamicResource SlimTextBox}"/>
+                <TextBox Grid.Column="1" Grid.Row="4" TextChanged="TextBox_TextChanged" Name="Ls" Style="{DynamicResource SlimTextBox}"/>
+                <TextBox Grid.Column="1" Grid.Row="5" TextChanged="TextBox_TextChanged" Name="Lr" Style="{DynamicResource SlimTextBox}"/>
+                <TextBox Grid.Column="1" Grid.Row="6" TextChanged="TextBox_TextChanged" Name="Lm" Style="{DynamicResource SlimTextBox}"/>
+                <TextBox Grid.Column="1" Grid.Row="7" TextChanged="TextBox_TextChanged" Name="Np" Style="{DynamicResource SlimTextBox}"/>
+                <TextBox Grid.Column="1" Grid.Row="8" TextChanged="TextBox_TextChanged" Name="Damping" Style="{DynamicResource SlimTextBox}"/>
+                <TextBox Grid.Column="1" Grid.Row="9" TextChanged="TextBox_TextChanged" Name="Inertia" Style="{DynamicResource SlimTextBox}"/>
+                <TextBox Grid.Column="1" Grid.Row="10" TextChanged="TextBox_TextChanged" Name="Fd"  Style="{DynamicResource SlimTextBox}"/>
+                <TextBox Grid.Column="1" Grid.Row="11" TextChanged="TextBox_TextChanged" Name="Fc" Style="{DynamicResource SlimTextBox}"/>
+                <TextBox Grid.Column="1" Grid.Row="12" TextChanged="TextBox_TextChanged" Name="Fs" Style="{DynamicResource SlimTextBox}"/>
+                <TextBox Grid.Column="1" Grid.Row="13" TextChanged="TextBox_TextChanged" Name="StribeckOmega" Style="{DynamicResource SlimTextBox}"/>
+                <TextBox Grid.Column="1" Grid.Row="14" TextChanged="TextBox_TextChanged" Name="FricSmoothK" Style="{DynamicResource SlimTextBox}"/>
+                <Label Content="{DynamicResource TrainAudio.Pages.MotorSetting.MotorSpecification.SourceVoltage}" Grid.Row="1" Style="{DynamicResource SubTitleBarText}"/>
+                <Label Content="{DynamicResource TrainAudio.Pages.MotorSetting.MotorSpecification.StatorResistance}" Grid.Row="2" Style="{DynamicResource SubTitleBarText}"/>
+                <Label Content="{DynamicResource TrainAudio.Pages.MotorSetting.MotorSpecification.RotorResistance}" Grid.Row="3" Style="{DynamicResource SubTitleBarText}"/>
+                <Label Content="{DynamicResource TrainAudio.Pages.MotorSetting.MotorSpecification.StatorInductance}" Grid.Row="4" Style="{DynamicResource SubTitleBarText}"/>
+                <Label Content="{DynamicResource TrainAudio.Pages.MotorSetting.MotorSpecification.RotorInductance}" Grid.Row="5" Style="{DynamicResource SubTitleBarText}"/>
+                <Label Content="{DynamicResource TrainAudio.Pages.MotorSetting.MotorSpecification.MutualInductance}" Grid.Row="6" Style="{DynamicResource SubTitleBarText}"/>
+                <Label Content="{DynamicResource TrainAudio.Pages.MotorSetting.MotorSpecification.PolePairCount}" Grid.Row="7" Style="{DynamicResource SubTitleBarText}"/>
+                <Label Content="{DynamicResource TrainAudio.Pages.MotorSetting.MotorSpecification.Damping}" Grid.Row="8" Style="{DynamicResource SubTitleBarText}"/>
+                <Label Content="{DynamicResource TrainAudio.Pages.MotorSetting.MotorSpecification.RotationalInertiaMass}" Grid.Row="9" Style="{DynamicResource SubTitleBarText}"/>
+                <Label Content="{DynamicResource TrainAudio.Pages.MotorSetting.MotorSpecification.ViscousFriction}" Grid.Row="10" Style="{DynamicResource SubTitleBarText}"/>
+                <Label Content="{DynamicResource TrainAudio.Pages.MotorSetting.MotorSpecification.CoulombFriction}" Grid.Row="11" Style="{DynamicResource SubTitleBarText}"/>
+                <Label Content="{DynamicResource TrainAudio.Pages.MotorSetting.MotorSpecification.StaticFriction}" Grid.Row="12" Style="{DynamicResource SubTitleBarText}"/>
+                <Label Content="{DynamicResource TrainAudio.Pages.MotorSetting.MotorSpecification.StribeckOmega}" Grid.Row="13" Style="{DynamicResource SubTitleBarText}"/>
+                <Label Content="{DynamicResource TrainAudio.Pages.MotorSetting.MotorSpecification.FrictionSmoothingGain}" Grid.Row="14" Style="{DynamicResource SubTitleBarText}"/>
             </Grid>
         </Border>
         <Grid Height="2"/>
@@ -81,7 +96,7 @@
                 <Label Content="{DynamicResource TrainAudio.Pages.MotorSetting.MotorSounds}" Style="{DynamicResource TitleBarText}" Grid.ColumnSpan="2"/>
 
                 <ListView 
-                    x:Name="Motor_Harmonics_List" 
+                    x:Name="MotorHarmonics" 
                     Grid.Row="1" 
                     d:ItemsSource="{d:SampleData ItemCount=5}" 
                     SelectionChanged="ListView_SelectionChanged" 
@@ -103,7 +118,7 @@
                         </ContextMenu>
                     </ListView.ContextMenu>
                 </ListView>
-                <Frame x:Name="Motor_Harmonic_Edit_Frame" NavigationUIVisibility="Hidden" Grid.Column="1" Grid.Row="1" VerticalAlignment="Top"/>
+                <Frame x:Name="MotorHarmonicEditFrame" NavigationUIVisibility="Hidden" Grid.Column="1" Grid.Row="1" VerticalAlignment="Top"/>
             </Grid>
         </Border>
     </StackPanel>

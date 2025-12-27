@@ -1,0 +1,118 @@
+﻿<Window x:Class="VvvfSimulator.GUI.BaseFrequency.SettingWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:uc="clr-namespace:VvvfSimulator.GUI.Resource.MyUserControl"
+        xmlns:local="clr-namespace:VvvfSimulator.GUI.BaseFrequency"
+        mc:Ignorable="d"
+        Style="{DynamicResource MinimumWindowStyle}"
+        Title="{DynamicResource BaseFrequency.SettingWindow.Title}" Height="500" Width="960" 
+        AllowDrop="True" 
+        Closing="Window_Closing" 
+        KeyDown="Window_KeyDown"
+        Drop="Window_Drop"
+        >
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/GUI/Resource/Dictionary/Common.xaml"/>
+                <ResourceDictionary Source="/GUI/Resource/Dictionary/MenuBar.xaml"/>
+                <ResourceDictionary Source="/GUI/Resource/Dictionary/TabControl.xaml"/>
+                <ResourceDictionary Source="/GUI/Resource/Dictionary/ListView.xaml"/>
+                <ResourceDictionary Source="/GUI/Resource/Dictionary/Window.xaml"/>
+                <ResourceDictionary Source="/GUI/Resource/Dictionary/MenuItem.xaml"/>
+                <ResourceDictionary Source="/GUI/Resource/Dictionary/ContextMenu.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+            <local:SmallTitleConverter x:Key="SmallTitle"/>
+            <local:BigTitleConverter x:Key="BigTitle"/>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Grid Background="{DynamicResource VoidBackgroundBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="25"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="46"/>
+                <ColumnDefinition Width="46"/>
+                <ColumnDefinition Width="46"/>
+            </Grid.ColumnDefinitions>
+            <Image Style="{StaticResource WindowIconStyle}"/>
+            <Menu Grid.Column="1" Style="{DynamicResource MenuStyle}">
+                <MenuItem Header="{DynamicResource BaseFrequency.SettingWindow.Menu.File}">
+                    <MenuItem Header="{DynamicResource BaseFrequency.SettingWindow.Menu.File.Save}" Tag="Save" Click="FileMenuClick"/>
+                    <MenuItem Header="{DynamicResource BaseFrequency.SettingWindow.Menu.File.SaveAs}" Tag="SaveAs" Click="FileMenuClick"/>
+                    <MenuItem Header="{DynamicResource BaseFrequency.SettingWindow.Menu.File.Load}" Tag="Load" Click="FileMenuClick"/>
+                </MenuItem>
+                <MenuItem Header="{DynamicResource BaseFrequency.SettingWindow.Menu.Edit}">
+                    <MenuItem Header="{DynamicResource BaseFrequency.SettingWindow.Menu.Edit.Reset}" Tag="Reset" Click="EditMenuClick"/>
+                    <MenuItem Header="{DynamicResource BaseFrequency.SettingWindow.Menu.Edit.Midi}" Tag="Midi" Click="EditMenuClick"/>
+                </MenuItem>
+            </Menu>
+            <uc:WindowControlButton Grid.Column="2" Tag="Minimize" Style="{DynamicResource WindowMimizeButton}" Click="OnWindowControlButtonClick"/>
+            <uc:WindowControlButton Grid.Column="3" Tag="Maximize" Style="{DynamicResource WindowMaximizeButton}" Click="OnWindowControlButtonClick"/>
+            <uc:WindowControlButton Grid.Column="4" Tag="Close" Style="{DynamicResource WindowCloseButton}" Click="OnWindowControlButtonClick"/>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="7*"/>
+            </Grid.ColumnDefinitions>
+            <Border CornerRadius="0,0,25,25" Margin="5" Background="{DynamicResource BackgroundBrush}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="50"/>
+                    </Grid.RowDefinitions>
+                    <Border>
+                        <ListView 
+                            x:Name="PointList" 
+                            SelectionChanged="ControlItemSelected" 
+                            Style="{DynamicResource SlimListView}"
+                            ItemContainerStyle="{DynamicResource SlimListItem}"
+                            >
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid Width="auto">
+                                        <TextBlock Text="{Binding Path=. , Converter={StaticResource BigTitle}}" Style="{DynamicResource ListItemTitleTextBlockStyle}"
+                                                   HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                                        <Grid.ContextMenu>
+                                            <ContextMenu Style="{DynamicResource SlimContextMenu}">
+                                                <MenuItem Header="{DynamicResource Generic.MenuItem.Copy}" Click="ControlItemContextMenuClick" Tag="Copy"/>
+                                                <Separator/>
+                                                <MenuItem Header="{DynamicResource Generic.MenuItem.Delete}" Click="ControlItemContextMenuClick" Tag="Delete"/>
+                                            </ContextMenu>
+                                        </Grid.ContextMenu>
+                                    </Grid>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                            <ListView.ContextMenu>
+                                <ContextMenu Style="{DynamicResource SlimContextMenu}">
+                                    <MenuItem Header="{DynamicResource Generic.MenuItem.Sort}" Click="ItemListContextMenuClick" Tag="Sort"/>
+                                </ContextMenu>
+                            </ListView.ContextMenu>
+                        </ListView>
+                    </Border>
+                    <Border Grid.Row="1" Background="{DynamicResource SubBackgroundBrush}" CornerRadius="25">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Button Content="+" Tag="Add" Click="ButtonClick" Style="{DynamicResource SlimButton}"/>
+                        </Grid>
+                    </Border>
+                </Grid>             
+            </Border>
+            <ScrollViewer Grid.Column="1" Style="{DynamicResource SlimScrollViewer}">
+                <Frame Padding="5" x:Name="EditorFrame" NavigationUIVisibility="Hidden"/>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+</Window>

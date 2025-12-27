@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:uc="clr-namespace:VvvfSimulator.GUI.Resource.MyUserControl"
         xmlns:local="clr-namespace:VvvfSimulator.GUI.Simulator.RealTime.Controller.Design1"
         mc:Ignorable="d"
         Style="{DynamicResource MinimumWindowStyle}"
@@ -88,9 +89,9 @@
             </Grid.ColumnDefinitions>
             <Image Style="{StaticResource WindowIconStyle}"/>
             <Label Grid.Column="1" x:Name="WindowTitle" Content="{DynamicResource Simulator.RealTime.Controller.Title}" Style="{StaticResource WindowTitleStyle}"/>
-            <Button Grid.Column="2" Tag="Minimize" Style="{DynamicResource WindowMimizeButton}" Click="OnWindowControlButtonClick"/>
-            <Button Grid.Column="3" Tag="Maximize" Style="{DynamicResource WindowMaximizeButton}" Click="OnWindowControlButtonClick"/>
-            <Button Grid.Column="4" Tag="Close" Style="{DynamicResource WindowCloseButton}" Click="OnWindowControlButtonClick"/>
+            <uc:WindowControlButton Grid.Column="2" Tag="Minimize" Style="{DynamicResource WindowMimizeButton}" Click="OnWindowControlButtonClick"/>
+            <uc:WindowControlButton Grid.Column="3" Tag="Maximize" Style="{DynamicResource WindowMaximizeButton}" Click="OnWindowControlButtonClick"/>
+            <uc:WindowControlButton Grid.Column="4" Tag="Close" Style="{DynamicResource WindowCloseButton}" Click="OnWindowControlButtonClick"/>
         </Grid>
         <Grid Grid.Column="1" Grid.Row="2">
             <Grid.RowDefinitions>
@@ -162,9 +163,9 @@
                         <ColumnDefinition Width="4*"/>
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
-                    <Label Content="{DynamicResource Simulator.RealTime.Controller.SineFrequency}" Style="{DynamicResource ValueTitle}"/>
+                    <Label Content="{DynamicResource Simulator.RealTime.Controller.BaseFrequency}" Style="{DynamicResource ValueTitle}"/>
                     <Label Grid.Column="2" Content="Hz" Style="{DynamicResource ValueUnit}"/>
-                    <TextBlock Style="{DynamicResource Value}" Grid.Column="1" Text="{Binding SineFrequency, StringFormat=\{0:N1\}}" d:Text="100.0"/>
+                    <TextBlock Style="{DynamicResource Value}" Grid.Column="1" Text="{Binding SineFrequency}" d:Text="100.0"/>
                 </Grid>
                 <Grid Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                     <Grid.ColumnDefinitions>
@@ -174,7 +175,7 @@
                     </Grid.ColumnDefinitions>
                     <Label Content="{DynamicResource Simulator.RealTime.Controller.Voltage}" Style="{DynamicResource ValueTitle}"/>
                     <Label Grid.Column="2" Content="%" Style="{DynamicResource ValueUnit}"/>
-                    <TextBlock Style="{DynamicResource Value}" Grid.Column="1" Text="{Binding Voltage, StringFormat=\{0:N1\}}" d:Text="100"/>
+                    <TextBlock Style="{DynamicResource Value}" Grid.Column="1" Text="{Binding Voltage}" d:Text="100"/>
                 </Grid>
                 <Grid Grid.Row="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                     <Grid.ColumnDefinitions>

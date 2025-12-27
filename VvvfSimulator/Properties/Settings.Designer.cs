@@ -12,7 +12,7 @@ namespace VvvfSimulator.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.11.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.14.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -25,7 +25,7 @@ namespace VvvfSimulator.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("40000")]
+        [global::System.Configuration.DefaultSettingValueAttribute("32768")]
         public int RealTime_VVVF_BuffSize {
             get {
                 return ((int)(this["RealTime_VVVF_BuffSize"]));
@@ -37,7 +37,7 @@ namespace VvvfSimulator.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool RealTime_VVVF_WaveForm_Line_Show {
             get {
                 return ((bool)(this["RealTime_VVVF_WaveForm_Line_Show"]));
@@ -61,7 +61,7 @@ namespace VvvfSimulator.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("40000")]
+        [global::System.Configuration.DefaultSettingValueAttribute("32768")]
         public int RealTime_Train_BuffSize {
             get {
                 return ((int)(this["RealTime_Train_BuffSize"]));
@@ -505,7 +505,7 @@ namespace VvvfSimulator.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("10000")]
+        [global::System.Configuration.DefaultSettingValueAttribute("16384")]
         public int RealTime_VVVF_Controller_Design2_CalculatePrecision {
             get {
                 return ((int)(this["RealTime_VVVF_Controller_Design2_CalculatePrecision"]));
@@ -517,7 +517,7 @@ namespace VvvfSimulator.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("10000")]
+        [global::System.Configuration.DefaultSettingValueAttribute("16384")]
         public int RealTime_Train_Controller_Design2_CalculatePrecision {
             get {
                 return ((int)(this["RealTime_Train_Controller_Design2_CalculatePrecision"]));

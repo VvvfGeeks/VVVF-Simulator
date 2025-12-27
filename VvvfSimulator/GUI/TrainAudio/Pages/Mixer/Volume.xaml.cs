@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using VvvfSimulator.GUI.Resource.Class;
-using static VvvfSimulator.Yaml.TrainAudioSetting.YamlTrainSoundAnalyze;
+using VvvfSimulator.Data.TrainAudio;
 
 namespace VvvfSimulator.GUI.TrainAudio.Pages.Mixer
 {
@@ -11,8 +11,8 @@ namespace VvvfSimulator.GUI.TrainAudio.Pages.Mixer
     /// </summary>
     public partial class Volume : Page
     {
-        readonly YamlTrainSoundData data;
-        public Volume(YamlTrainSoundData data)
+        readonly Struct data;
+        public Volume(Struct data)
         {
             this.data = data;
             InitializeComponent();
@@ -25,7 +25,7 @@ namespace VvvfSimulator.GUI.TrainAudio.Pages.Mixer
             MasterVolumeValue.Text = data.TotalVolumeDb.ToString("F2");
             MotorVolume.Value = data.MotorVolumeDb;
             MotorVolumeValue.Text = data.MotorVolumeDb.ToString("F2");
-            EnableFrequencyFilter.SetToggled(data.UseFilteres);
+            EnableFrequencyFilter.SetToggled(data.UseFilters);
             EnableConvolutionFilter.SetToggled(data.UseConvolutionFilter);
         }
 
@@ -95,7 +95,7 @@ namespace VvvfSimulator.GUI.TrainAudio.Pages.Mixer
 
         private void EnableFrequencyFilter_OnClicked(object sender, EventArgs e)
         {
-            data.UseFilteres = EnableFrequencyFilter.IsToggled();
+            data.UseFilters = EnableFrequencyFilter.IsToggled();
         }
 
         private void EnableConvolutionFilter_OnClicked(object sender, EventArgs e)

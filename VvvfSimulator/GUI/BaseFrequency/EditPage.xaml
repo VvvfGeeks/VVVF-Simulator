@@ -1,0 +1,94 @@
+﻿<Page x:Class="VvvfSimulator.GUI.BaseFrequency.EditPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:VvvfSimulator.GUI.BaseFrequency"
+      mc:Ignorable="d" 
+      d:DesignHeight="200" d:DesignWidth="534">
+
+    <Page.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/GUI/Resource/Dictionary/Common.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <Style TargetType="Label">
+                <Setter Property="Foreground" Value="{DynamicResource BackgroundTextBrush}"/>
+            </Style>
+        </ResourceDictionary>
+    </Page.Resources>
+
+    <Grid Background="{DynamicResource VoidBackgroundBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="11*"/>
+            </Grid.ColumnDefinitions>
+            <Grid Background="{DynamicResource SubTitleBarBrush}">
+                <Label Content="{DynamicResource BaseFrequency.EditPage.Order}" Style="{DynamicResource SubTitleBarText}"/>
+            </Grid>
+            <Grid Grid.Column="1">
+                <TextBox x:Name="order_box" Text="1" Style="{DynamicResource SlimTextBox}" Grid.RowSpan="1" TextChanged="TextChanged" Tag="Order"/>
+            </Grid>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="11*"/>
+            </Grid.ColumnDefinitions>
+            <Grid Background="{DynamicResource SubTitleBarBrush}">
+                <Label Content="{DynamicResource BaseFrequency.EditPage.Duration}" Style="{DynamicResource SubTitleBarText}"/>
+            </Grid>
+            <Grid Grid.Column="1" HorizontalAlignment="Stretch">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="6*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <TextBox x:Name="duration_box" Text="20.0" Style="{DynamicResource SlimTextBox}" Grid.RowSpan="1" TextChanged="TextChanged" Tag="Duration"/>
+                <Label Grid.Column="1" Content="sec" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="{DynamicResource Generic.Font}"/>
+            </Grid>
+        </Grid>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="11*"/>
+            </Grid.ColumnDefinitions>
+            <Grid Background="{DynamicResource SubTitleBarBrush}">
+                <Label Content="{DynamicResource BaseFrequency.EditPage.Rate}" Style="{DynamicResource SubTitleBarText}"/>
+            </Grid>
+            <Grid Grid.Column="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="6*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <TextBox x:Name="rate_box" Text="5.0" Style="{DynamicResource SlimTextBox}" Grid.RowSpan="1" TextChanged="TextChanged" Tag="Rate"/>
+                <Label Grid.Column="1" Content="Hz/sec" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="{DynamicResource Generic.Font}"/>
+            </Grid>
+        </Grid>
+        <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="11*"/>
+            </Grid.ColumnDefinitions>
+            <Grid Background="{DynamicResource SubTitleBarBrush}">
+                <Label Content="{DynamicResource BaseFrequency.EditPage.Other}" Style="{DynamicResource SubTitleBarText}"/>
+            </Grid>
+            <Grid Grid.Column="1" HorizontalAlignment="Stretch">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+
+                <CheckBox Style="{DynamicResource SlimCheckBox}" x:Name="is_power_on" Content="{DynamicResource BaseFrequency.EditPage.Other.PowerOn}" HorizontalAlignment="Center" VerticalAlignment="Center" Checked="Check_Changed" Unchecked="Check_Changed" Tag="PowerOn"/>
+                <CheckBox Style="{DynamicResource SlimCheckBox}" x:Name="is_brake" Content="{DynamicResource BaseFrequency.EditPage.Other.Brake}" HorizontalAlignment="Center" VerticalAlignment="Center" Checked="Check_Changed" Unchecked="Check_Changed" Tag="Brake" Grid.Column="1"/>
+            </Grid>
+        </Grid>
+
+    </Grid>
+</Page>

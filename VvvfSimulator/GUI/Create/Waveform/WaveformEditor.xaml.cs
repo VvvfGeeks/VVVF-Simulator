@@ -1,13 +1,12 @@
 ﻿using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Forms;
 using VvvfSimulator.GUI.Create.Waveform.Basic;
 using VvvfSimulator.GUI.Create.Waveform.Common;
 using VvvfSimulator.GUI.Resource.Class;
-using static VvvfSimulator.Vvvf.Struct;
-using static VvvfSimulator.Yaml.VvvfSound.YamlVvvfSoundData;
-using static VvvfSimulator.Yaml.VvvfSound.YamlVvvfSoundData.YamlControlData.YamlPulseMode;
+using VvvfSimulator.Vvvf.Model;
+using static VvvfSimulator.Data.Vvvf.Struct;
+using static VvvfSimulator.Data.Vvvf.Struct.PulseControl.Pulse;
 using UserControl = System.Windows.Controls.UserControl;
 
 namespace VvvfSimulator.GUI.Create.Waveform
@@ -17,7 +16,7 @@ namespace VvvfSimulator.GUI.Create.Waveform
     /// </summary>
     public partial class WaveformEditor : Page
     {
-        private readonly YamlControlData Control;
+        private readonly PulseControl Control;
         private readonly int Level;
         private readonly ViewModel viewModel = new();
         private partial class ViewModel : ViewModelBase
@@ -69,7 +68,7 @@ namespace VvvfSimulator.GUI.Create.Waveform
 
         public void SetPulseDataContent()
         {
-            PulseDataKey[] PulseDataKeys = PulseModeConfiguration.GetAvailablePulseDataKey(Control.PulseMode, Level);
+            PulseDataKey[] PulseDataKeys = Config.GetAvailablePulseDataKey(Control.PulseMode, Level);
             PulseDataSettings.Children.Clear();
             foreach (PulseDataKey Key in Control.PulseMode.PulseData.Keys)
             {
@@ -85,7 +84,7 @@ namespace VvvfSimulator.GUI.Create.Waveform
             }
         }
 
-        public WaveformEditor(YamlControlData Control, int Level)
+        public WaveformEditor(PulseControl Control, int Level)
         {
             this.Control = Control;
             this.Level = Level;

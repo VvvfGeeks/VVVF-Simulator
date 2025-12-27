@@ -2,10 +2,6 @@
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
-using VvvfSimulator.Yaml.MasconControl;
-using VvvfSimulator.Yaml.VvvfSound;
-using static VvvfSimulator.Vvvf.Struct;
-using static VvvfSimulator.Yaml.MasconControl.YamlMasconAnalyze;
 
 namespace VvvfSimulator.Generation
 {
@@ -32,10 +28,15 @@ namespace VvvfSimulator.Generation
             Mat mat = OpenCvSharp.Mat.FromImageData(img);
             for (int i = 0; i < frames; i++) { vr.Write(mat); }
         }
-        public class GenerationBasicParameter(YamlMasconAnalyze.YamlMasconDataCompiled MasconData, YamlVvvfSoundData VvvfData, GenerationBasicParameter.ProgressData Progress)
+        public class GenerationParameter(
+            Data.BaseFrequency.StructCompiled BaseFrequencyData, 
+            Data.Vvvf.Struct VvvfData, 
+            Data.TrainAudio.Struct TrainData,
+            GenerationParameter.ProgressData Progress)
         {
-            public YamlMasconDataCompiled MasconData { get; set; } = MasconData;
-            public YamlVvvfSoundData VvvfData { get; set; } = VvvfData;
+            public Data.BaseFrequency.StructCompiled BaseFrequencyData { get; set; } = BaseFrequencyData;
+            public Data.Vvvf.Struct VvvfData { get; set; } = VvvfData;
+            public Data.TrainAudio.Struct TrainData { get; set; } = TrainData;
             public ProgressData Progress { get; set; } = Progress;
 
             public class ProgressData

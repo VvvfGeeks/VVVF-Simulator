@@ -3,35 +3,20 @@ using NAudio.Wave.SampleProviders;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using VvvfSimulator.Vvvf;
-using VvvfSimulator.Yaml.MasconControl;
-using VvvfSimulator.Yaml.VvvfSound;
+using VvvfSimulator.Vvvf.Calculation;
+using VvvfSimulator.Data.BaseFrequency;
 using static VvvfSimulator.Generation.Audio.TrainSound.AudioFilter;
 using static VvvfSimulator.Generation.GenerateCommon;
-using static VvvfSimulator.Generation.GenerateCommon.GenerationBasicParameter;
-using static VvvfSimulator.Vvvf.MyMath;
-using static VvvfSimulator.Vvvf.Struct;
-using static VvvfSimulator.Yaml.MasconControl.YamlMasconAnalyze;
-using static VvvfSimulator.Yaml.TrainAudioSetting.YamlTrainSoundAnalyze;
-using static VvvfSimulator.Yaml.TrainAudioSetting.YamlTrainSoundAnalyze.YamlTrainSoundData;
+using static VvvfSimulator.Generation.GenerateCommon.GenerationParameter;
+using static VvvfSimulator.Vvvf.Model.Struct;
+using static VvvfSimulator.Data.TrainAudio.Struct;
 
 namespace VvvfSimulator.Generation.Audio.TrainSound
 {
     public class Audio
     {
         // -------- TRAIN SOUND --------------
-        public static double CalculateMotorSound(VvvfValues Control, YamlVvvfSoundData Sound, Motor.GenerateMotorCore.Motor Motor)
-        {
-            PwmCalculateValues calculated_Values = YamlVvvfWave.CalculateYaml(Control, Sound);
-            WaveValues Voltage = Calculate.CalculatePhases(Control, calculated_Values, 0);
-
-            double Theta = Control.GetVideoSineFrequency() * M_2PI * Control.GetSineTime();
-            Motor.UpdateParameter(new(Voltage.W, Voltage.V, Voltage.U), Theta);
-
-            return Motor.Parameter.DiffIdq0[0];
-        }
-
-        public static double CalculateHarmonicSounds(VvvfValues control, List<HarmonicData> harmonics)
+        public static double CalculateHarmonicSounds(Domain control, List<HarmonicData> harmonics)
         {
             double sound = 0;
             for (int harmonic = 0; harmonic < harmonics.Count; harmonic++)
@@ -39,15 +24,15 @@ namespace VvvfSimulator.Generation.Audio.TrainSound
                 HarmonicData harmonic_data = harmonics[harmonic];
                 var amplitude_data = harmonic_data.Amplitude;
 
-                if (harmonic_data.Range.Start > control.GetSineFrequency()) continue;
-                if (harmonic_data.Range.End >= 0 && harmonic_data.Range.End < control.GetSineFrequency()) continue;
+                if (harmonic_data.Range.Start > control.GetBaseWaveFrequency()) continue;
+                if (harmonic_data.Range.End >= 0 && harmonic_data.Range.End < control.GetBaseWaveFrequency()) continue;
 
-                double harmonic_freq = harmonic_data.Harmonic * control.GetSineFrequency();
+                double harmonic_freq = harmonic_data.Harmonic * control.GetBaseWaveFrequency();
 
                 if (harmonic_data.Disappear != -1 && harmonic_freq > harmonic_data.Disappear) continue;
-                double sine_val = Math.Sin(control.GetSineTime() * control.GetSineAngleFrequency() * harmonic_data.Harmonic);
+                double sine_val = Math.Sin(control.GetBaseWaveTime() * control.GetBaseWaveAngleFrequency() * harmonic_data.Harmonic);
 
-                double amplitude = amplitude_data.StartValue + (amplitude_data.EndValue - amplitude_data.StartValue) / (amplitude_data.End - harmonic_data.Amplitude.Start) * (control.GetSineFrequency() - harmonic_data.Amplitude.Start);
+                double amplitude = amplitude_data.StartValue + (amplitude_data.EndValue - amplitude_data.StartValue) / (amplitude_data.End - harmonic_data.Amplitude.Start) * (control.GetBaseWaveFrequency() - harmonic_data.Amplitude.Start);
                 if (amplitude > amplitude_data.MaximumValue) amplitude = amplitude_data.MaximumValue;
                 if (amplitude < amplitude_data.MinimumValue) amplitude = amplitude_data.MinimumValue;
 
@@ -60,19 +45,21 @@ namespace VvvfSimulator.Generation.Audio.TrainSound
             return sound;
         }
 
-        public static double CalculateTrainSound(VvvfValues control, YamlVvvfSoundData sound_data, Motor.GenerateMotorCore.Motor motor, YamlTrainSoundData train_sound_data)
+        public static double CalculateTrainSound(Domain Control, Data.TrainAudio.Struct Data)
         {
-            double motorPwmSound = CalculateMotorSound(control, sound_data, motor) * Math.Pow(10, train_sound_data.MotorVolumeDb);
-            double motorSound = CalculateHarmonicSounds(control, train_sound_data.HarmonicSound);
-            double gearSound = CalculateHarmonicSounds(control, train_sound_data.GearSound);
+            Common.CalculatePhsaseState(Control, 0);
 
-            double signal = (motorPwmSound + motorSound + gearSound) * Math.Pow(10, train_sound_data.TotalVolumeDb);
+            double motorPwmSound = Control.Motor.Parameter.DiffTe * Math.Pow(10, Data.MotorVolumeDb);
+            double motorSound = CalculateHarmonicSounds(Control, Data.HarmonicSound);
+            double gearSound = CalculateHarmonicSounds(Control, Data.GearSound);
+
+            double signal = (motorPwmSound + motorSound + gearSound) * Math.Pow(10, Data.TotalVolumeDb);
 
             return signal;
         }
 
 
-        public static void ExportWavFile(GenerationBasicParameter generationBasicParameter, YamlTrainSoundData soundData, int SamplingFrequency, bool raw, string path)
+        public static void ExportWavFile(GenerationParameter Parameter, int SamplingFrequency, bool raw, string path)
         {
             static void AddSample(float value, BufferedWaveProvider provider)
             {
@@ -99,13 +86,12 @@ namespace VvvfSimulator.Generation.Audio.TrainSound
                 if(DeleteOld) File.Delete(InputPath);
             }
 
-            YamlVvvfSoundData vvvfData = generationBasicParameter.VvvfData;
-            YamlMasconDataCompiled masconData = generationBasicParameter.MasconData;
-            ProgressData progressData = generationBasicParameter.Progress;
+            Data.Vvvf.Struct vvvfData = Parameter.VvvfData;
+            Data.TrainAudio.Struct soundData = Parameter.TrainData;
+            StructCompiled baseFreqData = Parameter.BaseFrequencyData;
+            ProgressData progressData = Parameter.Progress;
 
-            VvvfValues control = new();
-            control.ResetControlValues();
-            control.ResetMathematicValues();
+            Domain Domain = new(soundData.MotorSpec);
 
             int DownSampledFrequency = 44100;
             string pathTemp = Path.GetDirectoryName(path) + "\\" + "temp-" + DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss") + ".wav";
@@ -116,29 +102,22 @@ namespace VvvfSimulator.Generation.Audio.TrainSound
                 BufferLength = 4096
             };
             ISampleProvider sampleProvider = bufferedWaveProvider.ToSampleProvider();
-            if (soundData.UseFilteres) sampleProvider = new MonauralFilter(sampleProvider, soundData.GetFilteres(SamplingFrequency));
-            if (soundData.UseConvolutionFilter) sampleProvider = new CppConvolutionFilter(sampleProvider, 4096, soundData.ImpulseResponse);
+            if (soundData.UseFilters) sampleProvider = new MonauralFilter(sampleProvider, soundData.GetFilteres(SamplingFrequency));
+            if (soundData.UseConvolutionFilter) sampleProvider = new CppConvolutionFilter(sampleProvider, 4096, soundData.GetImpulseResponse(SamplingFrequency));
             WaveFileWriter writer = new(raw ? path : pathTemp, sampleProvider.WaveFormat);
 
-            Motor.GenerateMotorCore.Motor motor = new(SamplingFrequency, soundData.MotorSpec.Clone(), new());
-            motor.Parameter.TL = 0.0;
-
-            progressData.Total = masconData.GetEstimatedSteps(1.0 / SamplingFrequency) + (raw ? 0 : 100);
+            progressData.Total = baseFreqData.GetEstimatedSteps(1.0 / SamplingFrequency) + (raw ? 0 : 100);
 
             while (true)
             {
-                control.AddSineTime(1.00 / SamplingFrequency);
-                control.AddSawTime(1.00 / SamplingFrequency);
-
-                float sound = (float)CalculateTrainSound(control, vvvfData, motor , soundData);
-
+                Data.Vvvf.Analyze.Calculate(Domain, vvvfData);
+                float sound = (float)CalculateTrainSound(Domain, soundData);
                 AddSample(sound, bufferedWaveProvider);
                 if (bufferedWaveProvider.BufferedBytes == bufferedWaveProvider.BufferLength)
                     Write(bufferedWaveProvider, sampleProvider, writer);
-
                 progressData.Progress++;
 
-                bool flag_continue = YamlMasconControl.CheckForFreqChange(control, masconData, vvvfData, 1.0 / SamplingFrequency);
+                bool flag_continue = Data.BaseFrequency.Analyze.CheckForFreqChange(Domain, baseFreqData, vvvfData, 1.0 / SamplingFrequency);
                 bool flag_cancel = progressData.Cancel;
                 if (!flag_continue || flag_cancel) break;
             }

@@ -1,0 +1,67 @@
+﻿<Window x:Class="VvvfSimulator.GUI.BaseFrequency.LoadMidi"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:uc="clr-namespace:VvvfSimulator.GUI.Resource.MyUserControl"
+        xmlns:local="clr-namespace:VvvfSimulator.GUI.BaseFrequency"
+        mc:Ignorable="d"
+        Style="{DynamicResource DialogWindowStyle}"
+        WindowStartupLocation="CenterOwner"
+        Title="{DynamicResource BaseFrequency.LoadMidi.Title}" Width="400" ResizeMode="NoResize" SizeToContent="Height" AllowDrop="True" Drop="Window_Drop">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/GUI/Resource/Dictionary/Common.xaml"/>
+                <ResourceDictionary Source="/GUI/Resource/Dictionary/Window.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Grid Background="{DynamicResource VoidBackgroundBrush}">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="25"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="46"/>
+            </Grid.ColumnDefinitions>
+            <Image Style="{StaticResource WindowIconStyle}"/>
+            <Label Grid.Column="1" x:Name="WindowTitle" Content="{DynamicResource BaseFrequency.LoadMidi.Title}" Style="{StaticResource WindowTitleStyle}"/>
+            <uc:WindowControlButton Grid.Column="4" Tag="Close" Style="{DynamicResource WindowCloseButton}" Click="OnWindowControlButtonClick"/>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="5*"/>
+            </Grid.ColumnDefinitions>
+
+            <Border Background="{DynamicResource SubTitleBarBrush}" CornerRadius="0,25,0,0">
+                <Label Content="{DynamicResource BaseFrequency.LoadMidi.File}" Style="{DynamicResource SubTitleBarText}"/>
+            </Border>
+            <Grid Background="{DynamicResource SubTitleBarBrush}" Grid.Row="1">
+                <Label Content="{DynamicResource BaseFrequency.LoadMidi.Track}" Style="{DynamicResource SubTitleBarText}"/>
+            </Grid>
+            <Grid Background="{DynamicResource SubTitleBarBrush}" Grid.Row="2">
+                <Label Content="{DynamicResource BaseFrequency.LoadMidi.Priority}" Style="{DynamicResource SubTitleBarText}"/>
+            </Grid>
+
+            <Button x:Name="Select_File_Button" Grid.Column="1" Grid.Row="0" Content="{DynamicResource BaseFrequency.LoadMidi.File.Select}" Style="{DynamicResource SlimButton}" Click="Select_File_Button_Click"/>
+            <TextBox x:Name="Track_TextBox" Grid.Column="1" Grid.Row="1" Style="{DynamicResource SlimTextBox}"  TextChanged="TextBox_TextChanged" Tag="Track"/>
+            <TextBox x:Name="Priority_TextBox" Grid.Column="1" Grid.Row="2" Style="{DynamicResource SlimTextBox}" TextChanged="TextBox_TextChanged" Tag="Priority"/>
+        </Grid>
+
+    </Grid>
+</Window>

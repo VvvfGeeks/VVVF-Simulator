@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Controls;
 using VvvfSimulator.GUI.Resource.Class;
-using VvvfSimulator.Yaml.VvvfSound;
+using VvvfSimulator.Data.Vvvf;
 
 namespace VvvfSimulator.GUI.Create.Settings
 {
@@ -14,8 +14,8 @@ namespace VvvfSimulator.GUI.Create.Settings
         {
             InitializeComponent();
 
-            accelerate_min_freq_box.Text = YamlVvvfManage.CurrentData.MinimumFrequency.Accelerating.ToString();
-            braking_min_freq_box.Text = YamlVvvfManage.CurrentData.MinimumFrequency.Braking.ToString();
+            accelerate_min_freq_box.Text = Manager.Current.MinimumFrequency.Accelerating.ToString();
+            braking_min_freq_box.Text = Manager.Current.MinimumFrequency.Braking.ToString();
         }
         private void ValueChanged(object sender, TextChangedEventArgs e)
         {
@@ -24,9 +24,9 @@ namespace VvvfSimulator.GUI.Create.Settings
             if (tag == null) return;
 
             if (tag.Equals("Accelerate"))
-                YamlVvvfManage.CurrentData.MinimumFrequency.Accelerating = ParseTextBox.ParseDouble(tb);
+                Manager.Current.MinimumFrequency.Accelerating = ParseTextBox.ParseDouble(tb);
             else if (tag.Equals("Brake"))
-                YamlVvvfManage.CurrentData.MinimumFrequency.Braking = ParseTextBox.ParseDouble(tb);
+                Manager.Current.MinimumFrequency.Braking = ParseTextBox.ParseDouble(tb);
         }
     }
 }

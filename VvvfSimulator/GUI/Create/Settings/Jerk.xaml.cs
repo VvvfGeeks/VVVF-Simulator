@@ -2,15 +2,13 @@
 using System.Windows;
 using System.Windows.Controls;
 using VvvfSimulator.GUI.Resource.Class;
-using VvvfSimulator.Yaml.VvvfSound;
-using static VvvfSimulator.Yaml.VvvfSound.YamlVvvfSoundData;
-using static VvvfSimulator.Yaml.VvvfSound.YamlVvvfSoundData.YamlMasconData;
-using static VvvfSimulator.Yaml.VvvfSound.YamlVvvfSoundData.YamlMasconData.YamlMasconDataPattern;
+using VvvfSimulator.Data.Vvvf;
+using static VvvfSimulator.Data.Vvvf.Struct.JerkSettings.Jerk;
 
 namespace VvvfSimulator.GUI.Create.Settings
 {
     /// <summary>
-    /// mascon_off_setting.xaml の相互作用ロジック
+    /// Jerk.xaml の相互作用ロジック
     /// </summary>
     public partial class Jerk : Page
     {
@@ -44,9 +42,9 @@ namespace VvvfSimulator.GUI.Create.Settings
         public void SetView()
         {
             Controller dc = (Controller)this.DataContext;
-            YamlMasconData mascon = YamlVvvfManage.CurrentData.MasconData;
-            YamlMasconDataPattern pattern = dc.IsAccelerateActive ? mascon.Accelerating : mascon.Braking;
-            YamlMasconDataPatternMode mode = dc.IsTurnOnActive ? pattern.On : pattern.Off;
+            Struct.JerkSettings Setting = Manager.Current.JerkSetting;
+            Struct.JerkSettings.Jerk pattern = dc.IsAccelerateActive ? Setting.Accelerating : Setting.Braking;
+            JerkInfo mode = dc.IsTurnOnActive ? pattern.On : pattern.Off;
             MaxVoltageFreqInput.Text = mode.MaxControlFrequency.ToString();
             FreqChangeRateInput.Text = mode.FrequencyChangeRate.ToString();
         }
@@ -58,9 +56,9 @@ namespace VvvfSimulator.GUI.Create.Settings
             if (dc == null) return;
             if (IgnoreUpdateValue) return;
 
-            YamlMasconData mascon = YamlVvvfManage.CurrentData.MasconData;
-            YamlMasconDataPattern pattern = dc.IsAccelerateActive ? mascon.Accelerating : mascon.Braking;
-            YamlMasconDataPatternMode mode = dc.IsTurnOnActive ? pattern.On : pattern.Off;
+            Struct.JerkSettings Setting = Manager.Current.JerkSetting;
+            Struct.JerkSettings.Jerk pattern = dc.IsAccelerateActive ? Setting.Accelerating : Setting.Braking;
+            JerkInfo mode = dc.IsTurnOnActive ? pattern.On : pattern.Off;
             mode.MaxControlFrequency = ParseTextBox.ParseDouble(MaxVoltageFreqInput);
             mode.FrequencyChangeRate = ParseTextBox.ParseDouble(FreqChangeRateInput);
         }

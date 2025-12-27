@@ -95,6 +95,7 @@ namespace VvvfSimulator.GUI.Simulator.RealTime.Setting
         private void Window_Closing(object sender, CancelEventArgs e)
         {
             Controller.PrepareController();
+            Properties.Settings.Default.Save();
         }
 
         private void OnWindowControlButtonClick(object sender, RoutedEventArgs e)

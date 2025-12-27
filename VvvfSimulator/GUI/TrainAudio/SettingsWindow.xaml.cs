@@ -1,14 +1,15 @@
 ﻿using Microsoft.Win32;
 using System;
-using System.IO;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using VvvfSimulator.GUI.Resource.Language;
 using VvvfSimulator.GUI.TrainAudio.Pages.Gear;
 using VvvfSimulator.GUI.TrainAudio.Pages.Mixer;
 using VvvfSimulator.GUI.TrainAudio.Pages.Motor;
+using VvvfSimulator.GUI.Util;
 using YamlDotNet.Core;
-using static VvvfSimulator.Yaml.TrainAudioSetting.YamlTrainSoundAnalyze;
 
 namespace VvvfSimulator.GUI.TrainAudio
 {
@@ -17,94 +18,149 @@ namespace VvvfSimulator.GUI.TrainAudio
     /// </summary>
     public partial class SettingsWindow : Window
     {
-        private YamlTrainSoundData soundData;
-        public SettingsWindow(YamlTrainSoundData thd)
+        public SettingsWindow()
         {
-            soundData = thd;
             InitializeComponent();
-            PageFrame.Navigate(new MotorSetting(soundData));
+            PageFrame.Navigate(new MotorSetting(Data.TrainAudio.Manager.Current));
         }
-        private void MenuParameterClick(object sender, RoutedEventArgs e)
-        {
-            MenuItem btn = (MenuItem)sender;
-            object tag = btn.Tag;
-
-            if (tag.Equals("Gear"))
-                PageFrame.Navigate(new GearSetting(this, soundData));
-            else if (tag.Equals("Motor"))
-                PageFrame.Navigate(new MotorSetting(soundData));
-
-        }
-        private string LoadPath = "acoustic.yaml";
-        private void LoadYaml(string path)
+        public void LoadYaml(string Path)
         {
             try
             {
-
-                YamlTrainSoundDataManage.CurrentData = YamlTrainSoundDataManage.LoadYaml(path);
-                this.soundData = YamlTrainSoundDataManage.CurrentData;
-                PageFrame.Navigate(new MotorSetting(soundData));
-                MessageBox.Show(LanguageManager.GetString("TrainAudio.SettingWindow.Message.File.Open.Ok.Message"), LanguageManager.GetString("Generic.Title.Info"), MessageBoxButton.OK, MessageBoxImage.Information);
-                LoadPath = path;
+                Data.TrainAudio.Manager.LoadCurrent(Path);
+                PageFrame.Navigate(new MotorSetting(Data.TrainAudio.Manager.Current));
+                DialogBox.Show(this, LanguageManager.GetString("TrainAudio.SettingWindow.Message.File.Load.Ok.Message"), LanguageManager.GetString("Generic.Title.Info"), [DialogBoxButton.Ok], DialogBoxIcon.Ok);
             }
             catch (YamlException ex)
             {
-                String error_message = LanguageManager.GetString("TrainAudio.SettingWindow.Message.File.Open.Error.Message");
+                string error_message = LanguageManager.GetString("TrainAudio.SettingWindow.Message.File.Load.Error.Message");
                 error_message += "\r\n";
                 error_message += "\r\n" + ex.End.ToString() + "\r\n";
-                MessageBox.Show(error_message, LanguageManager.GetString("Generic.Title.Error"), MessageBoxButton.OK, MessageBoxImage.Error);
+                DialogBox.Show(this, error_message, LanguageManager.GetString("Generic.Title.Error"), [DialogBoxButton.Ok], DialogBoxIcon.Error);
+            }
+            catch (Exception ex)
+            {
+                string error_message = LanguageManager.GetString("TrainAudio.SettingWindow.Message.File.Load.Error.Message");
+                error_message += "\r\n";
+                error_message += "\r\n" + ex.Message + "\r\n";
+                DialogBox.Show(this, error_message, LanguageManager.GetString("Generic.Title.Error"), [DialogBoxButton.Ok], DialogBoxIcon.Error);
             }
         }
-        private void MenuFileClick(object sender, RoutedEventArgs e)
+        public void SaveYaml(string Path, bool SaveAs)
         {
-            MenuItem btn = (MenuItem)sender;
-            object tag = btn.Tag;
+            string MessagePath = SaveAs ? "SaveAs" : "Save";
+            if (Data.TrainAudio.Manager.SaveCurrent(Path))
+                DialogBox.Show(this,
+                    LanguageManager.GetString("TrainAudio.SettingWindow.Message.File." + MessagePath + ".Ok.Message"),
+                    LanguageManager.GetString("Generic.Title.Info"),
+                    [DialogBoxButton.Ok], DialogBoxIcon.Ok);
+            else
+                DialogBox.Show(this,
+                    LanguageManager.GetString("TrainAudio.SettingWindow.Message.File." + MessagePath + ".Error.Message"),
+                    LanguageManager.GetString("Generic.Title.Error"),
+                    [DialogBoxButton.Ok], DialogBoxIcon.Error);
+        }
+        public bool SaveBefore(string MessagePath)
+        {
+            if (Data.TrainAudio.Manager.IsCurrentEquivalent(
+                Data.TrainAudio.Manager.LoadPath.Length == 0 ? Data.TrainAudio.Manager.Template : Data.TrainAudio.Manager.LoadData))
+                return true;
 
-            if (tag.Equals("Open"))
+            DialogBoxButton? Result = DialogBox.Show(
+                    this,
+                    LanguageManager.GetString(MessagePath + ".Message"),
+                    LanguageManager.GetString(MessagePath + ".Title"),
+                    [DialogBoxButton.Yes, DialogBoxButton.No, DialogBoxButton.Cancel], DialogBoxIcon.Question);
+
+            if (Result == DialogBoxButton.Yes)
+            {
+                var dialog = new SaveFileDialog
+                {
+                    Filter = "Yaml (*.yaml)|*.yaml",
+                    FileName = Data.TrainAudio.Manager.GetLoadedYamlName()
+                };
+                if (dialog.ShowDialog() ?? false)
+                {
+                    SaveYaml(dialog.FileName, true);
+                    return true;
+                }
+                else
+                    return false;
+            }
+            else if (Result == DialogBoxButton.No)
+                return true;
+            else
+                return false;
+        }
+        private void File_Menu_Click(object sender, RoutedEventArgs e)
+        {
+            MenuItem button = (MenuItem)sender;
+            object? tag = button.Tag;
+            if (tag == null) return;
+            if (tag.Equals("Load"))
             {
                 var dialog = new OpenFileDialog
                 {
                     Filter = "Yaml (*.yaml)|*.yaml|All (*.*)|*.*"
                 };
-                if (dialog.ShowDialog() == false) return;
-                LoadYaml(dialog.FileName);
-                return;
+                if (SaveBefore("TrainAudio.SettingWindow.Message.File.SaveBefore.Load") && (dialog.ShowDialog() ?? false))
+                    LoadYaml(dialog.FileName);
             }
-
-            if (tag.Equals("Save"))
+            else if (tag.Equals("SaveAs"))
             {
                 var dialog = new SaveFileDialog
                 {
                     Filter = "Yaml (*.yaml)|*.yaml",
-                    FileName = Path.GetFileName(LoadPath)
+                    FileName = Data.TrainAudio.Manager.GetLoadedYamlName()
                 };
-                if (dialog.ShowDialog() == false) return;
-
-                if (YamlTrainSoundDataManage.SaveYaml(dialog.FileName))
-                    MessageBox.Show(LanguageManager.GetString("TrainAudio.SettingWindow.Message.File.Save.Ok.Message"), LanguageManager.GetString("Generic.Title.Info"), MessageBoxButton.OK, MessageBoxImage.Information);
+                if (dialog.ShowDialog() ?? false)
+                    SaveYaml(dialog.FileName, true);
+            }
+            else if (tag.Equals("Save"))
+            {
+                if (Data.TrainAudio.Manager.LoadPath.Length == 0)
+                {
+                    var dialog = new SaveFileDialog
+                    {
+                        Filter = "Yaml (*.yaml)|*.yaml",
+                        FileName = "VVVF"
+                    };
+                    if (dialog.ShowDialog() ?? false)
+                        SaveYaml(dialog.FileName, true);
+                }
                 else
-                    MessageBox.Show(LanguageManager.GetString("TrainAudio.SettingWindow.Message.File.Save.Error.Message"), LanguageManager.GetString("Generic.Title.Error"), MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
+                    SaveYaml(Data.TrainAudio.Manager.LoadPath, false);
             }
         }
-
-        private void MenuMixerClick(object sender, RoutedEventArgs e)
+        private void Mixer_Menu_Click(object sender, RoutedEventArgs e)
+        {
+            MenuItem btn = (MenuItem)sender;
+            object tag = btn.Tag;
+            if (tag.Equals("Frequency"))
+                PageFrame.Navigate(new FrequencyFilter(Data.TrainAudio.Manager.Current));
+            else if (tag.Equals("Convolution"))
+                PageFrame.Navigate(new ConvolutionFilter(Data.TrainAudio.Manager.Current));
+            else if (tag.Equals("Volume"))
+                PageFrame.Navigate(new Volume(Data.TrainAudio.Manager.Current));
+        }
+        private void Parameter_Menu_Click(object sender, RoutedEventArgs e)
         {
             MenuItem btn = (MenuItem)sender;
             object tag = btn.Tag;
 
-            if (tag.Equals("Frequency"))
-                PageFrame.Navigate(new FrequencyFilter(soundData));
-            else if (tag.Equals("Convolution"))
-                PageFrame.Navigate(new ConvolutionFilter(soundData));
-            else if (tag.Equals("Volume"))
-                PageFrame.Navigate(new Volume(soundData));
+            if (tag.Equals("Gear"))
+                PageFrame.Navigate(new GearSetting(this, Data.TrainAudio.Manager.Current));
+            else if (tag.Equals("Motor"))
+                PageFrame.Navigate(new MotorSetting(Data.TrainAudio.Manager.Current));
         }
-
+        private void Window_Closing(object sender, CancelEventArgs e)
+        {
+            if (!SaveBefore("TrainAudio.SettingWindow.Message.File.SaveBefore.Close"))
+                e.Cancel = true;
+        }
         private void OnWindowControlButtonClick(object sender, RoutedEventArgs e)
         {
-            Button? btn = sender as Button;
-            if (btn == null) return;
+            if (sender is not Button btn) return;
             string? tag = btn.Tag.ToString();
             if (tag == null) return;
 
@@ -120,13 +176,32 @@ namespace VvvfSimulator.GUI.TrainAudio
             else if (tag.Equals("Minimize"))
                 WindowState = WindowState.Minimized;
         }
-
         private void Window_Drop(object sender, DragEventArgs e)
         {
-            string path = (((Array)e.Data.GetData(DataFormats.FileDrop)).GetValue(0) ?? "").ToString() ?? "";
-            if (path.ToLower().EndsWith(".yaml"))
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
             {
-                LoadYaml(path);
+                string Path = (((Array)e.Data.GetData(DataFormats.FileDrop)).GetValue(0) ?? "").ToString() ?? "";
+                if (Path.ToLower().EndsWith(".yaml") && SaveBefore("TrainAudio.SettingWindow.Message.File.SaveBefore.Load")) LoadYaml(Path);
+            }
+        }
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.IsRepeat) return;
+            if (e.Key.Equals(Key.S) && e.KeyboardDevice.Modifiers == ModifierKeys.Control)
+            {
+                e.Handled = true;
+                if (Data.TrainAudio.Manager.LoadPath.Length == 0)
+                {
+                    var dialog = new SaveFileDialog
+                    {
+                        Filter = "Yaml (*.yaml)|*.yaml",
+                        FileName = "VVVF"
+                    };
+                    if (dialog.ShowDialog() ?? false)
+                        SaveYaml(dialog.FileName, true);
+                }
+                else
+                    SaveYaml(Data.TrainAudio.Manager.LoadPath, false);
             }
         }
     }

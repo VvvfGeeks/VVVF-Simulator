@@ -47,8 +47,8 @@
     <system:String x:Key="MainWindow.Menu.Generate.Audio.Train">Train</system:String>
     <system:String x:Key="MainWindow.Menu.Generate.Movie">Movie</system:String>
     <system:String x:Key="MainWindow.Menu.Generate.Movie.Control">Control</system:String>
-    <system:String x:Key="MainWindow.Menu.Generate.Movie.Control.Original">Design1</system:String>
-    <system:String x:Key="MainWindow.Menu.Generate.Movie.Control.Original2">Design2</system:String>
+    <system:String x:Key="MainWindow.Menu.Generate.Movie.Control.Design1">Design1</system:String>
+    <system:String x:Key="MainWindow.Menu.Generate.Movie.Control.Design2">Design2</system:String>
     <system:String x:Key="MainWindow.Menu.Generate.Movie.WaveForm">WaveForm</system:String>
     <system:String x:Key="MainWindow.Menu.Generate.Movie.WaveForm.Original">Line Voltage(1)</system:String>
     <system:String x:Key="MainWindow.Menu.Generate.Movie.WaveForm.Spaced">Line Voltage(2)</system:String>
@@ -110,6 +110,8 @@
     <system:String x:Key="MainWindow.TaskDescription.Generate.Movie.Hexagon.Original">Voltage Vector Movie Generation：</system:String>
     <system:String x:Key="MainWindow.TaskDescription.Generate.Movie.Hexagon.Explain">Voltage Vector Render Progress Movie Generation：</system:String>
     <system:String x:Key="MainWindow.TaskDescription.Generate.Movie.FFT.Original">FFT Movie Generation：</system:String>
+    <system:String x:Key="MainWindow.TaskDescription.Generate.Image.Hexagon.Original">Voltage Vector Image Generation：</system:String>
+    <system:String x:Key="MainWindow.TaskDescription.Generate.Image.FFT.Original">FFT Image Generation：</system:String>
 
     <system:String x:Key="MainWindow.Message.File.Save.Ok.Title">Great</system:String>
     <system:String x:Key="MainWindow.Message.File.Save.Ok.Message">Saved</system:String>
@@ -117,9 +119,15 @@
     <system:String x:Key="MainWindow.Message.File.SaveAs.Ok.Title">Great</system:String>
     <system:String x:Key="MainWindow.Message.File.SaveAs.Ok.Message">Saved</system:String>
     <system:String x:Key="MainWindow.Message.File.SaveAs.Error.Message">Failed to save</system:String>
+    <system:String x:Key="MainWindow.Message.File.SaveBefore.Load.Title">Confirm</system:String>
+    <system:String x:Key="MainWindow.Message.File.SaveBefore.Load.Message">The current content has not been saved. Do you want to save before opening another file?</system:String>
+    <system:String x:Key="MainWindow.Message.File.SaveBefore.Close.Title">Confirm</system:String>
+    <system:String x:Key="MainWindow.Message.File.SaveBefore.Close.Message">The current content has not been saved. Do you want to save before exiting?</system:String>
     <system:String x:Key="MainWindow.Message.File.Load.Ok.Title">Great</system:String>
     <system:String x:Key="MainWindow.Message.File.Load.Ok.Message">The file was successfully read</system:String>
     <system:String x:Key="MainWindow.Message.File.Load.Error.Message">This file cannot be read</system:String>
+    <system:String x:Key="MainWindow.Message.Edit.Reset.Confirm.Title">Confirm</system:String>
+    <system:String x:Key="MainWindow.Message.Edit.Reset.Confirm.Message">Are you sure you want to continue?</system:String>
     <system:String x:Key="MainWindow.Message.Generate.Movie.Hexagon.Original.EnableZeroVector">Enable Zero-Vector Point?</system:String>
     <system:String x:Key="MainWindow.Message.Generate.Movie.Hexagon.Explain.EnableZeroVector">Enable Zero-Vector Point?</system:String>
     <system:String x:Key="MainWindow.Message.Generate.Image.Hexagon.Original.EnableZeroVector">Enable Zero-Vector Point?</system:String>
@@ -157,6 +165,16 @@
     <system:String x:Key="DoubleNumberInput.Label">Enter the value</system:String>
     <system:String x:Key="DoubleNumberInput.OK">OK</system:String>
 
+    <system:String x:Key="DialogBox.Ok">OK</system:String>
+    <system:String x:Key="DialogBox.Cancel">Cancel</system:String>
+    <system:String x:Key="DialogBox.Abort">Abort</system:String>
+    <system:String x:Key="DialogBox.Retry">Retry</system:String>
+    <system:String x:Key="DialogBox.Ignore">Ignore</system:String>
+    <system:String x:Key="DialogBox.Try">Try</system:String>
+    <system:String x:Key="DialogBox.Continue">Continue</system:String>
+    <system:String x:Key="DialogBox.Yes">Yes</system:String>
+    <system:String x:Key="DialogBox.No">No</system:String>
+
     <system:String x:Key="TaskViewer.Title">Task Manager</system:String>
     <system:String x:Key="TaskViewer.Button.Cancel">Cancel</system:String>
     <system:String x:Key="TaskViewer.Status.Canceled">Canceled</system:String>
@@ -169,6 +187,7 @@
 
     <system:String x:Key="TrainAudio.SettingWindow.Menu.File">File</system:String>
     <system:String x:Key="TrainAudio.SettingWindow.Menu.File.Save">Save</system:String>
+    <system:String x:Key="TrainAudio.SettingWindow.Menu.File.SaveAs">Save As</system:String>
     <system:String x:Key="TrainAudio.SettingWindow.Menu.File.Open">Open</system:String>
     <system:String x:Key="TrainAudio.SettingWindow.Menu.Parameter">Parameter</system:String>
     <system:String x:Key="TrainAudio.SettingWindow.Menu.Parameter.Motor">Motor</system:String>
@@ -178,10 +197,16 @@
     <system:String x:Key="TrainAudio.SettingWindow.Menu.Mixer.FrequencyFilter">Frequency Filter</system:String>
     <system:String x:Key="TrainAudio.SettingWindow.Menu.Mixer.ConvolutionFilter">Convolution Filter</system:String>
 
-    <system:String x:Key="TrainAudio.SettingWindow.Message.File.Open.Ok.Message">The file was successfully read</system:String>
+    <system:String x:Key="TrainAudio.SettingWindow.Message.File.Load.Ok.Message">The file was successfully read</system:String>
+    <system:String x:Key="TrainAudio.SettingWindow.Message.File.Load.Error.Message">This file cannot be read</system:String>
     <system:String x:Key="TrainAudio.SettingWindow.Message.File.Save.Ok.Message">Saved</system:String>
-    <system:String x:Key="TrainAudio.SettingWindow.Message.File.Open.Error.Message">This file cannot be read</system:String>
     <system:String x:Key="TrainAudio.SettingWindow.Message.File.Save.Error.Message">Filed to save</system:String>
+    <system:String x:Key="TrainAudio.SettingWindow.Message.File.SaveAs.Ok.Message">Saved</system:String>
+    <system:String x:Key="TrainAudio.SettingWindow.Message.File.SaveAs.Error.Message">Filed to save</system:String>
+    <system:String x:Key="TrainAudio.SettingWindow.Message.File.SaveBefore.Load.Title">Confirm</system:String>
+    <system:String x:Key="TrainAudio.SettingWindow.Message.File.SaveBefore.Load.Message">The current content has not been saved. Do you want to save before opening another file?</system:String>
+    <system:String x:Key="TrainAudio.SettingWindow.Message.File.SaveBefore.Close.Title">Confirm</system:String>
+    <system:String x:Key="TrainAudio.SettingWindow.Message.File.SaveBefore.Close.Message">The current content has not been saved. Do you want to save before exiting?</system:String>
 
     <system:String x:Key="TrainAudio.Pages.HarmonicSetting.BasicSetting">Basic Setting</system:String>
     <system:String x:Key="TrainAudio.Pages.HarmonicSetting.BasicSetting.Harmonic">Harmonic</system:String>
@@ -200,15 +225,20 @@
     <system:String x:Key="TrainAudio.Pages.HarmonicSetting.AmplitudeSetting.MinAmplitude">Min Amplitude</system:String>
 
     <system:String x:Key="TrainAudio.Pages.MotorSetting.MotorSpecification">Motor Specification</system:String>
+    <system:String x:Key="TrainAudio.Pages.MotorSetting.MotorSpecification.SourceVoltage">Source Voltage</system:String>
     <system:String x:Key="TrainAudio.Pages.MotorSetting.MotorSpecification.StatorResistance">Stator Resistance</system:String>
     <system:String x:Key="TrainAudio.Pages.MotorSetting.MotorSpecification.RotorResistance">Rotor Resistance</system:String>
     <system:String x:Key="TrainAudio.Pages.MotorSetting.MotorSpecification.StatorInductance">Stator Inductance</system:String>
     <system:String x:Key="TrainAudio.Pages.MotorSetting.MotorSpecification.RotorInductance">Rotor Inductance</system:String>
     <system:String x:Key="TrainAudio.Pages.MotorSetting.MotorSpecification.MutualInductance">Mutual Inductance</system:String>
-    <system:String x:Key="TrainAudio.Pages.MotorSetting.MotorSpecification.PolePairCount">Number of Pole Pairs</system:String>
-    <system:String x:Key="TrainAudio.Pages.MotorSetting.MotorSpecification.Damping">Damping</system:String>
-    <system:String x:Key="TrainAudio.Pages.MotorSetting.MotorSpecification.RotationalInertiaMass">Rotational InertiaMass</system:String>
+    <system:String x:Key="TrainAudio.Pages.MotorSetting.MotorSpecification.PolePairCount">Pole Pair Count</system:String>
+    <system:String x:Key="TrainAudio.Pages.MotorSetting.MotorSpecification.Damping">Damping Coefficient</system:String>
+    <system:String x:Key="TrainAudio.Pages.MotorSetting.MotorSpecification.RotationalInertiaMass">Rotor Inertia</system:String>
+    <system:String x:Key="TrainAudio.Pages.MotorSetting.MotorSpecification.ViscousFriction">Viscous Friction</system:String>
+    <system:String x:Key="TrainAudio.Pages.MotorSetting.MotorSpecification.CoulombFriction">Coulomb Friction</system:String>
     <system:String x:Key="TrainAudio.Pages.MotorSetting.MotorSpecification.StaticFriction">Static Friction</system:String>
+    <system:String x:Key="TrainAudio.Pages.MotorSetting.MotorSpecification.StribeckOmega">Stribeck Angular Speed</system:String>
+    <system:String x:Key="TrainAudio.Pages.MotorSetting.MotorSpecification.FrictionSmoothingGain">Friction Smoothing Gain</system:String>
 
     <system:String x:Key="TrainAudio.Pages.MotorSetting.MotorSounds">Motor Sounds</system:String>
 
@@ -238,11 +268,19 @@
     <FontFamily x:Key="Simulator.RealTime.Controller.Font.Notch">/GUI/Resource/Fonts/MPlus1Code/#M PLUS 1 Code</FontFamily>
     <FontFamily x:Key="Simulator.RealTime.Controller.Font.Topic">/GUI/Resource/Fonts/Fugaz_One/#Fugaz One</FontFamily>
     <FontFamily x:Key="Simulator.RealTime.Controller.Font.Unit">/GUI/Resource/Fonts/Fugaz_One/#Fugaz One</FontFamily>
-    <system:String x:Key="Simulator.RealTime.Controller.SineFrequency">Frequency</system:String>
+    <system:String x:Key="Simulator.RealTime.Controller.BaseFrequency">Frequency</system:String>
+    <system:String x:Key="Simulator.RealTime.Controller.BaseFrequency.None">---</system:String>
     <system:String x:Key="Simulator.RealTime.Controller.Voltage">Voltage</system:String>
+    <system:String x:Key="Simulator.RealTime.Controller.Voltage.None">---</system:String>
     <system:String x:Key="Simulator.RealTime.Controller.PulseState">Pulse</system:String>
+    <system:String x:Key="Simulator.RealTime.Controller.PulseState.None">---</system:String>
     
     <system:String x:Key="Simulator.RealTime.Controller.MenuItem.DeviceSetting">Device Setting</system:String>
+
+    <system:String x:Key="Simulator.RealTime.Controller.Design2.MenuItem.Vvvf.WaveForm">Waveform Type</system:String>
+    <system:String x:Key="Simulator.RealTime.Controller.Design2.MenuItem.Vvvf.WaveForm.Line">Line Voltage</system:String>
+    <system:String x:Key="Simulator.RealTime.Controller.Design2.MenuItem.Vvvf.WaveForm.Phase">Phase Voltage</system:String>
+    <system:String x:Key="Simulator.RealTime.Controller.Design2.MenuItem.Vvvf.WaveForm.PhaseCurrent">Phase Current</system:String>
 
     <system:String x:Key="Simulator.RealTime.Controller.Design2.MenuItem.CalculateDivision">Calculate Precision Setting</system:String>
 
@@ -301,41 +339,51 @@
     <system:String x:Key="MidiConvert.Main.Config">Configuration</system:String>
     <system:String x:Key="MidiConvert.Main.Convert">Convert</system:String>
 
-    <system:String x:Key="MidiConvert.Main.Message.MidiConvertError">This Midi cannot be converted.</system:String>
+    <system:String x:Key="MidiConvert.Main.Message.MidiConvertError">This MIDI cannot be converted.</system:String>
     <system:String x:Key="MidiConvert.TaskDescription.Convert.Description">Conversion of MIDI:{0}, Track{1}, Part{2}</system:String>
     
     <system:String x:Key="MidiConvert.Config.Title">MIDI Conversion</system:String>
     <system:String x:Key="MidiConvert.Config.MultiThreading">Multi Thread</system:String>
 
-    <system:String x:Key="Mascon.EditPage.Order">Order</system:String>
-    <system:String x:Key="Mascon.EditPage.Duration">Duration</system:String>
-    <system:String x:Key="Mascon.EditPage.Rate">Rate</system:String>
-    <system:String x:Key="Mascon.EditPage.Other">Other</system:String>
-    <system:String x:Key="Mascon.EditPage.Other.MasconOn">Power ON</system:String>
-    <system:String x:Key="Mascon.EditPage.Other.Brake">Brake</system:String>
+    <system:String x:Key="BaseFrequency.EditPage.Order">Order</system:String>
+    <system:String x:Key="BaseFrequency.EditPage.Duration">Duration</system:String>
+    <system:String x:Key="BaseFrequency.EditPage.Rate">Rate</system:String>
+    <system:String x:Key="BaseFrequency.EditPage.Other">Other</system:String>
+    <system:String x:Key="BaseFrequency.EditPage.Other.PowerOn">Power ON</system:String>
+    <system:String x:Key="BaseFrequency.EditPage.Other.Brake">Brake</system:String>
 
-    <system:String x:Key="Mascon.LoadMidi.Title">Load MIDI</system:String>
-    <system:String x:Key="Mascon.LoadMidi.File">File</system:String>
-    <system:String x:Key="Mascon.LoadMidi.File.Select">Select</system:String>
-    <system:String x:Key="Mascon.LoadMidi.Track">Track</system:String>
-    <system:String x:Key="Mascon.LoadMidi.Priority">Priority</system:String>
+    <system:String x:Key="BaseFrequency.LoadMidi.Title">Load MIDI</system:String>
+    <system:String x:Key="BaseFrequency.LoadMidi.File">File</system:String>
+    <system:String x:Key="BaseFrequency.LoadMidi.File.Select">Select</system:String>
+    <system:String x:Key="BaseFrequency.LoadMidi.Track">Track</system:String>
+    <system:String x:Key="BaseFrequency.LoadMidi.Priority">Priority</system:String>
 
-    <system:String x:Key="Mascon.ControlEditor.Title">Generation Base Frequency Editor</system:String>
-    <system:String x:Key="Mascon.ControlEditor.Menu.File">File</system:String>
-    <system:String x:Key="Mascon.ControlEditor.Menu.File.Save">Save</system:String>
-    <system:String x:Key="Mascon.ControlEditor.Menu.File.Load">Open</system:String>
-    <system:String x:Key="Mascon.ControlEditor.Menu.Edit">Edit</system:String>
-    <system:String x:Key="Mascon.ControlEditor.Menu.Edit.Reset">Reset</system:String>
-    <system:String x:Key="Mascon.ControlEditor.Menu.Edit.Midi">Load MIDI</system:String>
+    <system:String x:Key="BaseFrequency.SettingWindow.Title">Generation Base Frequency Editor</system:String>
+    <system:String x:Key="BaseFrequency.SettingWindow.Menu.File">File</system:String>
+    <system:String x:Key="BaseFrequency.SettingWindow.Menu.File.Save">Save</system:String>
+    <system:String x:Key="BaseFrequency.SettingWindow.Menu.File.SaveAs">Save As</system:String>
+    <system:String x:Key="BaseFrequency.SettingWindow.Menu.File.Load">Open</system:String>
+    <system:String x:Key="BaseFrequency.SettingWindow.Menu.Edit">Edit</system:String>
+    <system:String x:Key="BaseFrequency.SettingWindow.Menu.Edit.Reset">Reset</system:String>
+    <system:String x:Key="BaseFrequency.SettingWindow.Menu.Edit.Midi">Load MIDI</system:String>
 
-    <system:String x:Key="Mascon.ControlEditor.Message.MidiConvertError">This Midi cannot be converted.</system:String>
+    <system:String x:Key="BaseFrequency.SettingWindow.Message.MidiConvertError">This Midi cannot be converted.</system:String>
 
-    <system:String x:Key="Mascon.ControlEditor.Message.File.Load.Ok.Title">Great</system:String>
-    <system:String x:Key="Mascon.ControlEditor.Message.File.Load.Ok.Message">The file was successfully load</system:String>
-    <system:String x:Key="Mascon.ControlEditor.Message.File.Load.Error.Message">This file cannot be read</system:String>
-    <system:String x:Key="Mascon.ControlEditor.Message.File.Save.Ok.Title">Great</system:String>
-    <system:String x:Key="Mascon.ControlEditor.Message.File.Save.Ok.Message">Saved</system:String>
-    <system:String x:Key="Mascon.ControlEditor.Message.File.Save.Error.Message">Failed to save</system:String>
+    <system:String x:Key="BaseFrequency.SettingWindow.Message.File.Load.Ok.Title">Great</system:String>
+    <system:String x:Key="BaseFrequency.SettingWindow.Message.File.Load.Ok.Message">The file was successfully load</system:String>
+    <system:String x:Key="BaseFrequency.SettingWindow.Message.File.Load.Error.Message">This file cannot be read</system:String>
+    <system:String x:Key="BaseFrequency.SettingWindow.Message.File.Save.Ok.Title">Great</system:String>
+    <system:String x:Key="BaseFrequency.SettingWindow.Message.File.Save.Ok.Message">Saved</system:String>
+    <system:String x:Key="BaseFrequency.SettingWindow.Message.File.Save.Error.Message">Failed to save</system:String>
+    <system:String x:Key="BaseFrequency.SettingWindow.Message.File.SaveAs.Ok.Title">Great</system:String>
+    <system:String x:Key="BaseFrequency.SettingWindow.Message.File.SaveAs.Ok.Message">Saved</system:String>
+    <system:String x:Key="BaseFrequency.SettingWindow.Message.File.SaveAs.Error.Message">Failed to save</system:String>
+    <system:String x:Key="BaseFrequency.SettingWindow.Message.File.SaveBefore.Load.Title">Confirm</system:String>
+    <system:String x:Key="BaseFrequency.SettingWindow.Message.File.SaveBefore.Load.Message">The current content has not been saved. Do you want to save before opening another file?</system:String>
+    <system:String x:Key="BaseFrequency.SettingWindow.SettingWindow.Message.File.SaveBefore.Close.Title">Confirm</system:String>
+    <system:String x:Key="BaseFrequency.SettingWindow.Message.File.SaveBefore.Close.Message">The current content has not been saved. Do you want to save before exiting?</system:String>
+    <system:String x:Key="BaseFrequency.SettingWindow.Message.Edit.Reset.Confirm.Title">Confirm</system:String>
+    <system:String x:Key="BaseFrequency.SettingWindow.Message.Edit.Reset.Confirm.Message">Are you sure you want to continue?</system:String>
 
     <system:String x:Key="Create.Settings.Jerk.Jerk">Jerk Setting</system:String>
     <system:String x:Key="Create.Settings.Jerk.On">Power On</system:String>
@@ -383,17 +431,19 @@
     <system:String x:Key="Create.Settings.Waveform.Basic.ControlAmplitude.TableInterpolation">Interpolation</system:String>
     <system:String x:Key="Create.Settings.Waveform.Basic.ControlAmplitude.TableEdit">Edit Points</system:String>
 
-    <system:String x:Key="Create.Settings.Waveform.Basic.PulseSetting.Title">Pulse Mode</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Basic.PulseSetting.Type">Type</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Basic.PulseSetting.PulseCount">Count</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Basic.PulseSetting.Detail">Detail</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Basic.PulseSetting.HarmonicSetting">Harmonic Setting</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Basic.PulseSetting.DiscreteSetting">Discrete Setting</system:String>
-
+    <system:String x:Key="Create.Settings.Waveform.Basic.PulseSetting.Title">Pulse Setting</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.PulseSetting.Type">Method</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.PulseSetting.PulseCount">Pulse Count</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.PulseSetting.AltMode">Type</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.PulseSetting.BaseWave">Base Wave</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.PulseSetting.BaseWave.HarmonicSetting">Harmonic Setting</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.PulseSetting.BaseWave.DiscreteSetting">Discrete Setting</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.PulseSetting.CarrierWave">Carrier Wave</system:String>
+    
     <system:String x:Key="Create.Settings.Waveform.Basic.ConditionSetting.Title">Condition Setting</system:String>
     <system:String x:Key="Create.Settings.Waveform.Basic.ConditionSetting.From">From</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Basic.ConditionSetting.SineFrom">Rotate From</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Basic.ConditionSetting.SineBelow">Rotate Below</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.ConditionSetting.BaseFrom">Rotate From</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.ConditionSetting.BaseBelow">Rotate Below</system:String>
     <system:String x:Key="Create.Settings.Waveform.Basic.ConditionSetting.Keep">Keep</system:String>
     <system:String x:Key="Create.Settings.Waveform.Basic.ConditionSetting.Keep.On">Power On</system:String>
     <system:String x:Key="Create.Settings.Waveform.Basic.ConditionSetting.Keep.Off">Power Off</system:String>
@@ -445,6 +495,8 @@
 
     <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseDataSetting.Key.Name.Dipolar">Dipolar</system:String>
     <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseDataSetting.Key.Name.PulseWidth">Pulse Width</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseDataSetting.Key.Name.Phase">Phase</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseDataSetting.Key.Name.UpdateFrequency">Frequency</system:String>
 
     <system:String x:Key="Resource.Language.FriendlyNameConverter.ControlMovingSetting.MoveType.Name.Proportional">Proportional</system:String>
     <system:String x:Key="Resource.Language.FriendlyNameConverter.ControlMovingSetting.MoveType.Name.InvProportional">Inverse Proportional</system:String>
@@ -480,9 +532,23 @@
     <system:String x:Key="Resource.Language.FriendlyNameConverter.BaseWaveType.Name.ModifiedSine1">Modified Sinusoidal 1</system:String>
     <system:String x:Key="Resource.Language.FriendlyNameConverter.BaseWaveType.Name.ModifiedSine2">Modified Sinusoidal 2</system:String>
     <system:String x:Key="Resource.Language.FriendlyNameConverter.BaseWaveType.Name.ModifiedSaw1">Modified Triangle</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.BaseWaveType.Name.SV">Space Vector</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.BaseWaveType.Name.DPWM30">30 DPWM</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.BaseWaveType.Name.DPWM60C">60 DPWM Center</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.BaseWaveType.Name.DPWM60P">60 DPWM Shift +30</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.BaseWaveType.Name.DPWM60N">60 DPWM Shift -30</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.BaseWaveType.Name.DPWM120P">120 DPWM Positive </system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.BaseWaveType.Name.DPWM120N">120 DPWM Negative</system:String>
+
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.CarrierWave.Type.Name.Triangle">Triangle</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.CarrierWave.Type.Name.Saw">Saw</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.CarrierWave.Type.Name.Sine">Sine</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.CarrierWave.Option.Name.RaiseStart">Rising Start</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.CarrierWave.Option.Name.FallStart">Falling Start</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.CarrierWave.Option.Name.TopStart">Peak Start</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.CarrierWave.Option.Name.BottomStart">Valley Start</system:String>
 
     <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseAlternative.Name.Default">Default</system:String>
-    <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseAlternative.Name.Shifted">Shifted</system:String>
     <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseAlternative.Name.CP">Center Pulse</system:String>
     <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseAlternative.Name.Square">Square</system:String>
     <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseAlternative.Name.Alt">Alternate</system:String>
@@ -492,6 +558,7 @@
     <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseModeName.Name.Chm">CHM</system:String>
     <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseModeName.Name.She">SHE</system:String>
     <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseModeName.Name.Ho">HO</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseModeName.Name.DeltaSigma">ΔΣ</system:String>
     <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseModeName.Name.Pulse">Pulse</system:String>
 
     <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseHarmonicType.Name.Sine">Sinusoidal</system:String>
@@ -513,6 +580,12 @@
     <system:String x:Key="Resource.Language.FriendlyNameConverter.YamlAsyncParameterVibratoMode.Name.Const">Constant</system:String>
     <system:String x:Key="Resource.Language.FriendlyNameConverter.YamlAsyncParameterVibratoMode.Name.Moving">Variable</system:String>
 
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.YamlAsyncParameterVibratoBaseWaveType.Name.Sine">Sine</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.YamlAsyncParameterVibratoBaseWaveType.Name.Triangle">Triangle</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.YamlAsyncParameterVibratoBaseWaveType.Name.Square">Square</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.YamlAsyncParameterVibratoBaseWaveType.Name.SawUp">Saw Rise</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.YamlAsyncParameterVibratoBaseWaveType.Name.SawDown">Saw Fall</system:String>
+    
     <system:String x:Key="Resource.Language.FriendlyNameConverter.MyMath.EquationSolver.EquationSolverType.Name.Newton">Newton Method</system:String>
     <system:String x:Key="Resource.Language.FriendlyNameConverter.MyMath.EquationSolver.EquationSolverType.Name.Bisection">Bisection Method</system:String>
 

@@ -3,16 +3,16 @@
   <Profiles />
   <Settings>
     <Setting Name="RealTime_VVVF_BuffSize" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">40000</Value>
+      <Value Profile="(Default)">32768</Value>
     </Setting>
     <Setting Name="RealTime_VVVF_WaveForm_Line_Show" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
+      <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="RealTime_VVVF_EditAllow" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="RealTime_Train_BuffSize" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">40000</Value>
+      <Value Profile="(Default)">32768</Value>
     </Setting>
     <Setting Name="RealTime_Train_EditAllow" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
@@ -123,10 +123,10 @@
       <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="RealTime_VVVF_Controller_Design2_CalculatePrecision" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">10000</Value>
+      <Value Profile="(Default)">16384</Value>
     </Setting>
     <Setting Name="RealTime_Train_Controller_Design2_CalculatePrecision" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">10000</Value>
+      <Value Profile="(Default)">16384</Value>
     </Setting>
   </Settings>
 </SettingsFile>

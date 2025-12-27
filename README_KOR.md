@@ -153,7 +153,7 @@ https://github.com/VvvfGeeks/VVVF-Simulator
 
 # 지원
 - [디스코드](https://discord.gg/SQr2tXJgVq)에 가입하세요! 여기에서 본 프로그램과 관련된 질문을 할 수 있습니다.
-- [샘플 VVVF 파일](https://github.com/VvvfGeeks/VVVF-Simulator/releases/download/v1.9.1.0/yaml_samples.zip)
+- [샘플 VVVF 파일](https://github.com/VvvfGeeks/YAML-Files)
 
 # 관련 프로젝트
  - [Raspberry Pi Pico Drive](https://github.com/VvvfGeeks/RPi-Pico-Drive)
@@ -170,4 +170,4 @@ https://github.com/VvvfGeeks/VVVF-Simulator
     - [turtle713](https://github.com/intel713)
  - 중국어
     - [02001](https://github.com/Jerethon)
-    - [YAJ-54S12G-1](https://github.com/YJ-321-C4)
+    - [YAJ-54S12G-1](https://github.com/YJ-305-A2)

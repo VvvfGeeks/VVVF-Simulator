@@ -5,13 +5,10 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using VvvfSimulator.GUI.Util;
-using VvvfSimulator.Yaml.MasconControl;
-using VvvfSimulator.Yaml.VvvfSound;
+using VvvfSimulator.Data.BaseFrequency;
 using static VvvfSimulator.Generation.GenerateCommon;
-using static VvvfSimulator.Generation.GenerateCommon.GenerationBasicParameter;
-using static VvvfSimulator.Vvvf.Calculate;
-using static VvvfSimulator.Vvvf.Struct;
-using static VvvfSimulator.Yaml.MasconControl.YamlMasconAnalyze;
+using static VvvfSimulator.Generation.GenerateCommon.GenerationParameter;
+using static VvvfSimulator.Vvvf.Model.Struct;
 
 namespace VvvfSimulator.Generation.Video.WaveForm
 {
@@ -29,8 +26,7 @@ namespace VvvfSimulator.Generation.Video.WaveForm
         /// <param name="Delta"></param>
         /// <returns></returns>
         public static Bitmap GetImage(
-            VvvfValues Control,
-            PwmCalculateValues PWM_Data,
+            Domain Control,
             int Width, 
             int Height, 
             int WaveHeight,
@@ -40,20 +36,12 @@ namespace VvvfSimulator.Generation.Video.WaveForm
         )
         {
             int Count = (Width - Spacing * 2) * Delta;
-            WaveValues[] values = new WaveValues[Count];
-            for (int i = 0; i < Count; i++)
-            {
-                WaveValues value = CalculatePhases(Control, PWM_Data, Math.PI / 6.0);
-                values[i] = value;
-                Control.SetGenerationCurrentTime(2 / (60.0 * Count) * i);
-                Control.SetSawTime(2 / (60.0 * Count) * i);
-                Control.SetSineTime(2 / (60.0 * Count) * i);
-            }
+            PhaseState[] values = GenerateBasic.WaveForm.GetUVW(Control, Math.PI / 6.0, 30.0 * Count, Count);
             return GetImage(ref values, Width, Height, WaveHeight, WaveWidth, Spacing);
         }
 
         public static Bitmap GetImage(
-            ref WaveValues[] UVW,
+            ref PhaseState[] UVW,
             int Width,
             int Height,
             int WaveHeight,
@@ -104,20 +92,17 @@ namespace VvvfSimulator.Generation.Video.WaveForm
         }
 
         private BitmapViewerManager? Viewer { get; set; }
-        public void ExportVideo1(GenerationBasicParameter generationBasicParameter, String fileName)
+        public void ExportVideo1(GenerationParameter Parameter, String fileName)
         {
             MainWindow.Invoke(() => Viewer = new BitmapViewerManager());
             Viewer?.Show();
 
-            YamlVvvfSoundData vvvfData = generationBasicParameter.VvvfData;
-            YamlMasconDataCompiled masconData = generationBasicParameter.MasconData;
-            ProgressData progressData = generationBasicParameter.Progress;
+            Data.Vvvf.Struct vvvfData = Parameter.VvvfData;
+            StructCompiled baseFreqData = Parameter.BaseFrequencyData;
+            ProgressData progressData = Parameter.Progress;
 
-            VvvfValues control = new();
-            control.ResetControlValues();
-            control.ResetMathematicValues();
-
-            control.SetRandomFrequencyMoveAllowed(false);
+            Domain Domain = new(Parameter.TrainData.MotorSpec);
+            Domain.GetCarrierInstance().UseSimpleFrequency = true;
 
             int fps = 60;
 
@@ -136,7 +121,7 @@ namespace VvvfSimulator.Generation.Video.WaveForm
             }
 
             // Progress Initialize
-            progressData.Total = masconData.GetEstimatedSteps(1.0 / fps) + 120;
+            progressData.Total = baseFreqData.GetEstimatedSteps(1.0 / fps) + 120;
 
             Boolean START_WAIT = true;
             if (START_WAIT)
@@ -162,15 +147,8 @@ namespace VvvfSimulator.Generation.Video.WaveForm
             Boolean loop = true;
             while (loop)
             {
-
-                control.SetSineTime(0);
-                control.SetSawTime(0);
-
-                PwmCalculateValues calculated_Values = YamlVvvfWave.CalculateYaml(control, vvvfData);
-
-                Bitmap image = GetImage(control.Clone(), calculated_Values, image_width, image_height, wave_height, 2, calculate_div, 100);
-
-
+                Data.Vvvf.Analyze.Calculate(Domain, vvvfData);
+                Bitmap image = GetImage(Domain.Clone(), image_width, image_height, wave_height, 2, calculate_div, 100);
                 MemoryStream ms = new();
                 image.Save(ms, ImageFormat.Png);
                 byte[] img = ms.GetBuffer();
@@ -182,7 +160,7 @@ namespace VvvfSimulator.Generation.Video.WaveForm
                 Viewer?.SetImage(image);
                 image.Dispose();
 
-                loop = YamlMasconControl.CheckForFreqChange(control, masconData, vvvfData, 1.0 / fps);
+                loop = Data.BaseFrequency.Analyze.CheckForFreqChange(Domain, baseFreqData, vvvfData, 1.0 / fps);
                 if (progressData.Cancel) loop = false;
 
                 // PROGRESS CHANGE
@@ -215,19 +193,17 @@ namespace VvvfSimulator.Generation.Video.WaveForm
             Viewer?.Close();
         }
 
-        public void ExportVideo2(GenerationBasicParameter generationBasicParameter, String fileName)
+        public void ExportVideo2(GenerationParameter Parameter, String fileName)
         {
             MainWindow.Invoke(() => Viewer = new BitmapViewerManager());
             Viewer?.Show();
 
-            YamlVvvfSoundData vvvfData = generationBasicParameter.VvvfData;
-            YamlMasconDataCompiled masconData = generationBasicParameter.MasconData;
-            ProgressData progressData = generationBasicParameter.Progress;
+            Data.Vvvf.Struct vvvfData = Parameter.VvvfData;
+            StructCompiled baseFreqData = Parameter.BaseFrequencyData;
+            ProgressData progressData = Parameter.Progress;
 
-            VvvfValues control = new();
-            control.ResetControlValues();
-            control.ResetMathematicValues();
-            control.SetRandomFrequencyMoveAllowed(false);
+            Domain Domain = new(Parameter.TrainData.MotorSpec);
+            Domain.GetCarrierInstance().UseSimpleFrequency = true;
 
             int fps = 60;
 
@@ -246,7 +222,7 @@ namespace VvvfSimulator.Generation.Video.WaveForm
             }
 
             // Progress Initialize
-            progressData.Total = masconData.GetEstimatedSteps(1.0 / fps) + 120;
+            progressData.Total = baseFreqData.GetEstimatedSteps(1.0 / fps) + 120;
 
             Boolean START_WAIT = true;
             if (START_WAIT)
@@ -274,12 +250,8 @@ namespace VvvfSimulator.Generation.Video.WaveForm
             Boolean loop = true;
             while (loop)
             {
-
-                control.SetSineTime(0);
-                control.SetSawTime(0);
-
-                PwmCalculateValues calculated_Values = YamlVvvfWave.CalculateYaml(control, vvvfData);
-                Bitmap image = GetImage(control.Clone(), calculated_Values, image_width, image_height, wave_height, 1, calculate_div, 0);
+                Data.Vvvf.Analyze.Calculate(Domain, vvvfData);
+                Bitmap image = GetImage(Domain.Clone(), image_width, image_height, wave_height, 1, calculate_div, 0);
 
                 MemoryStream ms = new();
                 image.Save(ms, ImageFormat.Png);
@@ -290,7 +262,7 @@ namespace VvvfSimulator.Generation.Video.WaveForm
                 vr.Write(mat);
 
                 image.Dispose();
-                loop = YamlMasconControl.CheckForFreqChange(control, masconData, vvvfData, 1.0 / fps);
+                loop = Data.BaseFrequency.Analyze.CheckForFreqChange(Domain, baseFreqData, vvvfData, 1.0 / fps);
                 if(progressData.Cancel) loop = false;
 
                 // PROGRESS CHANGE

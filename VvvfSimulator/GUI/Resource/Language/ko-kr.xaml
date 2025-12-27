@@ -47,8 +47,8 @@
     <system:String x:Key="MainWindow.Menu.Generate.Audio.Train">주행음</system:String>
     <system:String x:Key="MainWindow.Menu.Generate.Movie">영상</system:String>
     <system:String x:Key="MainWindow.Menu.Generate.Movie.Control">제어</system:String>
-    <system:String x:Key="MainWindow.Menu.Generate.Movie.Control.Original">디자인1</system:String>
-    <system:String x:Key="MainWindow.Menu.Generate.Movie.Control.Original2">디자인2</system:String>
+    <system:String x:Key="MainWindow.Menu.Generate.Movie.Control.Design1">디자인1</system:String>
+    <system:String x:Key="MainWindow.Menu.Generate.Movie.Control.Design2">디자인2</system:String>
     <system:String x:Key="MainWindow.Menu.Generate.Movie.WaveForm">파형</system:String>
     <system:String x:Key="MainWindow.Menu.Generate.Movie.WaveForm.Original">선간전압(1)</system:String>
     <system:String x:Key="MainWindow.Menu.Generate.Movie.WaveForm.Spaced">선간전압(2)</system:String>
@@ -110,6 +110,8 @@
     <system:String x:Key="MainWindow.TaskDescription.Generate.Movie.Hexagon.Original">전압 벡터 영상 생성：</system:String>
     <system:String x:Key="MainWindow.TaskDescription.Generate.Movie.Hexagon.Explain">전압 벡터 생성 과정 영상 생성：</system:String>
     <system:String x:Key="MainWindow.TaskDescription.Generate.Movie.FFT.Original">FFT 영상 생성：</system:String>
+    <system:String x:Key="MainWindow.TaskDescription.Generate.Image.Hexagon.Original">전압 벡터 이미지 생성：</system:String>
+    <system:String x:Key="MainWindow.TaskDescription.Generate.Image.FFT.Original">FFT 이미지 생성：</system:String>
 
     <system:String x:Key="MainWindow.Message.File.Save.Ok.Title">성공</system:String>
     <system:String x:Key="MainWindow.Message.File.Save.Ok.Message">파일을 저장했습니다</system:String>
@@ -117,9 +119,15 @@
     <system:String x:Key="MainWindow.Message.File.SaveAs.Ok.Title">성공</system:String>
     <system:String x:Key="MainWindow.Message.File.SaveAs.Ok.Message">파일을 저장했습니다</system:String>
     <system:String x:Key="MainWindow.Message.File.SaveAs.Error.Message">파일을 저장하지 못했습니다</system:String>
+    <system:String x:Key="MainWindow.Message.File.SaveBefore.Load.Title">확인</system:String>
+    <system:String x:Key="MainWindow.Message.File.SaveBefore.Load.Message">현재 내용은 저장되지 않았습니다. 다른 파일을 열기 전에 저장하시겠습니까?</system:String>
+    <system:String x:Key="MainWindow.Message.File.SaveBefore.Close.Title">확인</system:String>
+    <system:String x:Key="MainWindow.Message.File.SaveBefore.Close.Message">현재 내용은 저장되지 않았습니다. 종료하기 전에 저장하시겠습니까?</system:String>
     <system:String x:Key="MainWindow.Message.File.Load.Ok.Title">성공</system:String>
     <system:String x:Key="MainWindow.Message.File.Load.Ok.Message">파일을 불러왔습니다</system:String>
     <system:String x:Key="MainWindow.Message.File.Load.Error.Message">파일을 불러오지 못했습니다</system:String>
+    <system:String x:Key="MainWindow.Message.Edit.Reset.Confirm.Title">확인</system:String>
+    <system:String x:Key="MainWindow.Message.Edit.Reset.Confirm.Message">정말로 초기화 하시겠습니까?</system:String>
     <system:String x:Key="MainWindow.Message.Generate.Movie.Hexagon.Original.EnableZeroVector">영전압 벡터 지점을 표시할까요?</system:String>
     <system:String x:Key="MainWindow.Message.Generate.Movie.Hexagon.Explain.EnableZeroVector">영전압 벡터 지점을 표시할까요?</system:String>
     <system:String x:Key="MainWindow.Message.Generate.Image.Hexagon.Original.EnableZeroVector">영전압 벡터 지점을 표시할까요?</system:String>
@@ -157,6 +165,16 @@
     <system:String x:Key="DoubleNumberInput.Label">값 입력</system:String>
     <system:String x:Key="DoubleNumberInput.OK">완료</system:String>
 
+    <system:String x:Key="DialogBox.Ok">확인</system:String>
+    <system:String x:Key="DialogBox.Cancel">취소</system:String>
+    <system:String x:Key="DialogBox.Abort">중단</system:String>
+    <system:String x:Key="DialogBox.Retry">재시도</system:String>
+    <system:String x:Key="DialogBox.Ignore">무시</system:String>
+    <system:String x:Key="DialogBox.Try">시도</system:String>
+    <system:String x:Key="DialogBox.Continue">계속</system:String>
+    <system:String x:Key="DialogBox.Yes">예</system:String>
+    <system:String x:Key="DialogBox.No">아니요</system:String>
+
     <system:String x:Key="TaskViewer.Title">작업 관리자</system:String>
     <system:String x:Key="TaskViewer.Button.Cancel">취소</system:String>
     <system:String x:Key="TaskViewer.Status.Canceled">취소됨</system:String>
@@ -169,6 +187,7 @@
 
     <system:String x:Key="TrainAudio.SettingWindow.Menu.File">파일</system:String>
     <system:String x:Key="TrainAudio.SettingWindow.Menu.File.Save">저장</system:String>
+    <system:String x:Key="TrainAudio.SettingWindow.Menu.File.SaveAs">다른 이름으로 저장</system:String>
     <system:String x:Key="TrainAudio.SettingWindow.Menu.File.Open">열기</system:String>
     <system:String x:Key="TrainAudio.SettingWindow.Menu.Parameter">파라미터</system:String>
     <system:String x:Key="TrainAudio.SettingWindow.Menu.Parameter.Motor">모터</system:String>
@@ -178,11 +197,17 @@
     <system:String x:Key="TrainAudio.SettingWindow.Menu.Mixer.FrequencyFilter">주파수 필터</system:String>
     <system:String x:Key="TrainAudio.SettingWindow.Menu.Mixer.ConvolutionFilter">컨볼루션 필터</system:String>
 
-    <system:String x:Key="TrainAudio.SettingWindow.Message.File.Open.Ok.Message">파일을 불러왔습니다</system:String>
+    <system:String x:Key="TrainAudio.SettingWindow.Message.File.Load.Ok.Message">파일을 불러왔습니다</system:String>
+    <system:String x:Key="TrainAudio.SettingWindow.Message.File.Load.Error.Message">파일을 불러오지 못했습니다</system:String>
     <system:String x:Key="TrainAudio.SettingWindow.Message.File.Save.Ok.Message">파일을 저장했습니다</system:String>
-    <system:String x:Key="TrainAudio.SettingWindow.Message.File.Open.Error.Message">파일을 불러오지 못했습니다</system:String>
     <system:String x:Key="TrainAudio.SettingWindow.Message.File.Save.Error.Message">파일을 저장하지 못했습니다</system:String>
-
+    <system:String x:Key="TrainAudio.SettingWindow.Message.File.SaveAs.Ok.Message">파일을 저장했습니다</system:String>
+    <system:String x:Key="TrainAudio.SettingWindow.Message.File.SaveAs.Error.Message">파일을 저장하지 못했습니다</system:String>
+    <system:String x:Key="TrainAudio.SettingWindow.Message.File.SaveBefore.Load.Title">확인</system:String>
+    <system:String x:Key="TrainAudio.SettingWindow.Message.File.SaveBefore.Load.Message">현재 내용은 저장되지 않았습니다. 다른 파일을 열기 전에 저장하시겠습니까?</system:String>
+    <system:String x:Key="TrainAudio.SettingWindow.Message.File.SaveBefore.Close.Title">확인</system:String>
+    <system:String x:Key="TrainAudio.SettingWindow.Message.File.SaveBefore.Close.Message">현재 내용은 저장되지 않았습니다. 종료하기 전에 저장하시겠습니까?</system:String>
+    
     <system:String x:Key="TrainAudio.Pages.HarmonicSetting.BasicSetting">기본 설정</system:String>
     <system:String x:Key="TrainAudio.Pages.HarmonicSetting.BasicSetting.Harmonic">톱니 수</system:String>
     <system:String x:Key="TrainAudio.Pages.HarmonicSetting.BasicSetting.DisappearFrequency">소리 감소 시작 주파수</system:String>
@@ -200,15 +225,20 @@
     <system:String x:Key="TrainAudio.Pages.HarmonicSetting.AmplitudeSetting.MinAmplitude">최소 진폭</system:String>
 
     <system:String x:Key="TrainAudio.Pages.MotorSetting.MotorSpecification">모터 특성</system:String>
+    <system:String x:Key="TrainAudio.Pages.MotorSetting.MotorSpecification.SourceVoltage">전원 전압</system:String>
     <system:String x:Key="TrainAudio.Pages.MotorSetting.MotorSpecification.StatorResistance">고정자 저항</system:String>
     <system:String x:Key="TrainAudio.Pages.MotorSetting.MotorSpecification.RotorResistance">회전자 저항</system:String>
-    <system:String x:Key="TrainAudio.Pages.MotorSetting.MotorSpecification.StatorInductance">고정자 인덕턴스</system:String>
+    <system:String x:Key="TrainAudio.Pages.MotorSetting.MotorSpecification.StatorInductance">고정자 인덕턴스*</system:String>
     <system:String x:Key="TrainAudio.Pages.MotorSetting.MotorSpecification.RotorInductance">회전자 인덕턴스</system:String>
     <system:String x:Key="TrainAudio.Pages.MotorSetting.MotorSpecification.MutualInductance">상호 인덕턴스</system:String>
     <system:String x:Key="TrainAudio.Pages.MotorSetting.MotorSpecification.PolePairCount">극수</system:String>
     <system:String x:Key="TrainAudio.Pages.MotorSetting.MotorSpecification.Damping">감쇠 계수</system:String>
-    <system:String x:Key="TrainAudio.Pages.MotorSetting.MotorSpecification.RotationalInertiaMass">회전 관성 질량</system:String>
-    <system:String x:Key="TrainAudio.Pages.MotorSetting.MotorSpecification.StaticFriction">정지 마찰 계수</system:String>
+    <system:String x:Key="TrainAudio.Pages.MotorSetting.MotorSpecification.RotationalInertiaMass">회전 관성 모멘트</system:String>
+    <system:String x:Key="TrainAudio.Pages.MotorSetting.MotorSpecification.ViscousFriction">점성 마찰</system:String>
+    <system:String x:Key="TrainAudio.Pages.MotorSetting.MotorSpecification.CoulombFriction">쿨롱 마찰</system:String>
+    <system:String x:Key="TrainAudio.Pages.MotorSetting.MotorSpecification.StaticFriction">정지 마찰</system:String>
+    <system:String x:Key="TrainAudio.Pages.MotorSetting.MotorSpecification.StribeckOmega">스트라이벡 속도</system:String>
+    <system:String x:Key="TrainAudio.Pages.MotorSetting.MotorSpecification.FrictionSmoothingGain">마찰 스무딩 계수</system:String>
 
     <system:String x:Key="TrainAudio.Pages.MotorSetting.MotorSounds">모터 소리</system:String>
 
@@ -236,14 +266,22 @@
     <system:String x:Key="Simulator.RealTime.Controller.Title">컨트롤러</system:String>
     <FontFamily x:Key="Simulator.RealTime.Controller.Font.Number">/GUI/Resource/Fonts/MPlus1Code/#M PLUS 1 Code</FontFamily>
     <FontFamily x:Key="Simulator.RealTime.Controller.Font.Notch">/GUI/Resource/Fonts/MPlus1Code/#M PLUS 1 Code</FontFamily>
-    <FontFamily x:Key="Simulator.RealTime.Controller.Font.Topic">/GUI/Resource/Fonts/Gasoek_One/#Gasoek One</FontFamily>
-    <FontFamily x:Key="Simulator.RealTime.Controller.Font.Unit">/GUI/Resource/Fonts/Gasoek_One/#Gasoek One</FontFamily>
-    <system:String x:Key="Simulator.RealTime.Controller.SineFrequency">주파수</system:String>
+    <FontFamily x:Key="Simulator.RealTime.Controller.Font.Topic">/GUI/Resource/Fonts/GangWonEdu/#강원교육튼튼</FontFamily>
+    <FontFamily x:Key="Simulator.RealTime.Controller.Font.Unit">/GUI/Resource/Fonts/GangWonEdu/#강원교육튼튼</FontFamily>
+    <system:String x:Key="Simulator.RealTime.Controller.BaseFrequency">주파수</system:String>
+    <system:String x:Key="Simulator.RealTime.Controller.BaseFrequency.None">---</system:String>
     <system:String x:Key="Simulator.RealTime.Controller.Voltage">전압</system:String>
+    <system:String x:Key="Simulator.RealTime.Controller.Voltage.None">---</system:String>
     <system:String x:Key="Simulator.RealTime.Controller.PulseState">펄스</system:String>
+    <system:String x:Key="Simulator.RealTime.Controller.PulseState.None">---</system:String>
     
     <system:String x:Key="Simulator.RealTime.Controller.MenuItem.DeviceSetting">입력 설정</system:String>
 
+    <system:String x:Key="Simulator.RealTime.Controller.Design2.MenuItem.Vvvf.WaveForm">파형 유형</system:String>
+    <system:String x:Key="Simulator.RealTime.Controller.Design2.MenuItem.Vvvf.WaveForm.Line">선간전압</system:String>
+    <system:String x:Key="Simulator.RealTime.Controller.Design2.MenuItem.Vvvf.WaveForm.Phase">상전압</system:String>
+    <system:String x:Key="Simulator.RealTime.Controller.Design2.MenuItem.Vvvf.WaveForm.PhaseCurrent">상전류</system:String>
+    
     <system:String x:Key="Simulator.RealTime.Controller.Design2.MenuItem.CalculateDivision">정밀도 설정 계산</system:String>
 
     <system:String x:Key="Simulator.RealTime.RealtimeWindows.ControlStatus.Title">제어 상태</system:String>
@@ -301,41 +339,51 @@
     <system:String x:Key="MidiConvert.Main.Config">설정</system:String>
     <system:String x:Key="MidiConvert.Main.Convert">변환하기</system:String>
 
-    <system:String x:Key="MidiConvert.Main.Message.MidiConvertError">이 미디는 변환할 수 없습니다.</system:String>
-    <system:String x:Key="MidiConvert.TaskDescription.Convert.Description">미디:{0}, 트랙{1}, 파트{2}의 변환</system:String>
+    <system:String x:Key="MidiConvert.Main.Message.MidiConvertError">이 MIDI 파일은 변환할 수 없습니다.</system:String>
+    <system:String x:Key="MidiConvert.TaskDescription.Convert.Description">MIDI:{0}, 트랙{1}, 파트{2}의 변환</system:String>
 
     <system:String x:Key="MidiConvert.Config.Title">MIDI 변환</system:String>
     <system:String x:Key="MidiConvert.Config.MultiThreading">병렬 처리</system:String>
 
-    <system:String x:Key="Mascon.EditPage.Order">순서</system:String>
-    <system:String x:Key="Mascon.EditPage.Duration">지속 시간</system:String>
-    <system:String x:Key="Mascon.EditPage.Rate">주파수 변화율</system:String>
-    <system:String x:Key="Mascon.EditPage.Other">기타</system:String>
-    <system:String x:Key="Mascon.EditPage.Other.MasconOn">마스콘 투입</system:String>
-    <system:String x:Key="Mascon.EditPage.Other.Brake">제동</system:String>
+    <system:String x:Key="BaseFrequency.EditPage.Order">순서</system:String>
+    <system:String x:Key="BaseFrequency.EditPage.Duration">지속 시간</system:String>
+    <system:String x:Key="BaseFrequency.EditPage.Rate">주파수 변화율</system:String>
+    <system:String x:Key="BaseFrequency.EditPage.Other">기타</system:String>
+    <system:String x:Key="BaseFrequency.EditPage.Other.PowerOn">마스콘 투입</system:String>
+    <system:String x:Key="BaseFrequency.EditPage.Other.Brake">제동</system:String>
 
-    <system:String x:Key="Mascon.LoadMidi.Title">MIDI 열기</system:String>
-    <system:String x:Key="Mascon.LoadMidi.File">파일</system:String>
-    <system:String x:Key="Mascon.LoadMidi.File.Select">열기</system:String>
-    <system:String x:Key="Mascon.LoadMidi.Track">트랙 번호</system:String>
-    <system:String x:Key="Mascon.LoadMidi.Priority">우선순위</system:String>
+    <system:String x:Key="BaseFrequency.LoadMidi.Title">MIDI 열기</system:String>
+    <system:String x:Key="BaseFrequency.LoadMidi.File">파일</system:String>
+    <system:String x:Key="BaseFrequency.LoadMidi.File.Select">열기</system:String>
+    <system:String x:Key="BaseFrequency.LoadMidi.Track">트랙 번호</system:String>
+    <system:String x:Key="BaseFrequency.LoadMidi.Priority">우선순위</system:String>
 
-    <system:String x:Key="Mascon.ControlEditor.Title">주행 패턴 설정</system:String>
-    <system:String x:Key="Mascon.ControlEditor.Menu.File">파일</system:String>
-    <system:String x:Key="Mascon.ControlEditor.Menu.File.Save">저장</system:String>
-    <system:String x:Key="Mascon.ControlEditor.Menu.File.Load">열기</system:String>
-    <system:String x:Key="Mascon.ControlEditor.Menu.Edit">편집</system:String>
-    <system:String x:Key="Mascon.ControlEditor.Menu.Edit.Reset">초기화</system:String>
-    <system:String x:Key="Mascon.ControlEditor.Menu.Edit.Midi">MIDI 열기</system:String>
+    <system:String x:Key="BaseFrequency.SettingWindow.Title">주행 패턴 설정</system:String>
+    <system:String x:Key="BaseFrequency.SettingWindow.Menu.File">파일</system:String>
+    <system:String x:Key="BaseFrequency.SettingWindow.Menu.File.Save">저장</system:String>
+    <system:String x:Key="BaseFrequency.SettingWindow.Menu.File.SaveAs">다른 이름으로 저장</system:String>
+    <system:String x:Key="BaseFrequency.SettingWindow.Menu.File.Load">열기</system:String>
+    <system:String x:Key="BaseFrequency.SettingWindow.Menu.Edit">편집</system:String>
+    <system:String x:Key="BaseFrequency.SettingWindow.Menu.Edit.Reset">초기화</system:String>
+    <system:String x:Key="BaseFrequency.SettingWindow.Menu.Edit.Midi">MIDI 열기</system:String>
 
-    <system:String x:Key="Mascon.ControlEditor.Message.MidiConvertError">이 미디는 변환할 수 없습니다.</system:String>
+    <system:String x:Key="BaseFrequency.SettingWindow.Message.MidiConvertError">이 MIDI 파일은 변환할 수 없습니다.</system:String>
 
-    <system:String x:Key="Mascon.ControlEditor.Message.File.Load.Ok.Title">성공</system:String>
-    <system:String x:Key="Mascon.ControlEditor.Message.File.Load.Ok.Message">파일을 불러왔습니다</system:String>
-    <system:String x:Key="Mascon.ControlEditor.Message.File.Load.Error.Message">파일을 불러오지 못했습니다</system:String>
-    <system:String x:Key="Mascon.ControlEditor.Message.File.Save.Ok.Title">성공</system:String>
-    <system:String x:Key="Mascon.ControlEditor.Message.File.Save.Ok.Message">파일을 저장했습니다</system:String>
-    <system:String x:Key="Mascon.ControlEditor.Message.File.Save.Error.Message">파일을 저장하지 못했습니다</system:String>
+    <system:String x:Key="BaseFrequency.SettingWindow.Message.File.Load.Ok.Title">성공</system:String>
+    <system:String x:Key="BaseFrequency.SettingWindow.Message.File.Load.Ok.Message">파일을 불러왔습니다</system:String>
+    <system:String x:Key="BaseFrequency.SettingWindow.Message.File.Load.Error.Message">파일을 불러오지 못했습니다</system:String>
+    <system:String x:Key="BaseFrequency.SettingWindow.Message.File.Save.Ok.Title">성공</system:String>
+    <system:String x:Key="BaseFrequency.SettingWindow.Message.File.Save.Ok.Message">파일을 저장했습니다</system:String>
+    <system:String x:Key="BaseFrequency.SettingWindow.Message.File.Save.Error.Message">파일을 저장하지 못했습니다</system:String>
+    <system:String x:Key="BaseFrequency.SettingWindow.Message.File.SaveAs.Ok.Title">성공</system:String>
+    <system:String x:Key="BaseFrequency.SettingWindow.Message.File.SaveAs.Ok.Message">파일을 저장했습니다</system:String>
+    <system:String x:Key="BaseFrequency.SettingWindow.Message.File.SaveAs.Error.Message">파일을 저장하지 못했습니다</system:String>
+    <system:String x:Key="BaseFrequency.SettingWindow.Message.File.SaveBefore.Load.Title">확인</system:String>
+    <system:String x:Key="BaseFrequency.SettingWindow.Message.File.SaveBefore.Load.Message">현재 내용은 저장되지 않았습니다. 다른 파일을 열기 전에 저장하시겠습니까?</system:String>
+    <system:String x:Key="BaseFrequency.SettingWindow.Message.File.SaveBefore.Close.Title">확인</system:String>
+    <system:String x:Key="BaseFrequency.SettingWindow.Message.File.SaveBefore.Close.Message">현재 내용은 저장되지 않았습니다. 종료하기 전에 저장하시겠습니까?</system:String>
+    <system:String x:Key="BaseFrequency.SettingWindow.Message.Edit.Reset.Confirm.Title">확인</system:String>
+    <system:String x:Key="BaseFrequency.SettingWindow.Message.Edit.Reset.Confirm.Message">정말로 초기화 하시겠습니까?</system:String>
 
     <system:String x:Key="Create.Settings.Jerk.Jerk">타행 설정</system:String>
     <system:String x:Key="Create.Settings.Jerk.On">타행 종료</system:String>
@@ -383,17 +431,19 @@
     <system:String x:Key="Create.Settings.Waveform.Basic.ControlAmplitude.TableInterpolation">이산점 보간하기</system:String>
     <system:String x:Key="Create.Settings.Waveform.Basic.ControlAmplitude.TableEdit">이산점 편집</system:String>
 
-    <system:String x:Key="Create.Settings.Waveform.Basic.PulseSetting.Title">펄스 모드</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Basic.PulseSetting.Type">종류</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.PulseSetting.Title">펄스 설정</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.PulseSetting.Type">변조 방식</system:String>
     <system:String x:Key="Create.Settings.Waveform.Basic.PulseSetting.PulseCount">펄스 수</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Basic.PulseSetting.Detail">상세</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Basic.PulseSetting.HarmonicSetting">고조파 설정</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Basic.PulseSetting.DiscreteSetting">이산 설정</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.PulseSetting.AltMode">종류</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.PulseSetting.BaseWave">변조파</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.PulseSetting.BaseWave.HarmonicSetting">고조파 설정</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.PulseSetting.BaseWave.DiscreteSetting">이산 설정</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.PulseSetting.CarrierWave">반송파</system:String>
 
     <system:String x:Key="Create.Settings.Waveform.Basic.ConditionSetting.Title">패턴 조건 설정</system:String>
     <system:String x:Key="Create.Settings.Waveform.Basic.ConditionSetting.From">시작 주파수</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Basic.ConditionSetting.SineFrom">최소 주파수</system:String>
-    <system:String x:Key="Create.Settings.Waveform.Basic.ConditionSetting.SineBelow">최대 주파수</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.ConditionSetting.BaseFrom">최소 주파수</system:String>
+    <system:String x:Key="Create.Settings.Waveform.Basic.ConditionSetting.BaseBelow">최대 주파수</system:String>
     <system:String x:Key="Create.Settings.Waveform.Basic.ConditionSetting.Keep">패턴 유지</system:String>
     <system:String x:Key="Create.Settings.Waveform.Basic.ConditionSetting.Keep.On">타행 종료 시</system:String>
     <system:String x:Key="Create.Settings.Waveform.Basic.ConditionSetting.Keep.Off">타행 진입 시</system:String>
@@ -445,7 +495,9 @@
 
     <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseDataSetting.Key.Name.Dipolar">다이폴라</system:String>
     <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseDataSetting.Key.Name.PulseWidth">펄스 폭</system:String>
-
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseDataSetting.Key.Name.Phase">위상</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseDataSetting.Key.Name.UpdateFrequency">주파수</system:String>
+    
     <system:String x:Key="Resource.Language.FriendlyNameConverter.ControlMovingSetting.MoveType.Name.Proportional">정비례</system:String>
     <system:String x:Key="Resource.Language.FriendlyNameConverter.ControlMovingSetting.MoveType.Name.InvProportional">반비례</system:String>
     <system:String x:Key="Resource.Language.FriendlyNameConverter.ControlMovingSetting.MoveType.Name.Pow2Exponential">지수</system:String>
@@ -480,9 +532,23 @@
     <system:String x:Key="Resource.Language.FriendlyNameConverter.BaseWaveType.Name.ModifiedSine1">변형 사인파1</system:String>
     <system:String x:Key="Resource.Language.FriendlyNameConverter.BaseWaveType.Name.ModifiedSine2">변형 사인파2</system:String>
     <system:String x:Key="Resource.Language.FriendlyNameConverter.BaseWaveType.Name.ModifiedSaw1">변형 삼각파</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.BaseWaveType.Name.SV">공간 벡터</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.BaseWaveType.Name.DPWM30">30° DPWM</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.BaseWaveType.Name.DPWM60C">60° DPWM 중앙</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.BaseWaveType.Name.DPWM60P">60° DPWM +30</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.BaseWaveType.Name.DPWM60N">60° DPWM -30</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.BaseWaveType.Name.DPWM120P">120° DPWM (ON)</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.BaseWaveType.Name.DPWM120N">120° DPWM (OFF)</system:String>
+
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.CarrierWave.Type.Name.Triangle">삼각파</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.CarrierWave.Type.Name.Saw">톱니파</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.CarrierWave.Type.Name.Sine">사인파</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.CarrierWave.Option.Name.RaiseStart">상승 시작</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.CarrierWave.Option.Name.FallStart">하강 시작</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.CarrierWave.Option.Name.TopStart">정점 시작</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.CarrierWave.Option.Name.BottomStart">골짜기 시작</system:String>
 
     <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseAlternative.Name.Default">기본</system:String>
-    <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseAlternative.Name.Shifted">위상 반전</system:String>
     <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseAlternative.Name.CP">센터 펄스</system:String>
     <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseAlternative.Name.Square">사각파</system:String>
     <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseAlternative.Name.Alt">변형</system:String>
@@ -492,6 +558,7 @@
     <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseModeName.Name.Chm">CHM</system:String>
     <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseModeName.Name.She">SHE</system:String>
     <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseModeName.Name.Ho">HO</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseModeName.Name.DeltaSigma">ΔΣ</system:String>
     <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseModeName.Name.Pulse">펄스</system:String>
 
     <system:String x:Key="Resource.Language.FriendlyNameConverter.PulseHarmonicType.Name.Sine">사인파</system:String>
@@ -513,7 +580,13 @@
     <system:String x:Key="Resource.Language.FriendlyNameConverter.YamlAsyncParameterVibratoMode.Name.Const">일정</system:String>
     <system:String x:Key="Resource.Language.FriendlyNameConverter.YamlAsyncParameterVibratoMode.Name.Moving">가변</system:String>
 
-    <system:String x:Key="Resource.Language.FriendlyNameConverter.MyMath.EquationSolver.EquationSolverType.Name.Newton">뉴턴 방법</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.YamlAsyncParameterVibratoBaseWaveType.Name.Sine">사인파</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.YamlAsyncParameterVibratoBaseWaveType.Name.Triangle">삼각파</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.YamlAsyncParameterVibratoBaseWaveType.Name.Square">사각파</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.YamlAsyncParameterVibratoBaseWaveType.Name.SawUp">상승 톱니파</system:String>
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.YamlAsyncParameterVibratoBaseWaveType.Name.SawDown">하강 톱니파</system:String>
+
+    <system:String x:Key="Resource.Language.FriendlyNameConverter.MyMath.EquationSolver.EquationSolverType.Name.Newton">뉴턴법</system:String>
     <system:String x:Key="Resource.Language.FriendlyNameConverter.MyMath.EquationSolver.EquationSolverType.Name.Bisection">이분법</system:String>
 
     <system:String x:Key="Resource.Language.FriendlyNameConverter.Bool.True">예</system:String>

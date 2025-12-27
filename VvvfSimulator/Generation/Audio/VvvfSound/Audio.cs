@@ -3,10 +3,9 @@ using NAudio.Wave.SampleProviders;
 using System;
 using System.IO;
 using VvvfSimulator.Vvvf;
-using VvvfSimulator.Yaml.MasconControl;
-using VvvfSimulator.Yaml.VvvfSound;
+using VvvfSimulator.Vvvf.Calculation;
 using static VvvfSimulator.Generation.GenerateCommon;
-using static VvvfSimulator.Vvvf.Struct;
+using static VvvfSimulator.Vvvf.Model.Struct;
 
 namespace VvvfSimulator.Generation.Audio.VvvfSound
 {
@@ -61,27 +60,25 @@ namespace VvvfSimulator.Generation.Audio.VvvfSound
         }
 
 
-        private delegate double[] GetSampleDelegate(VvvfValues Control, YamlVvvfSoundData SoundData);
+        private delegate double[] GetSampleDelegate(Domain Control, Data.Vvvf.Struct SoundData);
 
-        public static void ExportWavLine(GenerationBasicParameter GenParam, int SamplingFreq, bool UseRaw, string Path)
+        public static void ExportWavLine(GenerationParameter GenParam, int SamplingFreq, bool UseRaw, string Path)
         {
-            GetSampleDelegate SampleGen = (VvvfValues control, YamlVvvfSoundData sound_data) =>
+            GetSampleDelegate SampleGen = (Domain control, Data.Vvvf.Struct sound_data) =>
             {
-                PwmCalculateValues calculated_Values = YamlVvvfWave.CalculateYaml(control, sound_data);
-                WaveValues value = Calculate.CalculatePhases(control, calculated_Values, MyMath.M_PI_6);
+                PhaseState value = Common.CalculatePhsaseState(control, MyMath.M_PI_6);
                 double pwm_value = (value.U - value.V) / 2.0;
                 return [pwm_value];
             };
             ExportWavFile(GenParam, SampleGen, SamplingFreq, UseRaw, [Path]);
         }
 
-        public static void ExportWavPhases(GenerationBasicParameter GenParam, int SamplingFreq, bool UseRaw, string Path)
+        public static void ExportWavPhases(GenerationParameter GenParam, int SamplingFreq, bool UseRaw, string Path)
         {
-            GetSampleDelegate SampleGen = (VvvfValues control, YamlVvvfSoundData sound_data) =>
+            GetSampleDelegate SampleGen = (Domain control, Data.Vvvf.Struct sound_data) =>
             {
-                PwmCalculateValues calculated_Values = YamlVvvfWave.CalculateYaml(control, sound_data);
-                WaveValues value = Calculate.CalculatePhases(control, calculated_Values, 0);
-                return [value.U, value.V, value.W];
+                PhaseState value = Common.CalculatePhsaseState(control, 0);
+                return [value.U - 1, value.V - 1, value.W - 1];
             };
 
             string[] ExportPath = [
@@ -92,27 +89,24 @@ namespace VvvfSimulator.Generation.Audio.VvvfSound
             ExportWavFile(GenParam, SampleGen, SamplingFreq, UseRaw, ExportPath);
         }
 
-        public static void ExportWavPhaseCurrent(GenerationBasicParameter GenParam, int SamplingFreq, bool UseRaw, string Path)
+        public static void ExportWavPhaseCurrent(GenerationParameter GenParam, int SamplingFreq, bool UseRaw, string Path)
         {
-            GetSampleDelegate SampleGen = (VvvfValues control, YamlVvvfSoundData sound_data) =>
+            GetSampleDelegate SampleGen = (Domain control, Data.Vvvf.Struct sound_data) =>
             {
-                PwmCalculateValues calculated_Values = YamlVvvfWave.CalculateYaml(control, sound_data);
-                WaveValues value = Calculate.CalculatePhases(control, calculated_Values, 0);
-                double pwm_value = (2 * value.U - value.V - value.W) / 8.0;
+                PhaseState value = Common.CalculatePhsaseState(control, 0);
+                double pwm_value = (2 * value.U - value.V - value.W) / 4.0;
                 return [pwm_value];
             };
             ExportWavFile(GenParam, SampleGen, SamplingFreq, UseRaw, [Path]);
         }
 
-        private static void ExportWavFile(GenerationBasicParameter GenParam, GetSampleDelegate GetSample, int SamplingFreq, bool UseRaw, string[] Path)
+        private static void ExportWavFile(GenerationParameter Parameter, GetSampleDelegate GetSample, int SamplingFreq, bool UseRaw, string[] Path)
         {
             const double VolumeFactor = 0.35;
             double dt = 1.0 / SamplingFreq;
-            GenParam.Progress.Total = GenParam.MasconData.GetEstimatedSteps(dt) * (UseRaw ? 1 : Math.Pow(1.05, Path.Length));
+            Parameter.Progress.Total = Parameter.BaseFrequencyData.GetEstimatedSteps(dt) * (UseRaw ? 1 : Math.Pow(1.05, Path.Length));
 
-            VvvfValues Control = new();
-            Control.ResetControlValues();
-            Control.ResetMathematicValues();
+            Domain Domain = new(Parameter.TrainData.MotorSpec);
             int DownSampledFrequency = 44100;
 
             string[] ExportPath = new string[Path.Length];
@@ -126,18 +120,17 @@ namespace VvvfSimulator.Generation.Audio.VvvfSound
             
             while (true)
             {
-                Control.AddSineTime(dt);
-                Control.AddSawTime(dt);
-                double[] Samples = GetSample(Control, GenParam.VvvfData);
+                Data.Vvvf.Analyze.Calculate(Domain, Parameter.VvvfData);
+                double[] Samples = GetSample(Domain, Parameter.VvvfData);
                 
                 for(int i = 0; i < ((Samples.Length < Path.Length) ? Samples.Length : Path.Length); i++)
                 {
                     Writer[i].AddSample(Samples[i] * VolumeFactor);
                 }
 
-                GenParam.Progress.Progress++;
-                bool flag_continue = YamlMasconControl.CheckForFreqChange(Control, GenParam.MasconData, GenParam.VvvfData, 1.0 / SamplingFreq);
-                bool flag_cancel = GenParam.Progress.Cancel;
+                Parameter.Progress.Progress++;
+                bool flag_continue = Data.BaseFrequency.Analyze.CheckForFreqChange(Domain, Parameter.BaseFrequencyData, Parameter.VvvfData, 1.0 / SamplingFreq);
+                bool flag_cancel = Parameter.Progress.Cancel;
                 if (flag_cancel || !flag_continue) break;
             }
 
@@ -147,11 +140,11 @@ namespace VvvfSimulator.Generation.Audio.VvvfSound
                 if (!UseRaw)
                 {
                     DownSample(DownSampledFrequency, ExportPath[i], Path[i], true);
-                    GenParam.Progress.Progress *= 1.05;
+                    Parameter.Progress.Progress *= 1.05;
                 }
             }
 
-            GenParam.Progress.Progress = GenParam.Progress.Total;
+            Parameter.Progress.Progress = Parameter.Progress.Total;
         }
     }
 }

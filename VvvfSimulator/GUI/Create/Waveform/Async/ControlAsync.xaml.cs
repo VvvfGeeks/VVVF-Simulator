@@ -4,10 +4,10 @@ using VvvfSimulator.GUI.Create.Waveform.Async;
 using VvvfSimulator.GUI.Create.Waveform.Async.Vibrato;
 using VvvfSimulator.GUI.Create.Waveform.Common;
 using VvvfSimulator.GUI.Resource.Language;
-using static VvvfSimulator.Yaml.VvvfSound.YamlVvvfSoundData;
-using static VvvfSimulator.Yaml.VvvfSound.YamlVvvfSoundData.YamlControlData.YamlAsync.CarrierFrequency;
-using static VvvfSimulator.Yaml.VvvfSound.YamlVvvfSoundData.YamlControlData.YamlAsync.RandomModulation;
-using static VvvfSimulator.Yaml.VvvfSound.YamlVvvfSoundData.YamlControlData.YamlAsync.RandomModulation.YamlAsyncParameterRandomValue;
+using static VvvfSimulator.Data.Vvvf.Struct;
+using static VvvfSimulator.Data.Vvvf.Struct.PulseControl.AsyncControl.CarrierFrequency;
+using static VvvfSimulator.Data.Vvvf.Struct.PulseControl.AsyncControl.RandomModulation;
+using static VvvfSimulator.Data.Vvvf.Struct.PulseControl.AsyncControl.RandomModulation.Parameter;
 
 namespace VvvfSimulator.GUI.Create.Waveform
 {
@@ -16,10 +16,10 @@ namespace VvvfSimulator.GUI.Create.Waveform
     /// </summary>
     public partial class ControlAsync : UserControl
     {
-        private readonly YamlControlData Data;
+        private readonly PulseControl Data;
         private readonly bool IgnoreUpdate = true;
         private readonly WaveformEditor Editor;
-        public ControlAsync(WaveformEditor Editor, YamlControlData ycd)
+        public ControlAsync(WaveformEditor Editor, PulseControl ycd)
         {
             this.Editor = Editor;
             Data = ycd;
@@ -54,41 +54,41 @@ namespace VvvfSimulator.GUI.Create.Waveform
 
             if (tag.Equals("Random_Range"))
             {
-                YamlAsyncParameterRandomValueMode selected = (YamlAsyncParameterRandomValueMode)Random_Range_Type_Selector.SelectedValue;
+                Parameter.ValueMode selected = (Parameter.ValueMode)Random_Range_Type_Selector.SelectedValue;
                 Data.AsyncModulationData.RandomData.Range.Mode = selected;
                 Show_Random_Setting(Random_Range_Setting_Frame, Data.AsyncModulationData.RandomData.Range);
             }
             else if (tag.Equals("Random_Interval"))
             {
-                YamlAsyncParameterRandomValueMode selected = (YamlAsyncParameterRandomValueMode)Random_Interval_Type_Selector.SelectedValue;
+                Parameter.ValueMode selected = (Parameter.ValueMode)Random_Interval_Type_Selector.SelectedValue;
                 Data.AsyncModulationData.RandomData.Interval.Mode = selected;
                 Show_Random_Setting(Random_Interval_Setting_Frame, Data.AsyncModulationData.RandomData.Interval);
             }
             else if (tag.Equals("Param"))
             {
-                CarrierFrequencyValueMode selected = (CarrierFrequencyValueMode)carrier_freq_mode.SelectedValue;
+                PulseControl.AsyncControl.CarrierFrequency.ValueMode selected = (PulseControl.AsyncControl.CarrierFrequency.ValueMode)carrier_freq_mode.SelectedValue;
                 Data.AsyncModulationData.CarrierWaveData.Mode = selected;
                 ShowSelectedCarrierMode(selected);
             }
         }
 
-        private void ShowSelectedCarrierMode(CarrierFrequencyValueMode selected)
+        private void ShowSelectedCarrierMode(PulseControl.AsyncControl.CarrierFrequency.ValueMode selected)
         {
-            if (selected == CarrierFrequencyValueMode.Const)
+            if (selected == PulseControl.AsyncControl.CarrierFrequency.ValueMode.Const)
                 carrier_setting.Navigate(new ControlConstSetting(Data.AsyncModulationData.CarrierWaveData.GetType(), Data.AsyncModulationData.CarrierWaveData));
-            else if (selected == CarrierFrequencyValueMode.Moving)
+            else if (selected == PulseControl.AsyncControl.CarrierFrequency.ValueMode.Moving)
                 carrier_setting.Navigate(new ControlMovingSetting(Data.AsyncModulationData.CarrierWaveData.MovingValue));
-            else if (selected == CarrierFrequencyValueMode.Vibrato)
+            else if (selected == PulseControl.AsyncControl.CarrierFrequency.ValueMode.Vibrato)
                 carrier_setting.Navigate(new ControlAsyncVibrato(Data));
-            else if(selected == CarrierFrequencyValueMode.Table)
+            else if(selected == PulseControl.AsyncControl.CarrierFrequency.ValueMode.Table)
                 carrier_setting.Navigate(new ControlAsyncCarrierTable(Data));
         }
 
-        private void Show_Random_Setting(Frame ShowFrame, YamlAsyncParameterRandomValue SettingValue)
+        private void Show_Random_Setting(Frame ShowFrame, Parameter SettingValue)
         {
-            if (SettingValue.Mode == YamlAsyncParameterRandomValueMode.Const)
+            if (SettingValue.Mode == Parameter.ValueMode.Const)
                 ShowFrame.Navigate(new ControlConstSetting(SettingValue.GetType(), SettingValue));
-            else if (SettingValue.Mode == YamlAsyncParameterRandomValueMode.Moving)
+            else if (SettingValue.Mode == Parameter.ValueMode.Moving)
                 ShowFrame.Navigate(new ControlMovingSetting(SettingValue.MovingValue));
         }
     }

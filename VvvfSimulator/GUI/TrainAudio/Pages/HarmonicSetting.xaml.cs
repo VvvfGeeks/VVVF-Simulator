@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using VvvfSimulator.GUI.Resource.Class;
-using static VvvfSimulator.Yaml.TrainAudioSetting.YamlTrainSoundAnalyze;
+using VvvfSimulator.Data.TrainAudio;
 
 namespace VvvfSimulator.GUI.TrainAudio.Pages
 {
@@ -11,10 +11,10 @@ namespace VvvfSimulator.GUI.TrainAudio.Pages
     /// </summary>
     public partial class HarmonicSetting : Page
     {
-        YamlTrainSoundData.HarmonicData Harmonic_Data;
+        Struct.HarmonicData Harmonic_Data;
         ListView ListView;
         bool no_update = true;
-        public HarmonicSetting(YamlTrainSoundData.HarmonicData harmonic_Data, ListView listView)
+        public HarmonicSetting(Struct.HarmonicData harmonic_Data, ListView listView)
         {
             Harmonic_Data = harmonic_Data;
             ListView = listView;

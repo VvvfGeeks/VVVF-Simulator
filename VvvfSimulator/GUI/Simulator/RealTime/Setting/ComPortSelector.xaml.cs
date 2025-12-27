@@ -20,7 +20,7 @@ namespace VvvfSimulator.GUI.Simulator.RealTime.Setting
         {
             string[] ports = SerialPort.GetPortNames();
             PortSelector.ItemsSource = ports;
-            if(ports.Length > 0 ) PortSelector.SelectedIndex = 0;
+            if (ports.Length > 0) PortSelector.SelectedIndex = 0;
         }
 
         public string GetComPortName()

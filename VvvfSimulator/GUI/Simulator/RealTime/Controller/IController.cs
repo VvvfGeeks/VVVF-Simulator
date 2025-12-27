@@ -21,11 +21,6 @@ namespace VvvfSimulator.GUI.Simulator.RealTime.Controller
         public Window GetInstance();
 
     }
-
-    public enum PropertyType
-    {
-        VVVF, Train
-    }
     public enum ControllerStyle
     {
         Design1, Design2

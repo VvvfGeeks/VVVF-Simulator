@@ -256,45 +256,82 @@
     <SolidColorBrush x:Key="SliderTrackBorderBrush" Color="{DynamicResource KeyDarkColor}"/>
     <SolidColorBrush x:Key="SliderTickFillBrush" Color="{DynamicResource SubBackgroundColor}"/>
 
-    <LinearGradientBrush x:Key="EnableSwitchBackgroundEnabledBrush" StartPoint="0,0" EndPoint="0,1">
-        <LinearGradientBrush.GradientStops>
-            <GradientStopCollection>
-                <GradientStop Offset="0" Color="#FFB4FF9A"/>
-                <GradientStop Offset="1" Color="#FF7AD859"/>
-            </GradientStopCollection>
-        </LinearGradientBrush.GradientStops>
-    </LinearGradientBrush>
-    <LinearGradientBrush x:Key="EnableSwitchBackgroundEnabledPressedBrush" StartPoint="0,0" EndPoint="0,1">
-        <LinearGradientBrush.GradientStops>
-            <GradientStopCollection>
-                <GradientStop Offset="0" Color="#FF7AD859"/>
-                <GradientStop Offset="1" Color="#FF5DBF39"/>
-            </GradientStopCollection>
-        </LinearGradientBrush.GradientStops>
-    </LinearGradientBrush>
-    <SolidColorBrush x:Key="EnableSwitchTextColorEnabledBrush" Color="#FCFCFC"/>
-    <LinearGradientBrush x:Key="EnableSwitchBackgroundDisabledBrush" StartPoint="0,0" EndPoint="0,1">
-        <LinearGradientBrush.GradientStops>
-            <GradientStopCollection>
-                <GradientStop Offset="0" Color="#DFDFDF"/>
-                <GradientStop Offset="1" Color="#B3B3B3"/>
-            </GradientStopCollection>
-        </LinearGradientBrush.GradientStops>
-    </LinearGradientBrush>
-    <LinearGradientBrush x:Key="EnableSwitchBackgroundDisabledPressedBrush" StartPoint="0,0" EndPoint="0,1">
-        <LinearGradientBrush.GradientStops>
-            <GradientStopCollection>
-                <GradientStop Offset="0" Color="#B3B3B3"/>
-                <GradientStop Offset="1" Color="#9B9B9B"/>
-            </GradientStopCollection>
-        </LinearGradientBrush.GradientStops>
-    </LinearGradientBrush>
-    <SolidColorBrush x:Key="EnableSwitchTextColorDisabledBrush" Color="#FCFCFC"/>
+    <Color x:Key="EnableSwitchBackColorEnabled">#6ADC7F</Color>
+    <Color x:Key="EnableSwitchBackColorEnabledPressed">#39D055</Color>
+    <Color x:Key="EnableSwitchForeColorEnabled">#FCFCFC</Color>
+    <Color x:Key="EnableSwitchBackColorDisabled">#DFDFDF</Color>
+    <Color x:Key="EnableSwitchBackColorDisabledPressed">#B3B3B3</Color>
+    <Color x:Key="EnableSwitchForeColorDisabled">#FCFCFC</Color>
 
     <SolidColorBrush x:Key="TaskViewer.DescriptionBrush" Color="{DynamicResource KeyTextColor}"/>
     <SolidColorBrush x:Key="TaskViewer.StatusColor.Canceled" Color="#E5B25D"/>
     <SolidColorBrush x:Key="TaskViewer.StatusColor.Complete" Color="#63BF5F"/>
     <SolidColorBrush x:Key="TaskViewer.StatusColor.Running" Color="{DynamicResource KeyDarkColor}"/>
+
+    <LinearGradientBrush x:Key="DialogBoxErrorStroke" StartPoint="0,0" EndPoint="0,1">
+        <GradientStop Color="#FCD9E1" Offset="0.0"/>
+        <GradientStop Color="#F9C8D3" Offset="1.0"/>
+    </LinearGradientBrush>
+    <LinearGradientBrush x:Key="DialogBoxErrorFill" StartPoint="0,0" EndPoint="0,1">
+        <GradientStop Color="#EF476F" Offset="0.0"/>
+        <GradientStop Color="#E11444" Offset="1.0"/>
+    </LinearGradientBrush>
+    <LinearGradientBrush x:Key="DialogBoxErrorIcon" StartPoint="0,0" EndPoint="0,1">
+        <GradientStop Color="#FCD9E1" Offset="0.0"/>
+        <GradientStop Color="#F9C8D3" Offset="1.0"/>
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="DialogBoxQuestionStroke" StartPoint="0,0" EndPoint="0,1">
+        <GradientStop Color="#EEF7FB" Offset="0.0"/>
+        <GradientStop Color="#DEF0F7" Offset="1.0"/>
+    </LinearGradientBrush>
+    <LinearGradientBrush x:Key="DialogBoxQuestionFill" StartPoint="0,0" EndPoint="0,1">
+        <GradientStop Color="#9CD1E8" Offset="0.0"/>
+        <GradientStop Color="#7BC2E0" Offset="1.0"/>
+    </LinearGradientBrush>
+    <LinearGradientBrush x:Key="DialogBoxQuestionIcon" StartPoint="0,0" EndPoint="0,1">
+        <GradientStop Color="#EEF7FB" Offset="0.0"/>
+        <GradientStop Color="#DEF0F7" Offset="1.0"/>
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="DialogBoxInformationStroke" StartPoint="0,0" EndPoint="0,1">
+        <GradientStop Color="#EEF7FB" Offset="0.0"/>
+        <GradientStop Color="#DEF0F7" Offset="1.0"/>
+    </LinearGradientBrush>
+    <LinearGradientBrush x:Key="DialogBoxInformationFill" StartPoint="0,0" EndPoint="0,1">
+        <GradientStop Color="#9CD1E8" Offset="0.0"/>
+        <GradientStop Color="#7BC2E0" Offset="1.0"/>
+    </LinearGradientBrush>
+    <LinearGradientBrush x:Key="DialogBoxInformationIcon" StartPoint="0,0" EndPoint="0,1">
+        <GradientStop Color="#EEF7FB" Offset="0.0"/>
+        <GradientStop Color="#DEF0F7" Offset="1.0"/>
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="DialogBoxWarningStroke" StartPoint="0,0" EndPoint="0,1">
+        <GradientStop Color="#CCB800" Offset="0.0"/>
+        <GradientStop Color="#A39300" Offset="1.0"/>
+    </LinearGradientBrush>
+    <LinearGradientBrush x:Key="DialogBoxWarningFill" StartPoint="0,0" EndPoint="0,1">
+        <GradientStop Color="#FFF275" Offset="0.0"/>
+        <GradientStop Color="#FFEF5C" Offset="1.0"/>
+    </LinearGradientBrush>
+    <LinearGradientBrush x:Key="DialogBoxWarningIcon" StartPoint="0,0" EndPoint="0,1">
+        <GradientStop Color="#CCB800" Offset="0.0"/>
+        <GradientStop Color="#A39300" Offset="1.0"/>
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="DialogBoxOkStroke" StartPoint="0,0" EndPoint="0,1">
+        <GradientStop Color="#6DD991" Offset="0.0"/>
+        <GradientStop Color="#32C362" Offset="1.0"/>
+    </LinearGradientBrush>
+    <LinearGradientBrush x:Key="DialogBoxOkFill" StartPoint="0,0" EndPoint="0,1">
+        <GradientStop Color="#A7E8BD" Offset="0.0"/>
+        <GradientStop Color="#A7E8BD" Offset="1.0"/>
+    </LinearGradientBrush>
+    <LinearGradientBrush x:Key="DialogBoxOkIcon" StartPoint="0,0" EndPoint="0,1">
+        <GradientStop Color="#6DD991" Offset="0.0"/>
+        <GradientStop Color="#32C362" Offset="1.0"/>
+    </LinearGradientBrush>
 
     <SolidColorBrush x:Key="IconBrush" Color="#212121"/>
     

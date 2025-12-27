@@ -58,7 +58,7 @@
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
                 <Grid Background="{DynamicResource SubTitleBarBrush}">
-                    <Label Content="{DynamicResource Create.Settings.Waveform.Basic.ConditionSetting.SineFrom}" Style="{DynamicResource SubTitleBarText}"/>
+                    <Label Content="{DynamicResource Create.Settings.Waveform.Basic.ConditionSetting.BaseFrom}" Style="{DynamicResource SubTitleBarText}"/>
                 </Grid>
                 <TextBox Style="{DynamicResource SlimTextBox}" Grid.Column="1" x:Name="sine_from_text_box" Text="56" FontSize="20" MaxLength="20" MaxLines="1" TextChanged="TextBox_TextChanged" Tag="SineFrom"/>
                 <Label Grid.Column="2" Content="Hz" Style="{DynamicResource UnitLabel}"/>
@@ -70,7 +70,7 @@
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
                 <Grid Background="{DynamicResource SubTitleBarBrush}">
-                    <Label Content="{DynamicResource Create.Settings.Waveform.Basic.ConditionSetting.SineBelow}" Style="{DynamicResource SubTitleBarText}"/>
+                    <Label Content="{DynamicResource Create.Settings.Waveform.Basic.ConditionSetting.BaseBelow}" Style="{DynamicResource SubTitleBarText}"/>
                 </Grid>
                 <TextBox Style="{DynamicResource SlimTextBox}" Grid.Column="1" x:Name="sine_below_text_box" Text="56" FontSize="20" MaxLength="20" MaxLines="1" TextChanged="TextBox_TextChanged" Tag="SineBelow"/>
                 <Label Grid.Column="2" Content="Hz" Style="{DynamicResource UnitLabel}"/>

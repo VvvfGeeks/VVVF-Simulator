@@ -31,43 +31,60 @@
                 <Label Content="{DynamicResource Create.Settings.Waveform.Basic.PulseSetting.Title}" Style="{DynamicResource TitleBarText}"/>
             </Border>
 
-            <Grid Background="{DynamicResource BackgroundBrush}" Height="50">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="2*"/>
-                    <ColumnDefinition Width="11*"/>
-                </Grid.ColumnDefinitions>
-                <Border Background="{DynamicResource SubTitleBarBrush}">
-                    <Label Content="{DynamicResource Create.Settings.Waveform.Basic.PulseSetting.Type}" Style="{DynamicResource SubTitleBarText}"/>
-                </Border>
-                <Grid Grid.Column="1">
-                    <ComboBox SelectedValuePath="Key" DisplayMemberPath="Value" Style="{DynamicResource SlimComboBoxStyle}" x:Name="PulseTypeSelector" SelectionChanged="SelectorSectionChanged" Grid.ColumnSpan="1" Tag="PulseType" />
-                </Grid>
-            </Grid>
-            <Grid Background="{DynamicResource BackgroundBrush}" Height="50" Name="PulseCountSection">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="2*"/>
-                    <ColumnDefinition Width="11*"/>
-                </Grid.ColumnDefinitions>
-                <Border Background="{DynamicResource SubTitleBarBrush}">
-                    <Label Content="{DynamicResource Create.Settings.Waveform.Basic.PulseSetting.PulseCount}" Style="{DynamicResource SubTitleBarText}"/>
-                </Border>
-                <Grid Grid.Column="1">
-                    <ComboBox Visibility="Visible" SelectedValuePath="Key" DisplayMemberPath="Value" Style="{DynamicResource SlimComboBoxStyle}" x:Name="PulseCountSelector" SelectionChanged="SelectorSectionChanged" Grid.ColumnSpan="1" Tag="PulseCount" />
-                    <TextBox Visibility="Collapsed" x:Name="PulseCountBox" Style="{DynamicResource SlimTextBox}" TextChanged="TextboxUpdate" Tag="PulseCount"/>
-                </Grid>
-            </Grid>
-            <Border Background="{DynamicResource BackgroundBrush}" Height="100" CornerRadius="0,0,25,25">
+            <Border Background="{DynamicResource BackgroundBrush}" Height="50" Name="PulseTypeSection">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="2*"/>
                         <ColumnDefinition Width="11*"/>
                     </Grid.ColumnDefinitions>
-                    <Border Background="{DynamicResource SubTitleBarBrush}" CornerRadius="0,0,0,25">
-                        <Label Content="{DynamicResource Create.Settings.Waveform.Basic.PulseSetting.Detail}" Style="{DynamicResource SubTitleBarText}"/>
+                    <Border Background="{DynamicResource SubTitleBarBrush}">
+                        <Label Content="{DynamicResource Create.Settings.Waveform.Basic.PulseSetting.Type}" Style="{DynamicResource SubTitleBarText}"/>
+                    </Border>
+                    <Grid Grid.Column="1">
+                        <ComboBox SelectedValuePath="Key" DisplayMemberPath="Value" Style="{DynamicResource SlimComboBoxStyle}" x:Name="PulseTypeSelector" SelectionChanged="SelectorSectionChanged" Grid.ColumnSpan="1" Tag="PulseType" />
+                    </Grid>
+                </Grid>
+            </Border>
+            <Border Background="{DynamicResource BackgroundBrush}" Height="50" Name="PulseCountSection">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="11*"/>
+                    </Grid.ColumnDefinitions>
+                    <Border Background="{DynamicResource SubTitleBarBrush}">
+                        <Label Content="{DynamicResource Create.Settings.Waveform.Basic.PulseSetting.PulseCount}" Style="{DynamicResource SubTitleBarText}"/>
+                    </Border>
+                    <Grid Grid.Column="1">
+                        <ComboBox Visibility="Visible" SelectedValuePath="Key" DisplayMemberPath="Value" Style="{DynamicResource SlimComboBoxStyle}" x:Name="PulseCountSelector" SelectionChanged="SelectorSectionChanged" Grid.ColumnSpan="1" Tag="PulseCount" />
+                        <TextBox Visibility="Collapsed" x:Name="PulseCountBox" Style="{DynamicResource SlimTextBox}" TextChanged="TextboxUpdate" Tag="PulseCount"/>
+                    </Grid>
+                </Grid>
+            </Border>
+            <Border Background="{DynamicResource BackgroundBrush}" Height="50" CornerRadius="0,0,0,0" Name="AltModeSection">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="11*"/>
+                    </Grid.ColumnDefinitions>
+                    <Border Background="{DynamicResource SubTitleBarBrush}" CornerRadius="0,0,0,0">
+                        <Label Content="{DynamicResource Create.Settings.Waveform.Basic.PulseSetting.AltMode}" Style="{DynamicResource SubTitleBarText}"/>
+                    </Border>
+                    <Grid Grid.Column="1">
+                        <ComboBox Visibility="Visible" SelectedValuePath="Key" DisplayMemberPath="Value" Style="{DynamicResource SlimComboBoxStyle}" x:Name="AltModeSelector" SelectionChanged="SelectorSectionChanged" Grid.ColumnSpan="1" Tag="AltMode" />
+                    </Grid>
+                </Grid>
+            </Border>
+            <Border Background="{DynamicResource BackgroundBrush}" Height="50" CornerRadius="0,0,0,0" Name="BaseWaveSection">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="11*"/>
+                    </Grid.ColumnDefinitions>
+                    <Border Background="{DynamicResource SubTitleBarBrush}" CornerRadius="0,0,0,0">
+                        <Label Content="{DynamicResource Create.Settings.Waveform.Basic.PulseSetting.BaseWave}" Style="{DynamicResource SubTitleBarText}"/>
                     </Border>
                     <Grid Grid.Column="1">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="1*"/>
                             <RowDefinition Height="1*"/>
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
@@ -76,12 +93,31 @@
                             <ColumnDefinition Width="1*"/>
                         </Grid.ColumnDefinitions>
 
-                        <ComboBox SelectedValuePath="Key" DisplayMemberPath="Value" Style="{DynamicResource SlimComboBoxStyle}" x:Name="AltModeSelector" Visibility="{Binding AltModeSelector_Visible, Converter={StaticResource BooleanToVisibilityConverter}}" SelectionChanged="SelectorSectionChanged" Tag="AltMode" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" />
-
-                        <ComboBox SelectedValuePath="Key" DisplayMemberPath="Value" Style="{DynamicResource SlimComboBoxStyle}" x:Name="BaseWaveSelector" Visibility="{Binding BaseWaveSelector_Visible, Converter={StaticResource BooleanToVisibilityConverter}}" SelectionChanged="SelectorSectionChanged" Tag="BaseWave" Grid.Row="1" Grid.Column="0" />
-                        <Button Style="{DynamicResource SlimButton}" Visibility="{Binding Discrete_Visible, Converter={StaticResource BooleanToVisibilityConverter}}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" x:Name="Open_Discrete_Setting_Button" Content="{DynamicResource Create.Settings.Waveform.Basic.PulseSetting.DiscreteSetting}" Click="ButtonClick" Tag="DiscreteSetting" Grid.Column="1" Grid.Row="1"/>
-                        <Button Style="{DynamicResource SlimButton}" Visibility="{Binding Harmonic_Visible, Converter={StaticResource BooleanToVisibilityConverter}}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" x:Name="Open_Harmonic_Setting_Button" Content="{DynamicResource Create.Settings.Waveform.Basic.PulseSetting.HarmonicSetting}" Click="ButtonClick" Tag="HarmonicSetting" Grid.Column="2" Grid.Row="1"/>
-                      
+                        <ComboBox SelectedValuePath="Key" DisplayMemberPath="Value" Style="{DynamicResource SlimComboBoxStyle}" x:Name="BaseWaveSelector" SelectionChanged="SelectorSectionChanged" Tag="BaseWave" Grid.Row="1" Grid.Column="0" />
+                        <Button Style="{DynamicResource SlimButton}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" x:Name="DiscreteSettingButton" Content="{DynamicResource Create.Settings.Waveform.Basic.PulseSetting.BaseWave.DiscreteSetting}" Click="ButtonClick" Tag="DiscreteSetting" Grid.Column="1" Grid.Row="1"/>
+                        <Button Style="{DynamicResource SlimButton}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" x:Name="HarmonicSettingButton" Content="{DynamicResource Create.Settings.Waveform.Basic.PulseSetting.BaseWave.HarmonicSetting}" Click="ButtonClick" Tag="HarmonicSetting" Grid.Column="2" Grid.Row="1"/>
+                    </Grid>
+                </Grid>
+            </Border>
+            <Border Background="{DynamicResource BackgroundBrush}" Height="50" CornerRadius="0,0,25,25" Name="CarrierWaveSection">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="11*"/>
+                    </Grid.ColumnDefinitions>
+                    <Border Background="{DynamicResource SubTitleBarBrush}" CornerRadius="0,0,0,25">
+                        <Label Content="{DynamicResource Create.Settings.Waveform.Basic.PulseSetting.CarrierWave}" Style="{DynamicResource SubTitleBarText}"/>
+                    </Border>
+                    <Grid Grid.Column="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+                        <ComboBox SelectedValuePath="Key" DisplayMemberPath="Value" Style="{DynamicResource SlimComboBoxStyle}" x:Name="CarrierWaveTypeSelector" SelectionChanged="SelectorSectionChanged" Tag="CarrierWaveType" Grid.Row="1" Grid.Column="0" />
+                        <ComboBox SelectedValuePath="Key" DisplayMemberPath="Value" Style="{DynamicResource SlimComboBoxStyle}" x:Name="CarrierWaveOptionSelector" SelectionChanged="SelectorSectionChanged" Tag="CarrierWaveOption" Grid.Row="1" Grid.Column="1" />
                     </Grid>
                 </Grid>
             </Border>

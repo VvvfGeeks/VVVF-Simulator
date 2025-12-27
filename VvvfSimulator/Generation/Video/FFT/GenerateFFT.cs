@@ -6,19 +6,17 @@ using System.Drawing.Imaging;
 using System.IO;
 using VvvfSimulator.GUI.Util;
 using VvvfSimulator.Vvvf;
-using VvvfSimulator.Yaml.MasconControl;
-using VvvfSimulator.Yaml.VvvfSound;
+using VvvfSimulator.Data.BaseFrequency;
 using static VvvfSimulator.Generation.GenerateCommon;
-using static VvvfSimulator.Generation.GenerateCommon.GenerationBasicParameter;
-using static VvvfSimulator.Vvvf.Struct;
-using static VvvfSimulator.Yaml.MasconControl.YamlMasconAnalyze;
+using static VvvfSimulator.Generation.GenerateCommon.GenerationParameter;
+using static VvvfSimulator.Vvvf.Model.Struct;
 
 namespace VvvfSimulator.Generation.Video.FFT
 {
     public class GenerateFFT
     {
         private static readonly int pow = 15;
-        private static Complex[] FFTNAudio(ref WaveValues[] WaveForm)
+        private static Complex[] FFTNAudio(ref PhaseState[] WaveForm)
         {
             Complex[] fft = new Complex[WaveForm.Length];
             for (int i = 0; i < WaveForm.Length; i++)
@@ -40,13 +38,13 @@ namespace VvvfSimulator.Generation.Video.FFT
         /// <summary>
         /// Gets image of FFT.
         /// </summary>
-        /// <param name="control">Make sure cloned data is passed</param>
+        /// <param name="Instance">Make sure cloned data is passed</param>
         /// <param name="sound"></param>
         /// <returns></returns>
-        public static Bitmap GetImage(VvvfValues control, YamlVvvfSoundData sound)
+        public static Bitmap GetImage(Domain Instance)
         {
-            control.SetRandomFrequencyMoveAllowed(false);
-            WaveValues[] PWM_Array = GenerateBasic.WaveForm.GetUVWSec(control, sound, MyMath.M_PI_6, (int)Math.Pow(2,pow) - 1, false);
+            Instance.GetCarrierInstance().UseSimpleFrequency = true;
+            PhaseState[] PWM_Array = GenerateBasic.WaveForm.GetUVWSec(Instance, MyMath.M_PI_6, (int)Math.Pow(2,pow) - 1, false);
             Complex[] FFT = FFTNAudio(ref PWM_Array);
 
             Bitmap image = new(1000, 1000);
@@ -70,20 +68,17 @@ namespace VvvfSimulator.Generation.Video.FFT
         }
 
         private BitmapViewerManager? Viewer { get; set; }
-        public void ExportVideo(GenerationBasicParameter generationBasicParameter, String fileName)
+        public void ExportVideo(GenerationParameter Parameter, string fileName)
         {
             MainWindow.Invoke(() => Viewer = new BitmapViewerManager());
             Viewer?.Show();
 
-            YamlVvvfSoundData vvvfData = generationBasicParameter.VvvfData;
-            YamlMasconDataCompiled masconData = generationBasicParameter.MasconData;
-            ProgressData progressData = generationBasicParameter.Progress;
+            Data.Vvvf.Struct vvvfData = Parameter.VvvfData;
+            StructCompiled baseFreqData = Parameter.BaseFrequencyData;
+            ProgressData progressData = Parameter.Progress;
 
-            VvvfValues control = new();
-            control.ResetControlValues();
-            control.ResetMathematicValues();
-
-            control.SetRandomFrequencyMoveAllowed(false);
+            Domain Domain = new(Parameter.TrainData.MotorSpec);
+            Domain.GetCarrierInstance().UseSimpleFrequency = true;
 
             int fps = 60;
 
@@ -99,7 +94,7 @@ namespace VvvfSimulator.Generation.Video.FFT
             }
 
             // Progress Initialize
-            progressData.Total = masconData.GetEstimatedSteps(1.0 / fps) + 120;
+            progressData.Total = baseFreqData.GetEstimatedSteps(1.0 / fps) + 120;
 
             Boolean START_WAIT = true;
             if (START_WAIT)
@@ -111,13 +106,8 @@ namespace VvvfSimulator.Generation.Video.FFT
             Boolean loop = true;
             while (loop)
             {
-
-                control.SetSineTime(0);
-                control.SetSawTime(0);
-
-                Bitmap image = GetImage(control.Clone(), vvvfData);
-
-
+                Data.Vvvf.Analyze.Calculate(Domain, vvvfData);
+                Bitmap image = GetImage(Domain.Clone());
                 MemoryStream ms = new();
                 image.Save(ms, ImageFormat.Png);
                 byte[] img = ms.GetBuffer();
@@ -130,7 +120,7 @@ namespace VvvfSimulator.Generation.Video.FFT
 
                 image.Dispose();
 
-                loop = YamlMasconControl.CheckForFreqChange(control, masconData, vvvfData, 1.0 / fps);
+                loop = Data.BaseFrequency.Analyze.CheckForFreqChange(Domain, baseFreqData, vvvfData, 1.0 / fps);
                 if (progressData.Cancel) loop = false;
 
                 // PROGRESS CHANGE
@@ -150,28 +140,29 @@ namespace VvvfSimulator.Generation.Video.FFT
             Viewer?.Close();
         }
 
-        public void ExportImage(String fileName, YamlVvvfSoundData sound_data, double d)
+        public void ExportImage(GenerationParameter Parameter, string fileName, double d)
         {
             MainWindow.Invoke(() => Viewer = new BitmapViewerManager());
             Viewer?.Show();
 
-            VvvfValues control = new();
+            Domain Domain = new(Parameter.TrainData.MotorSpec);
+            Domain.GetCarrierInstance().UseSimpleFrequency = true;
+            Domain.SetBaseWaveAngleFrequency(d * MyMath.M_2PI);
+            Domain.SetControlFrequency(d);
 
-            control.ResetControlValues();
-            control.ResetMathematicValues();
-            control.SetRandomFrequencyMoveAllowed(false);
+            Parameter.Progress.Total = 2;
 
-            control.SetSineAngleFrequency(d * MyMath.M_2PI);
-            control.SetControlFrequency(d);
-
-            Bitmap image = GetImage(control.Clone(), sound_data);
+            Data.Vvvf.Analyze.Calculate(Domain, Parameter.VvvfData);
+            Bitmap image = GetImage(Domain.Clone());
+            Parameter.Progress.Progress = 1;
 
             MemoryStream ms = new();
             image.Save(ms, ImageFormat.Png);
             byte[] img = ms.GetBuffer();
             Mat mat = Mat.FromImageData(img);
-
             image.Save(fileName, ImageFormat.Png);
+            Parameter.Progress.Progress = 2;
+
             Viewer?.SetImage(image);
             image.Dispose();
         }

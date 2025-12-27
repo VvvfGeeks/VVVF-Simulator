@@ -3,10 +3,15 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:uc="clr-namespace:VvvfSimulator.GUI.Resource.MyUserControl"
         xmlns:local="clr-namespace:VvvfSimulator.GUI.TrainAudio"
         mc:Ignorable="d"
         Style="{DynamicResource MinimumWindowStyle}"
-        Title="{DynamicResource TrainAudio.SettingWindow.Title}" Height="500" Width="800" AllowDrop="True" Drop="Window_Drop">
+        Title="{DynamicResource TrainAudio.SettingWindow.Title}" Height="500" Width="800" 
+        AllowDrop="True" 
+        Closing="Window_Closing"
+        KeyDown="Window_KeyDown"
+        Drop="Window_Drop">
 
     <Window.Resources>
         <ResourceDictionary>
@@ -38,23 +43,24 @@
             <Image Style="{StaticResource WindowIconStyle}"/>
             <Menu Grid.Column="1" Style="{DynamicResource MenuStyle}">
                 <MenuItem Header="{DynamicResource TrainAudio.SettingWindow.Menu.File}">
-                    <MenuItem Header="{DynamicResource TrainAudio.SettingWindow.Menu.File.Save}" Tag="Save" Click="MenuFileClick"/>
-                    <MenuItem Header="{DynamicResource TrainAudio.SettingWindow.Menu.File.Open}" Tag="Open" Click="MenuFileClick"/>
+                    <MenuItem Header="{DynamicResource TrainAudio.SettingWindow.Menu.File.Save}" Tag="Save" Click="File_Menu_Click"/>
+                    <MenuItem Header="{DynamicResource TrainAudio.SettingWindow.Menu.File.SaveAs}" Tag="SaveAs" Click="File_Menu_Click"/>
+                    <MenuItem Header="{DynamicResource TrainAudio.SettingWindow.Menu.File.Open}" Tag="Open" Click="File_Menu_Click"/>
                 </MenuItem>
                 <MenuItem Header="{DynamicResource TrainAudio.SettingWindow.Menu.Parameter}">
-                    <MenuItem Header="{DynamicResource TrainAudio.SettingWindow.Menu.Parameter.Motor}" Tag="Motor" Click="MenuParameterClick"/>
-                    <MenuItem Header="{DynamicResource TrainAudio.SettingWindow.Menu.Parameter.Gear}" Tag="Gear" Click="MenuParameterClick"/>
+                    <MenuItem Header="{DynamicResource TrainAudio.SettingWindow.Menu.Parameter.Motor}" Tag="Motor" Click="Parameter_Menu_Click"/>
+                    <MenuItem Header="{DynamicResource TrainAudio.SettingWindow.Menu.Parameter.Gear}" Tag="Gear" Click="Parameter_Menu_Click"/>
                 </MenuItem>
                 <MenuItem Header="{DynamicResource TrainAudio.SettingWindow.Menu.Mixer}">
-                    <MenuItem Header="{DynamicResource TrainAudio.SettingWindow.Menu.Mixer.Volume}" Tag="Volume" Click="MenuMixerClick"/>
-                    <MenuItem Header="{DynamicResource TrainAudio.SettingWindow.Menu.Mixer.FrequencyFilter}" Tag="Frequency" Click="MenuMixerClick"/>
-                    <MenuItem Header="{DynamicResource TrainAudio.SettingWindow.Menu.Mixer.ConvolutionFilter}" Tag="Convolution" Click="MenuMixerClick"/>
+                    <MenuItem Header="{DynamicResource TrainAudio.SettingWindow.Menu.Mixer.Volume}" Tag="Volume" Click="Mixer_Menu_Click"/>
+                    <MenuItem Header="{DynamicResource TrainAudio.SettingWindow.Menu.Mixer.FrequencyFilter}" Tag="Frequency" Click="Mixer_Menu_Click"/>
+                    <MenuItem Header="{DynamicResource TrainAudio.SettingWindow.Menu.Mixer.ConvolutionFilter}" Tag="Convolution" Click="Mixer_Menu_Click"/>
                 </MenuItem>
 
             </Menu>
-            <Button Grid.Column="2" Tag="Minimize" Style="{DynamicResource WindowMimizeButton}" Click="OnWindowControlButtonClick"/>
-            <Button Grid.Column="3" Tag="Maximize" Style="{DynamicResource WindowMaximizeButton}" Click="OnWindowControlButtonClick"/>
-            <Button Grid.Column="4" Tag="Close" Style="{DynamicResource WindowCloseButton}" Click="OnWindowControlButtonClick"/>
+            <uc:WindowControlButton Grid.Column="2" Tag="Minimize" Style="{DynamicResource WindowMimizeButton}" Click="OnWindowControlButtonClick"/>
+            <uc:WindowControlButton Grid.Column="3" Tag="Maximize" Style="{DynamicResource WindowMaximizeButton}" Click="OnWindowControlButtonClick"/>
+            <uc:WindowControlButton Grid.Column="4" Tag="Close" Style="{DynamicResource WindowCloseButton}" Click="OnWindowControlButtonClick"/>
         </Grid>
 
         <Grid Grid.Row="1">

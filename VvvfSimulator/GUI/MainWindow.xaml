@@ -3,10 +3,17 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:uc="clr-namespace:VvvfSimulator.GUI.Resource.MyUserControl"
         xmlns:converter="clr-namespace:VvvfSimulator.GUI.Resource.Converter"
         mc:Ignorable="d"
         Style="{DynamicResource MinimumWindowStyle}"
-        Title="{DynamicResource MainWindow.Title}" Height="500" Width="960" Closing="Window_Closing" WindowStartupLocation="CenterScreen" AllowDrop="True" Drop="Window_Drop">
+        Title="{DynamicResource MainWindow.Title}" Height="500" Width="960" 
+        Closing="Window_Closing" 
+        KeyDown="Window_KeyDown"
+        Drop="Window_Drop"
+        WindowStartupLocation="CenterScreen" 
+        AllowDrop="True" 
+        >
 
     <Window.Resources>
         <ResourceDictionary>
@@ -46,7 +53,7 @@
                             </Grid.RowDefinitions>
                             <Button Style="{StaticResource SlimButton}" x:Name="settings_level" Content="{DynamicResource MainWindow.TabControl.Settings.PwmLevel}" Click="SettingButtonClick"/>
                             <Button Style="{StaticResource SlimButton}" x:Name="settings_minimum" Content="{DynamicResource MainWindow.TabControl.Settings.MinimumFrequency}" Click="SettingButtonClick" Grid.Row="1"/>
-                            <Button Style="{StaticResource SlimButton}" x:Name="settings_mascon" Content="{DynamicResource MainWindow.TabControl.Settings.JerkSetting}" Click="SettingButtonClick" Grid.Row="2"/>
+                            <Button Style="{StaticResource SlimButton}" x:Name="settings_jerk" Content="{DynamicResource MainWindow.TabControl.Settings.JerkSetting}" Click="SettingButtonClick" Grid.Row="2"/>
                         </Grid>
                     </TabItem>
                     <TabItem Header="{DynamicResource MainWindow.TabControl.Accelerate}">
@@ -58,7 +65,7 @@
                             <Border Grid.Row="1" Background="{DynamicResource SubBackgroundBrush}" Grid.ColumnSpan="3" CornerRadius="25">
                                 <Button Style="{DynamicResource SlimButton}" x:Name="accelerate_add" Tag="accelerate_add" Content="+" Click="SettingEditClick" Grid.Column="0"/>
                             </Border>
-                            <ListView x:Name="accelerate_settings"  Loaded="SettingsLoad" Tag="accelerate" SelectionChanged="SettingsSelectionChanged" Style="{DynamicResource SlimListView}" ItemContainerStyle="{DynamicResource SlimListItem}">
+                            <ListView x:Name="AcceleratePatternList"  Loaded="SettingsLoad" Tag="accelerate" SelectionChanged="SettingsSelectionChanged" Style="{DynamicResource SlimListView}" ItemContainerStyle="{DynamicResource SlimListItem}">
                                 <ListView.ItemTemplate>
                                     <DataTemplate>
                                         <StackPanel>
@@ -93,7 +100,7 @@
                                 <Button Style="{DynamicResource SlimButton}" x:Name="brake_add" Tag="brake_add" Content="+" Click="SettingEditClick" Grid.Column="0"/>
                             </Border>
 
-                            <ListView x:Name="brake_settings" Loaded="SettingsLoad" Tag="brake" SelectionChanged="SettingsSelectionChanged" Style="{DynamicResource SlimListView}" ItemContainerStyle="{DynamicResource SlimListItem}">
+                            <ListView x:Name="BrakePatternList" Loaded="SettingsLoad" Tag="brake" SelectionChanged="SettingsSelectionChanged" Style="{DynamicResource SlimListView}" ItemContainerStyle="{DynamicResource SlimListItem}">
                                 <ListView.ItemTemplate>
                                     <DataTemplate>
                                         <StackPanel>
@@ -142,7 +149,7 @@
             <Menu Style="{DynamicResource MenuStyle}" Grid.Column="1">
                 <MenuItem Header="{DynamicResource MainWindow.Menu.File}">
                     <MenuItem Header="{DynamicResource MainWindow.Menu.File.Save}" Tag="Save" Click="File_Menu_Click"/>
-                    <MenuItem Header="{DynamicResource MainWindow.Menu.File.SaveAs}" Tag="Save_As" Click="File_Menu_Click"/>
+                    <MenuItem Header="{DynamicResource MainWindow.Menu.File.SaveAs}" Tag="SaveAs" Click="File_Menu_Click"/>
                     <MenuItem Header="{DynamicResource MainWindow.Menu.File.Load}" Tag="Load" Click="File_Menu_Click"/>
                 </MenuItem>
 
@@ -171,8 +178,8 @@
                     </MenuItem>
                     <MenuItem Header="{DynamicResource MainWindow.Menu.Generate.Movie}">
                         <MenuItem Header="{DynamicResource MainWindow.Menu.Generate.Movie.Control}">
-                            <MenuItem Header="{DynamicResource MainWindow.Menu.Generate.Movie.Control.Original}" Tag="Control_Original" Click="Generation_Menu_Click"/>
-                            <MenuItem Header="{DynamicResource MainWindow.Menu.Generate.Movie.Control.Original2}" Tag="Control_Original2" Click="Generation_Menu_Click"/>
+                            <MenuItem Header="{DynamicResource MainWindow.Menu.Generate.Movie.Control.Design1}" Tag="Control_Design1" Click="Generation_Menu_Click"/>
+                            <MenuItem Header="{DynamicResource MainWindow.Menu.Generate.Movie.Control.Design2}" Tag="Control_Design2" Click="Generation_Menu_Click"/>
                         </MenuItem>
                         <MenuItem Header="{DynamicResource MainWindow.Menu.Generate.Movie.WaveForm}">
                             <MenuItem Header="{DynamicResource MainWindow.Menu.Generate.Movie.WaveForm.Original}" Tag="WaveForm_Original" Click="Generation_Menu_Click"/>
@@ -219,9 +226,9 @@
                     <MenuItem Header="{DynamicResource MainWindow.Menu.Help.About}" Tag="About" Click="Help_Menu_Click"/>
                 </MenuItem>
             </Menu>
-            <Button Grid.Column="2" Tag="Minimize" Style="{DynamicResource WindowMimizeButton}" Click="OnWindowControlButtonClick"/>
-            <Button Grid.Column="3" Tag="Maximize" Style="{DynamicResource WindowMaximizeButton}" Click="OnWindowControlButtonClick"/>
-            <Button Grid.Column="4" Tag="Close" Style="{DynamicResource WindowCloseButton}" Click="OnWindowControlButtonClick"/>
+            <uc:WindowControlButton Grid.Column="2" Tag="Minimize" Style="{DynamicResource WindowMimizeButton}" Click="OnWindowControlButtonClick"/>
+            <uc:WindowControlButton Grid.Column="3" Tag="Maximize" Style="{DynamicResource WindowMaximizeButton}" Click="OnWindowControlButtonClick"/>
+            <uc:WindowControlButton Grid.Column="4" Tag="Close" Style="{DynamicResource WindowCloseButton}" Click="OnWindowControlButtonClick"/>
         </Grid>
         <Grid x:Name="Hider" Background="#7F000000" Visibility="{Binding Blocked, Converter={StaticResource BooleanToVisibilityConverter}}" Grid.RowSpan="2" d:IsHidden="True"/>
     </Grid>

@@ -147,7 +147,7 @@ ZIPファイルを展開し、`VVVF-Simulator.exe`を実行します。<br>
 
 # サポート
 - [Discord](https://discord.gg/SQr2tXJgVq)でVVVF Simulatorについて質問できます。
-- [サンプルファイル](https://github.com/VvvfGeeks/VVVF-Simulator/releases/download/v1.9.1.0/yaml_samples.zip)
+- [サンプルファイル](https://github.com/VvvfGeeks/YAML-Files)
 
 # 関連プロジェクト
  - [Raspberry Pi Pico Drive](https://github.com/VvvfGeeks/RPi-Pico-Drive)
@@ -164,4 +164,4 @@ ZIPファイルを展開し、`VVVF-Simulator.exe`を実行します。<br>
     - [turtle713](https://github.com/intel713)
  - 簡体中文
     - [02001](https://github.com/Jerethon)
-    - [YAJ-54S12G-1](https://github.com/YJ-321-C4)
+    - [YAJ-54S12G-1](https://github.com/YJ-305-A2)

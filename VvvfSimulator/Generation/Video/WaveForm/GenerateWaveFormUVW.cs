@@ -4,13 +4,11 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using VvvfSimulator.GUI.Util;
-using VvvfSimulator.Yaml.MasconControl;
-using VvvfSimulator.Yaml.VvvfSound;
+using VvvfSimulator.Data.BaseFrequency;
 using static VvvfSimulator.Generation.GenerateCommon;
-using static VvvfSimulator.Generation.GenerateCommon.GenerationBasicParameter;
-using static VvvfSimulator.Vvvf.Calculate;
-using static VvvfSimulator.Vvvf.Struct;
-using static VvvfSimulator.Yaml.MasconControl.YamlMasconAnalyze;
+using static VvvfSimulator.Generation.GenerateCommon.GenerationParameter;
+using static VvvfSimulator.Vvvf.Calculation.Common;
+using static VvvfSimulator.Vvvf.Model.Struct;
 
 namespace VvvfSimulator.Generation.Video.WaveForm
 {
@@ -19,23 +17,21 @@ namespace VvvfSimulator.Generation.Video.WaveForm
         private static readonly int image_width = 1500;
         private static readonly int image_height = 1000;
         private static readonly int calculate_div = 10;
-        public static Bitmap GetImage(VvvfValues control, YamlVvvfSoundData vvvfData)
+        public static Bitmap GetImage(Domain Domain)
         {
             Bitmap image = new(image_width, image_height);
             Graphics g = Graphics.FromImage(image);
             g.FillRectangle(new SolidBrush(Color.White), 0, 0, image_width, image_height);
 
-            WaveValues? LastValue = null;
+            PhaseState? LastValue = null;
 
+            Domain.ResetTimeAll();
             for (int i = 0; i < image_width * calculate_div; i++)
             {
                 double dt = Math.PI / (120000.0 * calculate_div);
-                control.SetGenerationCurrentTime(dt * i);
-                control.SetSawTime(dt * i);
-                control.SetSineTime(dt * i);
+                Domain.SetTimeAll(dt * i);
 
-                PwmCalculateValues calculated_Values = YamlVvvfWave.CalculateYaml(control, vvvfData);
-                WaveValues Value = CalculatePhases(control, calculated_Values, 0);
+                PhaseState Value = CalculatePhsaseState(Domain, 0);
 
                 if(LastValue == null)
                 {
@@ -75,35 +71,35 @@ namespace VvvfSimulator.Generation.Video.WaveForm
         }
 
         private BitmapViewerManager? Viewer { get; set; }
-        public void ExportVideo(GenerationBasicParameter generationBasicParameter, String fileName)
+        public void ExportVideo(GenerationParameter Parameter, String fileName)
         {
             MainWindow.Invoke(() => Viewer = new BitmapViewerManager());
             Viewer?.Show();
 
-            YamlVvvfSoundData vvvfData = generationBasicParameter.VvvfData;
-            YamlMasconDataCompiled masconData = generationBasicParameter.MasconData;
-            ProgressData progressData = generationBasicParameter.Progress;
+            Data.Vvvf.Struct vvvfData = Parameter.VvvfData;
+            StructCompiled baseFreqData = Parameter.BaseFrequencyData;
+            ProgressData progressData = Parameter.Progress;
 
-            VvvfValues Control = new();
-            Control.ResetControlValues();
-            Control.ResetMathematicValues();
+            Domain Domain = new(Parameter.TrainData.MotorSpec);
 
             int fps = 60;
             VideoWriter vr = new(fileName, OpenCvSharp.FourCC.H264, fps, new OpenCvSharp.Size(image_width, image_height));
             if (!vr.IsOpened()) return;
 
             // PROGRESS INITIALIZE
-            progressData.Total = masconData.GetEstimatedSteps(1.0 / fps) + 2 * fps;
+            progressData.Total = baseFreqData.GetEstimatedSteps(1.0 / fps) + 2 * fps;
 
             bool START_FRAMES = true;
             if (START_FRAMES)
             {
-                Control.SetFreeRun(false);
-                Control.SetBraking(false);
-                Control.SetMasconOff(false);
-                Control.SetControlFrequency(0);
-                Control.SetSineAngleFrequency(0);
-                Bitmap final_image = GetImage(Control, vvvfData);
+                Domain.SetFreeRun(false);
+                Domain.SetBraking(false);
+                Domain.SetPowerOff(false);
+                Domain.SetControlFrequency(0);
+                Domain.SetBaseWaveAngleFrequency(0);
+
+                Data.Vvvf.Analyze.Calculate(Domain, vvvfData);
+                Bitmap final_image = GetImage(Domain.Clone());
 
                 AddImageFrames(final_image, fps, vr);
                 Viewer?.SetImage(final_image);
@@ -115,7 +111,8 @@ namespace VvvfSimulator.Generation.Video.WaveForm
 
             while (true)
             {
-                Bitmap final_image = GetImage(Control.Clone(), vvvfData);
+                Data.Vvvf.Analyze.Calculate(Domain, vvvfData);
+                Bitmap final_image = GetImage(Domain.Clone());
 
                 MemoryStream ms = new();
                 final_image.Save(ms, ImageFormat.Png);
@@ -127,7 +124,7 @@ namespace VvvfSimulator.Generation.Video.WaveForm
                 Viewer?.SetImage(final_image);
                 final_image.Dispose();
 
-                if (!YamlMasconControl.CheckForFreqChange(Control, masconData, vvvfData, 1.0 / fps)) break;
+                if (!Data.BaseFrequency.Analyze.CheckForFreqChange(Domain, baseFreqData, vvvfData, 1.0 / fps)) break;
                 if (progressData.Cancel) break;
                 progressData.Progress++;
             }
@@ -135,12 +132,13 @@ namespace VvvfSimulator.Generation.Video.WaveForm
             bool END_FRAMES = true;
             if (END_FRAMES)
             {
-                Control.SetFreeRun(false);
-                Control.SetBraking(true);
-                Control.SetMasconOff(false);
-                Control.SetControlFrequency(0);
-                Control.SetSineAngleFrequency(0);
-                Bitmap final_image = GetImage(Control, vvvfData);
+                Domain.SetFreeRun(false);
+                Domain.SetBraking(true);
+                Domain.SetPowerOff(false);
+                Domain.SetControlFrequency(0);
+                Domain.SetBaseWaveAngleFrequency(0);
+                Data.Vvvf.Analyze.Calculate(Domain, vvvfData);
+                Bitmap final_image = GetImage(Domain.Clone());
                 AddImageFrames(final_image, fps, vr);
                 Viewer?.SetImage(final_image);
                 final_image.Dispose();

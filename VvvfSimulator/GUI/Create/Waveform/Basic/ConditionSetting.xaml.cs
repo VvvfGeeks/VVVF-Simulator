@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using VvvfSimulator.GUI.Resource.Class;
-using static VvvfSimulator.Yaml.VvvfSound.YamlVvvfSoundData;
+using static VvvfSimulator.Data.Vvvf.Struct;
 
 namespace VvvfSimulator.GUI.Create.Waveform.Basic
 {
@@ -11,11 +11,11 @@ namespace VvvfSimulator.GUI.Create.Waveform.Basic
     /// </summary>
     public partial class ConditionSetting : Page
     {
-        private readonly YamlControlData Target;
+        private readonly PulseControl Target;
         private readonly bool IgnoreUpdate = true;
         private readonly WaveformEditor Editor;
 
-        public ConditionSetting(WaveformEditor Editor, YamlControlData ControlData)
+        public ConditionSetting(WaveformEditor Editor, PulseControl ControlData)
         {
             InitializeComponent();
             Target = ControlData;

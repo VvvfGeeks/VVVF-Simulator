@@ -5,14 +5,12 @@ using System;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Forms;
 using VvvfSimulator.GUI.Resource.Language;
 using VvvfSimulator.GUI.TaskViewer;
-using VvvfSimulator.Yaml.VvvfSound;
+using VvvfSimulator.GUI.Util;
 using static VvvfSimulator.Generation.GenerateCommon;
 using Button = System.Windows.Controls.Button;
 using DataFormats = System.Windows.DataFormats;
-using MessageBox = System.Windows.Forms.MessageBox;
 
 namespace VvvfSimulator.GUI.MIDIConvert
 {
@@ -36,7 +34,7 @@ namespace VvvfSimulator.GUI.MIDIConvert
             }
             catch
             {
-                MessageBox.Show(LanguageManager.GetString("MidiConvert.Main.Message.MidiConvertError"), LanguageManager.GetString("Generic.Title.Error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                DialogBox.Show(LanguageManager.GetString("MidiConvert.Main.Message.MidiConvertError"), LanguageManager.GetString("Generic.Title.Error"), [DialogBoxButton.Ok], DialogBoxIcon.Error);
                 return false;
             }
 
@@ -49,21 +47,22 @@ namespace VvvfSimulator.GUI.MIDIConvert
                 int priority = 1;
                 while (true)
                 {
-                    Mascon.LoadMidi.MidiLoadData loadData = new()
+                    BaseFrequency.LoadMidi.MidiLoadData loadData = new()
                     {
                         track = i,
                         division = 1,
                         path = midi_path,
                         priority = priority,
                     };
-                    Yaml.MasconControl.YamlMasconAnalyze.YamlMasconData? ymd = Yaml.MasconControl.YamlMasconMidi.Convert(loadData);
+                    Data.BaseFrequency.Struct? ymd = Data.BaseFrequency.MidiConverter.Convert(loadData);
                     if (ymd == null) return false;
-                    if (ymd.points.Count == 0) break;
+                    if (ymd.Points.Count == 0) break;
 
-                    GenerationBasicParameter generationBasicParameter = new(
+                    GenerationParameter generationBasicParameter = new(
                         ymd.GetCompiled(),
-                        YamlVvvfManage.DeepClone(YamlVvvfManage.CurrentData),
-                        new GenerationBasicParameter.ProgressData()
+                        Data.Vvvf.Manager.DeepClone(Data.Vvvf.Manager.Current), 
+                        Data.TrainAudio.Manager.DeepClone(Data.TrainAudio.Manager.Current),
+                        new GenerationParameter.ProgressData()
                     );
 
                     string task_description = string.Format(LanguageManager.GetString("MidiConvert.TaskDescription.Convert.Description"), Path.GetFileNameWithoutExtension(midi_path), i, priority);
@@ -78,7 +77,7 @@ namespace VvvfSimulator.GUI.MIDIConvert
                         }
                         catch(Exception ex)
                         {
-                            MessageBox.Show(task_description + "\r\n" + ex.Message, LanguageManager.GetString("Generic.Title.Error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            DialogBox.Show(task_description + "\r\n" + ex.Message, LanguageManager.GetString("Generic.Title.Error"), [DialogBoxButton.Ok], DialogBoxIcon.Error);
                         }
                     });
 

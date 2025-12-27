@@ -94,7 +94,7 @@ namespace VvvfSimulator.Generation.Audio.TrainSound
 
                 for (int i = 0; i < filterInstances; i++)
                 {
-                    int bufferInBytes = Marshal.SizeOf(typeof(float)) * response.Length;
+                    int bufferInBytes = Marshal.SizeOf<float>() * response.Length;
                     IntPtr bufferPtr = Marshal.AllocCoTaskMem(bufferInBytes);
                     Marshal.Copy(response, 0, bufferPtr, response.Length);
 
@@ -113,7 +113,7 @@ namespace VvvfSimulator.Generation.Audio.TrainSound
                 {
                     int samplesRead = sourceProvider.Read(buffer, offset, count);
 
-                    int bufferInBytes = Marshal.SizeOf(typeof(float)) * samplesRead;
+                    int bufferInBytes = Marshal.SizeOf<float>() * samplesRead;
                     IntPtr bufferPtr = Marshal.AllocCoTaskMem(bufferInBytes);
                     Marshal.Copy(buffer, 0, bufferPtr, samplesRead);
 
@@ -121,29 +121,29 @@ namespace VvvfSimulator.Generation.Audio.TrainSound
 
                     Marshal.Copy(bufferPtr, buffer, 0, samplesRead);
 
-                    Marshal.FreeCoTaskMem(bufferInBytes);
+                    Marshal.FreeCoTaskMem(bufferPtr);
                     return samplesRead;
                 }
                 else if(filterInstances == 2)
                 {
                     int samplesRead = sourceProvider.Read(buffer, offset, count);
 
-                    int bufferInBytes = Marshal.SizeOf(typeof(float)) * samplesRead;
+                    int bufferInBytes = Marshal.SizeOf<float>() * samplesRead;
                     IntPtr bufferPtr = Marshal.AllocCoTaskMem(bufferInBytes);
                     Marshal.Copy(buffer, 0, bufferPtr, samplesRead);
 
-                    int bufferLRInBytes = Marshal.SizeOf(typeof(float)) * samplesRead / 2;
+                    int bufferLRInBytes = Marshal.SizeOf<float>() * samplesRead / 2;
                     IntPtr bufferLPtr = Marshal.AllocCoTaskMem(bufferLRInBytes);
                     IntPtr bufferRPtr = Marshal.AllocCoTaskMem(bufferLRInBytes);
 
-                    CppConvolutionFilter.StereoToMonaural(bufferPtr, samplesRead, bufferLPtr, bufferRPtr);
+                    StereoToMonaural(bufferPtr, samplesRead, bufferLPtr, bufferRPtr);
                     Process(0, bufferLPtr, bufferLPtr, samplesRead / 2);
                     Process(1, bufferRPtr, bufferRPtr, samplesRead / 2);
-                    CppConvolutionFilter.MonauralToStereo(bufferLPtr, bufferRPtr, bufferPtr, samplesRead);
+                    MonauralToStereo(bufferLPtr, bufferRPtr, bufferPtr, samplesRead);
 
                     Marshal.Copy(bufferPtr, buffer, 0, samplesRead);
 
-                    Marshal.FreeCoTaskMem(bufferInBytes);
+                    Marshal.FreeCoTaskMem(bufferPtr);
                     Marshal.FreeCoTaskMem(bufferLPtr);
                     Marshal.FreeCoTaskMem(bufferRPtr);
 

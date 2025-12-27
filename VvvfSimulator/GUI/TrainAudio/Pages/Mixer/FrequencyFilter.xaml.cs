@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
 using VvvfSimulator.GUI.Resource.Language;
-using static VvvfSimulator.Yaml.TrainAudioSetting.YamlTrainSoundAnalyze;
-using static VvvfSimulator.Yaml.TrainAudioSetting.YamlTrainSoundAnalyze.YamlTrainSoundData.SoundFilter;
+using VvvfSimulator.Data.TrainAudio;
 
 namespace VvvfSimulator.GUI.TrainAudio.Pages.Mixer
 {
@@ -12,8 +9,8 @@ namespace VvvfSimulator.GUI.TrainAudio.Pages.Mixer
     /// </summary>
     public partial class FrequencyFilter : Page
     {
-        readonly YamlTrainSoundData data;
-        public FrequencyFilter(YamlTrainSoundData train_Harmonic_Data)
+        readonly Struct data;
+        public FrequencyFilter(Struct train_Harmonic_Data)
         {
             data = train_Harmonic_Data;
 
@@ -22,7 +19,7 @@ namespace VvvfSimulator.GUI.TrainAudio.Pages.Mixer
 
             try
             {
-                Filter_DataGrid.ItemsSource = data.Filteres;
+                Filter_DataGrid.ItemsSource = data.Filters;
             }
             catch
             {

@@ -7,7 +7,7 @@ using VvvfSimulator.GUI.Resource.Language;
 using VvvfSimulator.GUI.Util;
 using VvvfSimulator.GUI.Resource.Class;
 using static OpenCvSharp.Stitcher;
-using static VvvfSimulator.Yaml.VvvfSound.YamlVvvfSoundData.YamlControlData;
+using static VvvfSimulator.Data.Vvvf.Struct.PulseControl;
 
 namespace VvvfSimulator.GUI.Create.Waveform.Common
 {
@@ -27,10 +27,10 @@ namespace VvvfSimulator.GUI.Create.Waveform.Common
             private Visibility _CurveRate_Visibility = Visibility.Collapsed;
             public Visibility CurveRate_Visibility { get { return _CurveRate_Visibility; } set { _CurveRate_Visibility = value; RaisePropertyChanged(nameof(CurveRate_Visibility)); } }
 
-            public YamlMovingValue MovingValue { get; set; } = new YamlMovingValue();
+            public FunctionValue MovingValue { get; set; } = new FunctionValue();
 
         };
-        public ControlMovingSetting(YamlMovingValue target)
+        public ControlMovingSetting(FunctionValue target)
         {
 
             BindingData.MovingValue = target;
@@ -67,13 +67,13 @@ namespace VvvfSimulator.GUI.Create.Waveform.Common
 
         }
 
-        private readonly Dictionary<YamlMovingValue.MovingValueType, string> MovingValueTypeNames = [];
+        private readonly Dictionary<FunctionValue.FunctionType, string> MovingValueTypeNames = [];
 
         private void MoveValueTypeChanged(object sender, SelectionChangedEventArgs e)
         {
             if (IgnoreUpdate) return;
 
-            YamlMovingValue.MovingValueType selected = (YamlMovingValue.MovingValueType)Move_Mode_Selector.SelectedValue;
+            FunctionValue.FunctionType selected = (FunctionValue.FunctionType)Move_Mode_Selector.SelectedValue;
             BindingData.MovingValue.Type = selected;
             UpdateView();
         }
@@ -86,17 +86,17 @@ namespace VvvfSimulator.GUI.Create.Waveform.Common
                 else if (x == 1) BindingData.CurveRate_Visibility = b;
             }
 
-            YamlMovingValue.MovingValueType selected = BindingData.MovingValue.Type;
+            FunctionValue.FunctionType selected = BindingData.MovingValue.Type;
 
             Visibility[] visible_list = [Visibility.Collapsed, Visibility.Collapsed];
 
-            if (selected == YamlMovingValue.MovingValueType.Proportional)
+            if (selected == FunctionValue.FunctionType.Proportional)
                 visible_list = [Visibility.Collapsed, Visibility.Collapsed];
-            else if (selected == YamlMovingValue.MovingValueType.Pow2_Exponential)
+            else if (selected == FunctionValue.FunctionType.Pow2_Exponential)
                 visible_list = [Visibility.Visible, Visibility.Collapsed];
-            else if (selected == YamlMovingValue.MovingValueType.Inv_Proportional)
+            else if (selected == FunctionValue.FunctionType.Inv_Proportional)
                 visible_list = [Visibility.Collapsed, Visibility.Visible];
-            else if (selected == YamlMovingValue.MovingValueType.Sine)
+            else if (selected == FunctionValue.FunctionType.Sine)
                 visible_list = [Visibility.Collapsed, Visibility.Collapsed];
 
             for (int i = 0; i < visible_list.Length; i++)

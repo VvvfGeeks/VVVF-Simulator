@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:uc="clr-namespace:VvvfSimulator.GUI.Resource.MyUserControl"
         xmlns:local="clr-namespace:VvvfSimulator.GUI.TrainAudio.Pages.Gear"
         mc:Ignorable="d"
         WindowStartupLocation="CenterOwner"
@@ -32,7 +33,7 @@
             </Grid.ColumnDefinitions>
             <Image Style="{StaticResource WindowIconStyle}"/>
             <Label Grid.Column="1" x:Name="WindowTitle" Content="{DynamicResource TrainAudio.Pages.Gear.GearCalculate.Title}" Style="{StaticResource WindowTitleStyle}"/>
-            <Button Grid.Column="2" Tag="Close" Click="OnWindowControlButtonClick" Style="{DynamicResource WindowCloseButton}"/>
+            <uc:WindowControlButton Grid.Column="2" Tag="Close" Click="OnWindowControlButtonClick" Style="{DynamicResource WindowCloseButton}"/>
         </Grid>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>

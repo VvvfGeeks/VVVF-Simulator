@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media;
-using VvvfSimulator.GUI.Resource.Language;
+using System.Windows.Media.Animation;
 using VvvfSimulator.GUI.Resource.Theme;
 
 namespace VvvfSimulator.GUI.Resource.MyUserControl
@@ -18,43 +16,74 @@ namespace VvvfSimulator.GUI.Resource.MyUserControl
 
         public event EventHandler? OnClicked;
 
+        private bool Enabled = false;
+        private bool Activated = false;
+        private readonly double ButtonDotMargin = 5.0;
+
         public EnableButton()
         {
             InitializeComponent();
-            UpdateState();
+            ButtonDotMargin = (double)FindResource("ButtonDotMargin");
+            SetAppearance();
         }
-
-      
-        private bool Enabled = false;
-        private bool Activated = false;
-
-        private void SetDisplayStatus()
+        private static Color GetForeColor(bool Status) => ThemeManager.GetColor(Status ? "EnableSwitchForeColorEnabled" : "EnableSwitchForeColorDisabled");
+        private static Color GetBackColor(bool Status) => ThemeManager.GetColor(Status ? "EnableSwitchBackColorEnabled" : "EnableSwitchBackColorDisabled");
+        private static Color GetPressedBackColor(bool Status) => ThemeManager.GetColor(Status ? "EnableSwitchBackColorEnabledPressed" : "EnableSwitchBackColorDisabledPressed");
+        private void SetAppearance()
         {
-            Status.Content = Enabled ? LanguageManager.GetString("Generic.Status.Enabled") : LanguageManager.GetString("Generic.Status.Disabled");
-        }
-
-        private void SetBorderStatus()
-        {
-            Brush EnabledBrush = ThemeManager.GetBrush("EnableSwitchBackgroundEnabledBrush");
-            Brush EnabledPressedBrush = ThemeManager.GetBrush("EnableSwitchBackgroundEnabledPressedBrush");
-            Brush DisabledBrush = ThemeManager.GetBrush("EnableSwitchBackgroundDisabledBrush");
-            Brush DisabledPressedBrush = ThemeManager.GetBrush("EnableSwitchBackgroundDisabledPressedBrush");
-            Brush EnabledTextBrush = ThemeManager.GetBrush("EnableSwitchTextColorEnabledBrush");
-            Brush DisabledTextBrush = ThemeManager.GetBrush("EnableSwitchTextColorDisabledBrush");
-
             if (Activated)
-                Button.Background = Enabled ? EnabledPressedBrush : DisabledPressedBrush;
+                Button.Background = new SolidColorBrush(GetPressedBackColor(Enabled));
             else
             {
-                Button.Background = Enabled ? EnabledBrush : DisabledBrush;
-                Status.Foreground = Enabled ? EnabledTextBrush : DisabledTextBrush;
+                Button.Background = new SolidColorBrush(GetBackColor(Enabled));
+                ButtonDot.Fill = new SolidColorBrush(GetForeColor(Enabled));
             }
-        }
 
-        public void SetToggled(bool enabled)
+            ButtonDot.BeginAnimation(MarginProperty, null);
+            ButtonDot.HorizontalAlignment = Enabled ? HorizontalAlignment.Left : HorizontalAlignment.Right;
+            ButtonDot.Margin = new Thickness(ButtonDotMargin);
+
+        }
+        public void SetToggled(bool Enabled, bool Animate = false)
         {
-            Enabled = enabled;
-            UpdateState();
+            this.Enabled = Enabled;
+
+            if (!Animate)
+            {
+                SetAppearance();
+                return;
+            }
+
+            double AnimateMargin = Button.ActualWidth - ButtonDot.ActualWidth - ButtonDotMargin;
+            ButtonDot.HorizontalAlignment = Enabled ? HorizontalAlignment.Left : HorizontalAlignment.Right;
+            ThicknessAnimation MoveAnimation = new()
+            {
+                From = new Thickness(Enabled ? AnimateMargin : ButtonDotMargin, ButtonDotMargin, Enabled ? ButtonDotMargin : AnimateMargin, ButtonDotMargin),
+                To = new Thickness(ButtonDotMargin),
+                Duration = TimeSpan.FromMilliseconds(200),
+                EasingFunction = new SineEase { EasingMode = EasingMode.EaseInOut }
+            };
+            ColorAnimation ForeColorAnimation = new()
+            {
+                From = GetForeColor(!Enabled),
+                To = GetForeColor(Enabled),
+                Duration = TimeSpan.FromMilliseconds(200),
+                EasingFunction = new SineEase { EasingMode = EasingMode.EaseInOut }
+            };
+            ColorAnimation BackColorAnimation = new()
+            {
+                From = GetBackColor(!Enabled),
+                To = GetBackColor(Enabled),
+                Duration = TimeSpan.FromMilliseconds(200),
+                EasingFunction = new SineEase { EasingMode = EasingMode.EaseInOut }
+            };
+
+            ButtonDot.BeginAnimation(MarginProperty, MoveAnimation);
+            ButtonDot.Fill.BeginAnimation(SolidColorBrush.ColorProperty, ForeColorAnimation);
+            Button.Background.BeginAnimation(SolidColorBrush.ColorProperty, BackColorAnimation);
+
+            MoveAnimation.Completed += (s, e) => SetAppearance();
+
         }
 
         public bool IsToggled()
@@ -62,48 +91,27 @@ namespace VvvfSimulator.GUI.Resource.MyUserControl
             return Enabled;
         }
 
-        public void UpdateState()
-        {
-            SetDisplayStatus();
-            SetBorderStatus();
-        }        
-
         private void Grid_MouseUp(object sender, MouseButtonEventArgs e)
         {
             if (Activated)
             {
                 Activated = false;
-                Enabled = !Enabled;
+                SetToggled(!Enabled, true);
                 OnClicked?.Invoke(this, EventArgs.Empty);
-                UpdateState();
             }
         }
 
         private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
         {
             Activated = true;
-            UpdateState();
+            SetAppearance();
         }
 
         private void Grid_MouseLeave(object sender, MouseEventArgs e)
         {
+            if (!Activated) return;
             Activated = false;
-            UpdateState();
-        }
-    }
-
-    public class FontSizeConverter : IValueConverter
-    {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            double d = ((double)(value) / 2.0);
-            if (d == 0) d = 1;
-            return d;
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            throw new NotImplementedException();
+            SetAppearance();
         }
     }
 }

@@ -14,12 +14,12 @@ using VvvfSimulator.GUI.Resource.Theme;
 using VvvfSimulator.GUI.Simulator.RealTime.Setting;
 using VvvfSimulator.GUI.Util;
 using VvvfSimulator.Vvvf;
-using VvvfSimulator.Yaml.VvvfSound;
-using static VvvfSimulator.Generation.Audio.GenerateRealTimeCommon;
-using static VvvfSimulator.Vvvf.Struct;
-using static VvvfSimulator.Yaml.VvvfSound.YamlVvvfSoundData.YamlControlData.YamlPulseMode;
+using static VvvfSimulator.Generation.Audio.RealTime;
+using static VvvfSimulator.Vvvf.Model.Struct;
+using static VvvfSimulator.Data.Vvvf.Struct.PulseControl.Pulse;
 using Brush = System.Windows.Media.Brush;
 using Color = System.Windows.Media.Color;
+using Key = System.Windows.Input.Key;
 
 namespace VvvfSimulator.GUI.Simulator.RealTime.Controller.Design2
 {
@@ -28,9 +28,8 @@ namespace VvvfSimulator.GUI.Simulator.RealTime.Controller.Design2
     /// </summary>
     public partial class Design2 : Window, IController
     {
-        private readonly RealTimeParameter Param;
+        private readonly Parameter Param;
         private readonly ViewModel Model = new();
-        private readonly PropertyType PropType = PropertyType.VVVF;
         private int CalculatePrecision = 10000;
         public int MasconPosition = 0;
         public DeviceMode CurrentMode = DeviceMode.KeyBoard;
@@ -77,28 +76,25 @@ namespace VvvfSimulator.GUI.Simulator.RealTime.Controller.Design2
             public Brush P4 { get { return _P4; } set { _P4 = value; RaisePropertyChanged(nameof(P4)); } }
 
 
-            private double _SineFrequency = 0;
-            public double SineFrequency { get { return _SineFrequency; } set { _SineFrequency = value; RaisePropertyChanged(nameof(SineFrequency)); } }
+            private string _SineFrequency = string.Empty;
+            public string SineFrequency { get { return _SineFrequency; } set { _SineFrequency = value; RaisePropertyChanged(nameof(SineFrequency)); } }
 
-            private double _Voltage = 0;
-            public double Voltage { get { return _Voltage; } set { _Voltage = value; RaisePropertyChanged(nameof(Voltage)); } }
+            private string _Voltage = string.Empty;
+            public string Voltage { get { return _Voltage; } set { _Voltage = value; RaisePropertyChanged(nameof(Voltage)); } }
 
-            private string _PulseState = "";
+            private string _PulseState = string.Empty;
             public string PulseState { get { return _PulseState; } set { _PulseState = value; RaisePropertyChanged(nameof(PulseState)); } }
         };
-        public Design2(RealTimeParameter parameter, PropertyType type)
+        public Design2(Parameter parameter)
         {
             Param = parameter;
-            PropType = type;
-            CalculatePrecision = type switch
-            {
-                PropertyType.VVVF => Properties.Settings.Default.RealTime_VVVF_Controller_Design2_CalculatePrecision,
-                _ => Properties.Settings.Default.RealTime_Train_Controller_Design2_CalculatePrecision
-            };
+            CalculatePrecision = (Param is VvvfSoundParameter) ? Properties.Settings.Default.RealTime_VVVF_Controller_Design2_CalculatePrecision :
+                Properties.Settings.Default.RealTime_Train_Controller_Design2_CalculatePrecision;
 
             InitializeComponent();
             SetState(0);
             DataContext = Model;
+            SetWindowContentVisibility();
         }
         public void StartTask()
         {
@@ -106,61 +102,80 @@ namespace VvvfSimulator.GUI.Simulator.RealTime.Controller.Design2
             Task.Run(() => {
                 while (!Param.Quit)
                 {
-                    YamlVvvfSoundData Sound = Param.VvvfSoundData;
-                    VvvfValues Control = Param.Control.Clone();
+                    Domain Control = Param.Control.Clone();
+                    Control.GetCarrierInstance().UseSimpleFrequency = true;
 
-                    Control.SetSawTime(0);
-                    Control.SetSineTime(0);
+                    Model.SineFrequency = Control.ElectricalState.BaseWaveFrequency.ToString("F1");
 
-                    Control.SetRandomFrequencyMoveAllowed(false);
-                    PwmCalculateValues Values = YamlVvvfWave.CalculateYaml(Control, Sound);
-                    Calculate.CalculatePhases(Control, Values, 0);
-
-                    CarrierFreq Carrier = Control.GetVideoCarrierFrequency();
-                    PulseTypeName Type = Control.GetVideoPulseMode().PulseType;
-                    int PulseCount = Control.GetVideoPulseMode().PulseCount;
-
-                    Model.PulseState = Type switch
+                    if (Control.ElectricalState.IsNone)
+                        Model.PulseState = LanguageManager.GetString("Simulator.RealTime.Controller.PulseState.None");
+                    else
                     {
-                        PulseTypeName.ASYNC => Carrier.BaseFrequency.ToString("F2"),
-                        PulseTypeName.SYNC => PulseCount.ToString(),
-                        PulseTypeName.CHM => "CHM " + PulseCount.ToString(),
-                        PulseTypeName.SHE => "SHE " + PulseCount.ToString(),
-                        PulseTypeName.HO => "HO " + PulseCount.ToString(),
-                        _ => PulseCount.ToString(),
-                    };
-                    Model.SineFrequency = Param.Control.GetVideoSineFrequency();
+                        int PulseCount = Control.ElectricalState.PulsePattern.PulseMode.PulseCount;
+                        Model.PulseState = Control.ElectricalState.PulsePattern.PulseMode.PulseType switch
+                        {
+                            PulseTypeName.ASYNC => Control.GetCarrierInstance().CalculateCarrierFrequency(Control.GetTime(), Control.ElectricalState).ToString("F2"),
+                            PulseTypeName.SYNC => PulseCount.ToString(),
+                            PulseTypeName.CHM => "CHM " + PulseCount.ToString(),
+                            PulseTypeName.SHE => "SHE " + PulseCount.ToString(),
+                            PulseTypeName.HO => "HO " + PulseCount.ToString(),
+                            PulseTypeName.ΔΣ => Control.ElectricalState.PulseData.GetValueOrDefault(PulseDataKey.UpdateFrequency).ToString("F2"),
+                            _ => PulseCount.ToString(),
+                        };
+                    }
                 }
             });
             Task.Run(() => {
                 while (!Param.Quit)
                 {
-                    System.Threading.Thread.Sleep(20);
+                    System.Threading.Thread.Sleep(15);
 
-                    YamlVvvfSoundData Sound = Param.VvvfSoundData;
-                    VvvfValues Control = Param.Control.Clone();
+                    Domain Control = Param.Control.Clone();
+                    Control.GetCarrierInstance().UseSimpleFrequency = true;
 
-                    Control.SetSawTime(0);
-                    Control.SetSineTime(0);
-                    Control.SetRandomFrequencyMoveAllowed(false);
+                    double InitialPhase = MyMath.M_PI_6;
+                    {
+                        if (Param is VvvfSoundParameter VvvfParam)
+                        {
+                            InitialPhase = VvvfParam.OutputMode switch
+                            {
+                                VvvfSoundParameter.Mode.Phase => 0,
+                                VvvfSoundParameter.Mode.PhaseCurrent => 0,
+                                _ => MyMath.M_PI_6,
+                            };
+                        }
+                    }
 
-                    WaveValues[] Pwm = GenerateBasic.WaveForm.GetUVWCycle(Control, Sound, MyMath.M_PI_6, CalculatePrecision, false);
+                    PhaseState[] Pwm = GenerateBasic.WaveForm.GetUVWCycle(Control, InitialPhase, CalculatePrecision, false);
 
                     double voltage = GenerateBasic.Fourier.GetVoltageRate(ref Pwm) * 100;
-                    Model.Voltage = voltage;
+                    Model.Voltage = Param.Control.ElectricalState.IsNone ? LanguageManager.GetString("Simulator.RealTime.Controller.Voltage.None") : voltage.ToString("F1");
 
-                    List<(double X, int Pwm)> Data = [];
-                    Data.Add((0, 0));
+                    List<(double X, double Pwm)> Data = [];
 
                     for (int i = 0; i < Pwm.Length; i++)
                     {
-                        int NewPwmLine = Pwm[i].U - Pwm[i].V;
-                        if (Data[^1].Pwm != NewPwmLine)
+                        double NewPwmLine = 0;
+                        if (Param is VvvfSoundParameter VvvfParam)
+                        {
+                            NewPwmLine = VvvfParam.OutputMode switch
+                            {
+                                VvvfSoundParameter.Mode.Line => Pwm[i].U - Pwm[i].V,
+                                VvvfSoundParameter.Mode.Phase => (Pwm[i].U - 1) * 2,
+                                _ => Pwm[i].U - Pwm[i].V * 0.5 - Pwm[i].W * 0.5
+                            };
+                        }
+                        else if (Param is TrainSoundParameter TrainParam)
+                        {
+                            NewPwmLine = Pwm[i].U - Pwm[i].V;
+                        }
+
+                        if (Data.Count == 0 || Data[^1].Pwm != NewPwmLine)
                             Data.Add(((double)i / Pwm.Length, NewPwmLine));
                     }
                     Data.Add((1.0, Data[^1].Pwm));
 
-                    double GetY(int Pwm)
+                    double GetY(double Pwm)
                     {
                         return -Pwm * WaveformViewer.ActualHeight / 2.0 * (1 / 2.0 - 1 / 10.0) + WaveformViewer.ActualHeight / 2.0;
                     }
@@ -173,7 +188,7 @@ namespace VvvfSimulator.GUI.Simulator.RealTime.Controller.Design2
                     {
                         PathFigure Figure = new()
                         {
-                            StartPoint = new (GetX(0), GetY(0))
+                            StartPoint = new(GetX(Data[0].X), GetY(Data[0].Pwm))
                         };
                         for (int i = 0; i < Data.Count - 1; i++)
                         {
@@ -274,7 +289,12 @@ namespace VvvfSimulator.GUI.Simulator.RealTime.Controller.Design2
                 SetColor(nega ? i : -i, inactive);
             }
         }
-
+        private void SetWindowContentVisibility()
+        {
+            Visibility VvvfItemVisibility = (Param is VvvfSoundParameter) ? Visibility.Visible : Visibility.Collapsed;
+            MenuItem_Vvvf.Visibility = VvvfItemVisibility;
+            MenuItem_Vvvf_Separator.Visibility = VvvfItemVisibility;
+        }
         //
         // Controller Device Interface
         //
@@ -303,7 +323,7 @@ namespace VvvfSimulator.GUI.Simulator.RealTime.Controller.Design2
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message, LanguageManager.GetString("Generic.Title.Error"), MessageBoxButton.OK, MessageBoxImage.Error);
+                    DialogBox.Show(ex.Message, LanguageManager.GetString("Generic.Title.Error"), [DialogBoxButton.Ok], DialogBoxIcon.Error);
                 }
             }
             else if(CurrentMode == DeviceMode.KeyBoard)
@@ -390,21 +410,23 @@ namespace VvvfSimulator.GUI.Simulator.RealTime.Controller.Design2
         }
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
-            MenuItem menuItem = (MenuItem)sender;
-            Object tag = menuItem.Tag;
+            if (sender is not MenuItem Item) return;
+            string[]? Tag = Item.Tag?.ToString()?.Split('_');
+            if (Tag == null) return;
 
-            if (tag.Equals("DeviceSetting"))
+            if (Tag[0].Equals("DeviceSetting"))
             {
                 MasconDevice rtds = new(this);
                 rtds.ShowDialog();
-            }else if (tag.Equals("CalculateDivision"))
+            }
+            else if (Tag[0].Equals("CalculateDivision"))
             {
                 IntegerNumberInput Input = new(this, LanguageManager.GetString("Simulator.RealTime.Controller.Design2.MenuItem.CalculateDivision"), 0, CalculatePrecision);
                 if (!Input.IsEnteredValueValid()) return;
                 CalculatePrecision = Input.GetEnteredValue();
-                switch (PropType)
+                switch (Param is VvvfSoundParameter)
                 {
-                    case PropertyType.VVVF:
+                    case true:
                         Properties.Settings.Default.RealTime_VVVF_Controller_Design2_CalculatePrecision = CalculatePrecision;
                         break;
                     default:
@@ -412,7 +434,24 @@ namespace VvvfSimulator.GUI.Simulator.RealTime.Controller.Design2
                         break;
                 }
                 Properties.Settings.Default.Save();
-        }
+            }
+            else if (Tag[0].Equals("Vvvf"))
+            {
+                if (Param is not VvvfSoundParameter) return;
+                if (Tag[1].Equals("WaveForm"))
+                {
+                    MenuItem[] Candidates = [MenuItem_Vvvf_WaveForm_Line, MenuItem_Vvvf_WaveForm_Phase, MenuItem_Vvvf_WaveForm_PhaseCurrent];
+                    VvvfSoundParameter.Mode[] Modes = Enum.GetValues<VvvfSoundParameter.Mode>();
+
+                    for (int i = 0; i < Candidates.Length; i++)
+                    {
+                        MenuItem Candidate = Candidates[i];
+                        bool Selected = Candidate == Item;
+                        Candidate.IsChecked = Selected;
+                        if (Selected) ((VvvfSoundParameter)Param).OutputMode = Modes[i];
+                    }
+                }
+            }
         }
         private void Window_Closing(object sender, CancelEventArgs e)
         {

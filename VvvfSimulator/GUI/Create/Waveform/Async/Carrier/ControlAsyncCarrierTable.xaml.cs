@@ -13,8 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using VvvfSimulator;
-using static VvvfSimulator.Yaml.VvvfSound.YamlVvvfSoundData;
-using static VvvfSimulator.Yaml.VvvfSound.YamlVvvfSoundData.YamlControlData.YamlAsync.CarrierFrequency.YamlAsyncParameterCarrierFreqTable;
+using static VvvfSimulator.Data.Vvvf.Struct;
+using static VvvfSimulator.Data.Vvvf.Struct.PulseControl.AsyncControl.CarrierFrequency.TableValue;
 
 namespace VvvfSimulator.GUI.Create.Waveform.Async
 {
@@ -25,15 +25,15 @@ namespace VvvfSimulator.GUI.Create.Waveform.Async
     {
         ViewData Data = new ViewData();
         public class ViewData {
-            public List<YamlAsyncParameterCarrierFreqTableValue> Async_Table_Data { get; set; } = new List<YamlAsyncParameterCarrierFreqTableValue>();
+            public List<Parameter> Async_Table_Data { get; set; } = new List<Parameter>();
         }
 
-        YamlControlData target;
-        public ControlAsyncCarrierTable(YamlControlData data)
+        PulseControl target;
+        public ControlAsyncCarrierTable(PulseControl data)
         {
             InitializeComponent();
 
-            Data.Async_Table_Data = data.AsyncModulationData.CarrierWaveData.CarrierFrequencyTable.CarrierFrequencyTableValues;
+            Data.Async_Table_Data = data.AsyncModulationData.CarrierWaveData.CarrierFrequencyTable.Table;
             DataContext = Data;
             target = data;
 
@@ -41,7 +41,7 @@ namespace VvvfSimulator.GUI.Create.Waveform.Async
 
         private void DataGrid_TargetUpdated(object sender, DataTransferEventArgs e)
         {
-            target.AsyncModulationData.CarrierWaveData.CarrierFrequencyTable.CarrierFrequencyTableValues = Data.Async_Table_Data;
+            target.AsyncModulationData.CarrierWaveData.CarrierFrequencyTable.Table = Data.Async_Table_Data;
         }
     }
 }

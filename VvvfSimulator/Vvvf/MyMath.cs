@@ -4,45 +4,56 @@ namespace VvvfSimulator.Vvvf
 {
     public class MyMath
     {
+        public const double M_2_PI = 0.63661977236758134307553505349006;
+        public const double M_1_PI = 0.31830988618379067153776752674503;
+        public const double M_1_2PI = 0.15915494309189533576888376337251;
 
-        public const double M_2_PI = 0.63661977236;
-        public const double M_1_PI = 0.31830988618;
-        public const double M_1_2PI = 0.15915494309;
-        public const double M_2PI = 6.28318530717;
-        public const double M_PI = 3.14159265358;
-        public const double M_PI_2 = 1.57079632679;
-        public const double M_PI_3 = 1.04719755119;
-        public const double M_PI_4 = 0.78539816339;
-        public const double M_PI_6 = 0.52359877559;
-        public const double M_PI_180 = 0.01745329251;
+        public const double M_4PI_3 = 4.1887902047863909846168578443727;
 
-        public const double M_SQRT3 = 1.73205080757;
-        public const double M_SQRT3_2 = 0.86602540378;
+        public const double M_2PI = 6.283185307179586476925286766559;
+        public const double M_2PI_3 = 2.0943951023931954923084289221863;
+
+        public const double M_PI = 3.1415926535897932384626433832795;
+        public const double M_PI_2 = 1.5707963267948966192313216916398;
+        public const double M_PI_3 = 1.0471975511965977461542144610932;
+        public const double M_PI_4 = 0.78539816339744830961566084581988;
+        public const double M_PI_6 = 0.52359877559829887307710723054658;
+        public const double M_PI_12 = 0.26179938779914943653855361527329;
+        public const double M_PI_180 = 0.01745329251994329576923690768489;
+
+        public const double M_SQRT3 = 1.7320508075688772935274463415059;
+        public const double M_SQRT3_2 = 0.86602540378443864676372317075294;
 
         public static class Functions
         {
+            public static double Triangle(double x)
+            {
+                double Phase = M_2_PI * x - 4 * Math.Floor(x * M_1_2PI);
+                double Value = Phase;
+                if (1 <= Phase && Phase < 3)
+                    Value = -Phase + 2;
+                else if(3 <= Phase)
+                    Value = Phase - 4;
+                return Value;
+            }
             public static double Saw(double x)
             {
-                double val;
-                double fixed_x = x - (double)((int)(x * M_1_2PI) * M_2PI);
-                if (0 <= fixed_x && fixed_x < M_PI_2)
-                    val = M_2_PI * fixed_x;
-                else if (M_PI_2 <= fixed_x && fixed_x < 3.0 * M_PI_2)
-                    val = -M_2_PI * fixed_x + 2;
-                else
-                    val = M_2_PI * fixed_x - 4;
-
-                return -val;
+                double Phase = M_1_PI * x - 2 * Math.Floor(x * M_1_2PI) - 1;
+                return Phase;
             }
-
             public static double Sine(double x)
             {
                 return Math.Sin(x);
             }
 
+            public static double ArcSine(double a)
+            {
+                return Math.Asin(a);
+            }
+
             public static double Square(double x)
             {
-                double fixed_x = x - (double)((int)(x * M_1_2PI) * M_2PI);
+                double fixed_x = x - Math.Floor(x * M_1_2PI) * M_2PI;
                 if (fixed_x * M_1_PI > 1) return -1;
                 return 1;
             }
@@ -131,6 +142,18 @@ namespace VvvfSimulator.Vvvf
             {
                 return X == 0 && Y == 0;
             }
+            public PointD Norm()
+            {
+                if (IsZero()) return new(0, 0);
+                double len = Math.Sqrt(X * X + Y * Y);
+                return new(X / len, Y / len);
+            }
+            public PointD Rotate(double Angle)
+            {
+                double cos = Math.Cos(Angle);
+                double sin = Math.Sin(Angle);
+                return new(X * cos - Y * sin, X * sin + Y * cos);
+            }
             public System.Drawing.Point ToPoint()
             {
                 return new System.Drawing.Point((int)X, (int)Y);
@@ -138,6 +161,10 @@ namespace VvvfSimulator.Vvvf
             public static PointD operator +(PointD a, PointD b)
             {
                 return new PointD(a.X + b.X, a.Y + b.Y);
+            }
+            public static PointD operator -(PointD a, PointD b)
+            {
+                return new PointD(a.X - b.X, a.Y - b.Y);
             }
             public static PointD operator *(double k, PointD a)
             {

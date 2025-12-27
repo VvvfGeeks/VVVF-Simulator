@@ -2,7 +2,7 @@
 using System.Globalization;
 using System.Windows.Data;
 using VvvfSimulator.GUI.Resource.Language;
-using static VvvfSimulator.Yaml.VvvfSound.YamlVvvfSoundData.YamlControlData;
+using static VvvfSimulator.Data.Vvvf.Struct.PulseControl;
 
 namespace VvvfSimulator.GUI.Resource.Converter
 {
@@ -10,7 +10,7 @@ namespace VvvfSimulator.GUI.Resource.Converter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if(value is not YamlPulseMode Mode) throw new NotImplementedException();
+            if(value is not Pulse Mode) throw new NotImplementedException();
             return FriendlyNameConverter.GetPulseModeName(Mode);
         }
 

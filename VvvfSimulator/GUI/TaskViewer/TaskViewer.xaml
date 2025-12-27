@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:uc="clr-namespace:VvvfSimulator.GUI.Resource.MyUserControl"
         xmlns:local="clr-namespace:VvvfSimulator.GUI.TaskViewer"
         mc:Ignorable="d"
         Style="{DynamicResource MinimumWindowStyle}"
@@ -38,9 +39,9 @@
             </Grid.ColumnDefinitions>
             <Image Style="{StaticResource WindowIconStyle}"/>
             <Label Grid.Column="1" x:Name="WindowTitle" Content="{DynamicResource TaskViewer.Title}" Style="{StaticResource WindowTitleStyle}"/>
-            <Button Grid.Column="2" Tag="Minimize" Style="{DynamicResource WindowMimizeButton}" Click="OnWindowControlButtonClick"/>
-            <Button Grid.Column="3" Tag="Maximize" Style="{DynamicResource WindowMaximizeButton}" Click="OnWindowControlButtonClick"/>
-            <Button Grid.Column="4" Tag="Close" Style="{DynamicResource WindowCloseButton}" Click="OnWindowControlButtonClick"/>
+            <uc:WindowControlButton Grid.Column="2" Tag="Minimize" Style="{DynamicResource WindowMimizeButton}" Click="OnWindowControlButtonClick"/>
+            <uc:WindowControlButton Grid.Column="3" Tag="Maximize" Style="{DynamicResource WindowMaximizeButton}" Click="OnWindowControlButtonClick"/>
+            <uc:WindowControlButton Grid.Column="4" Tag="Close" Style="{DynamicResource WindowCloseButton}" Click="OnWindowControlButtonClick"/>
         </Grid>
         <ListView Name="TaskView" ItemsSource="{Binding}" d:ItemsSource="{d:SampleData ItemCount=3}" Style="{DynamicResource SlimListView}" ItemContainerStyle="{DynamicResource SlimListItem}" Grid.Row="1">
             <ListView.ItemTemplate>

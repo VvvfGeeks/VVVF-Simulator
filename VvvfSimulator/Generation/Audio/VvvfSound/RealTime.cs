@@ -1,13 +1,12 @@
 ﻿using NAudio.CoreAudioApi;
 using NAudio.Wave;
 using System;
-using System.IO.Ports;
-using System.Windows;
 using VvvfSimulator.GUI.Resource.Language;
+using VvvfSimulator.GUI.Util;
 using VvvfSimulator.Properties;
-using VvvfSimulator.Yaml.VvvfSound;
-using static VvvfSimulator.Generation.Audio.GenerateRealTimeCommon;
-using static VvvfSimulator.Vvvf.Struct;
+using VvvfSimulator.Data.Vvvf;
+using static VvvfSimulator.Generation.Audio.RealTime;
+using static VvvfSimulator.Vvvf.Model.Struct;
 
 namespace VvvfSimulator.Generation.Audio.VvvfSound
 {
@@ -16,19 +15,16 @@ namespace VvvfSimulator.Generation.Audio.VvvfSound
         // --------- VVVF SOUND ------------
         private static int Generate(
             BufferedWaveProvider provider, 
-            YamlVvvfSoundData sound_data, 
-            VvvfValues control, 
-            RealTimeParameter realTime_Parameter,
-            SerialPort? serial
+            VvvfSoundParameter Param
         )
         {
             try
             {
-                serial?.Open();
+                Param.Port?.Open();
             }
             catch
             {
-                MessageBox.Show(LanguageManager.GetString("Simulator.RealTime.Message.NoUsbDevice"), "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                DialogBox.Show(LanguageManager.GetString("Simulator.RealTime.Message.NoUsbDevice"), "Error", [DialogBoxButton.Ok], DialogBoxIcon.Error);
                 return 0;
             }
 
@@ -45,64 +41,56 @@ namespace VvvfSimulator.Generation.Audio.VvvfSound
                 int CalcCount = Settings.Default.RealtimeVvvfCalculateDivision;
                 double Dt = 1.0 / Settings.Default.RealtimeVvvfSamplingFrequency;
 
-                end_result = RealTimeFrequencyControl(control, realTime_Parameter, CalcCount * Dt);
+                end_result = RealTimeFrequencyControl(Param.Control, Param, CalcCount * Dt);
                 if (end_result != -1) break;
 
                 byte[] data = new byte[CalcCount];
-
-                for(int i = 0; i < CalcCount; i++)
+                Analyze.Calculate(Param.Control, Param.VvvfSoundData);
+                for (int i = 0; i < CalcCount; i++)
                 {
-                    control.AddSineTime(Dt);
-                    control.AddSawTime(Dt);
-                    control.AddGenerationCurrentTime(Dt);
-
-                    PwmCalculateValues calculated_Values = YamlVvvfWave.CalculateYaml(control, sound_data);
-                    WaveValues value = Vvvf.Calculate.CalculatePhases(control, calculated_Values, 0);
+                    Param.Control.AddTimeAll(Dt);
+                    PhaseState value = Vvvf.Calculation.Common.CalculatePhsaseState(Param.Control, 0);
                     char cvalue = (char)(value.U << 4 | value.V << 2 | value.W);
                     data[i] = (byte)cvalue;
 
-                    double sound_byte = value.U - value.V;
-                    sound_byte /= 2.0;
-                    sound_byte *= 0.7;
+                    double sound_byte = Param.OutputMode switch
+                    {
+                        VvvfSoundParameter.Mode.Line => value.U - value.V,
+                        VvvfSoundParameter.Mode.Phase => value.U - 1,
+                        _ => value.U - value.V * 0.5 - value.W * 0.5
+                    };
+                    sound_byte *= 0.5;
 
                     AddSample((float)sound_byte, provider);
                 }
 
                 try
                 {
-                    serial?.BaseStream.WriteAsync(data, 0, data.Length);
+                    Param.Port?.BaseStream.WriteAsync(data, 0, data.Length);
                 }catch
                 {
                     break;
                 }
 
-                while (provider.BufferedBytes + CalcCount > Properties.Settings.Default.RealTime_VVVF_BuffSize) ;
+                while (provider.BufferedBytes + CalcCount > Settings.Default.RealTime_VVVF_BuffSize) ;
             }
 
             try
             {
-                serial?.Write(new byte[] { 0xFF }, 0, 1);
-                serial?.Close();
+                Param.Port?.Write([0xFF], 0, 1);
+                Param.Port?.Close();
             }
             catch
             {
-                MessageBox.Show(LanguageManager.GetString("Simulator.RealTime.Message.UsbDeviceRemoved"), "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                DialogBox.Show(LanguageManager.GetString("Simulator.RealTime.Message.UsbDeviceRemoved"), "Error", [DialogBoxButton.Ok], DialogBoxIcon.Error);
                 end_result = 0;
             }
 
             return end_result;
 
         }
-        public static void Calculate(YamlVvvfSoundData Sound, RealTimeParameter Param, SerialPort? Serial)
+        public static void Calculate(VvvfSoundParameter Param)
         {
-            Param.Quit = false;
-            Param.VvvfSoundData = Sound;
-
-            VvvfValues Control = new();
-            Control.ResetMathematicValues();
-            Control.ResetControlValues();
-            Param.Control = Control;
-
             BufferedWaveProvider bufferedWaveProvider = new(WaveFormat.CreateIeeeFloatWaveFormat(Settings.Default.RealtimeVvvfSamplingFrequency, 1))
             {
                 DiscardOnBufferOverflow = true
@@ -116,7 +104,7 @@ namespace VvvfSimulator.Generation.Audio.VvvfSound
             int stat;
             try
             {
-                stat = Generate(bufferedWaveProvider, Sound, Control, Param, Serial);
+                stat = Generate(bufferedWaveProvider, Param);
             }
             finally
             {

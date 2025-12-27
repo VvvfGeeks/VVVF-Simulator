@@ -3,6 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:uc="clr-namespace:VvvfSimulator.GUI.Resource.MyUserControl"
     xmlns:local="clr-namespace:VvvfSimulator.GUI.Create.Waveform.Basic"
     x:Class="VvvfSimulator.GUI.Create.Waveform.Basic.DiscreteSettingWindow"
     mc:Ignorable="d"
@@ -36,7 +37,7 @@
             <Image Style="{StaticResource WindowIconStyle}"/>
 
             <Label Grid.Column="1" x:Name="WindowTitle" Content="{DynamicResource Create.Settings.Waveform.Basic.DiscreteSetting.Title}" Style="{StaticResource WindowTitleStyle}"/>
-            <Button Grid.Column="4" Tag="Close" Style="{DynamicResource WindowCloseButton}" Click="OnWindowControlButtonClick"/>
+            <uc:WindowControlButton Grid.Column="4" Tag="Close" Style="{DynamicResource WindowCloseButton}" Click="OnWindowControlButtonClick"/>
         </Grid>
         <Grid Grid.Row="1" Height="200" VerticalAlignment="Top" Background="{DynamicResource BackgroundBrush}">
             <Grid.ColumnDefinitions>

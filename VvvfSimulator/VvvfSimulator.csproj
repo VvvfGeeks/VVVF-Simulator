@@ -2,7 +2,7 @@
 
 	<PropertyGroup>
 		<OutputType>WinExe</OutputType>
-		<TargetFramework>net8.0-windows10.0.22621.0</TargetFramework>
+		<TargetFramework>net10.0-windows10.0.22621.0</TargetFramework>
 		<RootNamespace>VvvfSimulator</RootNamespace>
 		<Nullable>enable</Nullable>
 		<UseWPF>true</UseWPF>
@@ -10,8 +10,8 @@
 		<Authors>VvvfGeeks</Authors>
 		<Description>A simple application to simulate VVVF sound</Description>
 		<PackageIcon>vvvf-simulator.png</PackageIcon>
-		<AllowUnsafeBlocks>False</AllowUnsafeBlocks>
-		<AssemblyVersion>1.9.1.1</AssemblyVersion>
+		<AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+		<AssemblyVersion>1.10.0.0</AssemblyVersion>
 		<ApplicationManifest>app.manifest</ApplicationManifest>
 	</PropertyGroup>
 
@@ -43,7 +43,7 @@
 		<Resource Include="GUI\Resource\Fonts\fonts-DSEG_v046\DSEG7-Modern\DSEG7Modern-LightItalic.ttf" />
 		<Resource Include="GUI\Resource\Fonts\fonts-DSEG_v046\DSEG7-Modern\DSEG7Modern-Regular.ttf" />
 		<Resource Include="GUI\Resource\Fonts\Fugaz_One\FugazOne-Regular.ttf" />
-		<Resource Include="GUI\Resource\Fonts\Gasoek_One\GasoekOne-Regular.ttf" />
+		<Resource Include="GUI\Resource\Fonts\GangWonEdu\GangWonEdu_TeunTeun.ttf" />
 		<Resource Include="GUI\Resource\Fonts\lxgw_marker_gothic\LXGWMarkerGothic-Regular.ttf" />
 		<Resource Include="GUI\Resource\Fonts\MPlus1Code\MPLUS1Code-Bold.ttf" />
 		<Resource Include="GUI\Resource\Fonts\MPlus1Code\MPLUS1Code-ExtraLight.ttf" />
@@ -59,7 +59,11 @@
 		<Resource Include="GUI\Resource\Fonts\NanumSquareNeo\NanumSquareNeo-eHv.ttf" />
 		<Resource Include="GUI\Resource\Fonts\New_Amsterdam\NewAmsterdam-Regular.ttf" />
 		<Resource Include="GUI\Resource\Fonts\Roboto_Condensed\RobotoCondensed-Medium.ttf" />
-		<Resource Include="GUI\Resource\Fonts\Noto_Sans_SC\NotoSansSC-Medium.ttf" />
+		<Resource Include="GUI\Resource\Fonts\Sarasa_UI_SC\SarasaUiSC-Bold.ttf" />
+		<Resource Include="GUI\Resource\Fonts\Sarasa_UI_SC\SarasaUiSC-ExtraLight.ttf" />
+		<Resource Include="GUI\Resource\Fonts\Sarasa_UI_SC\SarasaUiSC-Light.ttf" />
+		<Resource Include="GUI\Resource\Fonts\Sarasa_UI_SC\SarasaUiSC-Regular.ttf" />
+		<Resource Include="GUI\Resource\Fonts\Sarasa_UI_SC\SarasaUiSC-SemiBold.ttf" />
 		<Resource Include="GUI\Resource\Fonts\RocknRoll_One\RocknRollOne-Regular.ttf" />
 		<Resource Include="GUI\Resource\Images\MIDIConvert\B_MultiTask.png" />
 		<Resource Include="GUI\Resource\Images\MIDIConvert\B_Spanner.png" />
@@ -68,7 +72,13 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<EmbeddedResource Include="Generation\Audio\TrainSound\IrSample\sample6.wav" />
+		<EmbeddedResource Include="Generation\Audio\TrainSound\Filter.wav" />
+	</ItemGroup>
+	
+	<ItemGroup>
+		<EmbeddedResource Include="Generation\Video\Fonts\DSEG14Modern-Italic.ttf" />
+		<EmbeddedResource Include="Generation\Video\Fonts\DSEG7Modern-Italic.ttf" />
+		<EmbeddedResource Include="Generation\Video\Fonts\FugazOne-Regular.ttf" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -79,6 +89,7 @@
 	<ItemGroup>
 		<EmbeddedResource Include="Vvvf\SwitchAngle\L2Chm3Default.bin" />
 		<EmbeddedResource Include="Vvvf\SwitchAngle\L2Chm3Alt1.bin" />
+		<EmbeddedResource Include="Vvvf\SwitchAngle\L2Chm3Alt2.bin" />
 
 		<EmbeddedResource Include="Vvvf\SwitchAngle\L2Chm5Default.bin" />
 		<EmbeddedResource Include="Vvvf\SwitchAngle\L2Chm5Alt1.bin" />
@@ -114,7 +125,6 @@
 		<EmbeddedResource Include="Vvvf\SwitchAngle\L2Chm11Alt9.bin" />
 		<EmbeddedResource Include="Vvvf\SwitchAngle\L2Chm11Alt10.bin" />
 		<EmbeddedResource Include="Vvvf\SwitchAngle\L2Chm11Alt11.bin" />
-		<EmbeddedResource Include="Vvvf\SwitchAngle\L2Chm11Alt12.bin" />
 
 		<EmbeddedResource Include="Vvvf\SwitchAngle\L2Chm13Default.bin" />
 		<EmbeddedResource Include="Vvvf\SwitchAngle\L2Chm13Alt1.bin" />
@@ -382,15 +392,43 @@
 		<EmbeddedResource Include="Vvvf\SwitchAngle\L3Chm21Alt20.bin" />
 		<EmbeddedResource Include="Vvvf\SwitchAngle\L3Chm21Alt21.bin" />
 		<EmbeddedResource Include="Vvvf\SwitchAngle\L3Chm21Alt22.bin" />
-				
+
+		<EmbeddedResource Include="Vvvf\SwitchAngle\L2She21Alt6.bin" />
+		<EmbeddedResource Include="Vvvf\SwitchAngle\L2She21Alt5.bin" />
+		<EmbeddedResource Include="Vvvf\SwitchAngle\L2She21Alt4.bin" />
+		<EmbeddedResource Include="Vvvf\SwitchAngle\L2She21Alt3.bin" />
+		<EmbeddedResource Include="Vvvf\SwitchAngle\L2She21Alt2.bin" />
+		<EmbeddedResource Include="Vvvf\SwitchAngle\L2She21Alt1.bin" />
+		<EmbeddedResource Include="Vvvf\SwitchAngle\L2She21Default.bin" />
+		<EmbeddedResource Include="Vvvf\SwitchAngle\L2She19Alt6.bin" />
+		<EmbeddedResource Include="Vvvf\SwitchAngle\L2She19Alt5.bin" />
+		<EmbeddedResource Include="Vvvf\SwitchAngle\L2She19Alt4.bin" />
+		<EmbeddedResource Include="Vvvf\SwitchAngle\L2She19Alt3.bin" />
+		<EmbeddedResource Include="Vvvf\SwitchAngle\L2She19Alt2.bin" />
+		<EmbeddedResource Include="Vvvf\SwitchAngle\L2She19Alt1.bin" />
+		<EmbeddedResource Include="Vvvf\SwitchAngle\L2She19Default.bin" />
+		<EmbeddedResource Include="Vvvf\SwitchAngle\L2She17Alt6.bin" />
+		<EmbeddedResource Include="Vvvf\SwitchAngle\L2She17Alt5.bin" />
+		<EmbeddedResource Include="Vvvf\SwitchAngle\L2She17Alt4.bin" />
+		<EmbeddedResource Include="Vvvf\SwitchAngle\L2She17Alt3.bin" />
+		<EmbeddedResource Include="Vvvf\SwitchAngle\L2She17Alt2.bin" />
+		<EmbeddedResource Include="Vvvf\SwitchAngle\L2She17Alt1.bin" />
+		<EmbeddedResource Include="Vvvf\SwitchAngle\L2She17Default.bin" />
+		<EmbeddedResource Include="Vvvf\SwitchAngle\L2She15Alt3.bin" />
+		<EmbeddedResource Include="Vvvf\SwitchAngle\L2She15Alt2.bin" />
 		<EmbeddedResource Include="Vvvf\SwitchAngle\L2She15Alt1.bin" />
 		<EmbeddedResource Include="Vvvf\SwitchAngle\L2She15Default.bin" />
+		<EmbeddedResource Include="Vvvf\SwitchAngle\L2She13Alt3.bin" />
+		<EmbeddedResource Include="Vvvf\SwitchAngle\L2She13Alt2.bin" />
 		<EmbeddedResource Include="Vvvf\SwitchAngle\L2She13Alt1.bin" />
 		<EmbeddedResource Include="Vvvf\SwitchAngle\L2She13Default.bin" />
+		<EmbeddedResource Include="Vvvf\SwitchAngle\L2She11Alt3.bin" />
+		<EmbeddedResource Include="Vvvf\SwitchAngle\L2She11Alt2.bin" />
 		<EmbeddedResource Include="Vvvf\SwitchAngle\L2She11Alt1.bin" />
 		<EmbeddedResource Include="Vvvf\SwitchAngle\L2She11Default.bin" />
 		<EmbeddedResource Include="Vvvf\SwitchAngle\L2She7Alt1.bin" />
 		<EmbeddedResource Include="Vvvf\SwitchAngle\L2She7Default.bin" />
+		<EmbeddedResource Include="Vvvf\SwitchAngle\L2She9Alt3.bin" />
 		<EmbeddedResource Include="Vvvf\SwitchAngle\L2She9Alt2.bin" />
 		<EmbeddedResource Include="Vvvf\SwitchAngle\L2She9Alt1.bin" />
 		<EmbeddedResource Include="Vvvf\SwitchAngle\L2She9Default.bin" />
@@ -416,11 +454,10 @@
 
 	<ItemGroup>
 		<PackageReference Include="NAudio" Version="2.2.1" />
-		<PackageReference Include="OpenCvSharp4" Version="4.9.0.20240103" />
-		<PackageReference Include="OpenCvSharp4.runtime.win" Version="4.9.0.20240103" />
-		<PackageReference Include="System.Drawing.Common" Version="8.0.1" />
-		<PackageReference Include="System.IO.Ports" Version="8.0.0" />
-		<PackageReference Include="YamlDotNet" Version="15.1.1" />
+		<PackageReference Include="OpenCvSharp4" Version="4.11.0.20250507" />
+		<PackageReference Include="OpenCvSharp4.runtime.win" Version="4.11.0.20250507" />
+		<PackageReference Include="System.IO.Ports" Version="10.0.0" />
+		<PackageReference Include="YamlDotNet" Version="16.3.0" />
 	</ItemGroup>
 
 	<ItemGroup>

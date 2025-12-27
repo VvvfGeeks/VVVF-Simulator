@@ -5,8 +5,8 @@ using System.Windows.Controls;
 using VvvfSimulator.GUI.Create.Waveform.Basic;
 using VvvfSimulator.GUI.Resource.Class;
 using VvvfSimulator.GUI.Resource.Language;
-using static VvvfSimulator.Yaml.VvvfSound.YamlVvvfSoundData.YamlControlData.YamlAmplitude;
-using static VvvfSimulator.Yaml.VvvfSound.YamlVvvfSoundData.YamlControlData.YamlAmplitude.AmplitudeParameter;
+using static VvvfSimulator.Data.Vvvf.Struct.PulseControl.AmplitudeValue;
+using static VvvfSimulator.Data.Vvvf.Struct.PulseControl.AmplitudeValue.Parameter;
 
 namespace VvvfSimulator.GUI.Create.Waveform
 {
@@ -15,7 +15,7 @@ namespace VvvfSimulator.GUI.Create.Waveform
     /// </summary>
     public partial class ControlAmplitude : UserControl
     {
-        private readonly AmplitudeParameter Context;
+        private readonly Parameter Context;
         private readonly ControlAmplitudeContent ContextType;
         private readonly WaveformEditor Editor;
         private readonly bool IgnoreUpdate = true;
@@ -51,7 +51,7 @@ namespace VvvfSimulator.GUI.Create.Waveform
             public bool disable_range_visible { get { return _disable_range_visible; } set { _disable_range_visible = value; RaisePropertyChanged(nameof(disable_range_visible)); } }
         };
 
-        public ControlAmplitude(WaveformEditor Editor, AmplitudeParameter ycd, ControlAmplitudeContent cac)
+        public ControlAmplitude(WaveformEditor Editor, Parameter ycd, ControlAmplitudeContent cac)
         {
             Context = ycd;
             ContextType = cac;
@@ -98,21 +98,21 @@ namespace VvvfSimulator.GUI.Create.Waveform
             SetParameterVisibility(Context.Mode);
             SetFunctionParameterGridsVisibility(Context.Mode, ContextType);
         }
-        private void SetParameterVisibility(AmplitudeMode Mode)
+        private void SetParameterVisibility(ValueMode Mode)
         {
             TableParameter.Visibility = Mode switch
             {
-                AmplitudeMode.Table => Visibility.Visible,
+                ValueMode.Table => Visibility.Visible,
                 _ => Visibility.Collapsed,
             };
 
             FunctionParameter.Visibility = Mode switch
             {
-                AmplitudeMode.Table => Visibility.Collapsed,
+                ValueMode.Table => Visibility.Collapsed,
                 _ => Visibility.Visible,
             };
         }
-        private void SetFunctionParameterGridsVisibility(AmplitudeMode mode, ControlAmplitudeContent cac)
+        private void SetFunctionParameterGridsVisibility(ValueMode mode, ControlAmplitudeContent cac)
         {
             void _SetVisiblity(int i, bool b)
             {
@@ -129,13 +129,13 @@ namespace VvvfSimulator.GUI.Create.Waveform
 
             Boolean[] condition_1, condition_2;
 
-            if (mode == AmplitudeMode.Linear)
+            if (mode == ValueMode.Linear)
                 condition_1 = [true, true, true, true, true, true, false, false, true];
-            else if (mode == AmplitudeMode.InverseProportional)
+            else if (mode == ValueMode.InverseProportional)
                 condition_1 = [true, true, true, true, true, true, false, true, true];
-            else if (mode == AmplitudeMode.Exponential)
+            else if (mode == ValueMode.Exponential)
                 condition_1 = [false, false, true, true, true, true, false, false, true];
-            else if (mode == AmplitudeMode.LinearPolynomial)
+            else if (mode == ValueMode.LinearPolynomial)
                 condition_1 = [false, false, true, true, true, true, true, false, true];
             else
                 condition_1 = [false, false, true, true, true, true, false, false, true];
@@ -192,7 +192,7 @@ namespace VvvfSimulator.GUI.Create.Waveform
         {
             if (IgnoreUpdate) return;
 
-            Context.Mode = (AmplitudeMode)amplitude_mode_selector.SelectedValue;
+            Context.Mode = (ValueMode)amplitude_mode_selector.SelectedValue;
             UpdateVisibility();
         }
         private void ButtonClicked(object sender, RoutedEventArgs e)

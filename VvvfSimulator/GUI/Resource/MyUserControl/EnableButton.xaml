@@ -5,29 +5,25 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:converter="clr-namespace:VvvfSimulator.GUI.Resource.Converter"
              xmlns:local="clr-namespace:VvvfSimulator.GUI.Resource.MyUserControl"
+             xmlns:system="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d" 
-             d:DesignHeight="250" d:DesignWidth="1000">
+             d:DesignHeight="250" d:DesignWidth="500">
 
     <UserControl.Resources>
         <converter:HalfConverter x:Key="HalfConverter"/>
-        <local:FontSizeConverter x:Key="FontSizeConverter"/>
-
-        <Style TargetType="Label">
-            <Setter Property="FontSize" Value="{Binding ActualHeight, RelativeSource={RelativeSource AncestorType=Border}, Converter={StaticResource FontSizeConverter}}"/>
-            <Setter Property="FontFamily" Value="{DynamicResource Generic.Font}"/>
-            <Setter Property="FontWeight" Value="Bold"/>
-            <Setter Property="HorizontalAlignment" Value="Center"/>
-            <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="Padding" Value="0"/>
-            <d:Setter Property="Foreground" Value="{DynamicResource EnableSwitchTextColorDisabledBrush}"/>
-            <Setter Property="FontStretch" Value="Normal"/>
-            <Setter Property="FontStyle" Value="Normal"/>
-        </Style>
+        <system:Double x:Key="ButtonDotMargin">5.0</system:Double>
     </UserControl.Resources>
 
     <Grid Height="Auto" MouseUp="Grid_MouseUp" MouseDown="Grid_MouseDown" MouseLeave="Grid_MouseLeave" >
-        <Border x:Name="Button" d:Background="{DynamicResource EnableSwitchBackgroundEnabledBrush}" CornerRadius="{Binding ActualHeight, RelativeSource={RelativeSource Self}, Converter={StaticResource HalfConverter}}">
-            <Label x:Name="Status" Content="{DynamicResource Generic.Status.Enabled}"/>
+        <Border x:Name="Button" CornerRadius="{Binding ActualHeight, RelativeSource={RelativeSource Self}, Converter={StaticResource HalfConverter}}">
+            <Border.Background>
+                <SolidColorBrush Color="{DynamicResource EnableSwitchBackColorEnabled}"/>
+            </Border.Background>
+            <Ellipse x:Name="ButtonDot" HorizontalAlignment="Left" Margin="5" VerticalAlignment="Stretch" Width="{Binding ActualHeight, RelativeSource={RelativeSource Self}}">
+                <Ellipse.Fill>
+                    <SolidColorBrush Color="{DynamicResource EnableSwitchForeColorEnabled}"/>
+                </Ellipse.Fill>
+            </Ellipse>
         </Border>
     </Grid>
 </UserControl>

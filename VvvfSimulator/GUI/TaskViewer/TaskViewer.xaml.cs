@@ -7,7 +7,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using VvvfSimulator.GUI.Resource.Language;
 using VvvfSimulator.GUI.Resource.Theme;
-using static VvvfSimulator.Generation.GenerateCommon.GenerationBasicParameter;
+using static VvvfSimulator.Generation.GenerateCommon.GenerationParameter;
 
 namespace VvvfSimulator.GUI.TaskViewer
 {

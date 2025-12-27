@@ -27,7 +27,10 @@ namespace VvvfSimulator.GUI.Resource.Theme
         {
             return Application.Current.Resources[name];
         }
-
+        public static Color GetColor(string name)
+        {
+            return (Color)Application.Current.Resources[name];
+        }
         public static Brush GetBrush(string name)
         {
             return (Brush)Application.Current.Resources[name];

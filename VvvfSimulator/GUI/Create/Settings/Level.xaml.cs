@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
-using VvvfSimulator.Yaml.VvvfSound;
+using VvvfSimulator.Data.Vvvf;
 using VvvfSimulator.GUI.Resource.Class;
 
 
@@ -20,11 +20,11 @@ namespace VvvfSimulator.GUI.Create.Settings
             {
                 get
                 {
-                    return YamlVvvfManage.CurrentData.Level;
+                    return Manager.Current.Level;
                 }
                 set
                 {
-                    YamlVvvfManage.CurrentData.Level = value;
+                    Manager.Current.Level = value;
                     RaisePropertyChanged(nameof(Level));
                 }
             }

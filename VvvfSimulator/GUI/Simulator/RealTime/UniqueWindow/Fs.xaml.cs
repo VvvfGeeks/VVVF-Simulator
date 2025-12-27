@@ -7,28 +7,25 @@ using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 using VvvfSimulator.Generation;
 using VvvfSimulator.GUI.Resource.Class;
-using VvvfSimulator.Yaml.VvvfSound;
-using static VvvfSimulator.Generation.Audio.GenerateRealTimeCommon;
+using static VvvfSimulator.Generation.Audio.RealTime;
 using static VvvfSimulator.Generation.Video.FS.GenerateFourierSeries;
-using static VvvfSimulator.Vvvf.Struct;
 
 namespace VvvfSimulator.GUI.Simulator.RealTime.UniqueWindow
 {
     /// <summary>
     /// RealTime_FFT_Window.xaml の相互作用ロジック
     /// </summary>
-    public partial class Fs : Window
+    public partial class Fs : Window, IRealtimeDisplay
     {
         private ViewModel BindingData = new();
+        private readonly Parameter _Parameter;
         public class ViewModel : ViewModelBase
         {
 
             private BitmapFrame? _Image;
             public BitmapFrame? Image { get { return _Image; } set { _Image = value; RaisePropertyChanged(nameof(Image)); } }
         };
-
-        RealTimeParameter _Parameter;
-        public Fs(RealTimeParameter Parameter)
+        public Fs(Parameter Parameter)
         {
             _Parameter = Parameter;
 
@@ -36,7 +33,7 @@ namespace VvvfSimulator.GUI.Simulator.RealTime.UniqueWindow
             DataContext = BindingData;
         }
 
-        public void RunTask()
+        public void Start()
         {
             Task.Run(() => {
                 while (!_Parameter.Quit)
@@ -59,13 +56,9 @@ namespace VvvfSimulator.GUI.Simulator.RealTime.UniqueWindow
         private string StrCoefficients = "C = [0]";
         private void UpdateControl()
         {
-            VvvfValues control = _Parameter.Control.Clone();
-            YamlVvvfSoundData ysd = _Parameter.VvvfSoundData;
-
-            control.SetSineTime(0);
-            control.SetSawTime(0);
-
-            double[] Coefficients = GenerateBasic.Fourier.GetFourierCoefficients(control, ysd, 10000, N);
+            Vvvf.Model.Struct.Domain Domain = _Parameter.Control.Clone();
+            Data.Vvvf.Struct ysd = _Parameter.VvvfSoundData;
+            double[] Coefficients = GenerateBasic.Fourier.GetFourierCoefficients(Domain, 10000, N);
             StrCoefficients = GenerateBasic.Fourier.GetDesmosFourierCoefficientsArray(ref Coefficients);
             Bitmap image = GetImage(ref Coefficients);
 
@@ -88,8 +81,6 @@ namespace VvvfSimulator.GUI.Simulator.RealTime.UniqueWindow
             }
 
             image.Dispose();
-
-            
         }
 
         private void Button_CopyCoefficients_Click(object sender, RoutedEventArgs e)

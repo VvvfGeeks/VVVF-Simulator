@@ -1,0 +1,126 @@
+﻿<Window x:Class="VvvfSimulator.GUI.Util.DialogBox"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:uc="clr-namespace:VvvfSimulator.GUI.Resource.MyUserControl"
+        xmlns:local="clr-namespace:VvvfSimulator.GUI.Util"
+        mc:Ignorable="d"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Topmost="True"
+        SizeToContent="WidthAndHeight"
+        Background="Transparent"
+        Closing="OnClosing" Loaded="OnLoaded" ContentRendered="OnContentRendered" KeyDown="OnKeydown">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/GUI/Resource/Dictionary/Common.xaml"/>
+                <ResourceDictionary Source="/GUI/Resource/Dictionary/Window.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Window.RenderTransform>
+        <TransformGroup>
+            <ScaleTransform x:Name="WindowScaleTransform" ScaleX="1" ScaleY="1" />
+            <TranslateTransform x:Name="WindowTranslateTransform" X="0" Y="0" />
+        </TransformGroup>
+    </Window.RenderTransform>
+
+    <Border Background="{DynamicResource VoidBackgroundBrush}" BorderThickness="2" CornerRadius="5">
+        <Border.Style>
+            <Style TargetType="{x:Type Border}">
+                <Setter Property="BorderBrush">
+                    <Setter.Value>
+                        <SolidColorBrush Color="{StaticResource KeyUltraLightColor}"/>
+                    </Setter.Value>
+                </Setter>
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Path=IsActive}" Value="True">
+                        <Setter Property="BorderBrush">
+                            <Setter.Value>
+                                <SolidColorBrush Color="{StaticResource KeyColor}"/>
+                            </Setter.Value>
+                        </Setter>
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+        </Border.Style>
+        
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="25"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="25"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="46"/>
+                </Grid.ColumnDefinitions>
+                <Image Style="{StaticResource WindowIconStyle}"/>
+                <Label Grid.Column="1" x:Name="WindowTitle" Content="Title" Style="{StaticResource WindowTitleStyle}"/>
+                <uc:WindowControlButton Grid.Column="2" Tag="Close" Click="OnWindowControlButtonClick" Style="{DynamicResource WindowCloseButton}" BorderCorner="0,5,0,0"/>
+            </Grid>
+            <Grid Grid.Row="1" Margin="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="40"/>
+                    <ColumnDefinition Width="*" MinWidth="160"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition MinHeight="20" Height="*"/>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition MinHeight="20" Height="*"/>
+                    <RowDefinition Height="60"/>
+                </Grid.RowDefinitions>
+                <Grid x:Name="IconBox" Grid.Column="0" Grid.Row="1">
+                    <Grid x:Name="IconError" Visibility="Collapsed">
+                        <Ellipse StrokeThickness="3" Fill="{DynamicResource DialogBoxErrorFill}" Stroke="{DynamicResource DialogBoxErrorStroke}"/>
+                        <Path StrokeThickness="3" Data="M10,10 l20,20 M30,10 l-20,20" Stroke="{DynamicResource DialogBoxErrorIcon}"/>
+                    </Grid>
+                    <Grid x:Name="IconQuestion" Visibility="Collapsed">
+                        <Ellipse StrokeThickness="3" Fill="{DynamicResource DialogBoxQuestionFill}" Stroke="{DynamicResource DialogBoxQuestionStroke}"/>
+                        <Path StrokeThickness="3" Data="M 13,15 A 7.5,6.5 0 1 1 23,20 A 3.5,6 0 0 0 20,26 l 0,3 M 20,32 L 20,35" Stroke="{DynamicResource DialogBoxQuestionIcon}"/>
+                    </Grid>
+                    <Grid x:Name="IconInformation" Visibility="Collapsed">
+                        <Ellipse StrokeThickness="3" Fill="{DynamicResource DialogBoxInformationFill}" Stroke="{DynamicResource DialogBoxInformationStroke}"/>
+                        <Path StrokeThickness="3" Data="M 20 5 L 20 25 M 20,30 L 20,35" Stroke="{DynamicResource DialogBoxInformationIcon}"/>
+                    </Grid>
+                    <Grid x:Name="IconWarning" Visibility="Collapsed">
+                        <Path StrokeThickness="3" Data="M 20 5 L 3 35 L 37 35 Z" Stroke="{DynamicResource DialogBoxWarningStroke}" Fill="{DynamicResource DialogBoxWarningFill}"/>
+                        <Path StrokeThickness="3" Data="M 20 13 L 20 25 M 20,27 L 20,32" Stroke="{DynamicResource DialogBoxWarningIcon}"/>
+                    </Grid>
+                    <Grid x:Name="IconOk" Visibility="Collapsed">
+                        <Ellipse StrokeThickness="3" Fill="{DynamicResource DialogBoxOkFill}" Stroke="{DynamicResource DialogBoxOkStroke}"/>
+                        <Path StrokeThickness="3" Data="M 8 21 L 18 30 L 30 10" Stroke="{DynamicResource DialogBoxOkIcon}"/>
+                    </Grid>
+                    <Grid x:Name="IconNone" Visibility="Collapsed"/>
+                </Grid>
+                <Label x:Name="MessageLabel" Content="Message" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.ColumnSpan="1" Foreground="{DynamicResource BackgroundTextBrush}" Grid.RowSpan="3"/>
+
+                <Grid x:Name="ButtonGrid" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition MinWidth="100"/>
+                        <ColumnDefinition MinWidth="100"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.Resources>
+                        <Style TargetType="Button">
+                            <Setter Property="Margin" Value="5"/>
+                        </Style>
+                    </Grid.Resources>
+                    <Button x:Name="ButtonOk" Style="{DynamicResource SlimButton}" Content="{DynamicResource DialogBox.Ok}" Tag="{x:Static local:DialogBoxButton.Ok}" Visibility="Collapsed" Click="OnButtonClick"/>
+                    <Button x:Name="ButtonCancel" Style="{DynamicResource SlimButton}" Content="{DynamicResource DialogBox.Cancel}" Tag="{x:Static local:DialogBoxButton.Cancel}" Visibility="Collapsed" Click="OnButtonClick"/>
+                    <Button x:Name="ButtonAbort" Style="{DynamicResource SlimButton}" Content="{DynamicResource DialogBox.Abort}" Tag="{x:Static local:DialogBoxButton.Abort}" Visibility="Collapsed" Click="OnButtonClick"/>
+                    <Button x:Name="ButtonRetry" Style="{DynamicResource SlimButton}" Content="{DynamicResource DialogBox.Retry}" Tag="{x:Static local:DialogBoxButton.Retry}" Visibility="Collapsed" Click="OnButtonClick"/>
+                    <Button x:Name="ButtonIgnore" Style="{DynamicResource SlimButton}" Content="{DynamicResource DialogBox.Ignore}" Tag="{x:Static local:DialogBoxButton.Ignore}" Visibility="Collapsed" Click="OnButtonClick"/>
+                    <Button x:Name="ButtonTry" Style="{DynamicResource SlimButton}" Content="{DynamicResource DialogBox.Try}" Tag="{x:Static local:DialogBoxButton.Try}" Visibility="Collapsed" Click="OnButtonClick"/>
+                    <Button x:Name="ButtonContinue" Style="{DynamicResource SlimButton}" Content="{DynamicResource DialogBox.Continue}" Tag="{x:Static local:DialogBoxButton.Continue}" Visibility="Collapsed" Click="OnButtonClick"/>
+                    <Button x:Name="ButtonYes" Style="{DynamicResource SlimButton}" Content="{DynamicResource DialogBox.Yes}" Tag="{x:Static local:DialogBoxButton.Yes}" Visibility="Collapsed" Click="OnButtonClick"/>
+                    <Button x:Name="ButtonNo" Style="{DynamicResource SlimButton}" Content="{DynamicResource DialogBox.No}" Tag="{x:Static local:DialogBoxButton.No}" Visibility="Collapsed" Click="OnButtonClick"/>
+                </Grid>
+            </Grid>
+        </Grid>
+    </Border>
+</Window>

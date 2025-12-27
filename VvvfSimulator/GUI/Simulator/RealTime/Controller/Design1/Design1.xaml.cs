@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO.Ports;
 using System.Threading.Tasks;
@@ -11,11 +12,10 @@ using VvvfSimulator.GUI.Resource.Class;
 using VvvfSimulator.GUI.Resource.Language;
 using VvvfSimulator.GUI.Resource.Theme;
 using VvvfSimulator.GUI.Simulator.RealTime.Setting;
-using static VvvfSimulator.Generation.Audio.GenerateRealTimeCommon;
-using static VvvfSimulator.Vvvf.Calculate;
-using static VvvfSimulator.Vvvf.Struct;
-using static VvvfSimulator.Yaml.VvvfSound.YamlVvvfSoundData.YamlControlData;
-using static VvvfSimulator.Yaml.VvvfSound.YamlVvvfSoundData.YamlControlData.YamlPulseMode;
+using VvvfSimulator.GUI.Util;
+using static VvvfSimulator.Generation.Audio.RealTime;
+using static VvvfSimulator.Vvvf.Model.Struct;
+using static VvvfSimulator.Data.Vvvf.Struct.PulseControl.Pulse;
 
 namespace VvvfSimulator.GUI.Simulator.RealTime.Controller.Design1
 {
@@ -24,7 +24,7 @@ namespace VvvfSimulator.GUI.Simulator.RealTime.Controller.Design1
     /// </summary>
     public partial class Design1 : Window, IController
     {
-        private readonly RealTimeParameter Param;
+        private readonly Parameter Param;
         private readonly ViewModel Model = new();
         public int MasconPosition = 0;
         public DeviceMode CurrentMode = DeviceMode.KeyBoard;
@@ -72,16 +72,16 @@ namespace VvvfSimulator.GUI.Simulator.RealTime.Controller.Design1
             public Brush P4 { get { return _P4; } set { _P4 = value; RaisePropertyChanged(nameof(P4)); } }
 
 
-            private double _SineFrequency = 0;
-            public double SineFrequency { get { return _SineFrequency; } set { _SineFrequency = value; RaisePropertyChanged(nameof(SineFrequency)); } }
+            private string _SineFrequency = string.Empty;
+            public string SineFrequency { get { return _SineFrequency; } set { _SineFrequency = value; RaisePropertyChanged(nameof(SineFrequency)); } }
 
-            private double _Voltage = 0;
-            public double Voltage { get { return _Voltage; } set { _Voltage = value; RaisePropertyChanged(nameof(Voltage)); } }
+            private string _Voltage = string.Empty;
+            public string Voltage { get { return _Voltage; } set { _Voltage = value; RaisePropertyChanged(nameof(Voltage)); } }
 
-            private string _PulseState = "";
+            private string _PulseState = string.Empty;
             public string PulseState { get { return _PulseState; } set { _PulseState = value; RaisePropertyChanged(nameof(PulseState)); } }
         };
-        public Design1(RealTimeParameter parameter)
+        public Design1(Parameter parameter)
         {
             Param = parameter;
 
@@ -95,47 +95,41 @@ namespace VvvfSimulator.GUI.Simulator.RealTime.Controller.Design1
             Task.Run(() => {
                 while (!Param.Quit)
                 {
+                    Domain Control = Param.Control.Clone();
+                    Control.GetCarrierInstance().UseSimpleFrequency = true;
+
+                    string? PulseName = null;
+                    if (!Control.ElectricalState.IsNone)
+                    {
+                        int PulseCount = Control.ElectricalState.PulsePattern.PulseMode.PulseCount;
+                        PulseName = Control.ElectricalState.PulsePattern.PulseMode.PulseType switch
+                        {
+                            PulseTypeName.ASYNC => Control.GetCarrierInstance().CalculateCarrierFrequency(Control.GetTime(), Control.ElectricalState).ToString("F2"),
+                            PulseTypeName.SYNC => PulseCount.ToString(),
+                            PulseTypeName.CHM => "CHM " + PulseCount.ToString(),
+                            PulseTypeName.SHE => "SHE " + PulseCount.ToString(),
+                            PulseTypeName.HO => "HO " + PulseCount.ToString(),
+                            PulseTypeName.ΔΣ => Control.ElectricalState.PulseData.GetValueOrDefault(PulseDataKey.UpdateFrequency).ToString("F2"),
+                            _ => PulseCount.ToString(),
+                        };
+                    }
+
+                    Model.SineFrequency = Control.ElectricalState.BaseWaveFrequency.ToString("F1");
+                    Model.PulseState = PulseName ?? LanguageManager.GetString("Simulator.RealTime.Controller.PulseState.None");
+
                     System.Threading.Thread.Sleep(20);
-                    Model.SineFrequency = Param.Control.GetVideoSineFrequency();
-                    Model.PulseState = GetPulseName();
                 }
             });
             Task.Run(() => {
                 while (!Param.Quit)
                 {
-                    VvvfValues solve_control = Param.Control.Clone();
-                    solve_control.SetRandomFrequencyMoveAllowed(false);
-                    double voltage = GenerateBasic.Fourier.GetVoltageRate(solve_control, Param.VvvfSoundData, false) * 100;
-                    Model.Voltage = voltage;
+                    Domain solve_control = Param.Control.Clone();
+                    solve_control.GetCarrierInstance().UseSimpleFrequency = true;
+                    double voltage = GenerateBasic.Fourier.GetVoltageRate(solve_control, false) * 100;
+                    Model.Voltage = Param.Control.ElectricalState.IsNone ?  LanguageManager.GetString("Simulator.RealTime.Controller.Voltage.None") : ((double)voltage).ToString("F1");
                 }
             });
         }        
-        private string GetPulseName()
-        {
-            VvvfValues Control = Param.Control.Clone();
-            Task Calculate = Task.Run(() =>
-            {
-                Control.SetRandomFrequencyMoveAllowed(false);
-                PwmCalculateValues Values = Yaml.VvvfSound.YamlVvvfWave.CalculateYaml(Control, Param.VvvfSoundData);
-                CalculatePhases(Control, Values, 0);
-            });
-            Calculate.Wait();
-
-            YamlPulseMode PulseMode = Control.GetVideoPulseMode();
-            CarrierFreq Carrier = Control.GetVideoCarrierFrequency();
-            int PulseCount = PulseMode.PulseCount;
-            PulseTypeName Type = PulseMode.PulseType;
-
-            return Type switch
-            {
-                PulseTypeName.ASYNC => Carrier.BaseFrequency.ToString("F2"),
-                PulseTypeName.SYNC => PulseCount.ToString(),
-                PulseTypeName.CHM => "CHM " + PulseCount.ToString(),
-                PulseTypeName.SHE => "SHE " + PulseCount.ToString(),
-                PulseTypeName.HO => "HO " + PulseCount.ToString(),
-                _ => PulseCount.ToString(),
-            };
-        }
         private void SetColor(int c, SolidColorBrush brush)
         {
             if (c == 0) Model.N = brush;
@@ -217,7 +211,7 @@ namespace VvvfSimulator.GUI.Simulator.RealTime.Controller.Design1
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message, LanguageManager.GetString("Generic.Title.Error"), MessageBoxButton.OK, MessageBoxImage.Error);
+                    DialogBox.Show(ex.Message, LanguageManager.GetString("Generic.Title.Error"), [DialogBoxButton.Ok], DialogBoxIcon.Error);
                 }
             }
             else if(CurrentMode == DeviceMode.KeyBoard)

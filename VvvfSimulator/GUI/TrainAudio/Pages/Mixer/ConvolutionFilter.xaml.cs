@@ -2,7 +2,8 @@
 using System.Windows;
 using System.Windows.Controls;
 using VvvfSimulator.GUI.Resource.Language;
-using static VvvfSimulator.Yaml.TrainAudioSetting.YamlTrainSoundAnalyze;
+using VvvfSimulator.GUI.Util;
+using VvvfSimulator.Data.TrainAudio;
 
 namespace VvvfSimulator.GUI.TrainAudio.Pages.Mixer
 {
@@ -11,8 +12,8 @@ namespace VvvfSimulator.GUI.TrainAudio.Pages.Mixer
     /// </summary>
     public partial class ConvolutionFilter : Page
     {
-        readonly YamlTrainSoundData data;
-        public ConvolutionFilter(YamlTrainSoundData data)
+        readonly Struct data;
+        public ConvolutionFilter(Struct data)
         {
             this.data = data;
             InitializeComponent();
@@ -26,18 +27,22 @@ namespace VvvfSimulator.GUI.TrainAudio.Pages.Mixer
             };
             if (dialog.ShowDialog() == false)
             {
-                data.ImpulseResponse = Generation.Audio.TrainSound.AudioResourceManager.ReadResourceAudioFileSample(Generation.Audio.TrainSound.AudioResourceManager.SampleIrPath);
-                MessageBox.Show(LanguageManager.GetString("TrainAudio.Pages.Mixer.ConvolutionFilter.Message.Load.Reset"), LanguageManager.GetString("Generic.Title.Info"), MessageBoxButton.OK, MessageBoxImage.Information); return;
+                Generation.Audio.TrainSound.AudioResourceManager.ReadResourceAudioFileSample(Generation.Audio.TrainSound.AudioResourceManager.SampleIrPath, out float[] Data, out int SampleRate);
+                data.ImpulseResponse = Data;
+                data.ImpulseResponseSampleRate = SampleRate;
+                DialogBox.Show(LanguageManager.GetString("TrainAudio.Pages.Mixer.ConvolutionFilter.Message.Load.Reset"), LanguageManager.GetString("Generic.Title.Info"), [DialogBoxButton.Ok], DialogBoxIcon.Information); return;
             }
 
             string path = dialog.FileName;
             try
             {
-                data.ImpulseResponse = Generation.Audio.TrainSound.AudioResourceManager.ReadAudioFileSample(path);
-                MessageBox.Show(LanguageManager.GetString("TrainAudio.Pages.Mixer.ConvolutionFilter.Message.Load.Ok"), LanguageManager.GetString("Generic.Title.Info"), MessageBoxButton.OK, MessageBoxImage.Information); return;
+                Generation.Audio.TrainSound.AudioResourceManager.ReadAudioFileSample(path, out float[] Data, out int SampleRate);
+                data.ImpulseResponse = Data;
+                data.ImpulseResponseSampleRate = SampleRate;
+                DialogBox.Show(LanguageManager.GetString("TrainAudio.Pages.Mixer.ConvolutionFilter.Message.Load.Ok"), LanguageManager.GetString("Generic.Title.Info"), [DialogBoxButton.Ok], DialogBoxIcon.Information); return;
             } catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, LanguageManager.GetString("Generic.Title.Error"), MessageBoxButton.OK, MessageBoxImage.Error); return;
+                DialogBox.Show(ex.Message, LanguageManager.GetString("Generic.Title.Error"), [DialogBoxButton.Ok], DialogBoxIcon.Error); return;
             }
         }
     }
