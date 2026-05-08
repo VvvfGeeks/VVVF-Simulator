@@ -97,7 +97,7 @@ namespace VvvfSimulator.GUI.TrainAudio
             MenuItem button = (MenuItem)sender;
             object? tag = button.Tag;
             if (tag == null) return;
-            if (tag.Equals("Load"))
+            if (tag.Equals("Open"))
             {
                 var dialog = new OpenFileDialog
                 {

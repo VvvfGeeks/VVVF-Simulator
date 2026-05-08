@@ -1,7 +1,6 @@
 ﻿using System;
 using VvvfSimulator.Vvvf;
 using VvvfSimulator.Vvvf.Calculation;
-using VvvfSimulator.Data.Vvvf;
 using static VvvfSimulator.Vvvf.Model.Struct;
 
 namespace VvvfSimulator.Generation
@@ -58,8 +57,9 @@ namespace VvvfSimulator.Generation
         }
         public static class Fourier
         {
+            public static MyMath.Function PrimitiveOfSine = (double x) => { return -Math.Cos(x); };
             public const double VoltageConvertFactor = 1.102657791;
-            public static double GetFourier(ref PhaseState[] UVW, int N)
+            public static double GetFourier(ref PhaseState[] UVW, MyMath.Function Function, int N)
             {
                 double integral = 0;
                 double dt = 1.0 / (UVW.Length - 1);
@@ -67,14 +67,14 @@ namespace VvvfSimulator.Generation
                 for (int i = 0; i < UVW.Length; i++)
                 {
                     double iTime = MyMath.M_2PI * i / (UVW.Length - 1);
-                    double sum = (UVW[i].U - UVW[i].V) * Math.Sin(N * iTime) * dt;
+                    double sum = (UVW[i].U - UVW[i].V) * Function(N * iTime) * dt;
                     integral += sum;
                 }
                 double bn = integral;
                 return bn;
             }
 
-            public static double GetFourierFast(ref PhaseState[] UVW, int N)
+            public static double GetFourierFast(ref PhaseState[] UVW, MyMath.Function Primitive, int N)
             {
                 double integral = 0;
 
@@ -93,7 +93,7 @@ namespace VvvfSimulator.Generation
 
                     if (Ft == iFt) continue;
                     double iTime = MyMath.M_2PI * i / (UVW.Length - 1);
-                    double sum = (-Math.Cos(N * iTime) + Math.Cos(N * Time)) * Ft / N;
+                    double sum = (Primitive(N * iTime) - Primitive(N * Time)) * Ft / N;
                     integral += sum;
 
                     Time = iTime;
@@ -103,32 +103,22 @@ namespace VvvfSimulator.Generation
                 return bn;
             }
 
-            public static double[] GetFourierCoefficients(ref PhaseState[] UVW, int N)
+            public static double[] GetFourierCoefficients(ref PhaseState[] UVW, MyMath.Function Primitive, (int Begin, int End) N)
             {
-                double[] coefficients = new double[N];
-                for (int n = 1; n <= N; n++)
+                double[] coefficients = new double[N.End - N.Begin + 1];
+                for (int n = N.Begin; n <= N.End; n++)
                 {
-                    double result = GetFourierFast(ref UVW, n);
-                    coefficients[n - 1] = result;
+                    double result = GetFourierFast(ref UVW, Primitive, n);
+                    coefficients[n - N.Begin] = result;
                 }
                 return coefficients;
             }
-
-            /// <summary>
-            /// Gets Fourier series coefficients
-            /// </summary>
-            /// <param name="Control">Make sure you put cloned data.</param>
-            /// <param name="Sound"></param>
-            /// <param name="Delta"></param>
-            /// <param name="N"></param>
-            /// <returns></returns>
-            public static double[] GetFourierCoefficients(Domain Control, int Delta, int N)
+            public static double[] GetFourierCoefficients(Domain Control, int Delta, bool Precise, MyMath.Function Primitive, (int Begin, int End) N)
             {
                 Control.GetCarrierInstance().UseSimpleFrequency = true;
-                PhaseState[] PWM_Array = WaveForm.GetUVWCycle(Control, MyMath.M_PI_6, Delta, false);
-                return GetFourierCoefficients(ref PWM_Array, N);
+                PhaseState[] PWM_Array = WaveForm.GetUVWCycle(Control, MyMath.M_PI_6, Delta, Precise);
+                return GetFourierCoefficients(ref PWM_Array, Primitive, N);
             }
-
             public static string GetDesmosFourierCoefficientsArray(ref double[] coefficients)
             {
                 String array = "C = [";
@@ -139,13 +129,6 @@ namespace VvvfSimulator.Generation
                 array += "]";
                 return array;
             }
-
-            /// <summary>
-            /// Do clone about control!
-            /// </summary>
-            /// <param name="Sound"></param>
-            /// <param name="Control"></param>
-            /// <returns></returns>
             public static double GetVoltageRate(Domain Control, bool Precise, bool FixSign = true)
             {
                 PhaseState[] PWM_Array = WaveForm.GetUVWCycle(Control, MyMath.M_PI_6, 120000, Precise);
@@ -153,7 +136,7 @@ namespace VvvfSimulator.Generation
             }
             public static double GetVoltageRate(ref PhaseState[] UVW, bool FixSign = true)
             {
-                double result = GetFourierFast(ref UVW, 1) / VoltageConvertFactor;
+                double result = GetFourierFast(ref UVW, PrimitiveOfSine, 1) / VoltageConvertFactor;
                 if (FixSign) result = Math.Abs(result);
                 return result;
             }

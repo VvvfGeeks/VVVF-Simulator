@@ -43,38 +43,33 @@
 
     <system:String x:Key="MainWindow.Menu.Generate">생성</system:String>
     <system:String x:Key="MainWindow.Menu.Generate.Audio">오디오</system:String>
-    <system:String x:Key="MainWindow.Menu.Generate.Audio.VVVF">VVVF음</system:String>
-    <system:String x:Key="MainWindow.Menu.Generate.Audio.VVVF.Line">선간전압</system:String>
-    <system:String x:Key="MainWindow.Menu.Generate.Audio.VVVF.Phases">상전압</system:String>
-    <system:String x:Key="MainWindow.Menu.Generate.Audio.VVVF.PhaseCurrent">상전류</system:String>
-    <system:String x:Key="MainWindow.Menu.Generate.Audio.Train">주행음</system:String>
-    <system:String x:Key="MainWindow.Menu.Generate.Movie">영상</system:String>
-    <system:String x:Key="MainWindow.Menu.Generate.Movie.Control">제어</system:String>
-    <system:String x:Key="MainWindow.Menu.Generate.Movie.Control.Design1">디자인1</system:String>
-    <system:String x:Key="MainWindow.Menu.Generate.Movie.Control.Design2">디자인2</system:String>
-    <system:String x:Key="MainWindow.Menu.Generate.Movie.WaveForm">파형</system:String>
-    <system:String x:Key="MainWindow.Menu.Generate.Movie.WaveForm.Original">선간전압(1)</system:String>
-    <system:String x:Key="MainWindow.Menu.Generate.Movie.WaveForm.Spaced">선간전압(2)</system:String>
-    <system:String x:Key="MainWindow.Menu.Generate.Movie.WaveForm.UVW">3상 상전압</system:String>
-    <system:String x:Key="MainWindow.Menu.Generate.Movie.Hexagon">전압 벡터</system:String>
-    <system:String x:Key="MainWindow.Menu.Generate.Movie.Hexagon.Original">디자인1</system:String>
-    <system:String x:Key="MainWindow.Menu.Generate.Movie.Hexagon.Explain">전압 벡터 생성 과정</system:String>
-    <system:String x:Key="MainWindow.Menu.Generate.Movie.FFT">FFT</system:String>
-    <system:String x:Key="MainWindow.Menu.Generate.Movie.FFT.Original">디자인1</system:String>
-    <system:String x:Key="MainWindow.Menu.Generate.Image">이미지</system:String>
-    <system:String x:Key="MainWindow.Menu.Generate.Image.Hexagon">전압 벡터</system:String>
-    <system:String x:Key="MainWindow.Menu.Generate.Image.Hexagon.Original">디자인1</system:String>
-    <system:String x:Key="MainWindow.Menu.Generate.Image.FFT">FFT</system:String>
-    <system:String x:Key="MainWindow.Menu.Generate.Image.FFT.Original">디자인1</system:String>
+    <system:String x:Key="MainWindow.Menu.Generate.Audio.Line">선간 전압</system:String>
+    <system:String x:Key="MainWindow.Menu.Generate.Audio.Phases">상전압</system:String>
+    <system:String x:Key="MainWindow.Menu.Generate.Audio.PhaseCurrent">상전류</system:String>
+    <system:String x:Key="MainWindow.Menu.Generate.Audio.Train">차량</system:String>
+    <system:String x:Key="MainWindow.Menu.Generate.Control">제어 상태도</system:String>
+    <system:String x:Key="MainWindow.Menu.Generate.Control.Design1">디자인 1</system:String>
+    <system:String x:Key="MainWindow.Menu.Generate.Control.Design2">디자인 2</system:String>
+    <system:String x:Key="MainWindow.Menu.Generate.Waveform">파형도</system:String>
+    <system:String x:Key="MainWindow.Menu.Generate.Waveform.Line">선간 전압</system:String>
+    <system:String x:Key="MainWindow.Menu.Generate.Waveform.Phase">상전압</system:String>
+    <system:String x:Key="MainWindow.Menu.Generate.Hexagon">전압 벡터도</system:String>
+    <system:String x:Key="MainWindow.Menu.Generate.Hexagon.Design1">디자인 1</system:String>
+    <system:String x:Key="MainWindow.Menu.Generate.Hexagon.Explain">그리기 과정</system:String>
+    <system:String x:Key="MainWindow.Menu.Generate.FFT">FFT</system:String>
+    <system:String x:Key="MainWindow.Menu.Generate.FFT.Design1">디자인 1</system:String>
+    <system:String x:Key="MainWindow.Menu.Generate.FS">푸리에 급수</system:String>
+    <system:String x:Key="MainWindow.Menu.Generate.FS.Design1">디자인 1</system:String>
+    <system:String x:Key="MainWindow.Menu.Generate.Type.Audio">오디오</system:String>
+    <system:String x:Key="MainWindow.Menu.Generate.Type.Movie">동영상</system:String>
+    <system:String x:Key="MainWindow.Menu.Generate.Type.Snapshot">정지화상</system:String>
 
-    <system:String x:Key="MainWindow.Menu.RealTime">시뮬레이션</system:String>
-    <system:String x:Key="MainWindow.Menu.RealTime.VVVF">VVVF음</system:String>
-    <system:String x:Key="MainWindow.Menu.RealTime.VVVF.USB">VVVF-USB 출력</system:String>
-    <system:String x:Key="MainWindow.Menu.RealTime.VVVF.USB.Error.Title">오류</system:String>
-    <system:String x:Key="MainWindow.Menu.RealTime.VVVF.USB.Error.Message">COM 포트를 사용할 수 없습니다</system:String>
-    <system:String x:Key="MainWindow.Menu.RealTime.VVVF.Setting">VVVF 시뮬레이션 설정</system:String>
-    <system:String x:Key="MainWindow.Menu.RealTime.Train">주행음</system:String>
-    <system:String x:Key="MainWindow.Menu.RealTime.Train.Setting">주행음 시뮬레이션 설정</system:String>
+    <system:String x:Key="MainWindow.Menu.Realtime">시뮬레이션</system:String>
+    <system:String x:Key="MainWindow.Menu.Realtime.Vvvf">VVVF</system:String>
+    <system:String x:Key="MainWindow.Menu.Realtime.Vvvf.Usb">VVVF-USB 출력</system:String>
+    <system:String x:Key="MainWindow.Menu.Realtime.Vvvf.Setting">VVVF-시뮬레이션 설정</system:String>
+    <system:String x:Key="MainWindow.Menu.Realtime.Train">주행음</system:String>
+    <system:String x:Key="MainWindow.Menu.Realtime.Train.Setting">주행음-시뮬레이션 설정</system:String>
 
     <system:String x:Key="MainWindow.Menu.Tools">도구</system:String>
     <system:String x:Key="MainWindow.Menu.Tools.AutoVoltage">진폭 자동 설정</system:String>
@@ -101,22 +96,30 @@
     <system:String x:Key="MainWindow.TabControl.Accelerate">역행</system:String>
     <system:String x:Key="MainWindow.TabControl.Brake">제동</system:String>
 
-    <system:String x:Key="MainWindow.TaskDescription.Generate.Audio.Vvvf.Line">선간전압 오디오 생성：</system:String>
-    <system:String x:Key="MainWindow.TaskDescription.Generate.Audio.Vvvf.Phases">상전압 오디오 생성：</system:String>
-    <system:String x:Key="MainWindow.TaskDescription.Generate.Audio.Vvvf.PhaseCurrent">상전류 오디오 생성：</system:String>
-    <system:String x:Key="MainWindow.TaskDescription.Generate.Audio.Train">주행음 생성：</system:String>
-    <system:String x:Key="MainWindow.TaskDescription.Generate.Movie.Control.Original">제어(디자인1) 영상 생성：</system:String>
-    <system:String x:Key="MainWindow.TaskDescription.Generate.Movie.Control.Original2">제어(디자인2) 영상 생성：</system:String>
-    <system:String x:Key="MainWindow.TaskDescription.Generate.Movie.WaveForm.Original">선간전압(1) 영상 생성：</system:String>
-    <system:String x:Key="MainWindow.TaskDescription.Generate.Movie.WaveForm.Spaced">선간전압(2) 영상 생성：</system:String>
-    <system:String x:Key="MainWindow.TaskDescription.Generate.Movie.WaveForm.UVW">3상 상전압 영상 생성：</system:String>
-    <system:String x:Key="MainWindow.TaskDescription.Generate.Movie.Hexagon.Original">전압 벡터 영상 생성：</system:String>
-    <system:String x:Key="MainWindow.TaskDescription.Generate.Movie.Hexagon.Explain">전압 벡터 생성 과정 영상 생성：</system:String>
-    <system:String x:Key="MainWindow.TaskDescription.Generate.Movie.FFT.Original">FFT 영상 생성：</system:String>
-    <system:String x:Key="MainWindow.TaskDescription.Generate.Image.Hexagon.Original">전압 벡터 이미지 생성：</system:String>
-    <system:String x:Key="MainWindow.TaskDescription.Generate.Image.FFT.Original">FFT 이미지 생성：</system:String>
-    <system:String x:Key="MainWindow.TaskDescription.Tools.AutoVoltage">진폭 자동 설정</system:String>
-    
+    <system:String x:Key="MainWindow.TaskDescription.Generate.Audio">오디오</system:String>
+    <system:String x:Key="MainWindow.TaskDescription.Generate.Audio.Line">선간 전압</system:String>
+    <system:String x:Key="MainWindow.TaskDescription.Generate.Audio.Phases">상전압</system:String>
+    <system:String x:Key="MainWindow.TaskDescription.Generate.Audio.PhaseCurrent">상전류</system:String>
+    <system:String x:Key="MainWindow.TaskDescription.Generate.Audio.Train">차량</system:String>
+    <system:String x:Key="MainWindow.TaskDescription.Generate.Control">제어 상태도</system:String>
+    <system:String x:Key="MainWindow.TaskDescription.Generate.Control.Design1">디자인 1</system:String>
+    <system:String x:Key="MainWindow.TaskDescription.Generate.Control.Design2">디자인 2</system:String>
+    <system:String x:Key="MainWindow.TaskDescription.Generate.Waveform">파형도</system:String>
+    <system:String x:Key="MainWindow.TaskDescription.Generate.Waveform.Line">선간 전압</system:String>
+    <system:String x:Key="MainWindow.TaskDescription.Generate.Waveform.Phase">상전압</system:String>
+    <system:String x:Key="MainWindow.TaskDescription.Generate.Hexagon">전압 벡터도</system:String>
+    <system:String x:Key="MainWindow.TaskDescription.Generate.Hexagon.Design1">디자인 1</system:String>
+    <system:String x:Key="MainWindow.TaskDescription.Generate.Hexagon.Explain">그리기 과정</system:String>
+    <system:String x:Key="MainWindow.TaskDescription.Generate.FFT">FFT</system:String>
+    <system:String x:Key="MainWindow.TaskDescription.Generate.FFT.Design1">디자인 1</system:String>
+    <system:String x:Key="MainWindow.TaskDescription.Generate.FS">푸리에 급수</system:String>
+    <system:String x:Key="MainWindow.TaskDescription.Generate.FS.Design1">디자인 1</system:String>
+    <system:String x:Key="MainWindow.TaskDescription.Generate.Type.Audio">오디오</system:String>
+    <system:String x:Key="MainWindow.TaskDescription.Generate.Type.Movie">동영상</system:String>
+    <system:String x:Key="MainWindow.TaskDescription.Generate.Type.Snapshot">정지화상</system:String>
+    <system:String x:Key="MainWindow.TaskDescription.Generate.Format">{Main}({Sub}) {Type} 생성:</system:String>
+    <system:String x:Key="MainWindow.TaskDescription.Tools.AutoVoltage">변조율 자동 설정</system:String>
+
     <system:String x:Key="MainWindow.Message.File.Save.Ok.Title">성공</system:String>
     <system:String x:Key="MainWindow.Message.File.Save.Ok.Message">파일을 저장했습니다</system:String>
     <system:String x:Key="MainWindow.Message.File.Save.Error.Message">파일을 저장하지 못했습니다</system:String>
@@ -132,12 +135,8 @@
     <system:String x:Key="MainWindow.Message.File.Load.Error.Message">파일을 불러오지 못했습니다</system:String>
     <system:String x:Key="MainWindow.Message.Edit.Reset.Confirm.Title">확인</system:String>
     <system:String x:Key="MainWindow.Message.Edit.Reset.Confirm.Message">정말로 초기화 하시겠습니까?</system:String>
-    <system:String x:Key="MainWindow.Message.Generate.Movie.Hexagon.Original.EnableZeroVector">영전압 벡터 지점을 표시할까요?</system:String>
-    <system:String x:Key="MainWindow.Message.Generate.Movie.Hexagon.Explain.EnableZeroVector">영전압 벡터 지점을 표시할까요?</system:String>
-    <system:String x:Key="MainWindow.Message.Generate.Image.Hexagon.Original.EnableZeroVector">영전압 벡터 지점을 표시할까요?</system:String>
-    <system:String x:Key="MainWindow.Message.Generate.Movie.Hexagon.Explain.EnterFrequency">생성 주파수 입력</system:String>
-    <system:String x:Key="MainWindow.Message.Generate.Image.Hexagon.Original.EnterFrequency">생성 주파수 입력</system:String>
-    <system:String x:Key="MainWindow.Message.Generate.Image.FFT.Original.EnterFrequency">생성 주파수 입력</system:String>
+    <system:String x:Key="MainWindow.Message.Realtime.Vvvf.Usb.Error.Title">오류</system:String>
+    <system:String x:Key="MainWindow.Message.Realtime.Vvvf.Usb.Error.Message">유효하지 않은 COM 포트</system:String>
     <system:String x:Key="MainWindow.Message.Tools.AutoVoltage.Error">
         진폭 자동 설정 사용 시 아래 사항을 확인해 주세요.\n
         ・모든 패턴의 시작 주파수 값은 0 이상이어야 합니다.
@@ -185,7 +184,11 @@
     <system:String x:Key="TaskViewer.Status.Running">진행중</system:String>
 
     <system:String x:Key="BitmapViewer.Title.Default">이미지 뷰어</system:String>
-    
+    <system:String x:Key="BitmapViewer.ContextMenu.Close">닫기</system:String>
+    <system:String x:Key="BitmapViewer.ContextMenu.Maximize">최대화</system:String>
+    <system:String x:Key="BitmapViewer.ContextMenu.Minimize">최소화</system:String>
+    <system:String x:Key="BitmapViewer.ContextMenu.Setting">설정</system:String>
+
     <system:String x:Key="TrainAudio.SettingWindow.Title">주행음 설정</system:String>
 
     <system:String x:Key="TrainAudio.SettingWindow.Menu.File">파일</system:String>
@@ -269,6 +272,50 @@
     <system:String x:Key="TrainAudio.Pages.Gear.GearCalculate.Gear">기어</system:String>
     <system:String x:Key="TrainAudio.Pages.Gear.GearCalculate.Count">톱니 수</system:String>
 
+    <system:String x:Key="Simulator.Generation.Dialog.Waveform.Line.Title">그리기 설정</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.Waveform.Line.Width">너비</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.Waveform.Line.Height">높이</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.Waveform.Line.WaveHeight">파형 높이</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.Waveform.Line.Thikness">파형 두께</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.Waveform.Line.Margin">여백</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.Waveform.Line.Baseline">기준선 표시</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.Waveform.Line.Division">계산 정밀도</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.Waveform.Phase.Title">그리기 설정</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.Waveform.Phase.Width">너비</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.Waveform.Phase.Height">높이</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.Waveform.Phase.WaveHeight">파형 높이</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.Waveform.Phase.Thikness">파형 두께</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.Waveform.Phase.Division">계산 정밀도</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.Hexagon.Design1.Title">그리기 설정</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.Hexagon.Design1.ImageSize">이미지 크기</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.Hexagon.Design1.DrawSize">그리기 크기</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.Hexagon.Design1.Thikness">선 두께</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.Hexagon.Design1.ZeroVectorSize">정지점 크기</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.Hexagon.Design1.Division">계산 정밀도</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.Hexagon.Design1.Precise">정확하게 계산</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.Hexagon.Explain.Title">그리기 설정</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.Hexagon.Explain.EnableZeroVector">정지점 표시</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.Hexagon.Explain.EnterTime">생성 시 기본 주파수상의 시간(초) 입력</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.Hexagon.Explain.EnterForwardStep">해당 시간까지의 간격(초)</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.FFT.Design1.Title">그리기 설정</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.FFT.Design1.Width">너비</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.FFT.Design1.Height">높이</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.FFT.Design1.Amplitude">배율</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.FFT.Design1.Thikness">선 두께</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.FFT.Design1.Size">계산 크기</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.FFT.Design1.Range.Begin">그리기 범위 시작점</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.FFT.Design1.Range.End">그리기 범위 종료점</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.FS.Design1.Title">그리기 설정</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.FS.Design1.Width">너비</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.FS.Design1.Height">높이</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.FS.Design1.N.Begin">배수 시작점</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.FS.Design1.N.End">배수 종료점</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.FS.Design1.Division">계산 정밀도</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.FS.Design1.Precise">정확하게 계산</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.Type.Snapshot.Title">시간 설정</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.Type.Snapshot.EnterTime">생성 시 기본 주파수상의 시간(초) 입력</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.Type.Snapshot.EnterForwardStep">해당 시간까지의 간격(초)</system:String>
+    
     <system:String x:Key="Simulator.RealTime.Controller.Title">컨트롤러</system:String>
     <FontFamily x:Key="Simulator.RealTime.Controller.Font.Number">/GUI/Resource/Fonts/MPlus1Code/#M PLUS 1 Code</FontFamily>
     <FontFamily x:Key="Simulator.RealTime.Controller.Font.Notch">/GUI/Resource/Fonts/MPlus1Code/#M PLUS 1 Code</FontFamily>
@@ -325,11 +372,8 @@
     <system:String x:Key="Simulator.RealTime.Setting.Basic.ControlStatus.Show">표시</system:String>
     <system:String x:Key="Simulator.RealTime.Setting.Basic.ControlStatus.Design">디자인</system:String>
     <system:String x:Key="Simulator.RealTime.Setting.Basic.ControlStatus.PreciseCalculation">정밀 계산</system:String>
-    <system:String x:Key="Simulator.RealTime.Setting.Basic.VoltageVector">전압 벡터</system:String>
-    <system:String x:Key="Simulator.RealTime.Setting.Basic.VoltageVector.Show">표시</system:String>
-    <system:String x:Key="Simulator.RealTime.Setting.Basic.VoltageVector.Design">디자인</system:String>
-    <system:String x:Key="Simulator.RealTime.Setting.Basic.VoltageVector.ShowZeroVector">영전압 벡터 표시</system:String>
     <system:String x:Key="Simulator.RealTime.Setting.Basic.Others">기타</system:String>
+    <system:String x:Key="Simulator.RealTime.Setting.Basic.Others.VoltageVector.Show">표시</system:String>
     <system:String x:Key="Simulator.RealTime.Setting.Basic.Others.FFT.Show">FFT 표시</system:String>
     <system:String x:Key="Simulator.RealTime.Setting.Basic.Others.FS.Show">푸리에 급수 표시</system:String>
     <system:String x:Key="Simulator.RealTime.Setting.Basic.Others.EditRealTime">실시간 편집 허용</system:String>
@@ -525,8 +569,6 @@
 
     <system:String x:Key="Resource.Language.FriendlyNameConverter.ControlStatus.Design.Original1">디자인1</system:String>
     <system:String x:Key="Resource.Language.FriendlyNameConverter.ControlStatus.Design.Original2">디자인2</system:String>
-
-    <system:String x:Key="Resource.Language.FriendlyNameConverter.VoltageVector.Design.Original">디자인1</system:String>
 
     <system:String x:Key="Resource.Language.FriendlyNameConverter.AmplitudeMode.Name.Linear">정비례</system:String>
     <system:String x:Key="Resource.Language.FriendlyNameConverter.AmplitudeMode.Name.InverseProportional">반비례</system:String>

@@ -32,7 +32,6 @@ namespace VvvfSimulator.GUI.Simulator.RealTime.Setting
         private void InitializeCombobox()
         {
             SelectorControlDesign.ItemsSource = FriendlyNameConverter.GetRealTimeControlStatStyleNames();
-            SelectorHexagonDesign.ItemsSource = FriendlyNameConverter.GetRealTimeHexagonStyleNames();
             SelectorControllerStyle.ItemsSource = FriendlyNameConverter.GetRealTimeControllerStyleNames();
         }
 
@@ -52,15 +51,13 @@ namespace VvvfSimulator.GUI.Simulator.RealTime.Setting
                 BoxWaveFormPhase.IsChecked = Prop.RealTime_VVVF_WaveForm_Phase_Show;
                 BoxFFT.IsChecked = Prop.RealTime_VVVF_FFT_Show;
                 BoxFS.IsChecked = Prop.RealTime_VVVF_FS_Show;
+                BoxHexagon.IsChecked = Prop.RealTime_VVVF_Hexagon_Show;
                 BoxRealTimeEdit.IsChecked = Prop.RealTime_VVVF_EditAllow;
 
                 BoxShowControl.IsChecked = Prop.RealTime_VVVF_Control_Show;
                 BoxControlPrecise.IsChecked = Prop.RealTime_VVVF_Control_Precise;
                 SelectorControlDesign.SelectedValue = (RealtimeDisplay.ControlStatus.RealTimeControlStatStyle)Prop.RealTime_VVVF_Control_Style;
 
-                BoxShowHexagon.IsChecked = Prop.RealTime_VVVF_Hexagon_Show;
-                BoxShowZeroVectorCicle.IsChecked = Prop.RealTime_VVVF_Hexagon_ZeroVector;
-                SelectorHexagonDesign.SelectedValue = (RealtimeDisplay.Hexagon.RealTimeHexagonStyle)Prop.RealTime_VVVF_Hexagon_Style;
 
                 SamplingFrequencyInput.Text = Prop.RealtimeVvvfSamplingFrequency.ToString();
                 CalculateDivisionInput.Text = Prop.RealtimeVvvfCalculateDivision.ToString();
@@ -77,15 +74,13 @@ namespace VvvfSimulator.GUI.Simulator.RealTime.Setting
                 BoxWaveFormPhase.IsChecked = Prop.RealTime_Train_WaveForm_Phase_Show;
                 BoxFFT.IsChecked = Prop.RealTime_Train_FFT_Show;
                 BoxFS.IsChecked = Prop.RealTime_Train_FS_Show;
+                BoxHexagon.IsChecked = Prop.RealTime_Train_Hexagon_Show;
                 BoxRealTimeEdit.IsChecked = Prop.RealTime_Train_EditAllow;
 
                 BoxShowControl.IsChecked = Prop.RealTime_Train_Control_Show;
                 BoxControlPrecise.IsChecked = Prop.RealTime_Train_Control_Precise;
                 SelectorControlDesign.SelectedValue = (RealtimeDisplay.ControlStatus.RealTimeControlStatStyle)Prop.RealTime_Train_Control_Style;
 
-                BoxShowHexagon.IsChecked = Prop.RealTime_Train_Hexagon_Show;
-                SelectorHexagonDesign.SelectedValue = (RealtimeDisplay.Hexagon.RealTimeHexagonStyle)Prop.RealTime_Train_Hexagon_Style;
-                BoxShowZeroVectorCicle.IsChecked = Prop.RealTime_Train_Hexagon_ZeroVector;
 
                 SamplingFrequencyInput.Text = Prop.RealtimeTrainSamplingFrequency.ToString();
                 CalculateDivisionInput.Text = Prop.RealtimeTrainCalculateDivision.ToString();
@@ -159,23 +154,11 @@ namespace VvvfSimulator.GUI.Simulator.RealTime.Setting
 
             if (tags[0].Equals("Hexagon"))
             {
-                if(tags.Length == 1)
-                {
-                    if (_SettingType.Equals(RealTimeBasicSettingMode.VVVF))
-                        Properties.Settings.Default.RealTime_VVVF_Hexagon_Show = is_checked;
-                    else if (_SettingType.Equals(RealTimeBasicSettingMode.Train))
-                        Properties.Settings.Default.RealTime_Train_Hexagon_Show = is_checked;
-                    return;
-                }
-
-                if (tags[1].Equals("Zero"))
-                {
-                    if (_SettingType.Equals(RealTimeBasicSettingMode.VVVF))
-                        Properties.Settings.Default.RealTime_VVVF_Hexagon_ZeroVector = is_checked;
-                    else if (_SettingType.Equals(RealTimeBasicSettingMode.Train))
-                        Properties.Settings.Default.RealTime_Train_Hexagon_ZeroVector = is_checked;
-                    return;
-                }
+                if (_SettingType.Equals(RealTimeBasicSettingMode.VVVF))
+                    Properties.Settings.Default.RealTime_VVVF_Hexagon_Show = is_checked;
+                else if (_SettingType.Equals(RealTimeBasicSettingMode.Train))
+                    Properties.Settings.Default.RealTime_Train_Hexagon_Show = is_checked;
+                return;
             }
 
             if (tags[0].Equals("FFT"))
@@ -255,13 +238,6 @@ namespace VvvfSimulator.GUI.Simulator.RealTime.Setting
                     Properties.Settings.Default.RealTime_VVVF_Control_Language = (int)comboBox.SelectedValue;
                 else if (_SettingType.Equals(RealTimeBasicSettingMode.Train))
                     Properties.Settings.Default.RealTime_Train_Control_Language = (int)comboBox.SelectedValue;
-            }
-            else if (tag.Equals("HexagonDesign"))
-            {
-                if (_SettingType.Equals(RealTimeBasicSettingMode.VVVF))
-                    Properties.Settings.Default.RealTime_VVVF_Hexagon_Style = (int)comboBox.SelectedValue;
-                else if (_SettingType.Equals(RealTimeBasicSettingMode.Train))
-                    Properties.Settings.Default.RealTime_Train_Hexagon_Style = (int)comboBox.SelectedValue;               
             }
             else if (tag.Equals("ControllerStyle"))
             {

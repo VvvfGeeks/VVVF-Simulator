@@ -1,8 +1,10 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 using VvvfSimulator.GUI.Resource.Language;
 
@@ -14,6 +16,8 @@ namespace VvvfSimulator.GUI.Util
     public partial class BitmapViewer : Window
     {
         private readonly ViewModel BindingData = new();
+        public event RoutedEventHandler? SettingMenuClicked;
+        private readonly bool EnableSettingMenu;
         private class ViewModel : INotifyPropertyChanged
         {
             private BitmapFrame? _Image;
@@ -25,10 +29,74 @@ namespace VvvfSimulator.GUI.Util
                 this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
             }
         };
-        public BitmapViewer()
+        public BitmapViewer(bool settingMenu)
         {
             DataContext = BindingData;
             InitializeComponent();
+
+            EnableSettingMenu = settingMenu;
+            Resources.MergedDictionaries.Add(new ResourceDictionary()
+            {
+                Source = new Uri("/GUI/Resource/Dictionary/ContextMenu.xaml", UriKind.Relative)
+            });
+            CreateContextMenu();
+        }
+
+        private void CreateContextMenu()
+        {
+            ContextMenu contextMenu = new()
+            {
+                Style = (Style)FindResource("SlimContextMenu")
+            };
+
+            if (EnableSettingMenu)
+            {
+                MenuItem settingItem = new()
+                {
+                    Header = LanguageManager.GetString("BitmapViewer.ContextMenu.Setting")
+                };
+
+                settingItem.Click += (s, e) =>
+                {
+                    SettingMenuClicked?.Invoke(s, e);
+                };
+
+                contextMenu.Items.Add(settingItem);
+                contextMenu.Items.Add(new Separator());
+            }
+
+            MenuItem minimizeItem = new()
+            {
+                Header = LanguageManager.GetString("BitmapViewer.ContextMenu.Minimize")
+            };
+
+            minimizeItem.Click += (_, _) =>
+            {
+                WindowState = WindowState.Minimized;
+            };
+
+            MenuItem maximizeItem = new()
+            {
+                Header = LanguageManager.GetString("BitmapViewer.ContextMenu.Maximize")
+            };
+
+            maximizeItem.Click += (_, _) =>
+            {
+                WindowState = WindowState.Maximized;
+            };
+
+            MenuItem closeItem = new()
+            {
+                Header = LanguageManager.GetString("BitmapViewer.ContextMenu.Close")
+            };
+
+            closeItem.Click += (_, _) => Close();
+
+            contextMenu.Items.Add(minimizeItem);
+            contextMenu.Items.Add(maximizeItem);
+            contextMenu.Items.Add(closeItem);
+
+            ContextMenu = contextMenu;
         }
 
         public void SetImage(Bitmap image)
@@ -68,9 +136,9 @@ namespace VvvfSimulator.GUI.Util
         }
     }
 
-    public class BitmapViewerManager
+    public class BitmapViewerManager(bool SettingMenu = false)
     {
-        public readonly BitmapViewer Viewer = new();
+        public readonly BitmapViewer Viewer = new(SettingMenu);
         public void Show()
         {
             Viewer.Dispatcher.Invoke(() =>

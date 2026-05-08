@@ -168,51 +168,63 @@
 
                 <MenuItem Header="{DynamicResource MainWindow.Menu.Generate}">
                     <MenuItem Header="{DynamicResource MainWindow.Menu.Generate.Audio}">
-                        <MenuItem Header="{DynamicResource MainWindow.Menu.Generate.Audio.VVVF}">
-                            <MenuItem Header="{DynamicResource MainWindow.Menu.Generate.Audio.VVVF.Line}" Tag="VVVF_WAV_Line" Click="Generation_Menu_Click"/>
-                            <MenuItem Header="{DynamicResource MainWindow.Menu.Generate.Audio.VVVF.Phases}" Tag="VVVF_WAV_Phases" Click="Generation_Menu_Click"/>
-                            <MenuItem Header="{DynamicResource MainWindow.Menu.Generate.Audio.VVVF.PhaseCurrent}" Tag="VVVF_WAV_PhaseCurrent" Click="Generation_Menu_Click"/>
-                        </MenuItem>
-                        <Separator/>
-                        <MenuItem Header="{DynamicResource MainWindow.Menu.Generate.Audio.Train}" Tag="Train_WAV" Click="Generation_Menu_Click"/>
+                        <MenuItem Header="{DynamicResource MainWindow.Menu.Generate.Audio.Line}" Tag="Audio_Line_Audio" Click="Generation_Menu_Click"/>
+                        <MenuItem Header="{DynamicResource MainWindow.Menu.Generate.Audio.Phases}" Tag="Audio_Phases_Audio" Click="Generation_Menu_Click"/>
+                        <MenuItem Header="{DynamicResource MainWindow.Menu.Generate.Audio.PhaseCurrent}" Tag="Audio_PhaseCurrent_Audio" Click="Generation_Menu_Click"/>
+                        <MenuItem Header="{DynamicResource MainWindow.Menu.Generate.Audio.Train}" Tag="Audio_Train_Audio" Click="Generation_Menu_Click"/>
                     </MenuItem>
-                    <MenuItem Header="{DynamicResource MainWindow.Menu.Generate.Movie}">
-                        <MenuItem Header="{DynamicResource MainWindow.Menu.Generate.Movie.Control}">
-                            <MenuItem Header="{DynamicResource MainWindow.Menu.Generate.Movie.Control.Design1}" Tag="Control_Design1" Click="Generation_Menu_Click"/>
-                            <MenuItem Header="{DynamicResource MainWindow.Menu.Generate.Movie.Control.Design2}" Tag="Control_Design2" Click="Generation_Menu_Click"/>
+                    
+                    <MenuItem Header="{DynamicResource MainWindow.Menu.Generate.Control}">
+                        <MenuItem Header="{DynamicResource MainWindow.Menu.Generate.Control.Design1}">
+                            <MenuItem Header="{DynamicResource MainWindow.Menu.Generate.Type.Movie}" Tag="Control_Design1_Movie" Click="Generation_Menu_Click"/>
+                            <MenuItem Header="{DynamicResource MainWindow.Menu.Generate.Type.Snapshot}" Tag="Control_Design1_Snapshot" Click="Generation_Menu_Click"/>
                         </MenuItem>
-                        <MenuItem Header="{DynamicResource MainWindow.Menu.Generate.Movie.WaveForm}">
-                            <MenuItem Header="{DynamicResource MainWindow.Menu.Generate.Movie.WaveForm.Original}" Tag="WaveForm_Original" Click="Generation_Menu_Click"/>
-                            <MenuItem Header="{DynamicResource MainWindow.Menu.Generate.Movie.WaveForm.Spaced}" Tag="WaveForm_Spaced" Click="Generation_Menu_Click"/>
-                            <MenuItem Header="{DynamicResource MainWindow.Menu.Generate.Movie.WaveForm.UVW}" Tag="WaveForm_UVW" Click="Generation_Menu_Click"/>
-                        </MenuItem>
-                        <MenuItem Header="{DynamicResource MainWindow.Menu.Generate.Movie.Hexagon}">
-                            <MenuItem Header="{DynamicResource MainWindow.Menu.Generate.Movie.Hexagon.Original}" Tag="Hexagon_Original" Click="Generation_Menu_Click"/>
-                            <MenuItem Header="{DynamicResource MainWindow.Menu.Generate.Movie.Hexagon.Explain}" Tag="Hexagon_Explain" Click="Generation_Menu_Click"/>
-
-                        </MenuItem>
-                        <MenuItem Header="{DynamicResource MainWindow.Menu.Generate.Movie.FFT}">
-                            <MenuItem Header="{DynamicResource MainWindow.Menu.Generate.Movie.FFT.Original}" Tag="FFT_Video" Click="Generation_Menu_Click"/>
+                        <MenuItem Header="{DynamicResource MainWindow.Menu.Generate.Control.Design2}">
+                            <MenuItem Header="{DynamicResource MainWindow.Menu.Generate.Type.Movie}" Tag="Control_Design2_Movie" Click="Generation_Menu_Click"/>
+                            <MenuItem Header="{DynamicResource MainWindow.Menu.Generate.Type.Snapshot}" Tag="Control_Design2_Snapshot" Click="Generation_Menu_Click"/>
                         </MenuItem>
                     </MenuItem>
 
-                    <MenuItem Header="{DynamicResource MainWindow.Menu.Generate.Image}">
-                        <MenuItem Header="{DynamicResource MainWindow.Menu.Generate.Image.Hexagon}">
-                            <MenuItem Header="{DynamicResource MainWindow.Menu.Generate.Image.Hexagon.Original}" Tag="Hexagon_OriginalImage" Click="Generation_Menu_Click"/>
+                    <MenuItem Header="{DynamicResource MainWindow.Menu.Generate.Waveform}">
+                        <MenuItem Header="{DynamicResource MainWindow.Menu.Generate.Waveform.Line}">
+                            <MenuItem Header="{DynamicResource MainWindow.Menu.Generate.Type.Movie}" Tag="Waveform_Line_Movie" Click="Generation_Menu_Click"/>
+                            <MenuItem Header="{DynamicResource MainWindow.Menu.Generate.Type.Snapshot}" Tag="Waveform_Line_Snapshot" Click="Generation_Menu_Click"/>
                         </MenuItem>
-                        <MenuItem Header="{DynamicResource MainWindow.Menu.Generate.Image.FFT}">
-                            <MenuItem Header="{DynamicResource MainWindow.Menu.Generate.Image.FFT.Original}" Tag="FFT_Image" Click="Generation_Menu_Click"/>
+                        <MenuItem Header="{DynamicResource MainWindow.Menu.Generate.Waveform.Phase}">
+                            <MenuItem Header="{DynamicResource MainWindow.Menu.Generate.Type.Movie}" Tag="Waveform_Phase_Movie" Click="Generation_Menu_Click"/>
+                            <MenuItem Header="{DynamicResource MainWindow.Menu.Generate.Type.Snapshot}" Tag="Waveform_Phase_Snapshot" Click="Generation_Menu_Click"/>
                         </MenuItem>
+                    </MenuItem>
+
+                    <MenuItem Header="{DynamicResource MainWindow.Menu.Generate.Hexagon}">
+                        <MenuItem Header="{DynamicResource MainWindow.Menu.Generate.Hexagon.Design1}">
+                            <MenuItem Header="{DynamicResource MainWindow.Menu.Generate.Type.Movie}" Tag="Hexagon_Design1_Movie" Click="Generation_Menu_Click"/>
+                            <MenuItem Header="{DynamicResource MainWindow.Menu.Generate.Type.Snapshot}" Tag="Hexagon_Design1_Snapshot" Click="Generation_Menu_Click"/>
+                        </MenuItem>
+                        <MenuItem Header="{DynamicResource MainWindow.Menu.Generate.Hexagon.Explain}">
+                            <MenuItem Header="{DynamicResource MainWindow.Menu.Generate.Type.Movie}" Tag="Hexagon_Explain_Movie" Click="Generation_Menu_Click"/>
+                            <MenuItem Header="{DynamicResource MainWindow.Menu.Generate.Type.Snapshot}" Tag="Hexagon_Explain_Snapshot" Click="Generation_Menu_Click"/>
+                        </MenuItem>
+                    </MenuItem>
+
+                    <MenuItem Header="{DynamicResource MainWindow.Menu.Generate.FFT}">
+                        <MenuItem Header="{DynamicResource MainWindow.Menu.Generate.Type.Movie}" Tag="FFT_Design1_Movie" Click="Generation_Menu_Click"/>
+                        <MenuItem Header="{DynamicResource MainWindow.Menu.Generate.Type.Snapshot}" Tag="FFT_Design1_Snapshot" Click="Generation_Menu_Click"/>
+                    </MenuItem>
+
+                    <MenuItem Header="{DynamicResource MainWindow.Menu.Generate.FS}">
+                        <MenuItem Header="{DynamicResource MainWindow.Menu.Generate.Type.Movie}" Tag="FS_Design1_Movie" Click="Generation_Menu_Click"/>
+                        <MenuItem Header="{DynamicResource MainWindow.Menu.Generate.Type.Snapshot}" Tag="FS_Design1_Snapshot" Click="Generation_Menu_Click"/>
                     </MenuItem>
                 </MenuItem>
 
-                <MenuItem Header="{DynamicResource MainWindow.Menu.RealTime}">
-                    <MenuItem Header="{DynamicResource MainWindow.Menu.RealTime.VVVF}" Tag="VVVF_RealTime" Click="Generation_Menu_Click"/>
-                    <MenuItem Header="{DynamicResource MainWindow.Menu.RealTime.VVVF.USB}" Tag="VVVF_RealTime_Usb" Click="Generation_Menu_Click"/>
-                    <MenuItem Header="{DynamicResource MainWindow.Menu.RealTime.VVVF.Setting}" Tag="VVVF_Setting" Click="Generation_Menu_Click"/>
+                <MenuItem Header="{DynamicResource MainWindow.Menu.Realtime}">
+                    <MenuItem Header="{DynamicResource MainWindow.Menu.Realtime.Vvvf}" Tag="Vvvf_Normal" Click="Realtime_Menu_Click"/>
+                    <MenuItem Header="{DynamicResource MainWindow.Menu.Realtime.Vvvf.Usb}" Tag="Vvvf_Usb" Click="Realtime_Menu_Click"/>
+                    <MenuItem Header="{DynamicResource MainWindow.Menu.Realtime.Vvvf.Setting}" Tag="Vvvf_Setting" Click="Realtime_Menu_Click"/>
                     <Separator/>
-                    <MenuItem Header="{DynamicResource MainWindow.Menu.RealTime.Train}" Tag="Train_RealTime" Click="Generation_Menu_Click"/>
-                    <MenuItem Header="{DynamicResource MainWindow.Menu.RealTime.Train.Setting}" Tag="Train_Setting" Click="Generation_Menu_Click"/>
+                    <MenuItem Header="{DynamicResource MainWindow.Menu.Realtime.Train}" Tag="Train_Normal" Click="Realtime_Menu_Click"/>
+                    <MenuItem Header="{DynamicResource MainWindow.Menu.Realtime.Train.Setting}" Tag="Train_Setting" Click="Realtime_Menu_Click"/>
                 </MenuItem>
 
                 <MenuItem Header="{DynamicResource MainWindow.Menu.Tools}">

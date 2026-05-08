@@ -95,23 +95,6 @@ namespace VvvfSimulator.GUI.Resource.Language
             };
         }
 
-        public static Dictionary<Simulator.RealTime.RealtimeDisplay.Hexagon.RealTimeHexagonStyle, string> GetRealTimeHexagonStyleNames()
-        {
-            Dictionary<Simulator.RealTime.RealtimeDisplay.Hexagon.RealTimeHexagonStyle, string> Names = [];
-            foreach (Simulator.RealTime.RealtimeDisplay.Hexagon.RealTimeHexagonStyle type in Enum.GetValues<Simulator.RealTime.RealtimeDisplay.Hexagon.RealTimeHexagonStyle>())
-            {
-                Names.Add(type, GetRealTimeHexagonStyleName(type));
-            }
-            return Names;
-        }
-        public static string GetRealTimeHexagonStyleName(Simulator.RealTime.RealtimeDisplay.Hexagon.RealTimeHexagonStyle style)
-        {
-            return style switch
-            {
-                _ => LanguageManager.GetString("Resource.Language.FriendlyNameConverter.VoltageVector.Design.Original")
-            };
-        }
-
         public static Dictionary<Data.Vvvf.Struct.PulseControl.Pulse.PulseDataValue.PulseDataValueMode, string> GetPulseDataValueModeNames()
         {
             Dictionary<Data.Vvvf.Struct.PulseControl.Pulse.PulseDataValue.PulseDataValueMode, string> Names = [];

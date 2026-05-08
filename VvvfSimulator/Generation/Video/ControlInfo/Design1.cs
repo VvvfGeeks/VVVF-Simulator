@@ -114,13 +114,13 @@ namespace VvvfSimulator.Generation.Video.ControlInfo
                GraphicsUnit.Pixel);
 
             Font val_fnt = new(
-               Fonts.Manager.Arial,
+               Fonts.Manager.ChironGoRoundTC,
                50,
                FontStyle.Regular,
                GraphicsUnit.Pixel);
 
             Font val_mini_fnt = new(
-               Fonts.Manager.Arial,
+               Fonts.Manager.ChironGoRoundTC,
                25,
                FontStyle.Regular,
                GraphicsUnit.Pixel);
@@ -182,7 +182,7 @@ namespace VvvfSimulator.Generation.Video.ControlInfo
         }
 
         private BitmapViewerManager? Viewer { get; set; }
-        private void GenerateOpening(int image_width, int image_height, VideoWriter vr)
+        private void GenerateOpening(VideoWriter vr, GUI.TaskViewer.TaskProgress progress, int image_width, int image_height)
         {
             double change_per_frame = 60 / vr.Fps;
             for (double i = 0; i < 128; i += change_per_frame)
@@ -245,6 +245,8 @@ namespace VvvfSimulator.Generation.Video.ControlInfo
                 vr.Write(mat);
                 Viewer?.SetImage(image);
                 image.Dispose();
+
+                progress.Progress++;
             }
         }
         public void ExportVideo(GenerationParameter Parameter, string output_path, int fps)
@@ -267,53 +269,62 @@ namespace VvvfSimulator.Generation.Video.ControlInfo
                 return;
             }
 
-            GenerateOpening(image_width, image_height, vr);
 
-            bool loop = true, video_finished, final_show = false, first_show = true;
-            int freeze_count = 0;
+            progressData.Total = baseFreqData.GetEstimatedSteps(1.0 / fps) + (int)(fps * 4.13333333);
 
-            progressData.Total = baseFreqData.GetEstimatedSteps(1.0 / fps) + fps * 2;
+            GenerateOpening(vr, progressData, image_width, image_height);
 
-            while (loop)
             {
                 Data.Vvvf.Analyze.Calculate(Domain, vvvfData);
-                Bitmap image = GetImage(Domain.Clone(), final_show);
-                MemoryStream ms = new();
-                image.Save(ms, ImageFormat.Png);
-                Viewer?.SetImage(image);
-                byte[] img = ms.GetBuffer();
-                Mat mat = OpenCvSharp.Mat.FromImageData(img);
-                vr.Write(mat);
-                image.Dispose();              
+                Bitmap image = GetImage(Domain.Clone(), false);
+                AddImageFrames(vr, image, fps, () => { progressData.Progress++; });
+                image.Dispose();
+            }
 
+            Data.BaseFrequency.Analyze.ForwardTime(baseFreqData, Domain, vvvfData, 1.0 / fps, () =>
+            {
+                Data.Vvvf.Analyze.Calculate(Domain, vvvfData);
+
+                Bitmap image = GetImage(Domain.Clone(), false);
+                Viewer?.SetImage(image);
+                AddImageFrames(vr, image, 1);
+                image.Dispose();
                 progressData.Progress++;
 
-                if (first_show)
-                {
-                    freeze_count++;
-                    if (freeze_count > fps)
-                    {
-                        freeze_count = 0;
-                        first_show = false;
-                    }
-                    continue;
-                }
+                return progressData.Cancel;
+            });
 
-                video_finished = !Data.BaseFrequency.Analyze.CheckForFreqChange(Domain, baseFreqData, vvvfData, 1.0 / fps);
-                if (video_finished)
-                {
-                    final_show = true;
-                    freeze_count++;
-                }
-                if (freeze_count > fps) loop = false;
-                if (progressData.Cancel) loop = false;
-
-
+            {
+                Data.Vvvf.Analyze.Calculate(Domain, vvvfData);
+                Bitmap image = GetImage(Domain.Clone(), true); 
+                AddImageFrames(vr, image, fps, () => { progressData.Progress++; });
+                image.Dispose();
             }
+
             vr.Release();
             vr.Dispose();
 
             Viewer?.Close();
+        }
+        public void ExportImage(GenerationParameter Parameter, string fileName, double Time, double ForwardStep)
+        {
+            MainWindow.Invoke(() => Viewer = new BitmapViewerManager());
+            Viewer?.Show();
+
+            Parameter.Progress.Total = 3;
+
+            Domain Domain = new(Parameter.TrainData.MotorSpec);
+            Analyze.ForwardTime(Parameter.BaseFrequencyData, Domain, Parameter.VvvfData, Time, ForwardStep);
+            Parameter.Progress.Progress = 1;
+
+            Data.Vvvf.Analyze.Calculate(Domain, Parameter.VvvfData);
+            Bitmap image = GetImage(Domain.Clone(), false);
+            Parameter.Progress.Progress = 2;
+
+            image.Save(fileName, ImageFormat.Png);
+            Viewer?.SetImage(image);
+            image.Dispose();
+            Parameter.Progress.Progress = 3;
         }
     }
 }

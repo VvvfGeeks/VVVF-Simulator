@@ -4,6 +4,8 @@ namespace VvvfSimulator.Vvvf
 {
     public class MyMath
     {
+        public delegate double Function(double x);
+
         public const double M_2_PI = 0.63661977236758134307553505349006;
         public const double M_1_PI = 0.31830988618379067153776752674503;
         public const double M_1_2PI = 0.15915494309189533576888376337251;
@@ -60,7 +62,6 @@ namespace VvvfSimulator.Vvvf
         }
         public static class EquationSolver
         {
-            public delegate double Function(double x);
             public enum EquationSolverType
             {
                 Newton, Bisection

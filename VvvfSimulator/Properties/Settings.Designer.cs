@@ -12,7 +12,7 @@ namespace VvvfSimulator.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.14.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "18.5.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -188,54 +188,6 @@ namespace VvvfSimulator.Properties {
             }
             set {
                 this["RealTime_Train_Hexagon_Show"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public int RealTime_VVVF_Hexagon_Style {
-            get {
-                return ((int)(this["RealTime_VVVF_Hexagon_Style"]));
-            }
-            set {
-                this["RealTime_VVVF_Hexagon_Style"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public int RealTime_Train_Hexagon_Style {
-            get {
-                return ((int)(this["RealTime_Train_Hexagon_Style"]));
-            }
-            set {
-                this["RealTime_Train_Hexagon_Style"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool RealTime_VVVF_Hexagon_ZeroVector {
-            get {
-                return ((bool)(this["RealTime_VVVF_Hexagon_ZeroVector"]));
-            }
-            set {
-                this["RealTime_VVVF_Hexagon_ZeroVector"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool RealTime_Train_Hexagon_ZeroVector {
-            get {
-                return ((bool)(this["RealTime_Train_Hexagon_ZeroVector"]));
-            }
-            set {
-                this["RealTime_Train_Hexagon_ZeroVector"] = value;
             }
         }
         

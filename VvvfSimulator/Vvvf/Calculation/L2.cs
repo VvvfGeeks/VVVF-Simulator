@@ -51,7 +51,7 @@ namespace VvvfSimulator.Vvvf.Calculation
                 double SawValue = -Functions.Triangle(27 * RawX);
                 double FixedX = (int)(RawX / M_PI_2) % 2 == 1 ? M_PI_2 - RawX % M_PI_2 : RawX % M_PI_2;
                 Domain.GetCarrierInstance().AngleFrequency = Domain.ElectricalState.BaseWaveAngleFrequency;
-                Domain.GetCarrierInstance().Time = Domain.GetBaseWaveTime();
+                Domain.GetCarrierInstance().Time = Domain.GetBaseWaveInstance().Time;
                 return (FixedX < M_PI * Domain.ElectricalState.PulsePattern.PulseMode.PulseCount / 54) ? Common.ModulateSignal(SineVal, SawValue) * 2 : (int)(RawX / M_PI_2) % 4 > 1 ? 0 : 2;
             }
 
@@ -120,7 +120,7 @@ namespace VvvfSimulator.Vvvf.Calculation
                 double SineVal = Common.GetBaseWaveform(Domain, Phase, InitialPhase);
                 double CarrierVal = Common.GetCarrierWaveform(Domain, Domain.ElectricalState.PulsePattern.PulseMode.PulseCount * RawX);
                 Domain.GetCarrierInstance().AngleFrequency = Domain.ElectricalState.BaseWaveAngleFrequency;
-                Domain.GetCarrierInstance().Time = Domain.GetBaseWaveTime();
+                Domain.GetCarrierInstance().Time = Domain.GetBaseWaveInstance().Time;
                 return Common.ModulateSignal(SineVal, CarrierVal) * 2;
             }
         }

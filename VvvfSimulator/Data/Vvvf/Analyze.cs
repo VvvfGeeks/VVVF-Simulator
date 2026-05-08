@@ -145,13 +145,14 @@ namespace VvvfSimulator.Data.Vvvf
         }
         private static bool IsMatching(Domain Control, PulseControl ysd)
         {
+            double baseFrequency = Control.GetBaseWaveInstance().Frequency;
             bool enable_free_run_condition = Control.IsFreeRun() && ((!Control.IsPowerOff() && ysd.EnableFreeRunOn) || (Control.IsPowerOff() && ysd.EnableFreeRunOff));
             bool enable_normal_condition = ysd.EnableNormal && !Control.IsFreeRun();
             if (!(enable_free_run_condition || enable_normal_condition)) return false;
 
             bool Condition1 = ysd.ControlFrequencyFrom <= Control.GetControlFrequency();
-            bool Condition2 = ysd.RotateFrequencyFrom == -1 || ysd.RotateFrequencyFrom <= Control.GetBaseWaveFrequency();
-            bool Condition3 = ysd.RotateFrequencyBelow == -1 || ysd.RotateFrequencyBelow > Control.GetBaseWaveFrequency();
+            bool Condition2 = ysd.RotateFrequencyFrom == -1 || ysd.RotateFrequencyFrom <= baseFrequency;
+            bool Condition3 = ysd.RotateFrequencyBelow == -1 || ysd.RotateFrequencyBelow > baseFrequency;
 
             if (!Condition2) return false;
             if (!Condition3) return false;
@@ -166,7 +167,7 @@ namespace VvvfSimulator.Data.Vvvf
                 (ysd.StuckFreeRunOff && Control.IsFreeRun() && Control.IsPowerOff())
             )
             {
-                if (Control.GetBaseWaveFrequency() > ysd.ControlFrequencyFrom) return true;
+                if (baseFrequency > ysd.ControlFrequencyFrom) return true;
                 return false;
             }
 
@@ -176,12 +177,13 @@ namespace VvvfSimulator.Data.Vvvf
         public static void Calculate(Domain Domain, Struct Data)
         {
             // Minimum Frequency Solve
+            double baseFrequency = Domain.GetBaseWaveInstance().Frequency;
             double minBaseFrequency;
             if (Domain.IsBraking()) minBaseFrequency = Data.MinimumFrequency.Braking;
             else minBaseFrequency = Data.MinimumFrequency.Accelerating;
             if (0 < Domain.GetControlFrequency() && Domain.GetControlFrequency() < minBaseFrequency && !Domain.IsFreeRun()) Domain.SetControlFrequency(minBaseFrequency);
-            Domain.SetBaseWaveTimeChangeAllowed(!(Domain.GetBaseWaveFrequency() < minBaseFrequency && Domain.GetControlFrequency() > 0));
-            double solvedElectricBaseWaveFrequency = Domain.IsBaseWaveTimeChangeAllowed() ? Domain.GetBaseWaveFrequency() : minBaseFrequency;
+            Domain.SetBaseWaveTimeChangeAllowed(!(baseFrequency < minBaseFrequency && Domain.GetControlFrequency() > 0));
+            double solvedElectricBaseWaveFrequency = Domain.IsBaseWaveTimeChangeAllowed() ? baseFrequency : minBaseFrequency;
 
             // Pattern Solve
             int solveIndex = -1;
@@ -201,7 +203,7 @@ namespace VvvfSimulator.Data.Vvvf
                     if (Domain.IsPowerOff())
                         Domain.SetControlFrequency(0);
                     else
-                        Domain.SetControlFrequency(Domain.GetBaseWaveFrequency());
+                        Domain.SetControlFrequency(baseFrequency);
                 }
                 Domain.ElectricalState = new(Data.Level, solvedElectricBaseWaveFrequency);
                 return;
@@ -252,7 +254,7 @@ namespace VvvfSimulator.Data.Vvvf
                     for (int i = 0; i < Table.Count; i++)
                     {
                         var carrier = Table[i];
-                        bool flag1 = carrier.FreeRunStuckAtHere && (Domain.GetBaseWaveFrequency() >= carrier.ControlFrequencyFrom) && Domain.IsFreeRun();
+                        bool flag1 = carrier.FreeRunStuckAtHere && (baseFrequency >= carrier.ControlFrequencyFrom) && Domain.IsFreeRun();
                         bool flag2 = Domain.GetControlFrequency() > carrier.ControlFrequencyFrom;
                         if (!flag1 && !flag2) continue;
                         target = i;
@@ -261,7 +263,7 @@ namespace VvvfSimulator.Data.Vvvf
                     return new ElectricalParameter.CarrierParameter.ConstantFrequency(Table[target].CarrierFrequency);
                 }
 
-                object baseFrequency = solvePattern.AsyncModulationData.CarrierWaveData.Mode switch
+                object baseCarrierFrequency = solvePattern.AsyncModulationData.CarrierWaveData.Mode switch
                 {
                     AsyncControl.CarrierFrequency.ValueMode.Vibrato => SolveVibratoParameter(),
                     AsyncControl.CarrierFrequency.ValueMode.Table => SolveTableParameter(),
@@ -269,7 +271,7 @@ namespace VvvfSimulator.Data.Vvvf
                     _ => new ElectricalParameter.CarrierParameter.ConstantFrequency(solvePattern.AsyncModulationData.CarrierWaveData.Constant),
                 };
 
-                solvedCarrierFrequency = new ElectricalParameter.CarrierParameter(randomFrequency, baseFrequency);
+                solvedCarrierFrequency = new ElectricalParameter.CarrierParameter(randomFrequency, baseCarrierFrequency);
             }
 
             // Solve Amplitude
@@ -283,16 +285,16 @@ namespace VvvfSimulator.Data.Vvvf
 
                 if (Param.EndFrequency == -1)
                 {
-                    if (solvePattern.Amplitude.Default.DisableRangeLimit) Param.EndFrequency = Domain.GetBaseWaveFrequency();
+                    if (solvePattern.Amplitude.Default.DisableRangeLimit) Param.EndFrequency = baseFrequency;
                     else
                     {
-                        Param.EndFrequency = (Domain.GetBaseWaveFrequency() > MaxControlFrequency) ? MaxControlFrequency : Domain.GetBaseWaveFrequency();
+                        Param.EndFrequency = (baseFrequency > MaxControlFrequency) ? MaxControlFrequency : baseFrequency;
                         Param.EndFrequency = (Param.EndFrequency > solvePattern.Amplitude.Default.EndFrequency) ? solvePattern.Amplitude.Default.EndFrequency : Param.EndFrequency;
                     }
                 }
 
-                if (Param.EndAmplitude == -1) Param.EndAmplitude = GetAmplitude(solvePattern.Amplitude.Default, Domain.GetBaseWaveFrequency());
-                if (Param.StartAmplitude == -1) Param.StartAmplitude = GetAmplitude(solvePattern.Amplitude.Default, Domain.GetBaseWaveFrequency());
+                if (Param.EndAmplitude == -1) Param.EndAmplitude = GetAmplitude(solvePattern.Amplitude.Default, baseFrequency);
+                if (Param.StartAmplitude == -1) Param.StartAmplitude = GetAmplitude(solvePattern.Amplitude.Default, baseFrequency);
                 solvedAmplitude = GetAmplitude(Param, Domain.GetControlFrequency());
             }
             else

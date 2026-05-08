@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
-using System.IO;
 using VvvfSimulator.Data.BaseFrequency;
 using VvvfSimulator.GUI.Util;
 using static VvvfSimulator.Generation.GenerateCommon;
@@ -13,30 +12,20 @@ namespace VvvfSimulator.Generation.Video.WaveForm
 {
     public class GenerateWaveFormUV
     {
-
-        /// <summary>
-        /// Do clone before call this!
-        /// </summary>
-        /// <param name="Control"></param>
-        /// <param name="PWM_Data"></param>
-        /// <param name="Width"></param>
-        /// <param name="Height"></param>
-        /// <param name="WaveHeight"></param>
-        /// <param name="Delta"></param>
-        /// <returns></returns>
         public static Bitmap GetImage(
             Domain Control,
             int Width, 
             int Height, 
             int WaveHeight,
-            int WaveWidth,
-            int Delta,
-            int Spacing
+            int LineWidth,
+            int Spacing,
+            bool BaseLine,
+            int Division
         )
         {
-            int Count = (Width - Spacing * 2) * Delta;
+            int Count = (Width - Spacing * 2) * Division;
             PhaseState[] values = GenerateBasic.WaveForm.GetUVW(Control, Math.PI / 6.0, 30.0 * Count, Count);
-            return GetImage(ref values, Width, Height, WaveHeight, WaveWidth, Spacing);
+            return GetImage(ref values, Width, Height, WaveHeight, LineWidth, Spacing, BaseLine);
         }
 
         public static Bitmap GetImage(
@@ -44,13 +33,15 @@ namespace VvvfSimulator.Generation.Video.WaveForm
             int Width,
             int Height,
             int WaveHeight,
-            int WaveWidth,
-            int Spacing
+            int Thikness,
+            int Spacing,
+            bool BaseLine
         )
         {
             Bitmap image = new(Width, Height);
             Graphics g = Graphics.FromImage(image);
             g.FillRectangle(new SolidBrush(Color.White), 0, 0, Width, Height);
+            if(BaseLine) g.DrawLine(new Pen(Color.Gray), Spacing, Height / 2, Width - Spacing, Height / 2);
 
             List<int> points_x = [];
             List<int> points_y = [];
@@ -83,7 +74,7 @@ namespace VvvfSimulator.Generation.Video.WaveForm
                 int x_2 = points_x[i + 1];
                 int y_1 = points_y[i];
                 int y_2 = points_y[i + 1];
-                g.DrawLine(new Pen(Color.Black, WaveWidth), x_1, y_1, x_2, y_2);
+                g.DrawLine(new Pen(Color.Black, Thikness), x_1, y_1, x_2, y_2);
             }
 
             g.Dispose();
@@ -91,7 +82,12 @@ namespace VvvfSimulator.Generation.Video.WaveForm
         }
 
         private BitmapViewerManager? Viewer { get; set; }
-        public void ExportVideo1(GenerationParameter Parameter, String fileName)
+        public void ExportVideo(GenerationParameter Parameter, string fileName, int fps,
+            int Width, int Height,
+            int WaveHeight, int Thikness,
+            int Spacing, bool BaseLine,
+            int Division
+        )
         {
             MainWindow.Invoke(() => Viewer = new BitmapViewerManager());
             Viewer?.Show();
@@ -103,197 +99,60 @@ namespace VvvfSimulator.Generation.Video.WaveForm
             Domain Domain = new(Parameter.TrainData.MotorSpec);
             Domain.GetCarrierInstance().UseSimpleFrequency = true;
 
-            int fps = 60;
+            VideoWriter vr = new(fileName, OpenCvSharp.FourCC.H264, fps, new OpenCvSharp.Size(Width, Height));
 
-            int image_width = 2880;
-            int image_height = 540;
+            if (!vr.IsOpened()) return;
 
-            int wave_height = 100;
-            int calculate_div = 30;
+            progressData.Total = baseFreqData.GetEstimatedSteps(1.0 / fps) + fps * 2;
 
-            VideoWriter vr = new(fileName, OpenCvSharp.FourCC.H264, fps, new OpenCvSharp.Size(image_width, image_height));
+            PhaseState[] EmptyArray = [];
+            Bitmap Empty = GetImage(ref EmptyArray, Width, Height, WaveHeight, Thikness, Spacing, BaseLine);
 
-
-            if (!vr.IsOpened())
-            {
-                return;
-            }
-
-            // Progress Initialize
-            progressData.Total = baseFreqData.GetEstimatedSteps(1.0 / fps) + 120;
-
-            Boolean START_WAIT = true;
-            if (START_WAIT)
-            {
-                Bitmap image = new(image_width, image_height);
-                Graphics g = Graphics.FromImage(image);
-                g.FillRectangle(new SolidBrush(Color.White), 0, 0, image_width, image_height);
-                MemoryStream ms = new();
-                image.Save(ms, ImageFormat.Png);
-                byte[] img = ms.GetBuffer();
-                Mat mat = OpenCvSharp.Mat.FromImageData(img);
-                for (int i = 0; i < 60; i++)
-                {
-                    // PROGRESS CHANGE
-                    progressData.Progress++;
-
-                    vr.Write(mat);
-                }
-                g.Dispose();
-                image.Dispose();
-            }
-
-            Boolean loop = true;
-            while (loop)
+            AddImageFrames(vr, Empty, fps, () => { progressData.Progress++; });
+            Analyze.ForwardTime(baseFreqData, Domain, vvvfData, 1.0 / fps, () =>
             {
                 Data.Vvvf.Analyze.Calculate(Domain, vvvfData);
-                Bitmap image = GetImage(Domain.Clone(), image_width, image_height, wave_height, 2, calculate_div, 100);
-                MemoryStream ms = new();
-                image.Save(ms, ImageFormat.Png);
-                byte[] img = ms.GetBuffer();
-                Mat mat = OpenCvSharp.Mat.FromImageData(img);
-                vr.Write(mat);
-                mat.Dispose();
-                ms.Dispose();
 
+                Bitmap image = GetImage(Domain.Clone(), Width, Height, WaveHeight, Thikness, Spacing, BaseLine, Division);
                 Viewer?.SetImage(image);
+                AddImageFrames(vr, image, 1);
                 image.Dispose();
-
-                loop = Data.BaseFrequency.Analyze.CheckForFreqChange(Domain, baseFreqData, vvvfData, 1.0 / fps);
-                if (progressData.Cancel) loop = false;
-
-                // PROGRESS CHANGE
                 progressData.Progress++;
-            }
 
-            Boolean END_WAIT = true;
-            if (END_WAIT)
-            {
-                Bitmap image = new(image_width, image_height);
-                Graphics g = Graphics.FromImage(image);
-                g.FillRectangle(new SolidBrush(Color.White), 0, 0, image_width, image_height);
-                MemoryStream ms = new();
-                image.Save(ms, ImageFormat.Png);
-                byte[] img = ms.GetBuffer();
-                Mat mat = OpenCvSharp.Mat.FromImageData(img);
-                for (int i = 0; i < 60; i++)
-                {
-                    // PROGRESS CHANGE
-                    progressData.Progress++;
-
-                    vr.Write(mat);
-                }
-                g.Dispose();
-                image.Dispose();
-            }
+                return progressData.Cancel;
+            });
+            AddImageFrames(vr, Empty, fps, () => { progressData.Progress++; });
 
             vr.Release();
             vr.Dispose();
             Viewer?.Close();
         }
-
-        public void ExportVideo2(GenerationParameter Parameter, String fileName)
+        public void ExportImage(GenerationParameter Parameter, string fileName,
+            double Time, double ForwardStep,
+            int Width, int Height,
+            int WaveHeight, int Thikness,
+            int Spacing, bool BaseLine,
+            int Division
+        )
         {
             MainWindow.Invoke(() => Viewer = new BitmapViewerManager());
             Viewer?.Show();
 
-            Data.Vvvf.Struct vvvfData = Parameter.VvvfData;
-            StructCompiled baseFreqData = Parameter.BaseFrequencyData;
-            GUI.TaskViewer.TaskProgress progressData = Parameter.Progress;
+            Parameter.Progress.Total = 3;
 
             Domain Domain = new(Parameter.TrainData.MotorSpec);
             Domain.GetCarrierInstance().UseSimpleFrequency = true;
+            Analyze.ForwardTime(Parameter.BaseFrequencyData, Domain, Parameter.VvvfData, Time, ForwardStep);
+            Parameter.Progress.Progress = 1;
 
-            int fps = 60;
+            Data.Vvvf.Analyze.Calculate(Domain, Parameter.VvvfData);
+            Bitmap image = GetImage(Domain.Clone(), Width, Height, WaveHeight, Thikness, Spacing, BaseLine, Division);
+            Parameter.Progress.Progress = 2;
 
-            int image_width = 2000;
-            int image_height = 500;
-
-            int wave_height = 100;
-            int calculate_div = 10;
-
-            VideoWriter vr = new(fileName, OpenCvSharp.FourCC.H264, fps, new OpenCvSharp.Size(image_width, image_height));
-
-
-            if (!vr.IsOpened())
-            {
-                return;
-            }
-
-            // Progress Initialize
-            progressData.Total = baseFreqData.GetEstimatedSteps(1.0 / fps) + 120;
-
-            Boolean START_WAIT = true;
-            if (START_WAIT)
-            {
-                Bitmap image = new(image_width, image_height);
-                Graphics g = Graphics.FromImage(image);
-                g.FillRectangle(new SolidBrush(Color.White), 0, 0, image_width, image_height);
-                g.DrawLine(new Pen(Color.Gray), 0, image_height / 2, image_width, image_height / 2);
-                MemoryStream ms = new();
-                image.Save(ms, ImageFormat.Png);
-                byte[] img = ms.GetBuffer();
-                Mat mat = OpenCvSharp.Mat.FromImageData(img);
-
-                for (int i = 0; i < 60; i++)
-                {
-                    // PROGRESS CHANGE
-                    progressData.Progress++;
-
-                    vr.Write(mat);
-                }
-                g.Dispose();
-                image.Dispose();
-            }
-
-            Boolean loop = true;
-            while (loop)
-            {
-                Data.Vvvf.Analyze.Calculate(Domain, vvvfData);
-                Bitmap image = GetImage(Domain.Clone(), image_width, image_height, wave_height, 1, calculate_div, 0);
-
-                MemoryStream ms = new();
-                image.Save(ms, ImageFormat.Png);
-                byte[] img = ms.GetBuffer();
-                Mat mat = OpenCvSharp.Mat.FromImageData(img);
-
-                Viewer?.SetImage(image);
-                vr.Write(mat);
-
-                image.Dispose();
-                loop = Data.BaseFrequency.Analyze.CheckForFreqChange(Domain, baseFreqData, vvvfData, 1.0 / fps);
-                if(progressData.Cancel) loop = false;
-
-                // PROGRESS CHANGE
-                progressData.Progress++;
-
-            }
-
-            Boolean END_WAIT = true;
-            if (END_WAIT)
-            {
-                Bitmap image = new(image_width, image_height);
-                Graphics g = Graphics.FromImage(image);
-                g.FillRectangle(new SolidBrush(Color.White), 0, 0, image_width, image_height);
-                g.DrawLine(new Pen(Color.Gray), 0, image_height / 2, image_width, image_height / 2);
-                MemoryStream ms = new();
-                image.Save(ms, ImageFormat.Png);
-                byte[] img = ms.GetBuffer();
-                Mat mat = OpenCvSharp.Mat.FromImageData(img);
-                for (int i = 0; i < 60; i++)
-                {
-                    // PROGRESS CHANGE
-                    progressData.Progress++;
-
-                    vr.Write(mat);
-                }
-                g.Dispose();
-                image.Dispose();
-            }
-
-            vr.Release();
-            vr.Dispose();
-            Viewer?.Close();
-        }
+            image.Save(fileName, ImageFormat.Png);
+            Viewer?.SetImage(image);
+            image.Dispose();
+            Parameter.Progress.Progress = 3;
+        }        
     }
 }

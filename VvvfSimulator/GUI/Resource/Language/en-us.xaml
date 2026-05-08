@@ -43,38 +43,33 @@
 
     <system:String x:Key="MainWindow.Menu.Generate">Generate</system:String>
     <system:String x:Key="MainWindow.Menu.Generate.Audio">Audio</system:String>
-    <system:String x:Key="MainWindow.Menu.Generate.Audio.VVVF">VVVF</system:String>
-    <system:String x:Key="MainWindow.Menu.Generate.Audio.VVVF.Line">Line Voltage</system:String>
-    <system:String x:Key="MainWindow.Menu.Generate.Audio.VVVF.Phases">Phase Voltage</system:String>
-    <system:String x:Key="MainWindow.Menu.Generate.Audio.VVVF.PhaseCurrent">Phase Current</system:String>
+    <system:String x:Key="MainWindow.Menu.Generate.Audio.Line">Line Voltage</system:String>
+    <system:String x:Key="MainWindow.Menu.Generate.Audio.Phases">Phase Voltage</system:String>
+    <system:String x:Key="MainWindow.Menu.Generate.Audio.PhaseCurrent">Phase Current</system:String>
     <system:String x:Key="MainWindow.Menu.Generate.Audio.Train">Train</system:String>
-    <system:String x:Key="MainWindow.Menu.Generate.Movie">Movie</system:String>
-    <system:String x:Key="MainWindow.Menu.Generate.Movie.Control">Control</system:String>
-    <system:String x:Key="MainWindow.Menu.Generate.Movie.Control.Design1">Design1</system:String>
-    <system:String x:Key="MainWindow.Menu.Generate.Movie.Control.Design2">Design2</system:String>
-    <system:String x:Key="MainWindow.Menu.Generate.Movie.WaveForm">WaveForm</system:String>
-    <system:String x:Key="MainWindow.Menu.Generate.Movie.WaveForm.Original">Line Voltage(1)</system:String>
-    <system:String x:Key="MainWindow.Menu.Generate.Movie.WaveForm.Spaced">Line Voltage(2)</system:String>
-    <system:String x:Key="MainWindow.Menu.Generate.Movie.WaveForm.UVW">Each Phase</system:String>
-    <system:String x:Key="MainWindow.Menu.Generate.Movie.Hexagon">Voltage Vector</system:String>
-    <system:String x:Key="MainWindow.Menu.Generate.Movie.Hexagon.Original">Design1</system:String>
-    <system:String x:Key="MainWindow.Menu.Generate.Movie.Hexagon.Explain">Render Progress</system:String>
-    <system:String x:Key="MainWindow.Menu.Generate.Movie.FFT">FFT</system:String>
-    <system:String x:Key="MainWindow.Menu.Generate.Movie.FFT.Original">Design1</system:String>
-    <system:String x:Key="MainWindow.Menu.Generate.Image">Image</system:String>
-    <system:String x:Key="MainWindow.Menu.Generate.Image.Hexagon">Voltage Vector</system:String>
-    <system:String x:Key="MainWindow.Menu.Generate.Image.Hexagon.Original">Design1</system:String>
-    <system:String x:Key="MainWindow.Menu.Generate.Image.FFT">FFT</system:String>
-    <system:String x:Key="MainWindow.Menu.Generate.Image.FFT.Original">Design1</system:String>
+    <system:String x:Key="MainWindow.Menu.Generate.Control">Control Diagram</system:String>
+    <system:String x:Key="MainWindow.Menu.Generate.Control.Design1">Design 1</system:String>
+    <system:String x:Key="MainWindow.Menu.Generate.Control.Design2">Design 2</system:String>
+    <system:String x:Key="MainWindow.Menu.Generate.Waveform">Waveform</system:String>
+    <system:String x:Key="MainWindow.Menu.Generate.Waveform.Line">Line Voltage</system:String>
+    <system:String x:Key="MainWindow.Menu.Generate.Waveform.Phase">Phase Voltage</system:String>
+    <system:String x:Key="MainWindow.Menu.Generate.Hexagon">Voltage Vector Diagram</system:String>
+    <system:String x:Key="MainWindow.Menu.Generate.Hexagon.Design1">Design 1</system:String>
+    <system:String x:Key="MainWindow.Menu.Generate.Hexagon.Explain">Drawing Process</system:String>
+    <system:String x:Key="MainWindow.Menu.Generate.FFT">FFT</system:String>
+    <system:String x:Key="MainWindow.Menu.Generate.FFT.Design1">Design 1</system:String>
+    <system:String x:Key="MainWindow.Menu.Generate.FS">Fourier Series</system:String>
+    <system:String x:Key="MainWindow.Menu.Generate.FS.Design1">Design 1</system:String>
+    <system:String x:Key="MainWindow.Menu.Generate.Type.Audio">Audio</system:String>
+    <system:String x:Key="MainWindow.Menu.Generate.Type.Movie">Video</system:String>
+    <system:String x:Key="MainWindow.Menu.Generate.Type.Snapshot">Snapshot</system:String>
 
-    <system:String x:Key="MainWindow.Menu.RealTime">Simulation</system:String>
-    <system:String x:Key="MainWindow.Menu.RealTime.VVVF">VVVF</system:String>
-    <system:String x:Key="MainWindow.Menu.RealTime.VVVF.USB">VVVF-USB Passthrough</system:String>
-    <system:String x:Key="MainWindow.Menu.RealTime.VVVF.USB.Error.Title">Error</system:String>
-    <system:String x:Key="MainWindow.Menu.RealTime.VVVF.USB.Error.Message">Invalid COM Port</system:String>
-    <system:String x:Key="MainWindow.Menu.RealTime.VVVF.Setting">VVVF-Simulation Setting</system:String>
-    <system:String x:Key="MainWindow.Menu.RealTime.Train">Train</system:String>
-    <system:String x:Key="MainWindow.Menu.RealTime.Train.Setting">Train-Simulation Setting</system:String>
+    <system:String x:Key="MainWindow.Menu.Realtime">Simulation</system:String>
+    <system:String x:Key="MainWindow.Menu.Realtime.Vvvf">VVVF</system:String>
+    <system:String x:Key="MainWindow.Menu.Realtime.Vvvf.Usb">VVVF USB Output</system:String>
+    <system:String x:Key="MainWindow.Menu.Realtime.Vvvf.Setting">VVVF Simulation Settings</system:String>
+    <system:String x:Key="MainWindow.Menu.Realtime.Train">Train Sound</system:String>
+    <system:String x:Key="MainWindow.Menu.Realtime.Train.Setting">Train Sound Simulation Settings</system:String>
 
     <system:String x:Key="MainWindow.Menu.Tools">Tools</system:String>
     <system:String x:Key="MainWindow.Menu.Tools.AutoVoltage">Auto Modulation Index</system:String>
@@ -101,21 +96,29 @@
     <system:String x:Key="MainWindow.TabControl.Accelerate">Accelerate</system:String>
     <system:String x:Key="MainWindow.TabControl.Brake">Brake</system:String>
 
-    <system:String x:Key="MainWindow.TaskDescription.Generate.Audio.Vvvf.Line">Line Voltage Audio Generation : </system:String>
-    <system:String x:Key="MainWindow.TaskDescription.Generate.Audio.Vvvf.Phases">Phase Voltage Audio Generation : </system:String>
-    <system:String x:Key="MainWindow.TaskDescription.Generate.Audio.Vvvf.PhaseCurrent">Phase Current Audio Generation : </system:String>
-    <system:String x:Key="MainWindow.TaskDescription.Generate.Audio.Train">Train Audio Generation：</system:String>
-    <system:String x:Key="MainWindow.TaskDescription.Generate.Movie.Control.Original">Control(Design1) Movie Generation：</system:String>
-    <system:String x:Key="MainWindow.TaskDescription.Generate.Movie.Control.Original2">Control(Design2) Movie Generation：</system:String>
-    <system:String x:Key="MainWindow.TaskDescription.Generate.Movie.WaveForm.Original">Line Voltage(1) Movie Generation：</system:String>
-    <system:String x:Key="MainWindow.TaskDescription.Generate.Movie.WaveForm.Spaced">Line Voltage(2) Movie Generation：</system:String>
-    <system:String x:Key="MainWindow.TaskDescription.Generate.Movie.WaveForm.UVW">Each Phase Movie Generation：</system:String>
-    <system:String x:Key="MainWindow.TaskDescription.Generate.Movie.Hexagon.Original">Voltage Vector Movie Generation：</system:String>
-    <system:String x:Key="MainWindow.TaskDescription.Generate.Movie.Hexagon.Explain">Voltage Vector Render Progress Movie Generation：</system:String>
-    <system:String x:Key="MainWindow.TaskDescription.Generate.Movie.FFT.Original">FFT Movie Generation：</system:String>
-    <system:String x:Key="MainWindow.TaskDescription.Generate.Image.Hexagon.Original">Voltage Vector Image Generation：</system:String>
-    <system:String x:Key="MainWindow.TaskDescription.Generate.Image.FFT.Original">FFT Image Generation：</system:String>
-    <system:String x:Key="MainWindow.TaskDescription.Tools.AutoVoltage">Auto Modulation Index Setting</system:String>
+    <system:String x:Key="MainWindow.TaskDescription.Generate.Audio">Audio</system:String>
+    <system:String x:Key="MainWindow.TaskDescription.Generate.Audio.Line">Line Voltage</system:String>
+    <system:String x:Key="MainWindow.TaskDescription.Generate.Audio.Phases">Phase Voltage</system:String>
+    <system:String x:Key="MainWindow.TaskDescription.Generate.Audio.PhaseCurrent">Phase Current</system:String>
+    <system:String x:Key="MainWindow.TaskDescription.Generate.Audio.Train">Train</system:String>
+    <system:String x:Key="MainWindow.TaskDescription.Generate.Control">Control Diagram</system:String>
+    <system:String x:Key="MainWindow.TaskDescription.Generate.Control.Design1">Design 1</system:String>
+    <system:String x:Key="MainWindow.TaskDescription.Generate.Control.Design2">Design 2</system:String>
+    <system:String x:Key="MainWindow.TaskDescription.Generate.Waveform">Waveform</system:String>
+    <system:String x:Key="MainWindow.TaskDescription.Generate.Waveform.Line">Line Voltage</system:String>
+    <system:String x:Key="MainWindow.TaskDescription.Generate.Waveform.Phase">Phase Voltage</system:String>
+    <system:String x:Key="MainWindow.TaskDescription.Generate.Hexagon">Voltage Vector Diagram</system:String>
+    <system:String x:Key="MainWindow.TaskDescription.Generate.Hexagon.Design1">Design 1</system:String>
+    <system:String x:Key="MainWindow.TaskDescription.Generate.Hexagon.Explain">Drawing Process</system:String>
+    <system:String x:Key="MainWindow.TaskDescription.Generate.FFT">FFT</system:String>
+    <system:String x:Key="MainWindow.TaskDescription.Generate.FFT.Design1">Design 1</system:String>
+    <system:String x:Key="MainWindow.TaskDescription.Generate.FS">Fourier Series</system:String>
+    <system:String x:Key="MainWindow.TaskDescription.Generate.FS.Design1">Design 1</system:String>
+    <system:String x:Key="MainWindow.TaskDescription.Generate.Type.Audio">Audio</system:String>
+    <system:String x:Key="MainWindow.TaskDescription.Generate.Type.Movie">Video</system:String>
+    <system:String x:Key="MainWindow.TaskDescription.Generate.Type.Snapshot">Snapshot</system:String>
+    <system:String x:Key="MainWindow.TaskDescription.Generate.Format">Generating {Type} for {Main} ({Sub}):</system:String>
+    <system:String x:Key="MainWindow.TaskDescription.Tools.AutoVoltage">Automatic Modulation Index Setting</system:String>
 
     <system:String x:Key="MainWindow.Message.File.Save.Ok.Title">Great</system:String>
     <system:String x:Key="MainWindow.Message.File.Save.Ok.Message">Saved</system:String>
@@ -132,12 +135,8 @@
     <system:String x:Key="MainWindow.Message.File.Load.Error.Message">This file cannot be read</system:String>
     <system:String x:Key="MainWindow.Message.Edit.Reset.Confirm.Title">Confirm</system:String>
     <system:String x:Key="MainWindow.Message.Edit.Reset.Confirm.Message">Are you sure you want to continue?</system:String>
-    <system:String x:Key="MainWindow.Message.Generate.Movie.Hexagon.Original.EnableZeroVector">Enable Zero-Vector Point?</system:String>
-    <system:String x:Key="MainWindow.Message.Generate.Movie.Hexagon.Explain.EnableZeroVector">Enable Zero-Vector Point?</system:String>
-    <system:String x:Key="MainWindow.Message.Generate.Image.Hexagon.Original.EnableZeroVector">Enable Zero-Vector Point?</system:String>
-    <system:String x:Key="MainWindow.Message.Generate.Movie.Hexagon.Explain.EnterFrequency">Enter the frequency to render</system:String>
-    <system:String x:Key="MainWindow.Message.Generate.Image.Hexagon.Original.EnterFrequency">Enter the frequency to render</system:String>
-    <system:String x:Key="MainWindow.Message.Generate.Image.FFT.Original.EnterFrequency">Enter the frequency to render</system:String>
+    <system:String x:Key="MainWindow.Message.Realtime.Vvvf.Usb.Error.Title">Error</system:String>
+    <system:String x:Key="MainWindow.Message.Realtime.Vvvf.Usb.Error.Message">Invalid COM Port</system:String>
     <system:String x:Key="MainWindow.Message.Tools.AutoVoltage.Error">
         Check the following when using Auto Modulation Index.\n
         ・All patterns' From values must be greater than or equal to 0.
@@ -185,6 +184,10 @@
     <system:String x:Key="TaskViewer.Status.Running">Running</system:String>
 
     <system:String x:Key="BitmapViewer.Title.Default">Image Viewer</system:String>
+    <system:String x:Key="BitmapViewer.ContextMenu.Close">Close</system:String>
+    <system:String x:Key="BitmapViewer.ContextMenu.Maximize">Maximize</system:String>
+    <system:String x:Key="BitmapViewer.ContextMenu.Minimize">Minimize</system:String>
+    <system:String x:Key="BitmapViewer.ContextMenu.Setting">Settings</system:String>
 
     <system:String x:Key="TrainAudio.SettingWindow.Title">Train Sound Setting</system:String>
 
@@ -268,7 +271,51 @@
     <system:String x:Key="TrainAudio.Pages.Gear.GearCalculate.Title">Calculate</system:String>
     <system:String x:Key="TrainAudio.Pages.Gear.GearCalculate.Gear">Gear</system:String>
     <system:String x:Key="TrainAudio.Pages.Gear.GearCalculate.Count">Count</system:String>
-
+    
+    <system:String x:Key="Simulator.Generation.Dialog.Waveform.Line.Title">Drawing Settings</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.Waveform.Line.Width">Width</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.Waveform.Line.Height">Height</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.Waveform.Line.WaveHeight">Wave Height</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.Waveform.Line.Thikness">Wave Thickness</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.Waveform.Line.Margin">Margin</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.Waveform.Line.Baseline">Show Baseline</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.Waveform.Line.Division">Calculation Precision</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.Waveform.Phase.Title">Drawing Settings</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.Waveform.Phase.Width">Width</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.Waveform.Phase.Height">Height</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.Waveform.Phase.WaveHeight">Wave Height</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.Waveform.Phase.Thikness">Wave Thickness</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.Waveform.Phase.Division">Calculation Precision</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.Hexagon.Design1.Title">Drawing Settings</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.Hexagon.Design1.ImageSize">Image Size</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.Hexagon.Design1.DrawSize">Drawing Size</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.Hexagon.Design1.Thikness">Line Thickness</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.Hexagon.Design1.ZeroVectorSize">Zero Vector Size</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.Hexagon.Design1.Division">Calculation Precision</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.Hexagon.Design1.Precise">Calculate Precisely</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.Hexagon.Explain.Title">Drawing Settings</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.Hexagon.Explain.EnableZeroVector">Show Zero Vector</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.Hexagon.Explain.EnterTime">Enter Time on Fundamental Frequency (s)</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.Hexagon.Explain.EnterForwardStep">Step Interval Until the Time (s)</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.FFT.Design1.Title">Drawing Settings</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.FFT.Design1.Width">Width</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.FFT.Design1.Height">Height</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.FFT.Design1.Amplitude">Scale</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.FFT.Design1.Thikness">Line Thickness</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.FFT.Design1.Size">Calculation Size</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.FFT.Design1.Range.Begin">Drawing Range Start</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.FFT.Design1.Range.End">Drawing Range End</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.FS.Design1.Title">Drawing Settings</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.FS.Design1.Width">Width</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.FS.Design1.Height">Height</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.FS.Design1.N.Begin">Multiplier Start</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.FS.Design1.N.End">Multiplier End</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.FS.Design1.Division">Calculation Precision</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.FS.Design1.Precise">Calculate Precisely</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.Type.Snapshot.Title">Time Settings</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.Type.Snapshot.EnterTime">Enter Time on Fundamental Frequency (s)</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.Type.Snapshot.EnterForwardStep">Step Interval Until the Time (s)</system:String>
+    
     <system:String x:Key="Simulator.RealTime.Controller.Title">Controller</system:String>
     <FontFamily x:Key="Simulator.RealTime.Controller.Font.Number">/GUI/Resource/Fonts/MPlus1Code/#M PLUS 1 Code</FontFamily>
     <FontFamily x:Key="Simulator.RealTime.Controller.Font.Notch">/GUI/Resource/Fonts/MPlus1Code/#M PLUS 1 Code</FontFamily>
@@ -325,11 +372,8 @@
     <system:String x:Key="Simulator.RealTime.Setting.Basic.ControlStatus.Show">Show</system:String>
     <system:String x:Key="Simulator.RealTime.Setting.Basic.ControlStatus.Design">Design</system:String>
     <system:String x:Key="Simulator.RealTime.Setting.Basic.ControlStatus.PreciseCalculation">Calculate Precisely</system:String>
-    <system:String x:Key="Simulator.RealTime.Setting.Basic.VoltageVector">Voltage Vector</system:String>
-    <system:String x:Key="Simulator.RealTime.Setting.Basic.VoltageVector.Show">Show</system:String>
-    <system:String x:Key="Simulator.RealTime.Setting.Basic.VoltageVector.Design">Design</system:String>
-    <system:String x:Key="Simulator.RealTime.Setting.Basic.VoltageVector.ShowZeroVector">Show Zero Vector</system:String>
     <system:String x:Key="Simulator.RealTime.Setting.Basic.Others">Others</system:String>
+    <system:String x:Key="Simulator.RealTime.Setting.Basic.Others.VoltageVector.Show">Show</system:String>
     <system:String x:Key="Simulator.RealTime.Setting.Basic.Others.FFT.Show">Show FFT</system:String>
     <system:String x:Key="Simulator.RealTime.Setting.Basic.Others.FS.Show">Show FS</system:String>
     <system:String x:Key="Simulator.RealTime.Setting.Basic.Others.EditRealTime">Realtime Edit</system:String>
@@ -525,8 +569,6 @@
 
     <system:String x:Key="Resource.Language.FriendlyNameConverter.ControlStatus.Design.Original1">Design1</system:String>
     <system:String x:Key="Resource.Language.FriendlyNameConverter.ControlStatus.Design.Original2">Design2</system:String>
-
-    <system:String x:Key="Resource.Language.FriendlyNameConverter.VoltageVector.Design.Original">Design1</system:String>
 
     <system:String x:Key="Resource.Language.FriendlyNameConverter.AmplitudeMode.Name.Linear">Proportional</system:String>
     <system:String x:Key="Resource.Language.FriendlyNameConverter.AmplitudeMode.Name.InverseProportional">Inverse Proportional</system:String>

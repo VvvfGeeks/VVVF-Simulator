@@ -56,6 +56,7 @@ namespace VvvfSimulator.GUI.Util
 
             if (tag.Equals("Close"))
             {
+                EnteredValueValid = false;
                 Close();
             }
                 

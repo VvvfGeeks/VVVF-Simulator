@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using static VvvfSimulator.Vvvf.Model.Struct;
 using static VvvfSimulator.Data.BaseFrequency.StructCompiled;
+using static VvvfSimulator.Vvvf.Model.Struct;
 
 namespace VvvfSimulator.Data.BaseFrequency
 {
@@ -38,9 +37,9 @@ namespace VvvfSimulator.Data.BaseFrequency
             Point Selected = ymdc.Points[GetPointAtNum(time, ymdc)];
             return Selected;
         }
-        private static double GetFreqAt(double time, double initial, StructCompiled ymdc)
+        private static double GetFreqAt(double time, double initial, StructCompiled data)
         {
-            Point Selected = GetPointAtData(time,ymdc);
+            Point Selected = GetPointAtData(time,data);
 
             double A_Frequency = (Selected.EndFrequency - Selected.StartFrequency) / (Selected.EndTime - Selected.StartTime);
             double Frequency = A_Frequency * (time - Selected.StartTime) + Selected.StartFrequency;
@@ -48,11 +47,12 @@ namespace VvvfSimulator.Data.BaseFrequency
             return Frequency + initial;
 
         }
-        public static bool CheckForFreqChange(Domain Control, StructCompiled Data, Vvvf.Struct SoundData, double TimeDelta)
+        public static bool CheckForFreqChange(StructCompiled Data, Domain Control, Vvvf.Struct SoundData, double TimeDelta)
         {
             double ForceOnFrequency;
             bool Braking, IsPowerOn;
             double CurrentTime = Control.GetTime();
+            VvvfSimulator.Vvvf.Modulation.BaseWave BaseWave = Control.GetBaseWaveInstance();
             List<Point> SelectSource = Data.Points;
             int DataAt = GetPointAtNum(CurrentTime,Data);
             if (DataAt < 0) return false;
@@ -101,25 +101,42 @@ namespace VvvfSimulator.Data.BaseFrequency
             Control.SetPowerOff(!IsPowerOn);
 
             {
-                double SineTimeAmplitude = NewSineFrequency == 0 ? 0 : Control.GetBaseWaveFrequency() / NewSineFrequency;
-                Control.SetBaseWaveAngleFrequency(NewSineFrequency * Math.PI * 2);
+                double TargetFrequency = ForceOnFrequency != -1 ? ForceOnFrequency : NewSineFrequency;
+                double SineTimeAmplitude = TargetFrequency == 0 ? 0 : BaseWave.Frequency / TargetFrequency;
+                BaseWave.Frequency = TargetFrequency;
                 if (Control.IsBaseWaveTimeChangeAllowed())
-                    Control.MultiplyBaseWaveTime(SineTimeAmplitude);
+                    BaseWave.Time *= SineTimeAmplitude;
             }
-
-            if (ForceOnFrequency != -1)
-            {
-                double SineTimeAmplitude = ForceOnFrequency == 0 ? 0 : Control.GetBaseWaveFrequency() / ForceOnFrequency;
-                Control.SetBaseWaveAngleFrequency(ForceOnFrequency * Math.PI * 2);
-                if (Control.IsBaseWaveTimeChangeAllowed())
-                    Control.MultiplyBaseWaveTime(SineTimeAmplitude);
-            }
-
 
             Control.ProcessControlParameter(TimeDelta, SoundData.JerkSetting);
             Control.AddTimeAll(TimeDelta);
 
             if (Target == null) return false;
+            return true;
+        }
+        public delegate bool ForwardTimeDelegate();
+        public static bool ForwardTime(StructCompiled Data, Domain Control, Vvvf.Struct SoundData, double TargetTime, double TimeDelta, ForwardTimeDelegate? Forward = null)
+        {
+            while (Control.GetTime() < TargetTime)
+            {
+                if (Control.GetTime() + TimeDelta > TargetTime)
+                    TimeDelta = TargetTime - Control.GetTime();
+                if (Forward?.Invoke() ?? false)
+                    return false;
+                if (!CheckForFreqChange(Data, Control, SoundData, TimeDelta))
+                    return false;
+            }
+            return true;
+        }
+        public static bool ForwardTime(StructCompiled Data, Domain Control, Vvvf.Struct SoundData, double TimeDelta, ForwardTimeDelegate? Forward = null)
+        {
+            while (true)
+            {
+                if (Forward?.Invoke() ?? false)
+                    return false;
+                if (!CheckForFreqChange(Data, Control, SoundData, TimeDelta))
+                    break;
+            }
             return true;
         }
     }

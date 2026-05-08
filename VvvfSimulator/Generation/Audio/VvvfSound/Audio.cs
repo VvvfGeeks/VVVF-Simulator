@@ -117,22 +117,19 @@ namespace VvvfSimulator.Generation.Audio.VvvfSound
                 else ExportPath[i] = System.IO.Path.GetDirectoryName(Path[i]) + "\\" + DateTime.Now.ToString("yyyyMMddHHmmss") + System.IO.Path.GetFileNameWithoutExtension(Path[i]) + ".temp";
                 Writer[i] = new(ExportPath[i], SamplingFreq);
             }
-            
-            while (true)
+
+            Data.BaseFrequency.Analyze.ForwardTime(Parameter.BaseFrequencyData, Domain, Parameter.VvvfData, 1.0 / SamplingFreq, () =>
             {
                 Data.Vvvf.Analyze.Calculate(Domain, Parameter.VvvfData);
                 double[] Samples = GetSample(Domain, Parameter.VvvfData);
-                
-                for(int i = 0; i < ((Samples.Length < Path.Length) ? Samples.Length : Path.Length); i++)
-                {
+
+                for (int i = 0; i < ((Samples.Length < Path.Length) ? Samples.Length : Path.Length); i++)
                     Writer[i].AddSample(Samples[i] * VolumeFactor);
-                }
 
                 Parameter.Progress.Progress++;
-                bool flag_continue = Data.BaseFrequency.Analyze.CheckForFreqChange(Domain, Parameter.BaseFrequencyData, Parameter.VvvfData, 1.0 / SamplingFreq);
-                bool flag_cancel = Parameter.Progress.Cancel;
-                if (flag_cancel || !flag_continue) break;
-            }
+
+                return Parameter.Progress.Cancel;
+            });
 
             for (int i = 0; i < Path.Length; i++)
             {

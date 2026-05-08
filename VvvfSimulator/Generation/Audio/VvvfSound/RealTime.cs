@@ -24,7 +24,7 @@ namespace VvvfSimulator.Generation.Audio.VvvfSound
             }
             catch
             {
-                DialogBox.Show(LanguageManager.GetString("Simulator.RealTime.Message.NoUsbDevice"), "Error", [DialogBoxButton.Ok], DialogBoxIcon.Error);
+                DialogBox.Show(LanguageManager.GetString("Simulator.RealTime.Message.NoUsbDevice"), LanguageManager.GetString("Generic.Title.Error"), [DialogBoxButton.Ok], DialogBoxIcon.Error);
                 return 0;
             }
 
@@ -82,7 +82,7 @@ namespace VvvfSimulator.Generation.Audio.VvvfSound
             }
             catch
             {
-                DialogBox.Show(LanguageManager.GetString("Simulator.RealTime.Message.UsbDeviceRemoved"), "Error", [DialogBoxButton.Ok], DialogBoxIcon.Error);
+                DialogBox.Show(LanguageManager.GetString("Simulator.RealTime.Message.UsbDeviceRemoved"), LanguageManager.GetString("Generic.Title.Error"), [DialogBoxButton.Ok], DialogBoxIcon.Error);
                 end_result = 0;
             }
 

@@ -37,7 +37,7 @@ namespace VvvfSimulator.Vvvf.Calculation
         {
             if (Control.ElectricalState.IsNone) return (0, 0);
 
-            double SineTime = Control.GetBaseWaveTime();
+            double SineTime = Control.GetBaseWaveInstance().Time;
             double RawX = Control.ElectricalState.BaseWaveAngleFrequency * SineTime + M_2PI_3 * Phase + InitialPhase;
             double SineX;
             if (Control.ElectricalState.PulsePattern.PulseMode.DiscreteTime.Enabled) SineX = DiscreteTimeLine(RawX, Control.ElectricalState.PulsePattern.PulseMode.DiscreteTime.Steps, Control.ElectricalState.PulsePattern.PulseMode.DiscreteTime.Mode);
@@ -174,7 +174,7 @@ namespace VvvfSimulator.Vvvf.Calculation
                     double HarmonicX = HarmonicData.IsHarmonicProportional switch
                     {
                         true => HarmonicData.Harmonic * (X + HarmonicData.InitialPhase),
-                        false => M_2PI * HarmonicData.Harmonic * (Control.GetTime() + InitialPhase)
+                        false => M_2PI * HarmonicData.Harmonic * (Control.GetTime() + M_2PI_3 * Phase + InitialPhase + HarmonicData.InitialPhase)
                     };
                     HarmonicWave += (double)(HarmonicData.Type switch
                     {

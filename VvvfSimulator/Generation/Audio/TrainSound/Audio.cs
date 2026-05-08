@@ -17,21 +17,23 @@ namespace VvvfSimulator.Generation.Audio.TrainSound
         // -------- TRAIN SOUND --------------
         public static double CalculateHarmonicSounds(Domain control, List<HarmonicData> harmonics)
         {
+            Vvvf.Modulation.BaseWave baseWave = control.GetBaseWaveInstance();
+
             double sound = 0;
             for (int harmonic = 0; harmonic < harmonics.Count; harmonic++)
             {
                 HarmonicData harmonic_data = harmonics[harmonic];
                 var amplitude_data = harmonic_data.Amplitude;
 
-                if (harmonic_data.Range.Start > control.GetBaseWaveFrequency()) continue;
-                if (harmonic_data.Range.End >= 0 && harmonic_data.Range.End < control.GetBaseWaveFrequency()) continue;
+                if (harmonic_data.Range.Start > baseWave.Frequency) continue;
+                if (harmonic_data.Range.End >= 0 && harmonic_data.Range.End < baseWave.Frequency) continue;
 
-                double harmonic_freq = harmonic_data.Harmonic * control.GetBaseWaveFrequency();
+                double harmonic_freq = harmonic_data.Harmonic * baseWave.Frequency;
 
                 if (harmonic_data.Disappear != -1 && harmonic_freq > harmonic_data.Disappear) continue;
-                double sine_val = Math.Sin(control.GetBaseWaveTime() * control.GetBaseWaveAngleFrequency() * harmonic_data.Harmonic);
+                double sine_val = Math.Sin(baseWave.Time * baseWave.AngleFrequency * harmonic_data.Harmonic);
 
-                double amplitude = amplitude_data.StartValue + (amplitude_data.EndValue - amplitude_data.StartValue) / (amplitude_data.End - harmonic_data.Amplitude.Start) * (control.GetBaseWaveFrequency() - harmonic_data.Amplitude.Start);
+                double amplitude = amplitude_data.StartValue + (amplitude_data.EndValue - amplitude_data.StartValue) / (amplitude_data.End - harmonic_data.Amplitude.Start) * (baseWave.Frequency - harmonic_data.Amplitude.Start);
                 if (amplitude > amplitude_data.MaximumValue) amplitude = amplitude_data.MaximumValue;
                 if (amplitude < amplitude_data.MinimumValue) amplitude = amplitude_data.MinimumValue;
 
@@ -107,7 +109,7 @@ namespace VvvfSimulator.Generation.Audio.TrainSound
 
             progressData.Total = baseFreqData.GetEstimatedSteps(1.0 / SamplingFrequency) + (raw ? 0 : 100);
 
-            while (true)
+            Data.BaseFrequency.Analyze.ForwardTime(baseFreqData, Domain, vvvfData, 1.0 / SamplingFrequency, () =>
             {
                 Data.Vvvf.Analyze.Calculate(Domain, vvvfData);
                 float sound = (float)CalculateTrainSound(Domain, soundData);
@@ -116,10 +118,8 @@ namespace VvvfSimulator.Generation.Audio.TrainSound
                     Write(bufferedWaveProvider, sampleProvider, writer);
                 progressData.Progress++;
 
-                bool flag_continue = Data.BaseFrequency.Analyze.CheckForFreqChange(Domain, baseFreqData, vvvfData, 1.0 / SamplingFrequency);
-                bool flag_cancel = progressData.Cancel;
-                if (!flag_continue || flag_cancel) break;
-            }
+                return progressData.Cancel;
+            });
 
             if (bufferedWaveProvider.BufferedBytes > 0)
                 Write(bufferedWaveProvider, sampleProvider, writer);

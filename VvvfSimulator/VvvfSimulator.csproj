@@ -11,7 +11,7 @@
 		<Description>A simple application to simulate VVVF sound</Description>
 		<PackageIcon>vvvf-simulator.png</PackageIcon>
 		<AllowUnsafeBlocks>false</AllowUnsafeBlocks>
-		<AssemblyVersion>1.10.0.2</AssemblyVersion>
+		<AssemblyVersion>1.10.0.3</AssemblyVersion>
 		<ApplicationManifest>app.manifest</ApplicationManifest>
 	</PropertyGroup>
 
@@ -79,6 +79,7 @@
 		<EmbeddedResource Include="Generation\Video\Fonts\DSEG14Modern-Italic.ttf" />
 		<EmbeddedResource Include="Generation\Video\Fonts\DSEG7Modern-Italic.ttf" />
 		<EmbeddedResource Include="Generation\Video\Fonts\FugazOne-Regular.ttf" />
+		<EmbeddedResource Include="Generation\Video\Fonts\ChironGoRoundTC-Bold.ttf" />
 	</ItemGroup>
 
 	<ItemGroup>

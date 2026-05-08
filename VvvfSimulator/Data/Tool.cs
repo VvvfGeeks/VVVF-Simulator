@@ -99,12 +99,12 @@ namespace VvvfSimulator.Data
                     DesireVoltageRate = DesireVoltageRate > 1 ? 1 : DesireVoltageRate;
 
                     Struct.Domain Domain = new(Param.Configuration.TrainData.MotorSpec);
-                    Domain.SetBaseWaveAngleFrequency(TargetFrequency * Math.PI * 2);
-                    Domain.SetControlFrequency(TargetFrequency);
                     Domain.SetPowerOff(false);
                     Domain.SetFreeRun(false);
                     Domain.SetBraking(Param.IsBrakePattern);
                     Domain.GetCarrierInstance().UseSimpleFrequency = true;
+                    Domain.SetControlFrequency(TargetFrequency);
+                    Domain.GetBaseWaveInstance().Frequency = TargetFrequency;
                     Data.Vvvf.Analyze.Calculate(Domain, Param.Configuration.SoundData);
 
                     double SolveFunction(double Amplitude)

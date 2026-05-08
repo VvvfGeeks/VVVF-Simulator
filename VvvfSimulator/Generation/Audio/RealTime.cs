@@ -36,23 +36,25 @@ namespace VvvfSimulator.Generation.Audio
             Control.SetBraking(Param.IsBraking);
             Control.SetPowerOff(Param.IsFreeRunning);
 
-            double sin_new_angle_freq = Control.GetBaseWaveAngleFrequency();
-            sin_new_angle_freq += Param.FrequencyChangeRate * dt;
-            if (sin_new_angle_freq < 0) sin_new_angle_freq = 0;
+            Vvvf.Modulation.BaseWave baseWave = Control.GetBaseWaveInstance();
+
+            double angleFrequency = baseWave.AngleFrequency;
+            angleFrequency += Param.FrequencyChangeRate * dt;
+            if (angleFrequency < 0) angleFrequency = 0;
 
             if (!Control.IsFreeRun())
             {
                 if (Control.IsBaseWaveTimeChangeAllowed())
                 {
-                    if (sin_new_angle_freq != 0)
+                    if (angleFrequency != 0)
                     {
-                        double amp = Control.GetBaseWaveAngleFrequency() / sin_new_angle_freq;
-                        Control.MultiplyBaseWaveTime(amp);
+                        double amp = baseWave.AngleFrequency / angleFrequency;
+                        baseWave.Time *= amp;
                     }
                 }
 
-                Control.SetControlFrequency(Control.GetBaseWaveFrequency());
-                Control.SetBaseWaveAngleFrequency(sin_new_angle_freq);
+                baseWave.AngleFrequency = angleFrequency;
+                Control.SetControlFrequency(baseWave.Frequency);
             }
 
 

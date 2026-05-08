@@ -97,7 +97,7 @@ namespace VvvfSimulator.Vvvf.Calculation
 
             { // nP DEFAULT
                 Domain.GetCarrierInstance().AngleFrequency = Domain.ElectricalState.BaseWaveAngleFrequency;
-                Domain.GetCarrierInstance().Time = Domain.GetBaseWaveTime();
+                Domain.GetCarrierInstance().Time = Domain.GetBaseWaveInstance().Time;
 
                 double SineVal = Common.GetBaseWaveform(Domain, Phase, InitialPhase);
                 double CarrierVal = Common.GetCarrierWaveform(Domain, Domain.ElectricalState.PulsePattern.PulseMode.PulseCount * RawX);

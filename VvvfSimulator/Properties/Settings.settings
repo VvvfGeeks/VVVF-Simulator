@@ -44,18 +44,6 @@
     <Setting Name="RealTime_Train_Hexagon_Show" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="RealTime_VVVF_Hexagon_Style" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">0</Value>
-    </Setting>
-    <Setting Name="RealTime_Train_Hexagon_Style" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">0</Value>
-    </Setting>
-    <Setting Name="RealTime_VVVF_Hexagon_ZeroVector" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
-    </Setting>
-    <Setting Name="RealTime_Train_Hexagon_ZeroVector" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
-    </Setting>
     <Setting Name="RealTime_VVVF_FFT_Show" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>

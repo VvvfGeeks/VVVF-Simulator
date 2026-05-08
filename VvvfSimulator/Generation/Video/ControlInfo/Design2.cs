@@ -97,12 +97,12 @@ namespace VvvfSimulator.Generation.Video.ControlInfo
             Task WaveFormTask = Task.Run(() => {
                 Domain WaveFormControl = Control.Clone();
                 WaveFormControl.GetCarrierInstance().UseSimpleFrequency = true;
-                wave_form = WaveForm.GenerateWaveFormUV.GetImage(WaveFormControl, 1520, 400, 80, 2, Precise ? 60 : 1 ,50);
+                wave_form = WaveForm.GenerateWaveFormUV.GetImage(WaveFormControl, 1520, 400, 80, 2,50, false, Precise ? 60 : 1);
             });
             CycleCalcTask.Wait();
             Task HexagonRenderTask = Task.Run(() =>
             {
-                hexagon = new(Hexagon.Design1.GetImage(ref CycleUVW, CycleControl.GetControlFrequency(), 1000, 1000, 2, true), 400, 400);
+                hexagon = new(Hexagon.Design1.GetImage(ref CycleUVW, 1000, 0.9, 2, Hexagon.Design1.GetNominalCircleSize(CycleControl.GetControlFrequency())), 400, 400);
             });
             Task VoltageCalcTask = Task.Run(() =>
             {
@@ -116,7 +116,7 @@ namespace VvvfSimulator.Generation.Video.ControlInfo
 
             Color stat_color, back_color, stat_str_color;
             String stat_str;
-            bool stopping = CycleControl.GetBaseWaveAngleFrequency() == 0;
+            bool stopping = CycleControl.GetBaseWaveInstance().IsZeroFrequency();
             if (stopping)
             {
                 stat_str_color = Color.White;
@@ -220,69 +220,70 @@ namespace VvvfSimulator.Generation.Video.ControlInfo
             // PROGRESS INITIALIZE
             progressData.Total = baseFreqData.GetEstimatedSteps(1.0 / fps) + 2 * fps;
 
-            bool START_FRAMES = true;
-            if (START_FRAMES)
             {
                 Domain.SetBraking(false);
                 Domain.SetPowerOff(false);
                 Domain.SetFreeRun(false);
                 Domain.SetControlFrequency(0);
-                Domain.SetBaseWaveAngleFrequency(0);
+                Domain.GetBaseWaveInstance().AngleFrequency = 0;
 
                 Data.Vvvf.Analyze.Calculate(Domain, vvvfData);
-                Bitmap final_image = GetImage(Domain.Clone(), true);
+                Bitmap image = GetImage(Domain.Clone(), true);
 
-                AddImageFrames(final_image, fps, vr);
-                Viewer?.SetImage(final_image);
-                final_image.Dispose();
+                AddImageFrames(vr, image, fps, () => { progressData.Progress++; });
+                image.Dispose();
             }
 
-            //PROGRESS ADD
-            progressData.Progress += fps;
-
-            while (true)
+            Data.BaseFrequency.Analyze.ForwardTime(baseFreqData, Domain, vvvfData, 1.0 / fps, () =>
             {
                 Data.Vvvf.Analyze.Calculate(Domain, vvvfData);
-                Bitmap final_image = GetImage(Domain.Clone(), true);
 
-                MemoryStream ms = new();
-                final_image.Save(ms, ImageFormat.Png);
-                byte[] img = ms.GetBuffer();
-                Mat mat = OpenCvSharp.Mat.FromImageData(img);
-                vr.Write(mat);
-                ms.Dispose();
-                mat.Dispose();
-                Viewer?.SetImage(final_image);
-                final_image.Dispose();
-
-                if (!Data.BaseFrequency.Analyze.CheckForFreqChange(Domain, baseFreqData, vvvfData, 1.0 / fps)) break;
-                if (progressData.Cancel) break;
+                Bitmap image = GetImage(Domain.Clone(), true);
+                Viewer?.SetImage(image);
+                AddImageFrames(vr, image, 1);
+                image.Dispose();
                 progressData.Progress++;
-            }
 
-            bool END_FRAMES = true;
-            if (END_FRAMES)
+                return progressData.Cancel;
+            });
+
             {
 
                 Domain.SetBraking(true);
                 Domain.SetPowerOff(false);
                 Domain.SetFreeRun(false);
                 Domain.SetControlFrequency(0);
-                Domain.SetBaseWaveAngleFrequency(0);
+                Domain.GetBaseWaveInstance().AngleFrequency = 0;
                 Data.Vvvf.Analyze.Calculate(Domain, vvvfData);
-                Bitmap final_image = GetImage(Domain.Clone(), true);
-                AddImageFrames(final_image, fps, vr);
-                Viewer?.SetImage(final_image);
-                final_image.Dispose();
+                Bitmap image = GetImage(Domain.Clone(), true);
+                AddImageFrames(vr, image, fps, () => { progressData.Progress++; });
+                image.Dispose();
             }
-
-            //PROGRESS ADD
-            progressData.Progress += fps;
 
             vr.Release();
             vr.Dispose();
 
             Viewer?.Close();
+        }
+        public void ExportImage(GenerationParameter Parameter, string fileName, double Time, double ForwardStep)
+        {
+            MainWindow.Invoke(() => Viewer = new BitmapViewerManager());
+            Viewer?.Show();
+
+            Parameter.Progress.Total = 3;
+
+            Domain Domain = new(Parameter.TrainData.MotorSpec);
+            Analyze.ForwardTime(Parameter.BaseFrequencyData, Domain, Parameter.VvvfData, Time, ForwardStep);
+            Parameter.Progress.Progress = 1;
+
+            Data.Vvvf.Analyze.Calculate(Domain, Parameter.VvvfData);
+            Bitmap image = GetImage(Domain.Clone(), true);
+            Parameter.Progress.Progress = 2;
+
+            image.Save(fileName, ImageFormat.Png);
+            Viewer?.SetImage(image);
+            image.Dispose();
+            Parameter.Progress.Progress = 3;
         }
     }
 }

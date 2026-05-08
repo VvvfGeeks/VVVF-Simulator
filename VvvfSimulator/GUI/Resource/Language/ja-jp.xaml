@@ -43,38 +43,33 @@
 
     <system:String x:Key="MainWindow.Menu.Generate">生成</system:String>
     <system:String x:Key="MainWindow.Menu.Generate.Audio">音声</system:String>
-    <system:String x:Key="MainWindow.Menu.Generate.Audio.VVVF">VVVF</system:String>
-    <system:String x:Key="MainWindow.Menu.Generate.Audio.VVVF.Line">線間電圧</system:String>
-    <system:String x:Key="MainWindow.Menu.Generate.Audio.VVVF.Phases">相電圧</system:String>
-    <system:String x:Key="MainWindow.Menu.Generate.Audio.VVVF.PhaseCurrent">相電流</system:String>
+    <system:String x:Key="MainWindow.Menu.Generate.Audio.Line">線間電圧</system:String>
+    <system:String x:Key="MainWindow.Menu.Generate.Audio.Phases">相電圧</system:String>
+    <system:String x:Key="MainWindow.Menu.Generate.Audio.PhaseCurrent">相電流</system:String>
     <system:String x:Key="MainWindow.Menu.Generate.Audio.Train">車両</system:String>
-    <system:String x:Key="MainWindow.Menu.Generate.Movie">動画</system:String>
-    <system:String x:Key="MainWindow.Menu.Generate.Movie.Control">制御状態</system:String>
-    <system:String x:Key="MainWindow.Menu.Generate.Movie.Control.Design1">デザイン1</system:String>
-    <system:String x:Key="MainWindow.Menu.Generate.Movie.Control.Design2">デザイン2</system:String>
-    <system:String x:Key="MainWindow.Menu.Generate.Movie.WaveForm">波形</system:String>
-    <system:String x:Key="MainWindow.Menu.Generate.Movie.WaveForm.Original">線間電圧(1)</system:String>
-    <system:String x:Key="MainWindow.Menu.Generate.Movie.WaveForm.Spaced">線間電圧(2)</system:String>
-    <system:String x:Key="MainWindow.Menu.Generate.Movie.WaveForm.UVW">各相の波形</system:String>
-    <system:String x:Key="MainWindow.Menu.Generate.Movie.Hexagon">電圧ベクトル図</system:String>
-    <system:String x:Key="MainWindow.Menu.Generate.Movie.Hexagon.Original">デザイン1</system:String>
-    <system:String x:Key="MainWindow.Menu.Generate.Movie.Hexagon.Explain">描画過程</system:String>
-    <system:String x:Key="MainWindow.Menu.Generate.Movie.FFT">FFT</system:String>
-    <system:String x:Key="MainWindow.Menu.Generate.Movie.FFT.Original">デザイン1</system:String>
-    <system:String x:Key="MainWindow.Menu.Generate.Image">静止画</system:String>
-    <system:String x:Key="MainWindow.Menu.Generate.Image.Hexagon">電圧ベクトル図</system:String>
-    <system:String x:Key="MainWindow.Menu.Generate.Image.Hexagon.Original">デザイン1</system:String>
-    <system:String x:Key="MainWindow.Menu.Generate.Image.FFT">FFT</system:String>
-    <system:String x:Key="MainWindow.Menu.Generate.Image.FFT.Original">デザイン1</system:String>
-
-    <system:String x:Key="MainWindow.Menu.RealTime">シミュレーション</system:String>
-    <system:String x:Key="MainWindow.Menu.RealTime.VVVF">VVVF</system:String>
-    <system:String x:Key="MainWindow.Menu.RealTime.VVVF.USB">VVVF-USB出力</system:String>
-    <system:String x:Key="MainWindow.Menu.RealTime.VVVF.USB.Error.Title">エラー</system:String>
-    <system:String x:Key="MainWindow.Menu.RealTime.VVVF.USB.Error.Message">無効なCOMポート</system:String>
-    <system:String x:Key="MainWindow.Menu.RealTime.VVVF.Setting">VVVF-シミュレーション設定</system:String>
-    <system:String x:Key="MainWindow.Menu.RealTime.Train">走行音</system:String>
-    <system:String x:Key="MainWindow.Menu.RealTime.Train.Setting">走行音-シミュレーション設定</system:String>
+    <system:String x:Key="MainWindow.Menu.Generate.Control">制御状態図</system:String>
+    <system:String x:Key="MainWindow.Menu.Generate.Control.Design1">デザイン1</system:String>
+    <system:String x:Key="MainWindow.Menu.Generate.Control.Design2">デザイン2</system:String>
+    <system:String x:Key="MainWindow.Menu.Generate.Waveform">波形図</system:String>
+    <system:String x:Key="MainWindow.Menu.Generate.Waveform.Line">線間電圧</system:String>
+    <system:String x:Key="MainWindow.Menu.Generate.Waveform.Phase">相電圧</system:String>
+    <system:String x:Key="MainWindow.Menu.Generate.Hexagon">電圧ベクトル図</system:String>
+    <system:String x:Key="MainWindow.Menu.Generate.Hexagon.Design1">デザイン1</system:String>
+    <system:String x:Key="MainWindow.Menu.Generate.Hexagon.Explain">描画過程</system:String>
+    <system:String x:Key="MainWindow.Menu.Generate.FFT">FFT</system:String>
+    <system:String x:Key="MainWindow.Menu.Generate.FFT.Design1">デザイン1</system:String>
+    <system:String x:Key="MainWindow.Menu.Generate.FS">フーリエ級数</system:String>
+    <system:String x:Key="MainWindow.Menu.Generate.FS.Design1">デザイン1</system:String>
+    <system:String x:Key="MainWindow.Menu.Generate.Type.Audio">音声</system:String>
+    <system:String x:Key="MainWindow.Menu.Generate.Type.Movie">動画</system:String>
+    <system:String x:Key="MainWindow.Menu.Generate.Type.Snapshot">静止画</system:String>
+    
+    <system:String x:Key="MainWindow.Menu.Realtime">シミュレーション</system:String>
+    <system:String x:Key="MainWindow.Menu.Realtime.Vvvf">VVVF</system:String>
+    <system:String x:Key="MainWindow.Menu.Realtime.Vvvf.Usb">VVVF-USB出力</system:String>
+    <system:String x:Key="MainWindow.Menu.Realtime.Vvvf.Setting">VVVF-シミュレーション設定</system:String>
+    <system:String x:Key="MainWindow.Menu.Realtime.Train">走行音</system:String>
+    <system:String x:Key="MainWindow.Menu.Realtime.Train.Setting">走行音-シミュレーション設定</system:String>
     
     <system:String x:Key="MainWindow.Menu.Tools">ツール</system:String>
     <system:String x:Key="MainWindow.Menu.Tools.AutoVoltage">変調率自動設定</system:String>
@@ -101,20 +96,28 @@
     <system:String x:Key="MainWindow.TabControl.Accelerate">力行</system:String>
     <system:String x:Key="MainWindow.TabControl.Brake">回生</system:String>
 
-    <system:String x:Key="MainWindow.TaskDescription.Generate.Audio.Vvvf.Line">線間電圧音声の生成：</system:String>
-    <system:String x:Key="MainWindow.TaskDescription.Generate.Audio.Vvvf.Phases">相電圧音声の生成：</system:String>
-    <system:String x:Key="MainWindow.TaskDescription.Generate.Audio.Vvvf.PhaseCurrent">相電流音声の生成：</system:String>
-    <system:String x:Key="MainWindow.TaskDescription.Generate.Audio.Train">走行音声の生成：</system:String>
-    <system:String x:Key="MainWindow.TaskDescription.Generate.Movie.Control.Original">制御状態（デザイン1）の動画生成：</system:String>
-    <system:String x:Key="MainWindow.TaskDescription.Generate.Movie.Control.Original2">制御状態（デザイン2）の動画生成：</system:String>
-    <system:String x:Key="MainWindow.TaskDescription.Generate.Movie.WaveForm.Original">線間電圧(1)の動画生成：</system:String>
-    <system:String x:Key="MainWindow.TaskDescription.Generate.Movie.WaveForm.Spaced">線間電圧(2)の動画生成：</system:String>
-    <system:String x:Key="MainWindow.TaskDescription.Generate.Movie.WaveForm.UVW">各相の波形の動画生成：</system:String>
-    <system:String x:Key="MainWindow.TaskDescription.Generate.Movie.Hexagon.Original">電圧ベクトルの動画生成：</system:String>
-    <system:String x:Key="MainWindow.TaskDescription.Generate.Movie.Hexagon.Explain">電圧ベクトルの描写過程の動画生成：</system:String>
-    <system:String x:Key="MainWindow.TaskDescription.Generate.Movie.FFT.Original">FFTの動画生成：</system:String>
-    <system:String x:Key="MainWindow.TaskDescription.Generate.Image.Hexagon.Original">電圧ベクトルの画像生成：</system:String>
-    <system:String x:Key="MainWindow.TaskDescription.Generate.Image.FFT.Original">FFTの画像生成：</system:String>
+    <system:String x:Key="MainWindow.TaskDescription.Generate.Audio">音声</system:String>
+    <system:String x:Key="MainWindow.TaskDescription.Generate.Audio.Line">線間電圧</system:String>
+    <system:String x:Key="MainWindow.TaskDescription.Generate.Audio.Phases">相電圧</system:String>
+    <system:String x:Key="MainWindow.TaskDescription.Generate.Audio.PhaseCurrent">相電流</system:String>
+    <system:String x:Key="MainWindow.TaskDescription.Generate.Audio.Train">車両</system:String>
+    <system:String x:Key="MainWindow.TaskDescription.Generate.Control">制御状態図</system:String>
+    <system:String x:Key="MainWindow.TaskDescription.Generate.Control.Design1">デザイン1</system:String>
+    <system:String x:Key="MainWindow.TaskDescription.Generate.Control.Design2">デザイン2</system:String>
+    <system:String x:Key="MainWindow.TaskDescription.Generate.Waveform">波形図</system:String>
+    <system:String x:Key="MainWindow.TaskDescription.Generate.Waveform.Line">線間電圧</system:String>
+    <system:String x:Key="MainWindow.TaskDescription.Generate.Waveform.Phase">相電圧</system:String>
+    <system:String x:Key="MainWindow.TaskDescription.Generate.Hexagon">電圧ベクトル図</system:String>
+    <system:String x:Key="MainWindow.TaskDescription.Generate.Hexagon.Design1">デザイン1</system:String>
+    <system:String x:Key="MainWindow.TaskDescription.Generate.Hexagon.Explain">描画過程</system:String>
+    <system:String x:Key="MainWindow.TaskDescription.Generate.FFT">FFT</system:String>
+    <system:String x:Key="MainWindow.TaskDescription.Generate.FFT.Design1">デザイン1</system:String>
+    <system:String x:Key="MainWindow.TaskDescription.Generate.FS">フーリエ級数</system:String>
+    <system:String x:Key="MainWindow.TaskDescription.Generate.FS.Design1">デザイン1</system:String>
+    <system:String x:Key="MainWindow.TaskDescription.Generate.Type.Audio">音声</system:String>
+    <system:String x:Key="MainWindow.TaskDescription.Generate.Type.Movie">動画</system:String>
+    <system:String x:Key="MainWindow.TaskDescription.Generate.Type.Snapshot">静止画</system:String>
+    <system:String x:Key="MainWindow.TaskDescription.Generate.Format">{Main}({Sub})の{Type}生成：</system:String>
     <system:String x:Key="MainWindow.TaskDescription.Tools.AutoVoltage">変調率自動設定</system:String>
 
     <system:String x:Key="MainWindow.Message.File.Save.Ok.Title">いいね</system:String>
@@ -132,17 +135,13 @@
     <system:String x:Key="MainWindow.Message.File.Load.Error.Message">このファイルは読めません</system:String>
     <system:String x:Key="MainWindow.Message.Edit.Reset.Confirm.Title">確認</system:String>
     <system:String x:Key="MainWindow.Message.Edit.Reset.Confirm.Message">本当に白紙に戻しますか？</system:String>
-    <system:String x:Key="MainWindow.Message.Generate.Movie.Hexagon.Original.EnableZeroVector">停留点を表しますか？</system:String>
-    <system:String x:Key="MainWindow.Message.Generate.Movie.Hexagon.Explain.EnableZeroVector">停留点を表しますか？</system:String>
-    <system:String x:Key="MainWindow.Message.Generate.Image.Hexagon.Original.EnableZeroVector">停留点を表しますか？</system:String>
-    <system:String x:Key="MainWindow.Message.Generate.Movie.Hexagon.Explain.EnterFrequency">描画する周波数を入力</system:String>
-    <system:String x:Key="MainWindow.Message.Generate.Image.Hexagon.Original.EnterFrequency">描画する周波数を入力</system:String>
-    <system:String x:Key="MainWindow.Message.Generate.Image.FFT.Original.EnterFrequency">描画する周波数を入力</system:String>
+    <system:String x:Key="MainWindow.Message.Realtime.Vvvf.Usb.Error.Title">エラー</system:String>
+    <system:String x:Key="MainWindow.Message.Realtime.Vvvf.Usb.Error.Message">無効なCOMポート</system:String>
     <system:String x:Key="MainWindow.Message.Tools.AutoVoltage.Error">
         変調率自動設定を使用する際は、次の事項を確認してください。\n
         ・すべてのパターンの制御周波数条件が0以上であること。
     </system:String>
-
+    
     <system:String x:Key="MainWindow.Dialog.Tools.AutoVoltage.Title">変調率自動設定</system:String>
     <system:String x:Key="MainWindow.Dialog.Tools.AutoVoltage.AcceleratePatternMaxFrequency">力行パターン最大周波数</system:String>
     <system:String x:Key="MainWindow.Dialog.Tools.AutoVoltage.AcceleratePatternMaxVoltage">力行パターン最大電圧</system:String>
@@ -185,6 +184,10 @@
     <system:String x:Key="TaskViewer.Status.Running">実行中</system:String>
 
     <system:String x:Key="BitmapViewer.Title.Default">画像表示</system:String>
+    <system:String x:Key="BitmapViewer.ContextMenu.Close">閉じる</system:String>
+    <system:String x:Key="BitmapViewer.ContextMenu.Maximize">最大化</system:String>
+    <system:String x:Key="BitmapViewer.ContextMenu.Minimize">最小化</system:String>
+    <system:String x:Key="BitmapViewer.ContextMenu.Setting">設定</system:String>
 
     <system:String x:Key="TrainAudio.SettingWindow.Title">走行音環境設定</system:String>
     
@@ -269,6 +272,50 @@
     <system:String x:Key="TrainAudio.Pages.Gear.GearCalculate.Gear">歯車</system:String>
     <system:String x:Key="TrainAudio.Pages.Gear.GearCalculate.Count">歯数</system:String>
 
+    <system:String x:Key="Simulator.Generation.Dialog.Waveform.Line.Title">描画設定</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.Waveform.Line.Width">幅</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.Waveform.Line.Height">高さ</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.Waveform.Line.WaveHeight">波の高さ</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.Waveform.Line.Thikness">波の太さ</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.Waveform.Line.Margin">余白</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.Waveform.Line.Baseline">基準線の表示</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.Waveform.Line.Division">計算の細かさ</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.Waveform.Phase.Title">描画設定</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.Waveform.Phase.Width">幅</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.Waveform.Phase.Height">高さ</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.Waveform.Phase.WaveHeight">波の高さ</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.Waveform.Phase.Thikness">波の太さ</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.Waveform.Phase.Division">計算の細かさ</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.Hexagon.Design1.Title">描画設定</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.Hexagon.Design1.ImageSize">画像の大きさ</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.Hexagon.Design1.DrawSize">描画する大きさ</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.Hexagon.Design1.Thikness">線の太さ</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.Hexagon.Design1.ZeroVectorSize">停留点の大きさ</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.Hexagon.Design1.Division">計算の細かさ</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.Hexagon.Design1.Precise">正確に計算</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.Hexagon.Explain.Title">描画設定</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.Hexagon.Explain.EnableZeroVector">停留点を表示</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.Hexagon.Explain.EnterTime">生成時基本周波数上の時刻(秒)を入力</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.Hexagon.Explain.EnterForwardStep">時刻に至るまでの刻み幅(秒)</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.FFT.Design1.Title">描画設定</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.FFT.Design1.Width">幅</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.FFT.Design1.Height">高さ</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.FFT.Design1.Amplitude">倍率</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.FFT.Design1.Thikness">線の太さ</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.FFT.Design1.Size">計算の大きさ</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.FFT.Design1.Range.Begin">描画範囲の開始点</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.FFT.Design1.Range.End">描画範囲の終了点</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.FS.Design1.Title">描画設定</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.FS.Design1.Width">幅</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.FS.Design1.Height">高さ</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.FS.Design1.N.Begin">倍数の起点</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.FS.Design1.N.End">倍数の終点</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.FS.Design1.Division">計算の細かさ</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.FS.Design1.Precise">正確に計算</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.Type.Snapshot.Title">時間設定</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.Type.Snapshot.EnterTime">生成時基本周波数上の時刻(秒)を入力</system:String>
+    <system:String x:Key="Simulator.Generation.Dialog.Type.Snapshot.EnterForwardStep">時刻に至るまでの刻み幅(秒)</system:String>
+
     <system:String x:Key="Simulator.RealTime.Controller.Title">コントローラ</system:String>
     <FontFamily x:Key="Simulator.RealTime.Controller.Font.Number">/GUI/Resource/Fonts/MPlus1Code/#M PLUS 1 Code</FontFamily>
     <FontFamily x:Key="Simulator.RealTime.Controller.Font.Notch">/GUI/Resource/Fonts/MPlus1Code/#M PLUS 1 Code</FontFamily>
@@ -325,11 +372,8 @@
     <system:String x:Key="Simulator.RealTime.Setting.Basic.ControlStatus.Show">表示する</system:String>
     <system:String x:Key="Simulator.RealTime.Setting.Basic.ControlStatus.Design">デザイン</system:String>
     <system:String x:Key="Simulator.RealTime.Setting.Basic.ControlStatus.PreciseCalculation">精確に計算</system:String>
-    <system:String x:Key="Simulator.RealTime.Setting.Basic.VoltageVector">電圧ベクトル図</system:String>
-    <system:String x:Key="Simulator.RealTime.Setting.Basic.VoltageVector.Show">表示する</system:String>
-    <system:String x:Key="Simulator.RealTime.Setting.Basic.VoltageVector.Design">デザイン</system:String>
-    <system:String x:Key="Simulator.RealTime.Setting.Basic.VoltageVector.ShowZeroVector">停留点を表示</system:String>
     <system:String x:Key="Simulator.RealTime.Setting.Basic.Others">そのほか</system:String>
+    <system:String x:Key="Simulator.RealTime.Setting.Basic.Others.VoltageVector.Show">電圧ベクトル図を表示</system:String>
     <system:String x:Key="Simulator.RealTime.Setting.Basic.Others.FFT.Show">FFTを表示</system:String>
     <system:String x:Key="Simulator.RealTime.Setting.Basic.Others.FS.Show">フーリエ級数を表示</system:String>
     <system:String x:Key="Simulator.RealTime.Setting.Basic.Others.EditRealTime">即時編集適応</system:String>
@@ -525,8 +569,6 @@
     
     <system:String x:Key="Resource.Language.FriendlyNameConverter.ControlStatus.Design.Original1">デザイン1</system:String>
     <system:String x:Key="Resource.Language.FriendlyNameConverter.ControlStatus.Design.Original2">デザイン2</system:String>
-
-    <system:String x:Key="Resource.Language.FriendlyNameConverter.VoltageVector.Design.Original">デザイン1</system:String>
 
     <system:String x:Key="Resource.Language.FriendlyNameConverter.AmplitudeMode.Name.Linear">比例</system:String>
     <system:String x:Key="Resource.Language.FriendlyNameConverter.AmplitudeMode.Name.InverseProportional">反比例</system:String>

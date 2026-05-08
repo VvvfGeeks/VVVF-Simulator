@@ -13,6 +13,7 @@ namespace VvvfSimulator.Vvvf.Model
             {
                 Domain Copy = (Domain)MemberwiseClone();
 
+                Copy.BaseWaveInstance = BaseWaveInstance.Clone();
                 Copy.DeltaSigmaInstances = [DeltaSigmaInstances[0].Clone(), DeltaSigmaInstances[1].Clone(), DeltaSigmaInstances[2].Clone()];
                 Copy.CarrierInstance = CarrierInstance.Clone();
                 Copy.Motor = Motor.Clone();
@@ -60,7 +61,7 @@ namespace VvvfSimulator.Vvvf.Model
                         if (IsFreeRun())
                         {
                             if (GetControlFrequency() > MaxVoltageFreq)
-                                SetControlFrequency(GetBaseWaveFrequency());
+                                SetControlFrequency(BaseWaveInstance.Frequency);
                         }
                     }
                     else
@@ -77,14 +78,15 @@ namespace VvvfSimulator.Vvvf.Model
 
                 if (!IsPowerOff())
                 {
+                    double F = BaseWaveInstance.Frequency;
                     if (!IsFreeRun())
-                        SetControlFrequency(GetBaseWaveFrequency());
+                        SetControlFrequency(F);
                     else
                     {
                         double updatedControlFrequency = GetControlFrequency() + GetFreeFrequencyChange() * DeltaTime;
-                        if (GetBaseWaveFrequency() <= updatedControlFrequency)
+                        if (F <= updatedControlFrequency)
                         {
-                            SetControlFrequency(GetBaseWaveFrequency());
+                            SetControlFrequency(F);
                             SetFreeRun(false);
                         }
                         else
@@ -106,22 +108,20 @@ namespace VvvfSimulator.Vvvf.Model
             #endregion
 
             #region MathematicalParameter
-            private double BaseWaveAngleFrequency = 0;
-            private double BaseWaveTime = 0;
             private double LastT = 0;
             private double T = 0;
 
             public void SetTimeAll(double Time)
             {
                 SetTime(Time);
-                SetBaseWaveTime(Time);
+                BaseWaveInstance.Time = Time;
                 CarrierInstance.Time = Time;
             }
 
             public void AddTimeAll(double Delta)
             {
                 AddTime(Delta);
-                AddBaseWaveTime(Delta);
+                BaseWaveInstance.Time += Delta;
                 CarrierInstance.Time += Delta;
             }
 
@@ -142,15 +142,6 @@ namespace VvvfSimulator.Vvvf.Model
 
             public double GetLastTime() => LastT;
             public double GetDeltaTime() => T - LastT;
-
-            public void SetBaseWaveAngleFrequency(double b) { BaseWaveAngleFrequency = b; }
-            public double GetBaseWaveAngleFrequency() { return BaseWaveAngleFrequency; }
-            public double GetBaseWaveFrequency() { return BaseWaveAngleFrequency * MyMath.M_1_2PI; }
-
-            public void SetBaseWaveTime(double t) { BaseWaveTime = t; }
-            public double GetBaseWaveTime() { return BaseWaveTime; }
-            public void AddBaseWaveTime(double t) { BaseWaveTime += t; }
-            public void MultiplyBaseWaveTime(double x) { BaseWaveTime *= x; }
             #endregion
 
             #region MotorParameter
@@ -162,6 +153,9 @@ namespace VvvfSimulator.Vvvf.Model
             #endregion
 
             #region Modulation
+            private BaseWave BaseWaveInstance = new();
+            public BaseWave GetBaseWaveInstance() => BaseWaveInstance;
+
             private DeltaSigma[] DeltaSigmaInstances = [new(), new(), new()];
             public DeltaSigma GetDeltaSigmaInstance(int Phase) => DeltaSigmaInstances[Phase];
             public int ProcessDeltaSigmaInstance(int Phase, double Input) => GetDeltaSigmaInstance(Phase).Process(Input, GetTime());

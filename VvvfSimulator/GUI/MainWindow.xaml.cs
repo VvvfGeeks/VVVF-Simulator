@@ -190,67 +190,627 @@ namespace VvvfSimulator
                     SaveYaml(Data.Vvvf.Manager.LoadPath, false);
             }
         }
-        private static GenerationParameter GetGenerationBasicParameter()
+        private void SolveCommand(string[] command)
         {
-            return new(
+            string taskDescription = LanguageManager.GetString("MainWindow.TaskDescription.Generate.Format")
+                .Replace("{Main}", LanguageManager.GetString("MainWindow.TaskDescription.Generate." + command[0]))
+                .Replace("{Sub}", LanguageManager.GetString("MainWindow.TaskDescription.Generate." + command[0] + "." + command[1]))
+                .Replace("{Type}", LanguageManager.GetString("MainWindow.TaskDescription.Generate.Type." + command[2])) + Data.Vvvf.Manager.GetLoadedYamlName();
+
+            GenerationParameter parameter = new(
                 Data.BaseFrequency.Manager.Current.GetCompiled(),
                 Data.Vvvf.Manager.DeepClone(Data.Vvvf.Manager.Current),
                 Data.TrainAudio.Manager.DeepClone(Data.TrainAudio.Manager.Current),
                 new TaskProgress()
             );
-        }
-        private bool SolveCommand(string[] command)
-        {
-            if (command[0].Equals("VVVF"))
+            Task? task = null;
+
+            if (command[2].Equals("Audio"))
             {
-                if (command[1].Equals("WAV"))
+                if (command[0].Equals("Audio"))
                 {
-                    var dialog = new SaveFileDialog
+                    if (command[1].Equals("Train"))
                     {
-                        Filter = "normal(192k)|*.wav|normal(5M)|*.wav|raw(192k)|*.wav|raw(5M)|*.wav",
-                        FilterIndex = 1
-                    };
-                    if (dialog.ShowDialog() == false) return true;
+                        var dialog = new SaveFileDialog { Filter = "wav|*.wav|raw|*.wav" };
+                        if (dialog.ShowDialog() == false) return;
 
-                    int sample_freq = new int[] { 192000, 5000000, 192000, 5000000 }[dialog.FilterIndex - 1];
-                    bool raw = new bool[] { false, false, true, true }[dialog.FilterIndex - 1];
-
-                    GenerationParameter parameter = GetGenerationBasicParameter();
-
-                    Task task = Task.Run(() =>
+                        task = Task.Run(() =>
+                        {
+                            try
+                            {
+                                bool raw = dialog.FilterIndex == 2;
+                                Generation.Audio.TrainSound.Audio.ExportWavFile(parameter, 192000, raw, dialog.FileName);
+                            }
+                            catch (Exception e)
+                            {
+                                DialogBox.Show(this, e.Message, LanguageManager.GetString("Generic.Title.Error"), [DialogBoxButton.Ok], DialogBoxIcon.Error);
+                            }
+                            SystemSounds.Beep.Play();
+                        });
+                    }
+                    else
                     {
-                        try
+                        var dialog = new SaveFileDialog
                         {
-                            if (command[2].Equals("Line"))
-                                Generation.Audio.VvvfSound.Audio.ExportWavLine(parameter, sample_freq, raw, dialog.FileName);
-                            else if (command[2].Equals("Phases"))
-                                Generation.Audio.VvvfSound.Audio.ExportWavPhases(parameter, sample_freq, raw, dialog.FileName);
-                            else if (command[2].Equals("PhaseCurrent"))
-                                Generation.Audio.VvvfSound.Audio.ExportWavPhaseCurrent(parameter, sample_freq, raw, dialog.FileName);
-                        }
-                        catch (Exception e)
-                        {
-                            DialogBox.Show(this, e.Message, LanguageManager.GetString("Generic.Title.Error"), [DialogBoxButton.Ok], DialogBoxIcon.Error);
-                        }
-                        SystemSounds.Beep.Play();
-                    });
+                            Filter = "normal(192k)|*.wav|normal(5M)|*.wav|raw(192k)|*.wav|raw(5M)|*.wav",
+                            FilterIndex = 1
+                        };
+                        if (dialog.ShowDialog() == false) return;
 
-                    TaskInfo taskProgressData = new(task, parameter.Progress,
-                        LanguageManager.GetString("MainWindow.TaskDescription.Generate.Audio.Vvvf." + command[2]) + Data.Vvvf.Manager.GetLoadedYamlName()
-                    );
-                    TaskViewer.TaskList.Add(taskProgressData);
+                        int sample_freq = new int[] { 192000, 5000000, 192000, 5000000 }[dialog.FilterIndex - 1];
+                        bool raw = new bool[] { false, false, true, true }[dialog.FilterIndex - 1];
+
+                        task = Task.Run(() =>
+                        {
+                            try
+                            {
+                                if (command[1].Equals("Line"))
+                                    Generation.Audio.VvvfSound.Audio.ExportWavLine(parameter, sample_freq, raw, dialog.FileName);
+                                else if (command[1].Equals("Phases"))
+                                    Generation.Audio.VvvfSound.Audio.ExportWavPhases(parameter, sample_freq, raw, dialog.FileName);
+                                else if (command[1].Equals("PhaseCurrent"))
+                                    Generation.Audio.VvvfSound.Audio.ExportWavPhaseCurrent(parameter, sample_freq, raw, dialog.FileName);
+                            }
+                            catch (Exception e)
+                            {
+                                DialogBox.Show(this, e.Message, LanguageManager.GetString("Generic.Title.Error"), [DialogBoxButton.Ok], DialogBoxIcon.Error);
+                            }
+                            SystemSounds.Beep.Play();
+                        });
+                    }
                 }
+            }
+            else if (command[2].Equals("Movie"))
+            {
+                int[] valid_fps = [240, 120, 60, 30, 10, 5];
+                string filter = "";
+                for (int i = 0; i < valid_fps.Length; i++)
+                {
+                    filter += valid_fps[i] + "fps|*.mp4" + (i + 1 == valid_fps.Length ? "" : "|");
+                }
+                var dialog = new SaveFileDialog { Filter = filter, FilterIndex = 3 };
+                if (dialog.ShowDialog() == false) return;
+                int fps = valid_fps[dialog.FilterIndex - 1];
 
-                else if (command[1].Equals("RealTime"))
+                if (command[0].Equals("Control"))
+                {
+                    if (command[1].Equals("Design1"))
+                    {
+                        task = Task.Run(() =>
+                        {
+                            try
+                            {
+                                Generation.Video.ControlInfo.Design1 generate = new();
+                                generate.ExportVideo(parameter, dialog.FileName, fps);
+                            }
+                            catch (Exception e)
+                            {
+                                DialogBox.Show(this, e.Message, LanguageManager.GetString("Generic.Title.Error"), [DialogBoxButton.Ok], DialogBoxIcon.Error);
+                            }
+                            SystemSounds.Beep.Play();
+                        });
+                    }
+                    else if (command[1].Equals("Design2"))
+                    {
+                        task = Task.Run(() =>
+                        {
+                            try
+                            {
+                                Generation.Video.ControlInfo.Design2 generation = new();
+                                generation.ExportVideo(parameter, dialog.FileName, fps);
+                            }
+                            catch (Exception e)
+                            {
+                                DialogBox.Show(this, e.Message, LanguageManager.GetString("Generic.Title.Error"), [DialogBoxButton.Ok], DialogBoxIcon.Error);
+                            }
+                            SystemSounds.Beep.Play();
+                        });
+                    }
+                }
+                else if (command[0].Equals("Waveform"))
+                {
+                    if (command[1].Equals("Line"))
+                    {
+                        List<DialogInputWindow.InputContext> Inputs =
+                        [
+                            new (LanguageManager.GetString("Simulator.Generation.Dialog.Waveform.Line.Width"), DialogInputWindow.InputContextMode.TextBox, 2000, typeof(int)),
+                            new (LanguageManager.GetString("Simulator.Generation.Dialog.Waveform.Line.Height"), DialogInputWindow.InputContextMode.TextBox, 500, typeof(int)),
+                            new (LanguageManager.GetString("Simulator.Generation.Dialog.Waveform.Line.WaveHeight"), DialogInputWindow.InputContextMode.TextBox, 100, typeof(int)),
+                            new (LanguageManager.GetString("Simulator.Generation.Dialog.Waveform.Line.Thikness"), DialogInputWindow.InputContextMode.TextBox, 2, typeof(int)),
+                            new (LanguageManager.GetString("Simulator.Generation.Dialog.Waveform.Line.Margin"), DialogInputWindow.InputContextMode.TextBox, 100, typeof(int)),
+                            new (LanguageManager.GetString("Simulator.Generation.Dialog.Waveform.Line.Baseline"), DialogInputWindow.InputContextMode.CheckBox, true, typeof(bool)),
+                            new (LanguageManager.GetString("Simulator.Generation.Dialog.Waveform.Line.Division"), DialogInputWindow.InputContextMode.TextBox, 10, typeof(int)),
+                        ];
+                        DialogInputWindow InputDialog = new(
+                            this,
+                            LanguageManager.GetString("Simulator.Generation.Dialog.Waveform.Line.Title"),
+                            Inputs
+                        );
+
+                        InputDialog.ShowDialog();
+                        if (InputDialog.Contexts == null) return;
+
+                        task = Task.Run(() =>
+                        {
+                            try
+                            {
+                                new Generation.Video.WaveForm.GenerateWaveFormUV().ExportVideo(parameter, dialog.FileName, fps,
+                                    InputDialog.GetValue<int>(0), InputDialog.GetValue<int>(1),
+                                    InputDialog.GetValue<int>(2), InputDialog.GetValue<int>(3),
+                                    InputDialog.GetValue<int>(4), InputDialog.GetValue<bool>(5),
+                                    InputDialog.GetValue<int>(6)
+                                );
+                            }
+                            catch (Exception e)
+                            {
+                                DialogBox.Show(this, e.Message, LanguageManager.GetString("Generic.Title.Error"), [DialogBoxButton.Ok], DialogBoxIcon.Error);
+                            }
+                            SystemSounds.Beep.Play();
+                        });
+
+                    }
+                    else if (command[1].Equals("Phase"))
+                    {
+                        List<DialogInputWindow.InputContext> Inputs =
+                        [
+                            new (LanguageManager.GetString("Simulator.Generation.Dialog.Waveform.Phase.Width"), DialogInputWindow.InputContextMode.TextBox, 1500, typeof(int)),
+                            new (LanguageManager.GetString("Simulator.Generation.Dialog.Waveform.Phase.Height"), DialogInputWindow.InputContextMode.TextBox, 1000, typeof(int)),
+                            new (LanguageManager.GetString("Simulator.Generation.Dialog.Waveform.Phase.WaveHeight"), DialogInputWindow.InputContextMode.TextBox, 100, typeof(int)),
+                            new (LanguageManager.GetString("Simulator.Generation.Dialog.Waveform.Phase.Thikness"), DialogInputWindow.InputContextMode.TextBox, 1, typeof(int)),
+                            new (LanguageManager.GetString("Simulator.Generation.Dialog.Waveform.Phase.Division"), DialogInputWindow.InputContextMode.TextBox, 10, typeof(int)),
+                        ];
+                        DialogInputWindow InputDialog = new(
+                            this,
+                            LanguageManager.GetString("Simulator.Generation.Dialog.Waveform.Phase.Title"),
+                            Inputs
+                        );
+                        InputDialog.ShowDialog();
+                        if (InputDialog.Contexts == null) return;
+
+                        task = Task.Run(() =>
+                        {
+                            try
+                            {
+                                new Generation.Video.WaveForm.GenerateWaveFormUVW().ExportVideo(parameter, dialog.FileName, fps,
+                                    InputDialog.GetValue<int>(0), InputDialog.GetValue<int>(1),
+                                    InputDialog.GetValue<int>(2), InputDialog.GetValue<int>(3),
+                                    InputDialog.GetValue<int>(4)
+                                );
+                            }
+                            catch (Exception e)
+                            {
+                                DialogBox.Show(this, e.Message, LanguageManager.GetString("Generic.Title.Error"), [DialogBoxButton.Ok], DialogBoxIcon.Error);
+                            }
+                            SystemSounds.Beep.Play();
+                        });
+                    }
+                }
+                else if (command[0].Equals("Hexagon"))
+                {
+                    if (command[1].Equals("Design1"))
+                    {
+                        List<DialogInputWindow.InputContext> Inputs =
+                        [
+                            new (LanguageManager.GetString("Simulator.Generation.Dialog.Hexagon.Design1.ImageSize"), DialogInputWindow.InputContextMode.TextBox, 1000, typeof(int)),
+                            new (LanguageManager.GetString("Simulator.Generation.Dialog.Hexagon.Design1.DrawSize"), DialogInputWindow.InputContextMode.TextBox, 0.9, typeof(double)),
+                            new (LanguageManager.GetString("Simulator.Generation.Dialog.Hexagon.Design1.Thikness"), DialogInputWindow.InputContextMode.TextBox, 2, typeof(int)),
+                            new (LanguageManager.GetString("Simulator.Generation.Dialog.Hexagon.Design1.ZeroVectorSize"), DialogInputWindow.InputContextMode.TextBox, -1.0, typeof(double)),
+                            new (LanguageManager.GetString("Simulator.Generation.Dialog.Hexagon.Design1.Division"), DialogInputWindow.InputContextMode.TextBox, 60000, typeof(int)),
+                            new (LanguageManager.GetString("Simulator.Generation.Dialog.Hexagon.Design1.Precise"), DialogInputWindow.InputContextMode.CheckBox, true, typeof(bool)),
+                        ];
+                        DialogInputWindow InputDialog = new(
+                            this,
+                            LanguageManager.GetString("Simulator.Generation.Dialog.Hexagon.Design1.Title"),
+                            Inputs
+                        );
+
+                        InputDialog.ShowDialog();
+                        if (InputDialog.Contexts == null) return;
+
+                        task = Task.Run(() =>
+                        {
+                            try
+                            {
+                                new Generation.Video.Hexagon.Design1().ExportVideo(parameter, dialog.FileName, fps, InputDialog.GetValue<int>(0), InputDialog.GetValue<double>(1), InputDialog.GetValue<int>(2), InputDialog.GetValue<double>(3), InputDialog.GetValue<int>(4), InputDialog.GetValue<bool>(5));
+                            }
+                            catch (Exception e)
+                            {
+                                DialogBox.Show(this, e.Message, LanguageManager.GetString("Generic.Title.Error"), [DialogBoxButton.Ok], DialogBoxIcon.Error);
+                            }
+                            SystemSounds.Beep.Play();
+                        });
+                    }
+                    else if (command[1].Equals("Explain"))
+                    {
+                        List<DialogInputWindow.InputContext> Inputs =
+                        [
+                            new (LanguageManager.GetString("Simulator.Generation.Dialog.Hexagon.Explain.EnableZeroVector"), DialogInputWindow.InputContextMode.CheckBox, true, typeof(bool)),
+                            new (LanguageManager.GetString("Simulator.Generation.Dialog.Hexagon.Explain.EnterTime"), DialogInputWindow.InputContextMode.TextBox, 10.0, typeof(double)),
+                            new (LanguageManager.GetString("Simulator.Generation.Dialog.Hexagon.Explain.EnterForwardStep"), DialogInputWindow.InputContextMode.TextBox, 1.0 / 200000, typeof(double)),
+                        ];
+                        DialogInputWindow InputDialog = new(
+                            this,
+                            LanguageManager.GetString("Simulator.Generation.Dialog.Hexagon.Explain.Title"),
+                            Inputs
+                        );
+
+                        InputDialog.ShowDialog();
+                        if (InputDialog.Contexts == null) return;
+
+                        task = Task.Run(() =>
+                        {
+                            try
+                            {
+                                new Generation.Video.Hexagon.Explain().ExportVideo(parameter, dialog.FileName, fps, InputDialog.GetValue<bool>(0), InputDialog.GetValue<double>(1), InputDialog.GetValue<double>(2));
+                            }
+                            catch (Exception e)
+                            {
+                                DialogBox.Show(this, e.Message, LanguageManager.GetString("Generic.Title.Error"), [DialogBoxButton.Ok], DialogBoxIcon.Error);
+                            }
+                            SystemSounds.Beep.Play();
+                        });
+                    }
+                }
+                else if (command[0].Equals("FFT"))
+                {
+                    if (command[1].Equals("Design1"))
+                    {
+                        List<DialogInputWindow.InputContext> Inputs =
+                        [
+                            new (LanguageManager.GetString("Simulator.Generation.Dialog.FFT.Design1.Width"), DialogInputWindow.InputContextMode.TextBox, 1000, typeof(int)),
+                            new (LanguageManager.GetString("Simulator.Generation.Dialog.FFT.Design1.Height"), DialogInputWindow.InputContextMode.TextBox, 1000, typeof(int)),
+                            new (LanguageManager.GetString("Simulator.Generation.Dialog.FFT.Design1.Amplitude"), DialogInputWindow.InputContextMode.TextBox, 2000, typeof(int)),
+                            new (LanguageManager.GetString("Simulator.Generation.Dialog.FFT.Design1.Thikness"), DialogInputWindow.InputContextMode.TextBox, 2, typeof(int)),
+                            new (LanguageManager.GetString("Simulator.Generation.Dialog.FFT.Design1.Size"), DialogInputWindow.InputContextMode.TextBox, 15, typeof(int)),
+                            new (LanguageManager.GetString("Simulator.Generation.Dialog.FFT.Design1.Range.Begin"), DialogInputWindow.InputContextMode.TextBox, 0, typeof(int)),
+                            new (LanguageManager.GetString("Simulator.Generation.Dialog.FFT.Design1.Range.End"), DialogInputWindow.InputContextMode.TextBox, 1000, typeof(int)),
+                        ];
+                        DialogInputWindow InputDialog = new(
+                            this,
+                            LanguageManager.GetString("Simulator.Generation.Dialog.FFT.Design1.Title"),
+                            Inputs
+                        );
+                        InputDialog.ShowDialog();
+                        if (InputDialog.Contexts == null) return;
+
+                        task = Task.Run(() =>
+                        {
+                            try
+                            {
+                                new Generation.Video.FFT.Design1().ExportVideo(parameter, dialog.FileName, fps, InputDialog.GetValue<int>(0), InputDialog.GetValue<int>(1), InputDialog.GetValue<int>(2), InputDialog.GetValue<int>(3), InputDialog.GetValue<int>(4), InputDialog.GetValue<int>(5), InputDialog.GetValue<int>(6));
+                            }
+                            catch (Exception e)
+                            {
+                                DialogBox.Show(this, e.Message, LanguageManager.GetString("Generic.Title.Error"), [DialogBoxButton.Ok], DialogBoxIcon.Error);
+                            }
+                            SystemSounds.Beep.Play();
+                        });
+                    }
+                }
+                else if (command[0].Equals("FS"))
+                {
+                    if (command[1].Equals("Design1"))
+                    {
+                        List<DialogInputWindow.InputContext> Inputs =
+                        [
+                            new (LanguageManager.GetString("Simulator.Generation.Dialog.FS.Design1.Width"), DialogInputWindow.InputContextMode.TextBox, 1000, typeof(int)),
+                            new (LanguageManager.GetString("Simulator.Generation.Dialog.FS.Design1.Height"), DialogInputWindow.InputContextMode.TextBox, 1000, typeof(int)),
+                            new (LanguageManager.GetString("Simulator.Generation.Dialog.FS.Design1.N.Begin"), DialogInputWindow.InputContextMode.TextBox, 1, typeof(int)),
+                            new (LanguageManager.GetString("Simulator.Generation.Dialog.FS.Design1.N.End"), DialogInputWindow.InputContextMode.TextBox, 100, typeof(int)),
+                            new (LanguageManager.GetString("Simulator.Generation.Dialog.FS.Design1.Division"), DialogInputWindow.InputContextMode.TextBox, 10000, typeof(int)),
+                            new (LanguageManager.GetString("Simulator.Generation.Dialog.FS.Design1.Precise"), DialogInputWindow.InputContextMode.CheckBox, false, typeof(bool)),
+                        ];
+                        DialogInputWindow InputDialog = new(
+                            this,
+                            LanguageManager.GetString("Simulator.Generation.Dialog.FS.Design1.Title"),
+                            Inputs
+                        );
+
+                        InputDialog.ShowDialog();
+                        if (InputDialog.Contexts == null) return;
+
+                        task = Task.Run(() =>
+                        {
+                            try
+                            {
+                                new Generation.Video.FS.Design1().ExportVideo(parameter, dialog.FileName, fps, InputDialog.GetValue<int>(0), InputDialog.GetValue<int>(1), (InputDialog.GetValue<int>(2), InputDialog.GetValue<int>(3)), InputDialog.GetValue<int>(4), InputDialog.GetValue<bool>(5));
+                            }
+                            catch (Exception e)
+                            {
+                                DialogBox.Show(this, e.Message, LanguageManager.GetString("Generic.Title.Error"), [DialogBoxButton.Ok], DialogBoxIcon.Error);
+                            }
+                            SystemSounds.Beep.Play();
+                        });
+                    }
+                }
+            }
+            else if (command[2].Equals("Snapshot"))
+            {
+                var dialog = new SaveFileDialog { Filter = "png (*.png)|*.png" };
+                if (dialog.ShowDialog() == false) return;
+
+                List<DialogInputWindow.InputContext> SnapshotDialogContext =
+                        [
+                            new (LanguageManager.GetString("Simulator.Generation.Dialog.Type.Snapshot.EnterTime"), DialogInputWindow.InputContextMode.TextBox, 10.0, typeof(double)),
+                            new (LanguageManager.GetString("Simulator.Generation.Dialog.Type.Snapshot.EnterForwardStep"), DialogInputWindow.InputContextMode.TextBox, 1.0 / 200000, typeof(double)),
+                        ];
+                DialogInputWindow SnapshotDialog = new(
+                    this,
+                    LanguageManager.GetString("Simulator.Generation.Dialog.Type.Snapshot.Title"),
+                    SnapshotDialogContext
+                );
+
+                SnapshotDialog.ShowDialog();
+                if (SnapshotDialog.Contexts == null) return;
+
+                double Time = SnapshotDialog.GetValue<double>(0);
+                double Step = SnapshotDialog.GetValue<double>(1);
+
+                if (command[0].Equals("Control"))
+                {
+                    if (command[1].Equals("Design1"))
+                    {
+                        task = Task.Run(() =>
+                        {
+                            try
+                            {
+                                Generation.Video.ControlInfo.Design1 generate = new();
+                                generate.ExportImage(parameter, dialog.FileName, Time, Step);
+                            }
+                            catch (Exception e)
+                            {
+                                DialogBox.Show(this, e.Message, LanguageManager.GetString("Generic.Title.Error"), [DialogBoxButton.Ok], DialogBoxIcon.Error);
+                            }
+                            SystemSounds.Beep.Play();
+                        });
+                    }
+                    else if (command[1].Equals("Design2"))
+                    {
+                        task = Task.Run(() =>
+                        {
+                            try
+                            {
+                                Generation.Video.ControlInfo.Design2 generation = new();
+                                generation.ExportImage(parameter, dialog.FileName, Time, Step);
+                            }
+                            catch (Exception e)
+                            {
+                                DialogBox.Show(this, e.Message, LanguageManager.GetString("Generic.Title.Error"), [DialogBoxButton.Ok], DialogBoxIcon.Error);
+                            }
+                            SystemSounds.Beep.Play();
+                        });
+                    }
+                }
+                else if (command[0].Equals("Waveform"))
+                {
+                    if (command[1].Equals("Line"))
+                    {
+                        List<DialogInputWindow.InputContext> Inputs =
+                        [
+                            new (LanguageManager.GetString("Simulator.Generation.Dialog.Waveform.Line.Width"), DialogInputWindow.InputContextMode.TextBox, 2000, typeof(int)),
+                            new (LanguageManager.GetString("Simulator.Generation.Dialog.Waveform.Line.Height"), DialogInputWindow.InputContextMode.TextBox, 500, typeof(int)),
+                            new (LanguageManager.GetString("Simulator.Generation.Dialog.Waveform.Line.WaveHeight"), DialogInputWindow.InputContextMode.TextBox, 100, typeof(int)),
+                            new (LanguageManager.GetString("Simulator.Generation.Dialog.Waveform.Line.Thikness"), DialogInputWindow.InputContextMode.TextBox, 2, typeof(int)),
+                            new (LanguageManager.GetString("Simulator.Generation.Dialog.Waveform.Line.Margin"), DialogInputWindow.InputContextMode.TextBox, 100, typeof(int)),
+                            new (LanguageManager.GetString("Simulator.Generation.Dialog.Waveform.Line.Baseline"), DialogInputWindow.InputContextMode.CheckBox, true, typeof(bool)),
+                            new (LanguageManager.GetString("Simulator.Generation.Dialog.Waveform.Line.Division"), DialogInputWindow.InputContextMode.TextBox, 10, typeof(int)),
+                        ];
+                        DialogInputWindow InputDialog = new(
+                            this,
+                            LanguageManager.GetString("Simulator.Generation.Dialog.Waveform.Line.Title"),
+                            Inputs
+                        );
+
+                        InputDialog.ShowDialog();
+                        if (InputDialog.Contexts == null) return;
+
+                        task = Task.Run(() =>
+                        {
+                            try
+                            {
+                                new Generation.Video.WaveForm.GenerateWaveFormUV().ExportImage(parameter, dialog.FileName, Time, Step,
+                                    InputDialog.GetValue<int>(0), InputDialog.GetValue<int>(1),
+                                    InputDialog.GetValue<int>(2), InputDialog.GetValue<int>(3),
+                                    InputDialog.GetValue<int>(4), InputDialog.GetValue<bool>(5),
+                                    InputDialog.GetValue<int>(6)
+                                );
+                            }
+                            catch (Exception e)
+                            {
+                                DialogBox.Show(this, e.Message, LanguageManager.GetString("Generic.Title.Error"), [DialogBoxButton.Ok], DialogBoxIcon.Error);
+                            }
+                            SystemSounds.Beep.Play();
+                        });
+
+                    }
+                    else if (command[1].Equals("Phase"))
+                    {
+                        List<DialogInputWindow.InputContext> Inputs =
+                        [
+                            new (LanguageManager.GetString("Simulator.Generation.Dialog.Waveform.Phase.Width"), DialogInputWindow.InputContextMode.TextBox, 1500, typeof(int)),
+                            new (LanguageManager.GetString("Simulator.Generation.Dialog.Waveform.Phase.Height"), DialogInputWindow.InputContextMode.TextBox, 1000, typeof(int)),
+                            new (LanguageManager.GetString("Simulator.Generation.Dialog.Waveform.Phase.WaveHeight"), DialogInputWindow.InputContextMode.TextBox, 100, typeof(int)),
+                            new (LanguageManager.GetString("Simulator.Generation.Dialog.Waveform.Phase.Thikness"), DialogInputWindow.InputContextMode.TextBox, 1, typeof(int)),
+                            new (LanguageManager.GetString("Simulator.Generation.Dialog.Waveform.Phase.Division"), DialogInputWindow.InputContextMode.TextBox, 10, typeof(int)),
+                        ];
+                        DialogInputWindow InputDialog = new(
+                            this,
+                            LanguageManager.GetString("Simulator.Generation.Dialog.Waveform.Phase.Title"),
+                            Inputs
+                        );
+                        InputDialog.ShowDialog();
+                        if (InputDialog.Contexts == null) return;
+
+                        task = Task.Run(() =>
+                        {
+                            try
+                            {
+                                new Generation.Video.WaveForm.GenerateWaveFormUVW().ExportImage(parameter, dialog.FileName, Time, Step,
+                                    InputDialog.GetValue<int>(0), InputDialog.GetValue<int>(1),
+                                    InputDialog.GetValue<int>(2), InputDialog.GetValue<int>(3),
+                                    InputDialog.GetValue<int>(4)
+                                );
+                            }
+                            catch (Exception e)
+                            {
+                                DialogBox.Show(this, e.Message, LanguageManager.GetString("Generic.Title.Error"), [DialogBoxButton.Ok], DialogBoxIcon.Error);
+                            }
+                            SystemSounds.Beep.Play();
+                        });
+                    }
+                }
+                else if (command[0].Equals("Hexagon"))
+                {
+                    if (command[1].Equals("Design1"))
+                    {
+                        List<DialogInputWindow.InputContext> Inputs =
+                        [
+                            new (LanguageManager.GetString("Simulator.Generation.Dialog.Hexagon.Design1.ImageSize"), DialogInputWindow.InputContextMode.TextBox, 1000, typeof(int)),
+                            new (LanguageManager.GetString("Simulator.Generation.Dialog.Hexagon.Design1.DrawSize"), DialogInputWindow.InputContextMode.TextBox, 0.9, typeof(double)),
+                            new (LanguageManager.GetString("Simulator.Generation.Dialog.Hexagon.Design1.Thikness"), DialogInputWindow.InputContextMode.TextBox, 2, typeof(int)),
+                            new (LanguageManager.GetString("Simulator.Generation.Dialog.Hexagon.Design1.ZeroVectorSize"), DialogInputWindow.InputContextMode.TextBox, -1.0, typeof(double)),
+                            new (LanguageManager.GetString("Simulator.Generation.Dialog.Hexagon.Design1.Division"), DialogInputWindow.InputContextMode.TextBox, 60000, typeof(int)),
+                            new (LanguageManager.GetString("Simulator.Generation.Dialog.Hexagon.Design1.Precise"), DialogInputWindow.InputContextMode.CheckBox, true, typeof(bool)),
+                        ];
+                        DialogInputWindow InputDialog = new(
+                            this,
+                            LanguageManager.GetString("Simulator.Generation.Dialog.Hexagon.Design1.Title"),
+                            Inputs
+                        );
+
+                        InputDialog.ShowDialog();
+                        if (InputDialog.Contexts == null) return;
+
+                        task = Task.Run(() =>
+                        {
+                            try
+                            {
+                                new Generation.Video.Hexagon.Design1().ExportImage(parameter, dialog.FileName, Time, Step, InputDialog.GetValue<int>(0), InputDialog.GetValue<double>(1), InputDialog.GetValue<int>(2), InputDialog.GetValue<double>(3), InputDialog.GetValue<int>(4), InputDialog.GetValue<bool>(5));
+                            }
+                            catch (Exception e)
+                            {
+                                DialogBox.Show(this, e.Message, LanguageManager.GetString("Generic.Title.Error"), [DialogBoxButton.Ok], DialogBoxIcon.Error);
+                            }
+                            SystemSounds.Beep.Play();
+                        });
+                    }
+                }
+                else if (command[0].Equals("FFT"))
+                {
+                    if (command[1].Equals("Design1"))
+                    {
+                        List<DialogInputWindow.InputContext> Inputs =
+                        [
+                            new (LanguageManager.GetString("Simulator.Generation.Dialog.FFT.Design1.Width"), DialogInputWindow.InputContextMode.TextBox, 1000, typeof(int)),
+                            new (LanguageManager.GetString("Simulator.Generation.Dialog.FFT.Design1.Height"), DialogInputWindow.InputContextMode.TextBox, 1000, typeof(int)),
+                            new (LanguageManager.GetString("Simulator.Generation.Dialog.FFT.Design1.Amplitude"), DialogInputWindow.InputContextMode.TextBox, 2000, typeof(int)),
+                            new (LanguageManager.GetString("Simulator.Generation.Dialog.FFT.Design1.Thikness"), DialogInputWindow.InputContextMode.TextBox, 2, typeof(int)),
+                            new (LanguageManager.GetString("Simulator.Generation.Dialog.FFT.Design1.Size"), DialogInputWindow.InputContextMode.TextBox, 15, typeof(int)),
+                            new (LanguageManager.GetString("Simulator.Generation.Dialog.FFT.Design1.Range.Begin"), DialogInputWindow.InputContextMode.TextBox, 0, typeof(int)),
+                            new (LanguageManager.GetString("Simulator.Generation.Dialog.FFT.Design1.Range.End"), DialogInputWindow.InputContextMode.TextBox, 1000, typeof(int)),
+                        ];
+                        DialogInputWindow InputDialog = new(
+                            this,
+                            LanguageManager.GetString("Simulator.Generation.Dialog.FFT.Design1.Title"),
+                            Inputs
+                        );
+                        InputDialog.ShowDialog();
+                        if (InputDialog.Contexts == null) return;
+
+                        task = Task.Run(() =>
+                        {
+                            try
+                            {
+                                new Generation.Video.FFT.Design1().ExportImage(parameter, dialog.FileName, Time, Step, InputDialog.GetValue<int>(0), InputDialog.GetValue<int>(1), InputDialog.GetValue<int>(2), InputDialog.GetValue<int>(3), InputDialog.GetValue<int>(4), InputDialog.GetValue<int>(5), InputDialog.GetValue<int>(6));
+                            }
+                            catch (Exception e)
+                            {
+                                DialogBox.Show(this, e.Message, LanguageManager.GetString("Generic.Title.Error"), [DialogBoxButton.Ok], DialogBoxIcon.Error);
+                            }
+                            SystemSounds.Beep.Play();
+                        });
+                    }
+                }
+                else if (command[0].Equals("FS"))
+                {
+                    if (command[1].Equals("Design1"))
+                    {
+                        List<DialogInputWindow.InputContext> Inputs =
+                        [
+                            new (LanguageManager.GetString("Simulator.Generation.Dialog.FS.Design1.Width"), DialogInputWindow.InputContextMode.TextBox, 1000, typeof(int)),
+                            new (LanguageManager.GetString("Simulator.Generation.Dialog.FS.Design1.Height"), DialogInputWindow.InputContextMode.TextBox, 1000, typeof(int)),
+                            new (LanguageManager.GetString("Simulator.Generation.Dialog.FS.Design1.N.Begin"), DialogInputWindow.InputContextMode.TextBox, 1, typeof(int)),
+                            new (LanguageManager.GetString("Simulator.Generation.Dialog.FS.Design1.N.End"), DialogInputWindow.InputContextMode.TextBox, 100, typeof(int)),
+                            new (LanguageManager.GetString("Simulator.Generation.Dialog.FS.Design1.Division"), DialogInputWindow.InputContextMode.TextBox, 10000, typeof(int)),
+                            new (LanguageManager.GetString("Simulator.Generation.Dialog.FS.Design1.Precise"), DialogInputWindow.InputContextMode.CheckBox, false, typeof(bool)),
+                        ];
+                        DialogInputWindow InputDialog = new(
+                            this,
+                            LanguageManager.GetString("Simulator.Generation.Dialog.FS.Design1.Title"),
+                            Inputs
+                        );
+
+                        InputDialog.ShowDialog();
+                        if (InputDialog.Contexts == null) return;
+
+                        task = Task.Run(() =>
+                        {
+                            try
+                            {
+                                new Generation.Video.FS.Design1().ExportImage(parameter, dialog.FileName, Time, Step, InputDialog.GetValue<int>(0), InputDialog.GetValue<int>(1), (InputDialog.GetValue<int>(2), InputDialog.GetValue<int>(3)), InputDialog.GetValue<int>(4), InputDialog.GetValue<bool>(5));
+                            }
+                            catch (Exception e)
+                            {
+                                DialogBox.Show(this, e.Message, LanguageManager.GetString("Generic.Title.Error"), [DialogBoxButton.Ok], DialogBoxIcon.Error);
+                            }
+                            SystemSounds.Beep.Play();
+                        });
+                    }
+                }
+            }
+
+            if (task is null) return;
+
+            TaskInfo taskProgressData = new(task, parameter.Progress, taskDescription);
+            TaskViewer.TaskList.Add(taskProgressData);
+        }
+        private void Generation_Menu_Click(object sender, RoutedEventArgs e)
+        {
+            MenuItem button = (MenuItem)sender;
+            object? tag = button.Tag;
+            if (tag == null) return;
+            string? tag_str = tag.ToString();
+            if (tag_str == null) return;
+            string[] command = tag_str.Split("_");
+            SolveCommand(command);
+            SystemSounds.Beep.Play();
+        }
+        private void Realtime_Menu_Click(object sender, RoutedEventArgs e)
+        {
+            MenuItem button = (MenuItem)sender;
+            object? tag = button.Tag;
+            if (tag == null) return;
+            string? tag_str = tag.ToString();
+            if (tag_str == null) return;
+            string[] command = tag_str.Split("_");
+
+            MainWindow.SetInteractive(false);
+
+            if (command[0].Equals("Vvvf"))
+            {
+                if (command[1].Equals("Setting"))
+                {
+                    GUI.Simulator.RealTime.Setting.Basic setting = new(this, GUI.Simulator.RealTime.Setting.Basic.RealTimeBasicSettingMode.VVVF);
+                    setting.ShowDialog();
+                }
+                else
                 {
                     VvvfSoundParameter Param = new(
                         Properties.Settings.Default.RealTime_VVVF_EditAllow ? Data.Vvvf.Manager.Current : Data.Vvvf.Manager.DeepClone(Data.Vvvf.Manager.Current),
                         Data.TrainAudio.Manager.DeepClone(Data.TrainAudio.Manager.Current)
                     );
 
-                    MainWindow.SetInteractive(false);
-
-                    if (command.Length == 3)
+                    if (command[1].Equals("Usb"))
                     {
                         try
                         {
@@ -263,8 +823,11 @@ namespace VvvfSimulator
                         }
                         catch
                         {
-                            DialogBox.Show(this, LanguageManager.GetString("MainWindow.Menu.RealTime.VVVF.USB.Error.Message"), LanguageManager.GetString("MainWindow.Menu.RealTime.VVVF.USB.Error.Title"), [DialogBoxButton.Ok], DialogBoxIcon.Error);
-                            return true;
+                            DialogBox.Show(this,
+                                LanguageManager.GetString("MainWindow.Message.Realtime.Vvvf.Usb.Error.Message"),
+                                LanguageManager.GetString("MainWindow.Message.Realtime.Vvvf.Usb.Error.Title"),
+                            [DialogBoxButton.Ok], DialogBoxIcon.Error);
+                            return;
                         }
                     }
 
@@ -301,11 +864,7 @@ namespace VvvfSimulator
 
                     if (Properties.Settings.Default.RealTime_VVVF_Hexagon_Show)
                     {
-                        IRealtimeDisplay Display = new RealtimeDisplay.Hexagon(
-                            Param,
-                            (RealtimeDisplay.Hexagon.RealTimeHexagonStyle)Properties.Settings.Default.RealTime_VVVF_Hexagon_Style,
-                            Properties.Settings.Default.RealTime_VVVF_Hexagon_ZeroVector
-                        );
+                        IRealtimeDisplay Display = new RealtimeDisplay.Hexagon(Param);
                         Display.Show();
                         Display.Start();
                     }
@@ -319,7 +878,7 @@ namespace VvvfSimulator
 
                     if (Properties.Settings.Default.RealTime_VVVF_FS_Show)
                     {
-                        IRealtimeDisplay Display = new GUI.Simulator.RealTime.UniqueWindow.Fs(Param);
+                        IRealtimeDisplay Display = new RealtimeDisplay.Fs(Param);
                         Display.Show();
                         Display.Start();
                     }
@@ -339,42 +898,17 @@ namespace VvvfSimulator
                         SystemSounds.Beep.Play();
                     });
 
-                    return Properties.Settings.Default.RealTime_VVVF_EditAllow;
-                }
-                else if (command[1].Equals("Setting"))
-                {
-                    GUI.Simulator.RealTime.Setting.Basic setting = new(this, GUI.Simulator.RealTime.Setting.Basic.RealTimeBasicSettingMode.VVVF);
-                    setting.ShowDialog();
+                    if (!Properties.Settings.Default.RealTime_VVVF_EditAllow) return;
                 }
             }
             else if (command[0].Equals("Train"))
             {
-                if (command[1].Equals("WAV"))
+                if (command[1].Equals("Setting"))
                 {
-
-                    var dialog = new SaveFileDialog { Filter = "wav|*.wav|raw|*.wav" };
-                    if (dialog.ShowDialog() == false) return true;
-
-                    GenerationParameter parameter = GetGenerationBasicParameter();
-
-                    Task task = Task.Run(() =>
-                    {
-                        try
-                        {
-                            bool raw = dialog.FilterIndex == 2;
-                            Generation.Audio.TrainSound.Audio.ExportWavFile(parameter, 192000, raw, dialog.FileName);
-                        }
-                        catch (Exception e)
-                        {
-                            DialogBox.Show(this, e.Message, LanguageManager.GetString("Generic.Title.Error"), [DialogBoxButton.Ok], DialogBoxIcon.Error);
-                        }
-                        SystemSounds.Beep.Play();
-                    });
-
-                    TaskInfo taskProgressData = new(task, parameter.Progress, LanguageManager.GetString("MainWindow.TaskDescription.Generate.Audio.Train") + Data.Vvvf.Manager.GetLoadedYamlName());
-                    TaskViewer.TaskList.Add(taskProgressData);
+                    GUI.Simulator.RealTime.Setting.Basic setting = new(this, GUI.Simulator.RealTime.Setting.Basic.RealTimeBasicSettingMode.Train);
+                    setting.ShowDialog();
                 }
-                else if (command[1].Equals("RealTime"))
+                else
                 {
                     TrainSoundParameter Param = new(
                         Properties.Settings.Default.RealTime_VVVF_EditAllow ? Data.Vvvf.Manager.Current : Data.Vvvf.Manager.DeepClone(Data.Vvvf.Manager.Current),
@@ -414,11 +948,7 @@ namespace VvvfSimulator
 
                     if (Properties.Settings.Default.RealTime_Train_Hexagon_Show)
                     {
-                        IRealtimeDisplay Display = new RealtimeDisplay.Hexagon(
-                            Param,
-                            (RealtimeDisplay.Hexagon.RealTimeHexagonStyle)Properties.Settings.Default.RealTime_Train_Hexagon_Style,
-                            Properties.Settings.Default.RealTime_Train_Hexagon_ZeroVector
-                        );
+                        IRealtimeDisplay Display = new RealtimeDisplay.Hexagon(Param);
                         Display.Show();
                         Display.Start();
                     }
@@ -432,7 +962,7 @@ namespace VvvfSimulator
 
                     if (Properties.Settings.Default.RealTime_Train_FS_Show)
                     {
-                        IRealtimeDisplay Display = new GUI.Simulator.RealTime.UniqueWindow.Fs(Param);
+                        IRealtimeDisplay Display = new RealtimeDisplay.Fs(Param);
                         Display.Show();
                         Display.Start();
                     }
@@ -451,246 +981,12 @@ namespace VvvfSimulator
                         MainWindow.SetInteractive(true);
                         SystemSounds.Beep.Play();
                     });
-                    return Properties.Settings.Default.RealTime_Train_EditAllow;
-                }
-                else if (command[1].Equals("Setting"))
-                {
-                    GUI.Simulator.RealTime.Setting.Basic setting = new(this, GUI.Simulator.RealTime.Setting.Basic.RealTimeBasicSettingMode.Train);
-                    setting.ShowDialog();
+                    if (!Properties.Settings.Default.RealTime_Train_EditAllow) return;
                 }
             }
-            else if (command[0].Equals("Control"))
-            {
-                int[] valid_fps = [120, 60, 30, 10, 5];
-                string filter = "";
-                for (int i = 0; i < valid_fps.Length; i++)
-                {
-                    filter += valid_fps[i] + "fps|*.mp4" + (i + 1 == valid_fps.Length ? "" : "|");
-                }
-                var dialog = new SaveFileDialog { Filter = filter, FilterIndex = 2 };
-                if (dialog.ShowDialog() == false) return true;
-                int fps = valid_fps[dialog.FilterIndex - 1];
 
-                if (command[1].Equals("Design1"))
-                {
-                    GenerationParameter parameter = GetGenerationBasicParameter();
-                    Task task = Task.Run(() =>
-                    {
-                        try
-                        {
-                            Generation.Video.ControlInfo.Design1 generate = new();
-                            generate.ExportVideo(parameter, dialog.FileName, fps);
-                        }
-                        catch (Exception e)
-                        {
-                            DialogBox.Show(this, e.Message, LanguageManager.GetString("Generic.Title.Error"), [DialogBoxButton.Ok], DialogBoxIcon.Error);
-                        }
-                        SystemSounds.Beep.Play();
-                    });
-
-                    TaskInfo taskProgressData = new(task, parameter.Progress, LanguageManager.GetString("MainWindow.TaskDescription.Generate.Movie.Control.Original") + Data.Vvvf.Manager.GetLoadedYamlName());
-                    TaskViewer.TaskList.Add(taskProgressData);
-                }
-
-                else if (command[1].Equals("Design2"))
-                {
-                    GenerationParameter parameter = GetGenerationBasicParameter();
-
-                    Task task = Task.Run(() =>
-                    {
-                        try
-                        {
-                            Generation.Video.ControlInfo.Design2 generation = new();
-                            generation.ExportVideo(parameter, dialog.FileName, fps);
-                        }
-                        catch (Exception e)
-                        {
-                            DialogBox.Show(this, e.Message, LanguageManager.GetString("Generic.Title.Error"), [DialogBoxButton.Ok], DialogBoxIcon.Error);
-                        }
-                        SystemSounds.Beep.Play();
-                    });
-
-                    TaskInfo taskProgressData = new(task, parameter.Progress, LanguageManager.GetString("MainWindow.TaskDescription.Generate.Movie.Control.Original2") + Data.Vvvf.Manager.GetLoadedYamlName());
-                    TaskViewer.TaskList.Add(taskProgressData);
-                }
-            }
-            else if (command[0].Equals("WaveForm"))
-            {
-                var dialog = new SaveFileDialog { Filter = "mp4 (*.mp4)|*.mp4" };
-                if (dialog.ShowDialog() == false) return true;
-
-                GenerationParameter parameter = GetGenerationBasicParameter();
-                Task task = Task.Run(() =>
-                {
-                    try
-                    {
-                        if (command[1].Equals("Original"))
-                            new Generation.Video.WaveForm.GenerateWaveFormUV().ExportVideo2(parameter, dialog.FileName);
-                        else if (command[1].Equals("Spaced"))
-                            new Generation.Video.WaveForm.GenerateWaveFormUV().ExportVideo1(parameter, dialog.FileName);
-                        else if (command[1].Equals("UVW"))
-                            new Generation.Video.WaveForm.GenerateWaveFormUVW().ExportVideo(parameter, dialog.FileName);
-                    }
-                    catch (Exception e)
-                    {
-                        DialogBox.Show(this, e.Message, LanguageManager.GetString("Generic.Title.Error"), [DialogBoxButton.Ok], DialogBoxIcon.Error);
-                    }
-                    SystemSounds.Beep.Play();
-                });
-
-                string description = command[1] switch
-                {
-                    "Original" => LanguageManager.GetString("MainWindow.TaskDescription.Generate.Movie.WaveForm.Original"),
-                    "Spaced" => LanguageManager.GetString("MainWindow.TaskDescription.Generate.Movie.WaveForm.Spaced"),
-                    _ => LanguageManager.GetString("MainWindow.TaskDescription.Generate.Movie.WaveForm.UVW")
-                };
-                TaskInfo taskProgressData = new(task, parameter.Progress, description + Data.Vvvf.Manager.GetLoadedYamlName());
-                TaskViewer.TaskList.Add(taskProgressData);
-            }
-            else if (command[0].Equals("Hexagon"))
-            {
-                if (command[1].Equals("Original"))
-                {
-                    var dialog = new SaveFileDialog { Filter = "mp4 (*.mp4)|*.mp4" };
-                    if (dialog.ShowDialog() == false) return true;
-                    DialogBoxButton? Result = DialogBox.Show(this, LanguageManager.GetString("MainWindow.Message.Generate.Movie.Hexagon.Original.EnableZeroVector"), LanguageManager.GetString("Generic.Title.Ask"), [DialogBoxButton.Yes, DialogBoxButton.No], DialogBoxIcon.Question);
-                    bool DrawCircle = Result == DialogBoxButton.Yes;
-                    GenerationParameter parameter = GetGenerationBasicParameter();
-                    Task task = Task.Run(() =>
-                    {
-                        try
-                        {
-                            new Generation.Video.Hexagon.Design1().ExportVideo(parameter, dialog.FileName, DrawCircle);
-                        }
-                        catch (Exception e)
-                        {
-                            DialogBox.Show(this, e.Message, LanguageManager.GetString("Generic.Title.Error"), [DialogBoxButton.Ok], DialogBoxIcon.Error);
-                        }
-                        SystemSounds.Beep.Play();
-                    });
-
-                    TaskInfo taskProgressData = new(task, parameter.Progress, LanguageManager.GetString("MainWindow.TaskDescription.Generate.Movie.Hexagon.Original") + Data.Vvvf.Manager.GetLoadedYamlName());
-                    TaskViewer.TaskList.Add(taskProgressData);
-                }
-                else if (command[1].Equals("Explain"))
-                {
-                    var dialog = new SaveFileDialog { Filter = "mp4 (*.mp4)|*.mp4" };
-                    if (dialog.ShowDialog() == false) return true;
-                    DialogBoxButton? Result = DialogBox.Show(this, LanguageManager.GetString("MainWindow.Message.Generate.Movie.Hexagon.Explain.EnableZeroVector"), LanguageManager.GetString("Generic.Title.Ask"), [DialogBoxButton.Yes, DialogBoxButton.No], DialogBoxIcon.Question);
-                    bool DrawCircle = Result == DialogBoxButton.Yes;
-                    DoubleNumberInput Input = new(this, LanguageManager.GetString("MainWindow.Message.Generate.Movie.Hexagon.Explain.EnterFrequency"));
-                    if (!Input.IsEnteredValueValid()) return true;
-
-                    GenerationParameter parameter = GetGenerationBasicParameter();
-                    Task task = Task.Run(() =>
-                    {
-                        try
-                        {
-                            new Generation.Video.Hexagon.Explain().ExportVideo(parameter, dialog.FileName, DrawCircle, Input.GetEnteredValue());
-                        }
-                        catch (Exception e)
-                        {
-                            DialogBox.Show(this, e.Message, LanguageManager.GetString("Generic.Title.Error"), [DialogBoxButton.Ok], DialogBoxIcon.Error);
-                        }
-                        SystemSounds.Beep.Play();
-                    });
-
-                    TaskInfo taskProgressData = new(task, parameter.Progress, LanguageManager.GetString("MainWindow.TaskDescription.Generate.Movie.Hexagon.Explain") + Data.Vvvf.Manager.GetLoadedYamlName());
-                    TaskViewer.TaskList.Add(taskProgressData);
-                }
-                else if (command[1].Equals("OriginalImage"))
-                {
-                    var dialog = new SaveFileDialog { Filter = "png (*.png)|*.png" };
-                    if (dialog.ShowDialog() == false) return true;
-                    DialogBoxButton? Result = DialogBox.Show(this, LanguageManager.GetString("MainWindow.Message.Generate.Image.Hexagon.Original.EnableZeroVector"), LanguageManager.GetString("Generic.Title.Ask"), [DialogBoxButton.Yes, DialogBoxButton.No], DialogBoxIcon.Question);
-                    bool DrawCircle = Result == DialogBoxButton.Yes;
-                    DoubleNumberInput Input = new(this, LanguageManager.GetString("MainWindow.Message.Generate.Image.Hexagon.Original.EnterFrequency"));
-                    if (!Input.IsEnteredValueValid()) return true;
-                    GenerationParameter parameter = GetGenerationBasicParameter();
-                    Task task = Task.Run(() =>
-                    {
-                        try
-                        {
-                            new Generation.Video.Hexagon.Design1().ExportImage(parameter, dialog.FileName, DrawCircle, Input.GetEnteredValue());
-                        }
-                        catch (Exception e)
-                        {
-                            DialogBox.Show(this, e.Message, LanguageManager.GetString("Generic.Title.Error"), [DialogBoxButton.Ok], DialogBoxIcon.Error);
-                        }
-                        SystemSounds.Beep.Play();
-                    });
-
-                    TaskInfo taskProgressData = new(task, parameter.Progress, LanguageManager.GetString("MainWindow.TaskDescription.Generate.Image.Hexagon.Original") + Data.Vvvf.Manager.GetLoadedYamlName());
-                    TaskViewer.TaskList.Add(taskProgressData);
-                }
-
-            }
-            else if (command[0].Equals("FFT"))
-            {
-                if (command[1].Equals("Video"))
-                {
-                    var dialog = new SaveFileDialog { Filter = "mp4 (*.mp4)|*.mp4" };
-                    if (dialog.ShowDialog() == false) return true;
-
-                    GenerationParameter parameter = GetGenerationBasicParameter();
-                    Task task = Task.Run(() =>
-                    {
-                        try
-                        {
-                            new Generation.Video.FFT.GenerateFFT().ExportVideo(parameter, dialog.FileName);
-                        }
-                        catch (Exception e)
-                        {
-                            DialogBox.Show(this, e.Message, LanguageManager.GetString("Generic.Title.Error"), [DialogBoxButton.Ok], DialogBoxIcon.Error);
-                        }
-                        SystemSounds.Beep.Play();
-                    });
-
-                    TaskInfo taskProgressData = new(task, parameter.Progress, LanguageManager.GetString("MainWindow.TaskDescription.Generate.Movie.FFT.Original") + Data.Vvvf.Manager.GetLoadedYamlName());
-                    TaskViewer.TaskList.Add(taskProgressData);
-                }
-                else if (command[1].Equals("Image"))
-                {
-                    var dialog = new SaveFileDialog { Filter = "png (*.png)|*.png" };
-                    if (dialog.ShowDialog() == false) return true;
-                    DoubleNumberInput Input = new(this, LanguageManager.GetString("MainWindow.Message.Generate.Image.FFT.Original.EnterFrequency"));
-                    if (!Input.IsEnteredValueValid()) return true;
-                    GenerationParameter parameter = GetGenerationBasicParameter();
-                    Task task = Task.Run(() =>
-                    {
-                        try
-                        {
-                            new Generation.Video.FFT.GenerateFFT().ExportImage(parameter, dialog.FileName, Input.GetEnteredValue());
-                        }
-                        catch (Exception e)
-                        {
-                            DialogBox.Show(this, e.Message, LanguageManager.GetString("Generic.Title.Error"), [DialogBoxButton.Ok], DialogBoxIcon.Error);
-                        }
-                        SystemSounds.Beep.Play();
-                    });
-                    TaskInfo taskProgressData = new(task, parameter.Progress, LanguageManager.GetString("MainWindow.TaskDescription.Generate.Image.FFT.Original") + Data.Vvvf.Manager.GetLoadedYamlName());
-                    TaskViewer.TaskList.Add(taskProgressData);
-                }
-
-            }
-            return true;
-        }
-        private void Generation_Menu_Click(object sender, RoutedEventArgs e)
-        {
-            MenuItem button = (MenuItem)sender;
-            object? tag = button.Tag;
-            if (tag == null) return;
-            string? tag_str = tag.ToString();
-            if (tag_str == null) return;
-            string[] command = tag_str.Split("_");
-
-
-            MainWindow.SetInteractive(false);
-            bool unblock = SolveCommand(command);
-            if (!unblock) return;
             MainWindow.SetInteractive(true);
             SystemSounds.Beep.Play();
-
         }
         private void Window_Menu_Click(object sender, RoutedEventArgs e)
         {
@@ -814,7 +1110,7 @@ namespace VvvfSimulator
 
                 Task Solver = Task.Run(() =>
                 {
-                    
+
                     bool result = Data.Tool.AutoModulationIndexSolver.Run(Progress, Configuration);
                     if (!result)
                         DialogBox.Show(this, LanguageManager.GetStringWithNewLine("MainWindow.Message.Tools.AutoVoltage.Error"), LanguageManager.GetString("Generic.Title.Error"), [DialogBoxButton.Ok], DialogBoxIcon.Error);
@@ -866,7 +1162,7 @@ namespace VvvfSimulator
             if (tag_str.Equals("Reset"))
             {
                 DialogBoxButton? Result = DialogBox.Show(
-                    this, 
+                    this,
                     LanguageManager.GetString("MainWindow.Message.Edit.Reset.Confirm.Message"),
                     LanguageManager.GetString("MainWindow.Message.Edit.Reset.Confirm.Title"),
                     [DialogBoxButton.Yes, DialogBoxButton.No], DialogBoxIcon.Question);
@@ -934,7 +1230,7 @@ namespace VvvfSimulator
                 BrakeSelectedShow();
             }
         }
-        
+
         private void SettingButtonClick(object sender, RoutedEventArgs e)
         {
             Button button = (Button)sender;
@@ -1049,7 +1345,7 @@ namespace VvvfSimulator
             }
         }
 
-        
+
         private void Window_Closing(object sender, CancelEventArgs e)
         {
             if (!SaveBefore("MainWindow.Message.File.SaveBefore.Close"))
@@ -1057,7 +1353,7 @@ namespace VvvfSimulator
                 e.Cancel = true;
                 return;
             }
-            
+
             Application.Current.Shutdown();
             Generation.Video.Fonts.Manager.Dispose();
         }

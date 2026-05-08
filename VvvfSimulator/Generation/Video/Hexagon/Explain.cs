@@ -5,7 +5,6 @@ using System.Drawing.Imaging;
 using System.IO;
 using VvvfSimulator.Data.Vvvf;
 using VvvfSimulator.GUI.Util;
-using VvvfSimulator.Vvvf;
 using static VvvfSimulator.Generation.GenerateCommon;
 using static VvvfSimulator.Vvvf.Model.Struct;
 using static VvvfSimulator.Vvvf.MyMath;
@@ -30,9 +29,8 @@ namespace VvvfSimulator.Generation.Video.Hexagon
             g.DrawLine(pen, top.ToPoint(), left.ToPoint());
             g.DrawLine(pen, top.ToPoint(), right.ToPoint());
         }
-        public bool ExportVideo(GenerationParameter Parameter, string Path, bool DrawCircle, double ControlFrequency)
+        public bool ExportVideo(GenerationParameter Parameter, string Path, int fps, bool DrawCircle, double Time, double ForwardStep)
         {
-            int fps = 60;
             int widthTotalImage = 1300, heightTotalImage = 500;
             int widthPwmImage = 750, heightPwmImage = 500;
             int sizeVectorImage = 1000;
@@ -51,11 +49,10 @@ namespace VvvfSimulator.Generation.Video.Hexagon
             if (!Writer.IsOpened()) return false;
 
             // Progress Initialize
-            progressData.Total = division + 120;
+            progressData.Total = division + fps * 2;
 
             // Analyze
-            Domain.SetControlFrequency(ControlFrequency);
-            Domain.SetBaseWaveAngleFrequency(ControlFrequency * MyMath.M_2PI);
+            Data.BaseFrequency.Analyze.ForwardTime(Parameter.BaseFrequencyData, Domain, Parameter.VvvfData, Time, ForwardStep);
             Analyze.Calculate(Domain, vvvfData);
 
             // Graphic
@@ -110,17 +107,7 @@ namespace VvvfSimulator.Generation.Video.Hexagon
             totalGraphic.DrawImage(pwmImage, 0, 0);
 
             // Start Frame
-            {
-                MemoryStream memory = new();
-                totalImage.Save(memory, ImageFormat.Png);
-                Viewer?.SetImage(totalImage);
-                Mat data = Mat.FromImageData(memory.GetBuffer());
-                for (int i = 0; i < 60; i++)
-                {
-                    progressData.Progress++;
-                    Writer.Write(data);
-                }
-            }
+            GenerateCommon.AddImageFrames(Writer, totalImage, fps, () => { progressData.Progress++; });
 
             // Actual Draw
             CurrentPoint = -0.5 * (MaxValue + MinValue) + new PointD(sizeVectorImage / 2, sizeVectorImage / 2);
@@ -135,7 +122,7 @@ namespace VvvfSimulator.Generation.Video.Hexagon
                     if (!flag)
                     {
                         flag = true;
-                        double Radius = 15 * ((ControlFrequency > 40) ? 1 : (ControlFrequency / 40.0));
+                        double Radius = 15 * ((Domain.GetControlFrequency() > 40) ? 1 : (Domain.GetControlFrequency() / 40.0));
                         zeroVectorGraphic.FillEllipse(new SolidBrush(Color.White),
                             (int)Math.Round(MovedPoint.X - Radius),
                             (int)Math.Round(MovedPoint.Y - Radius),
@@ -155,7 +142,7 @@ namespace VvvfSimulator.Generation.Video.Hexagon
                     flag = false;
 
                 if (progressData.Cancel) break;
-                if (i % 100 == 0 || i + 1 == division)
+                if (i % (6000 / fps) == 0 || i + 1 == division)
                 {
                     Bitmap totalVectorImage = new(sizeVectorImage, sizeVectorImage);
                     Graphics totalVectorGraphic = Graphics.FromImage(totalVectorImage);
@@ -195,17 +182,7 @@ namespace VvvfSimulator.Generation.Video.Hexagon
             }
 
             // End Frame
-            {
-                MemoryStream memory = new();
-                totalImage.Save(memory, ImageFormat.Png);
-                Viewer?.SetImage(totalImage);
-                Mat data = Mat.FromImageData(memory.GetBuffer());
-                for (int i = 0; i < 60; i++)
-                {
-                    progressData.Progress++;
-                    Writer.Write(data);
-                }
-            }
+            GenerateCommon.AddImageFrames(Writer, totalImage, fps, () => { progressData.Progress++; });
 
             pwmGraphic.Dispose();
             pwmImage.Dispose();

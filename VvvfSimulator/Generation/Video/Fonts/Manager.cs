@@ -5,6 +5,7 @@ using System.Drawing.Text;
 using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
+using System.Windows.Documents;
 
 namespace VvvfSimulator.Generation.Video.Fonts
 {
@@ -14,7 +15,7 @@ namespace VvvfSimulator.Generation.Video.Fonts
         public static FontFamily DSEG14ModernItalic { get; set; } = GeneralFont;
         public static FontFamily DSEG7ModernItalic { get; set; } = GeneralFont;
         public static FontFamily FugazOne { get; set; } = GeneralFont;
-        public static FontFamily Arial { get; set; } = GeneralFont;
+        public static FontFamily ChironGoRoundTC { get; set; } = GeneralFont;
         private static void Load(Stream? Reader, out FontFamily Font, out nint RamAddress)
         {
             if (Reader == null) throw new Exception();
@@ -47,6 +48,10 @@ namespace VvvfSimulator.Generation.Video.Fonts
             Load(Assembly.GetExecutingAssembly().GetManifestResourceStream("VvvfSimulator.Generation.Video.Fonts.FugazOne-Regular.ttf"), out FontFamily _FugazOneFont, out nint _FugazOneFontAddress);
             FugazOne = _FugazOneFont;
             FontAddressList.Add(_FugazOneFontAddress);
+
+            Load(Assembly.GetExecutingAssembly().GetManifestResourceStream("VvvfSimulator.Generation.Video.Fonts.ChironGoRoundTC-Bold.ttf"), out FontFamily _ChironGoRoundTCFont, out nint _ChironGoRoundTCAddress);
+            ChironGoRoundTC = _ChironGoRoundTCFont;
+            FontAddressList.Add(_ChironGoRoundTCAddress);
         }
         public static void Dispose()
         {
